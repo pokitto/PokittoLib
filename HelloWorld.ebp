@@ -10,6 +10,7 @@
 			<Target title="HelloWorld">
 				<Option output=".\build\hello.elf" />
 				<Option type="0" />
+				<Option create_hex="1" />
 				<Option compiler="armgcc_eb" />
 				<Device>
 					<Add option="$device=cortex-m0plus" />
