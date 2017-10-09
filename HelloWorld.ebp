@@ -8,7 +8,7 @@
 		<Option compiler="armgcc_eb" />
 		<Build>
 			<Target title="HelloWorld">
-				<Option output=".\build\HelloWorld.elf" />
+				<Option output=".\build\hello.elf" />
 				<Option type="0" />
 				<Option compiler="armgcc_eb" />
 				<Device>
@@ -16,24 +16,24 @@
 					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
 				</Device>
 				<Compiler>
-					<Add option="-Wall" />
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
 					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
 					<Add option="-Wno-unused-parameter" />
 					<Add option="-Wno-missing-field-initializers" />
 					<Add option="-fmessage-length=0" />
-					<Add option="-fno-exceptions" />
 					<Add option="-fno-builtin" />
-					<Add option="-ffunction-sections" />
-					<Add option="-fdata-sections" />
-					<Add option="-funsigned-char" />
 					<Add option="-fno-delete-null-pointer-checks" />
-					<Add option="-fomit-frame-pointer" />
-					<Add option="-Os" />
 					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
-					<Add option="-std=gnu99" />
 					<Add option="-include" />
 					<Add option="mbed_config.h" />
-					<Add option="-g" />
 					<Add symbol="TARGET_LPC11U68" />
 					<Add symbol="__MBED__=1" />
 					<Add symbol="DEVICE_I2CSLAVE=1" />
@@ -89,31 +89,34 @@
 					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X" />
 				</Compiler>
 				<Cpp>
-					<Add option="-Wall" />
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++98" />
 					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
 					<Add option="-Wno-unused-parameter" />
 					<Add option="-Wno-missing-field-initializers" />
 					<Add option="-fmessage-length=0" />
-					<Add option="-fno-exceptions" />
 					<Add option="-fno-builtin" />
-					<Add option="-ffunction-sections" />
-					<Add option="-fdata-sections" />
-					<Add option="-funsigned-char" />
 					<Add option="-fno-delete-null-pointer-checks" />
-					<Add option="-fomit-frame-pointer" />
-					<Add option="-Os" />
 					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
-					<Add option="-std=gnu++98" />
-					<Add option="-fno-rtti" />
 					<Add option="-Wvla" />
 					<Add option="-include" />
 					<Add option="mbed_config.h" />
-					<Add option="-g" />
 				</Cpp>
 				<Assembler>
 					<Add option="-Wa,--gdwarf-2" />
 				</Assembler>
 				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
 					<Add option="-Wl,--gc-sections" />
 					<Add option="-Wl,--wrap,main" />
 					<Add option="-Wl,--wrap,_malloc_r" />
@@ -124,64 +127,44 @@
 					<Add option="-Wl,--wrap,exit" />
 					<Add option="-Wl,--wrap,atexit" />
 					<Add option="-Wl,-n" />
-					<Add option="-eb_lib=n" />
-					<Add option="-lstdc++" />
-					<Add option="-eb_start_files" />
 					<Add library="supc++" />
 					<Add library="m" />
 					<Add library="c" />
 					<Add library="gcc" />
 					<Add library="nosys" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\hello.hex -O binary .\build\hello.bin" />
+					<Add after=".\build\lpcrc .\build\hello.bin" />
+					<Mode before="0" />
+					<Mode after="0" />
+				</ExtraCommands>
 			</Target>
 		</Build>
+		<Unit filename="main.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="mbed_config.h" />
-		<Unit filename="Pokitto\My_settings.h" />
-		<Unit filename="Pokitto\Pokitto.h" />
-		<Unit filename="Pokitto\Pokitto_settings.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\GBcompatibility.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\Localization.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\Macros_LCD.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisk.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisplay.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoFakeavr.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoFonts.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoGlobs.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalettes.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoSound.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoTimer.h" />
-		<Unit filename="Pokitto\POKITTO_CORE\binary.h" />
-		<Unit filename="Pokitto\POKITTO_HW\HWButtons.h" />
-		<Unit filename="Pokitto\POKITTO_HW\HWLCD.h" />
-		<Unit filename="Pokitto\POKITTO_HW\HWSound.h" />
-		<Unit filename="Pokitto\POKITTO_HW\PokittoEEPROM.h" />
-		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.h" />
-		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.h" />
-		<Unit filename="Pokitto\POKITTO_HW\iap.h" />
-		<Unit filename="Pokitto\POKITTO_HW\loader.h" />
-		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.h" />
-		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_osc.h" />
-		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_song.h" />
 		<Unit filename="Pokitto\libpff\connect.h" />
 		<Unit filename="Pokitto\libpff\diskio.h" />
 		<Unit filename="Pokitto\libpff\integer.h" />
+		<Unit filename="Pokitto\libpff\mmc.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\libpff\pff.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pokitto\libpff\pff.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\AnalogIn.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\AnalogOut.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\BusIn.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\BusInOut.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\BusOut.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\CAN.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\CThunk.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\CallChain.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\CAN.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\can_helper.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\CircularBuffer.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\CThunk.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\DigitalIn.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\DigitalInOut.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\DigitalOut.h" />
@@ -201,32 +184,145 @@
 		<Unit filename="Pokitto\mbed-pokitto\api\LowPowerTicker.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\LowPowerTimeout.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\LowPowerTimer.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\PortIn.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\PortInOut.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\PortOut.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\PwmOut.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\RawSerial.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\SPI.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\SPISlave.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\Serial.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\SerialBase.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\Stream.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\Ticker.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\Timeout.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\Timer.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\TimerEvent.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\Transaction.h" />
-		<Unit filename="Pokitto\mbed-pokitto\api\can_helper.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\mbed.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\mbed_assert.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\mbed_debug.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\mbed_error.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\mbed_interface.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\platform.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\PortIn.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\PortInOut.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\PortOut.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\PwmOut.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\RawSerial.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\rtc_time.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\semihost_api.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\Serial.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\SerialBase.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\SPI.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\SPISlave.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\Stream.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\Ticker.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\Timeout.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\Timer.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\TimerEvent.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\toolchain.h" />
+		<Unit filename="Pokitto\mbed-pokitto\api\Transaction.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\wait_api.h" />
+		<Unit filename="Pokitto\mbed-pokitto\common\assert.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\board.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\BusIn.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\BusInOut.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\BusOut.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\CallChain.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\CAN.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\error.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\Ethernet.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\FileBase.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\FileLike.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\FilePath.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\FileSystemLike.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\gpio.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\I2C.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\I2CSlave.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\InterruptIn.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\InterruptManager.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\LocalFileSystem.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\lp_ticker_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\mbed_interface.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\pinmap_common.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\RawSerial.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\retarget.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\rtc_time.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\semihost_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\Serial.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\SerialBase.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\SPI.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\SPISlave.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\Stream.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\Ticker.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\ticker_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\Timeout.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\Timer.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\TimerEvent.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\us_ticker_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\common\wait_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\hal\analogin_api.h" />
 		<Unit filename="Pokitto\mbed-pokitto\hal\analogout_api.h" />
 		<Unit filename="Pokitto\mbed-pokitto\hal\buffer.h" />
@@ -247,9 +343,9 @@
 		<Unit filename="Pokitto\mbed-pokitto\hal\ticker_api.h" />
 		<Unit filename="Pokitto\mbed-pokitto\hal\us_ticker_api.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_ca9.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_ca_mmu.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_caFunc.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_caInstr.h" />
-		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_ca_mmu.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm0.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm0plus.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm3.h" />
@@ -259,58 +355,61 @@
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cmFunc.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cmInstr.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cmSimd.h" />
-		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\cmsis.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\cmsis_nvic.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\cmsis_nvic.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\system_LPC11U6x.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\system_LPC11U6x.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68\startup_LPC11U68.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\analogin_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\device.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_irq_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_object.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\i2c_api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\objects.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\PeripheralNames.h" />
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\pinmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\PinNames.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\PortNames.h" />
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\device.h" />
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_object.h" />
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\objects.h" />
-		<Unit filename="main.cpp">
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\pwmout_api.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.cpp">
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\rtc_api.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.cpp">
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\serial_api.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.cpp">
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\sleep.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.cpp">
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\spi_api.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.cpp">
+		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\us_ticker.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisk.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisplay.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalette.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\PokittoSound.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\FONTS\TIC806x6.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_CORE\FONTS\ZXSpec.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="Pokitto\My_settings.h" />
+		<Unit filename="Pokitto\Pokitto.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\binary.h" />
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\adventurer12x16.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -347,12 +446,21 @@
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\runes6x8.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\FONTS\TIC806x6.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\tight4x7.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\tiny5x7.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\FONTS\ZXSpec.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\GBcompatibility.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\Localization.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\Macros_LCD.h" />
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palAction.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -383,33 +491,90 @@
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palZXSpec.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisk.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisk.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisplay.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisplay.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoFakeavr.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoFonts.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoGlobs.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalette.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalettes.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoSound.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoSound.h" />
+		<Unit filename="Pokitto\POKITTO_CORE\PokittoTimer.h" />
 		<Unit filename="Pokitto\POKITTO_HW\HWButtons.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\HWButtons.h" />
 		<Unit filename="Pokitto\POKITTO_HW\HWLCD.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\HWLCD.h" />
 		<Unit filename="Pokitto\POKITTO_HW\HWSound.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\HWSound.h" />
+		<Unit filename="Pokitto\POKITTO_HW\iap.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\iap.h" />
+		<Unit filename="Pokitto\POKITTO_HW\loader.h" />
+		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.h" />
 		<Unit filename="Pokitto\POKITTO_HW\PokittoClock.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\PokittoEEPROM.h" />
 		<Unit filename="Pokitto\POKITTO_HW\PokittoHW.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_HW\iap.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.h" />
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.h" />
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_envfuncs.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -419,177 +584,18 @@
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_mixfuncs.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_osc.h" />
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_oscfuncs.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_song.h" />
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_songfuncs.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_wavefuncs.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Pokitto\libpff\mmc.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\libpff\pff.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\BusIn.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\BusInOut.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\BusOut.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\CAN.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\CallChain.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\Ethernet.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\FileBase.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\FileLike.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\FilePath.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\FileSystemLike.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\I2C.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\I2CSlave.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\InterruptIn.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\InterruptManager.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\LocalFileSystem.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\RawSerial.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\SPI.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\SPISlave.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\Serial.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\SerialBase.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\Stream.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\Ticker.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\Timeout.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\Timer.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\TimerEvent.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\retarget.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68\startup_LPC11U68.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\assert.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\board.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\error.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\gpio.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\lp_ticker_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\mbed_interface.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\pinmap_common.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\rtc_time.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\semihost_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\ticker_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\us_ticker_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\common\wait_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\cmsis_nvic.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\system_LPC11U6x.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\analogin_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_irq_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\i2c_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\pinmap.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\pwmout_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\rtc_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\serial_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\sleep.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\spi_api.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\us_ticker.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="Pokitto\Pokitto_settings.h" />
 		<Extensions>
 			<code_completion />
 			<debugger>
