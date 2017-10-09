@@ -1,0 +1,11 @@
+/obj
+*.zip
+*.usbeecomp
+*.o
+*.i
+*.s
+*.d
+*.mpg
+/bin
+
+
