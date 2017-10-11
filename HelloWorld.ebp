@@ -121,7 +121,6 @@
 					<Add option="-Wl,--gc-sections" />
 					<Add option="-Wl,--wrap,main" />
 					<Add option="-Wl,--wrap,_malloc_r" />
-					<Add option="-Wl,--wrap,_free_r" />
 					<Add option="-Wl,--wrap,_realloc_r" />
 					<Add option="-Wl,--wrap,_memalign_r" />
 					<Add option="-Wl,--wrap,_calloc_r" />
@@ -138,14 +137,13 @@
 					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\hello.hex -O binary .\build\hello.bin" />
 					<Add after=".\build\lpcrc .\build\hello.bin" />
 					<Mode before="0" />
-					<Mode after="0" />
+					<Mode after="1" />
 				</ExtraCommands>
 			</Target>
 		</Build>
 		<Unit filename="main.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="mbed_config.h" />
 		<Unit filename="Pokitto\libpff\connect.h" />
 		<Unit filename="Pokitto\libpff\diskio.h" />
 		<Unit filename="Pokitto\libpff\integer.h" />
