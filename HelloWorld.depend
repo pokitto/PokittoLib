@@ -1018,3 +1018,1030 @@
 1507386450 source:c:\pokittodev\helloworld_embitz_lpc11u68\helloworld\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
 	"Synth.h"
 
+1507581030 source:c:\pokittolib\main.cpp
+	"Pokitto.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto.h
+	"Pokitto_settings.h"
+	"PokittoCore.h"
+	"mbed.h"
+	"HWLCD.h"
+	"PokittoTimer.h"
+	"Pokitto_extport.h"
+	"PokittoEEPROM.h"
+	"PokittoSimulator.h"
+	"PokittoDisk.h"
+	"FileIO.h"
+	"Synth.h"
+	"HWSound.h"
+
+1507406594 c:\pokittolib\pokitto\pokitto_settings.h
+	"My_settings.h"
+
+1507476684 c:\pokittolib\pokitto\my_settings.h
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittocore.h
+	<stdint.h>
+	<math.h>
+	"pwmout_api.h"
+	"HWButtons.h"
+	"PokittoSimulator.h"
+	"PokittoConsole.h"
+	"PokittoDisk.h"
+	"PokittoFonts.h"
+	"PokittoPalettes.h"
+	"PokittoDisplay.h"
+	"PokittoButtons.h"
+	"PokittoBattery.h"
+	"PokittoBacklight.h"
+	"PokittoSound.h"
+	"PokittoFakeavr.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\pwmout_api.h
+	"device.h"
+
+1507386526 c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\device.h
+	"objects.h"
+
+1507386526 c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\objects.h
+	"cmsis.h"
+	"PortNames.h"
+	"PeripheralNames.h"
+	"PinNames.h"
+	"gpio_object.h"
+
+1507386516 c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis.h
+	"LPC11U6x.h"
+	"cmsis_nvic.h"
+
+1507386516 c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\lpc11u6x.h
+	"core_cm0plus.h"
+	"system_LPC11U6x.h"
+
+1507386524 c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\core_cm0plus.h
+	<stdint.h>
+	<core_cmInstr.h>
+	<core_cmFunc.h>
+
+1507386524 c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\core_cminstr.h
+	<cmsis_iar.h>
+	<cmsis_ccs.h>
+
+1507386524 c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\core_cmfunc.h
+	<cmsis_iar.h>
+	<cmsis_ccs.h>
+
+1507386516 c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.h
+	<stdint.h>
+
+1507386516 c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis_nvic.h
+	"cmsis.h"
+
+1507386526 c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\portnames.h
+
+1507386526 c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\peripheralnames.h
+	"cmsis.h"
+
+1507386526 c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinnames.h
+	"cmsis.h"
+
+1507386526 c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_object.h
+	"mbed_assert.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\mbed_assert.h
+
+1507386450 c:\pokittolib\pokitto\pokitto_hw\hwbuttons.h
+	"mbed.h"
+	"Pokitto_settings.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\mbed.h
+	"platform.h"
+	<math.h>
+	<time.h>
+	"mbed_error.h"
+	"mbed_interface.h"
+	"DigitalIn.h"
+	"DigitalOut.h"
+	"DigitalInOut.h"
+	"BusIn.h"
+	"BusOut.h"
+	"BusInOut.h"
+	"PortIn.h"
+	"PortInOut.h"
+	"PortOut.h"
+	"AnalogIn.h"
+	"AnalogOut.h"
+	"PwmOut.h"
+	"Serial.h"
+	"SPI.h"
+	"SPISlave.h"
+	"I2C.h"
+	"I2CSlave.h"
+	"Ethernet.h"
+	"CAN.h"
+	"RawSerial.h"
+	"Timer.h"
+	"Ticker.h"
+	"Timeout.h"
+	"LowPowerTimeout.h"
+	"LowPowerTicker.h"
+	"LowPowerTimer.h"
+	"LocalFileSystem.h"
+	"InterruptIn.h"
+	"wait_api.h"
+	"sleep_api.h"
+	"rtc_time.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\platform.h
+	"device.h"
+	"PinNames.h"
+	"PeripheralNames.h"
+	<cstddef>
+	<cstdlib>
+	<cstdio>
+	<cstring>
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\mbed_error.h
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\mbed_interface.h
+	"device.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\digitalin.h
+	"platform.h"
+	"gpio_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\gpio_api.h
+	"device.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\digitalout.h
+	"platform.h"
+	"gpio_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\digitalinout.h
+	"platform.h"
+	"gpio_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\busin.h
+	"platform.h"
+	"DigitalIn.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\busout.h
+	"DigitalOut.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\businout.h
+	"DigitalInOut.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\portin.h
+	"platform.h"
+	"port_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\port_api.h
+	"device.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\portinout.h
+	"platform.h"
+	"port_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\portout.h
+	"platform.h"
+	"port_api.h"
+
+1507386512 c:\pokittolib\pokitto\mbed-pokitto\api\analogin.h
+	"platform.h"
+	"analogin_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\analogin_api.h
+	"device.h"
+
+1507386512 c:\pokittolib\pokitto\mbed-pokitto\api\analogout.h
+	"platform.h"
+	"analogout_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\analogout_api.h
+	"device.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\pwmout.h
+	"platform.h"
+	"pwmout_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\serial.h
+	"platform.h"
+	"Stream.h"
+	"SerialBase.h"
+	"serial_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\stream.h
+	"platform.h"
+	"FileLike.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\filelike.h
+	"FileBase.h"
+	"FileHandle.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\filebase.h
+	<stdio.h>
+	<sys/fcntl.h>
+	<sys/types.h>
+	<sys/syslimits.h>
+	"platform.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\filehandle.h
+	<stdio.h>
+	<sys/types.h>
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\serialbase.h
+	"platform.h"
+	"Stream.h"
+	"FunctionPointer.h"
+	"serial_api.h"
+	"CThunk.h"
+	"dma_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\functionpointer.h
+	<string.h>
+	<stdint.h>
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\serial_api.h
+	"device.h"
+	"buffer.h"
+	"dma_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\buffer.h
+	<stddef.h>
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\dma_api.h
+	<stdint.h>
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\cthunk.h
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\spi.h
+	"platform.h"
+	"spi_api.h"
+	"CThunk.h"
+	"dma_api.h"
+	"CircularBuffer.h"
+	"FunctionPointer.h"
+	"Transaction.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\spi_api.h
+	"device.h"
+	"dma_api.h"
+	"buffer.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\circularbuffer.h
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\transaction.h
+	"platform.h"
+	"FunctionPointer.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\spislave.h
+	"platform.h"
+	"spi_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\i2c.h
+	"platform.h"
+	"i2c_api.h"
+	"CThunk.h"
+	"dma_api.h"
+	"FunctionPointer.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\i2c_api.h
+	"device.h"
+	"buffer.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\i2cslave.h
+	"platform.h"
+	"i2c_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\ethernet.h
+	"platform.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\can.h
+	"platform.h"
+	"can_api.h"
+	"can_helper.h"
+	"FunctionPointer.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\can_api.h
+	"device.h"
+	"PinNames.h"
+	"PeripheralNames.h"
+	"can_helper.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\can_helper.h
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\rawserial.h
+	"platform.h"
+	"SerialBase.h"
+	"serial_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\timer.h
+	"platform.h"
+	"ticker_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\ticker_api.h
+	"device.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\ticker.h
+	"TimerEvent.h"
+	"FunctionPointer.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\timerevent.h
+	"ticker_api.h"
+	"us_ticker_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\us_ticker_api.h
+	<stdint.h>
+	"ticker_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\timeout.h
+	"Ticker.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\lowpowertimeout.h
+	"platform.h"
+	"lp_ticker_api.h"
+	"LowPowerTicker.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\lp_ticker_api.h
+	"device.h"
+	"ticker_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\lowpowerticker.h
+	"platform.h"
+	"Ticker.h"
+	"lp_ticker_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\lowpowertimer.h
+	"platform.h"
+	"Timer.h"
+	"lp_ticker_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\localfilesystem.h
+	"platform.h"
+	"FileSystemLike.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\filesystemlike.h
+	"platform.h"
+	"FileBase.h"
+	"FileHandle.h"
+	"DirHandle.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\dirhandle.h
+	<sys/syslimits.h>
+	"FileHandle.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\interruptin.h
+	"platform.h"
+	"gpio_api.h"
+	"gpio_irq_api.h"
+	"FunctionPointer.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\gpio_irq_api.h
+	"device.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\wait_api.h
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\sleep_api.h
+	"device.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\rtc_time.h
+	<time.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittoconsole.h
+	"Pokitto_settings.h"
+	"PokittoButtons.h"
+	<stdint.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittobuttons.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoGlobs.h"
+	"HWButtons.h"
+	"PokittoSimulator.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\gbcompatibility.h
+	"binary.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\binary.h
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittoglobs.h
+	<stdint.h>
+	"SimLCD.h"
+	"SimSound.h"
+	"PokittoSimulator.h"
+	"mbed.h"
+	"HWLCD.h"
+	"HWSound.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_hw\hwlcd.h
+	"mbed.h"
+	"gpio_api.h"
+	"pinmap.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\pinmap.h
+	"PinNames.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_hw\hwsound.h
+	"mbed.h"
+	"Pokitto_settings.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittodisk.h
+	"diskio.h"
+	"pff.h"
+	"connect.h"
+	"mbed.h"
+	<stdint.h>
+
+1507386450 c:\pokittolib\pokitto\libpff\diskio.h
+	"integer.h"
+
+1507386450 c:\pokittolib\pokitto\libpff\integer.h
+
+1507386450 c:\pokittolib\pokitto\libpff\pff.h
+	"integer.h"
+
+1507386450 c:\pokittolib\pokitto\libpff\connect.h
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittofonts.h
+	"Pokitto_settings.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittopalettes.h
+	"Pokitto_settings.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittodisplay.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"PokittoGlobs.h"
+	"PokittoFonts.h"
+	"PokittoPalettes.h"
+	<stdint.h>
+	<stdlib.h>
+	<string.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittobattery.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoGlobs.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittobacklight.h
+	<stdint.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittosound.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoFakeavr.h"
+	"PokittoGlobs.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittofakeavr.h
+	"PokittoItoa.h"
+	"binary.h"
+	<stdint.h>
+	<stdlib.h>
+	<stdbool.h>
+	<stdbool.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittoitoa.h
+	<stdint.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittotimer.h
+
+1507386450 c:\pokittolib\pokitto\pokitto_hw\pokitto_extport.h
+	"mbed.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_hw\pokittoeeprom.h
+	<stdint.h>
+	"iap.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_hw\iap.h
+	<stdint.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_libs\synth\synth.h
+	"Synth_osc.h"
+	"Synth_song.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_libs\synth\synth_osc.h
+	"Pokitto.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_libs\synth\synth_song.h
+
+1507386450 source:c:\pokittolib\pokitto\libpff\mmc.cpp
+	"diskio.h"
+	"mbed.h"
+	"connect.h"
+	"PokittoDisk.h"
+
+1507386450 source:c:\pokittolib\pokitto\libpff\pff.cpp
+	"pff.h"
+	"diskio.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\assert.c
+	"mbed_assert.h"
+	"mbed_error.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\board.c
+	"gpio_api.h"
+	"wait_api.h"
+	"toolchain.h"
+	"mbed_interface.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\toolchain.h
+	<rt_sys.h>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\busin.cpp
+	"BusIn.h"
+	"mbed_assert.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\businout.cpp
+	"BusInOut.h"
+	"mbed_assert.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\busout.cpp
+	"BusOut.h"
+	"mbed_assert.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\callchain.cpp
+	"CallChain.h"
+	"cmsis.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\callchain.h
+	"FunctionPointer.h"
+	<string.h>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\can.cpp
+	"CAN.h"
+	"cmsis.h"
+
+1507569560 source:c:\pokittolib\pokitto\mbed-pokitto\common\error.c
+	<stdlib.h>
+	<stdarg.h>
+	"device.h"
+	"toolchain.h"
+	"mbed_error.h"
+	<stdio.h>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\ethernet.cpp
+	"Ethernet.h"
+	"ethernet_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\ethernet_api.h
+	"device.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\filebase.cpp
+	"FileBase.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\filelike.cpp
+	"FileLike.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\filepath.cpp
+	"FilePath.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\filepath.h
+	"platform.h"
+	"FileSystemLike.h"
+	"FileLike.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\filesystemlike.cpp
+	"FileSystemLike.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\gpio.c
+	"gpio_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\i2c.cpp
+	"I2C.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\i2cslave.cpp
+	"I2CSlave.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\interruptin.cpp
+	"InterruptIn.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\interruptmanager.cpp
+	"cmsis.h"
+	"InterruptManager.h"
+	<string.h>
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\interruptmanager.h
+	"cmsis.h"
+	"CallChain.h"
+	<string.h>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\localfilesystem.cpp
+	"LocalFileSystem.h"
+	"semihost_api.h"
+	<string.h>
+	<stdio.h>
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\api\semihost_api.h
+	"device.h"
+	"toolchain.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\lp_ticker_api.c
+	"lp_ticker_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\mbed_interface.c
+	<stdio.h>
+	"mbed_interface.h"
+	"gpio_api.h"
+	"wait_api.h"
+	"semihost_api.h"
+	"mbed_error.h"
+	"toolchain.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\pinmap_common.c
+	"pinmap.h"
+	"mbed_error.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\rawserial.cpp
+	"RawSerial.h"
+	"wait_api.h"
+	<cstdarg>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\retarget.cpp
+	"platform.h"
+	"FileHandle.h"
+	"FileSystemLike.h"
+	"FilePath.h"
+	"serial_api.h"
+	"toolchain.h"
+	"semihost_api.h"
+	"mbed_interface.h"
+	<stdio.h>
+	<errno.h>
+	<rt_sys.h>
+	<yfuns.h>
+	<sys/stat.h>
+	<sys/unistd.h>
+	<sys/syslimits.h>
+	"mbed_error.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\rtc_time.c
+	"rtc_api.h"
+	<time.h>
+	"rtc_time.h"
+	"us_ticker_api.h"
+
+1507386514 c:\pokittolib\pokitto\mbed-pokitto\hal\rtc_api.h
+	"device.h"
+	<time.h>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\semihost_api.c
+	"cmsis.h"
+	"semihost_api.h"
+	<stdint.h>
+	<string.h>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\serial.cpp
+	"Serial.h"
+	"wait_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\serialbase.cpp
+	"SerialBase.h"
+	"wait_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\spi.cpp
+	"SPI.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\spislave.cpp
+	"SPISlave.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\stream.cpp
+	"Stream.h"
+	<cstdarg>
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\ticker.cpp
+	"Ticker.h"
+	"TimerEvent.h"
+	"FunctionPointer.h"
+	"ticker_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\ticker_api.c
+	<stddef.h>
+	"ticker_api.h"
+	"cmsis.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\timeout.cpp
+	"Timeout.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\timer.cpp
+	"Timer.h"
+	"ticker_api.h"
+	"us_ticker_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\timerevent.cpp
+	"TimerEvent.h"
+	"cmsis.h"
+	<stddef.h>
+	"ticker_api.h"
+	"us_ticker_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\us_ticker_api.c
+	"us_ticker_api.h"
+
+1507386514 source:c:\pokittolib\pokitto\mbed-pokitto\common\wait_api.c
+	"wait_api.h"
+	"us_ticker_api.h"
+
+1507386516 source:c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis_nvic.c
+	"cmsis_nvic.h"
+
+1507386516 source:c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.c
+	<stdint.h>
+	"LPC11U6x.h"
+	"power_api.h"
+
+1507386516 source:c:\pokittolib\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.cpp
+	"LPC11U6x.h"
+	<stdlib.h>
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.c
+	"mbed_assert.h"
+	"analogin_api.h"
+	"cmsis.h"
+	"pinmap.h"
+	"mbed_error.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_api.c
+	"mbed_assert.h"
+	"gpio_api.h"
+	"pinmap.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_irq_api.c
+	<stddef.h>
+	"cmsis.h"
+	"gpio_irq_api.h"
+	"mbed_error.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.c
+	"mbed_assert.h"
+	"i2c_api.h"
+	"cmsis.h"
+	"pinmap.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinmap.c
+	"mbed_assert.h"
+	"pinmap.h"
+	"mbed_error.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.c
+	"pwmout_api.h"
+	"cmsis.h"
+	"pinmap.h"
+	"mbed_error.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.c
+	"rtc_api.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.c
+	"mbed_assert.h"
+	<math.h>
+	<string.h>
+	<stdlib.h>
+	"serial_api.h"
+	"cmsis.h"
+	"pinmap.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.c
+	"sleep_api.h"
+	"cmsis.h"
+	"mbed_interface.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.c
+	"mbed_assert.h"
+	<math.h>
+	"spi_api.h"
+	"cmsis.h"
+	"pinmap.h"
+	"mbed_error.h"
+
+1507386526 source:c:\pokittolib\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\us_ticker.c
+	<stddef.h>
+	"us_ticker_api.h"
+	"PeripheralNames.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\adventurer12x16.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\donut7x10.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\dragon6x8.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\font3x3.cpp
+	<stdint.h>
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\font3x5.cpp
+	<stdint.h>
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\font5x7.cpp
+	<stdint.h>
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\fontc64.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\fontc64uigfx.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\karateka8x11.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\koubit7x7.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\mini4x6.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\runes6x8.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\tic806x6.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\tight4x7.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\tiny5x7.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\fonts\zxspec.cpp
+	"PokittoFonts.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palaction.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palcga.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\paldb16.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\paldefault.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palgameboy.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palmagma.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palmono.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palpico.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palrainbow.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\palettes\palzxspec.cpp
+	"PokittoPalettes.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittobacklight.cpp
+	"PokittoBacklight.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittobattery.cpp
+	"PokittoBattery.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittobuttons.cpp
+	"PokittoCore.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittoconsole.cpp
+	"PokittoGlobs.h"
+	"PokittoConsole.h"
+	"PokittoFonts.h"
+	"PokittoDisplay.h"
+
+1507480690 source:c:\pokittolib\pokitto\pokitto_core\pokittocore.cpp
+	"PokittoCore.h"
+	"Pokitto_settings.h"
+	"PokittoConsole.h"
+	"PokittoFonts.h"
+	"PokittoTimer.h"
+	"PokittoLogos.h"
+	<stdlib.h>
+
+1507386450 c:\pokittolib\pokitto\pokitto_core\pokittologos.h
+	<stdint.h>
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittodisk.cpp
+	"Pokitto.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittodisplay.cpp
+	"PokittoDisplay.h"
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoCore.h"
+	"PokittoSound.h"
+	<stdio.h>
+	<string.h>
+	"HWLCD.h"
+	"SimLCD.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittoitoa.cpp
+	"PokittoItoa.h"
+	<string.h>
+	<stdint.h>
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittologos.cpp
+	"PokittoLogos.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittopalette.cpp
+	"PokittoDisplay.h"
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	<stdio.h>
+	<string.h>
+	"HWLCD.h"
+	"SimLCD.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_core\pokittosound.cpp
+	"PokittoSound.h"
+	"Pokitto_settings.h"
+	"PokittoCore.h"
+	"Synth.h"
+	"HWSound.h"
+	"SimSound.h"
+	"PokittoSimulator.h"
+
+1507474780 source:c:\pokittolib\pokitto\pokitto_hw\hwbuttons.cpp
+	"HWButtons.h"
+	"PokittoCore.h"
+	"PokittoSound.h"
+	"PokittoDisplay.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_hw\hwlcd.cpp
+	"HWLCD.h"
+	"Pokitto_settings.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_hw\hwsound.cpp
+	"mbed.h"
+	"HWSound.h"
+	"SoftwareI2C.h"
+	"Pokitto_settings.h"
+	"PokittoDisk.h"
+	"PokittoGlobs.h"
+	"Synth.h"
+
+1507386450 c:\pokittolib\pokitto\pokitto_hw\softwarei2c.h
+	"mbed.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_hw\iap.cpp
+	<stdio.h>
+	<stdint.h>
+	<iap.h>
+	"LPC11U6x.h"
+	"PokittoDisk.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_hw\pokitto_extport.cpp
+	"Pokitto.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_hw\pokittoclock.cpp
+	"PokittoCore.h"
+	"pinmap.h"
+	"HWLCD.h"
+	"Pokitto_settings.h"
+	"wait_api.h"
+
+1507406190 source:c:\pokittolib\pokitto\pokitto_hw\pokittohw.cpp
+	"PokittoCore.h"
+	"pinmap.h"
+	"HWLCD.h"
+	"loader.h"
+
+1507476016 c:\pokittolib\pokitto\pokitto_hw\loader.h
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_hw\softwarei2c.cpp
+	"SoftwareI2C.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_libs\synth\synth.cpp
+	"Pokitto.h"
+	"Synth.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_libs\synth\synth_envfuncs.cpp
+	"Synth.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_libs\synth\synth_helpers.cpp
+	"Pokitto.h"
+	"Synth.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
+	"PokittoGlobs.h"
+	"Synth.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
+	"Synth.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
+	"PokittoDisk.h"
+	"Synth.h"
+	"FileIO.h"
+
+1507386450 source:c:\pokittolib\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
+	"Synth.h"
+

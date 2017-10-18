@@ -177,7 +177,7 @@ void Pokitto::audio_IRQ() {
         #endif
 
         streamstep &= streamon; //check if stream is on
-		
+
         if(streamvol && streamstep) {
             uint8_t output = (*currentPtr++);
             sbyte = output;
@@ -251,7 +251,7 @@ void Sound::updateStream() {
 }
 
 void Sound::begin() {
-#if POK_ENABLE_SOUND > 1
+#if POK_ENABLE_SOUND > 0
 soundInit();
 #endif
 #if (NUM_CHANNELS > 0)
