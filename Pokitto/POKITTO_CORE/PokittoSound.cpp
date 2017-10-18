@@ -783,7 +783,7 @@ void Sound::setVolume(int16_t volume) {
 	#ifndef POK_SIM
 	volume = (volume / 2)-10;
 	if (volume<0) volume = 0;
-	#if POK_ENABLE_SOUND > 1
+	#if POK_ENABLE_SOUND > 0
 	setHWvolume(volume);
 	#endif
 	#endif
@@ -842,7 +842,7 @@ uint8_t Sound::ampIsOn()
     #ifdef POK_SIM
     return core.ampIsOn();
     #else
-    #if POK_ENABLE_SOUND > 1
+    #if POK_ENABLE_SOUND > 0
     return Pokitto::ampIsOn();
     #endif
     #endif // POK_SIM
@@ -853,7 +853,7 @@ void Sound::ampEnable(uint8_t v) {
     #ifdef POK_SIM
     core.ampEnable(v);
     #else
-    #if POK_ENABLE_SOUND > 1
+    #if POK_ENABLE_SOUND > 0
     Pokitto::ampEnable(v);
     #endif
     #endif // POK_SIM
@@ -876,7 +876,7 @@ int Sound::playMusicStream()
 }
 
 void Sound::pauseMusicStream() {
-    #if POK_ENABLE_SOUND > 1
+    #if POK_ENABLE_SOUND > 0
     pokPauseStream();
     #endif
 }

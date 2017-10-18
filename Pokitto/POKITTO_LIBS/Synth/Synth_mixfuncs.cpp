@@ -62,7 +62,7 @@ void mix1(){
     osc1.output = soundbyte;
     #else
     //OCR2B = osc1.output>>8;
-    #if POK_ENABLE_SOUND > 1
+    #if POK_ENABLE_SOUND > 0
     soundbyte = (((osc1.output>>8) * (osc1.adsrvol >>8 )) >> 8) >> osc1.echodiv; // To output, shift back to 8-bit
     if (osc1.overdrive) soundbyte *= OVERDRIVE;
     if (osc1.kick ) soundbyte >>= 2;
@@ -83,7 +83,7 @@ void mix2(){
     osc2.output = soundbyte;
     #else
     //OCR2B = osc2.output>>8;
-    #if POK_ENABLE_SOUND > 1
+    #if POK_ENABLE_SOUND > 0
     soundbyte = (((osc2.output>>8) * (osc2.adsrvol >>8 )) >> 8) >> osc2.echodiv;
     if (osc2.overdrive) soundbyte *= OVERDRIVE;
     if (osc2.kick ) soundbyte >>= 2;
@@ -104,7 +104,7 @@ void mix3(){
     osc3.output = soundbyte;
     #else
     //OCR2B = osc3.output>>8;
-    #if POK_ENABLE_SOUND > 1
+    #if POK_ENABLE_SOUND > 0
     soundbyte = (((osc3.output>>8) * (osc3.adsrvol >>8 )) >> 8) >> osc3.echodiv;
     if (osc3.overdrive) soundbyte *= OVERDRIVE;
     if (osc3.kick ) soundbyte >>= 2;
