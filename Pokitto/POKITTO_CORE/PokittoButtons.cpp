@@ -53,7 +53,7 @@ void Buttons::begin() {
 }
 
 void Buttons::update() {
-    #if POK_USE_CONSOLE > 1
+    #if POK_USE_CONSOLE
     if (console.conscounter) return;
     #endif // POK_USE_CONSOLE
     #ifndef POK_SIM
@@ -258,4 +258,3 @@ uint8_t Buttons::downBtn() {
 
 
 //** EOF **//
-

@@ -43,7 +43,7 @@
  *
  * License for Gamebuino-identical code:
  *
- * (C) Copyright 2014 Aurï¿½lien Rodot. All rights reserved.
+ * (C) Copyright 2014 Aurélien Rodot. All rights reserved.
  *
  * This file is part of the Gamebuino Library (http://gamebuino.com)
  *
@@ -77,7 +77,7 @@ typedef uint8_t byte;
 
 using namespace Pokitto;
 
-Pokitto::Core c;
+Pokitto::Core _soundc;
 
 uint8_t Sound::prescaler;
 uint16_t Sound::globalVolume;
@@ -177,7 +177,7 @@ void Pokitto::audio_IRQ() {
         #endif
 
         streamstep &= streamon; //check if stream is on
-
+		
         if(streamvol && streamstep) {
             uint8_t output = (*currentPtr++);
             sbyte = output;
@@ -253,6 +253,7 @@ void Sound::updateStream() {
 void Sound::begin() {
 #if POK_ENABLE_SOUND > 0
 soundInit();
+ampEnable(true);
 #endif
 #if (NUM_CHANNELS > 0)
 #if POK_ENABLE_SOUND > 0
@@ -788,7 +789,7 @@ void Sound::setVolume(int16_t volume) {
 	#endif
 	#endif
 	#if POK_SHOW_VOLUME > 0
-	c.volbar_visible = VOLUMEBAR_TIMEOUT;
+	_soundc.volbar_visible = VOLUMEBAR_TIMEOUT;
 	#endif
 //#endif
 }

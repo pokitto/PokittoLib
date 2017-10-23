@@ -89,7 +89,7 @@
 
 
 /** CONSOLE **/
-#define POK_USE_CONSOLE 1 //if debugging console is available or not
+#define POK_USE_CONSOLE 0 //if debugging console is available or not
 #define POK_CONSOLE_VISIBLE_AT_STARTUP 1 // whaddaya think ?
 #define POK_CONSOLE_INTERVAL 1000 // interval in ms how often console is drawn
 #if POK_USE_CONSOLE > 0 // this prevents trying to log messages if console is disabled
@@ -378,6 +378,9 @@
 #define ABIT     4
 #define BBIT     5
 #define CBIT     6
+
+/** LOADER UPDATE MECHANISM **/
+#define POK_ENABLE_LOADER_UPDATES 1 //1=check for new loader versions on SD and update if new found
 
 #endif // POKITTO_SETTINGS_H
 

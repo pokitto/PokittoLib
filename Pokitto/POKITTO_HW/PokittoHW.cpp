@@ -37,7 +37,6 @@
 #include "PokittoCore.h"
 #include "pinmap.h"
 #include "HWLCD.h"
-#include "loader.h"
 
 
 using namespace Pokitto;

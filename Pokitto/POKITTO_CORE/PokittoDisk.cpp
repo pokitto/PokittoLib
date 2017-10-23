@@ -74,6 +74,10 @@ __attribute__((section(".SD_Code"))) int pokInitSD() {
 }
 
 
+void emptyFname() {
+    for (int i=0; i<13; i++) fno.fname[i]=NULL;
+}
+
 /** PUBLIC FUNCTIONS **/
 
 char* getFirstDirEntry() {
@@ -82,6 +86,7 @@ char* getFirstDirEntry() {
             pokInitSD();
     }
     res = pf_opendir(&dir,"");
+    emptyFname();
     res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
     if (res) return 0;
     while (res==0) { //while res is ok
@@ -95,6 +100,7 @@ char* getFirstDirEntry() {
                 }
                 return fno.fname;
         }
+        emptyFname();
         res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
         if (res==0 && dir.index==0) break;
     }
@@ -103,9 +109,10 @@ char* getFirstDirEntry() {
 
 char* getNextDirEntry() {
     if (!diropened) pokInitSD();
+    emptyFname();
 	res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
 	if (res==0) {
-	        while (fno.fattrib & 0x02 && !res) res = pf_readdir(&dir,&fno); //system/hidden file
+	        while (fno.fattrib & 0x02 && !res) {emptyFname(); res = pf_readdir(&dir,&fno);} //system/hidden file
 	        if (fno.fattrib & 0x10) {
 	                int a=12;
                     while (a) {
@@ -134,13 +141,17 @@ char* getNextFile (char* ext){
 
     if (!diropened) pokInitSD();
 	int a=1;
+	emptyFname();
 	res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
 	while (res==0 || a) { //while there are entries and
         if (dir.index==0) return 0; //end of list
         a = strcmp((const char*)get_filename_ext(fno.fname),(const char*)ext); // returns 0 if strings are identical
         if (strcmp(ext,"")==0 && (fno.fattrib & 0x10) == 0) a=0;
         if (a == 0 && (fno.fattrib & 0x10) == 0) return fno.fname;
-        if (fno.fattrib&0x10) return NULL; //its a directory
+        if (fno.fname[0]==NULL) return NULL; //end of files
+        //if (fno.fattrib&0x10) return NULL; //its a directory
+        emptyFname();
+        res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
 	}
 return 0;
 }
@@ -156,6 +167,7 @@ char* getFirstFile(char* ext) {
             pokInitSD();
     }
     res = pf_opendir(&dir,"");
+    emptyFname();
     res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
     if (res) return 0;
     while (res==0 || (fno.fattrib & 0x10) == 0) {
@@ -163,7 +175,9 @@ char* getFirstFile(char* ext) {
         a = strcmp((const char*)get_filename_ext(fno.fname),(const char*)ext); // returns 0 if strings are identical
         if (!strcmp(ext,"")) a=0;
         if ( a == 0 && (fno.fattrib & 0x10) == 0) return fno.fname;
+        emptyFname();
         res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
+        if (fno.fname[0]==NULL) break; //end of directory reached, no files found
         if (res==0 && dir.index==0) break;
     }
     return 0;

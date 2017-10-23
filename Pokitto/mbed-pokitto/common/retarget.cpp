@@ -405,7 +405,7 @@ namespace __gnu_cxx {
 }
 extern "C" WEAK void __cxa_pure_virtual(void);
 extern "C" WEAK void __cxa_pure_virtual(void) {
-    exit(1);
+    //exit(1);
 }
 
 #endif
@@ -530,7 +530,7 @@ namespace mbed {
 void mbed_set_unbuffered_stream(FILE *_file) {
 #if defined (__ICCARM__)
     char buf[2];
-    std::setvbuf(_file,buf,_IONBF,NULL);    
+    std::setvbuf(_file,buf,_IONBF,NULL);
 #else
     setbuf(_file, NULL);
 #endif
@@ -544,11 +544,11 @@ int mbed_getc(FILE *_file){
         _file->_Mode = (unsigned short)(_file->_Mode & ~ 0x1000);/* Unset read mode */
         _file->_Rend = _file->_Wend;
         _file->_Next = _file->_Wend;
-    }    
+    }
     return res;
-#else    
+#else
     return std::fgetc(_file);
-#endif   
+#endif
 }
 
 char* mbed_gets(char*s, int size, FILE *_file){
@@ -561,7 +561,7 @@ char* mbed_gets(char*s, int size, FILE *_file){
         _file->_Next = _file->_Wend;
     }
     return str;
-#else    
+#else
     return std::fgets(s,size,_file);
 #endif
 }

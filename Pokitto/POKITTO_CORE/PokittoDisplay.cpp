@@ -79,7 +79,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 Pokitto::Core core;
-Pokitto::Sound sound;
+Pokitto::Sound _pdsound;
 
 using namespace Pokitto;
 
@@ -260,7 +260,7 @@ if (!persistence) clear();
 /** draw volume bar if visible **/
 #if POK_SHOW_VOLUME > 0
 if (core.volbar_visible) {
-        core.drawvolbar(4,20,sound.getVolume(),true);
+        core.drawvolbar(4,20,_pdsound.getVolume(),true);
         core.volbar_visible--;
 }
 #endif // POK_SHOW_VOLUME
@@ -411,7 +411,7 @@ void Display::clear() {
 }
 
 void Display::scroll(int16_t pixelrows) {
-    uint16_t index = 0, index2,oc;
+    uint16_t index = 0, index2=0,oc;
     if (pixelrows==0) return;
     if (pixelrows >= height) pixelrows=height-1;
     if (bpp == 4) index2 = pixelrows*width/2;
@@ -426,7 +426,7 @@ void Display::scroll(int16_t pixelrows) {
     fillRect(0,cursorY,width,height);
     } else {
     for (uint16_t y=pixelrows;y<height;y++) {
-            for (uint16_t x=0;x<(width*bpp)/8;x++) screenbuffer[index2++]=screenbuffer[index2];
+            for (uint16_t x=0;x<(width*bpp)/8;x++) screenbuffer[index2++]=screenbuffer[index++];
     }
     fillRect(0,0,width,pixelrows);
     }
@@ -1666,15 +1666,15 @@ void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t ro
                         k = i;
                         l = j;
                         break;
-                    case ROTCCW: //90ï¿½ counter-clockwise
+                    case ROTCCW: //90° counter-clockwise
                         k = j;
                         l = w - i - 1;
                         break;
-                    case ROT180: //180ï¿½
+                    case ROT180: //180°
                         k = w - i - 1;
                         l = h - j - 1;
                         break;
-                    case ROTCW: //90ï¿½ clockwise
+                    case ROTCW: //90° clockwise
                         k = h - j - 1;
                         l = i;
                         break;

@@ -62,7 +62,9 @@ void APressed() { Pokitto::heldStates[BTN_A] = 1; }
 void AReleased() { Pokitto::heldStates[BTN_A] = 0; }
 void BPressed() { Pokitto::heldStates[BTN_B] = 1; }
 void BReleased() { Pokitto::heldStates[BTN_B] = 0; }
-void CPressed() { Pokitto::heldStates[BTN_C] = 1;}
+void CPressed() {
+    Pokitto::heldStates[BTN_C] = 1;
+    }
 void CReleased() { Pokitto::heldStates[BTN_C] = 0; }
 void UPressed() { Pokitto::heldStates[BTN_UP] = 1; }
 void UReleased() { Pokitto::heldStates[BTN_UP] = 0; }
@@ -81,7 +83,7 @@ void LPressed() {
     }
 void LReleased() { Pokitto::heldStates[BTN_LEFT] = 0; }
 
-void Pokitto::initButtons() {  
+void Pokitto::initButtons() {
   ABtn.fall(&AReleased);
   ABtn.rise(&APressed);
   BBtn.fall(&BReleased);
@@ -123,4 +125,3 @@ uint8_t Pokitto::Core::leftBtn() {
 uint8_t Pokitto::Core::rightBtn() {
     return Pokitto::heldStates[BTN_RIGHT];
 }
-

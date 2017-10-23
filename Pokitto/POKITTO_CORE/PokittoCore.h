@@ -243,6 +243,7 @@ private:
     static uint16_t frameDurationMicros;
     static uint32_t frameStartMicros, frameEndMicros;
     static uint8_t startMenuTimer;
+    static int updateLoader(uint32_t,uint32_t);
 public:
     static uint8_t volbar_visible;
     static void drawvolbar(int,int,int, bool);

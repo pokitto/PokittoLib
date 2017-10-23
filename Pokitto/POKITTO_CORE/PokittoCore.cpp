@@ -47,12 +47,13 @@
 
 char selectedfile[25];
 
-//#define F 
+//#define F
 #ifdef __ARMCC_VERSION
 typedef void (*func_t)(void);
-#endif 
+#endif
 
 #ifndef POK_SIM
+#include "iap.h"
 /** start the user application
 * https://community.nxp.com/thread/417695
 *
@@ -163,6 +164,44 @@ Core::Core() {
 
 }
 
+
+int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
+    uint32_t counter=0;
+    uint8_t data[256];
+    /** prepare the flash writing **/
+    float progress=0;
+    int opg=-1;
+    uint32_t fsize=0;
+    fileEnd(); //
+    fsize = fileGetPosition();
+    if (fsize>0x40000-jumpaddress) fsize = 0x40000-jumpaddress; // shouldn't happen!!
+    fileRewind();
+    display.println("PLEASE WAIT");
+    while (1) {
+        //if (counter >= fsize-0x200) {
+        //    display.println("gotcha");
+        //}
+        if (counter >= fsize) {
+                break;
+        }
+        opg=progress;
+        if (fileReadBytes(&data[0],0x100)<0x100) {
+                if (fsize-counter>0x100) {
+                        display.println("ERROR READING LOA.DER FILE");
+                        return 1; // 1 means error
+                }
+        }
+        if (CopyPageToFlash(jumpaddress+counter,data)) {
+                    display.println("FLASH WRITE ERROR");
+                    return 1;
+        } else {
+            counter += 0x100;
+            display.print(".");
+        }
+        }
+    return 0; //success
+}
+
 void Core::showWarning() {
     display.enableDirectPrinting(true);
     display.directbgcolor = COLOR_BLACK;
@@ -208,19 +247,90 @@ void Core::showWarning() {
 }
 
 void Core::jumpToLoader() {
+    //display.setFont(font5x7);
+    //display.adjustCharStep=1;
+    //display.adjustLineStep=2;
     display.fontSize=1;
     display.directbgcolor=COLOR_BLACK;
     display.directcolor=COLOR_GREEN;
+    display.clearLCD();
     display.setCursor(0,0);
     display.enableDirectPrinting(true);
     #ifdef POK_SIM
     display.println("LOADER IS NOT AVAILABLE ON THE SIMULATOR. PRESS A TO RETURN.");
     #else
     uint32_t* bootinfo;
-    bootinfo = (uint32_t*)0x3FE04;
-    if (*bootinfo != 0xB007AB1E) display.println("NO LOADER CONNECTED!");
-    else start_application(*(bootinfo+2)); //never returns
-    //display.println((unsigned int)(*(bootinfo+2)),16); 
+    uint32_t bootversion=0, sdversion=0, sdjump=0;
+    bool flashloader=false, checkforboot=true;
+    //check for loa.der on SD card
+    #if POK_ENABLE_LOADER_UPDATES > 0
+    pokInitSD();
+    if (fileOpen("LOA.DER", FILE_MODE_BINARY)==0) {
+        //LOA.DER found on SD
+        fileEnd(); // go to end
+        fileSeekRelative(-8); //rewind 8 bytes
+        uint32_t* tptr = &sdversion;
+        fileReadBytes((uint8_t*)tptr,4); //read version number of loader on SD card
+        tptr = &sdjump;
+        fileReadBytes((uint8_t*)tptr,4); //read jump address of loader on sd card
+        fileRewind();
+    }
+    #endif
+    //now start searching for bootkey
+    while (checkforboot)
+    {
+    checkforboot=false; flashloader=false;
+    bootinfo = (uint32_t*)0x3FFF4;
+    if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3FF04; //allow couple of alternative locations
+    if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3FE04; //allow couple of alternative locations
+    if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3F004; //for futureproofing
+    if (*bootinfo != 0xB007AB1E) {
+        // no bootkey found at all
+        display.directcolor=COLOR_YELLOW;
+        display.println("NO LOADER INSTALLED");
+        if (sdversion==0 || sdjump < 0x38000) {
+                //file open of loader failed
+                display.println("NO VALID LOA.DER ON SD");
+                display.println("");
+                display.directcolor=COLOR_GREEN;
+                display.println("PUT LOA.DER ON SD & REBOOT");
+        } else flashloader=true;
+    } else {
+        //loader was found
+        //check if we should update the loader
+        display.directcolor=COLOR_CYAN;
+        display.print("LOADER V.");
+        display.directcolor=COLOR_WHITE;
+        display.println(*(bootinfo+1));
+        #if POK_ENABLE_LOADER_UPDATES
+        if (sdversion>(*(bootinfo+1))) flashloader=true;
+        else start_application(*(bootinfo+2)); //never returns
+        #else
+        start_application(*(bootinfo+2)); //never returns
+        #endif
+    }
+    // update loader if it was requested
+    if(flashloader) {
+            display.directcolor=COLOR_MAGENTA;
+            display.print("NEW LOADER ON SD V.");
+            display.directcolor=COLOR_WHITE;
+            display.println(sdversion);
+            display.directcolor=COLOR_GREEN;
+            display.println("UPDATE LOADER?\n(UP=YES, DOWN=CANCEL)");
+            while(1) {
+                    if (buttons.upBtn()) {
+                        if (updateLoader(sdversion,sdjump)) {
+                            display.println("PUT LOA.DER ON SD AND RETRY");
+                        } else {
+                        display.println("SUCCESS!!");
+                        checkforboot=true; //recheck
+                        }
+                    break;
+                    }
+                    if (buttons.downBtn()) return;
+            }
+    } // if flashloader
+    } // while checkforboot
     #endif // POK_SIM
     while (!buttons.aBtn()) {
         buttons.pollButtons();
@@ -431,11 +541,27 @@ void Core::begin() {
 	#if POK_DISPLAYLOGO
         showLogo();
 	#endif // POK_DISPLAYLOGO
+
 	display.enableDirectPrinting(true);
     display.directbgcolor = COLOR_BLACK;
     display.clearLCD();
     display.setFont(fntC64UIGfx);
+
+    display.enableDirectPrinting(true);
+    display.directbgcolor = COLOR_BLACK;
+    display.directcolor = COLOR_GREEN;
+    display.clearLCD();
+    display.setFont(fntC64UIGfx);
+    display.adjustCharStep=0;
+    display.adjustLineStep=1;
+    #ifdef JUSTLOAD
+	jumpToLoader();
+	#endif
+
+    #ifndef DISABLE_LOADER
     askLoader();
+    #endif
+
 	#ifndef DISABLE_SOUND_WARNING
 	//showWarning();
 	setVolLimit();
@@ -452,13 +578,11 @@ void Core::begin() {
 	#else
 	display.setFont(fontC64);
     #endif
-    
 	#if POK_ENABLE_SOUND > 0
         sound.begin();
-	
+
 	//mute when B is held during start up or if battery is low
 	battery.update();
-	
 	if(buttons.pressed(BTN_B) || (battery.level == 0)){
 		sound.setVolume(0);
 	}
@@ -530,7 +654,7 @@ void Core::initDisplay() {
 void Core::showLogo() {
     uint32_t now;
     uint8_t state=0; //jump directly to logo, bypass teeth
-    uint16_t i=0;
+    uint16_t counter=0, i=0;
     uint16_t sc;
     while (state < 255/6) {
     now=getTime();
@@ -803,6 +927,9 @@ char* Core::filemenu(char *ext) {
 			display.cursorX = 0;
 			display.cursorY = currentY;
 			display.textWrap = false;
+			uint16_t fc,bc;
+			fc = display.color;
+            bc = display.bgcolor;
             //getFirstFile(ext);
 			for (int i = 0; i<20; i++) {
 				display.invisiblecolor=255;

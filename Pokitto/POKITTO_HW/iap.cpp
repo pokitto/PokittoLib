@@ -30,10 +30,14 @@ IAP iap_entry = (IAP) IAP_LOCATION;
 
 int CopyPageToFlash (uint32_t address, uint8_t* data) {
     IAP iap_call = (IAP) IAP_LOCATION;
+    uint32_t writecount=0;
 	__disable_irq();
 
-    unsigned int sector;
-    bool firstpage=false;
+    unsigned int sector, page;
+    bool firstpage=false, erasepage=false;
+
+    //DEBUG//
+    //for (int i=0;i<256;i++) data[i]=0xBB;
 
     /* Calculate sector based on address */
     if (address < 0x18000) sector = address/0x1000; // sectors go in 4 k's
@@ -57,12 +61,33 @@ int CopyPageToFlash (uint32_t address, uint8_t* data) {
 	iap_call(command, result);
     if (result[0]) return 1;
 
+    /* wipe pages when writing the loader */
+    if (address==0x39000) {
+            erasepage=true;
+    }
+
     /* do sector erase only when writing first page of given sector */
     if (firstpage) {
         /* Erase the last sector */
         command[0] = IAP_ERSSECTOR_CMD;	   					/* Erase command code*/
         command[1] = sector;             						/* Start Sector Number */
         command[2] = sector;            						/* End Sector Number */
+        command[3] = SystemCoreClock / 1000UL;	/* Core clock frequency in kHz */
+        iap_call(command, result);
+        if (result[0]) return 1;
+        /* Prepare to write/erase the last sector, needs to be done again because succesful erase re-locks sectors */
+        command[0] = IAP_PREWRRITE_CMD;						/* Prepare to write/erase command code */
+        command[1] = sector;			            				/* Start Sector Number */
+        command[2] = sector;        							/* Start Sector Number */
+        iap_call(command, result);
+        if (result[0]) return 1;
+    }
+
+    /* page erase for bootloader area */
+    if (erasepage) {
+        command[0] = 59; //erase page command
+        command[1] = 896;
+        command[2] = 1023;
         command[3] = SystemCoreClock / 1000UL;	/* Core clock frequency in kHz */
         iap_call(command, result);
         if (result[0]) return 1;
@@ -162,8 +187,8 @@ default:
 
 
     SCB->AIRCR = 0x05FA0004; //issue system reset
-    //while(1); //should never come here
-    return 0;
+    while(1); //should never come here
+    return teahupoo;
 }
 
 
@@ -701,4 +726,3 @@ __attribute__((section(".IAP_Code"))) uint32_t u32IAP_ErasePage(uint32_t u32Star
 /*****************************************************************************
  **                            End Of File
  *****************************************************************************/
-
