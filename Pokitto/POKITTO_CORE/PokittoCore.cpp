@@ -166,6 +166,7 @@ Core::Core() {
 
 
 int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
+    #ifndef POK_SIM
     uint32_t counter=0;
     uint8_t data[256];
     /** prepare the flash writing **/
@@ -199,6 +200,7 @@ int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
             display.print(".");
         }
         }
+        #endif // POK_SIM
     return 0; //success
 }
 
