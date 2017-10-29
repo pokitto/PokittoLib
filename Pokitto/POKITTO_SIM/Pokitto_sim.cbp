@@ -30,7 +30,7 @@
 			<Add option="-std=gnu++11" />
 			<Add option="-fsigned-char" />
 			<Add option="-DPOK_SIM" />
-			<Add directory="C:/SDL2/include" />
+			<Add directory="SDL2/include" />
 			<Add directory="../../Pokitto" />
 			<Add directory="../POKITTO_CORE" />
 			<Add directory="../POKITTO_SIM" />
@@ -53,7 +53,7 @@
 			<Add library="gdi32" />
 			<Add library="winmm" />
 			<Add library="dxguid" />
-			<Add directory="C:/SDL2/lib" />
+			<Add directory="SDL2/lib" />
 		</Linker>
 		<Unit filename="../../Examples/HelloWorld/My_settings.h" />
 		<Unit filename="../../Examples/HelloWorld/main.cpp" />

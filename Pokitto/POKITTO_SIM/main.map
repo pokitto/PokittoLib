@@ -12477,16 +12477,16 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_info    0x00528145     0x749c obj\Debug\Pokitto\POKITTO_SIM\PokittoSimButtons.o
  .debug_info    0x0052f5e1     0x78f8 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimCore.o
  .debug_info    0x00536ed9     0xaa61 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o
- .debug_info    0x0054193a     0x4042 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
- .debug_info    0x0054597c     0x3742 obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
- .debug_info    0x005490be      0x389 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_info    0x00549447      0x980 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
- .debug_info    0x00549dc7     0x2e5e C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
- .debug_info    0x0054cc25      0xd74 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
- .debug_info    0x0054d999      0x8ad C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
- .debug_info    0x0054e246       0x94 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_chkstk_ms.o)
- .debug_info    0x0054e2da      0x567 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
- .debug_info    0x0054e841      0x552 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_udivdi3.o)
+ .debug_info    0x0054193a     0x4064 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
+ .debug_info    0x0054599e     0x3742 obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
+ .debug_info    0x005490e0      0x389 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
+ .debug_info    0x00549469      0x980 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_info    0x00549de9     0x2e5e C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
+ .debug_info    0x0054cc47      0xd74 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
+ .debug_info    0x0054d9bb      0x8ad C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
+ .debug_info    0x0054e268       0x94 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_chkstk_ms.o)
+ .debug_info    0x0054e2fc      0x567 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
+ .debug_info    0x0054e863      0x552 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_udivdi3.o)
 
 .zdebug_info
  *(.zdebug_info .zdebug.gnu.linkonce.wi.*)
@@ -12540,16 +12540,16 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_abbrev  0x00552577      0x5b6 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimButtons.o
  .debug_abbrev  0x00552b2d      0x472 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimCore.o
  .debug_abbrev  0x00552f9f      0x93f obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o
- .debug_abbrev  0x005538de      0x356 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
- .debug_abbrev  0x00553c34      0x30d obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
- .debug_abbrev  0x00553f41       0xb1 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_abbrev  0x00553ff2      0x23c C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
- .debug_abbrev  0x0055422e      0x49d C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
- .debug_abbrev  0x005546cb       0xa7 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
- .debug_abbrev  0x00554772      0x1ee C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
- .debug_abbrev  0x00554960       0x14 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_chkstk_ms.o)
- .debug_abbrev  0x00554974      0x162 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
- .debug_abbrev  0x00554ad6      0x15c C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_udivdi3.o)
+ .debug_abbrev  0x005538de      0x358 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
+ .debug_abbrev  0x00553c36      0x30d obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
+ .debug_abbrev  0x00553f43       0xb1 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
+ .debug_abbrev  0x00553ff4      0x23c C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_abbrev  0x00554230      0x49d C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
+ .debug_abbrev  0x005546cd       0xa7 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
+ .debug_abbrev  0x00554774      0x1ee C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
+ .debug_abbrev  0x00554962       0x14 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_chkstk_ms.o)
+ .debug_abbrev  0x00554976      0x162 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
+ .debug_abbrev  0x00554ad8      0x15c C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_udivdi3.o)
 
 .zdebug_abbrev
  *(.zdebug_abbrev)
@@ -12581,38 +12581,38 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_line    0x0055589b       0x5b obj\Debug\Pokitto\POKITTO_CORE\PALETTES\palRainbow.o
  .debug_line    0x005558f6       0xbe obj\Debug\Pokitto\POKITTO_CORE\PokittoBacklight.o
  .debug_line    0x005559b4       0xf4 obj\Debug\Pokitto\POKITTO_CORE\PokittoBattery.o
- .debug_line    0x00555aa8      0x28f obj\Debug\Pokitto\POKITTO_CORE\PokittoButtons.o
- .debug_line    0x00555d37      0x373 obj\Debug\Pokitto\POKITTO_CORE\PokittoConsole.o
- .debug_line    0x005560aa      0x93e obj\Debug\Pokitto\POKITTO_CORE\PokittoCore.o
- .debug_line    0x005569e8      0xf29 obj\Debug\Pokitto\POKITTO_CORE\PokittoDisplay.o
- .debug_line    0x00557911      0x14f obj\Debug\Pokitto\POKITTO_CORE\PokittoItoa.o
- .debug_line    0x00557a60       0x54 obj\Debug\Pokitto\POKITTO_CORE\PokittoLogos.o
- .debug_line    0x00557ab4      0x1ba obj\Debug\Pokitto\POKITTO_CORE\PokittoPalette.o
- .debug_line    0x00557c6e      0x45b obj\Debug\Pokitto\POKITTO_CORE\PokittoSound.o
- .debug_line    0x005580c9      0x316 obj\Debug\Pokitto\POKITTO_LIBS\FileIO\FileIO_SIM.o
- .debug_line    0x005583df      0x143 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth.o
- .debug_line    0x00558522      0x160 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_envfuncs.o
- .debug_line    0x00558682      0x124 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_helpers.o
- .debug_line    0x005587a6      0x27c obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_mixfuncs.o
- .debug_line    0x00558a22      0x264 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_oscfuncs.o
- .debug_line    0x00558c86      0x28b obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_songfuncs.o
- .debug_line    0x00558f11      0x16b obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_wavefuncs.o
- .debug_line    0x0055907c      0x1d6 obj\Debug\Pokitto\POKITTO_SIM\mbed_sim\mbed_sim.o
- .debug_line    0x00559252      0x103 obj\Debug\Pokitto\POKITTO_SIM\Pokitto_simport.o
- .debug_line    0x00559355      0x286 obj\Debug\Pokitto\POKITTO_SIM\PokittoClock.o
- .debug_line    0x005595db      0x675 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimButtons.o
- .debug_line    0x00559c50      0x2e9 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimCore.o
- .debug_line    0x00559f39      0x7b0 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o
- .debug_line    0x0055a6e9      0x7d2 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
- .debug_line    0x0055aebb      0x220 obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
- .debug_line    0x0055b0db      0x10f obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_line    0x0055b1ea      0x1ec C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
- .debug_line    0x0055b3d6      0x5ac C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
- .debug_line    0x0055b982       0xbd C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
- .debug_line    0x0055ba3f      0x15d C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
- .debug_line    0x0055bb9c       0x77 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_chkstk_ms.o)
- .debug_line    0x0055bc13      0x100 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
- .debug_line    0x0055bd13       0xe8 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_udivdi3.o)
+ .debug_line    0x00555aa8      0x28c obj\Debug\Pokitto\POKITTO_CORE\PokittoButtons.o
+ .debug_line    0x00555d34      0x370 obj\Debug\Pokitto\POKITTO_CORE\PokittoConsole.o
+ .debug_line    0x005560a4      0x93b obj\Debug\Pokitto\POKITTO_CORE\PokittoCore.o
+ .debug_line    0x005569df      0xf29 obj\Debug\Pokitto\POKITTO_CORE\PokittoDisplay.o
+ .debug_line    0x00557908      0x14f obj\Debug\Pokitto\POKITTO_CORE\PokittoItoa.o
+ .debug_line    0x00557a57       0x54 obj\Debug\Pokitto\POKITTO_CORE\PokittoLogos.o
+ .debug_line    0x00557aab      0x1ba obj\Debug\Pokitto\POKITTO_CORE\PokittoPalette.o
+ .debug_line    0x00557c65      0x45b obj\Debug\Pokitto\POKITTO_CORE\PokittoSound.o
+ .debug_line    0x005580c0      0x316 obj\Debug\Pokitto\POKITTO_LIBS\FileIO\FileIO_SIM.o
+ .debug_line    0x005583d6      0x143 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth.o
+ .debug_line    0x00558519      0x160 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_envfuncs.o
+ .debug_line    0x00558679      0x124 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_helpers.o
+ .debug_line    0x0055879d      0x27c obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_mixfuncs.o
+ .debug_line    0x00558a19      0x264 obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_oscfuncs.o
+ .debug_line    0x00558c7d      0x28b obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_songfuncs.o
+ .debug_line    0x00558f08      0x16b obj\Debug\Pokitto\POKITTO_LIBS\Synth\Synth_wavefuncs.o
+ .debug_line    0x00559073      0x1d3 obj\Debug\Pokitto\POKITTO_SIM\mbed_sim\mbed_sim.o
+ .debug_line    0x00559246      0x103 obj\Debug\Pokitto\POKITTO_SIM\Pokitto_simport.o
+ .debug_line    0x00559349      0x283 obj\Debug\Pokitto\POKITTO_SIM\PokittoClock.o
+ .debug_line    0x005595cc      0x672 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimButtons.o
+ .debug_line    0x00559c3e      0x2e6 obj\Debug\Pokitto\POKITTO_SIM\PokittoSimCore.o
+ .debug_line    0x00559f24      0x7ad obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o
+ .debug_line    0x0055a6d1      0x7cf obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
+ .debug_line    0x0055aea0      0x21d obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
+ .debug_line    0x0055b0bd      0x10f obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
+ .debug_line    0x0055b1cc      0x1ec C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_line    0x0055b3b8      0x5ac C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
+ .debug_line    0x0055b964       0xbd C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
+ .debug_line    0x0055ba21      0x15d C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
+ .debug_line    0x0055bb7e       0x77 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_chkstk_ms.o)
+ .debug_line    0x0055bbf5      0x100 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
+ .debug_line    0x0055bcf5       0xe8 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_udivdi3.o)
 
 .zdebug_line
  *(.zdebug_line)
