@@ -53,7 +53,7 @@
 			<Add library="gdi32" />
 			<Add library="winmm" />
 			<Add library="dxguid" />
-			<Add directory="C:/SDL2/lib" />
+			<Add directory="SDL2/lib" />
 		</Linker>
 		<Unit filename="../../Examples/HelloWorld/My_settings.h" />
 		<Unit filename="../../Examples/HelloWorld/main.cpp" />
