@@ -24,66 +24,66 @@ C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../li
                               C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(tlssup.o) (__mingw_TLScallback)
 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(pseudo-reloc-list.o)
                               C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(pseudo-reloc.o) (__RUNTIME_PSEUDO_RELOC_LIST__)
-C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+SDL2\lib/libSDLmain.a(SDL_windows_main.o)
                               C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(main.o) (WinMain@16)
-C:\SDL2\lib/libSDL.dll.a(d000198.o)
+SDL2\lib/libSDL.dll.a(d000198.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoClock.o (SDL_GetTicks)
-C:\SDL2\lib/libSDL.dll.a(d000339.o)
+SDL2\lib/libSDL.dll.a(d000339.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimButtons.o (SDL_PollEvent)
-C:\SDL2\lib/libSDL.dll.a(d000264.o)
+SDL2\lib/libSDL.dll.a(d000264.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_Init)
-C:\SDL2\lib/libSDL.dll.a(d000144.o)
+SDL2\lib/libSDL.dll.a(d000144.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_GetError)
-C:\SDL2\lib/libSDL.dll.a(d000049.o)
+SDL2\lib/libSDL.dll.a(d000049.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_CreateWindow)
-C:\SDL2\lib/libSDL.dll.a(d000344.o)
+SDL2\lib/libSDL.dll.a(d000344.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_Quit)
-C:\SDL2\lib/libSDL.dll.a(d000041.o)
+SDL2\lib/libSDL.dll.a(d000041.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_CreateRenderer)
-C:\SDL2\lib/libSDL.dll.a(d000062.o)
+SDL2\lib/libSDL.dll.a(d000062.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_DestroyWindow)
-C:\SDL2\lib/libSDL.dll.a(d000046.o)
+SDL2\lib/libSDL.dll.a(d000046.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_CreateTexture)
-C:\SDL2\lib/libSDL.dll.a(d000003.o)
+SDL2\lib/libSDL.dll.a(d000003.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_AddTimer)
-C:\SDL2\lib/libSDL.dll.a(d000056.o)
+SDL2\lib/libSDL.dll.a(d000056.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_Delay)
-C:\SDL2\lib/libSDL.dll.a(d000460.o)
+SDL2\lib/libSDL.dll.a(d000460.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_UpdateTexture)
-C:\SDL2\lib/libSDL.dll.a(d000362.o)
+SDL2\lib/libSDL.dll.a(d000362.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_RenderClear)
-C:\SDL2\lib/libSDL.dll.a(d000363.o)
+SDL2\lib/libSDL.dll.a(d000363.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_RenderCopy)
-C:\SDL2\lib/libSDL.dll.a(d000379.o)
+SDL2\lib/libSDL.dll.a(d000379.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_RenderPresent)
-C:\SDL2\lib/libSDL.dll.a(d000336.o)
+SDL2\lib/libSDL.dll.a(d000336.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_PauseAudioDevice)
-C:\SDL2\lib/libSDL.dll.a(d000265.o)
+SDL2\lib/libSDL.dll.a(d000265.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_InitSubSystem)
-C:\SDL2\lib/libSDL.dll.a(d000511.o)
+SDL2\lib/libSDL.dll.a(d000511.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_memset)
-C:\SDL2\lib/libSDL.dll.a(d000334.o)
+SDL2\lib/libSDL.dll.a(d000334.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimulator.o (SDL_OpenAudioDevice)
-C:\SDL2\lib/libSDL.dll.a(d000335.o)
+SDL2\lib/libSDL.dll.a(d000335.o)
                               obj\Debug\Pokitto\POKITTO_SIM\SimSound.o (SDL_PauseAudio)
-C:\SDL2\lib/libSDL.dll.a(d000406.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_SetMainReady)
-C:\SDL2\lib/libSDL.dll.a(d000507.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_malloc)
-C:\SDL2\lib/libSDL.dll.a(d000554.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_wcslen)
-C:\SDL2\lib/libSDL.dll.a(d000500.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_iconv_string)
-C:\SDL2\lib/libSDL.dll.a(d000495.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_free)
-C:\SDL2\lib/libSDL.dll.a(d000502.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_isspace)
-C:\SDL2\lib/libSDL.dll.a(d000442.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_ShowSimpleMessageBox)
-C:\SDL2\lib/libSDL.dll.a(d000000.o)
-                              C:\SDL2\lib/libSDL.dll.a(d000198.o) (_head_SDL2_dll)
-C:\SDL2\lib/libSDL.dll.a(d000555.o)
-                              C:\SDL2\lib/libSDL.dll.a(d000000.o) (SDL2_dll_iname)
+SDL2\lib/libSDL.dll.a(d000406.o)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_SetMainReady)
+SDL2\lib/libSDL.dll.a(d000507.o)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_malloc)
+SDL2\lib/libSDL.dll.a(d000554.o)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_wcslen)
+SDL2\lib/libSDL.dll.a(d000500.o)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_iconv_string)
+SDL2\lib/libSDL.dll.a(d000495.o)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_free)
+SDL2\lib/libSDL.dll.a(d000502.o)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_isspace)
+SDL2\lib/libSDL.dll.a(d000442.o)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (SDL_ShowSimpleMessageBox)
+SDL2\lib/libSDL.dll.a(d000000.o)
+                              SDL2\lib/libSDL.dll.a(d000198.o) (_head_SDL2_dll)
+SDL2\lib/libSDL.dll.a(d000555.o)
+                              SDL2\lib/libSDL.dll.a(d000000.o) (SDL2_dll_iname)
 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(ios_init.o)
                               obj\Debug\Pokitto\POKITTO_SIM\PokittoSimButtons.o (std::ios_base::Init::Init())
 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(eh_personality.o)
@@ -515,7 +515,7 @@ C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../li
 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchds00734.o)
                               C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(tlsthrd.o) (InitializeCriticalSection@4)
 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchds00389.o)
-                              C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o) (_imp__GetCommandLineW@0)
+                              SDL2\lib/libSDLmain.a(SDL_windows_main.o) (_imp__GetCommandLineW@0)
 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchds00363.o)
                               C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o) (GetAtomNameA@12)
 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchds00154.o)
@@ -1173,8 +1173,8 @@ LOAD obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
 LOAD obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
 LOAD obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
 LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a
-LOAD C:\SDL2\lib/libSDLmain.a
-LOAD C:\SDL2\lib/libSDL.dll.a
+LOAD SDL2\lib/libSDLmain.a
+LOAD SDL2\lib/libSDL.dll.a
 LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libuser32.a
 LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libgdi32.a
 LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libwinmm.a
@@ -1654,63 +1654,63 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
                 0x00412c20                ___w64_mingwthr_remove_key_dtor
                 0x00412cb0                __mingw_TLScallback
  .text          0x00412d50        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(pseudo-reloc-list.o)
- .text          0x00412d50      0x3a0 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .text          0x00412d50      0x3a0 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
                 0x00412d50                console_ansi_main
                 0x00412d70                console_wmain
                 0x00412e00                WinMain@16
- .text          0x004130f0        0x8 C:\SDL2\lib/libSDL.dll.a(d000198.o)
+ .text          0x004130f0        0x8 SDL2\lib/libSDL.dll.a(d000198.o)
                 0x004130f0                SDL_GetTicks
- .text          0x004130f8        0x8 C:\SDL2\lib/libSDL.dll.a(d000339.o)
+ .text          0x004130f8        0x8 SDL2\lib/libSDL.dll.a(d000339.o)
                 0x004130f8                SDL_PollEvent
- .text          0x00413100        0x8 C:\SDL2\lib/libSDL.dll.a(d000264.o)
+ .text          0x00413100        0x8 SDL2\lib/libSDL.dll.a(d000264.o)
                 0x00413100                SDL_Init
- .text          0x00413108        0x8 C:\SDL2\lib/libSDL.dll.a(d000144.o)
+ .text          0x00413108        0x8 SDL2\lib/libSDL.dll.a(d000144.o)
                 0x00413108                SDL_GetError
- .text          0x00413110        0x8 C:\SDL2\lib/libSDL.dll.a(d000049.o)
+ .text          0x00413110        0x8 SDL2\lib/libSDL.dll.a(d000049.o)
                 0x00413110                SDL_CreateWindow
- .text          0x00413118        0x8 C:\SDL2\lib/libSDL.dll.a(d000344.o)
+ .text          0x00413118        0x8 SDL2\lib/libSDL.dll.a(d000344.o)
                 0x00413118                SDL_Quit
- .text          0x00413120        0x8 C:\SDL2\lib/libSDL.dll.a(d000041.o)
+ .text          0x00413120        0x8 SDL2\lib/libSDL.dll.a(d000041.o)
                 0x00413120                SDL_CreateRenderer
- .text          0x00413128        0x8 C:\SDL2\lib/libSDL.dll.a(d000062.o)
+ .text          0x00413128        0x8 SDL2\lib/libSDL.dll.a(d000062.o)
                 0x00413128                SDL_DestroyWindow
- .text          0x00413130        0x8 C:\SDL2\lib/libSDL.dll.a(d000046.o)
+ .text          0x00413130        0x8 SDL2\lib/libSDL.dll.a(d000046.o)
                 0x00413130                SDL_CreateTexture
- .text          0x00413138        0x8 C:\SDL2\lib/libSDL.dll.a(d000003.o)
+ .text          0x00413138        0x8 SDL2\lib/libSDL.dll.a(d000003.o)
                 0x00413138                SDL_AddTimer
- .text          0x00413140        0x8 C:\SDL2\lib/libSDL.dll.a(d000056.o)
+ .text          0x00413140        0x8 SDL2\lib/libSDL.dll.a(d000056.o)
                 0x00413140                SDL_Delay
- .text          0x00413148        0x8 C:\SDL2\lib/libSDL.dll.a(d000460.o)
+ .text          0x00413148        0x8 SDL2\lib/libSDL.dll.a(d000460.o)
                 0x00413148                SDL_UpdateTexture
- .text          0x00413150        0x8 C:\SDL2\lib/libSDL.dll.a(d000362.o)
+ .text          0x00413150        0x8 SDL2\lib/libSDL.dll.a(d000362.o)
                 0x00413150                SDL_RenderClear
- .text          0x00413158        0x8 C:\SDL2\lib/libSDL.dll.a(d000363.o)
+ .text          0x00413158        0x8 SDL2\lib/libSDL.dll.a(d000363.o)
                 0x00413158                SDL_RenderCopy
- .text          0x00413160        0x8 C:\SDL2\lib/libSDL.dll.a(d000379.o)
+ .text          0x00413160        0x8 SDL2\lib/libSDL.dll.a(d000379.o)
                 0x00413160                SDL_RenderPresent
- .text          0x00413168        0x8 C:\SDL2\lib/libSDL.dll.a(d000336.o)
+ .text          0x00413168        0x8 SDL2\lib/libSDL.dll.a(d000336.o)
                 0x00413168                SDL_PauseAudioDevice
- .text          0x00413170        0x8 C:\SDL2\lib/libSDL.dll.a(d000265.o)
+ .text          0x00413170        0x8 SDL2\lib/libSDL.dll.a(d000265.o)
                 0x00413170                SDL_InitSubSystem
- .text          0x00413178        0x8 C:\SDL2\lib/libSDL.dll.a(d000511.o)
+ .text          0x00413178        0x8 SDL2\lib/libSDL.dll.a(d000511.o)
                 0x00413178                SDL_memset
- .text          0x00413180        0x8 C:\SDL2\lib/libSDL.dll.a(d000334.o)
+ .text          0x00413180        0x8 SDL2\lib/libSDL.dll.a(d000334.o)
                 0x00413180                SDL_OpenAudioDevice
- .text          0x00413188        0x8 C:\SDL2\lib/libSDL.dll.a(d000335.o)
+ .text          0x00413188        0x8 SDL2\lib/libSDL.dll.a(d000335.o)
                 0x00413188                SDL_PauseAudio
- .text          0x00413190        0x8 C:\SDL2\lib/libSDL.dll.a(d000406.o)
+ .text          0x00413190        0x8 SDL2\lib/libSDL.dll.a(d000406.o)
                 0x00413190                SDL_SetMainReady
- .text          0x00413198        0x8 C:\SDL2\lib/libSDL.dll.a(d000507.o)
+ .text          0x00413198        0x8 SDL2\lib/libSDL.dll.a(d000507.o)
                 0x00413198                SDL_malloc
- .text          0x004131a0        0x8 C:\SDL2\lib/libSDL.dll.a(d000554.o)
+ .text          0x004131a0        0x8 SDL2\lib/libSDL.dll.a(d000554.o)
                 0x004131a0                SDL_wcslen
- .text          0x004131a8        0x8 C:\SDL2\lib/libSDL.dll.a(d000500.o)
+ .text          0x004131a8        0x8 SDL2\lib/libSDL.dll.a(d000500.o)
                 0x004131a8                SDL_iconv_string
- .text          0x004131b0        0x8 C:\SDL2\lib/libSDL.dll.a(d000495.o)
+ .text          0x004131b0        0x8 SDL2\lib/libSDL.dll.a(d000495.o)
                 0x004131b0                SDL_free
- .text          0x004131b8        0x8 C:\SDL2\lib/libSDL.dll.a(d000502.o)
+ .text          0x004131b8        0x8 SDL2\lib/libSDL.dll.a(d000502.o)
                 0x004131b8                SDL_isspace
- .text          0x004131c0        0x8 C:\SDL2\lib/libSDL.dll.a(d000442.o)
+ .text          0x004131c0        0x8 SDL2\lib/libSDL.dll.a(d000442.o)
                 0x004131c0                SDL_ShowSimpleMessageBox
  *fill*         0x004131c8        0x8 
  .text          0x004131d0      0xc40 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(ios_init.o)
@@ -8539,7 +8539,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .data          0x00496394        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(crtst.o)
  .data          0x00496394        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(tlsthrd.o)
  .data          0x00496394        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(pseudo-reloc-list.o)
- .data          0x00496394        0x0 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .data          0x00496394        0x0 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .data          0x00496394        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(ios_init.o)
  .data          0x00496394        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(eh_personality.o)
  .data          0x00496394        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(globals_io.o)
@@ -9053,7 +9053,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .rdata         0x0049c228        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(tlssup.o)
                 0x0049c228                __dyn_tls_init_callback
  .rdata         0x0049c22c       0xac C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(pseudo-reloc.o)
- .rdata         0x0049c2d8       0x34 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .rdata         0x0049c2d8       0x34 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .rdata         0x0049c30c       0x20 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(ios_init.o)
  .rdata         0x0049c32c       0x34 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(eh_personality.o)
  .rdata         0x0049c360      0x1b4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(string-inst.o)
@@ -10564,7 +10564,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .rdata$zzz     0x004a42c0       0x14 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
  .rdata$zzz     0x004a42d4       0x14 obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
  .rdata$zzz     0x004a42e8       0x14 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .rdata$zzz     0x004a42fc       0x2c C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .rdata$zzz     0x004a42fc       0x2c SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .rdata$zzz     0x004a4328       0x14 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(ios_init.o)
  .rdata$zzz     0x004a433c       0x14 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(eh_personality.o)
  .rdata$zzz     0x004a4350       0x14 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(globals_io.o)
@@ -10984,7 +10984,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
                 0x004e3860                _CRT_MT
  .bss           0x004e3864       0x20 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(tlsthrd.o)
  .bss           0x004e3884        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(pseudo-reloc-list.o)
- .bss           0x004e3888        0x0 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .bss           0x004e3888        0x0 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .bss           0x004e3888        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(ios_init.o)
  .bss           0x004e3888        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2\libstdc++.a(eh_personality.o)
  *fill*         0x004e3888       0x38 
@@ -11345,7 +11345,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
                 0x004eb014                _head_libmoldname_a
  .idata$2       0x004eb028       0x14 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnoh.o)
                 0x004eb028                _head_libmsvcrt_a
- .idata$2       0x004eb03c       0x14 C:\SDL2\lib/libSDL.dll.a(d000000.o)
+ .idata$2       0x004eb03c       0x14 SDL2\lib/libSDL.dll.a(d000000.o)
                 0x004eb03c                _head_SDL2_dll
  SORT(*)(.idata$3)
                 0x004eb050        0x4 LONG 0x0
@@ -11503,35 +11503,35 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .idata$4       0x004eb2a0        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnos00761.o)
  .idata$4       0x004eb2a4        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnos00774.o)
  .idata$4       0x004eb2a8        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnot.o)
- .idata$4       0x004eb2ac        0x0 C:\SDL2\lib/libSDL.dll.a(d000000.o)
- .idata$4       0x004eb2ac        0x4 C:\SDL2\lib/libSDL.dll.a(d000003.o)
- .idata$4       0x004eb2b0        0x4 C:\SDL2\lib/libSDL.dll.a(d000041.o)
- .idata$4       0x004eb2b4        0x4 C:\SDL2\lib/libSDL.dll.a(d000046.o)
- .idata$4       0x004eb2b8        0x4 C:\SDL2\lib/libSDL.dll.a(d000049.o)
- .idata$4       0x004eb2bc        0x4 C:\SDL2\lib/libSDL.dll.a(d000056.o)
- .idata$4       0x004eb2c0        0x4 C:\SDL2\lib/libSDL.dll.a(d000062.o)
- .idata$4       0x004eb2c4        0x4 C:\SDL2\lib/libSDL.dll.a(d000144.o)
- .idata$4       0x004eb2c8        0x4 C:\SDL2\lib/libSDL.dll.a(d000198.o)
- .idata$4       0x004eb2cc        0x4 C:\SDL2\lib/libSDL.dll.a(d000264.o)
- .idata$4       0x004eb2d0        0x4 C:\SDL2\lib/libSDL.dll.a(d000265.o)
- .idata$4       0x004eb2d4        0x4 C:\SDL2\lib/libSDL.dll.a(d000334.o)
- .idata$4       0x004eb2d8        0x4 C:\SDL2\lib/libSDL.dll.a(d000335.o)
- .idata$4       0x004eb2dc        0x4 C:\SDL2\lib/libSDL.dll.a(d000336.o)
- .idata$4       0x004eb2e0        0x4 C:\SDL2\lib/libSDL.dll.a(d000339.o)
- .idata$4       0x004eb2e4        0x4 C:\SDL2\lib/libSDL.dll.a(d000344.o)
- .idata$4       0x004eb2e8        0x4 C:\SDL2\lib/libSDL.dll.a(d000362.o)
- .idata$4       0x004eb2ec        0x4 C:\SDL2\lib/libSDL.dll.a(d000363.o)
- .idata$4       0x004eb2f0        0x4 C:\SDL2\lib/libSDL.dll.a(d000379.o)
- .idata$4       0x004eb2f4        0x4 C:\SDL2\lib/libSDL.dll.a(d000406.o)
- .idata$4       0x004eb2f8        0x4 C:\SDL2\lib/libSDL.dll.a(d000442.o)
- .idata$4       0x004eb2fc        0x4 C:\SDL2\lib/libSDL.dll.a(d000460.o)
- .idata$4       0x004eb300        0x4 C:\SDL2\lib/libSDL.dll.a(d000495.o)
- .idata$4       0x004eb304        0x4 C:\SDL2\lib/libSDL.dll.a(d000500.o)
- .idata$4       0x004eb308        0x4 C:\SDL2\lib/libSDL.dll.a(d000502.o)
- .idata$4       0x004eb30c        0x4 C:\SDL2\lib/libSDL.dll.a(d000507.o)
- .idata$4       0x004eb310        0x4 C:\SDL2\lib/libSDL.dll.a(d000511.o)
- .idata$4       0x004eb314        0x4 C:\SDL2\lib/libSDL.dll.a(d000554.o)
- .idata$4       0x004eb318        0x4 C:\SDL2\lib/libSDL.dll.a(d000555.o)
+ .idata$4       0x004eb2ac        0x0 SDL2\lib/libSDL.dll.a(d000000.o)
+ .idata$4       0x004eb2ac        0x4 SDL2\lib/libSDL.dll.a(d000003.o)
+ .idata$4       0x004eb2b0        0x4 SDL2\lib/libSDL.dll.a(d000041.o)
+ .idata$4       0x004eb2b4        0x4 SDL2\lib/libSDL.dll.a(d000046.o)
+ .idata$4       0x004eb2b8        0x4 SDL2\lib/libSDL.dll.a(d000049.o)
+ .idata$4       0x004eb2bc        0x4 SDL2\lib/libSDL.dll.a(d000056.o)
+ .idata$4       0x004eb2c0        0x4 SDL2\lib/libSDL.dll.a(d000062.o)
+ .idata$4       0x004eb2c4        0x4 SDL2\lib/libSDL.dll.a(d000144.o)
+ .idata$4       0x004eb2c8        0x4 SDL2\lib/libSDL.dll.a(d000198.o)
+ .idata$4       0x004eb2cc        0x4 SDL2\lib/libSDL.dll.a(d000264.o)
+ .idata$4       0x004eb2d0        0x4 SDL2\lib/libSDL.dll.a(d000265.o)
+ .idata$4       0x004eb2d4        0x4 SDL2\lib/libSDL.dll.a(d000334.o)
+ .idata$4       0x004eb2d8        0x4 SDL2\lib/libSDL.dll.a(d000335.o)
+ .idata$4       0x004eb2dc        0x4 SDL2\lib/libSDL.dll.a(d000336.o)
+ .idata$4       0x004eb2e0        0x4 SDL2\lib/libSDL.dll.a(d000339.o)
+ .idata$4       0x004eb2e4        0x4 SDL2\lib/libSDL.dll.a(d000344.o)
+ .idata$4       0x004eb2e8        0x4 SDL2\lib/libSDL.dll.a(d000362.o)
+ .idata$4       0x004eb2ec        0x4 SDL2\lib/libSDL.dll.a(d000363.o)
+ .idata$4       0x004eb2f0        0x4 SDL2\lib/libSDL.dll.a(d000379.o)
+ .idata$4       0x004eb2f4        0x4 SDL2\lib/libSDL.dll.a(d000406.o)
+ .idata$4       0x004eb2f8        0x4 SDL2\lib/libSDL.dll.a(d000442.o)
+ .idata$4       0x004eb2fc        0x4 SDL2\lib/libSDL.dll.a(d000460.o)
+ .idata$4       0x004eb300        0x4 SDL2\lib/libSDL.dll.a(d000495.o)
+ .idata$4       0x004eb304        0x4 SDL2\lib/libSDL.dll.a(d000500.o)
+ .idata$4       0x004eb308        0x4 SDL2\lib/libSDL.dll.a(d000502.o)
+ .idata$4       0x004eb30c        0x4 SDL2\lib/libSDL.dll.a(d000507.o)
+ .idata$4       0x004eb310        0x4 SDL2\lib/libSDL.dll.a(d000511.o)
+ .idata$4       0x004eb314        0x4 SDL2\lib/libSDL.dll.a(d000554.o)
+ .idata$4       0x004eb318        0x4 SDL2\lib/libSDL.dll.a(d000555.o)
                 0x004eb31c                __IAT_start__ = .
  SORT(*)(.idata$5)
  .idata$5       0x004eb31c        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchdh.o)
@@ -11826,62 +11826,62 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .idata$5       0x004eb55c        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnos00774.o)
                 0x004eb55c                _imp__wcsxfrm
  .idata$5       0x004eb560        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnot.o)
- .idata$5       0x004eb564        0x0 C:\SDL2\lib/libSDL.dll.a(d000000.o)
- .idata$5       0x004eb564        0x4 C:\SDL2\lib/libSDL.dll.a(d000003.o)
+ .idata$5       0x004eb564        0x0 SDL2\lib/libSDL.dll.a(d000000.o)
+ .idata$5       0x004eb564        0x4 SDL2\lib/libSDL.dll.a(d000003.o)
                 0x004eb564                _imp__SDL_AddTimer
- .idata$5       0x004eb568        0x4 C:\SDL2\lib/libSDL.dll.a(d000041.o)
+ .idata$5       0x004eb568        0x4 SDL2\lib/libSDL.dll.a(d000041.o)
                 0x004eb568                _imp__SDL_CreateRenderer
- .idata$5       0x004eb56c        0x4 C:\SDL2\lib/libSDL.dll.a(d000046.o)
+ .idata$5       0x004eb56c        0x4 SDL2\lib/libSDL.dll.a(d000046.o)
                 0x004eb56c                _imp__SDL_CreateTexture
- .idata$5       0x004eb570        0x4 C:\SDL2\lib/libSDL.dll.a(d000049.o)
+ .idata$5       0x004eb570        0x4 SDL2\lib/libSDL.dll.a(d000049.o)
                 0x004eb570                _imp__SDL_CreateWindow
- .idata$5       0x004eb574        0x4 C:\SDL2\lib/libSDL.dll.a(d000056.o)
+ .idata$5       0x004eb574        0x4 SDL2\lib/libSDL.dll.a(d000056.o)
                 0x004eb574                _imp__SDL_Delay
- .idata$5       0x004eb578        0x4 C:\SDL2\lib/libSDL.dll.a(d000062.o)
+ .idata$5       0x004eb578        0x4 SDL2\lib/libSDL.dll.a(d000062.o)
                 0x004eb578                _imp__SDL_DestroyWindow
- .idata$5       0x004eb57c        0x4 C:\SDL2\lib/libSDL.dll.a(d000144.o)
+ .idata$5       0x004eb57c        0x4 SDL2\lib/libSDL.dll.a(d000144.o)
                 0x004eb57c                _imp__SDL_GetError
- .idata$5       0x004eb580        0x4 C:\SDL2\lib/libSDL.dll.a(d000198.o)
+ .idata$5       0x004eb580        0x4 SDL2\lib/libSDL.dll.a(d000198.o)
                 0x004eb580                _imp__SDL_GetTicks
- .idata$5       0x004eb584        0x4 C:\SDL2\lib/libSDL.dll.a(d000264.o)
+ .idata$5       0x004eb584        0x4 SDL2\lib/libSDL.dll.a(d000264.o)
                 0x004eb584                _imp__SDL_Init
- .idata$5       0x004eb588        0x4 C:\SDL2\lib/libSDL.dll.a(d000265.o)
+ .idata$5       0x004eb588        0x4 SDL2\lib/libSDL.dll.a(d000265.o)
                 0x004eb588                _imp__SDL_InitSubSystem
- .idata$5       0x004eb58c        0x4 C:\SDL2\lib/libSDL.dll.a(d000334.o)
+ .idata$5       0x004eb58c        0x4 SDL2\lib/libSDL.dll.a(d000334.o)
                 0x004eb58c                _imp__SDL_OpenAudioDevice
- .idata$5       0x004eb590        0x4 C:\SDL2\lib/libSDL.dll.a(d000335.o)
+ .idata$5       0x004eb590        0x4 SDL2\lib/libSDL.dll.a(d000335.o)
                 0x004eb590                _imp__SDL_PauseAudio
- .idata$5       0x004eb594        0x4 C:\SDL2\lib/libSDL.dll.a(d000336.o)
+ .idata$5       0x004eb594        0x4 SDL2\lib/libSDL.dll.a(d000336.o)
                 0x004eb594                _imp__SDL_PauseAudioDevice
- .idata$5       0x004eb598        0x4 C:\SDL2\lib/libSDL.dll.a(d000339.o)
+ .idata$5       0x004eb598        0x4 SDL2\lib/libSDL.dll.a(d000339.o)
                 0x004eb598                _imp__SDL_PollEvent
- .idata$5       0x004eb59c        0x4 C:\SDL2\lib/libSDL.dll.a(d000344.o)
+ .idata$5       0x004eb59c        0x4 SDL2\lib/libSDL.dll.a(d000344.o)
                 0x004eb59c                _imp__SDL_Quit
- .idata$5       0x004eb5a0        0x4 C:\SDL2\lib/libSDL.dll.a(d000362.o)
+ .idata$5       0x004eb5a0        0x4 SDL2\lib/libSDL.dll.a(d000362.o)
                 0x004eb5a0                _imp__SDL_RenderClear
- .idata$5       0x004eb5a4        0x4 C:\SDL2\lib/libSDL.dll.a(d000363.o)
+ .idata$5       0x004eb5a4        0x4 SDL2\lib/libSDL.dll.a(d000363.o)
                 0x004eb5a4                _imp__SDL_RenderCopy
- .idata$5       0x004eb5a8        0x4 C:\SDL2\lib/libSDL.dll.a(d000379.o)
+ .idata$5       0x004eb5a8        0x4 SDL2\lib/libSDL.dll.a(d000379.o)
                 0x004eb5a8                _imp__SDL_RenderPresent
- .idata$5       0x004eb5ac        0x4 C:\SDL2\lib/libSDL.dll.a(d000406.o)
+ .idata$5       0x004eb5ac        0x4 SDL2\lib/libSDL.dll.a(d000406.o)
                 0x004eb5ac                _imp__SDL_SetMainReady
- .idata$5       0x004eb5b0        0x4 C:\SDL2\lib/libSDL.dll.a(d000442.o)
+ .idata$5       0x004eb5b0        0x4 SDL2\lib/libSDL.dll.a(d000442.o)
                 0x004eb5b0                _imp__SDL_ShowSimpleMessageBox
- .idata$5       0x004eb5b4        0x4 C:\SDL2\lib/libSDL.dll.a(d000460.o)
+ .idata$5       0x004eb5b4        0x4 SDL2\lib/libSDL.dll.a(d000460.o)
                 0x004eb5b4                _imp__SDL_UpdateTexture
- .idata$5       0x004eb5b8        0x4 C:\SDL2\lib/libSDL.dll.a(d000495.o)
+ .idata$5       0x004eb5b8        0x4 SDL2\lib/libSDL.dll.a(d000495.o)
                 0x004eb5b8                _imp__SDL_free
- .idata$5       0x004eb5bc        0x4 C:\SDL2\lib/libSDL.dll.a(d000500.o)
+ .idata$5       0x004eb5bc        0x4 SDL2\lib/libSDL.dll.a(d000500.o)
                 0x004eb5bc                _imp__SDL_iconv_string
- .idata$5       0x004eb5c0        0x4 C:\SDL2\lib/libSDL.dll.a(d000502.o)
+ .idata$5       0x004eb5c0        0x4 SDL2\lib/libSDL.dll.a(d000502.o)
                 0x004eb5c0                _imp__SDL_isspace
- .idata$5       0x004eb5c4        0x4 C:\SDL2\lib/libSDL.dll.a(d000507.o)
+ .idata$5       0x004eb5c4        0x4 SDL2\lib/libSDL.dll.a(d000507.o)
                 0x004eb5c4                _imp__SDL_malloc
- .idata$5       0x004eb5c8        0x4 C:\SDL2\lib/libSDL.dll.a(d000511.o)
+ .idata$5       0x004eb5c8        0x4 SDL2\lib/libSDL.dll.a(d000511.o)
                 0x004eb5c8                _imp__SDL_memset
- .idata$5       0x004eb5cc        0x4 C:\SDL2\lib/libSDL.dll.a(d000554.o)
+ .idata$5       0x004eb5cc        0x4 SDL2\lib/libSDL.dll.a(d000554.o)
                 0x004eb5cc                _imp__SDL_wcslen
- .idata$5       0x004eb5d0        0x4 C:\SDL2\lib/libSDL.dll.a(d000555.o)
+ .idata$5       0x004eb5d0        0x4 SDL2\lib/libSDL.dll.a(d000555.o)
                 0x004eb5d4                __IAT_end__ = .
  SORT(*)(.idata$6)
  .idata$6       0x004eb5d4        0xc C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchds00003.o)
@@ -12028,33 +12028,33 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .idata$6       0x004ebd8e        0xa C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnos00761.o)
  .idata$6       0x004ebd98        0xa C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnos00774.o)
  *fill*         0x004ebda2        0x2 
- .idata$6       0x004ebda4       0x10 C:\SDL2\lib/libSDL.dll.a(d000003.o)
- .idata$6       0x004ebdb4       0x18 C:\SDL2\lib/libSDL.dll.a(d000041.o)
- .idata$6       0x004ebdcc       0x14 C:\SDL2\lib/libSDL.dll.a(d000046.o)
- .idata$6       0x004ebde0       0x14 C:\SDL2\lib/libSDL.dll.a(d000049.o)
- .idata$6       0x004ebdf4        0xc C:\SDL2\lib/libSDL.dll.a(d000056.o)
- .idata$6       0x004ebe00       0x14 C:\SDL2\lib/libSDL.dll.a(d000062.o)
- .idata$6       0x004ebe14       0x10 C:\SDL2\lib/libSDL.dll.a(d000144.o)
- .idata$6       0x004ebe24       0x10 C:\SDL2\lib/libSDL.dll.a(d000198.o)
- .idata$6       0x004ebe34        0xc C:\SDL2\lib/libSDL.dll.a(d000264.o)
- .idata$6       0x004ebe40       0x14 C:\SDL2\lib/libSDL.dll.a(d000265.o)
- .idata$6       0x004ebe54       0x18 C:\SDL2\lib/libSDL.dll.a(d000334.o)
- .idata$6       0x004ebe6c       0x14 C:\SDL2\lib/libSDL.dll.a(d000335.o)
- .idata$6       0x004ebe80       0x18 C:\SDL2\lib/libSDL.dll.a(d000336.o)
- .idata$6       0x004ebe98       0x10 C:\SDL2\lib/libSDL.dll.a(d000339.o)
- .idata$6       0x004ebea8        0xc C:\SDL2\lib/libSDL.dll.a(d000344.o)
- .idata$6       0x004ebeb4       0x14 C:\SDL2\lib/libSDL.dll.a(d000362.o)
- .idata$6       0x004ebec8       0x14 C:\SDL2\lib/libSDL.dll.a(d000363.o)
- .idata$6       0x004ebedc       0x14 C:\SDL2\lib/libSDL.dll.a(d000379.o)
- .idata$6       0x004ebef0       0x14 C:\SDL2\lib/libSDL.dll.a(d000406.o)
- .idata$6       0x004ebf04       0x1c C:\SDL2\lib/libSDL.dll.a(d000442.o)
- .idata$6       0x004ebf20       0x14 C:\SDL2\lib/libSDL.dll.a(d000460.o)
- .idata$6       0x004ebf34        0xc C:\SDL2\lib/libSDL.dll.a(d000495.o)
- .idata$6       0x004ebf40       0x14 C:\SDL2\lib/libSDL.dll.a(d000500.o)
- .idata$6       0x004ebf54       0x10 C:\SDL2\lib/libSDL.dll.a(d000502.o)
- .idata$6       0x004ebf64       0x10 C:\SDL2\lib/libSDL.dll.a(d000507.o)
- .idata$6       0x004ebf74       0x10 C:\SDL2\lib/libSDL.dll.a(d000511.o)
- .idata$6       0x004ebf84       0x10 C:\SDL2\lib/libSDL.dll.a(d000554.o)
+ .idata$6       0x004ebda4       0x10 SDL2\lib/libSDL.dll.a(d000003.o)
+ .idata$6       0x004ebdb4       0x18 SDL2\lib/libSDL.dll.a(d000041.o)
+ .idata$6       0x004ebdcc       0x14 SDL2\lib/libSDL.dll.a(d000046.o)
+ .idata$6       0x004ebde0       0x14 SDL2\lib/libSDL.dll.a(d000049.o)
+ .idata$6       0x004ebdf4        0xc SDL2\lib/libSDL.dll.a(d000056.o)
+ .idata$6       0x004ebe00       0x14 SDL2\lib/libSDL.dll.a(d000062.o)
+ .idata$6       0x004ebe14       0x10 SDL2\lib/libSDL.dll.a(d000144.o)
+ .idata$6       0x004ebe24       0x10 SDL2\lib/libSDL.dll.a(d000198.o)
+ .idata$6       0x004ebe34        0xc SDL2\lib/libSDL.dll.a(d000264.o)
+ .idata$6       0x004ebe40       0x14 SDL2\lib/libSDL.dll.a(d000265.o)
+ .idata$6       0x004ebe54       0x18 SDL2\lib/libSDL.dll.a(d000334.o)
+ .idata$6       0x004ebe6c       0x14 SDL2\lib/libSDL.dll.a(d000335.o)
+ .idata$6       0x004ebe80       0x18 SDL2\lib/libSDL.dll.a(d000336.o)
+ .idata$6       0x004ebe98       0x10 SDL2\lib/libSDL.dll.a(d000339.o)
+ .idata$6       0x004ebea8        0xc SDL2\lib/libSDL.dll.a(d000344.o)
+ .idata$6       0x004ebeb4       0x14 SDL2\lib/libSDL.dll.a(d000362.o)
+ .idata$6       0x004ebec8       0x14 SDL2\lib/libSDL.dll.a(d000363.o)
+ .idata$6       0x004ebedc       0x14 SDL2\lib/libSDL.dll.a(d000379.o)
+ .idata$6       0x004ebef0       0x14 SDL2\lib/libSDL.dll.a(d000406.o)
+ .idata$6       0x004ebf04       0x1c SDL2\lib/libSDL.dll.a(d000442.o)
+ .idata$6       0x004ebf20       0x14 SDL2\lib/libSDL.dll.a(d000460.o)
+ .idata$6       0x004ebf34        0xc SDL2\lib/libSDL.dll.a(d000495.o)
+ .idata$6       0x004ebf40       0x14 SDL2\lib/libSDL.dll.a(d000500.o)
+ .idata$6       0x004ebf54       0x10 SDL2\lib/libSDL.dll.a(d000502.o)
+ .idata$6       0x004ebf64       0x10 SDL2\lib/libSDL.dll.a(d000507.o)
+ .idata$6       0x004ebf74       0x10 SDL2\lib/libSDL.dll.a(d000511.o)
+ .idata$6       0x004ebf84       0x10 SDL2\lib/libSDL.dll.a(d000554.o)
  SORT(*)(.idata$7)
  .idata$7       0x004ebf94        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchds00003.o)
  .idata$7       0x004ebf98        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libkernel32.a(dchds00082.o)
@@ -12205,34 +12205,34 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .idata$7       0x004ec1e8        0x4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnos00774.o)
  .idata$7       0x004ec1ec        0xc C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmsvcrt.a(dsnot.o)
                 0x004ec1ec                _libmsvcrt_a_iname
- .idata$7       0x004ec1f8        0x4 C:\SDL2\lib/libSDL.dll.a(d000003.o)
- .idata$7       0x004ec1fc        0x4 C:\SDL2\lib/libSDL.dll.a(d000041.o)
- .idata$7       0x004ec200        0x4 C:\SDL2\lib/libSDL.dll.a(d000046.o)
- .idata$7       0x004ec204        0x4 C:\SDL2\lib/libSDL.dll.a(d000049.o)
- .idata$7       0x004ec208        0x4 C:\SDL2\lib/libSDL.dll.a(d000056.o)
- .idata$7       0x004ec20c        0x4 C:\SDL2\lib/libSDL.dll.a(d000062.o)
- .idata$7       0x004ec210        0x4 C:\SDL2\lib/libSDL.dll.a(d000144.o)
- .idata$7       0x004ec214        0x4 C:\SDL2\lib/libSDL.dll.a(d000198.o)
- .idata$7       0x004ec218        0x4 C:\SDL2\lib/libSDL.dll.a(d000264.o)
- .idata$7       0x004ec21c        0x4 C:\SDL2\lib/libSDL.dll.a(d000265.o)
- .idata$7       0x004ec220        0x4 C:\SDL2\lib/libSDL.dll.a(d000334.o)
- .idata$7       0x004ec224        0x4 C:\SDL2\lib/libSDL.dll.a(d000335.o)
- .idata$7       0x004ec228        0x4 C:\SDL2\lib/libSDL.dll.a(d000336.o)
- .idata$7       0x004ec22c        0x4 C:\SDL2\lib/libSDL.dll.a(d000339.o)
- .idata$7       0x004ec230        0x4 C:\SDL2\lib/libSDL.dll.a(d000344.o)
- .idata$7       0x004ec234        0x4 C:\SDL2\lib/libSDL.dll.a(d000362.o)
- .idata$7       0x004ec238        0x4 C:\SDL2\lib/libSDL.dll.a(d000363.o)
- .idata$7       0x004ec23c        0x4 C:\SDL2\lib/libSDL.dll.a(d000379.o)
- .idata$7       0x004ec240        0x4 C:\SDL2\lib/libSDL.dll.a(d000406.o)
- .idata$7       0x004ec244        0x4 C:\SDL2\lib/libSDL.dll.a(d000442.o)
- .idata$7       0x004ec248        0x4 C:\SDL2\lib/libSDL.dll.a(d000460.o)
- .idata$7       0x004ec24c        0x4 C:\SDL2\lib/libSDL.dll.a(d000495.o)
- .idata$7       0x004ec250        0x4 C:\SDL2\lib/libSDL.dll.a(d000500.o)
- .idata$7       0x004ec254        0x4 C:\SDL2\lib/libSDL.dll.a(d000502.o)
- .idata$7       0x004ec258        0x4 C:\SDL2\lib/libSDL.dll.a(d000507.o)
- .idata$7       0x004ec25c        0x4 C:\SDL2\lib/libSDL.dll.a(d000511.o)
- .idata$7       0x004ec260        0x4 C:\SDL2\lib/libSDL.dll.a(d000554.o)
- .idata$7       0x004ec264        0xc C:\SDL2\lib/libSDL.dll.a(d000555.o)
+ .idata$7       0x004ec1f8        0x4 SDL2\lib/libSDL.dll.a(d000003.o)
+ .idata$7       0x004ec1fc        0x4 SDL2\lib/libSDL.dll.a(d000041.o)
+ .idata$7       0x004ec200        0x4 SDL2\lib/libSDL.dll.a(d000046.o)
+ .idata$7       0x004ec204        0x4 SDL2\lib/libSDL.dll.a(d000049.o)
+ .idata$7       0x004ec208        0x4 SDL2\lib/libSDL.dll.a(d000056.o)
+ .idata$7       0x004ec20c        0x4 SDL2\lib/libSDL.dll.a(d000062.o)
+ .idata$7       0x004ec210        0x4 SDL2\lib/libSDL.dll.a(d000144.o)
+ .idata$7       0x004ec214        0x4 SDL2\lib/libSDL.dll.a(d000198.o)
+ .idata$7       0x004ec218        0x4 SDL2\lib/libSDL.dll.a(d000264.o)
+ .idata$7       0x004ec21c        0x4 SDL2\lib/libSDL.dll.a(d000265.o)
+ .idata$7       0x004ec220        0x4 SDL2\lib/libSDL.dll.a(d000334.o)
+ .idata$7       0x004ec224        0x4 SDL2\lib/libSDL.dll.a(d000335.o)
+ .idata$7       0x004ec228        0x4 SDL2\lib/libSDL.dll.a(d000336.o)
+ .idata$7       0x004ec22c        0x4 SDL2\lib/libSDL.dll.a(d000339.o)
+ .idata$7       0x004ec230        0x4 SDL2\lib/libSDL.dll.a(d000344.o)
+ .idata$7       0x004ec234        0x4 SDL2\lib/libSDL.dll.a(d000362.o)
+ .idata$7       0x004ec238        0x4 SDL2\lib/libSDL.dll.a(d000363.o)
+ .idata$7       0x004ec23c        0x4 SDL2\lib/libSDL.dll.a(d000379.o)
+ .idata$7       0x004ec240        0x4 SDL2\lib/libSDL.dll.a(d000406.o)
+ .idata$7       0x004ec244        0x4 SDL2\lib/libSDL.dll.a(d000442.o)
+ .idata$7       0x004ec248        0x4 SDL2\lib/libSDL.dll.a(d000460.o)
+ .idata$7       0x004ec24c        0x4 SDL2\lib/libSDL.dll.a(d000495.o)
+ .idata$7       0x004ec250        0x4 SDL2\lib/libSDL.dll.a(d000500.o)
+ .idata$7       0x004ec254        0x4 SDL2\lib/libSDL.dll.a(d000502.o)
+ .idata$7       0x004ec258        0x4 SDL2\lib/libSDL.dll.a(d000507.o)
+ .idata$7       0x004ec25c        0x4 SDL2\lib/libSDL.dll.a(d000511.o)
+ .idata$7       0x004ec260        0x4 SDL2\lib/libSDL.dll.a(d000554.o)
+ .idata$7       0x004ec264        0xc SDL2\lib/libSDL.dll.a(d000555.o)
                 0x004ec264                SDL2_dll_iname
 
 .CRT            0x004ed000      0x200
@@ -12399,7 +12399,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_aranges
                 0x004ef580       0x20 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
  .debug_aranges
-                0x004ef5a0       0x20 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+                0x004ef5a0       0x20 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_aranges
                 0x004ef5c0       0x20 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_aranges
@@ -12480,7 +12480,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_info    0x0054193a     0x4064 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
  .debug_info    0x0054599e     0x3742 obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
  .debug_info    0x005490e0      0x389 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_info    0x00549469      0x980 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_info    0x00549469      0x980 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_info    0x00549de9     0x2e5e C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_info    0x0054cc47      0xd74 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
  .debug_info    0x0054d9bb      0x8ad C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
@@ -12543,7 +12543,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_abbrev  0x005538de      0x358 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
  .debug_abbrev  0x00553c36      0x30d obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
  .debug_abbrev  0x00553f43       0xb1 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_abbrev  0x00553ff4      0x23c C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_abbrev  0x00553ff4      0x23c SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_abbrev  0x00554230      0x49d C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_abbrev  0x005546cd       0xa7 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
  .debug_abbrev  0x00554774      0x1ee C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
@@ -12606,7 +12606,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_line    0x0055a6d1      0x7cf obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
  .debug_line    0x0055aea0      0x21d obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
  .debug_line    0x0055b0bd      0x10f obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_line    0x0055b1cc      0x1ec C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_line    0x0055b1cc      0x1ec SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_line    0x0055b3b8      0x5ac C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_line    0x0055b964       0xbd C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
  .debug_line    0x0055ba21      0x15d C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
@@ -12652,7 +12652,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
                 0x0055f31c       0x34 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
  .debug_frame   0x0055f350       0xf4 obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
  .debug_frame   0x0055f444       0x54 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_frame   0x0055f498       0xcc C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_frame   0x0055f498       0xcc SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_frame   0x0055f564      0x3d4 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_frame   0x0055f938       0x88 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
  .debug_frame   0x0055f9c0       0x38 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_chkstk_ms.o)
@@ -12714,7 +12714,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
  .debug_str     0x00562551      0x2ff obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
  .debug_str     0x00562850      0x2ca obj\Debug\Pokitto\POKITTO_SIM\SimSound.o
  .debug_str     0x00562b1a        0x0 obj\Debug\Pokitto\POKITTO_SIM\WriteWav.o
- .debug_str     0x00562b1a        0xb C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_str     0x00562b1a        0xb SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_str     0x00562b25       0x40 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_str     0x00562b65        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_ctors.o)
  .debug_str     0x00562b65        0x0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
@@ -12726,7 +12726,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
 
 .debug_loc      0x00563000     0x2200
  *(.debug_loc)
- .debug_loc     0x00563000      0x604 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_loc     0x00563000      0x604 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_loc     0x00563604      0x9b8 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_loc     0x00563fbc      0x279 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
  .debug_loc     0x00564235      0x765 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
@@ -12774,7 +12774,7 @@ LOAD C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/crtend
 .debug_ranges   0x00566000      0x600
  *(.debug_ranges)
  .debug_ranges  0x00566000       0x28 obj\Debug\Pokitto\POKITTO_SIM\SimLCD.o
- .debug_ranges  0x00566028       0xa0 C:\SDL2\lib/libSDLmain.a(SDL_windows_main.o)
+ .debug_ranges  0x00566028       0xa0 SDL2\lib/libSDLmain.a(SDL_windows_main.o)
  .debug_ranges  0x005660c8      0x2d0 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(unwind-sjlj.o)
  .debug_ranges  0x00566398       0x20 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(shmem-win32.o)
  .debug_ranges  0x005663b8       0x60 C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/libgcc.a(_umoddi3.o)
