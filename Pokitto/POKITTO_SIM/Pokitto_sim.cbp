@@ -30,7 +30,7 @@
 			<Add option="-std=gnu++11" />
 			<Add option="-fsigned-char" />
 			<Add option="-DPOK_SIM" />
-			<Add directory="C:/SDL2/include" />
+			<Add directory="SDL2/include" />
 			<Add directory="../../Pokitto" />
 			<Add directory="../POKITTO_CORE" />
 			<Add directory="../POKITTO_SIM" />
