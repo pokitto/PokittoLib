@@ -235,7 +235,7 @@ public:
     static void setCursor(int16_t,int16_t);
     /** direct bitmap to screen (no buffering) */
     static void directBitmap(int16_t,int16_t,const uint8_t*, uint8_t,uint8_t);
-
+    static void directDrawBuffer(int16_t x, int16_t y, uint8_t w, uint8_t h, const uint8_t *buffer, uint8_t depth, uint8_t scale);
 
     // DRAWING METHODS
     /** Draw pixel at various bit depths */
@@ -288,6 +288,8 @@ public:
     // BITMAPS !
     /** Draw monochromatic bitmap. Used in font rendering */
     static void drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t index);
+    /** Draw bitmap */
+    static void drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
     /** Draw bitmap */
     static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw RLE bitmap */
