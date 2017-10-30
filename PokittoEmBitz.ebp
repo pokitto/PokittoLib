@@ -140,7 +140,7 @@
 					<Mode after="1" />
 				</ExtraCommands>
 			</Target>
-			<Target title="MicroPythonSim">
+			<Target title="MicroPython">
 				<Option output=".\build\hello.elf" />
 				<Option type="0" />
 				<Option create_hex="1" />
@@ -719,21 +719,21 @@
 		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.h" />
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\frozen_mpy.c">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\main.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\My_settings.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\PythonBindings.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\PythonBindings.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.cpp">
 			<Option compilerVar="CC" />
@@ -760,96 +760,96 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDescriptor.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice_Types.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_EFM32.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_KL25Z.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_LPC11U.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_LPC17_LPC23.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_Maxim.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_RZ_A1H.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_STM32F4.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_EFM32.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_KL25Z.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC11U.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC17.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC40.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_Maxim.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_RZ_A1H.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_STM32F4.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBRegs_STM32.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\CircBuffer.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBCDC.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBCDC.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBSerial.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBSerial.h">
-			<Option target="MicroPythonSim" />
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\Pokitto_settings.h" />
 		<Extensions>
@@ -880,7 +880,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
-				<target_debugging_settings target="MicroPythonSim" active_interface="J-link">
+				<target_debugging_settings target="MicroPython" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
