@@ -1,0 +1,1 @@
+python tools/mpy-tool.py -mlongint-impl=none -f -q  genhdr/qstrdefs.preprocessed.h mpy\marsattack_data.mpy mpy\marsattack_main.mpy mpy\sprite.mpy > frozen_mpy.c

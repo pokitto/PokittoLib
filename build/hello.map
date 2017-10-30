@@ -250,7 +250,7 @@ Discarded input sections
                 0x00000000       0x20 .objs\pokitto\mbed-pokitto\common\board.o
  .debug_ranges  0x00000000       0x40 .objs\pokitto\mbed-pokitto\common\board.o
  .debug_line    0x00000000      0x23a .objs\pokitto\mbed-pokitto\common\board.o
- .debug_str     0x00000000      0x472 .objs\pokitto\mbed-pokitto\common\board.o
+ .debug_str     0x00000000      0x477 .objs\pokitto\mbed-pokitto\common\board.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\board.o
  .debug_frame   0x00000000       0x28 .objs\pokitto\mbed-pokitto\common\board.o
  .ARM.attributes
@@ -285,7 +285,7 @@ Discarded input sections
                 0x00000000       0x58 .objs\pokitto\mbed-pokitto\common\busin.o
  .debug_ranges  0x00000000       0xf0 .objs\pokitto\mbed-pokitto\common\busin.o
  .debug_line    0x00000000      0x517 .objs\pokitto\mbed-pokitto\common\busin.o
- .debug_str     0x00000000      0xe8c .objs\pokitto\mbed-pokitto\common\busin.o
+ .debug_str     0x00000000      0xe91 .objs\pokitto\mbed-pokitto\common\busin.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\busin.o
  .debug_frame   0x00000000       0xf8 .objs\pokitto\mbed-pokitto\common\busin.o
  .ARM.attributes
@@ -330,7 +330,7 @@ Discarded input sections
                 0x00000000       0x80 .objs\pokitto\mbed-pokitto\common\businout.o
  .debug_ranges  0x00000000      0x130 .objs\pokitto\mbed-pokitto\common\businout.o
  .debug_line    0x00000000      0x5a1 .objs\pokitto\mbed-pokitto\common\businout.o
- .debug_str     0x00000000     0x105f .objs\pokitto\mbed-pokitto\common\businout.o
+ .debug_str     0x00000000     0x1064 .objs\pokitto\mbed-pokitto\common\businout.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\businout.o
  .debug_frame   0x00000000      0x184 .objs\pokitto\mbed-pokitto\common\businout.o
  .ARM.attributes
@@ -369,7 +369,7 @@ Discarded input sections
                 0x00000000       0x68 .objs\pokitto\mbed-pokitto\common\busout.o
  .debug_ranges  0x00000000      0x118 .objs\pokitto\mbed-pokitto\common\busout.o
  .debug_line    0x00000000      0x550 .objs\pokitto\mbed-pokitto\common\busout.o
- .debug_str     0x00000000      0xeb3 .objs\pokitto\mbed-pokitto\common\busout.o
+ .debug_str     0x00000000      0xeb8 .objs\pokitto\mbed-pokitto\common\busout.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\busout.o
  .debug_frame   0x00000000      0x130 .objs\pokitto\mbed-pokitto\common\busout.o
  .ARM.attributes
@@ -414,7 +414,7 @@ Discarded input sections
                 0x00000000       0x88 .objs\pokitto\mbed-pokitto\common\callchain.o
  .debug_ranges  0x00000000       0xc8 .objs\pokitto\mbed-pokitto\common\callchain.o
  .debug_line    0x00000000      0x398 .objs\pokitto\mbed-pokitto\common\callchain.o
- .debug_str     0x00000000      0x6c5 .objs\pokitto\mbed-pokitto\common\callchain.o
+ .debug_str     0x00000000      0x6ca .objs\pokitto\mbed-pokitto\common\callchain.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\callchain.o
  .debug_frame   0x00000000      0x17c .objs\pokitto\mbed-pokitto\common\callchain.o
  .ARM.attributes
@@ -427,7 +427,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\mbed-pokitto\common\can.o
  .debug_line    0x00000000      0x264 .objs\pokitto\mbed-pokitto\common\can.o
- .debug_str     0x00000000      0x894 .objs\pokitto\mbed-pokitto\common\can.o
+ .debug_str     0x00000000      0x899 .objs\pokitto\mbed-pokitto\common\can.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\can.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\mbed-pokitto\common\can.o
@@ -442,7 +442,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\mbed-pokitto\common\ethernet.o
  .debug_line    0x00000000      0x264 .objs\pokitto\mbed-pokitto\common\ethernet.o
- .debug_str     0x00000000      0x899 .objs\pokitto\mbed-pokitto\common\ethernet.o
+ .debug_str     0x00000000      0x89e .objs\pokitto\mbed-pokitto\common\ethernet.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\ethernet.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\mbed-pokitto\common\ethernet.o
@@ -474,7 +474,7 @@ Discarded input sections
                 0x00000000       0x50 .objs\pokitto\mbed-pokitto\common\filebase.o
  .debug_ranges  0x00000000       0x40 .objs\pokitto\mbed-pokitto\common\filebase.o
  .debug_line    0x00000000      0x39c .objs\pokitto\mbed-pokitto\common\filebase.o
- .debug_str     0x00000000      0xd14 .objs\pokitto\mbed-pokitto\common\filebase.o
+ .debug_str     0x00000000      0xd19 .objs\pokitto\mbed-pokitto\common\filebase.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\filebase.o
  .debug_frame   0x00000000       0x94 .objs\pokitto\mbed-pokitto\common\filebase.o
  .ARM.attributes
@@ -504,7 +504,7 @@ Discarded input sections
                 0x00000000       0x48 .objs\pokitto\mbed-pokitto\common\filelike.o
  .debug_ranges  0x00000000       0x50 .objs\pokitto\mbed-pokitto\common\filelike.o
  .debug_line    0x00000000      0x36b .objs\pokitto\mbed-pokitto\common\filelike.o
- .debug_str     0x00000000      0x9e4 .objs\pokitto\mbed-pokitto\common\filelike.o
+ .debug_str     0x00000000      0x9e9 .objs\pokitto\mbed-pokitto\common\filelike.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\filelike.o
  .debug_frame   0x00000000       0x94 .objs\pokitto\mbed-pokitto\common\filelike.o
  .ARM.attributes
@@ -533,7 +533,7 @@ Discarded input sections
                 0x00000000       0x50 .objs\pokitto\mbed-pokitto\common\filepath.o
  .debug_ranges  0x00000000       0x58 .objs\pokitto\mbed-pokitto\common\filepath.o
  .debug_line    0x00000000      0x36e .objs\pokitto\mbed-pokitto\common\filepath.o
- .debug_str     0x00000000      0xa76 .objs\pokitto\mbed-pokitto\common\filepath.o
+ .debug_str     0x00000000      0xa7b .objs\pokitto\mbed-pokitto\common\filepath.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\filepath.o
  .debug_frame   0x00000000       0xa8 .objs\pokitto\mbed-pokitto\common\filepath.o
  .ARM.attributes
@@ -599,7 +599,7 @@ Discarded input sections
                 0x00000000       0xa0 .objs\pokitto\mbed-pokitto\common\filesystemlike.o
  .debug_ranges  0x00000000       0xa8 .objs\pokitto\mbed-pokitto\common\filesystemlike.o
  .debug_line    0x00000000      0x4b0 .objs\pokitto\mbed-pokitto\common\filesystemlike.o
- .debug_str     0x00000000      0xe1a .objs\pokitto\mbed-pokitto\common\filesystemlike.o
+ .debug_str     0x00000000      0xe1f .objs\pokitto\mbed-pokitto\common\filesystemlike.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\filesystemlike.o
  .debug_frame   0x00000000      0x15c .objs\pokitto\mbed-pokitto\common\filesystemlike.o
  .ARM.attributes
@@ -641,7 +641,7 @@ Discarded input sections
                 0x00000000       0x60 .objs\pokitto\mbed-pokitto\common\i2c.o
  .debug_ranges  0x00000000       0x50 .objs\pokitto\mbed-pokitto\common\i2c.o
  .debug_line    0x00000000      0x4a1 .objs\pokitto\mbed-pokitto\common\i2c.o
- .debug_str     0x00000000      0xd44 .objs\pokitto\mbed-pokitto\common\i2c.o
+ .debug_str     0x00000000      0xd49 .objs\pokitto\mbed-pokitto\common\i2c.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\i2c.o
  .debug_frame   0x00000000       0xfc .objs\pokitto\mbed-pokitto\common\i2c.o
  .ARM.attributes
@@ -674,7 +674,7 @@ Discarded input sections
                 0x00000000       0x60 .objs\pokitto\mbed-pokitto\common\i2cslave.o
  .debug_ranges  0x00000000       0x50 .objs\pokitto\mbed-pokitto\common\i2cslave.o
  .debug_line    0x00000000      0x492 .objs\pokitto\mbed-pokitto\common\i2cslave.o
- .debug_str     0x00000000      0xd3d .objs\pokitto\mbed-pokitto\common\i2cslave.o
+ .debug_str     0x00000000      0xd42 .objs\pokitto\mbed-pokitto\common\i2cslave.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\i2cslave.o
  .debug_frame   0x00000000       0xe8 .objs\pokitto\mbed-pokitto\common\i2cslave.o
  .ARM.attributes
@@ -729,7 +729,7 @@ Discarded input sections
                 0x00000000       0x68 .objs\pokitto\mbed-pokitto\common\interruptmanager.o
  .debug_ranges  0x00000000       0x70 .objs\pokitto\mbed-pokitto\common\interruptmanager.o
  .debug_line    0x00000000      0x37c .objs\pokitto\mbed-pokitto\common\interruptmanager.o
- .debug_str     0x00000000      0xabf .objs\pokitto\mbed-pokitto\common\interruptmanager.o
+ .debug_str     0x00000000      0xac4 .objs\pokitto\mbed-pokitto\common\interruptmanager.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\interruptmanager.o
  .debug_frame   0x00000000      0x11c .objs\pokitto\mbed-pokitto\common\interruptmanager.o
  .ARM.attributes
@@ -742,7 +742,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\mbed-pokitto\common\localfilesystem.o
  .debug_line    0x00000000      0x264 .objs\pokitto\mbed-pokitto\common\localfilesystem.o
- .debug_str     0x00000000      0x8a0 .objs\pokitto\mbed-pokitto\common\localfilesystem.o
+ .debug_str     0x00000000      0x8a5 .objs\pokitto\mbed-pokitto\common\localfilesystem.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\localfilesystem.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\mbed-pokitto\common\localfilesystem.o
@@ -754,7 +754,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\mbed-pokitto\common\lp_ticker_api.o
  .debug_line    0x00000000       0x1d .objs\pokitto\mbed-pokitto\common\lp_ticker_api.o
- .debug_str     0x00000000      0x1db .objs\pokitto\mbed-pokitto\common\lp_ticker_api.o
+ .debug_str     0x00000000      0x1e0 .objs\pokitto\mbed-pokitto\common\lp_ticker_api.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\lp_ticker_api.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\mbed-pokitto\common\lp_ticker_api.o
@@ -769,7 +769,7 @@ Discarded input sections
                 0x00000000       0x20 .objs\pokitto\mbed-pokitto\common\mbed_interface.o
  .debug_ranges  0x00000000       0x10 .objs\pokitto\mbed-pokitto\common\mbed_interface.o
  .debug_line    0x00000000       0x69 .objs\pokitto\mbed-pokitto\common\mbed_interface.o
- .debug_str     0x00000000      0x1f2 .objs\pokitto\mbed-pokitto\common\mbed_interface.o
+ .debug_str     0x00000000      0x1f7 .objs\pokitto\mbed-pokitto\common\mbed_interface.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\mbed_interface.o
  .debug_frame   0x00000000       0x20 .objs\pokitto\mbed-pokitto\common\mbed_interface.o
  .ARM.attributes
@@ -814,7 +814,7 @@ Discarded input sections
                 0x00000000       0x60 .objs\pokitto\mbed-pokitto\common\rawserial.o
  .debug_ranges  0x00000000       0x50 .objs\pokitto\mbed-pokitto\common\rawserial.o
  .debug_line    0x00000000      0x4f2 .objs\pokitto\mbed-pokitto\common\rawserial.o
- .debug_str     0x00000000     0x11b9 .objs\pokitto\mbed-pokitto\common\rawserial.o
+ .debug_str     0x00000000     0x11be .objs\pokitto\mbed-pokitto\common\rawserial.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\rawserial.o
  .debug_frame   0x00000000       0xe8 .objs\pokitto\mbed-pokitto\common\rawserial.o
  .ARM.attributes
@@ -899,7 +899,7 @@ Discarded input sections
                 0x00000000       0x38 .objs\pokitto\mbed-pokitto\common\rtc_time.o
  .debug_ranges  0x00000000       0x28 .objs\pokitto\mbed-pokitto\common\rtc_time.o
  .debug_line    0x00000000      0x1d3 .objs\pokitto\mbed-pokitto\common\rtc_time.o
- .debug_str     0x00000000      0x291 .objs\pokitto\mbed-pokitto\common\rtc_time.o
+ .debug_str     0x00000000      0x296 .objs\pokitto\mbed-pokitto\common\rtc_time.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\rtc_time.o
  .debug_frame   0x00000000       0x70 .objs\pokitto\mbed-pokitto\common\rtc_time.o
  .ARM.attributes
@@ -912,7 +912,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\mbed-pokitto\common\semihost_api.o
  .debug_line    0x00000000       0x1d .objs\pokitto\mbed-pokitto\common\semihost_api.o
- .debug_str     0x00000000      0x1df .objs\pokitto\mbed-pokitto\common\semihost_api.o
+ .debug_str     0x00000000      0x1e4 .objs\pokitto\mbed-pokitto\common\semihost_api.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\semihost_api.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\mbed-pokitto\common\semihost_api.o
@@ -948,7 +948,7 @@ Discarded input sections
                 0x00000000       0x80 .objs\pokitto\mbed-pokitto\common\serial.o
  .debug_ranges  0x00000000       0x70 .objs\pokitto\mbed-pokitto\common\serial.o
  .debug_line    0x00000000      0x4ce .objs\pokitto\mbed-pokitto\common\serial.o
- .debug_str     0x00000000     0x1136 .objs\pokitto\mbed-pokitto\common\serial.o
+ .debug_str     0x00000000     0x113b .objs\pokitto\mbed-pokitto\common\serial.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\serial.o
  .debug_frame   0x00000000      0x114 .objs\pokitto\mbed-pokitto\common\serial.o
  .ARM.attributes
@@ -991,7 +991,7 @@ Discarded input sections
                 0x00000000       0x78 .objs\pokitto\mbed-pokitto\common\serialbase.o
  .debug_ranges  0x00000000       0x80 .objs\pokitto\mbed-pokitto\common\serialbase.o
  .debug_line    0x00000000      0x55a .objs\pokitto\mbed-pokitto\common\serialbase.o
- .debug_str     0x00000000     0x11ae .objs\pokitto\mbed-pokitto\common\serialbase.o
+ .debug_str     0x00000000     0x11b3 .objs\pokitto\mbed-pokitto\common\serialbase.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\serialbase.o
  .debug_frame   0x00000000      0x138 .objs\pokitto\mbed-pokitto\common\serialbase.o
  .ARM.attributes
@@ -1008,7 +1008,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\mbed-pokitto\common\spislave.o
  .debug_line    0x00000000      0x264 .objs\pokitto\mbed-pokitto\common\spislave.o
- .debug_str     0x00000000      0x899 .objs\pokitto\mbed-pokitto\common\spislave.o
+ .debug_str     0x00000000      0x89e .objs\pokitto\mbed-pokitto\common\spislave.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\spislave.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\mbed-pokitto\common\spislave.o
@@ -1058,7 +1058,7 @@ Discarded input sections
                 0x00000000       0x98 .objs\pokitto\mbed-pokitto\common\stream.o
  .debug_ranges  0x00000000       0xa0 .objs\pokitto\mbed-pokitto\common\stream.o
  .debug_line    0x00000000      0x40c .objs\pokitto\mbed-pokitto\common\stream.o
- .debug_str     0x00000000      0xc53 .objs\pokitto\mbed-pokitto\common\stream.o
+ .debug_str     0x00000000      0xc58 .objs\pokitto\mbed-pokitto\common\stream.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\stream.o
  .debug_frame   0x00000000      0x19c .objs\pokitto\mbed-pokitto\common\stream.o
  .ARM.attributes
@@ -1091,7 +1091,7 @@ Discarded input sections
                 0x00000000       0x30 .objs\pokitto\mbed-pokitto\common\timeout.o
  .debug_ranges  0x00000000       0x50 .objs\pokitto\mbed-pokitto\common\timeout.o
  .debug_line    0x00000000      0x1c3 .objs\pokitto\mbed-pokitto\common\timeout.o
- .debug_str     0x00000000      0x413 .objs\pokitto\mbed-pokitto\common\timeout.o
+ .debug_str     0x00000000      0x418 .objs\pokitto\mbed-pokitto\common\timeout.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\timeout.o
  .debug_frame   0x00000000       0x58 .objs\pokitto\mbed-pokitto\common\timeout.o
  .ARM.attributes
@@ -1126,7 +1126,7 @@ Discarded input sections
                 0x00000000       0x68 .objs\pokitto\mbed-pokitto\common\timer.o
  .debug_ranges  0x00000000       0x58 .objs\pokitto\mbed-pokitto\common\timer.o
  .debug_line    0x00000000      0x421 .objs\pokitto\mbed-pokitto\common\timer.o
- .debug_str     0x00000000      0xb85 .objs\pokitto\mbed-pokitto\common\timer.o
+ .debug_str     0x00000000      0xb8a .objs\pokitto\mbed-pokitto\common\timer.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\common\timer.o
  .debug_frame   0x00000000      0x100 .objs\pokitto\mbed-pokitto\common\timer.o
  .ARM.attributes
@@ -1197,7 +1197,7 @@ Discarded input sections
                 0x00000000       0x40 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.o
  .debug_ranges  0x00000000       0x30 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.o
  .debug_line    0x00000000      0x2b9 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.o
- .debug_str     0x00000000      0x939 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.o
+ .debug_str     0x00000000      0x93e .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.o
  .debug_frame   0x00000000       0x98 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\analogin_api.o
  .ARM.attributes
@@ -1260,7 +1260,7 @@ Discarded input sections
                 0x00000000       0x90 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.o
  .debug_ranges  0x00000000      0x2a0 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.o
  .debug_line    0x00000000      0x55a .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.o
- .debug_str     0x00000000      0xa92 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.o
+ .debug_str     0x00000000      0xa97 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.o
  .debug_frame   0x00000000      0x190 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\i2c_api.o
  .ARM.attributes
@@ -1304,7 +1304,7 @@ Discarded input sections
                 0x00000000       0x40 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.o
  .debug_ranges  0x00000000       0x30 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.o
  .debug_line    0x00000000      0x1f1 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.o
- .debug_str     0x00000000      0x5d0 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.o
+ .debug_str     0x00000000      0x5d5 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.o
  .debug_frame   0x00000000       0x68 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\rtc_api.o
  .ARM.attributes
@@ -1371,7 +1371,7 @@ Discarded input sections
                 0x00000000       0xb8 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.o
  .debug_ranges  0x00000000       0xf8 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.o
  .debug_line    0x00000000      0x599 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.o
- .debug_str     0x00000000      0xe1e .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.o
+ .debug_str     0x00000000      0xe23 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.o
  .debug_frame   0x00000000      0x1dc .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\serial_api.o
  .ARM.attributes
@@ -1389,7 +1389,7 @@ Discarded input sections
                 0x00000000       0x28 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.o
  .debug_ranges  0x00000000       0x18 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.o
  .debug_line    0x00000000      0x1f7 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.o
- .debug_str     0x00000000      0x5dd .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.o
+ .debug_str     0x00000000      0x5e2 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.o
  .comment       0x00000000       0x6f .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.o
  .debug_frame   0x00000000       0x30 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\sleep.o
  .ARM.attributes
@@ -1420,7 +1420,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\adventurer12x16.o
  .debug_line    0x00000000       0x4f .objs\pokitto\pokitto_core\fonts\adventurer12x16.o
- .debug_str     0x00000000      0x185 .objs\pokitto\pokitto_core\fonts\adventurer12x16.o
+ .debug_str     0x00000000      0x18a .objs\pokitto\pokitto_core\fonts\adventurer12x16.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\adventurer12x16.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\adventurer12x16.o
@@ -1434,7 +1434,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\donut7x10.o
  .debug_line    0x00000000       0x49 .objs\pokitto\pokitto_core\fonts\donut7x10.o
- .debug_str     0x00000000      0x17a .objs\pokitto\pokitto_core\fonts\donut7x10.o
+ .debug_str     0x00000000      0x17f .objs\pokitto\pokitto_core\fonts\donut7x10.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\donut7x10.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\donut7x10.o
@@ -1448,7 +1448,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\dragon6x8.o
  .debug_line    0x00000000       0x49 .objs\pokitto\pokitto_core\fonts\dragon6x8.o
- .debug_str     0x00000000      0x17b .objs\pokitto\pokitto_core\fonts\dragon6x8.o
+ .debug_str     0x00000000      0x180 .objs\pokitto\pokitto_core\fonts\dragon6x8.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\dragon6x8.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\dragon6x8.o
@@ -1462,7 +1462,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\font3x3.o
  .debug_line    0x00000000      0x106 .objs\pokitto\pokitto_core\fonts\font3x3.o
- .debug_str     0x00000000      0x1fe .objs\pokitto\pokitto_core\fonts\font3x3.o
+ .debug_str     0x00000000      0x203 .objs\pokitto\pokitto_core\fonts\font3x3.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\font3x3.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\font3x3.o
@@ -1476,7 +1476,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\font3x5.o
  .debug_line    0x00000000      0x106 .objs\pokitto\pokitto_core\fonts\font3x5.o
- .debug_str     0x00000000      0x1fe .objs\pokitto\pokitto_core\fonts\font3x5.o
+ .debug_str     0x00000000      0x203 .objs\pokitto\pokitto_core\fonts\font3x5.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\font3x5.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\font3x5.o
@@ -1499,7 +1499,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\karateka8x11.o
  .debug_line    0x00000000       0x4c .objs\pokitto\pokitto_core\fonts\karateka8x11.o
- .debug_str     0x00000000      0x180 .objs\pokitto\pokitto_core\fonts\karateka8x11.o
+ .debug_str     0x00000000      0x185 .objs\pokitto\pokitto_core\fonts\karateka8x11.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\karateka8x11.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\karateka8x11.o
@@ -1513,7 +1513,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\koubit7x7.o
  .debug_line    0x00000000       0x49 .objs\pokitto\pokitto_core\fonts\koubit7x7.o
- .debug_str     0x00000000      0x17b .objs\pokitto\pokitto_core\fonts\koubit7x7.o
+ .debug_str     0x00000000      0x180 .objs\pokitto\pokitto_core\fonts\koubit7x7.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\koubit7x7.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\koubit7x7.o
@@ -1530,7 +1530,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\runes6x8.o
  .debug_line    0x00000000       0x48 .objs\pokitto\pokitto_core\fonts\runes6x8.o
- .debug_str     0x00000000      0x179 .objs\pokitto\pokitto_core\fonts\runes6x8.o
+ .debug_str     0x00000000      0x17e .objs\pokitto\pokitto_core\fonts\runes6x8.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\runes6x8.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\runes6x8.o
@@ -1544,7 +1544,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\tic806x6.o
  .debug_line    0x00000000       0x48 .objs\pokitto\pokitto_core\fonts\tic806x6.o
- .debug_str     0x00000000      0x17c .objs\pokitto\pokitto_core\fonts\tic806x6.o
+ .debug_str     0x00000000      0x181 .objs\pokitto\pokitto_core\fonts\tic806x6.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\tic806x6.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\tic806x6.o
@@ -1558,7 +1558,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\tight4x7.o
  .debug_line    0x00000000       0x48 .objs\pokitto\pokitto_core\fonts\tight4x7.o
- .debug_str     0x00000000      0x179 .objs\pokitto\pokitto_core\fonts\tight4x7.o
+ .debug_str     0x00000000      0x17e .objs\pokitto\pokitto_core\fonts\tight4x7.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\tight4x7.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\tight4x7.o
@@ -1572,7 +1572,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\tiny5x7.o
  .debug_line    0x00000000       0x47 .objs\pokitto\pokitto_core\fonts\tiny5x7.o
- .debug_str     0x00000000      0x177 .objs\pokitto\pokitto_core\fonts\tiny5x7.o
+ .debug_str     0x00000000      0x17c .objs\pokitto\pokitto_core\fonts\tiny5x7.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\tiny5x7.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\tiny5x7.o
@@ -1586,7 +1586,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\fonts\zxspec.o
  .debug_line    0x00000000       0x46 .objs\pokitto\pokitto_core\fonts\zxspec.o
- .debug_str     0x00000000      0x178 .objs\pokitto\pokitto_core\fonts\zxspec.o
+ .debug_str     0x00000000      0x17d .objs\pokitto\pokitto_core\fonts\zxspec.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\fonts\zxspec.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\fonts\zxspec.o
@@ -1600,7 +1600,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\palaction.o
  .debug_line    0x00000000       0x4c .objs\pokitto\pokitto_core\palettes\palaction.o
- .debug_str     0x00000000      0x181 .objs\pokitto\pokitto_core\palettes\palaction.o
+ .debug_str     0x00000000      0x186 .objs\pokitto\pokitto_core\palettes\palaction.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\palaction.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\palaction.o
@@ -1617,7 +1617,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\paldb16.o
  .debug_line    0x00000000       0x4a .objs\pokitto\pokitto_core\palettes\paldb16.o
- .debug_str     0x00000000      0x17d .objs\pokitto\pokitto_core\palettes\paldb16.o
+ .debug_str     0x00000000      0x182 .objs\pokitto\pokitto_core\palettes\paldb16.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\paldb16.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\paldb16.o
@@ -1631,7 +1631,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\paldefault.o
  .debug_line    0x00000000       0x4d .objs\pokitto\pokitto_core\palettes\paldefault.o
- .debug_str     0x00000000      0x183 .objs\pokitto\pokitto_core\palettes\paldefault.o
+ .debug_str     0x00000000      0x188 .objs\pokitto\pokitto_core\palettes\paldefault.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\paldefault.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\paldefault.o
@@ -1645,7 +1645,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\palgameboy.o
  .debug_line    0x00000000       0x4d .objs\pokitto\pokitto_core\palettes\palgameboy.o
- .debug_str     0x00000000      0x183 .objs\pokitto\pokitto_core\palettes\palgameboy.o
+ .debug_str     0x00000000      0x188 .objs\pokitto\pokitto_core\palettes\palgameboy.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\palgameboy.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\palgameboy.o
@@ -1659,7 +1659,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\palmagma.o
  .debug_line    0x00000000       0x4b .objs\pokitto\pokitto_core\palettes\palmagma.o
- .debug_str     0x00000000      0x17f .objs\pokitto\pokitto_core\palettes\palmagma.o
+ .debug_str     0x00000000      0x184 .objs\pokitto\pokitto_core\palettes\palmagma.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\palmagma.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\palmagma.o
@@ -1673,7 +1673,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\palmono.o
  .debug_line    0x00000000       0x4a .objs\pokitto\pokitto_core\palettes\palmono.o
- .debug_str     0x00000000      0x17d .objs\pokitto\pokitto_core\palettes\palmono.o
+ .debug_str     0x00000000      0x182 .objs\pokitto\pokitto_core\palettes\palmono.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\palmono.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\palmono.o
@@ -1687,7 +1687,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\palpico.o
  .debug_line    0x00000000       0x4a .objs\pokitto\pokitto_core\palettes\palpico.o
- .debug_str     0x00000000      0x17d .objs\pokitto\pokitto_core\palettes\palpico.o
+ .debug_str     0x00000000      0x182 .objs\pokitto\pokitto_core\palettes\palpico.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\palpico.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\palpico.o
@@ -1701,7 +1701,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\palrainbow.o
  .debug_line    0x00000000       0x4d .objs\pokitto\pokitto_core\palettes\palrainbow.o
- .debug_str     0x00000000      0x183 .objs\pokitto\pokitto_core\palettes\palrainbow.o
+ .debug_str     0x00000000      0x188 .objs\pokitto\pokitto_core\palettes\palrainbow.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\palrainbow.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\palrainbow.o
@@ -1715,7 +1715,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 .objs\pokitto\pokitto_core\palettes\palzxspec.o
  .debug_line    0x00000000       0x4c .objs\pokitto\pokitto_core\palettes\palzxspec.o
- .debug_str     0x00000000      0x181 .objs\pokitto\pokitto_core\palettes\palzxspec.o
+ .debug_str     0x00000000      0x186 .objs\pokitto\pokitto_core\palettes\palzxspec.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\palettes\palzxspec.o
  .ARM.attributes
                 0x00000000       0x32 .objs\pokitto\pokitto_core\palettes\palzxspec.o
@@ -1957,8 +1957,10 @@ Discarded input sections
                 0x00000000      0x198 .objs\pokitto\pokitto_core\pokittodisplay.o
  .text._ZN7Pokitto7Display10drawBitmapEssPKhh
                 0x00000000      0x2f4 .objs\pokitto\pokitto_core\pokittodisplay.o
+ .text._ZN7Pokitto7Display14drawBitmapDataEssssPKh
+                0x00000000      0x31c .objs\pokitto\pokitto_core\pokittodisplay.o
  .text._ZN7Pokitto7Display10drawBitmapEssPKh
-                0x00000000      0x2e8 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00000000       0x12 .objs\pokitto\pokitto_core\pokittodisplay.o
  .text._ZN7Pokitto7Display13drawRleBitmapEssPKh
                 0x00000000        0x2 .objs\pokitto\pokitto_core\pokittodisplay.o
  .text._ZN7Pokitto7Display18drawBitmapXFlippedEssPKh
@@ -2062,7 +2064,7 @@ Discarded input sections
                 0x00000000       0x30 .objs\pokitto\pokitto_core\pokittoitoa.o
  .debug_ranges  0x00000000       0x20 .objs\pokitto\pokitto_core\pokittoitoa.o
  .debug_line    0x00000000      0x1d3 .objs\pokitto\pokitto_core\pokittoitoa.o
- .debug_str     0x00000000      0x25d .objs\pokitto\pokitto_core\pokittoitoa.o
+ .debug_str     0x00000000      0x262 .objs\pokitto\pokitto_core\pokittoitoa.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_core\pokittoitoa.o
  .debug_frame   0x00000000       0x5c .objs\pokitto\pokitto_core\pokittoitoa.o
  .ARM.attributes
@@ -2226,7 +2228,7 @@ Discarded input sections
                 0x00000000       0x20 .objs\pokitto\pokitto_hw\pokitto_extport.o
  .debug_ranges  0x00000000       0x10 .objs\pokitto\pokitto_hw\pokitto_extport.o
  .debug_line    0x00000000      0x3b9 .objs\pokitto\pokitto_hw\pokitto_extport.o
- .debug_str     0x00000000      0xca0 .objs\pokitto\pokitto_hw\pokitto_extport.o
+ .debug_str     0x00000000      0xca5 .objs\pokitto\pokitto_hw\pokitto_extport.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_hw\pokitto_extport.o
  .debug_frame   0x00000000       0x20 .objs\pokitto\pokitto_hw\pokitto_extport.o
  .ARM.attributes
@@ -2321,7 +2323,7 @@ Discarded input sections
                 0x00000000       0x38 .objs\pokitto\pokitto_libs\synth\synth_envfuncs.o
  .debug_ranges  0x00000000       0x28 .objs\pokitto\pokitto_libs\synth\synth_envfuncs.o
  .debug_line    0x00000000      0x44e .objs\pokitto\pokitto_libs\synth\synth_envfuncs.o
- .debug_str     0x00000000      0xdc9 .objs\pokitto\pokitto_libs\synth\synth_envfuncs.o
+ .debug_str     0x00000000      0xdce .objs\pokitto\pokitto_libs\synth\synth_envfuncs.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_libs\synth\synth_envfuncs.o
  .debug_frame   0x00000000       0x58 .objs\pokitto\pokitto_libs\synth\synth_envfuncs.o
  .ARM.attributes
@@ -2529,7 +2531,7 @@ Discarded input sections
                 0x00000000       0x30 .objs\pokitto\pokitto_libs\synth\synth_helpers.o
  .debug_ranges  0x00000000       0x20 .objs\pokitto\pokitto_libs\synth\synth_helpers.o
  .debug_line    0x00000000      0x404 .objs\pokitto\pokitto_libs\synth\synth_helpers.o
- .debug_str     0x00000000      0xfb9 .objs\pokitto\pokitto_libs\synth\synth_helpers.o
+ .debug_str     0x00000000      0xfbe .objs\pokitto\pokitto_libs\synth\synth_helpers.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_libs\synth\synth_helpers.o
  .debug_frame   0x00000000       0x48 .objs\pokitto\pokitto_libs\synth\synth_helpers.o
  .ARM.attributes
@@ -2554,7 +2556,7 @@ Discarded input sections
                 0x00000000       0x38 .objs\pokitto\pokitto_libs\synth\synth_mixfuncs.o
  .debug_ranges  0x00000000       0x28 .objs\pokitto\pokitto_libs\synth\synth_mixfuncs.o
  .debug_line    0x00000000      0x55e .objs\pokitto\pokitto_libs\synth\synth_mixfuncs.o
- .debug_str     0x00000000      0xe1f .objs\pokitto\pokitto_libs\synth\synth_mixfuncs.o
+ .debug_str     0x00000000      0xe24 .objs\pokitto\pokitto_libs\synth\synth_mixfuncs.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_libs\synth\synth_mixfuncs.o
  .debug_frame   0x00000000       0x74 .objs\pokitto\pokitto_libs\synth\synth_mixfuncs.o
  .ARM.attributes
@@ -2581,7 +2583,7 @@ Discarded input sections
                 0x00000000       0x48 .objs\pokitto\pokitto_libs\synth\synth_oscfuncs.o
  .debug_ranges  0x00000000       0x88 .objs\pokitto\pokitto_libs\synth\synth_oscfuncs.o
  .debug_line    0x00000000      0x628 .objs\pokitto\pokitto_libs\synth\synth_oscfuncs.o
- .debug_str     0x00000000      0xe75 .objs\pokitto\pokitto_libs\synth\synth_oscfuncs.o
+ .debug_str     0x00000000      0xe7a .objs\pokitto\pokitto_libs\synth\synth_oscfuncs.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_libs\synth\synth_oscfuncs.o
  .debug_frame   0x00000000       0xc4 .objs\pokitto\pokitto_libs\synth\synth_oscfuncs.o
  .ARM.attributes
@@ -2616,7 +2618,7 @@ Discarded input sections
                 0x00000000       0x60 .objs\pokitto\pokitto_libs\synth\synth_songfuncs.o
  .debug_ranges  0x00000000       0x80 .objs\pokitto\pokitto_libs\synth\synth_songfuncs.o
  .debug_line    0x00000000      0x5db .objs\pokitto\pokitto_libs\synth\synth_songfuncs.o
- .debug_str     0x00000000     0x10ca .objs\pokitto\pokitto_libs\synth\synth_songfuncs.o
+ .debug_str     0x00000000     0x10cf .objs\pokitto\pokitto_libs\synth\synth_songfuncs.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_libs\synth\synth_songfuncs.o
  .debug_frame   0x00000000       0xfc .objs\pokitto\pokitto_libs\synth\synth_songfuncs.o
  .ARM.attributes
@@ -2652,7 +2654,7 @@ Discarded input sections
                 0x00000000       0x50 .objs\pokitto\pokitto_libs\synth\synth_wavefuncs.o
  .debug_ranges  0x00000000       0x40 .objs\pokitto\pokitto_libs\synth\synth_wavefuncs.o
  .debug_line    0x00000000      0x489 .objs\pokitto\pokitto_libs\synth\synth_wavefuncs.o
- .debug_str     0x00000000      0xe65 .objs\pokitto\pokitto_libs\synth\synth_wavefuncs.o
+ .debug_str     0x00000000      0xe6a .objs\pokitto\pokitto_libs\synth\synth_wavefuncs.o
  .comment       0x00000000       0x6f .objs\pokitto\pokitto_libs\synth\synth_wavefuncs.o
  .debug_frame   0x00000000       0x94 .objs\pokitto\pokitto_libs\synth\synth_wavefuncs.o
  .ARM.attributes
@@ -3354,7 +3356,7 @@ LOAD c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-
                 0x20000800                __top_Ram1_2 = 0x20000800
                 0x20004800                __top_Ram2USB_2 = 0x20004800
 
-.text           0x00000000     0x872c
+.text           0x00000000     0x8748
  FILL mask 0xff
                 0x00000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -3363,13 +3365,13 @@ LOAD c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-
                 0x000000c0                . = ALIGN (0x4)
                 0x000000c0                __section_table_start = .
                 0x000000c0                __data_section_table = .
-                0x000000c0        0x4 LONG 0x8968 LOADADDR (.data)
+                0x000000c0        0x4 LONG 0x8984 LOADADDR (.data)
                 0x000000c4        0x4 LONG 0x10000100 ADDR (.data)
                 0x000000c8        0x4 LONG 0x84 SIZEOF (.data)
-                0x000000cc        0x4 LONG 0x8968 LOADADDR (.data_RAM2)
+                0x000000cc        0x4 LONG 0x8984 LOADADDR (.data_RAM2)
                 0x000000d0        0x4 LONG 0x20000000 ADDR (.data_RAM2)
                 0x000000d4        0x4 LONG 0x0 SIZEOF (.data_RAM2)
-                0x000000d8        0x4 LONG 0x8968 LOADADDR (.data_RAM3)
+                0x000000d8        0x4 LONG 0x8984 LOADADDR (.data_RAM3)
                 0x000000dc        0x4 LONG 0x20004000 ADDR (.data_RAM3)
                 0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM3)
                 0x000000e4                __data_section_table_end = .
@@ -3859,654 +3861,657 @@ LOAD c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-
  .text._ZN7Pokitto7Display9setCursorEss
                 0x0000276c       0x14 .objs\pokitto\pokitto_core\pokittodisplay.o
                 0x0000276c                Pokitto::Display::setCursor(short, short)
- .text._ZN7Pokitto7Display12directBitmapEssPKhhh
+ .text._ZN7Pokitto7Display16directDrawBufferEsshhPKhhh
                 0x00002780      0x234 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002780                Pokitto::Display::directBitmap(short, short, unsigned char const*, unsigned char, unsigned char)
+                0x00002780                Pokitto::Display::directDrawBuffer(short, short, unsigned char, unsigned char, unsigned char const*, unsigned char, unsigned char)
+ .text._ZN7Pokitto7Display12directBitmapEssPKhhh
+                0x000029b4       0x1c .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x000029b4                Pokitto::Display::directBitmap(short, short, unsigned char const*, unsigned char, unsigned char)
  .text._ZN7Pokitto7Display10directCharEsst
-                0x000029b4      0x154 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000029b4                Pokitto::Display::directChar(short, short, unsigned short)
+                0x000029d0      0x154 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x000029d0                Pokitto::Display::directChar(short, short, unsigned short)
  .text._ZN7Pokitto7Display5clearEv
-                0x00002b08       0x60 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002b08                Pokitto::Display::clear()
+                0x00002b24       0x60 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002b24                Pokitto::Display::clear()
  .text._ZN7Pokitto7Display6updateEv
-                0x00002b68       0x28 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002b68                Pokitto::Display::update()
+                0x00002b84       0x28 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002b84                Pokitto::Display::update()
  .text._ZN7Pokitto7Display17setDefaultPaletteEv
-                0x00002b90       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002b90                Pokitto::Display::setDefaultPalette()
+                0x00002bac       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002bac                Pokitto::Display::setDefaultPalette()
  .text._ZN7Pokitto7Display8setColorEh
-                0x00002ba0       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002ba0                Pokitto::Display::setColor(unsigned char)
+                0x00002bbc       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002bbc                Pokitto::Display::setColor(unsigned char)
  .text._ZN7Pokitto7Display9drawPixelEssh
-                0x00002bb0       0x80 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002bb0                Pokitto::Display::drawPixel(short, short, unsigned char)
+                0x00002bcc       0x80 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002bcc                Pokitto::Display::drawPixel(short, short, unsigned char)
  .text._ZN7Pokitto7Display10bufferCharEsst
-                0x00002c30       0xb4 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002c30                Pokitto::Display::bufferChar(short, short, unsigned short)
+                0x00002c4c       0xb4 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002c4c                Pokitto::Display::bufferChar(short, short, unsigned short)
  .text._ZN7Pokitto7Display9drawPixelEss
-                0x00002ce4       0x74 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002ce4                Pokitto::Display::drawPixel(short, short)
+                0x00002d00       0x74 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002d00                Pokitto::Display::drawPixel(short, short)
  .text._ZN7Pokitto7Display10drawColumnEsss
-                0x00002d58       0x48 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002d58                Pokitto::Display::drawColumn(short, short, short)
+                0x00002d74       0x48 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002d74                Pokitto::Display::drawColumn(short, short, short)
  .text._ZN7Pokitto7Display7drawRowEsss
-                0x00002da0       0x48 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002da0                Pokitto::Display::drawRow(short, short, short)
+                0x00002dbc       0x48 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002dbc                Pokitto::Display::drawRow(short, short, short)
  .text._ZN7Pokitto7Display13drawFastVLineEsss
-                0x00002de8       0x1a .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002de8                Pokitto::Display::drawFastVLine(short, short, short)
+                0x00002e04       0x1a .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002e04                Pokitto::Display::drawFastVLine(short, short, short)
  .text._ZN7Pokitto7Display13drawFastHLineEsss
-                0x00002e02       0x20 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002e02                Pokitto::Display::drawFastHLine(short, short, short)
+                0x00002e1e       0x20 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002e1e                Pokitto::Display::drawFastHLine(short, short, short)
  .text._ZN7Pokitto7Display13drawRectangleEssss
-                0x00002e22       0x36 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002e22                Pokitto::Display::drawRectangle(short, short, short, short)
+                0x00002e3e       0x36 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002e3e                Pokitto::Display::drawRectangle(short, short, short, short)
  .text._ZN7Pokitto7Display13fillRectangleEssss
-                0x00002e58       0x7c .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002e58                Pokitto::Display::fillRectangle(short, short, short, short)
+                0x00002e74       0x7c .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002e74                Pokitto::Display::fillRectangle(short, short, short, short)
  .text._ZN7Pokitto7Display6scrollEs
-                0x00002ed4      0x120 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002ed4                Pokitto::Display::scroll(short)
+                0x00002ef0      0x120 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00002ef0                Pokitto::Display::scroll(short)
  .text._ZN7Pokitto7Display16drawCircleHelperEssst
-                0x00002ff4       0xfe .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00002ff4                Pokitto::Display::drawCircleHelper(short, short, short, unsigned short)
+                0x00003010       0xfe .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003010                Pokitto::Display::drawCircleHelper(short, short, short, unsigned short)
  .text._ZN7Pokitto7Display16fillCircleHelperEsssts
-                0x000030f2       0xf8 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000030f2                Pokitto::Display::fillCircleHelper(short, short, short, unsigned short, short)
+                0x0000310e       0xf8 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x0000310e                Pokitto::Display::fillCircleHelper(short, short, short, unsigned short, short)
  .text._ZN7Pokitto7Display13drawRoundRectEsssss
-                0x000031ea       0xcc .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000031ea                Pokitto::Display::drawRoundRect(short, short, short, short, short)
+                0x00003206       0xcc .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003206                Pokitto::Display::drawRoundRect(short, short, short, short, short)
  .text._ZN7Pokitto7Display13fillRoundRectEsssss
-                0x000032b6       0x78 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000032b6                Pokitto::Display::fillRoundRect(short, short, short, short, short)
- *fill*         0x0000332e        0x2 ff
+                0x000032d2       0x78 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x000032d2                Pokitto::Display::fillRoundRect(short, short, short, short, short)
+ *fill*         0x0000334a        0x2 ff
  .text._ZN7Pokitto7Display7setFontEPKh
-                0x00003330       0x24 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003330                Pokitto::Display::setFont(unsigned char const*)
+                0x0000334c       0x24 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x0000334c                Pokitto::Display::setFont(unsigned char const*)
  .text._ZN7Pokitto7DisplayC2Ev
-                0x00003354       0x60 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003354                Pokitto::Display::Display()
-                0x00003354                Pokitto::Display::Display()
+                0x00003370       0x60 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003370                Pokitto::Display::Display()
+                0x00003370                Pokitto::Display::Display()
  .text._ZN7Pokitto7Display10print_charEhhh
-                0x000033b4       0x2c .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000033b4                Pokitto::Display::print_char(unsigned char, unsigned char, unsigned char)
+                0x000033d0       0x2c .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x000033d0                Pokitto::Display::print_char(unsigned char, unsigned char, unsigned char)
  .text._ZN7Pokitto7Display23isDirectPrintingEnabledEv
-                0x000033e0       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000033e0                Pokitto::Display::isDirectPrintingEnabled()
+                0x000033fc       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x000033fc                Pokitto::Display::isDirectPrintingEnabled()
  .text._ZN7Pokitto7Display20enableDirectPrintingEh
-                0x000033f0       0x3c .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000033f0                Pokitto::Display::enableDirectPrinting(unsigned char)
+                0x0000340c       0x3c .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x0000340c                Pokitto::Display::enableDirectPrinting(unsigned char)
  .text._ZN7Pokitto7Display11inc_txtlineEv
-                0x0000342c       0x40 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x0000342c                Pokitto::Display::inc_txtline()
+                0x00003448       0x40 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003448                Pokitto::Display::inc_txtline()
  .text._ZN7Pokitto7Display5writeEh
-                0x0000346c       0xc8 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x0000346c                Pokitto::Display::write(unsigned char)
+                0x00003488       0xc8 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003488                Pokitto::Display::write(unsigned char)
  .text._ZN7Pokitto7Display5writeEPKc
-                0x00003534       0x14 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003534                Pokitto::Display::write(char const*)
+                0x00003550       0x14 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003550                Pokitto::Display::write(char const*)
  .text._ZN7Pokitto7Display5printEPKc
-                0x00003548        0x8 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003548                Pokitto::Display::print(char const*)
+                0x00003564        0x8 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003564                Pokitto::Display::print(char const*)
  .text._ZN7Pokitto7Display7printlnEv
-                0x00003550       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003550                Pokitto::Display::println()
+                0x0000356c       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x0000356c                Pokitto::Display::println()
  .text._ZN7Pokitto7Display7printlnEPKc
-                0x00003560        0xc .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003560                Pokitto::Display::println(char const*)
+                0x0000357c        0xc .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x0000357c                Pokitto::Display::println(char const*)
  .text._ZN7Pokitto7Display10set_cursorEhh
-                0x0000356c       0x14 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x0000356c                Pokitto::Display::set_cursor(unsigned char, unsigned char)
+                0x00003588       0x14 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003588                Pokitto::Display::set_cursor(unsigned char, unsigned char)
  .text._ZN7Pokitto7Display11printNumberEmh
-                0x00003580       0x54 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003580                Pokitto::Display::printNumber(unsigned long, unsigned char)
+                0x0000359c       0x54 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x0000359c                Pokitto::Display::printNumber(unsigned long, unsigned char)
  .text._ZN7Pokitto7Display5printEli.part.4
-                0x000035d4       0x18 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x000035f0       0x18 .objs\pokitto\pokitto_core\pokittodisplay.o
  .text._ZN7Pokitto7Display5printEli
-                0x000035ec       0x20 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x000035ec                Pokitto::Display::print(long, int)
+                0x00003608       0x20 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003608                Pokitto::Display::print(long, int)
  .text._ZN7Pokitto7Display5printEci
-                0x0000360c        0x8 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x0000360c                Pokitto::Display::print(char, int)
+                0x00003628        0x8 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003628                Pokitto::Display::print(char, int)
  .text._ZN7Pokitto7Display5printEii
-                0x00003614        0x8 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003614                Pokitto::Display::print(int, int)
+                0x00003630        0x8 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003630                Pokitto::Display::print(int, int)
  .text._ZN7Pokitto7Display5printEhhii
-                0x0000361c       0x1c .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x0000361c                Pokitto::Display::print(unsigned char, unsigned char, int, int)
+                0x00003638       0x1c .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003638                Pokitto::Display::print(unsigned char, unsigned char, int, int)
  .text._ZN7Pokitto7Display5printEmi
-                0x00003638       0x16 .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x00003638                Pokitto::Display::print(unsigned long, int)
+                0x00003654       0x16 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003654                Pokitto::Display::print(unsigned long, int)
  .text._ZN7Pokitto7Display7printlnEmi
-                0x0000364e        0xc .objs\pokitto\pokitto_core\pokittodisplay.o
-                0x0000364e                Pokitto::Display::println(unsigned long, int)
- *fill*         0x0000365a        0x2 ff
+                0x0000366a        0xc .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x0000366a                Pokitto::Display::println(unsigned long, int)
+ *fill*         0x00003676        0x2 ff
  .text.startup._GLOBAL__sub_I_core
-                0x0000365c       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00003678       0x10 .objs\pokitto\pokitto_core\pokittodisplay.o
  .text._ZN7Pokitto7Display8RGBto565Ehhh
-                0x0000366c       0x10 .objs\pokitto\pokitto_core\pokittopalette.o
-                0x0000366c                Pokitto::Display::RGBto565(unsigned char, unsigned char, unsigned char)
+                0x00003688       0x10 .objs\pokitto\pokitto_core\pokittopalette.o
+                0x00003688                Pokitto::Display::RGBto565(unsigned char, unsigned char, unsigned char)
  .text._ZN7Pokitto7Display14loadRGBPaletteEPKh
-                0x0000367c       0x2c .objs\pokitto\pokitto_core\pokittopalette.o
-                0x0000367c                Pokitto::Display::loadRGBPalette(unsigned char const*)
+                0x00003698       0x2c .objs\pokitto\pokitto_core\pokittopalette.o
+                0x00003698                Pokitto::Display::loadRGBPalette(unsigned char const*)
  .text._ZN7Pokitto7Display16interpolateColorEtth
-                0x000036a8       0x5c .objs\pokitto\pokitto_core\pokittopalette.o
-                0x000036a8                Pokitto::Display::interpolateColor(unsigned short, unsigned short, unsigned char)
+                0x000036c4       0x5c .objs\pokitto\pokitto_core\pokittopalette.o
+                0x000036c4                Pokitto::Display::interpolateColor(unsigned short, unsigned short, unsigned char)
  .text._ZN7Pokitto5Sound12updateStreamEv
-                0x00003704       0x94 .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003704                Pokitto::Sound::updateStream()
+                0x00003720       0x94 .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003720                Pokitto::Sound::updateStream()
  .text._ZN7Pokitto5Sound5beginEv
-                0x00003798        0xe .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003798                Pokitto::Sound::begin()
- *fill*         0x000037a6        0x2 ff
+                0x000037b4        0xe .objs\pokitto\pokitto_core\pokittosound.o
+                0x000037b4                Pokitto::Sound::begin()
+ *fill*         0x000037c2        0x2 ff
  .text._ZN7Pokitto5Sound7commandEhhah
-                0x000037a8       0xb4 .objs\pokitto\pokitto_core\pokittosound.o
-                0x000037a8                Pokitto::Sound::command(unsigned char, unsigned char, signed char, unsigned char)
+                0x000037c4       0xb4 .objs\pokitto\pokitto_core\pokittosound.o
+                0x000037c4                Pokitto::Sound::command(unsigned char, unsigned char, signed char, unsigned char)
  .text._ZN7Pokitto5Sound8playNoteEhhh
-                0x0000385c       0x4c .objs\pokitto\pokitto_core\pokittosound.o
-                0x0000385c                Pokitto::Sound::playNote(unsigned char, unsigned char, unsigned char)
+                0x00003878       0x4c .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003878                Pokitto::Sound::playNote(unsigned char, unsigned char, unsigned char)
  .text._ZN7Pokitto5Sound12updateOutputEv
-                0x000038a8       0x58 .objs\pokitto\pokitto_core\pokittosound.o
-                0x000038a8                Pokitto::Sound::updateOutput()
+                0x000038c4       0x58 .objs\pokitto\pokitto_core\pokittosound.o
+                0x000038c4                Pokitto::Sound::updateOutput()
  .text._ZN7Pokitto5Sound8stopNoteEh
-                0x00003900       0x44 .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003900                Pokitto::Sound::stopNote(unsigned char)
+                0x0000391c       0x44 .objs\pokitto\pokitto_core\pokittosound.o
+                0x0000391c                Pokitto::Sound::stopNote(unsigned char)
  .text._ZN7Pokitto5Sound11stopPatternEh
-                0x00003944       0x14 .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003944                Pokitto::Sound::stopPattern(unsigned char)
+                0x00003960       0x14 .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003960                Pokitto::Sound::stopPattern(unsigned char)
  .text._ZN7Pokitto5Sound11playPatternEPKth
-                0x00003958       0x4c .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003958                Pokitto::Sound::playPattern(unsigned short const*, unsigned char)
+                0x00003974       0x4c .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003974                Pokitto::Sound::playPattern(unsigned short const*, unsigned char)
  .text._ZN7Pokitto5Sound11updateTrackEh
-                0x000039a4       0x64 .objs\pokitto\pokitto_core\pokittosound.o
-                0x000039a4                Pokitto::Sound::updateTrack(unsigned char)
+                0x000039c0       0x64 .objs\pokitto\pokitto_core\pokittosound.o
+                0x000039c0                Pokitto::Sound::updateTrack(unsigned char)
  .text._ZN7Pokitto5Sound11updateTrackEv
-                0x00003a08        0xa .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003a08                Pokitto::Sound::updateTrack()
+                0x00003a24        0xa .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003a24                Pokitto::Sound::updateTrack()
  .text._ZN7Pokitto5Sound11stopPatternEv
-                0x00003a12        0xa .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003a12                Pokitto::Sound::stopPattern()
+                0x00003a2e        0xa .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003a2e                Pokitto::Sound::stopPattern()
  .text._ZN7Pokitto5Sound13updatePatternEh
-                0x00003a1c       0xb4 .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003a1c                Pokitto::Sound::updatePattern(unsigned char)
+                0x00003a38       0xb4 .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003a38                Pokitto::Sound::updatePattern(unsigned char)
  .text._ZN7Pokitto5Sound13updatePatternEv
-                0x00003ad0        0xa .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003ad0                Pokitto::Sound::updatePattern()
- *fill*         0x00003ada        0x2 ff
+                0x00003aec        0xa .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003aec                Pokitto::Sound::updatePattern()
+ *fill*         0x00003af6        0x2 ff
  .text._ZN7Pokitto5Sound10updateNoteEh
-                0x00003adc      0x1dc .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003adc                Pokitto::Sound::updateNote(unsigned char)
+                0x00003af8      0x1dc .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003af8                Pokitto::Sound::updateNote(unsigned char)
  .text._ZN7Pokitto5Sound10updateNoteEv
-                0x00003cb8        0xa .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003cb8                Pokitto::Sound::updateNote()
- *fill*         0x00003cc2        0x2 ff
+                0x00003cd4        0xa .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003cd4                Pokitto::Sound::updateNote()
+ *fill*         0x00003cde        0x2 ff
  .text._ZN7Pokitto5Sound9setVolumeEs
-                0x00003cc4       0x3c .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003cc4                Pokitto::Sound::setVolume(short)
+                0x00003ce0       0x3c .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003ce0                Pokitto::Sound::setVolume(short)
  .text._ZN7Pokitto5Sound9setMaxVolEs
-                0x00003d00       0x28 .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003d00                Pokitto::Sound::setMaxVol(short)
+                0x00003d1c       0x28 .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003d1c                Pokitto::Sound::setMaxVol(short)
  .text._ZN7Pokitto5Sound8volumeUpEv
-                0x00003d28       0x1c .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003d28                Pokitto::Sound::volumeUp()
- .text._ZN7Pokitto5Sound10volumeDownEv
                 0x00003d44       0x1c .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003d44                Pokitto::Sound::volumeDown()
+                0x00003d44                Pokitto::Sound::volumeUp()
+ .text._ZN7Pokitto5Sound10volumeDownEv
+                0x00003d60       0x1c .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003d60                Pokitto::Sound::volumeDown()
  .text._ZN7Pokitto5Sound9getVolumeEv
-                0x00003d60        0xc .objs\pokitto\pokitto_core\pokittosound.o
-                0x00003d60                Pokitto::Sound::getVolume()
+                0x00003d7c        0xc .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003d7c                Pokitto::Sound::getVolume()
  .text.startup._GLOBAL__sub_I__soundc
-                0x00003d6c       0x10 .objs\pokitto\pokitto_core\pokittosound.o
+                0x00003d88       0x10 .objs\pokitto\pokitto_core\pokittosound.o
  .text._Z8APressedv
-                0x00003d7c        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003d7c                APressed()
+                0x00003d98        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003d98                APressed()
  .text._Z9AReleasedv
-                0x00003d88        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003d88                AReleased()
+                0x00003da4        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003da4                AReleased()
  .text._Z8BPressedv
-                0x00003d94        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003d94                BPressed()
+                0x00003db0        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003db0                BPressed()
  .text._Z9BReleasedv
-                0x00003da0        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003da0                BReleased()
+                0x00003dbc        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003dbc                BReleased()
  .text._Z8CPressedv
-                0x00003dac        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003dac                CPressed()
+                0x00003dc8        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003dc8                CPressed()
  .text._Z9CReleasedv
-                0x00003db8        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003db8                CReleased()
+                0x00003dd4        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003dd4                CReleased()
  .text._Z8UPressedv
-                0x00003dc4        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003dc4                UPressed()
+                0x00003de0        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003de0                UPressed()
  .text._Z9UReleasedv
-                0x00003dd0        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003dd0                UReleased()
+                0x00003dec        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003dec                UReleased()
  .text._Z8DPressedv
-                0x00003ddc        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003ddc                DPressed()
+                0x00003df8        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003df8                DPressed()
  .text._Z9DReleasedv
-                0x00003de8        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003de8                DReleased()
+                0x00003e04        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003e04                DReleased()
  .text._Z9RReleasedv
-                0x00003df4        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003df4                RReleased()
+                0x00003e10        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003e10                RReleased()
  .text._Z9LReleasedv
-                0x00003e00        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003e00                LReleased()
+                0x00003e1c        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003e1c                LReleased()
  .text._Z8RPressedv
-                0x00003e0c       0x1c .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003e0c                RPressed()
- .text._Z8LPressedv
                 0x00003e28       0x1c .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003e28                LPressed()
+                0x00003e28                RPressed()
+ .text._Z8LPressedv
+                0x00003e44       0x1c .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003e44                LPressed()
  .text._ZN7Pokitto11initButtonsEv
-                0x00003e44       0xd8 .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003e44                Pokitto::initButtons()
+                0x00003e60       0xd8 .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003e60                Pokitto::initButtons()
  .text._ZN7Pokitto4Core4aBtnEv
-                0x00003f1c        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003f1c                Pokitto::Core::aBtn()
+                0x00003f38        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003f38                Pokitto::Core::aBtn()
  .text._ZN7Pokitto4Core4bBtnEv
-                0x00003f28        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003f28                Pokitto::Core::bBtn()
+                0x00003f44        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003f44                Pokitto::Core::bBtn()
  .text._ZN7Pokitto4Core4cBtnEv
-                0x00003f34        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003f34                Pokitto::Core::cBtn()
+                0x00003f50        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003f50                Pokitto::Core::cBtn()
  .text._ZN7Pokitto4Core7leftBtnEv
-                0x00003f40        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003f40                Pokitto::Core::leftBtn()
+                0x00003f5c        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003f5c                Pokitto::Core::leftBtn()
  .text._ZN7Pokitto4Core8rightBtnEv
-                0x00003f4c        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
-                0x00003f4c                Pokitto::Core::rightBtn()
+                0x00003f68        0xc .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003f68                Pokitto::Core::rightBtn()
  .text.startup._GLOBAL__sub_I__s
-                0x00003f58       0xe0 .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x00003f74       0xe0 .objs\pokitto\pokitto_hw\hwbuttons.o
  .text._ZL13setup_data_16t
-                0x00004038       0x30 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x00004054       0x30 .objs\pokitto\pokitto_hw\hwlcd.o
  .text._Z16write_command_16t
-                0x00004068       0x34 .objs\pokitto\pokitto_hw\hwlcd.o
-                0x00004068                write_command_16(unsigned short)
+                0x00004084       0x34 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x00004084                write_command_16(unsigned short)
  .text._Z13write_data_16t
-                0x0000409c       0x34 .objs\pokitto\pokitto_hw\hwlcd.o
-                0x0000409c                write_data_16(unsigned short)
+                0x000040b8       0x34 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x000040b8                write_data_16(unsigned short)
  .text._ZL10setDRAMptrhh.constprop.0
-                0x000040d0       0x44 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x000040ec       0x44 .objs\pokitto\pokitto_hw\hwlcd.o
  .text._ZN7Pokitto13initBacklightEv
-                0x00004114       0x2c .objs\pokitto\pokitto_hw\hwlcd.o
-                0x00004114                Pokitto::initBacklight()
+                0x00004130       0x2c .objs\pokitto\pokitto_hw\hwlcd.o
+                0x00004130                Pokitto::initBacklight()
  .text._ZN7Pokitto14lcdFillSurfaceEt
-                0x00004140       0x64 .objs\pokitto\pokitto_hw\hwlcd.o
-                0x00004140                Pokitto::lcdFillSurface(unsigned short)
+                0x0000415c       0x64 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x0000415c                Pokitto::lcdFillSurface(unsigned short)
  .text._ZN7Pokitto8lcdClearEv
-                0x000041a4       0x60 .objs\pokitto\pokitto_hw\hwlcd.o
-                0x000041a4                Pokitto::lcdClear()
+                0x000041c0       0x60 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x000041c0                Pokitto::lcdClear()
  .text._ZN7Pokitto7lcdInitEv
-                0x00004204      0x218 .objs\pokitto\pokitto_hw\hwlcd.o
-                0x00004204                Pokitto::lcdInit()
+                0x00004220      0x218 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x00004220                Pokitto::lcdInit()
  .text._ZN7Pokitto8lcdPixelEsst
-                0x0000441c       0x64 .objs\pokitto\pokitto_hw\hwlcd.o
-                0x0000441c                Pokitto::lcdPixel(short, short, unsigned short)
+                0x00004438       0x64 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x00004438                Pokitto::lcdPixel(short, short, unsigned short)
  .text._ZN7Pokitto12lcdRectangleEsssst
-                0x00004480       0xc8 .objs\pokitto\pokitto_hw\hwlcd.o
-                0x00004480                Pokitto::lcdRectangle(short, short, short, short, unsigned short)
+                0x0000449c       0xc8 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x0000449c                Pokitto::lcdRectangle(short, short, short, short, unsigned short)
  .text._ZN7Pokitto15lcdRefreshMode1EPhPt
-                0x00004548      0x30c .objs\pokitto\pokitto_hw\hwlcd.o
-                0x00004548                Pokitto::lcdRefreshMode1(unsigned char*, unsigned short*)
+                0x00004564      0x30c .objs\pokitto\pokitto_hw\hwlcd.o
+                0x00004564                Pokitto::lcdRefreshMode1(unsigned char*, unsigned short*)
  .text._ZN4mbed10DigitalOutC2E7PinName
-                0x00004854       0x1a .objs\pokitto\pokitto_hw\hwsound.o
-                0x00004854                mbed::DigitalOut::DigitalOut(PinName)
-                0x00004854                mbed::DigitalOut::DigitalOut(PinName)
- *fill*         0x0000486e        0x2 ff
+                0x00004870       0x1a .objs\pokitto\pokitto_hw\hwsound.o
+                0x00004870                mbed::DigitalOut::DigitalOut(PinName)
+                0x00004870                mbed::DigitalOut::DigitalOut(PinName)
+ *fill*         0x0000488a        0x2 ff
  .text._ZN7Pokitto11setHWvolumeEh
-                0x00004870       0x38 .objs\pokitto\pokitto_hw\hwsound.o
-                0x00004870                Pokitto::setHWvolume(unsigned char)
+                0x0000488c       0x38 .objs\pokitto\pokitto_hw\hwsound.o
+                0x0000488c                Pokitto::setHWvolume(unsigned char)
  .text._Z19initHWvolumecontrolv
-                0x000048a8       0x20 .objs\pokitto\pokitto_hw\hwsound.o
-                0x000048a8                initHWvolumecontrol()
+                0x000048c4       0x20 .objs\pokitto\pokitto_hw\hwsound.o
+                0x000048c4                initHWvolumecontrol()
  .text._ZN7Pokitto9ampEnableEh
-                0x000048c8       0x34 .objs\pokitto\pokitto_hw\hwsound.o
-                0x000048c8                Pokitto::ampEnable(unsigned char)
+                0x000048e4       0x34 .objs\pokitto\pokitto_hw\hwsound.o
+                0x000048e4                Pokitto::ampEnable(unsigned char)
  .text._ZN7Pokitto9dac_writeEh
-                0x000048fc       0xc0 .objs\pokitto\pokitto_hw\hwsound.o
-                0x000048fc                Pokitto::dac_write(unsigned char)
+                0x00004918       0xc0 .objs\pokitto\pokitto_hw\hwsound.o
+                0x00004918                Pokitto::dac_write(unsigned char)
  .text._Z11pokSoundIRQv
-                0x000049bc       0xc8 .objs\pokitto\pokitto_hw\hwsound.o
-                0x000049bc                pokSoundIRQ()
+                0x000049d8       0xc8 .objs\pokitto\pokitto_hw\hwsound.o
+                0x000049d8                pokSoundIRQ()
  .text._ZN7Pokitto9soundInitEv
-                0x00004a84       0x48 .objs\pokitto\pokitto_hw\hwsound.o
-                0x00004a84                Pokitto::soundInit()
+                0x00004aa0       0x48 .objs\pokitto\pokitto_hw\hwsound.o
+                0x00004aa0                Pokitto::soundInit()
  .text.startup._GLOBAL__sub_I_buffers
-                0x00004acc       0xc0 .objs\pokitto\pokitto_hw\hwsound.o
+                0x00004ae8       0xc0 .objs\pokitto\pokitto_hw\hwsound.o
  .text._Z15CopyPageToFlashmPh
-                0x00004b8c      0x16c .objs\pokitto\pokitto_hw\iap.o
-                0x00004b8c                CopyPageToFlash(unsigned long, unsigned char*)
+                0x00004ba8      0x16c .objs\pokitto\pokitto_hw\iap.o
+                0x00004ba8                CopyPageToFlash(unsigned long, unsigned char*)
  .text.SysTick_Handler
-                0x00004cf8       0x10 .objs\pokitto\pokitto_hw\pokittoclock.o
-                0x00004cf8                SysTick_Handler
+                0x00004d14       0x10 .objs\pokitto\pokitto_hw\pokittoclock.o
+                0x00004d14                SysTick_Handler
  .text._ZN7Pokitto4Core9initClockEv
-                0x00004d08       0x20 .objs\pokitto\pokitto_hw\pokittoclock.o
-                0x00004d08                Pokitto::Core::initClock()
+                0x00004d24       0x20 .objs\pokitto\pokitto_hw\pokittoclock.o
+                0x00004d24                Pokitto::Core::initClock()
  .text._ZN7Pokitto4Core7getTimeEv
-                0x00004d28        0xc .objs\pokitto\pokitto_hw\pokittoclock.o
-                0x00004d28                Pokitto::Core::getTime()
+                0x00004d44        0xc .objs\pokitto\pokitto_hw\pokittoclock.o
+                0x00004d44                Pokitto::Core::getTime()
  .text._ZN7Pokitto4Core10initRandomEv
-                0x00004d34        0x2 .objs\pokitto\pokitto_hw\pokittohw.o
-                0x00004d34                Pokitto::Core::initRandom()
- *fill*         0x00004d36        0x2 ff
+                0x00004d50        0x2 .objs\pokitto\pokitto_hw\pokittohw.o
+                0x00004d50                Pokitto::Core::initRandom()
+ *fill*         0x00004d52        0x2 ff
  .text._ZN7Pokitto4Core8initGPIOEv
-                0x00004d38      0x108 .objs\pokitto\pokitto_hw\pokittohw.o
-                0x00004d38                Pokitto::Core::initGPIO()
+                0x00004d54      0x108 .objs\pokitto\pokitto_hw\pokittohw.o
+                0x00004d54                Pokitto::Core::initGPIO()
  .text.gpio_write
-                0x00004e40       0x30 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004e5c       0x30 .objs\pokitto\pokitto_hw\softwarei2c.o
  .text.gpio_read
-                0x00004e70       0x2c .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004e8c       0x2c .objs\pokitto\pokitto_hw\softwarei2c.o
  .text._ZN4mbed12DigitalInOut6outputEv
-                0x00004e9c        0xa .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00004e9c                mbed::DigitalInOut::output()
+                0x00004eb8        0xa .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004eb8                mbed::DigitalInOut::output()
  .text._ZN11SoftwareI2C5startEv
-                0x00004ea6       0x46 .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00004ea6                SoftwareI2C::start()
+                0x00004ec2       0x46 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004ec2                SoftwareI2C::start()
  .text._ZN11SoftwareI2C4stopEv
-                0x00004eec       0x36 .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00004eec                SoftwareI2C::stop()
+                0x00004f08       0x36 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004f08                SoftwareI2C::stop()
  .text._ZN11SoftwareI2C7putByteEh
-                0x00004f22       0x48 .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00004f22                SoftwareI2C::putByte(unsigned char)
+                0x00004f3e       0x48 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004f3e                SoftwareI2C::putByte(unsigned char)
  .text._ZN11SoftwareI2C6getAckEv
-                0x00004f6a       0x52 .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00004f6a                SoftwareI2C::getAck()
+                0x00004f86       0x52 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004f86                SoftwareI2C::getAck()
  .text._ZN11SoftwareI2CC2E7PinNameS0_
-                0x00004fbc       0x94 .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00004fbc                SoftwareI2C::SoftwareI2C(PinName, PinName)
-                0x00004fbc                SoftwareI2C::SoftwareI2C(PinName, PinName)
+                0x00004fd8       0x94 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00004fd8                SoftwareI2C::SoftwareI2C(PinName, PinName)
+                0x00004fd8                SoftwareI2C::SoftwareI2C(PinName, PinName)
  .text._ZN11SoftwareI2CD2Ev
-                0x00005050        0x2 .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00005050                SoftwareI2C::~SoftwareI2C()
-                0x00005050                SoftwareI2C::~SoftwareI2C()
+                0x0000506c        0x2 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x0000506c                SoftwareI2C::~SoftwareI2C()
+                0x0000506c                SoftwareI2C::~SoftwareI2C()
  .text._ZN11SoftwareI2C5writeEhh
-                0x00005052       0x34 .objs\pokitto\pokitto_hw\softwarei2c.o
-                0x00005052                SoftwareI2C::write(unsigned char, unsigned char)
- *fill*         0x00005086        0x2 ff
+                0x0000506e       0x34 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x0000506e                SoftwareI2C::write(unsigned char, unsigned char)
+ *fill*         0x000050a2        0x2 ff
  .text.startup._GLOBAL__sub_I_playing
-                0x00005088       0x2c .objs\pokitto\pokitto_libs\synth\synth.o
- .text.floor    0x000050b4      0x130 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libm.a(lib_a-s_floor.o)
-                0x000050b4                floor
+                0x000050a4       0x2c .objs\pokitto\pokitto_libs\synth\synth.o
+ .text.floor    0x000050d0      0x130 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libm.a(lib_a-s_floor.o)
+                0x000050d0                floor
  .text.__libc_init_array
-                0x000051e4       0x4c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-init.o)
-                0x000051e4                __libc_init_array
- .text.free     0x00005230       0x14 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-malloc.o)
-                0x00005230                free
- .text.memset   0x00005244       0x10 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-memset.o)
-                0x00005244                memset
- .text._free_r  0x00005254       0x98 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-nano-freer.o)
-                0x00005254                _free_r
- .text.strcpy   0x000052ec       0x10 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-strcpy.o)
-                0x000052ec                strcpy
+                0x00005200       0x4c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-init.o)
+                0x00005200                __libc_init_array
+ .text.free     0x0000524c       0x14 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-malloc.o)
+                0x0000524c                free
+ .text.memset   0x00005260       0x10 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-memset.o)
+                0x00005260                memset
+ .text._free_r  0x00005270       0x98 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-nano-freer.o)
+                0x00005270                _free_r
+ .text.strcpy   0x00005308       0x10 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-strcpy.o)
+                0x00005308                strcpy
  .text.__malloc_lock
-                0x000052fc        0x2 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-mlock.o)
-                0x000052fc                __malloc_lock
+                0x00005318        0x2 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-mlock.o)
+                0x00005318                __malloc_lock
  .text.__malloc_unlock
-                0x000052fe        0x2 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-mlock.o)
-                0x000052fe                __malloc_unlock
- .text          0x00005300       0x14 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_thumb1_case_uqi.o)
-                0x00005300                __gnu_thumb1_case_uqi
- .text          0x00005314      0x114 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
-                0x00005314                __aeabi_uidiv
-                0x00005314                __udivsi3
-                0x00005420                __aeabi_uidivmod
- .text          0x00005428      0x1d4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
-                0x00005428                __divsi3
-                0x00005428                __aeabi_idiv
-                0x000055f4                __aeabi_idivmod
- .text          0x000055fc        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_dvmd_tls.o)
-                0x000055fc                __aeabi_idiv0
-                0x000055fc                __aeabi_ldiv0
- .text          0x00005600       0x7c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_arm_cmpdf2.o)
-                0x00005600                __aeabi_cdrcmple
-                0x00005610                __aeabi_cdcmple
-                0x00005610                __aeabi_cdcmpeq
-                0x00005620                __aeabi_dcmpeq
-                0x0000562c                __aeabi_dcmplt
-                0x00005640                __aeabi_dcmple
-                0x00005654                __aeabi_dcmpgt
-                0x00005668                __aeabi_dcmpge
- .text          0x0000567c       0x74 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_arm_cmpsf2.o)
-                0x0000567c                __aeabi_cfrcmple
-                0x00005684                __aeabi_cfcmpeq
-                0x00005684                __aeabi_cfcmple
-                0x00005694                __aeabi_fcmpeq
-                0x000056a0                __aeabi_fcmplt
-                0x000056b4                __aeabi_fcmple
-                0x000056c8                __aeabi_fcmpgt
-                0x000056dc                __aeabi_fcmpge
- .text          0x000056f0       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_fixunssfsi.o)
-                0x000056f0                __fixunssfsi
-                0x000056f0                __aeabi_f2uiz
- .text          0x00005720      0x2ec c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(addsf3.o)
-                0x00005720                __aeabi_fadd
- .text          0x00005a0c      0x234 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(divsf3.o)
-                0x00005a0c                __aeabi_fdiv
- .text          0x00005c40       0x50 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqsf2.o)
-                0x00005c40                __eqsf2
-                0x00005c40                __nesf2
- .text          0x00005c90       0x88 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gesf2.o)
-                0x00005c90                __gesf2
-                0x00005c90                __gtsf2
- .text          0x00005d18       0x88 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(lesf2.o)
-                0x00005d18                __ltsf2
-                0x00005d18                __lesf2
- .text          0x00005da0      0x228 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(mulsf3.o)
-                0x00005da0                __aeabi_fmul
- .text          0x00005fc8      0x30c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(subsf3.o)
-                0x00005fc8                __aeabi_fsub
- .text          0x000062d4       0x44 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixsfsi.o)
-                0x000062d4                __aeabi_f2iz
- .text          0x00006318       0x90 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatsisf.o)
-                0x00006318                __aeabi_i2f
- .text          0x000063a8       0x7c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatunsisf.o)
-                0x000063a8                __aeabi_ui2f
- .text          0x00006424      0x658 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(adddf3.o)
-                0x00006424                __aeabi_dadd
- .text          0x00006a7c       0x80 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqdf2.o)
-                0x00006a7c                __nedf2
-                0x00006a7c                __eqdf2
- .text          0x00006afc       0xc8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gedf2.o)
-                0x00006afc                __gedf2
-                0x00006afc                __gtdf2
- .text          0x00006bc4       0xd4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(ledf2.o)
-                0x00006bc4                __ledf2
-                0x00006bc4                __ltdf2
- .text          0x00006c98       0x6c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixdfsi.o)
-                0x00006c98                __aeabi_d2iz
- .text          0x00006d04       0xa8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(extendsfdf2.o)
-                0x00006d04                __aeabi_f2d
- .text          0x00006dac       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_clzsi2.o)
-                0x00006dac                __clzsi2
+                0x0000531a        0x2 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-mlock.o)
+                0x0000531a                __malloc_unlock
+ .text          0x0000531c       0x14 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_thumb1_case_uqi.o)
+                0x0000531c                __gnu_thumb1_case_uqi
+ .text          0x00005330      0x114 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
+                0x00005330                __aeabi_uidiv
+                0x00005330                __udivsi3
+                0x0000543c                __aeabi_uidivmod
+ .text          0x00005444      0x1d4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
+                0x00005444                __divsi3
+                0x00005444                __aeabi_idiv
+                0x00005610                __aeabi_idivmod
+ .text          0x00005618        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_dvmd_tls.o)
+                0x00005618                __aeabi_idiv0
+                0x00005618                __aeabi_ldiv0
+ .text          0x0000561c       0x7c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_arm_cmpdf2.o)
+                0x0000561c                __aeabi_cdrcmple
+                0x0000562c                __aeabi_cdcmple
+                0x0000562c                __aeabi_cdcmpeq
+                0x0000563c                __aeabi_dcmpeq
+                0x00005648                __aeabi_dcmplt
+                0x0000565c                __aeabi_dcmple
+                0x00005670                __aeabi_dcmpgt
+                0x00005684                __aeabi_dcmpge
+ .text          0x00005698       0x74 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_arm_cmpsf2.o)
+                0x00005698                __aeabi_cfrcmple
+                0x000056a0                __aeabi_cfcmpeq
+                0x000056a0                __aeabi_cfcmple
+                0x000056b0                __aeabi_fcmpeq
+                0x000056bc                __aeabi_fcmplt
+                0x000056d0                __aeabi_fcmple
+                0x000056e4                __aeabi_fcmpgt
+                0x000056f8                __aeabi_fcmpge
+ .text          0x0000570c       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_fixunssfsi.o)
+                0x0000570c                __fixunssfsi
+                0x0000570c                __aeabi_f2uiz
+ .text          0x0000573c      0x2ec c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(addsf3.o)
+                0x0000573c                __aeabi_fadd
+ .text          0x00005a28      0x234 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(divsf3.o)
+                0x00005a28                __aeabi_fdiv
+ .text          0x00005c5c       0x50 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqsf2.o)
+                0x00005c5c                __eqsf2
+                0x00005c5c                __nesf2
+ .text          0x00005cac       0x88 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gesf2.o)
+                0x00005cac                __gesf2
+                0x00005cac                __gtsf2
+ .text          0x00005d34       0x88 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(lesf2.o)
+                0x00005d34                __ltsf2
+                0x00005d34                __lesf2
+ .text          0x00005dbc      0x228 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(mulsf3.o)
+                0x00005dbc                __aeabi_fmul
+ .text          0x00005fe4      0x30c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(subsf3.o)
+                0x00005fe4                __aeabi_fsub
+ .text          0x000062f0       0x44 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixsfsi.o)
+                0x000062f0                __aeabi_f2iz
+ .text          0x00006334       0x90 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatsisf.o)
+                0x00006334                __aeabi_i2f
+ .text          0x000063c4       0x7c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatunsisf.o)
+                0x000063c4                __aeabi_ui2f
+ .text          0x00006440      0x658 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(adddf3.o)
+                0x00006440                __aeabi_dadd
+ .text          0x00006a98       0x80 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqdf2.o)
+                0x00006a98                __nedf2
+                0x00006a98                __eqdf2
+ .text          0x00006b18       0xc8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gedf2.o)
+                0x00006b18                __gedf2
+                0x00006b18                __gtdf2
+ .text          0x00006be0       0xd4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(ledf2.o)
+                0x00006be0                __ledf2
+                0x00006be0                __ltdf2
+ .text          0x00006cb4       0x6c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixdfsi.o)
+                0x00006cb4                __aeabi_d2iz
+ .text          0x00006d20       0xa8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(extendsfdf2.o)
+                0x00006d20                __aeabi_f2d
+ .text          0x00006dc8       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_clzsi2.o)
+                0x00006dc8                __clzsi2
  *(.rodata .rodata.*)
  .rodata.str1.1
-                0x00006de8        0xd .objs\examples\helloworld\main.o
+                0x00006e04        0xd .objs\examples\helloworld\main.o
  .rodata.str1.1
-                0x00006df5       0x31 .objs\pokitto\mbed-pokitto\common\assert.o
+                0x00006e11       0x31 .objs\pokitto\mbed-pokitto\common\assert.o
  .rodata.str1.1
-                0x00006e26       0x62 .objs\pokitto\mbed-pokitto\common\gpio.o
+                0x00006e42       0x62 .objs\pokitto\mbed-pokitto\common\gpio.o
  .rodata._ZTVN4mbed11InterruptInE
-                0x00006e88       0x10 .objs\pokitto\mbed-pokitto\common\interruptin.o
-                0x00006e88                vtable for mbed::InterruptIn
+                0x00006ea4       0x10 .objs\pokitto\mbed-pokitto\common\interruptin.o
+                0x00006ea4                vtable for mbed::InterruptIn
  .rodata.str1.1
-                0x00006e98       0x60 .objs\pokitto\mbed-pokitto\common\pinmap_common.o
+                0x00006eb4       0x60 .objs\pokitto\mbed-pokitto\common\pinmap_common.o
  .rodata._ZTVN4mbed3SPIE
-                0x00006ef8       0x14 .objs\pokitto\mbed-pokitto\common\spi.o
-                0x00006ef8                vtable for mbed::SPI
+                0x00006f14       0x14 .objs\pokitto\mbed-pokitto\common\spi.o
+                0x00006f14                vtable for mbed::SPI
  .rodata._ZTVN4mbed6TickerE
-                0x00006f0c       0x14 .objs\pokitto\mbed-pokitto\common\ticker.o
-                0x00006f0c                vtable for mbed::Ticker
+                0x00006f28       0x14 .objs\pokitto\mbed-pokitto\common\ticker.o
+                0x00006f28                vtable for mbed::Ticker
  .rodata._ZTVN4mbed10TimerEventE
-                0x00006f20       0x14 .objs\pokitto\mbed-pokitto\common\timerevent.o
-                0x00006f20                vtable for mbed::TimerEvent
+                0x00006f3c       0x14 .objs\pokitto\mbed-pokitto\common\timerevent.o
+                0x00006f3c                vtable for mbed::TimerEvent
  .rodata.us_interface
-                0x00006f34       0x14 .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
+                0x00006f50       0x14 .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
  .rodata.us_data
-                0x00006f48        0x8 .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
+                0x00006f64        0x8 .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
  .rodata.str1.1
-                0x00006f50       0x47 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_api.o
+                0x00006f6c       0x47 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_api.o
                                  0x72 (size before relaxing)
- *fill*         0x00006f97        0x1 ff
+ *fill*         0x00006fb3        0x1 ff
  .rodata.CSWTCH.17
-                0x00006f98       0x20 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_irq_api.o
+                0x00006fb4       0x20 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_irq_api.o
  .rodata.str1.1
-                0x00006fb8       0x45 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinmap.o
+                0x00006fd4       0x45 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinmap.o
                                  0x58 (size before relaxing)
- *fill*         0x00006ffd        0x3 ff
+ *fill*         0x00007019        0x3 ff
  .rodata.PinMap_PWM
-                0x00007000       0x6c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
+                0x0000701c       0x6c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
  .rodata.str1.1
-                0x0000706c       0x2b .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
- *fill*         0x00007097        0x1 ff
- .rodata.SCTs   0x00007098        0x8 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
+                0x00007088       0x2b .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
+ *fill*         0x000070b3        0x1 ff
+ .rodata.SCTs   0x000070b4        0x8 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
  .rodata.PinMap_SPI_MISO
-                0x000070a0       0x3c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
+                0x000070bc       0x3c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
  .rodata.PinMap_SPI_SCLK
-                0x000070dc       0x48 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
+                0x000070f8       0x48 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
  .rodata.str1.1
-                0x00007124       0xbf .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
- *fill*         0x000071e3        0x1 ff
+                0x00007140       0xbf .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
+ *fill*         0x000071ff        0x1 ff
  .rodata.PinMap_SPI_MOSI
-                0x000071e4       0x3c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
+                0x00007200       0x3c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
  .rodata.PinMap_SPI_SSEL
-                0x00007220       0x3c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
+                0x0000723c       0x3c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
  .rodata.font5x7
-                0x0000725c      0x304 .objs\pokitto\pokitto_core\fonts\font5x7.o
-                0x0000725c                font5x7
+                0x00007278      0x304 .objs\pokitto\pokitto_core\fonts\font5x7.o
+                0x00007278                font5x7
  .rodata.fontC64
-                0x00007560      0x364 .objs\pokitto\pokitto_core\fonts\fontc64.o
-                0x00007560                fontC64
+                0x0000757c      0x364 .objs\pokitto\pokitto_core\fonts\fontc64.o
+                0x0000757c                fontC64
  .rodata.fntC64UIGfx
-                0x000078c4      0x364 .objs\pokitto\pokitto_core\fonts\fontc64uigfx.o
-                0x000078c4                fntC64UIGfx
+                0x000078e0      0x364 .objs\pokitto\pokitto_core\fonts\fontc64uigfx.o
+                0x000078e0                fntC64UIGfx
  .rodata.fontMini
-                0x00007c28      0x13a .objs\pokitto\pokitto_core\fonts\mini4x6.o
-                0x00007c28                fontMini
+                0x00007c44      0x13a .objs\pokitto\pokitto_core\fonts\mini4x6.o
+                0x00007c44                fontMini
  .rodata.paletteCGA
-                0x00007d62       0x30 .objs\pokitto\pokitto_core\palettes\palcga.o
-                0x00007d62                paletteCGA
+                0x00007d7e       0x30 .objs\pokitto\pokitto_core\palettes\palcga.o
+                0x00007d7e                paletteCGA
  .rodata.str1.1
-                0x00007d92      0x2c0 .objs\pokitto\pokitto_core\pokittocore.o
+                0x00007dae      0x2c0 .objs\pokitto\pokitto_core\pokittocore.o
                                 0x2d3 (size before relaxing)
  .rodata.str1.1
-                0x00008052        0x1 .objs\pokitto\pokitto_core\pokittodisk.o
+                0x0000806e        0x1 .objs\pokitto\pokitto_core\pokittodisk.o
  .rodata.Pokitto_logo
-                0x00008052      0x50a .objs\pokitto\pokitto_core\pokittologos.o
-                0x00008052                Pokitto_logo
+                0x0000806e      0x50a .objs\pokitto\pokitto_core\pokittologos.o
+                0x0000806e                Pokitto_logo
  .rodata.Pokitto_headphones
-                0x0000855c       0x22 .objs\pokitto\pokitto_core\pokittologos.o
-                0x0000855c                Pokitto_headphones
+                0x00008578       0x22 .objs\pokitto\pokitto_core\pokittologos.o
+                0x00008578                Pokitto_headphones
  .rodata.Pokitto_speaker
-                0x0000857e       0x22 .objs\pokitto\pokitto_core\pokittologos.o
-                0x0000857e                Pokitto_speaker
+                0x0000859a       0x22 .objs\pokitto\pokitto_core\pokittologos.o
+                0x0000859a                Pokitto_speaker
  .rodata.Pokitto_volumebar
-                0x000085a0        0x6 .objs\pokitto\pokitto_core\pokittologos.o
-                0x000085a0                Pokitto_volumebar
+                0x000085bc        0x6 .objs\pokitto\pokitto_core\pokittologos.o
+                0x000085bc                Pokitto_volumebar
  .rodata._ZL12_halfPeriods
-                0x000085a6       0x24 .objs\pokitto\pokitto_core\pokittosound.o
+                0x000085c2       0x24 .objs\pokitto\pokitto_core\pokittosound.o
  .rodata.str1.1
-                0x000085ca       0x62 .objs\pokitto\pokitto_hw\hwsound.o
+                0x000085e6       0x62 .objs\pokitto\pokitto_hw\hwsound.o
  .rodata.str1.1
-                0x000085ca       0x62 .objs\pokitto\pokitto_hw\softwarei2c.o
- *fill*         0x000085ca        0x2 ff
+                0x000085e6       0x62 .objs\pokitto\pokitto_hw\softwarei2c.o
+ *fill*         0x000085e6        0x2 ff
  .rodata.__sf_fake_stdin
-                0x000085cc       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
-                0x000085cc                __sf_fake_stdin
+                0x000085e8       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
+                0x000085e8                __sf_fake_stdin
  .rodata.__sf_fake_stdout
-                0x000085ec       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
-                0x000085ec                __sf_fake_stdout
+                0x00008608       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
+                0x00008608                __sf_fake_stdout
  .rodata.__sf_fake_stderr
-                0x0000860c       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
-                0x0000860c                __sf_fake_stderr
+                0x00008628       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
+                0x00008628                __sf_fake_stderr
  .rodata.str1.1
-                0x0000862c      0x2c0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-impure.o)
+                0x00008648      0x2c0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-impure.o)
                                   0x2 (size before relaxing)
- .rodata        0x0000862c       0x80 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(divsf3.o)
- .rodata        0x000086ac       0x40 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(mulsf3.o)
-                0x000088ec                . = ALIGN (0x4)
-                0x000088ec                . = ALIGN (0x4)
+ .rodata        0x00008648       0x80 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(divsf3.o)
+ .rodata        0x000086c8       0x40 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(mulsf3.o)
+                0x00008908                . = ALIGN (0x4)
+                0x00008908                . = ALIGN (0x4)
  *(.init)
- .init          0x000086ec        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
-                0x000086ec                _init
- .init          0x000086f0        0x8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
-                0x000088ec                . = ALIGN (0x4)
-                0x000088ec                __preinit_array_start = .
+ .init          0x00008708        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
+                0x00008708                _init
+ .init          0x0000870c        0x8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
+                0x00008908                . = ALIGN (0x4)
+                0x00008908                __preinit_array_start = .
  *(.preinit_array)
-                0x000088ec                __preinit_array_end = .
-                0x000088ec                . = ALIGN (0x4)
-                0x000088ec                __init_array_start = .
+                0x00008908                __preinit_array_end = .
+                0x00008908                . = ALIGN (0x4)
+                0x00008908                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x000086f8        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
- .init_array    0x000086fc        0x4 .objs\examples\helloworld\main.o
- .init_array    0x00008700        0x4 .objs\pokitto\pokitto_core\pokittoconsole.o
- .init_array    0x00008704        0x4 .objs\pokitto\pokitto_core\pokittocore.o
- .init_array    0x00008708        0x4 .objs\pokitto\pokitto_core\pokittodisk.o
- .init_array    0x0000870c        0x4 .objs\pokitto\pokitto_core\pokittodisplay.o
- .init_array    0x00008710        0x4 .objs\pokitto\pokitto_core\pokittosound.o
- .init_array    0x00008714        0x4 .objs\pokitto\pokitto_hw\hwbuttons.o
- .init_array    0x00008718        0x4 .objs\pokitto\pokitto_hw\hwsound.o
- .init_array    0x0000871c        0x4 .objs\pokitto\pokitto_libs\synth\synth.o
-                0x000088ec                __init_array_end = .
+ .init_array    0x00008714        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+ .init_array    0x00008718        0x4 .objs\examples\helloworld\main.o
+ .init_array    0x0000871c        0x4 .objs\pokitto\pokitto_core\pokittoconsole.o
+ .init_array    0x00008720        0x4 .objs\pokitto\pokitto_core\pokittocore.o
+ .init_array    0x00008724        0x4 .objs\pokitto\pokitto_core\pokittodisk.o
+ .init_array    0x00008728        0x4 .objs\pokitto\pokitto_core\pokittodisplay.o
+ .init_array    0x0000872c        0x4 .objs\pokitto\pokitto_core\pokittosound.o
+ .init_array    0x00008730        0x4 .objs\pokitto\pokitto_hw\hwbuttons.o
+ .init_array    0x00008734        0x4 .objs\pokitto\pokitto_hw\hwsound.o
+ .init_array    0x00008738        0x4 .objs\pokitto\pokitto_libs\synth\synth.o
+                0x00008908                __init_array_end = .
  *(.fini)
- .fini          0x00008720        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
-                0x00008720                _fini
- .fini          0x00008724        0x8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
-                0x000088ec                . = ALIGN (0x4)
+ .fini          0x0000873c        0x4 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
+                0x0000873c                _fini
+ .fini          0x00008740        0x8 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
+                0x00008908                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x000088ec                . = ALIGN (0x4)
+                0x00008908                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
 
-.glue_7         0x0000872c        0x0
- .glue_7        0x0000872c        0x0 linker stubs
+.glue_7         0x00008748        0x0
+ .glue_7        0x00008748        0x0 linker stubs
 
-.glue_7t        0x0000872c        0x0
- .glue_7t       0x0000872c        0x0 linker stubs
+.glue_7t        0x00008748        0x0
+ .glue_7t       0x00008748        0x0 linker stubs
 
-.vfp11_veneer   0x0000872c        0x0
- .vfp11_veneer  0x0000872c        0x0 linker stubs
+.vfp11_veneer   0x00008748        0x0
+ .vfp11_veneer  0x00008748        0x0 linker stubs
 
-.v4_bx          0x0000872c        0x0
- .v4_bx         0x0000872c        0x0 linker stubs
+.v4_bx          0x00008748        0x0
+ .v4_bx         0x00008748        0x0 linker stubs
 
-.iplt           0x0000872c        0x0
- .iplt          0x0000872c        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+.iplt           0x00008748        0x0
+ .iplt          0x00008748        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
-.SD_Code        0x0000872c      0x23c
- .SD_Code       0x0000872c      0x1cc .objs\pokitto\libpff\pff.o
-                0x000087a4                pf_mount(_FATFS_*)
- .SD_Code       0x000088f8       0x70 .objs\pokitto\pokitto_core\pokittodisk.o
-                0x000088f8                initSDGPIO()
-                0x00008926                pokInitSD()
+.SD_Code        0x00008748      0x23c
+ .SD_Code       0x00008748      0x1cc .objs\pokitto\libpff\pff.o
+                0x000087c0                pf_mount(_FATFS_*)
+ .SD_Code       0x00008914       0x70 .objs\pokitto\pokitto_core\pokittodisk.o
+                0x00008914                initSDGPIO()
+                0x00008942                pokInitSD()
 
-.eh_frame       0x00008968        0x0
- .eh_frame      0x00008968        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+.eh_frame       0x00008984        0x0
+ .eh_frame      0x00008984        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
-.rel.dyn        0x00008968        0x0
- .rel.iplt      0x00008968        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+.rel.dyn        0x00008984        0x0
+ .rel.iplt      0x00008984        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00008968                __exidx_start = .
+                0x00008984                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00008968                __exidx_end = .
-                0x00008968                _etext = .
+                0x00008984                __exidx_end = .
+                0x00008984                _etext = .
 
 .mtb_buffer_RAM2
  *(.mtb.$RAM2*)
  *(.mtb.$RAM1_2*)
 
-.data_RAM2      0x20000000        0x0 load address 0x00008968
+.data_RAM2      0x20000000        0x0 load address 0x00008984
  FILL mask 0xff
  *(.ramfunc.$RAM2)
  *(.ramfunc.$Ram1_2)
@@ -4518,7 +4523,7 @@ LOAD c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-
  *(.mtb.$RAM3*)
  *(.mtb.$RAM2USB_2*)
 
-.data_RAM3      0x20004000        0x0 load address 0x00008968
+.data_RAM3      0x20004000        0x0 load address 0x00008984
  FILL mask 0xff
  *(.ramfunc.$RAM3)
  *(.ramfunc.$Ram2USB_2)
@@ -4535,7 +4540,7 @@ LOAD c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-
                 0x10000100                . = ALIGN (0x4)
                 0x10000100                _end_uninit_RESERVED = .
 
-.data           0x10000100       0x84 load address 0x00008968
+.data           0x10000100       0x84 load address 0x00008984
  FILL mask 0xff
                 0x10000100                _data = .
  *(vtable)
@@ -4600,10 +4605,10 @@ LOAD c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-
                 0x10000184                . = ALIGN (0x4)
                 0x10000184                _edata = .
 
-.jcr            0x10000184        0x0 load address 0x000089ec
+.jcr            0x10000184        0x0 load address 0x00008a08
  .jcr           0x10000184        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
-.igot.plt       0x10000184        0x0 load address 0x000089ec
+.igot.plt       0x10000184        0x0 load address 0x00008a08
  .igot.plt      0x10000184        0x0 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
 .bss_RAM2       0x20000000        0x0
@@ -5390,56 +5395,56 @@ OUTPUT(.\build\hello.elf elf32-littlearm)
  .comment       0x0000006e       0x6f .objs\pokitto\pokitto_hw\softwarei2c.o
  .comment       0x0000006e       0x6f .objs\pokitto\pokitto_libs\synth\synth.o
 
-.debug_info     0x00000000    0x51abc
- .debug_info    0x00000000     0x3fd0 .objs\examples\helloworld\main.o
- .debug_info    0x00003fd0     0x1d8b .objs\pokitto\libpff\mmc.o
- .debug_info    0x00005d5b      0xf99 .objs\pokitto\libpff\pff.o
- .debug_info    0x00006cf4       0xb5 .objs\pokitto\mbed-pokitto\common\assert.o
- .debug_info    0x00006da9       0xa6 .objs\pokitto\mbed-pokitto\common\error.o
- .debug_info    0x00006e4f      0xa40 .objs\pokitto\mbed-pokitto\common\gpio.o
- .debug_info    0x0000788f     0x22ab .objs\pokitto\mbed-pokitto\common\interruptin.o
- .debug_info    0x00009b3a      0x6e8 .objs\pokitto\mbed-pokitto\common\pinmap_common.o
- .debug_info    0x0000a222     0x2f1b .objs\pokitto\mbed-pokitto\common\retarget.o
- .debug_info    0x0000d13d     0x1e7d .objs\pokitto\mbed-pokitto\common\spi.o
- .debug_info    0x0000efba      0x6b6 .objs\pokitto\mbed-pokitto\common\ticker.o
- .debug_info    0x0000f670      0x3f8 .objs\pokitto\mbed-pokitto\common\ticker_api.o
- .debug_info    0x0000fa68      0x5be .objs\pokitto\mbed-pokitto\common\timerevent.o
- .debug_info    0x00010026      0x25a .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
- .debug_info    0x00010280      0x145 .objs\pokitto\mbed-pokitto\common\wait_api.o
- .debug_info    0x000103c5      0x2c0 .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis_nvic.o
- .debug_info    0x00010685      0xbbd .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.o
- .debug_info    0x00011242      0x382 .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.o
- .debug_info    0x000115c4      0xe29 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_api.o
- .debug_info    0x000123ed     0x1250 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_irq_api.o
- .debug_info    0x0001363d      0x575 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinmap.o
- .debug_info    0x00013bb2     0x137c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
- .debug_info    0x00014f2e     0x1274 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
- .debug_info    0x000161a2      0xa53 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\us_ticker.o
- .debug_info    0x00016bf5       0xad .objs\pokitto\pokitto_core\fonts\font5x7.o
- .debug_info    0x00016ca2       0x58 .objs\pokitto\pokitto_core\fonts\fontc64.o
- .debug_info    0x00016cfa       0x58 .objs\pokitto\pokitto_core\fonts\fontc64uigfx.o
- .debug_info    0x00016d52       0x58 .objs\pokitto\pokitto_core\fonts\mini4x6.o
- .debug_info    0x00016daa       0x57 .objs\pokitto\pokitto_core\palettes\palcga.o
- .debug_info    0x00016e01      0x1f2 .objs\pokitto\pokitto_core\pokittobacklight.o
- .debug_info    0x00016ff3     0x1734 .objs\pokitto\pokitto_core\pokittobattery.o
- .debug_info    0x00018727     0x1bc6 .objs\pokitto\pokitto_core\pokittobuttons.o
- .debug_info    0x0001a2ed     0x3085 .objs\pokitto\pokitto_core\pokittoconsole.o
- .debug_info    0x0001d372     0x6977 .objs\pokitto\pokitto_core\pokittocore.o
- .debug_info    0x00023ce9     0x2e66 .objs\pokitto\pokitto_core\pokittodisk.o
- .debug_info    0x00026b4f     0x7f6c .objs\pokitto\pokitto_core\pokittodisplay.o
- .debug_info    0x0002eabb      0x10f .objs\pokitto\pokitto_core\pokittologos.o
- .debug_info    0x0002ebca     0x28c8 .objs\pokitto\pokitto_core\pokittopalette.o
- .debug_info    0x00031492     0x5301 .objs\pokitto\pokitto_core\pokittosound.o
- .debug_info    0x00036793     0x43ff .objs\pokitto\pokitto_hw\hwbuttons.o
- .debug_info    0x0003ab92     0x3bbf .objs\pokitto\pokitto_hw\hwlcd.o
- .debug_info    0x0003e751     0x3b31 .objs\pokitto\pokitto_hw\hwsound.o
- .debug_info    0x00042282     0x2360 .objs\pokitto\pokitto_hw\iap.o
- .debug_info    0x000445e2     0x3ae8 .objs\pokitto\pokitto_hw\pokittoclock.o
- .debug_info    0x000480ca     0x41ac .objs\pokitto\pokitto_hw\pokittohw.o
- .debug_info    0x0004c276     0x383f .objs\pokitto\pokitto_hw\softwarei2c.o
- .debug_info    0x0004fab5     0x2007 .objs\pokitto\pokitto_libs\synth\synth.o
+.debug_info     0x00000000    0x51f28
+ .debug_info    0x00000000     0x402f .objs\examples\helloworld\main.o
+ .debug_info    0x0000402f     0x1d8b .objs\pokitto\libpff\mmc.o
+ .debug_info    0x00005dba      0xf99 .objs\pokitto\libpff\pff.o
+ .debug_info    0x00006d53       0xb5 .objs\pokitto\mbed-pokitto\common\assert.o
+ .debug_info    0x00006e08       0xa6 .objs\pokitto\mbed-pokitto\common\error.o
+ .debug_info    0x00006eae      0xa40 .objs\pokitto\mbed-pokitto\common\gpio.o
+ .debug_info    0x000078ee     0x22ab .objs\pokitto\mbed-pokitto\common\interruptin.o
+ .debug_info    0x00009b99      0x6e8 .objs\pokitto\mbed-pokitto\common\pinmap_common.o
+ .debug_info    0x0000a281     0x2f1b .objs\pokitto\mbed-pokitto\common\retarget.o
+ .debug_info    0x0000d19c     0x1e7d .objs\pokitto\mbed-pokitto\common\spi.o
+ .debug_info    0x0000f019      0x6b6 .objs\pokitto\mbed-pokitto\common\ticker.o
+ .debug_info    0x0000f6cf      0x3f8 .objs\pokitto\mbed-pokitto\common\ticker_api.o
+ .debug_info    0x0000fac7      0x5be .objs\pokitto\mbed-pokitto\common\timerevent.o
+ .debug_info    0x00010085      0x25a .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
+ .debug_info    0x000102df      0x145 .objs\pokitto\mbed-pokitto\common\wait_api.o
+ .debug_info    0x00010424      0x2c0 .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis_nvic.o
+ .debug_info    0x000106e4      0xbbd .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.o
+ .debug_info    0x000112a1      0x382 .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.o
+ .debug_info    0x00011623      0xe29 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_api.o
+ .debug_info    0x0001244c     0x1250 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_irq_api.o
+ .debug_info    0x0001369c      0x575 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinmap.o
+ .debug_info    0x00013c11     0x137c .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
+ .debug_info    0x00014f8d     0x1274 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
+ .debug_info    0x00016201      0xa53 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\us_ticker.o
+ .debug_info    0x00016c54       0xad .objs\pokitto\pokitto_core\fonts\font5x7.o
+ .debug_info    0x00016d01       0x58 .objs\pokitto\pokitto_core\fonts\fontc64.o
+ .debug_info    0x00016d59       0x58 .objs\pokitto\pokitto_core\fonts\fontc64uigfx.o
+ .debug_info    0x00016db1       0x58 .objs\pokitto\pokitto_core\fonts\mini4x6.o
+ .debug_info    0x00016e09       0x57 .objs\pokitto\pokitto_core\palettes\palcga.o
+ .debug_info    0x00016e60      0x1f2 .objs\pokitto\pokitto_core\pokittobacklight.o
+ .debug_info    0x00017052     0x1734 .objs\pokitto\pokitto_core\pokittobattery.o
+ .debug_info    0x00018786     0x1bc6 .objs\pokitto\pokitto_core\pokittobuttons.o
+ .debug_info    0x0001a34c     0x30e4 .objs\pokitto\pokitto_core\pokittoconsole.o
+ .debug_info    0x0001d430     0x69d6 .objs\pokitto\pokitto_core\pokittocore.o
+ .debug_info    0x00023e06     0x2e66 .objs\pokitto\pokitto_core\pokittodisk.o
+ .debug_info    0x00026c6c     0x80e0 .objs\pokitto\pokitto_core\pokittodisplay.o
+ .debug_info    0x0002ed4c      0x10f .objs\pokitto\pokitto_core\pokittologos.o
+ .debug_info    0x0002ee5b     0x2927 .objs\pokitto\pokitto_core\pokittopalette.o
+ .debug_info    0x00031782     0x5360 .objs\pokitto\pokitto_core\pokittosound.o
+ .debug_info    0x00036ae2     0x445e .objs\pokitto\pokitto_hw\hwbuttons.o
+ .debug_info    0x0003af40     0x3bbf .objs\pokitto\pokitto_hw\hwlcd.o
+ .debug_info    0x0003eaff     0x3b31 .objs\pokitto\pokitto_hw\hwsound.o
+ .debug_info    0x00042630     0x2360 .objs\pokitto\pokitto_hw\iap.o
+ .debug_info    0x00044990     0x3b47 .objs\pokitto\pokitto_hw\pokittoclock.o
+ .debug_info    0x000484d7     0x420b .objs\pokitto\pokitto_hw\pokittohw.o
+ .debug_info    0x0004c6e2     0x383f .objs\pokitto\pokitto_hw\softwarei2c.o
+ .debug_info    0x0004ff21     0x2007 .objs\pokitto\pokitto_libs\synth\synth.o
 
-.debug_abbrev   0x00000000     0x93d0
+.debug_abbrev   0x00000000     0x93e5
  .debug_abbrev  0x00000000      0x52e .objs\examples\helloworld\main.o
  .debug_abbrev  0x0000052e      0x436 .objs\pokitto\libpff\mmc.o
  .debug_abbrev  0x00000964      0x318 .objs\pokitto\libpff\pff.o
@@ -5473,22 +5478,22 @@ OUTPUT(.\build\hello.elf elf32-littlearm)
  .debug_abbrev  0x00003f94      0x285 .objs\pokitto\pokitto_core\pokittobattery.o
  .debug_abbrev  0x00004219      0x3b3 .objs\pokitto\pokitto_core\pokittobuttons.o
  .debug_abbrev  0x000045cc      0x5c1 .objs\pokitto\pokitto_core\pokittoconsole.o
- .debug_abbrev  0x00004b8d      0x78b .objs\pokitto\pokitto_core\pokittocore.o
- .debug_abbrev  0x00005318      0x5fc .objs\pokitto\pokitto_core\pokittodisk.o
- .debug_abbrev  0x00005914      0x78b .objs\pokitto\pokitto_core\pokittodisplay.o
- .debug_abbrev  0x0000609f       0x66 .objs\pokitto\pokitto_core\pokittologos.o
- .debug_abbrev  0x00006105      0x446 .objs\pokitto\pokitto_core\pokittopalette.o
- .debug_abbrev  0x0000654b      0x721 .objs\pokitto\pokitto_core\pokittosound.o
- .debug_abbrev  0x00006c6c      0x59f .objs\pokitto\pokitto_hw\hwbuttons.o
- .debug_abbrev  0x0000720b      0x4b6 .objs\pokitto\pokitto_hw\hwlcd.o
- .debug_abbrev  0x000076c1      0x6ba .objs\pokitto\pokitto_hw\hwsound.o
- .debug_abbrev  0x00007d7b      0x490 .objs\pokitto\pokitto_hw\iap.o
- .debug_abbrev  0x0000820b      0x4b1 .objs\pokitto\pokitto_hw\pokittoclock.o
- .debug_abbrev  0x000086bc      0x4d5 .objs\pokitto\pokitto_hw\pokittohw.o
- .debug_abbrev  0x00008b91      0x522 .objs\pokitto\pokitto_hw\softwarei2c.o
- .debug_abbrev  0x000090b3      0x31d .objs\pokitto\pokitto_libs\synth\synth.o
+ .debug_abbrev  0x00004b8d      0x7a0 .objs\pokitto\pokitto_core\pokittocore.o
+ .debug_abbrev  0x0000532d      0x5fc .objs\pokitto\pokitto_core\pokittodisk.o
+ .debug_abbrev  0x00005929      0x78b .objs\pokitto\pokitto_core\pokittodisplay.o
+ .debug_abbrev  0x000060b4       0x66 .objs\pokitto\pokitto_core\pokittologos.o
+ .debug_abbrev  0x0000611a      0x446 .objs\pokitto\pokitto_core\pokittopalette.o
+ .debug_abbrev  0x00006560      0x721 .objs\pokitto\pokitto_core\pokittosound.o
+ .debug_abbrev  0x00006c81      0x59f .objs\pokitto\pokitto_hw\hwbuttons.o
+ .debug_abbrev  0x00007220      0x4b6 .objs\pokitto\pokitto_hw\hwlcd.o
+ .debug_abbrev  0x000076d6      0x6ba .objs\pokitto\pokitto_hw\hwsound.o
+ .debug_abbrev  0x00007d90      0x490 .objs\pokitto\pokitto_hw\iap.o
+ .debug_abbrev  0x00008220      0x4b1 .objs\pokitto\pokitto_hw\pokittoclock.o
+ .debug_abbrev  0x000086d1      0x4d5 .objs\pokitto\pokitto_hw\pokittohw.o
+ .debug_abbrev  0x00008ba6      0x522 .objs\pokitto\pokitto_hw\softwarei2c.o
+ .debug_abbrev  0x000090c8      0x31d .objs\pokitto\pokitto_libs\synth\synth.o
 
-.debug_loc      0x00000000     0xf66e
+.debug_loc      0x00000000     0xf819
  .debug_loc     0x00000000       0x2a .objs\examples\helloworld\main.o
  .debug_loc     0x0000002a      0x4e3 .objs\pokitto\libpff\mmc.o
  .debug_loc     0x0000050d      0xf06 .objs\pokitto\libpff\pff.o
@@ -5515,18 +5520,18 @@ OUTPUT(.\build\hello.elf elf32-littlearm)
  .debug_loc     0x0000474d      0x387 .objs\pokitto\pokitto_core\pokittoconsole.o
  .debug_loc     0x00004ad4     0x1075 .objs\pokitto\pokitto_core\pokittocore.o
  .debug_loc     0x00005b49      0x45b .objs\pokitto\pokitto_core\pokittodisk.o
- .debug_loc     0x00005fa4     0x5dd3 .objs\pokitto\pokitto_core\pokittodisplay.o
- .debug_loc     0x0000bd77      0x481 .objs\pokitto\pokitto_core\pokittopalette.o
- .debug_loc     0x0000c1f8      0xb7c .objs\pokitto\pokitto_core\pokittosound.o
- .debug_loc     0x0000cd74       0x2a .objs\pokitto\pokitto_hw\hwbuttons.o
- .debug_loc     0x0000cd9e      0xc84 .objs\pokitto\pokitto_hw\hwlcd.o
- .debug_loc     0x0000da22      0x336 .objs\pokitto\pokitto_hw\hwsound.o
- .debug_loc     0x0000dd58      0x739 .objs\pokitto\pokitto_hw\iap.o
- .debug_loc     0x0000e491       0x21 .objs\pokitto\pokitto_hw\pokittoclock.o
- .debug_loc     0x0000e4b2     0x1192 .objs\pokitto\pokitto_hw\softwarei2c.o
- .debug_loc     0x0000f644       0x2a .objs\pokitto\pokitto_libs\synth\synth.o
+ .debug_loc     0x00005fa4     0x5f7e .objs\pokitto\pokitto_core\pokittodisplay.o
+ .debug_loc     0x0000bf22      0x481 .objs\pokitto\pokitto_core\pokittopalette.o
+ .debug_loc     0x0000c3a3      0xb7c .objs\pokitto\pokitto_core\pokittosound.o
+ .debug_loc     0x0000cf1f       0x2a .objs\pokitto\pokitto_hw\hwbuttons.o
+ .debug_loc     0x0000cf49      0xc84 .objs\pokitto\pokitto_hw\hwlcd.o
+ .debug_loc     0x0000dbcd      0x336 .objs\pokitto\pokitto_hw\hwsound.o
+ .debug_loc     0x0000df03      0x739 .objs\pokitto\pokitto_hw\iap.o
+ .debug_loc     0x0000e63c       0x21 .objs\pokitto\pokitto_hw\pokittoclock.o
+ .debug_loc     0x0000e65d     0x1192 .objs\pokitto\pokitto_hw\softwarei2c.o
+ .debug_loc     0x0000f7ef       0x2a .objs\pokitto\pokitto_libs\synth\synth.o
 
-.debug_aranges  0x00000000     0x1500
+.debug_aranges  0x00000000     0x1510
  .debug_aranges
                 0x00000000       0x28 .objs\examples\helloworld\main.o
  .debug_aranges
@@ -5598,31 +5603,31 @@ OUTPUT(.\build\hello.elf elf32-littlearm)
  .debug_aranges
                 0x00000a80      0x108 .objs\pokitto\pokitto_core\pokittodisk.o
  .debug_aranges
-                0x00000b88      0x380 .objs\pokitto\pokitto_core\pokittodisplay.o
+                0x00000b88      0x390 .objs\pokitto\pokitto_core\pokittodisplay.o
  .debug_aranges
-                0x00000f08       0x18 .objs\pokitto\pokitto_core\pokittologos.o
+                0x00000f18       0x18 .objs\pokitto\pokitto_core\pokittologos.o
  .debug_aranges
-                0x00000f20       0x48 .objs\pokitto\pokitto_core\pokittopalette.o
+                0x00000f30       0x48 .objs\pokitto\pokitto_core\pokittopalette.o
  .debug_aranges
-                0x00000f68      0x170 .objs\pokitto\pokitto_core\pokittosound.o
+                0x00000f78      0x170 .objs\pokitto\pokitto_core\pokittosound.o
  .debug_aranges
-                0x000010d8       0xd0 .objs\pokitto\pokitto_hw\hwbuttons.o
+                0x000010e8       0xd0 .objs\pokitto\pokitto_hw\hwbuttons.o
  .debug_aranges
-                0x000011a8       0xc0 .objs\pokitto\pokitto_hw\hwlcd.o
+                0x000011b8       0xc0 .objs\pokitto\pokitto_hw\hwlcd.o
  .debug_aranges
-                0x00001268       0xa0 .objs\pokitto\pokitto_hw\hwsound.o
+                0x00001278       0xa0 .objs\pokitto\pokitto_hw\hwsound.o
  .debug_aranges
-                0x00001308       0xb0 .objs\pokitto\pokitto_hw\iap.o
+                0x00001318       0xb0 .objs\pokitto\pokitto_hw\iap.o
  .debug_aranges
-                0x000013b8       0x38 .objs\pokitto\pokitto_hw\pokittoclock.o
+                0x000013c8       0x38 .objs\pokitto\pokitto_hw\pokittoclock.o
  .debug_aranges
-                0x000013f0       0x30 .objs\pokitto\pokitto_hw\pokittohw.o
+                0x00001400       0x30 .objs\pokitto\pokitto_hw\pokittohw.o
  .debug_aranges
-                0x00001420       0xc0 .objs\pokitto\pokitto_hw\softwarei2c.o
+                0x00001430       0xc0 .objs\pokitto\pokitto_hw\softwarei2c.o
  .debug_aranges
-                0x000014e0       0x20 .objs\pokitto\pokitto_libs\synth\synth.o
+                0x000014f0       0x20 .objs\pokitto\pokitto_libs\synth\synth.o
 
-.debug_ranges   0x00000000     0x1b38
+.debug_ranges   0x00000000     0x1b58
  .debug_ranges  0x00000000       0x18 .objs\examples\helloworld\main.o
  .debug_ranges  0x00000018       0x50 .objs\pokitto\libpff\mmc.o
  .debug_ranges  0x00000068       0xd8 .objs\pokitto\libpff\pff.o
@@ -5653,19 +5658,19 @@ OUTPUT(.\build\hello.elf elf32-littlearm)
  .debug_ranges  0x000008a8       0x98 .objs\pokitto\pokitto_core\pokittoconsole.o
  .debug_ranges  0x00000940      0x1b0 .objs\pokitto\pokitto_core\pokittocore.o
  .debug_ranges  0x00000af0      0x140 .objs\pokitto\pokitto_core\pokittodisk.o
- .debug_ranges  0x00000c30      0x6a0 .objs\pokitto\pokitto_core\pokittodisplay.o
- .debug_ranges  0x000012d0       0x50 .objs\pokitto\pokitto_core\pokittopalette.o
- .debug_ranges  0x00001320      0x178 .objs\pokitto\pokitto_core\pokittosound.o
- .debug_ranges  0x00001498       0xc0 .objs\pokitto\pokitto_hw\hwbuttons.o
- .debug_ranges  0x00001558      0x1c0 .objs\pokitto\pokitto_hw\hwlcd.o
- .debug_ranges  0x00001718      0x138 .objs\pokitto\pokitto_hw\hwsound.o
- .debug_ranges  0x00001850       0xa0 .objs\pokitto\pokitto_hw\iap.o
- .debug_ranges  0x000018f0       0x28 .objs\pokitto\pokitto_hw\pokittoclock.o
- .debug_ranges  0x00001918       0x20 .objs\pokitto\pokitto_hw\pokittohw.o
- .debug_ranges  0x00001938      0x1d8 .objs\pokitto\pokitto_hw\softwarei2c.o
- .debug_ranges  0x00001b10       0x28 .objs\pokitto\pokitto_libs\synth\synth.o
+ .debug_ranges  0x00000c30      0x6c0 .objs\pokitto\pokitto_core\pokittodisplay.o
+ .debug_ranges  0x000012f0       0x50 .objs\pokitto\pokitto_core\pokittopalette.o
+ .debug_ranges  0x00001340      0x178 .objs\pokitto\pokitto_core\pokittosound.o
+ .debug_ranges  0x000014b8       0xc0 .objs\pokitto\pokitto_hw\hwbuttons.o
+ .debug_ranges  0x00001578      0x1c0 .objs\pokitto\pokitto_hw\hwlcd.o
+ .debug_ranges  0x00001738      0x138 .objs\pokitto\pokitto_hw\hwsound.o
+ .debug_ranges  0x00001870       0xa0 .objs\pokitto\pokitto_hw\iap.o
+ .debug_ranges  0x00001910       0x28 .objs\pokitto\pokitto_hw\pokittoclock.o
+ .debug_ranges  0x00001938       0x20 .objs\pokitto\pokitto_hw\pokittohw.o
+ .debug_ranges  0x00001958      0x1d8 .objs\pokitto\pokitto_hw\softwarei2c.o
+ .debug_ranges  0x00001b30       0x28 .objs\pokitto\pokitto_libs\synth\synth.o
 
-.debug_line     0x00000000     0xc923
+.debug_line     0x00000000     0xc945
  .debug_line    0x00000000      0x4f6 .objs\examples\helloworld\main.o
  .debug_line    0x000004f6      0x4f2 .objs\pokitto\libpff\mmc.o
  .debug_line    0x000009e8      0x3cf .objs\pokitto\libpff\pff.o
@@ -5701,116 +5706,116 @@ OUTPUT(.\build\hello.elf elf32-littlearm)
  .debug_line    0x000050d2      0x609 .objs\pokitto\pokitto_core\pokittoconsole.o
  .debug_line    0x000056db      0xda2 .objs\pokitto\pokitto_core\pokittocore.o
  .debug_line    0x0000647d      0x7d2 .objs\pokitto\pokitto_core\pokittodisk.o
- .debug_line    0x00006c4f     0x16c2 .objs\pokitto\pokitto_core\pokittodisplay.o
- .debug_line    0x00008311      0x105 .objs\pokitto\pokitto_core\pokittologos.o
- .debug_line    0x00008416      0x468 .objs\pokitto\pokitto_core\pokittopalette.o
- .debug_line    0x0000887e      0x9d2 .objs\pokitto\pokitto_core\pokittosound.o
- .debug_line    0x00009250      0x680 .objs\pokitto\pokitto_hw\hwbuttons.o
- .debug_line    0x000098d0      0xb9b .objs\pokitto\pokitto_hw\hwlcd.o
- .debug_line    0x0000a46b      0x81c .objs\pokitto\pokitto_hw\hwsound.o
- .debug_line    0x0000ac87      0x6a9 .objs\pokitto\pokitto_hw\iap.o
- .debug_line    0x0000b330      0x52f .objs\pokitto\pokitto_hw\pokittoclock.o
- .debug_line    0x0000b85f      0x508 .objs\pokitto\pokitto_hw\pokittohw.o
- .debug_line    0x0000bd67      0x7b5 .objs\pokitto\pokitto_hw\softwarei2c.o
- .debug_line    0x0000c51c      0x407 .objs\pokitto\pokitto_libs\synth\synth.o
+ .debug_line    0x00006c4f     0x16e4 .objs\pokitto\pokitto_core\pokittodisplay.o
+ .debug_line    0x00008333      0x105 .objs\pokitto\pokitto_core\pokittologos.o
+ .debug_line    0x00008438      0x468 .objs\pokitto\pokitto_core\pokittopalette.o
+ .debug_line    0x000088a0      0x9d2 .objs\pokitto\pokitto_core\pokittosound.o
+ .debug_line    0x00009272      0x680 .objs\pokitto\pokitto_hw\hwbuttons.o
+ .debug_line    0x000098f2      0xb9b .objs\pokitto\pokitto_hw\hwlcd.o
+ .debug_line    0x0000a48d      0x81c .objs\pokitto\pokitto_hw\hwsound.o
+ .debug_line    0x0000aca9      0x6a9 .objs\pokitto\pokitto_hw\iap.o
+ .debug_line    0x0000b352      0x52f .objs\pokitto\pokitto_hw\pokittoclock.o
+ .debug_line    0x0000b881      0x508 .objs\pokitto\pokitto_hw\pokittohw.o
+ .debug_line    0x0000bd89      0x7b5 .objs\pokitto\pokitto_hw\softwarei2c.o
+ .debug_line    0x0000c53e      0x407 .objs\pokitto\pokitto_libs\synth\synth.o
 
-.debug_str      0x00000000     0x9a32
- .debug_str     0x00000000     0x3c08 .objs\examples\helloworld\main.o
-                               0x3e1e (size before relaxing)
- .debug_str     0x00003c08      0x18f .objs\pokitto\libpff\mmc.o
-                                0xaaf (size before relaxing)
- .debug_str     0x00003d97      0x2b4 .objs\pokitto\libpff\pff.o
-                                0x542 (size before relaxing)
- .debug_str     0x0000404b      0x153 .objs\pokitto\mbed-pokitto\common\assert.o
-                                0x176 (size before relaxing)
- .debug_str     0x0000419e       0x24 .objs\pokitto\mbed-pokitto\common\error.o
-                                0x1e5 (size before relaxing)
- .debug_str     0x000041c2      0x316 .objs\pokitto\mbed-pokitto\common\gpio.o
-                                0x538 (size before relaxing)
- .debug_str     0x000044d8      0x48f .objs\pokitto\mbed-pokitto\common\interruptin.o
-                               0x106c (size before relaxing)
- .debug_str     0x00004967       0xb2 .objs\pokitto\mbed-pokitto\common\pinmap_common.o
-                                0x4cc (size before relaxing)
- .debug_str     0x00004a19      0x7bd .objs\pokitto\mbed-pokitto\common\retarget.o
-                               0x13bc (size before relaxing)
- .debug_str     0x000051d6      0x15b .objs\pokitto\mbed-pokitto\common\spi.o
-                                0xd0a (size before relaxing)
- .debug_str     0x00005331      0x1fd .objs\pokitto\mbed-pokitto\common\ticker.o
-                                0x636 (size before relaxing)
- .debug_str     0x0000552e       0x9e .objs\pokitto\mbed-pokitto\common\ticker_api.o
-                                0x36e (size before relaxing)
- .debug_str     0x000055cc      0x18d .objs\pokitto\mbed-pokitto\common\timerevent.o
-                                0x566 (size before relaxing)
- .debug_str     0x00005759       0x5e .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
-                                0x328 (size before relaxing)
- .debug_str     0x000057b7       0x46 .objs\pokitto\mbed-pokitto\common\wait_api.o
-                                0x21a (size before relaxing)
- .debug_str     0x000057fd      0x26c .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis_nvic.o
-                                0x44f (size before relaxing)
- .debug_str     0x00005a69      0x626 .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.o
-                                0x849 (size before relaxing)
- .debug_str     0x0000608f      0x1bb .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.o
-                                0x3c2 (size before relaxing)
- .debug_str     0x0000624a       0x6e .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_api.o
-                                0x8b3 (size before relaxing)
- .debug_str     0x000062b8      0x169 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_irq_api.o
-                                0xb82 (size before relaxing)
- .debug_str     0x00006421       0x45 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinmap.o
-                                0x486 (size before relaxing)
- .debug_str     0x00006466      0x175 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
-                                0xaf6 (size before relaxing)
- .debug_str     0x000065db      0x18f .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
-                                0x9de (size before relaxing)
- .debug_str     0x0000676a       0xc9 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\us_ticker.o
-                                0x859 (size before relaxing)
- .debug_str     0x00006833       0x2f .objs\pokitto\pokitto_core\fonts\font5x7.o
-                                0x1fe (size before relaxing)
- .debug_str     0x00006862       0x2f .objs\pokitto\pokitto_core\fonts\fontc64.o
-                                0x176 (size before relaxing)
- .debug_str     0x00006891       0x38 .objs\pokitto\pokitto_core\fonts\fontc64uigfx.o
-                                0x17f (size before relaxing)
- .debug_str     0x000068c9       0x30 .objs\pokitto\pokitto_core\fonts\mini4x6.o
-                                0x177 (size before relaxing)
- .debug_str     0x000068f9       0x34 .objs\pokitto\pokitto_core\palettes\palcga.o
+.debug_str      0x00000000     0x9ab3
+ .debug_str     0x00000000     0x3c89 .objs\examples\helloworld\main.o
+                               0x3e9f (size before relaxing)
+ .debug_str     0x00003c89      0x18f .objs\pokitto\libpff\mmc.o
+                                0xab4 (size before relaxing)
+ .debug_str     0x00003e18      0x2b4 .objs\pokitto\libpff\pff.o
+                                0x547 (size before relaxing)
+ .debug_str     0x000040cc      0x153 .objs\pokitto\mbed-pokitto\common\assert.o
                                 0x17b (size before relaxing)
- .debug_str     0x0000692d      0x131 .objs\pokitto\pokitto_core\pokittobacklight.o
-                                0x3ee (size before relaxing)
- .debug_str     0x00006a5e       0xbc .objs\pokitto\pokitto_core\pokittobattery.o
-                                0xa08 (size before relaxing)
- .debug_str     0x00006b1a      0x147 .objs\pokitto\pokitto_core\pokittobuttons.o
-                                0xf28 (size before relaxing)
- .debug_str     0x00006c61      0x460 .objs\pokitto\pokitto_core\pokittoconsole.o
-                               0x2869 (size before relaxing)
- .debug_str     0x000070c1      0x5ca .objs\pokitto\pokitto_core\pokittocore.o
-                               0x44d9 (size before relaxing)
- .debug_str     0x0000768b      0x266 .objs\pokitto\pokitto_core\pokittodisk.o
-                               0x14e8 (size before relaxing)
- .debug_str     0x000078f1      0x639 .objs\pokitto\pokitto_core\pokittodisplay.o
-                               0x4139 (size before relaxing)
- .debug_str     0x00007f2a       0x26 .objs\pokitto\pokitto_core\pokittologos.o
-                                0x237 (size before relaxing)
- .debug_str     0x00007f50       0x48 .objs\pokitto\pokitto_core\pokittopalette.o
-                               0x1eb1 (size before relaxing)
- .debug_str     0x00007f98      0x800 .objs\pokitto\pokitto_core\pokittosound.o
-                               0x478b (size before relaxing)
- .debug_str     0x00008798      0x198 .objs\pokitto\pokitto_hw\hwbuttons.o
-                               0x3edc (size before relaxing)
- .debug_str     0x00008930      0x29c .objs\pokitto\pokitto_hw\hwlcd.o
-                               0x1171 (size before relaxing)
- .debug_str     0x00008bcc      0x7ac .objs\pokitto\pokitto_hw\hwsound.o
-                               0x1f40 (size before relaxing)
- .debug_str     0x00009378      0x443 .objs\pokitto\pokitto_hw\iap.o
-                                0xe1e (size before relaxing)
- .debug_str     0x000097bb       0x63 .objs\pokitto\pokitto_hw\pokittoclock.o
-                               0x3adc (size before relaxing)
- .debug_str     0x0000981e       0x21 .objs\pokitto\pokitto_hw\pokittohw.o
-                               0x3d1b (size before relaxing)
- .debug_str     0x0000983f       0x88 .objs\pokitto\pokitto_hw\softwarei2c.o
-                               0x117c (size before relaxing)
- .debug_str     0x000098c7      0x16b .objs\pokitto\pokitto_libs\synth\synth.o
-                                0xf0c (size before relaxing)
+ .debug_str     0x0000421f       0x24 .objs\pokitto\mbed-pokitto\common\error.o
+                                0x1ea (size before relaxing)
+ .debug_str     0x00004243      0x316 .objs\pokitto\mbed-pokitto\common\gpio.o
+                                0x53d (size before relaxing)
+ .debug_str     0x00004559      0x48f .objs\pokitto\mbed-pokitto\common\interruptin.o
+                               0x1071 (size before relaxing)
+ .debug_str     0x000049e8       0xb2 .objs\pokitto\mbed-pokitto\common\pinmap_common.o
+                                0x4d1 (size before relaxing)
+ .debug_str     0x00004a9a      0x7bd .objs\pokitto\mbed-pokitto\common\retarget.o
+                               0x13c1 (size before relaxing)
+ .debug_str     0x00005257      0x15b .objs\pokitto\mbed-pokitto\common\spi.o
+                                0xd0f (size before relaxing)
+ .debug_str     0x000053b2      0x1fd .objs\pokitto\mbed-pokitto\common\ticker.o
+                                0x63b (size before relaxing)
+ .debug_str     0x000055af       0x9e .objs\pokitto\mbed-pokitto\common\ticker_api.o
+                                0x373 (size before relaxing)
+ .debug_str     0x0000564d      0x18d .objs\pokitto\mbed-pokitto\common\timerevent.o
+                                0x56b (size before relaxing)
+ .debug_str     0x000057da       0x5e .objs\pokitto\mbed-pokitto\common\us_ticker_api.o
+                                0x32d (size before relaxing)
+ .debug_str     0x00005838       0x46 .objs\pokitto\mbed-pokitto\common\wait_api.o
+                                0x21f (size before relaxing)
+ .debug_str     0x0000587e      0x26c .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis_nvic.o
+                                0x454 (size before relaxing)
+ .debug_str     0x00005aea      0x626 .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.o
+                                0x84e (size before relaxing)
+ .debug_str     0x00006110      0x1bb .objs\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.o
+                                0x3c7 (size before relaxing)
+ .debug_str     0x000062cb       0x6e .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_api.o
+                                0x8b8 (size before relaxing)
+ .debug_str     0x00006339      0x169 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\gpio_irq_api.o
+                                0xb87 (size before relaxing)
+ .debug_str     0x000064a2       0x45 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pinmap.o
+                                0x48b (size before relaxing)
+ .debug_str     0x000064e7      0x175 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.o
+                                0xafb (size before relaxing)
+ .debug_str     0x0000665c      0x18f .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.o
+                                0x9e3 (size before relaxing)
+ .debug_str     0x000067eb       0xc9 .objs\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\us_ticker.o
+                                0x85e (size before relaxing)
+ .debug_str     0x000068b4       0x2f .objs\pokitto\pokitto_core\fonts\font5x7.o
+                                0x203 (size before relaxing)
+ .debug_str     0x000068e3       0x2f .objs\pokitto\pokitto_core\fonts\fontc64.o
+                                0x17b (size before relaxing)
+ .debug_str     0x00006912       0x38 .objs\pokitto\pokitto_core\fonts\fontc64uigfx.o
+                                0x184 (size before relaxing)
+ .debug_str     0x0000694a       0x30 .objs\pokitto\pokitto_core\fonts\mini4x6.o
+                                0x17c (size before relaxing)
+ .debug_str     0x0000697a       0x34 .objs\pokitto\pokitto_core\palettes\palcga.o
+                                0x180 (size before relaxing)
+ .debug_str     0x000069ae      0x131 .objs\pokitto\pokitto_core\pokittobacklight.o
+                                0x3f3 (size before relaxing)
+ .debug_str     0x00006adf       0xbc .objs\pokitto\pokitto_core\pokittobattery.o
+                                0xa0d (size before relaxing)
+ .debug_str     0x00006b9b      0x147 .objs\pokitto\pokitto_core\pokittobuttons.o
+                                0xf2d (size before relaxing)
+ .debug_str     0x00006ce2      0x460 .objs\pokitto\pokitto_core\pokittoconsole.o
+                               0x28ea (size before relaxing)
+ .debug_str     0x00007142      0x5ca .objs\pokitto\pokitto_core\pokittocore.o
+                               0x455a (size before relaxing)
+ .debug_str     0x0000770c      0x266 .objs\pokitto\pokitto_core\pokittodisk.o
+                               0x14ed (size before relaxing)
+ .debug_str     0x00007972      0x639 .objs\pokitto\pokitto_core\pokittodisplay.o
+                               0x41ba (size before relaxing)
+ .debug_str     0x00007fab       0x26 .objs\pokitto\pokitto_core\pokittologos.o
+                                0x23c (size before relaxing)
+ .debug_str     0x00007fd1       0x48 .objs\pokitto\pokitto_core\pokittopalette.o
+                               0x1f32 (size before relaxing)
+ .debug_str     0x00008019      0x800 .objs\pokitto\pokitto_core\pokittosound.o
+                               0x480c (size before relaxing)
+ .debug_str     0x00008819      0x198 .objs\pokitto\pokitto_hw\hwbuttons.o
+                               0x3f5d (size before relaxing)
+ .debug_str     0x000089b1      0x29c .objs\pokitto\pokitto_hw\hwlcd.o
+                               0x1176 (size before relaxing)
+ .debug_str     0x00008c4d      0x7ac .objs\pokitto\pokitto_hw\hwsound.o
+                               0x1f45 (size before relaxing)
+ .debug_str     0x000093f9      0x443 .objs\pokitto\pokitto_hw\iap.o
+                                0xe23 (size before relaxing)
+ .debug_str     0x0000983c       0x63 .objs\pokitto\pokitto_hw\pokittoclock.o
+                               0x3b5d (size before relaxing)
+ .debug_str     0x0000989f       0x21 .objs\pokitto\pokitto_hw\pokittohw.o
+                               0x3d9c (size before relaxing)
+ .debug_str     0x000098c0       0x88 .objs\pokitto\pokitto_hw\softwarei2c.o
+                               0x1181 (size before relaxing)
+ .debug_str     0x00009948      0x16b .objs\pokitto\pokitto_libs\synth\synth.o
+                                0xf11 (size before relaxing)
 
-.debug_frame    0x00000000     0x3cb0
+.debug_frame    0x00000000     0x3cf4
  .debug_frame   0x00000000       0x40 .objs\examples\helloworld\main.o
  .debug_frame   0x00000040       0xc0 .objs\pokitto\libpff\mmc.o
  .debug_frame   0x00000100      0x19c .objs\pokitto\libpff\pff.o
@@ -5841,42 +5846,42 @@ OUTPUT(.\build\hello.elf elf32-littlearm)
  .debug_frame   0x000013dc      0x174 .objs\pokitto\pokitto_core\pokittoconsole.o
  .debug_frame   0x00001550      0x400 .objs\pokitto\pokitto_core\pokittocore.o
  .debug_frame   0x00001950      0x2ec .objs\pokitto\pokitto_core\pokittodisk.o
- .debug_frame   0x00001c3c      0xa64 .objs\pokitto\pokitto_core\pokittodisplay.o
- .debug_frame   0x000026a0       0xac .objs\pokitto\pokitto_core\pokittopalette.o
- .debug_frame   0x0000274c      0x420 .objs\pokitto\pokitto_core\pokittosound.o
- .debug_frame   0x00002b6c      0x1a4 .objs\pokitto\pokitto_hw\hwbuttons.o
- .debug_frame   0x00002d10      0x25c .objs\pokitto\pokitto_hw\hwlcd.o
- .debug_frame   0x00002f6c      0x1b4 .objs\pokitto\pokitto_hw\hwsound.o
- .debug_frame   0x00003120      0x224 .objs\pokitto\pokitto_hw\iap.o
- .debug_frame   0x00003344       0x58 .objs\pokitto\pokitto_hw\pokittoclock.o
- .debug_frame   0x0000339c       0x48 .objs\pokitto\pokitto_hw\pokittohw.o
- .debug_frame   0x000033e4      0x278 .objs\pokitto\pokitto_hw\softwarei2c.o
- .debug_frame   0x0000365c       0x28 .objs\pokitto\pokitto_libs\synth\synth.o
- .debug_frame   0x00003684       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libm.a(lib_a-s_floor.o)
- .debug_frame   0x000036c0      0x140 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
- .debug_frame   0x00003800       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-init.o)
- .debug_frame   0x0000382c       0x40 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-malloc.o)
- .debug_frame   0x0000386c       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-memset.o)
- .debug_frame   0x0000388c       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-nano-freer.o)
- .debug_frame   0x000038b8       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-nano-mallocr.o)
- .debug_frame   0x000038e4       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-strcpy.o)
- .debug_frame   0x00003904       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-mlock.o)
- .debug_frame   0x00003934       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
- .debug_frame   0x00003954       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
- .debug_frame   0x00003974       0x28 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_fixunssfsi.o)
- .debug_frame   0x0000399c       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(addsf3.o)
- .debug_frame   0x000039cc       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(divsf3.o)
- .debug_frame   0x00003a08       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqsf2.o)
- .debug_frame   0x00003a34       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gesf2.o)
- .debug_frame   0x00003a64       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(lesf2.o)
- .debug_frame   0x00003a94       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(mulsf3.o)
- .debug_frame   0x00003acc       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(subsf3.o)
- .debug_frame   0x00003afc       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixsfsi.o)
- .debug_frame   0x00003b1c       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatsisf.o)
- .debug_frame   0x00003b48       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatunsisf.o)
- .debug_frame   0x00003b74       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(adddf3.o)
- .debug_frame   0x00003bb0       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqdf2.o)
- .debug_frame   0x00003be8       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gedf2.o)
- .debug_frame   0x00003c20       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(ledf2.o)
- .debug_frame   0x00003c58       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixdfsi.o)
- .debug_frame   0x00003c84       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(extendsfdf2.o)
+ .debug_frame   0x00001c3c      0xaa8 .objs\pokitto\pokitto_core\pokittodisplay.o
+ .debug_frame   0x000026e4       0xac .objs\pokitto\pokitto_core\pokittopalette.o
+ .debug_frame   0x00002790      0x420 .objs\pokitto\pokitto_core\pokittosound.o
+ .debug_frame   0x00002bb0      0x1a4 .objs\pokitto\pokitto_hw\hwbuttons.o
+ .debug_frame   0x00002d54      0x25c .objs\pokitto\pokitto_hw\hwlcd.o
+ .debug_frame   0x00002fb0      0x1b4 .objs\pokitto\pokitto_hw\hwsound.o
+ .debug_frame   0x00003164      0x224 .objs\pokitto\pokitto_hw\iap.o
+ .debug_frame   0x00003388       0x58 .objs\pokitto\pokitto_hw\pokittoclock.o
+ .debug_frame   0x000033e0       0x48 .objs\pokitto\pokitto_hw\pokittohw.o
+ .debug_frame   0x00003428      0x278 .objs\pokitto\pokitto_hw\softwarei2c.o
+ .debug_frame   0x000036a0       0x28 .objs\pokitto\pokitto_libs\synth\synth.o
+ .debug_frame   0x000036c8       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libm.a(lib_a-s_floor.o)
+ .debug_frame   0x00003704      0x140 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-findfp.o)
+ .debug_frame   0x00003844       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-init.o)
+ .debug_frame   0x00003870       0x40 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-malloc.o)
+ .debug_frame   0x000038b0       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-memset.o)
+ .debug_frame   0x000038d0       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-nano-freer.o)
+ .debug_frame   0x000038fc       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x00003928       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-strcpy.o)
+ .debug_frame   0x00003948       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libc_n.a(lib_a-mlock.o)
+ .debug_frame   0x00003978       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
+ .debug_frame   0x00003998       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
+ .debug_frame   0x000039b8       0x28 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_fixunssfsi.o)
+ .debug_frame   0x000039e0       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(addsf3.o)
+ .debug_frame   0x00003a10       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(divsf3.o)
+ .debug_frame   0x00003a4c       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqsf2.o)
+ .debug_frame   0x00003a78       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gesf2.o)
+ .debug_frame   0x00003aa8       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(lesf2.o)
+ .debug_frame   0x00003ad8       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(mulsf3.o)
+ .debug_frame   0x00003b10       0x30 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(subsf3.o)
+ .debug_frame   0x00003b40       0x20 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixsfsi.o)
+ .debug_frame   0x00003b60       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatsisf.o)
+ .debug_frame   0x00003b8c       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(floatunsisf.o)
+ .debug_frame   0x00003bb8       0x3c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(adddf3.o)
+ .debug_frame   0x00003bf4       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(eqdf2.o)
+ .debug_frame   0x00003c2c       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(gedf2.o)
+ .debug_frame   0x00003c64       0x38 c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(ledf2.o)
+ .debug_frame   0x00003c9c       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(fixdfsi.o)
+ .debug_frame   0x00003cc8       0x2c c:/program files (x86)/embitz/1.11/share/em_armgcc/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(extendsfdf2.o)

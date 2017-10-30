@@ -37,6 +37,7 @@
 #include "PokittoCore.h"
 #include "PokittoDisplay.h"
 #include "PythonBindings.h"
+#include "time.h"
 
 using namespace Pokitto;
 
@@ -181,6 +182,14 @@ bool Pok_Core_buttons_released(uint8_t button) {
     return Core::buttons.released(button);
 }
 
+
+struct tm * localtime_cpp(const time_t * timer){
+    return(localtime(timer));
+}
+
+time_t time_cpp(time_t* timer){
+    return(time(timer));
+}
 
 
 #endif // MICROPY_ENABLE_GC

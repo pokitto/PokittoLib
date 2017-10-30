@@ -140,6 +140,144 @@
 					<Mode after="1" />
 				</ExtraCommands>
 			</Target>
+			<Target title="MicroPythonSim">
+				<Option output=".\build\hello.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add symbol="POKITTO_USE_WIN_SIMULATOR=0" />
+					<Add symbol="TARGET_LPC11U68" />
+					<Add symbol="__MBED__=1" />
+					<Add symbol="DEVICE_I2CSLAVE=1" />
+					<Add symbol="TARGET_LIKE_MBED" />
+					<Add symbol="TARGET_NXP" />
+					<Add symbol="__MBED_CMSIS_RTOS_CM" />
+					<Add symbol="DEVICE_RTC=1" />
+					<Add symbol="TOOLCHAIN_object" />
+					<Add symbol="__CMSIS_RTOS" />
+					<Add symbol="TOOLCHAIN_GCC" />
+					<Add symbol="TARGET_CORTEX_M" />
+					<Add symbol="TARGET_M0P" />
+					<Add symbol="TARGET_UVISOR_UNSUPPORTED" />
+					<Add symbol="DEVICE_SERIAL=1" />
+					<Add symbol="DEVICE_INTERRUPTIN=1" />
+					<Add symbol="TARGET_LPCTarget" />
+					<Add symbol="TARGET_CORTEX" />
+					<Add symbol="DEVICE_I2C=1" />
+					<Add symbol="__CORTEX_M0PLUS" />
+					<Add symbol="TARGET_FF_ARDUINO" />
+					<Add symbol="TARGET_RELEASE" />
+					<Add symbol="MBED_BUILD_TIMESTAMP=1507563655.72" />
+					<Add symbol="ARM_MATH_CM0PLUS" />
+					<Add symbol="TARGET_LPC11U6X" />
+					<Add symbol="DEVICE_SLEEP=1" />
+					<Add symbol="TOOLCHAIN_GCC_ARM" />
+					<Add symbol="DEVICE_SPI=1" />
+					<Add symbol="DEVICE_ANALOGIN=1" />
+					<Add symbol="DEVICE_PWMOUT=1" />
+					<Add symbol="TARGET_LIKE_CORTEX_M0" />
+					<Add directory="." />
+					<Add directory="Pokitto" />
+					<Add directory="Pokitto\POKITTO_CORE" />
+					<Add directory="Pokitto\POKITTO_CORE\FONTS" />
+					<Add directory="Pokitto\POKITTO_CORE\PALETTES" />
+					<Add directory="Pokitto\POKITTO_HW" />
+					<Add directory="Pokitto\POKITTO_LIBS" />
+					<Add directory="Pokitto\POKITTO_LIBS\Synth" />
+					<Add directory="Pokitto\libpff" />
+					<Add directory="Pokitto\mbed-pokitto" />
+					<Add directory="Pokitto\mbed-pokitto\api" />
+					<Add directory="Pokitto\mbed-pokitto\common" />
+					<Add directory="Pokitto\mbed-pokitto\hal" />
+					<Add directory="Pokitto\mbed-pokitto\targets" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TOOLCHAIN_GCC" />
+					<Add directory="Pokitto\mbed-pokitto\targets\hal" />
+					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP" />
+					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X" />
+					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBSerial" />
+					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBDevice" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++98" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,--wrap,main" />
+					<Add option="-Wl,--wrap,_malloc_r" />
+					<Add option="-Wl,--wrap,_realloc_r" />
+					<Add option="-Wl,--wrap,_memalign_r" />
+					<Add option="-Wl,--wrap,_calloc_r" />
+					<Add option="-Wl,--wrap,exit" />
+					<Add option="-Wl,--wrap,atexit" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+					<Add library="Pokitto\POKITTO_LIBS\MicroPython\libmicropython.a" />
+				</Linker>
+				<ExtraCommands>
+					<Add before="Pokitto\POKITTO_LIBS\MicroPython\compile_and_freeze_py_files.bat" />
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\hello.hex -O binary .\build\hello.bin" />
+					<Add after=".\build\lpcrc .\build\hello.bin" />
+					<Mode before="1" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-O3" />
@@ -149,8 +287,11 @@
 		</Cpp>
 		<Unit filename="Examples\HelloWorld\main.cpp">
 			<Option compilerVar="CC" />
+			<Option target="HelloWorld" />
 		</Unit>
-		<Unit filename="Examples\HelloWorld\My_settings.h" />
+		<Unit filename="Examples\HelloWorld\My_settings.h">
+			<Option target="HelloWorld" />
+		</Unit>
 		<Unit filename="Pokitto\libpff\connect.h" />
 		<Unit filename="Pokitto\libpff\diskio.h" />
 		<Unit filename="Pokitto\libpff\integer.h" />
@@ -576,6 +717,24 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.h" />
+		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\frozen_mpy.c">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\My_settings.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\PythonBindings.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\PythonBindings.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -600,11 +759,128 @@
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_wavefuncs.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDescriptor.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice_Types.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_EFM32.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_KL25Z.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_LPC11U.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_LPC17_LPC23.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_Maxim.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_RZ_A1H.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_STM32F4.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_EFM32.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_KL25Z.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC11U.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC17.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC40.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_Maxim.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_RZ_A1H.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_STM32F4.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBRegs_STM32.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\CircBuffer.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBCDC.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBCDC.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBSerial.cpp">
+			<Option compilerVar="CC" />
+			<Option target="MicroPythonSim" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBSerial.h">
+			<Option target="MicroPythonSim" />
+		</Unit>
 		<Unit filename="Pokitto\Pokitto_settings.h" />
 		<Extensions>
 			<code_completion />
 			<debugger>
 				<target_debugging_settings target="HelloWorld" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="MicroPythonSim" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>

@@ -51,7 +51,6 @@
 #define BTN_LEFT    0
 
 // Main function in uPy library
-
 EXTERNC int PythonMain(int argc, char **argv);
 
 // Pokitto simulator API for uPython.
@@ -84,7 +83,10 @@ EXTERNC bool Pok_Core_buttons_repeat(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_held(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_released(uint8_t button);
 
-#if 1
+EXTERNC struct tm * localtime_cpp(const time_t * timer);
+EXTERNC time_t time_cpp(time_t* timer);
+
+#if !POKITTO_USE_WIN_SIMULATOR
 // Debug
 EXTERNC int pc_printf(const char* format, ...);
 EXTERNC void pc_puts(const char* strWithNull);
