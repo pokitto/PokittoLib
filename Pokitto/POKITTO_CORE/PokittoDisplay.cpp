@@ -271,12 +271,6 @@ void Display::directBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t 
     uint8_t w = *bitmap;
 	uint8_t h = *(bitmap + 1);
 	bitmap = bitmap + 2; //add an offset to the pointer to start after the width and height
-
-	directDrawBuffer(x, y, w, h, bitmap, depth, scale);
-}
-
-void Display::directDrawBuffer(int16_t x, int16_t y, uint8_t w, uint8_t h, const uint8_t *bitmap, uint8_t depth, uint8_t scale) {
-
     int16_t i, j;
     int8_t byteNum, bitNum, byteWidth = (w + 7) >> 3;
 

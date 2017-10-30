@@ -1162,7 +1162,7 @@
 	"mbed.h"
 	<stdint.h>
 
-1509275226 c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.h
+1509398969 c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -1211,7 +1211,7 @@
 1508094660 c:\git\pokittolib2\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1509275301 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.cpp
+1509399010 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
