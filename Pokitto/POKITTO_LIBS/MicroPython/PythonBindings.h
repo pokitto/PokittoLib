@@ -1,13 +1,13 @@
 /**************************************************************************/
 /*!
-    @file     PythonBindings_SIM.h
+    @file     PythonBindings.h
     @author   Hannu Viitala
 
     @section LICENSE
 
     Software License Agreement (BSD License)
 
-    Copyright (c) 2017, Jonne Valola
+    Copyright (c) 2017, Hannu Viitala
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -86,7 +86,7 @@ EXTERNC bool Pok_Core_buttons_released(uint8_t button);
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
 EXTERNC time_t time_cpp(time_t* timer);
 
-#if !POKITTO_USE_WIN_SIMULATOR
+#if !POKITTO_USE_WIN_SIMULATOR && !defined(POK_SIM)
 // Debug
 EXTERNC int pc_printf(const char* format, ...);
 EXTERNC void pc_puts(const char* strWithNull);

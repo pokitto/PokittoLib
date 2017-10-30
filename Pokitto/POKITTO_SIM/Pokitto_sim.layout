@@ -2,19 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="MicroPython" />
-	<File name="..\..\Examples\HelloWorld\My_settings.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\Pokitto_settings.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="554" topLine="0" />
+			<Cursor1 position="3192" topLine="75" />
 		</Cursor>
 	</File>
-	<File name="..\POKITTO_LIBS\MicroPython\My_settings.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\POKITTO_LIBS\MicroPython\PythonBindings.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="597" topLine="2" />
-		</Cursor>
-	</File>
-	<File name="..\POKITTO_CORE\PokittoCore.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6566" topLine="187" />
+			<Cursor1 position="3606" topLine="78" />
 		</Cursor>
 	</File>
 	<File name="..\Pokitto.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -22,24 +17,39 @@
 			<Cursor1 position="2328" topLine="49" />
 		</Cursor>
 	</File>
-	<File name="..\POKITTO_CORE\PokittoSound.cpp" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5229" topLine="122" />
-		</Cursor>
-	</File>
 	<File name="PokittoSimulator.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2427" topLine="42" />
 		</Cursor>
 	</File>
-	<File name="..\Pokitto_settings.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\POKITTO_LIBS\MicroPython\My_settings.h" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3192" topLine="75" />
+			<Cursor1 position="402" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="..\POKITTO_LIBS\MicroPython\main.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2184" topLine="35" />
+			<Cursor1 position="2892" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="..\POKITTO_CORE\PokittoCore.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6566" topLine="187" />
+		</Cursor>
+	</File>
+	<File name="..\POKITTO_LIBS\MicroPython\src_py\example_main.py" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="83" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\Examples\HelloWorld\My_settings.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="554" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\POKITTO_CORE\PokittoSound.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5229" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

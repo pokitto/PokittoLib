@@ -1,12 +1,12 @@
 import upygame as pygame
 import framebuf
 import urandom as random
-import spritedata
+import frogitto_data as spritedata
 import sprite
 import gc
 
 pygame.display.init()
-pygame.display.set_palette16([
+pygame.display.set_palette_16bit([
     0, 6438, 18917, 10825, 47398, 688, 41764, 17475,
     58225, 13598, 60486, 40179, 42596, 46845, 63245, 65535
 ]);

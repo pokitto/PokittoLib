@@ -33,11 +33,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-DPROJ_HIRES=1" />
-					<Add option="-DPROJ_STARTUPLOGO=1" />
-					<Add option="-DPROJ_GAMEBUINO=0" />
-					<Add option="-DPROJ_STREAMING_MUSIC=0" />
-					<Add option="-DPROJ_ENABLE_SYNTH=0" />
+					<Add option="-DPOK_SIM" />
 					<Add directory="../POKITTO_LIBS/MicroPython" />
 				</Compiler>
 				<Linker>
@@ -50,7 +46,6 @@
 			<Add option="-std=gnu++11" />
 			<Add option="-fsigned-char" />
 			<Add option="-DPOK_SIM" />
-			<Add option="-DPOKITTO_USE_WIN_SIMULATOR=1" />
 			<Add directory="SDL2/include" />
 			<Add directory="../../Pokitto" />
 			<Add directory="../POKITTO_CORE" />
@@ -200,10 +195,13 @@
 		<Unit filename="../POKITTO_LIBS/MicroPython/main.cpp">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/marsattack_data.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_data.py">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/marsattack_main.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_main.py">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/sprite.py">
 			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="../POKITTO_LIBS/Physics/Body.cpp">
