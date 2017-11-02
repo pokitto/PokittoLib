@@ -20,7 +20,7 @@
 
 // Python specific
 
-#define PROJ_PYTHON_REPL 1
+#define PROJ_PYTHON_REPL 0
 #define MICROPY_ENABLE_GC 1  // This just means micropython is in use
 
 #ifdef POK_SIM
