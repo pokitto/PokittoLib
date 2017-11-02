@@ -64,7 +64,7 @@ int main () {
 
         #if PROJ_PYTHON_REPL
 
-        PythonMain(0, nullptr);
+        PythonMain(0, NULL);
 
         #else // Run python script
 

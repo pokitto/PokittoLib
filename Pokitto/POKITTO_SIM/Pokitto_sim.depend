@@ -622,7 +622,7 @@
 1509275042 c:\git\pokittolib2\pokitto\pokitto_settings.h
 	"My_settings.h"
 
-1509397602 c:\git\pokittolib2\pokitto\pokitto_libs\micropython\my_settings.h
+1509483430 c:\git\pokittolib2\pokitto\pokitto_libs\micropython\my_settings.h
 
 1508094660 source:c:\git\pokittolib2\pokitto\pokitto_core\fonts\donut7x10.cpp
 	"PokittoFonts.h"
@@ -1298,7 +1298,7 @@
 	<unistd.h>
 	<sys/types.h>
 
-1509396937 source:c:\git\pokittolib2\pokitto\pokitto_libs\micropython\main.cpp
+1509482933 source:c:\git\pokittolib2\pokitto\pokitto_libs\micropython\main.cpp
 	"Pokitto.h"
 	"USBSerial.h"
 	"PythonBindings.h"

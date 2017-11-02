@@ -20,13 +20,12 @@
 
 // Python specific
 
-#define PROJ_PYTHON_REPL 0
+#define PROJ_PYTHON_REPL 1
 #define MICROPY_ENABLE_GC 1  // This just means micropython is in use
 
 #ifdef POK_SIM
 #define USE_USB_SERIAL_PRINT (0)
 #else
-//#define USE_USB_SERIAL_PRINT (0)
 #define USE_USB_SERIAL_PRINT (1)
 #endif
 
