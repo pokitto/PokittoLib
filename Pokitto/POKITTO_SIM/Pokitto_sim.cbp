@@ -24,6 +24,22 @@
 					<Add directory="../../Examples/HelloWorld" />
 				</Compiler>
 			</Target>
+			<Target title="MicroPython">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DPOK_SIM" />
+					<Add directory="../POKITTO_LIBS/MicroPython" />
+				</Compiler>
+				<Linker>
+					<Add library="../POKITTO_LIBS/MicroPython/libmicropython_win.a" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -55,8 +71,12 @@
 			<Add library="dxguid" />
 			<Add directory="SDL2/lib" />
 		</Linker>
-		<Unit filename="../../Examples/HelloWorld/My_settings.h" />
-		<Unit filename="../../Examples/HelloWorld/main.cpp" />
+		<Unit filename="../../Examples/HelloWorld/My_settings.h">
+			<Option target="HelloWorld" />
+		</Unit>
+		<Unit filename="../../Examples/HelloWorld/main.cpp">
+			<Option target="HelloWorld" />
+		</Unit>
 		<Unit filename="../POKITTO_APP/PokittoApp.h" />
 		<Unit filename="../POKITTO_APP/PokittoAppObject.h" />
 		<Unit filename="../POKITTO_APP/PokittoCollisionEvent.h" />
@@ -162,6 +182,27 @@
 		</Unit>
 		<Unit filename="../POKITTO_LIBS/FixMath/uint32.h">
 			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/My_settings.h">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/PythonBindings.cpp">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/PythonBindings.h">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/main.cpp">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_data.py">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_main.py">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/sprite.py">
+			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="../POKITTO_LIBS/Physics/Body.cpp">
 			<Option target="&lt;{~None~}&gt;" />

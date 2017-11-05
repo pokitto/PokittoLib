@@ -288,6 +288,8 @@ public:
     // BITMAPS !
     /** Draw monochromatic bitmap. Used in font rendering */
     static void drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t index);
+    /** Draw bitmap data*/
+    static void drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
     /** Draw bitmap */
     static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw RLE bitmap */

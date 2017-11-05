@@ -34,7 +34,7 @@
 */
 /**************************************************************************/
 
-#if PROJ_WINDOWS
+#if POKITTO_USE_WIN_SIMULATOR
 #include "defines_win_SIM.h"
 #endif
 
