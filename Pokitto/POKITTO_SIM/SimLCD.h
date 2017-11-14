@@ -41,6 +41,17 @@
 
 namespace Pokitto {
 
+struct SpriteInfo {
+    const uint8_t* bitmapData;
+    int16_t x;
+    int16_t y;
+    int16_t oldx;
+    int16_t oldy;
+    uint8_t w;
+    uint8_t h;
+    uint16_t palette[16];
+};
+
 /** Initialize display hardware */
 extern void lcdInit();
 /** Clear display hardware */
@@ -61,6 +72,8 @@ extern void lcdPixel(int16_t,int16_t,uint16_t);
 extern void lcdRectangle(int16_t,int16_t,int16_t,int16_t,uint16_t);
 /** Update LCD from native Mode 1 */
 extern void lcdRefreshMode1(uint8_t*, uint16_t*);
+/** Update LCD from native Mode 1 with sprites */
+extern void lcdRefreshMode1Spr(uint8_t * scrbuf, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool useDirectMode);
 /** Update LCD from native Mode 2 */
 extern void lcdRefreshMode2(uint8_t*, uint16_t*);
 /** Update LCD from native Mode 3 */

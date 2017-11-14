@@ -164,6 +164,8 @@ public:
   static uint32_t getTime();
   /** Wait for n milliseconds */
   static void wait(uint16_t);
+  /** FPS */
+  static uint32_t fps;
 private:
   /** Time of next refresh */
   static uint32_t refreshtime;
@@ -244,6 +246,10 @@ private:
     static uint32_t frameStartMicros, frameEndMicros;
     static uint8_t startMenuTimer;
     static int updateLoader(uint32_t,uint32_t);
+    static uint32_t fps_refreshtime;
+    static uint32_t fps_frameCount;
+    static uint32_t total_fps_frameCount;
+
 public:
     static uint8_t volbar_visible;
     static void drawvolbar(int,int,int, bool);

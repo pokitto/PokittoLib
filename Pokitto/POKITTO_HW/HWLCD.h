@@ -46,6 +46,16 @@
 
 namespace Pokitto {
 
+struct SpriteInfo {
+    const uint8_t* bitmapData;
+    int16_t x;
+    int16_t y;
+    int16_t oldx;
+    int16_t oldy;
+    uint8_t w;
+    uint8_t h;
+    uint16_t palette[16];
+};
 
 extern void initBacklight();
 extern void setBacklight(float);
@@ -59,6 +69,7 @@ extern void lcdRefresh(uint8_t *, uint16_t*);
 extern void lcdRefreshAB(uint8_t *, uint16_t*);
 extern void lcdRefreshGB(uint8_t *, uint16_t*);
 extern void lcdRefreshMode1(uint8_t *, uint16_t*);
+extern void lcdRefreshMode1Spr(uint8_t * scrbuf, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool useDirectMode);
 extern void lcdRefreshMode2(uint8_t *, uint16_t*);
 extern void lcdRefreshMode3(uint8_t *, uint16_t*);
 extern void lcdRefreshModeGBC(uint8_t *, uint16_t*);
