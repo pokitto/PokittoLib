@@ -62,6 +62,8 @@ extern void lcdRefreshMode1(uint8_t *, uint16_t*);
 extern void lcdRefreshMode2(uint8_t *, uint16_t*);
 extern void lcdRefreshMode3(uint8_t *, uint16_t*);
 extern void lcdRefreshModeGBC(uint8_t *, uint16_t*);
+extern void lcdRefreshMode13(uint8_t *, uint16_t*, uint8_t);
+
 /** Update LCD from 1-bit tile mode */
 extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
 extern void lcdClear();
