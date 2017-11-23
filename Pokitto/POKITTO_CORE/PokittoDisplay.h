@@ -125,7 +125,7 @@ const uint16_t def565palette[16] = {
     0x2d7f,0x83b3,0xfbb5,0xfe75
 };
 
-#define PALETTE_SIZE 256
+#define PALETTE_SIZE 16
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -143,7 +143,6 @@ private:
     static uint8_t bpp;
     static uint8_t m_colordepth;
 public:
-    static uint8_t palOffset;
     static uint8_t width;
     static uint8_t height;
     static uint8_t screenbuffer[];
