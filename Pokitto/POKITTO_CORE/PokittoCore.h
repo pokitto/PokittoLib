@@ -165,7 +165,7 @@ public:
   /** Wait for n milliseconds */
   static void wait(uint16_t);
   /** FPS */
-  static uint32_t fps;
+  static uint32_t fps_counter;
 private:
   /** Time of next refresh */
   static uint32_t refreshtime;
@@ -248,7 +248,6 @@ private:
     static int updateLoader(uint32_t,uint32_t);
     static uint32_t fps_refreshtime;
     static uint32_t fps_frameCount;
-    static uint32_t total_fps_frameCount;
 
 public:
     static uint8_t volbar_visible;

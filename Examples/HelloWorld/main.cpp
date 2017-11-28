@@ -6,7 +6,7 @@ struct MySprite {
     int16_t x,y,w,h,vx,vy;
 };
 
-uint8_t spriteCount = 0;
+uint8_t spriteCount = 1;
 MySprite sprites[8];
 int16_t speedX = 3, speedY = 3;
 
@@ -65,7 +65,7 @@ int main () {
             }
         }
         else {
-            if (mygame.update(false)) {
+            if (mygame.update(true)) {
 
                 // Read key
                 if (mygame.buttons.held(BTN_B, 1) && spriteCount < 8) {

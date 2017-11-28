@@ -379,7 +379,7 @@ uint16_t x,y,xptr;
 uint16_t scanline[4][176]; // read 4 half-nibbles = 4 pixels at a time
 uint8_t *d, yoffset=0;
 
-#ifdef POK_SHOW_FPS_ON_DISPLAY
+#ifdef PROJ_USE_FPS_COUNTER
 xptr = 8;
 #else
 xptr = 0;
@@ -408,7 +408,7 @@ for(x=0;x<220;x+=4)
     d+=220/4; // jump to read byte directly below in screenbuffer
     }
 
-#ifdef POK_SHOW_FPS_ON_DISPLAY
+#ifdef PROJ_USE_FPS_COUNTER
     if (x>=8 ) {
 #else
     {
@@ -553,7 +553,7 @@ void Pokitto::lcdRefreshMode1Spr(uint8_t * scrbuf, uint16_t* paletteptr, SpriteI
         for (;sprites[spriteCount].bitmapData != NULL && spriteCount < SPRITE_COUNT; spriteCount++);
 
     // If drawing the screen buffer, set the start pos to LCD commands only here.
-    #ifdef POK_SHOW_FPS_ON_DISPLAY
+    #ifdef PROJ_USE_FPS_COUNTER
     if (!useDirectMode) setDRAMptr(8, 0);
     #else
     if (!useDirectMode) setDRAMptr(0, 0);
@@ -700,7 +700,7 @@ void Pokitto::lcdRefreshMode1Spr(uint8_t * scrbuf, uint16_t* paletteptr, SpriteI
         }
 
         // Draw scanline to LCD
-#ifdef POK_SHOW_FPS_ON_DISPLAY
+#ifdef PROJ_USE_FPS_COUNTER
         if (x>=8 && scanlineMaxY - scanlineMinY +1 > 0) {
 #else
         if (scanlineMaxY - scanlineMinY +1 > 0) {

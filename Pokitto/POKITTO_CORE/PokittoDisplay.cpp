@@ -233,53 +233,54 @@ void Display::setCursor(int16_t x,int16_t y) {
 
 void Display::update(bool useDirectDrawMode) {
 
-#if POK_SCREENMODE == MODE_HI_4COLOR
+    #if POK_SCREENMODE == MODE_HI_4COLOR
     // If there is one or more sprites, use sprite enabled drawing.
     if (m_sprites[0].bitmapData != NULL)
         lcdRefreshMode1Spr(m_scrbuf, paletteptr, m_sprites, useDirectDrawMode);
     else if (!useDirectDrawMode)
         lcdRefreshMode1(m_scrbuf, paletteptr);
-#endif
+    #endif
 
     // For the screen modes that do not support sprites, return if the direct draw mode is used.
-    if (useDirectDrawMode) return;
+    if (! useDirectDrawMode) {
 
-#if POK_SCREENMODE == MODE_GAMEBOY
-    lcdRefreshModeGBC(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_GAMEBOY
+        lcdRefreshModeGBC(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_HI_16COLOR
-    lcdRefreshMode3(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_HI_16COLOR
+        lcdRefreshMode3(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_FAST_16COLOR
-    lcdRefreshMode2(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_FAST_16COLOR
+        lcdRefreshMode2(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_GAMEBUINO_16COLOR
-    lcdRefreshGB(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_GAMEBUINO_16COLOR
+        lcdRefreshGB(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
-    lcdRefreshAB(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
+        lcdRefreshAB(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_TILED_1BIT
-    lcdRefreshT1(m_tilebuf, m_tilecolorbuf, m_tileset, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_TILED_1BIT
+        lcdRefreshT1(m_tilebuf, m_tilecolorbuf, m_tileset, paletteptr);
+        #endif
+    }
 
-if (!persistence) clear();
+    if (!persistence) clear();
 
-/** draw volume bar if visible **/
-#if POK_SHOW_VOLUME > 0
-if (core.volbar_visible) {
-        core.drawvolbar(4,20,_pdsound.getVolume(),true);
-        core.volbar_visible--;
-}
-#endif // POK_SHOW_VOLUME
+    /** draw volume bar if visible **/
+    #if POK_SHOW_VOLUME > 0
+    if (core.volbar_visible) {
+            core.drawvolbar(4,20,_pdsound.getVolume(),true);
+            core.volbar_visible--;
+    }
+    #endif // POK_SHOW_VOLUME
 
-/** draw FPS if visible **/
-#ifdef POK_SHOW_FPS_ON_DISPLAY
+    /** draw FPS if visible **/
+    #ifdef PROJ_USE_FPS_COUNTER
 
 	// Store current state
     bool temp = isDirectPrintingEnabled();
@@ -291,7 +292,7 @@ if (core.volbar_visible) {
 
     // Print FPS
     char str[16];
-    sprintf(str,"FPS:%d ", (int)core.fps);
+    sprintf(str,"FPS:%d ", (int)core.fps_counter);
     directcolor = COLOR_WHITE;
     directbgcolor = COLOR_BLACK;
     directtextrotated = true;
@@ -307,8 +308,7 @@ if (core.volbar_visible) {
     directtextrotated = olddirecttextrotated;
     adjustCharStep = oldadjustCharStep;
     setFont(font);
-#endif
-
+    #endif
 }
 
 void Display::directBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t depth, uint8_t scale) {
@@ -588,8 +588,8 @@ void Display::drawPixel(int16_t x,int16_t y) {
 
     #if POK_COLORDEPTH == 8
         m_scrbuf[x+width*y] = color;
-    #endif	
-	
+    #endif
+
     #if POK_GAMEBUINO_SUPPORT > 0
 
 	uint8_t c = color;

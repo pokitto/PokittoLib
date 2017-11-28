@@ -18,9 +18,6 @@
 // Sprite specific
 #define SPRITE_COUNT 8
 
-#define PROJ_USE_FPS_COUNTER 1  // Must define USE_USB_SERIAL_PRINT also
-#define POK_SHOW_FPS_ON_DISPLAY
-
-#define USE_USB_SERIAL_PRINT (0)
+#define PROJ_USE_FPS_COUNTER
 
 #endif

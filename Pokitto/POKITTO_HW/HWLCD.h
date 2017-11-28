@@ -54,7 +54,7 @@ struct SpriteInfo {
     int16_t oldy;
     uint8_t w;
     uint8_t h;
-    uint16_t palette[16];
+    uint16_t palette[4];
 };
 
 extern void initBacklight();
