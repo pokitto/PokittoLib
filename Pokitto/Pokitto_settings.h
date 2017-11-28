@@ -193,6 +193,15 @@
 #endif // PROJ_GAMEBUINO
 #endif // PROJ_TILEDMODE
 
+#if PROJ_MODE13 > 0
+    #define PROJ_SCREENMODE MODE13
+    #define POK_COLORDEPTH 8
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+    #define POK_COLORDEPTH 8
+#endif
+
+
 /** SCREEN MODES TABLE -- DO NOT CHANGE THESE **/
 
 #define POK_LCD_W 220 //<- do not change !!
@@ -222,6 +231,8 @@
 #define BUFSIZE_LAMENES             7680
 #define MODE_256_COLOR              12
 #define BUFSIZE_MODE_12              4176 // 72 x 58
+#define MODE13                      13
+#define BUFSIZE_MODE13              9680 // 110*88
 // Tiled modes
 #define MODE_TILED_1BIT             1001
 #define MODE_TILED_8BIT             1002
@@ -329,6 +340,11 @@
     #define LCDWIDTH 160
     #define LCDHEIGHT 144
     #define POK_BITFRAME 2880
+#elif POK_SCREENMODE == MODE13
+    #define POK_SCREENBUFFERSIZE 110*88
+    #define LCDWIDTH 110
+    #define LCDHEIGHT 88
+    #define POK_BITFRAME 110*88
 #else
     #define POK_SCREENBUFFERSIZE 0
 #endif // POK_SCREENMODE

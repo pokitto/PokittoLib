@@ -61,7 +61,7 @@
 #include "PokittoSound.h"
 #include "PokittoFakeavr.h"
 
-#define PALETTE_SIZE 16
+#define PALETTE_SIZE 256
 #define PI 3.141592741f
 
 // For GB compatibility
