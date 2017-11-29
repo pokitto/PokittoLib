@@ -14,18 +14,6 @@ const uint16_t sprite3_pal[] = {
 const uint16_t sprite4_pal[] = {
 0,27392,63232,63345
 };
-const uint16_t sprite5_pal[] = {
-0,34829,63513,65081
-};
-const uint16_t sprite6_pal[] = {
-0,37280,64192,64913
-};
-const uint16_t sprite7_pal[] = {
-0,3081,3857,34583
-};
-const uint16_t sprite8_pal[] = {
-0,14352,28703,48159
-};
 
 // Background palette
 const uint16_t background_pal[] = {
