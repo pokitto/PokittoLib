@@ -209,6 +209,7 @@ void Display::fillLCD(uint16_t c) {
 }
 
 void Display::directPixel(int16_t x, int16_t y, uint16_t color) {
+    if ((invisiblecolor < PALETTE_SIZE) && (invisiblecolor < 16) && (color == palette[invisiblecolor])) return;
     lcdPixel(x,y,color);
 }
 
@@ -1679,15 +1680,15 @@ void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t ro
                         k = i;
                         l = j;
                         break;
-                    case ROTCCW: //90° counter-clockwise
+                    case ROTCCW: //90Â° counter-clockwise
                         k = j;
                         l = w - i - 1;
                         break;
-                    case ROT180: //180°
+                    case ROT180: //180Â°
                         k = w - i - 1;
                         l = h - j - 1;
                         break;
-                    case ROTCW: //90° clockwise
+                    case ROTCW: //90Â° clockwise
                         k = h - j - 1;
                         l = i;
                         break;
