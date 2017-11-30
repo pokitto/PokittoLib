@@ -398,5 +398,9 @@
 /** LOADER UPDATE MECHANISM **/
 #define POK_ENABLE_LOADER_UPDATES 1 //1=check for new loader versions on SD and update if new found
 
+#ifndef SPRITE_COUNT
+#define SPRITE_COUNT 4  // The default max sprite count
+#endif
+
 #endif // POKITTO_SETTINGS_H
 

@@ -90,6 +90,7 @@ uint8_t* Display::m_tileset;
 uint8_t* Display::m_tilebuf;
 uint8_t* Display::m_tilecolorbuf;
 uint8_t Display::m_mode, Display::m_colordepth;
+SpriteInfo Display::m_sprites[SPRITE_COUNT];
 uint8_t Display::fontSize=1;
 int16_t Display::cursorX,Display::cursorY;
 uint16_t Display::m_w,Display::m_h;
@@ -102,6 +103,7 @@ uint16_t Display::bgcolor = 0;
 uint16_t Display::invisiblecolor = 17;
 uint16_t Display::directcolor=0xFFFF;
 uint16_t Display::directbgcolor=0x0;
+bool Display::directtextrotated=false;
 
 uint16_t* Display::paletteptr;
 uint16_t Display::palette[PALETTE_SIZE];
@@ -176,6 +178,10 @@ Display::Display() {
     #if POK_GAMEBUINO_SUPPORT
     setColorDepth(1);
     #endif // POK_GAMEBUINO_SUPPORT
+
+    // Reset sprites
+    m_tilecolorbuf = NULL; //!!HV
+    for (uint8_t s = 0; s < SPRITE_COUNT; s++) m_sprites[s].bitmapData = NULL;
 }
 
 uint16_t Display::getWidth() {
@@ -226,46 +232,84 @@ void Display::setCursor(int16_t x,int16_t y) {
     cursorY = y;
 }
 
-void Display::update() {
+void Display::update(bool useDirectDrawMode) {
 
-#if POK_SCREENMODE == MODE_GAMEBOY
-    lcdRefreshModeGBC(m_scrbuf, paletteptr);
-#endif
+    #if POK_SCREENMODE == MODE_HI_4COLOR
+    // If there is one or more sprites, use sprite enabled drawing.
+    if (m_sprites[0].bitmapData != NULL)
+        lcdRefreshMode1Spr(m_scrbuf, paletteptr, m_sprites, useDirectDrawMode);
+    else if (!useDirectDrawMode)
+        lcdRefreshMode1(m_scrbuf, paletteptr);
+    #endif
 
-#if POK_SCREENMODE == MODE_HI_4COLOR
-    lcdRefreshMode1(m_scrbuf, paletteptr);
-#endif
+    // For the screen modes that do not support sprites, return if the direct draw mode is used.
+    if (! useDirectDrawMode) {
 
-#if POK_SCREENMODE == MODE_HI_16COLOR
-    lcdRefreshMode3(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_GAMEBOY
+        lcdRefreshModeGBC(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_FAST_16COLOR
-    lcdRefreshMode2(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_HI_16COLOR
+        lcdRefreshMode3(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_GAMEBUINO_16COLOR
-    lcdRefreshGB(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_FAST_16COLOR
+        lcdRefreshMode2(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
-    lcdRefreshAB(m_scrbuf, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_GAMEBUINO_16COLOR
+        lcdRefreshGB(m_scrbuf, paletteptr);
+        #endif
 
-#if POK_SCREENMODE == MODE_TILED_1BIT
-    lcdRefreshT1(m_tilebuf, m_tilecolorbuf, m_tileset, paletteptr);
-#endif
+        #if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
+        lcdRefreshAB(m_scrbuf, paletteptr);
+        #endif
 
-if (!persistence) clear();
+        #if POK_SCREENMODE == MODE_TILED_1BIT
+        lcdRefreshT1(m_tilebuf, m_tilecolorbuf, m_tileset, paletteptr);
+        #endif
+    }
 
-/** draw volume bar if visible **/
-#if POK_SHOW_VOLUME > 0
-if (core.volbar_visible) {
-        core.drawvolbar(4,20,_pdsound.getVolume(),true);
-        core.volbar_visible--;
-}
-#endif // POK_SHOW_VOLUME
+    if (!persistence) clear();
 
+    /** draw volume bar if visible **/
+    #if POK_SHOW_VOLUME > 0
+    if (core.volbar_visible) {
+            core.drawvolbar(4,20,_pdsound.getVolume(),true);
+            core.volbar_visible--;
+    }
+    #endif // POK_SHOW_VOLUME
+
+    /** draw FPS if visible **/
+    #ifdef PROJ_USE_FPS_COUNTER
+
+	// Store current state
+    bool temp = isDirectPrintingEnabled();
+    uint16_t oldcol = directcolor;
+    uint16_t oldbgcol = directbgcolor;
+    bool olddirecttextrotated = directtextrotated;
+    int8_t oldadjustCharStep = adjustCharStep;
+    const unsigned char * oldFont = font;
+
+    // Print FPS
+    char str[16];
+    sprintf(str,"FPS:%d ", (int)core.fps_counter);
+    directcolor = COLOR_WHITE;
+    directbgcolor = COLOR_BLACK;
+    directtextrotated = true;
+    adjustCharStep = 0;
+    setFont(fontC64);
+    enableDirectPrinting(true);
+    print(0,0, str);
+
+	// Restore state
+    enableDirectPrinting(temp);
+    directcolor = oldcol;
+    directbgcolor = oldbgcol;
+    directtextrotated = olddirecttextrotated;
+    adjustCharStep = oldadjustCharStep;
+    setFont(font);
+    #endif
 }
 
 void Display::directBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t depth, uint8_t scale) {
@@ -340,14 +384,21 @@ int Display::directChar(int16_t x, int16_t y, uint16_t index){
                         directPixel(x + (i<<1)+1, y + (j<<1),directcolor);
                         directPixel(x + (i<<1)  , y + (j<<1)+1,directcolor);
                         directPixel(x + (i<<1)+1, y + (j<<1)+1,directcolor);
-                    } else directPixel(x + i, y + j,directcolor);
+                    } else {
+                        if(directtextrotated) directPixel(y + h - j - 1, x + i,directcolor);
+                        else directPixel(x + i, y + j,directcolor);
+                    }
+
                 } else if (directbgcolor != invisiblecolor) {
                     if (fontSize==2) {
                         directPixel(x + (i<<1)  , y + (j<<1),directbgcolor);
                         directPixel(x + (i<<1)+1, y + (j<<1),directbgcolor);
                         directPixel(x + (i<<1)  , y + (j<<1)+1,directbgcolor);
                         directPixel(x + (i<<1)+1, y + (j<<1)+1,directbgcolor);
-                    } else directPixel(x + i, y + j,directbgcolor);
+                    } else {
+                        if(directtextrotated) directPixel(y + h - j - 1, x + i,directbgcolor);
+                        else directPixel(x + i, y + j,directbgcolor);
+                    }
                 }
                 bitcolumn>>=1;
             }
@@ -538,8 +589,8 @@ void Display::drawPixel(int16_t x,int16_t y) {
 
     #if POK_COLORDEPTH == 8
         m_scrbuf[x+width*y] = color;
-    #endif	
-	
+    #endif
+
     #if POK_GAMEBUINO_SUPPORT > 0
 
 	uint8_t c = color;
@@ -1404,7 +1455,7 @@ void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
 
             if (rle_count == 0) {
 
-               /** Escape or absolute mode */
+               /* Escape or absolute mode */
 
                 uint8_t rle_escape_or_runsize = *rlebitmap++;
                 if ( rle_escape_or_runsize == RLE_ESC_EOL) {
@@ -1428,7 +1479,7 @@ void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
                  }
                 else {
 
-                    /** Absolute mode. Copy pixels from the source bitmap to the target screen. */
+                    /* Absolute mode. Copy pixels from the source bitmap to the target screen. */
 
                     int16_t runsize = rle_escape_or_runsize;
                     uint8_t targetpixel = *scrptr;  // initial value
@@ -1479,7 +1530,7 @@ void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
             }
             else {
 
-                /** Encoded mode. Duplicate one pixel pair to the all required pixels on the target screen */
+                /* Encoded mode. Duplicate one pixel pair to the all required pixels on the target screen */
 
                 int16_t runsize = rle_count;
                 uint8_t clonepixelpair = *rlebitmap++;
@@ -2113,14 +2164,76 @@ void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
             }
 }
 
-void Display::lcdRefresh(unsigned char* scr) {
+/**
+ * Setup or disable the sprite. Note that enabled sprites must always have subsequent indices, starting from the index zero.
+ * You cannot have gaps in indices of enabled sprites.
+ * The max number of sprites can be changed by a SPRITE_COUNT define, the default is 4.
+ * Note: the sprites currently work only in the 220 x 176 x 2bpp mode.
+ * @param index The sprite index. The lower index is drawn first, i.e. is on bottom.
+ * @param bitmap A pointer to a 2bpp bitmap. A NULL value means that the sprite is disabled. The ownership is not transferred, so the caller must keep the bitmap alive.
+ * @param palette4x16bit Four color palette of 16bit elements. The first color value is considered as transparent. The palette is copied to the sprite struct, so the caller do not have to keep it alive.
+ * @param x The initial x
+ * @param y The initial y
+ */
+void Display::setSpriteBitmap(uint8_t index, const uint8_t* bitmap,  const uint16_t* palette4x16bit, int16_t x, int16_t y ) {
+
+    setSprite(index, &(bitmap[2]), palette4x16bit, x, y, bitmap[0], bitmap[1]);
+}
+
+/**
+ * Setup or disable the sprite. Note that enabled sprites must always have subsequent indices, starting from the index zero.
+ * You cannot have gaps in indices of enabled sprites.
+ * The max number of sprites can be changed by a SPRITE_COUNT define, the default is 4.
+ * Note: the sprites currently work only in the 220 x 176 x 2bpp mode.
+ * @param index The sprite index. The lower index is drawn first, i.e. is on bottom. Note that
+ * @param data A pointer to a 2bpp pixel data of size w x h. A NULL value means that the sprite is disabled. The ownership is not transferred, so the caller must keep the data alive.
+ * @param palette4x16bit Four color palette of 16bit elements. The first color value is considered as transparent. The palette is copied to the sprite struct, so the caller do not have to keep it alive.
+ * @param x The initial x
+ * @param y The initial y
+ * @param w Width
+ * @param h Height
+ */
+void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette4x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h ) {
+
+    if(index >= SPRITE_COUNT) return;
+    m_sprites[index].bitmapData = data;
+    m_sprites[index].x = x;
+    m_sprites[index].y = y;
+    m_sprites[index].oldx = x;
+    m_sprites[index].oldy = y;
+    m_sprites[index].w = w;
+    m_sprites[index].h = h;
+    memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
+}
+
+/**
+ * Set the sprite position.
+ * @param index The sprite index
+ * @param x
+ * @param y
+ */
+void Display::setSpritePos(uint8_t index, int16_t x, int16_t y) {
+
+    if(index >= SPRITE_COUNT) return;
+    m_sprites[index].x = x;
+    m_sprites[index].y = y;
+}
+
+void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
+
+#if POK_SCREENMODE == MODE_HI_4COLOR
+    // If there is one or more sprites, use sprite enabled drawing.
+    if (m_sprites[0].bitmapData != NULL)
+        lcdRefreshMode1Spr(scr, paletteptr, m_sprites, useDirectDrawMode);
+    else if (!useDirectDrawMode)
+        lcdRefreshMode1(m_scrbuf, paletteptr);
+#endif
+
+    // For the screen modes that do not support sprites, return if the direct draw mode is used.
+    if (useDirectDrawMode) return;
 
 #if POK_SCREENMODE == MODE_GAMEBOY
     lcdRefreshModeGBC(scr, paletteptr);
-#endif
-
-#if POK_SCREENMODE == MODE_HI_4COLOR
-    lcdRefreshMode1(scr, paletteptr);
 #endif
 
 #if POK_SCREENMODE == MODE_FAST_16COLOR

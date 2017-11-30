@@ -159,6 +159,9 @@ uint16_t Core::frameDurationMicros;
 uint32_t Core::frameStartMicros, Core::frameEndMicros;
 uint8_t Core::volbar_visible=0;
 
+uint32_t Core::fps_counter;
+uint32_t Core::fps_refreshtime;
+uint32_t Core::fps_frameCount;
 
 Core::Core() {
 
@@ -789,14 +792,27 @@ bool Core::update(bool useDirectMode) {
         sound.updateStream();
     #endif
 
-	if ((((nextFrameMillis - getTime())) > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
-		nextFrameMillis = getTime() + timePerFrame;
+    uint32_t now = getTime();
+	if ((((nextFrameMillis - now)) > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
+		nextFrameMillis = now + timePerFrame;
 		frameCount++;
 
 		frameEndMicros = 0;
 		backlight.update();
 		buttons.update();
 		battery.update();
+
+        // FPS counter
+		#ifdef PROJ_USE_FPS_COUNTER
+        const uint32_t fpsInterval_ms = 1000*3;
+
+        fps_frameCount++;
+        if (now > fps_refreshtime) {
+            fps_counter = (1000*fps_frameCount) / (now - fps_refreshtime + fpsInterval_ms);
+            fps_refreshtime = now + fpsInterval_ms;
+            fps_frameCount = 0;
+        }
+        #endif
 
 		return true;
 
@@ -810,8 +826,7 @@ bool Core::update(bool useDirectMode) {
 			updatePopup();
 			displayBattery();
 
-			if(!useDirectMode)
-				display.update(); //send the buffer to the screen
+            display.update(useDirectMode); //send the buffer to the screen
 
             frameEndMicros = 1; //jonne
 

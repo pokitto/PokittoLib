@@ -171,6 +171,8 @@ public:
     static uint16_t directcolor;
     /** Direct unbuffered background color */
     static uint16_t directbgcolor;
+    /** Direct text rotated */
+    static bool directtextrotated;
     /** set color with a command */
     static void setColor(uint8_t);
     /** set color and bgcolor with a command */
@@ -194,9 +196,9 @@ public:
     /** Fill display buffer */
     static void fillScreen(uint16_t);
     /** Send display buffer to display hardware */
-    static void update();
+    static void update(bool useDirectMode=false);
     /** Forced update of LCD display memory with a given pixel buffer */
-    static void lcdRefresh(unsigned char*);
+    static void lcdRefresh(unsigned char*, bool useDirectMode=false);
     /** Clear LCD hardware memory */
     static void clearLCD();
     /** Fill LCD hardware memory */
@@ -308,6 +310,14 @@ public:
     /** Optimized functions for drawing bit columns - used in raytracing */
     static void draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap);
 
+    // SPRITES
+    /* Setup or disable the sprite */
+    static void setSpriteBitmap(uint8_t index, const uint8_t* bitmap, const uint16_t* palette4x16bit, int16_t x, int16_t y );
+    /* Setup or disable the sprite */
+    static void setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette4x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h );
+    /* Set the sprite position */
+    static void setSpritePos(uint8_t index, int16_t x, int16_t y);
+
     // PRINTING
     /** direct character to screen (no buffering) */
     static int directChar(int16_t, int16_t, uint16_t);
@@ -398,7 +408,8 @@ private:
     static uint8_t* m_tilebuf;
     /** Pointer to tilecolorbuffer */
     static uint8_t* m_tilecolorbuf;
-
+    /** Sprites */
+    static SpriteInfo m_sprites[SPRITE_COUNT];  // Does not own sprite bitmaps
 };
 
 }
