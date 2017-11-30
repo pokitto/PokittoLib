@@ -2163,14 +2163,38 @@ void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
             }
 }
 
-/* Set or reset the sprite */
-void Display::setSpriteBitmap(uint8_t index, const uint8_t* bitmap,  const uint16_t* palette16x16bit, int16_t x, int16_t y ) {
+/**
+ * Setup or disable the sprite. Note that enabled sprites must always have subsequent indices, starting from the index zero.
+ * You cannot have gaps in indices of enabled sprites.
+ * The max number of sprites can be changed by a SPRITE_COUNT define, the default is 4.
+ * Note: the sprites currently work only in the 220 x 176 x 2bpp mode.
+ * @param index The sprite index. The lower index is drawn first, i.e. is on bottom.
+ * @param bitmap A pointer to a 2bpp bitmap. A NULL value means that the sprite is disabled. The ownership is not transferred, so the caller must keep the bitmap alive.
+ * @param palette4x16bit Four color palette of 16bit elements. The first color value is considered as transparent. The palette is copied to the sprite struct, so the caller do not have to keep it alive.
+ * @param x The initial x
+ * @param y The initial y
+ */
+void Display::setSpriteBitmap(uint8_t index, const uint8_t* bitmap,  const uint16_t* palette4x16bit, int16_t x, int16_t y ) {
 
-    setSprite(index, &(bitmap[2]), palette16x16bit, x, y, bitmap[0], bitmap[1]);
+    setSprite(index, &(bitmap[2]), palette4x16bit, x, y, bitmap[0], bitmap[1]);
 }
 
-void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette16x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h ) {
+/**
+ * Setup or disable the sprite. Note that enabled sprites must always have subsequent indices, starting from the index zero.
+ * You cannot have gaps in indices of enabled sprites.
+ * The max number of sprites can be changed by a SPRITE_COUNT define, the default is 4.
+ * Note: the sprites currently work only in the 220 x 176 x 2bpp mode.
+ * @param index The sprite index. The lower index is drawn first, i.e. is on bottom. Note that
+ * @param data A pointer to a 2bpp pixel data of size w x h. A NULL value means that the sprite is disabled. The ownership is not transferred, so the caller must keep the data alive.
+ * @param palette4x16bit Four color palette of 16bit elements. The first color value is considered as transparent. The palette is copied to the sprite struct, so the caller do not have to keep it alive.
+ * @param x The initial x
+ * @param y The initial y
+ * @param w Width
+ * @param h Height
+ */
+void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette4x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h ) {
 
+    if(index >= SPRITE_COUNT) return;
     m_sprites[index].bitmapData = data;
     m_sprites[index].x = x;
     m_sprites[index].y = y;
@@ -2178,12 +2202,18 @@ void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* pale
     m_sprites[index].oldy = y;
     m_sprites[index].w = w;
     m_sprites[index].h = h;
-    memcpy(m_sprites[index].palette, palette16x16bit, 4*2);
+    memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
 }
 
-/* Set the sprite position */
+/**
+ * Set the sprite position.
+ * @param index The sprite index
+ * @param x
+ * @param y
+ */
 void Display::setSpritePos(uint8_t index, int16_t x, int16_t y) {
 
+    if(index >= SPRITE_COUNT) return;
     m_sprites[index].x = x;
     m_sprites[index].y = y;
 }
