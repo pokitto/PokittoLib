@@ -232,6 +232,8 @@ public:
     // DIRECT DRAWING (NO BUFFERING)
     /** Direct pixel (not through display buffer) */
     static void directPixel(int16_t,int16_t,uint16_t);
+    /** Direct tile 16bit (not through display buffer) */
+	static void directTile(int16_t x, int16_t y, int16_t x2, int16_t y2, uint16_t* gfx);
     /** Direct rectangle (not through display buffer) */
     static void directRectangle(int16_t, int16_t,int16_t, int16_t, uint16_t);
     /** Set the cursor for printing to a certain screen position */
