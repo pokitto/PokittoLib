@@ -212,6 +212,10 @@ void Display::directPixel(int16_t x, int16_t y, uint16_t color) {
     lcdPixel(x,y,color);
 }
 
+void Display::directTile(int16_t x, int16_t y, int16_t x2, int16_t y2, uint16_t* gfx) {
+    lcdTile(x,y,x2,y2,gfx);
+}
+
 void Display::directRectangle(int16_t x, int16_t y,int16_t x2, int16_t y2, uint16_t color) {
     lcdRectangle(x,y,x2,y2,color);
 }
