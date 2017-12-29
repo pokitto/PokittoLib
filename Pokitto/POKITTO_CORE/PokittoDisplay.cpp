@@ -90,6 +90,7 @@ uint8_t* Display::m_tileset;
 uint8_t* Display::m_tilebuf;
 uint8_t* Display::m_tilecolorbuf;
 uint8_t Display::m_mode, Display::m_colordepth;
+uint8_t Display::palOffset;
 SpriteInfo Display::m_sprites[SPRITE_COUNT];
 uint8_t Display::fontSize=1;
 int16_t Display::cursorX,Display::cursorY;
