@@ -1453,7 +1453,7 @@
 
 1514724720 e:\pokittodev\pokittolib\pokitto\pokitto_sim\mbed_sim\gpio_object.h
 
-1514724720 e:\pokittodev\pokittolib\pokitto\pokitto_sim\pokittosimulator.h
+1514746895 e:\pokittodev\pokittolib\pokitto\pokitto_sim\pokittosimulator.h
 	<stdint.h>
 	<SDL2/SDL.h>
 	"Pokitto_settings.h"
@@ -2022,5 +2022,177 @@
 	"iap.h"
 
 1514724719 e:\pokittodev\pokittolib\pokitto\pokitto_core\pokittologos.h
+	<stdint.h>
+
+1514726748 e:\pokittodev\pokittolib\examples\bitmap\my_settings.h
+
+1514746738 source:e:\pokittodev\pokittolib\pokitto\pokitto_core\pokittodisplay.cpp
+	"PokittoDisplay.h"
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoCore.h"
+	"PokittoSound.h"
+	<stdio.h>
+	<string.h>
+	"HWLCD.h"
+	"SimLCD.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_core\pokittoitoa.cpp
+	"PokittoItoa.h"
+	<string.h>
+	<stdint.h>
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_core\pokittologos.cpp
+	"PokittoLogos.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_core\pokittopalette.cpp
+	"PokittoDisplay.h"
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	<stdio.h>
+	<string.h>
+	"HWLCD.h"
+	"SimLCD.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_core\pokittosound.cpp
+	"PokittoSound.h"
+	"Pokitto_settings.h"
+	"PokittoCore.h"
+	"Synth.h"
+	"HWSound.h"
+	"SimSound.h"
+	"PokittoSimulator.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\fileio\fileio_sim.cpp
+	<stdint.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+	"FileIO.h"
+	"tinydir.h"
+
+1514724720 e:\pokittodev\pokittolib\pokitto\pokitto_sim\tinydir\tinydir.h
+	<errno.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+	<tchar.h>
+	<dirent.h>
+	<libgen.h>
+	<sys/stat.h>
+	<stddef.h>
+	<tchar.h>
+	<windows.h>
+	<linux/limits.h>
+	<unistd.h>
+	<sys/types.h>
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\synth\synth.cpp
+	"Pokitto.h"
+	"Synth.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\synth\synth_envfuncs.cpp
+	"Synth.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\synth\synth_helpers.cpp
+	"Pokitto.h"
+	"Synth.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
+	"PokittoGlobs.h"
+	"Synth.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
+	"Synth.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
+	"PokittoDisk.h"
+	"Synth.h"
+	"FileIO.h"
+
+1514724719 source:e:\pokittodev\pokittolib\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
+	"Synth.h"
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\mbed_sim\mbed_sim.cpp
+	"PokittoSimulator.h"
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\pokitto_simport.cpp
+	"Pokitto.h"
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\pokittoclock.cpp
+	"PokittoCore.h"
+	"PokittoConsole.h"
+	"Pokitto_settings.h"
+	<SDL2/SDL.h>
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\pokittosimbuttons.cpp
+	"PokittoSimulator.h"
+	"Pokitto_settings.h"
+	"PokittoConsole.h"
+	"PokittoSound.h"
+	"PokittoCore.h"
+	<SDL2/SDL.h>
+	<iostream>
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\pokittosimcore.cpp
+	"PokittoCore.h"
+	"PokittoSimulator.h"
+	<time.h>
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\pokittosimulator.cpp
+	"PokittoSimulator.h"
+	"Pokitto_settings.h"
+	"PokittoGlobs.h"
+	"PokittoSound.h"
+	<SDL2/SDL.h>
+	<iostream>
+	<stdlib.h>
+	<sstream>
+	<stdint.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+	"WriteWav.h"
+	"PokittoConsole.h"
+
+1514724720 e:\pokittodev\pokittolib\pokitto\pokitto_sim\writewav.h
+	<stdint.h>
+	<stdio.h>
+
+1514725660 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\simlcd.cpp
+	"SimLCD.h"
+	"PokittoSimulator.h"
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\simsound.cpp
+	"SimSound.h"
+	"PokittoSimulator.h"
+	"PokittoGlobs.h"
+	"Synth.h"
+	<stdint.h>
+
+1514724720 source:e:\pokittodev\pokittolib\pokitto\pokitto_sim\writewav.cpp
+	"WriteWav.h"
+
+1514742526 source:e:\pokittodev\pokittolib\examples\doon\doon.cpp
+	"Pokitto.h"
+	<vector>
+	<stdint.h>
+	"tiles.h"
+	"doon_sprites.h"
+	"backgrounds.h"
+	"creatures.h"
+
+1514730136 e:\pokittodev\pokittolib\examples\doon\my_settings.h
+
+1514730136 e:\pokittodev\pokittolib\examples\doon\tiles.h
+	<stdint.h>
+
+1514730136 e:\pokittodev\pokittolib\examples\doon\doon_sprites.h
+	<stdint.h>
+
+1514730136 e:\pokittodev\pokittolib\examples\doon\backgrounds.h
+	<stdint.h>
+
+1514730136 e:\pokittodev\pokittolib\examples\doon\creatures.h
 	<stdint.h>
 

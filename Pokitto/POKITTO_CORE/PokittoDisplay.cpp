@@ -1396,7 +1396,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                         uint8_t sourcepixel = *bitmap;
                         if ((sourcepixel&0x0F) != invisiblecolor) {
                             sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
+                            uint8_t targetpixel = *scrptr & 0x0F;
                             targetpixel |= sourcepixel;
                             *scrptr = targetpixel;
                         }
@@ -1407,6 +1407,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
                 bitmap += xjump; // needed if x<0 clipping occurs
             } else { /** ODD pixel starting line **/
+                //for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                 for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                     uint8_t sourcepixel = *bitmap;
                     uint8_t targetpixel = *scrptr;
@@ -1419,6 +1420,19 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                     if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
                     *scrptr = targetpixel;
                     bitmap++;
+                }
+                if (xclip){
+                    if (w&1) {
+                        /**last pixel is odd pixel due to clipping & odd width*/
+                        uint8_t sourcepixel = *bitmap;
+                        sourcepixel >>=4; //top nibble of sourcebyte from bitmap...
+                        if (sourcepixel != invisiblecolor) {
+                            uint8_t targetpixel = *scrptr & 0xF0; //...put into the low nibble of the target
+                            targetpixel |= sourcepixel;
+                            *scrptr = targetpixel;
+                        }
+                        //scrptr++;
+                    }
                 }
                 bitmap+=xjump;
             }
