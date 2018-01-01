@@ -32,7 +32,7 @@
 					<Add directory="../POKITTO_LIBS/MicroPython" />
 				</Compiler>
 				<Linker>
-					<Add library="..\POKITTO_LIBS\MicroPython\libmicropython_win.a" />
+					<Add library="../POKITTO_LIBS/MicroPython/libmicropython_win.a" />
 				</Linker>
 			</Target>
 			<Target title="Bitmap">
@@ -79,6 +79,12 @@
 			<Add directory="SDL2/lib" />
 		</Linker>
 		<Unit filename="../../Examples/Bitmap/My_settings.h">
+			<Option target="Bitmap" />
+		</Unit>
+		<Unit filename="../../Examples/Bitmap/bitmap.cpp">
+			<Option target="Bitmap" />
+		</Unit>
+		<Unit filename="../../Examples/Bitmap/pokitto_icon.h">
 			<Option target="Bitmap" />
 		</Unit>
 		<Unit filename="../../Examples/HelloWorld/My_settings.h">
