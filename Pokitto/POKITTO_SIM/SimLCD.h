@@ -68,6 +68,10 @@ extern inline void toggle_data();
 extern void lcdFillSurface(uint16_t);
 /** Directly draw a pixel in a position (no buffering) */
 extern void lcdPixel(int16_t,int16_t,uint16_t);
+/** Set a DRAM memory window that is being operated on */
+extern void setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+/** Draw a tile limited by setWindow */
+extern void lcdTile(int16_t x0, int16_t y0, int16_t width, int16_t height, uint16_t* gfx);
 /** Directly fill a rectangle (x0,y0,x1,y1) in a position (no buffering) */
 extern void lcdRectangle(int16_t,int16_t,int16_t,int16_t,uint16_t);
 /** Update LCD from native Mode 1 */

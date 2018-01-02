@@ -66,6 +66,35 @@ void Pokitto::lcdPixel(int16_t x, int16_t y, uint16_t c) {
     simulator.directSDLPixel(x,y,c);
 }
 
+
+void Pokitto::setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2) {
+	//ToDo Sim versions for these
+	/*write_command(0x37); write_data(x1);
+	write_command(0x36); write_data(x2);
+	write_command(0x39); write_data(y1);
+	write_command(0x38); write_data(y2);
+	write_command(0x20); write_data(x1);
+	write_command(0x21); write_data(y1);*/
+}
+
+void Pokitto::lcdTile(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t* gfx){
+	//ToDo Sim versions for these
+	/*int width=x1-x0;
+	int height=y1-y0;
+	if (x0 > POK_LCD_W) return;
+	if (y0 > POK_LCD_H) return;
+	if (x0 < 0) x0=0;
+	if (y0 < 0) y0=0;
+
+	setWindow(y0, x0, y1-1, x1-1);
+    write_command(0x22);
+
+    for (int x=0; x<=width*height-1;x++) {
+        write_data(gfx[x]);
+    }
+	setWindow(0, 0, 175, 219);*/
+}
+
 void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t c) {
     simulator.directSDLRectangle(x0,y0,x1,y1,c);
 }

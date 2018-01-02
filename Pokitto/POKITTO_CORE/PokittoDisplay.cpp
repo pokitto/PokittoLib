@@ -90,6 +90,7 @@ uint8_t* Display::m_tileset;
 uint8_t* Display::m_tilebuf;
 uint8_t* Display::m_tilecolorbuf;
 uint8_t Display::m_mode, Display::m_colordepth;
+uint8_t Display::palOffset;
 SpriteInfo Display::m_sprites[SPRITE_COUNT];
 uint8_t Display::fontSize=1;
 int16_t Display::cursorX,Display::cursorY;
@@ -219,7 +220,12 @@ void Display::fillLCD(uint16_t c) {
 }
 
 void Display::directPixel(int16_t x, int16_t y, uint16_t color) {
+    if ((invisiblecolor < PALETTE_SIZE) && (invisiblecolor < 16) && (color == palette[invisiblecolor])) return;
     lcdPixel(x,y,color);
+}
+
+void Display::directTile(int16_t x, int16_t y, int16_t x2, int16_t y2, uint16_t* gfx) {
+    lcdTile(x,y,x2,y2,gfx);
 }
 
 void Display::directRectangle(int16_t x, int16_t y,int16_t x2, int16_t y2, uint16_t color) {
@@ -1430,7 +1436,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                         uint8_t sourcepixel = *bitmap;
                         if ((sourcepixel&0x0F) != invisiblecolor) {
                             sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
+                            uint8_t targetpixel = *scrptr & 0x0F;
                             targetpixel |= sourcepixel;
                             *scrptr = targetpixel;
                         }
@@ -1441,6 +1447,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
                 bitmap += xjump; // needed if x<0 clipping occurs
             } else { /** ODD pixel starting line **/
+                //for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                 for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                     uint8_t sourcepixel = *bitmap;
                     uint8_t targetpixel = *scrptr;
@@ -1453,6 +1460,19 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                     if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
                     *scrptr = targetpixel;
                     bitmap++;
+                }
+                if (xclip){
+                    if (w&1) {
+                        /**last pixel is odd pixel due to clipping & odd width*/
+                        uint8_t sourcepixel = *bitmap;
+                        sourcepixel >>=4; //top nibble of sourcebyte from bitmap...
+                        if (sourcepixel != invisiblecolor) {
+                            uint8_t targetpixel = *scrptr & 0xF0; //...put into the low nibble of the target
+                            targetpixel |= sourcepixel;
+                            *scrptr = targetpixel;
+                        }
+                        //scrptr++;
+                    }
                 }
                 bitmap+=xjump;
             }
@@ -1770,15 +1790,15 @@ void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t ro
                         k = i;
                         l = j;
                         break;
-                    case ROTCCW: //90° counter-clockwise
+                    case ROTCCW: //90Â° counter-clockwise
                         k = j;
                         l = w - i - 1;
                         break;
-                    case ROT180: //180°
+                    case ROT180: //180Â°
                         k = w - i - 1;
                         l = h - j - 1;
                         break;
-                    case ROTCW: //90° clockwise
+                    case ROTCW: //90Â° clockwise
                         k = h - j - 1;
                         l = i;
                         break;
