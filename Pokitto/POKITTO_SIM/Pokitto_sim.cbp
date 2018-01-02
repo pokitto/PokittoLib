@@ -190,10 +190,10 @@
 		<Unit filename="../POKITTO_LIBS/MicroPython/main.cpp">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_data.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/main.py">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_main.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/marsattack_data.py">
 			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/sprite.py">
@@ -290,7 +290,9 @@
 		<Extensions>
 			<code_completion />
 			<envvars />
-			<debugger />
+			<debugger>
+				<search_path add="C:\git\micropython2\ports\pokitto\modules" />
+			</debugger>
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

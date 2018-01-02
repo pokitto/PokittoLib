@@ -104,6 +104,10 @@ uint16_t Display::invisiblecolor = 17;
 uint16_t Display::directcolor=0xFFFF;
 uint16_t Display::directbgcolor=0x0;
 bool Display::directtextrotated=false;
+int16_t Display::clipX = 0;
+int16_t Display::clipY = 0;
+int16_t Display::clipW = LCDWIDTH;
+int16_t Display::clipH = LCDHEIGHT;
 
 uint16_t* Display::paletteptr;
 uint16_t Display::palette[PALETTE_SIZE];
@@ -231,12 +235,12 @@ void Display::setCursor(int16_t x,int16_t y) {
     cursorY = y;
 }
 
-void Display::update(bool useDirectDrawMode) {
+void Display::update(bool useDirectDrawMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
 
     #if POK_SCREENMODE == MODE_HI_4COLOR
     // If there is one or more sprites, use sprite enabled drawing.
     if (m_sprites[0].bitmapData != NULL)
-        lcdRefreshMode1Spr(m_scrbuf, paletteptr, m_sprites, useDirectDrawMode);
+        lcdRefreshMode1Spr(m_scrbuf, x, y, w, h, paletteptr, m_sprites, useDirectDrawMode);
     else if (!useDirectDrawMode)
         lcdRefreshMode1(m_scrbuf, paletteptr);
     #endif
@@ -285,6 +289,7 @@ void Display::update(bool useDirectDrawMode) {
 	// Store current state
     bool temp = isDirectPrintingEnabled();
     uint16_t oldcol = directcolor;
+    uint16_t oldinvisiblecolor = invisiblecolor;
     uint16_t oldbgcol = directbgcolor;
     bool olddirecttextrotated = directtextrotated;
     int8_t oldadjustCharStep = adjustCharStep;
@@ -294,7 +299,8 @@ void Display::update(bool useDirectDrawMode) {
     char str[16];
     sprintf(str,"FPS:%d ", (int)core.fps_counter);
     directcolor = COLOR_WHITE;
-    directbgcolor = COLOR_BLACK;
+    invisiblecolor = COLOR_BLACK;
+    directbgcolor = 0x0001; // Cannot be black as that is transparent color
     directtextrotated = true;
     adjustCharStep = 0;
     setFont(fontC64);
@@ -304,6 +310,7 @@ void Display::update(bool useDirectDrawMode) {
 	// Restore state
     enableDirectPrinting(temp);
     directcolor = oldcol;
+    invisiblecolor =  oldinvisiblecolor;
     directbgcolor = oldbgcol;
     directtextrotated = olddirecttextrotated;
     adjustCharStep = oldadjustCharStep;
@@ -529,6 +536,11 @@ uint8_t Display::getBgColor() {
 uint16_t Display::getInvisibleColor() {
     return invisiblecolor;
 }
+
+void Display::setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
+    clipX = x; clipY = y; clipW = w; clipH = h;
+}
+
 
 void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
     if (col==invisiblecolor) return; // do not draw transparent pixels
@@ -1335,22 +1347,50 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     }
     /** 2 bpp mode */
     if (m_colordepth<4) {
-    int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 4;
-        bitNum = (i % 4)<<1;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            uint8_t output = (source & (0xC0 >> bitNum));
-            output >>= (6-bitNum);
-            if (output != invisiblecolor) {
-                setColor(output);
-                drawPixel(x + i, y + j);
+        if(clipH > 0) {
+
+            // Clip
+            int16_t x1 = max(x, clipX);
+            int16_t x2 = min(x + w, clipX + clipW);
+            int16_t bmupdateX = x1 - x;
+            int16_t bmupdateX2 = x2 - x;
+            int16_t y1 = max(y, clipY);
+            int16_t y2 = min(y + h, clipY + clipH);
+            int16_t bmupdateY = y1 - y;
+            int16_t bmupdateY2 = y2 - y;
+
+            int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
+            for (i = bmupdateX; i < bmupdateX2; i++) {
+                byteNum = i / 4;
+                bitNum = (i % 4)<<1;
+                for (j = bmupdateY; j < bmupdateY2; j++) {
+                    uint8_t source = *(bitmap + j * byteWidth + byteNum);
+                    uint8_t output = (source & (0xC0 >> bitNum));
+                    output >>= (6-bitNum);
+                    if (output != invisiblecolor) {
+                        setColor(output);
+                        drawPixel(x + i, y + j);
+                    }
+                }
             }
         }
-    }
-
-    return;
+        else {
+            int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
+            for (i = 0; i < w; i++) {
+                byteNum = i / 4;
+                bitNum = (i % 4)<<1;
+                for (j = 0; j < h; j++) {
+                    uint8_t source = *(bitmap + j * byteWidth + byteNum);
+                    uint8_t output = (source & (0xC0 >> bitNum));
+                    output >>= (6-bitNum);
+                    if (output != invisiblecolor) {
+                        setColor(output);
+                        drawPixel(x + i, y + j);
+                    }
+                }
+            }
+        }
+        return;
     }
     /** 4bpp fast version */
 	int16_t scrx,scry,xclip,xjump,scrxjump;
@@ -2173,10 +2213,11 @@ void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
  * @param palette4x16bit Four color palette of 16bit elements. The first color value is considered as transparent. The palette is copied to the sprite struct, so the caller do not have to keep it alive.
  * @param x The initial x
  * @param y The initial y
+ * @param doResetDirtyRect (default=true) True, if the previous coordinates are reseted.
  */
-void Display::setSpriteBitmap(uint8_t index, const uint8_t* bitmap,  const uint16_t* palette4x16bit, int16_t x, int16_t y ) {
+void Display::setSpriteBitmap(uint8_t index, const uint8_t* bitmap,  const uint16_t* palette4x16bit, int16_t x, int16_t y, bool doResetDirtyRect ) {
 
-    setSprite(index, &(bitmap[2]), palette4x16bit, x, y, bitmap[0], bitmap[1]);
+    setSprite(index, &(bitmap[2]), palette4x16bit, x, y, bitmap[0], bitmap[1], doResetDirtyRect);
 }
 
 /**
@@ -2192,14 +2233,16 @@ void Display::setSpriteBitmap(uint8_t index, const uint8_t* bitmap,  const uint1
  * @param w Width
  * @param h Height
  */
-void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette4x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h ) {
+void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette4x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h, bool doResetDirtyRect ) {
 
     if(index >= SPRITE_COUNT) return;
     m_sprites[index].bitmapData = data;
     m_sprites[index].x = x;
     m_sprites[index].y = y;
-    m_sprites[index].oldx = x;
-    m_sprites[index].oldy = y;
+    if (doResetDirtyRect) {
+        m_sprites[index].oldx = x;
+        m_sprites[index].oldy = y;
+    }
     m_sprites[index].w = w;
     m_sprites[index].h = h;
     memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
@@ -2223,7 +2266,7 @@ void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
 #if POK_SCREENMODE == MODE_HI_4COLOR
     // If there is one or more sprites, use sprite enabled drawing.
     if (m_sprites[0].bitmapData != NULL)
-        lcdRefreshMode1Spr(scr, paletteptr, m_sprites, useDirectDrawMode);
+        lcdRefreshMode1Spr(scr, 0, 0, 220, 176, paletteptr, m_sprites, useDirectDrawMode);
     else if (!useDirectDrawMode)
         lcdRefreshMode1(m_scrbuf, paletteptr);
 #endif

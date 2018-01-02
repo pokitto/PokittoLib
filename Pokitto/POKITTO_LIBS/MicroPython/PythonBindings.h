@@ -71,13 +71,17 @@ EXTERNC uint8_t Pok_Display_getNumberOfColors();
 EXTERNC uint16_t Pok_Display_getWidth();
 EXTERNC uint16_t Pok_Display_getHeight();
 EXTERNC void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, const uint8_t *buffer);
+EXTERNC void Pok_Display_setSprite(uint8_t index, int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, uint8_t *buffer, uint16_t* palette16x16bit, bool doResetDirtyRect);
+EXTERNC void Pok_Display_setSpritePos(uint8_t index, int16_t x, int16_t y);
+EXTERNC void Pok_Display_fillRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uint8_t color);
 EXTERNC void Pok_Display_write(const uint8_t *buffer, uint8_t size);
 EXTERNC void Pok_Display_print(uint8_t x, uint8_t y, const char str[], uint8_t color);
 EXTERNC uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b);
 EXTERNC void POK_game_display_setPalette(uint16_t* paletteArray, int16_t len);
+EXTERNC void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h);
 
 // Core
-EXTERNC bool Pok_Core_update(bool useDirectMode);
+EXTERNC bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h);
 EXTERNC bool Pok_Core_isRunning();
 EXTERNC bool Pok_Core_buttons_repeat(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_held(uint8_t button, uint8_t period);
@@ -86,12 +90,10 @@ EXTERNC bool Pok_Core_buttons_released(uint8_t button);
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
 EXTERNC time_t time_cpp(time_t* timer);
 
-#if !POKITTO_USE_WIN_SIMULATOR && !defined(POK_SIM)
 // Debug
 EXTERNC int pc_printf(const char* format, ...);
 EXTERNC void pc_puts(const char* strWithNull);
 EXTERNC void pc_putsn(const char* str, int len);
-#endif
 
 #endif // MICROPY_ENABLE_GC
 

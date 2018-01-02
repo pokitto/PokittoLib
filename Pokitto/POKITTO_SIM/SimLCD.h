@@ -73,7 +73,7 @@ extern void lcdRectangle(int16_t,int16_t,int16_t,int16_t,uint16_t);
 /** Update LCD from native Mode 1 */
 extern void lcdRefreshMode1(uint8_t*, uint16_t*);
 /** Update LCD from native Mode 1 with sprites */
-extern void lcdRefreshMode1Spr(uint8_t * scrbuf, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool useDirectMode);
+extern void lcdRefreshMode1Spr(uint8_t * scrbuf, uint8_t screenx, uint8_t screeny, uint8_t screenw, uint8_t screenh, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool drawSpritesOnly);
 /** Update LCD from native Mode 2 */
 extern void lcdRefreshMode2(uint8_t*, uint16_t*);
 /** Update LCD from native Mode 3 */

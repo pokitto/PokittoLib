@@ -13,8 +13,7 @@ echo|set /p dummyName="python tools/mpy-tool.py -mlongint-impl=none -f -q  genhd
 for %%a in (mpy\*) do echo  | set /p dummyName="%%a ">>tmp_freeze.bat
 echo|set /p dummyName=" > frozen_mpy.c">>tmp_freeze.bat
 @echo on
-tmp_freeze.bat
-
+call tmp_freeze.bat
 
 
 

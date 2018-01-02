@@ -147,6 +147,21 @@ void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, int
     Display::drawBitmapData(x, y, w, h, buffer );
 }
 
+void Pok_Display_setSprite(uint8_t index, int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, uint8_t *buffer, uint16_t* palette16x16bit, bool doResetDirtyRect) {
+    Display::invisiblecolor = (uint8_t)invisiblecol_;
+    Display::setSprite(index, buffer, palette16x16bit, x, y, w, h, doResetDirtyRect );
+}
+
+void Pok_Display_setSpritePos(uint8_t index, int16_t x, int16_t y) {
+    Display::setSpritePos(index, x, y);
+}
+
+void Pok_Display_fillRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uint8_t color) {
+    Display::color = color;
+    Display::fillRectangle(x, y, w, h);
+}
+
+
 uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b) {
     return Display::RGBto565(r, g, b);
 }
@@ -156,10 +171,16 @@ void POK_game_display_setPalette(uint16_t* paletteArray, int16_t len) {
         Display::palette[i] = paletteArray[i];
 }
 
-bool Pok_Core_update(bool useDirectMode) {
+void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
+    if(h == 0)
+        Display::setClipRect(0, 0, LCDWIDTH, LCDHEIGHT);  // Remove clip rect
+    else
+        Display::setClipRect(x, y, w, h);  // Set clip rect
+}
 
-    bool ret = Core::update(useDirectMode);
-    return ret;
+bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
+
+    return Core::update(useDirectMode, x, y, w, h);
 }
 
 bool Pok_Core_isRunning() {

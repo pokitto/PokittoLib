@@ -173,6 +173,11 @@ public:
     static uint16_t directbgcolor;
     /** Direct text rotated */
     static bool directtextrotated;
+    /** clip rect on screen**/
+    static int16_t clipX;
+    static int16_t clipY;
+    static int16_t clipW;
+    static int16_t clipH;
     /** set color with a command */
     static void setColor(uint8_t);
     /** set color and bgcolor with a command */
@@ -185,7 +190,8 @@ public:
     static uint8_t getBgColor();
     /** get invisible color */
     static uint16_t getInvisibleColor();
-
+    /** set clip rect on screen**/
+    static void setClipRect(int16_t x, int16_t y, int16_t w, int16_t h);
 
     /** Initialize display */
     static void begin();
@@ -196,7 +202,7 @@ public:
     /** Fill display buffer */
     static void fillScreen(uint16_t);
     /** Send display buffer to display hardware */
-    static void update(bool useDirectMode=false);
+    static void update(bool useDirectMode=false, uint8_t x=0, uint8_t y=0, uint8_t w=LCDWIDTH, uint8_t h=LCDHEIGHT);
     /** Forced update of LCD display memory with a given pixel buffer */
     static void lcdRefresh(unsigned char*, bool useDirectMode=false);
     /** Clear LCD hardware memory */
@@ -312,9 +318,9 @@ public:
 
     // SPRITES
     /* Setup or disable the sprite */
-    static void setSpriteBitmap(uint8_t index, const uint8_t* bitmap, const uint16_t* palette4x16bit, int16_t x, int16_t y );
+    static void setSpriteBitmap(uint8_t index, const uint8_t* bitmap, const uint16_t* palette4x16bit, int16_t x, int16_t y, bool doResetDirtyRect=true );
     /* Setup or disable the sprite */
-    static void setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette4x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h );
+    static void setSprite(uint8_t index, const uint8_t* data, const uint16_t* palette4x16bit, int16_t x, int16_t y, uint8_t w, uint8_t h, bool doResetDirtyRect=true );
     /* Set the sprite position */
     static void setSpritePos(uint8_t index, int16_t x, int16_t y);
 
