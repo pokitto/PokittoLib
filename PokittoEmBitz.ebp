@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <EmBitz_project_file>
-	<EmBitzVersion release="1.11" revision="0" />
+	<EmBitzVersion release="0.42" revision="0" />
 	<FileVersion major="1" minor="0" />
 	<Project>
 		<Option title="PokittoEmBitz" />
@@ -854,12 +854,12 @@
 			<code_completion />
 			<debugger>
 				<target_debugging_settings target="HelloWorld" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
 						<family_options family_id="All" />
 					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V622a" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="2" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
 						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U68" />
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
 							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
 							<option opt_id="ID_SPEED" opt_value="1000" />
 							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
@@ -879,10 +879,10 @@
 					</debug_interface>
 				</target_debugging_settings>
 				<target_debugging_settings target="MicroPython" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
 						<family_options family_id="All" />
 					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
 						<family_options family_id="NXP">
 							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
 							<option opt_id="ID_JTAG_SWD" opt_value="swd" />

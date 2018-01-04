@@ -90,20 +90,8 @@
 		<Unit filename="../../Examples/HelloWorld/My_settings.h">
 			<Option target="HelloWorld" />
 		</Unit>
-		<Unit filename="../../Examples/HelloWorld/gfxdata.h">
-			<Option target="HelloWorld" />
-		</Unit>
 		<Unit filename="../../Examples/HelloWorld/main.cpp">
 			<Option target="HelloWorld" />
-		</Unit>
-		<Unit filename="../../Examples/updaterect/My_settings.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="../../Examples/updaterect/gfxdata.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="../../Examples/updaterect/main.cpp">
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="../POKITTO_APP/PokittoApp.h" />
 		<Unit filename="../POKITTO_APP/PokittoAppObject.h" />
@@ -223,10 +211,10 @@
 		<Unit filename="../POKITTO_LIBS/MicroPython/main.cpp">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/main.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_data.py">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/marsattack_data.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_main.py">
 			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/sprite.py">
@@ -323,9 +311,7 @@
 		<Extensions>
 			<code_completion />
 			<envvars />
-			<debugger>
-				<search_path add="C:\git\micropython2\ports\pokitto\modules" />
-			</debugger>
+			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

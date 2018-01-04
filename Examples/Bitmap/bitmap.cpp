@@ -7,6 +7,7 @@ int main () {
     while (mygame.isRunning()) {
         if (mygame.update()) {
             mygame.display.print("Hello World!");
+            }
         }
-    }
+
 }
