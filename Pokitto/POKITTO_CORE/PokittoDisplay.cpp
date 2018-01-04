@@ -241,14 +241,25 @@ void Display::setCursor(int16_t x,int16_t y) {
     cursorY = y;
 }
 
-void Display::update(bool useDirectDrawMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
+/**
+ * Update the display.
+ * The update rect is used for drawing only part of the screen buffer to LCD. Because of speed optimizations, the
+ * x, y, and width of the update rect must be dividable by 4 pixels, and the height must be dividable by 8 pixels.
+ * Note: The update rect is currently used for 220x176, 4 colors, screen mode only.
+ * @param useDirectMode True, if only direct screen drawing is used. False, if the screen buffer is drawn. Note: If sprites are enabled, they are drawn in both modes.
+ * @param updRectX The update rect.
+ * @param updRectY The update rect.
+ * @param updRectW The update rect.
+ * @param updRectH The update rect.
+ */
+void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH) {
 
     #if POK_SCREENMODE == MODE_HI_4COLOR
     // If there is one or more sprites, use sprite enabled drawing.
     if (m_sprites[0].bitmapData != NULL)
-        lcdRefreshMode1Spr(m_scrbuf, x, y, w, h, paletteptr, m_sprites, useDirectDrawMode);
+        lcdRefreshMode1Spr(m_scrbuf, updRectX, updRectY, updRectW, updRectH, paletteptr, m_sprites, useDirectDrawMode);
     else if (!useDirectDrawMode)
-        lcdRefreshMode1(m_scrbuf, paletteptr);
+        lcdRefreshMode1(m_scrbuf, updRectX, updRectY, updRectW, updRectH, paletteptr);
     #endif
 
     // For the screen modes that do not support sprites, return if the direct draw mode is used.
@@ -1370,7 +1381,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 byteNum = i / 4;
                 bitNum = (i % 4)<<1;
                 for (j = bmupdateY; j < bmupdateY2; j++) {
-                    uint8_t source = *(bitmap + j * byteWidth + byteNum);
+                    uint8_t source = *(bitmap + (j * byteWidth) + byteNum);
                     uint8_t output = (source & (0xC0 >> bitNum));
                     output >>= (6-bitNum);
                     if (output != invisiblecolor) {
@@ -1386,7 +1397,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 byteNum = i / 4;
                 bitNum = (i % 4)<<1;
                 for (j = 0; j < h; j++) {
-                    uint8_t source = *(bitmap + j * byteWidth + byteNum);
+                    uint8_t source = *(bitmap + (j * byteWidth) + byteNum);
                     uint8_t output = (source & (0xC0 >> bitNum));
                     output >>= (6-bitNum);
                     if (output != invisiblecolor) {
@@ -2286,9 +2297,9 @@ void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
 #if POK_SCREENMODE == MODE_HI_4COLOR
     // If there is one or more sprites, use sprite enabled drawing.
     if (m_sprites[0].bitmapData != NULL)
-        lcdRefreshMode1Spr(scr, 0, 0, 220, 176, paletteptr, m_sprites, useDirectDrawMode);
+        lcdRefreshMode1Spr(scr, 0, 0, LCDWIDTH, LCDHEIGHT, paletteptr, m_sprites, useDirectDrawMode);
     else if (!useDirectDrawMode)
-        lcdRefreshMode1(m_scrbuf, paletteptr);
+        lcdRefreshMode1(m_scrbuf, 0, 0, LCDWIDTH, LCDHEIGHT, paletteptr);
 #endif
 
     // For the screen modes that do not support sprites, return if the direct draw mode is used.

@@ -401,90 +401,127 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
     }
 }
 
-void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint16_t* paletteptr) {
-uint16_t x,y,xptr;
-uint16_t scanline[4][176]; // read 4 half-nibbles = 4 pixels at a time
-uint8_t *d, yoffset=0;
+/***
+ * Update the screen buffer of 220x176 pixels, 4 colors to LCD.
+ *
+ * The update rect is used for drawing only part of the screen buffer to LCD. Because of speed optimizations, the
+ * x, y, and width of the update rect must be dividable by 4 pixels, and the height must be dividable by 8 pixels.
+ * Note: The update rect is currently used for 220x176, 4 colors, screen mode only.
+ * @param scrbuf The screen buffer.
+ * @param updRectX The update rect.
+ * @param updRectY The update rect.
+ * @param updRectW The update rect.
+ * @param updRectH The update rect.
+ * @param paletteptr The screen palette.
+*/
+void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr) {
 
-#ifdef PROJ_USE_FPS_COUNTER
-xptr = 8;
-#else
-xptr = 0;
-#endif
-setDRAMptr(xptr,yoffset);
+    uint16_t x,y,xptr;
+    uint16_t scanline[4][176]; // read 4 half-nibbles = 4 pixels at a time
+    uint8_t *d, yoffset=0;
 
-for(x=0;x<220;x+=4)
-  {
-    d = scrbuf+(x>>2);// point to beginning of line in data
-    /** find colours in one scanline **/
-    uint8_t s=0;
-    for(y=0;y<176;y++)
-    {
-    uint8_t tdata = *d;
-    uint8_t t4 = tdata & 0x03; tdata >>= 2;// lowest half-nibble
-    uint8_t t3 = tdata & 0x03; tdata >>= 2;// second lowest half-nibble
-    uint8_t t2 = tdata & 0x03; tdata >>= 2;// second highest half-nibble
-    uint8_t t = tdata & 0x03;// highest half-nibble
+    // If not the full screen is updated, check the validity of the update rect.
+    if ( updRectX != 0 || updRectY != 0 ||updRectW != LCDWIDTH ||updRectH != LCDHEIGHT ) {
+        uint8_t org_screenx = updRectX;
+        updRectX &= 0xfc; // Make the value dividable by 4.
+        updRectW += org_screenx - updRectX;
+        updRectW = (updRectW + 3) & 0xfc; // Make the value dividable by 4, round up.
 
-    /** put nibble values in the scanlines **/
-    scanline[0][s] = paletteptr[t];
-    scanline[1][s] = paletteptr[t2];
-    scanline[2][s] = paletteptr[t3];
-    scanline[3][s++] = paletteptr[t4];
-
-    d+=220/4; // jump to read byte directly below in screenbuffer
+        uint8_t org_screeny = updRectY;
+        updRectY &= 0xfc; // Make the value dividable by 4.
+        updRectH += org_screeny - updRectY;
+        updRectH = (updRectH + 7) & 0xf8; // Make the value dividable by 8 (because of loop unroll optimization), round up.
     }
 
-#ifdef PROJ_USE_FPS_COUNTER
-    if (x>=8 ) {
-#else
-    {
 
-#endif
+    #ifdef PROJ_USE_FPS_COUNTER
+    xptr = 8;
+    setDRAMptr(8, 0);
+    #else
+    xptr = 0;
+    setDRAMptr(0, 0);
+    #endif
 
-        /** draw scanlines **/
-        for (s=0;s<176;) {
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+    for (x=updRectX; x<updRectX+updRectW; x+=4) {
+        d = scrbuf+(x>>2);// point to beginning of line in data
+
+        /** find colours in one scanline **/
+        uint8_t s=0;
+        d += (updRectY * 220/4);
+        for (y=updRectY; y<updRectY+updRectH; y++) {
+            uint8_t tdata = *d;
+            uint8_t t4 = tdata & 0x03; tdata >>= 2;// lowest half-nibble
+            uint8_t t3 = tdata & 0x03; tdata >>= 2;// second lowest half-nibble
+            uint8_t t2 = tdata & 0x03; tdata >>= 2;// second highest half-nibble
+            uint8_t t = tdata & 0x03;// highest half-nibble
+
+            /** put nibble values in the scanlines **/
+            scanline[0][y] = paletteptr[t];
+            scanline[1][y] = paletteptr[t2];
+            scanline[2][y] = paletteptr[t3];
+            scanline[3][y] = paletteptr[t4];
+
+            d += 220/4; // jump to read byte directly below in screenbuffer
         }
-        for (s=0;s<176;) {
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        }
-        for (s=0;s<176;) {
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-        }
-        for (s=0;s<176;) {
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+
+        #ifdef PROJ_USE_FPS_COUNTER
+        if (x>=8 ) {
+        #else
+        {
+
+        #endif
+
+            // Draw 8 vertical pixels at a time for performance reasons
+            setDRAMptr(x, updRectY);
+            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+            }
+            setDRAMptr(x+1, updRectY);
+            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+            }
+            setDRAMptr(x+2, updRectY);
+            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
+            }
+            setDRAMptr(x+3, updRectY);
+            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+            }
         }
     }
-  }
+
+    #ifdef POK_SIM
+    simulator.refreshDisplay();
+    #endif
 }
 
 // Copy sprite pixels to the scanline
@@ -552,19 +589,27 @@ for(x=0;x<220;x+=4)
 #define UNROLLED_LOOP_N_(n) UNROLLED_LOOP_##n()
 #define UNROLLED_LOOP_N(n) UNROLLED_LOOP_N_(n)
 
-/**
-Update the screen buffer of 220x176 pixels and sprites to LCD.
-
-If drawSpritesOnly=true only sprites are updated to LCD and the dirty rect is drawn behind the sprite current and previous
-location.
-If drawSpritesOnly=false both the screen buffer (using the update rect) and sprites are updated to LCD.
-
-Limitations of sprites:
-- Sprite is enabled if sprites.bitmapData is not NULL
-- All enabled sprites must be at the beginning of the sprites array.
+/***
+ * Update the screen buffer of 220x176 pixels, 4 colors and free size 4 color sprites to LCD.
+ *
+ * The update rect is used for drawing only part of the screen buffer to LCD. Because of speed optimizations, the
+ * x, y, and width of the update rect must be dividable by 4 pixels, and the height must be dividable by 8 pixels.
+ * Note: The update rect is currently used for 220x176, 4 colors, screen mode only.
+ * If drawSpritesOnly=true, only sprites are fully updated to LCD. However, the dirty rect of the screen buffer is
+ * drawn behind the sprite current and previous location.
+ * Note: Sprite is enabled if sprite.bitmapData is not NULL. Also all enabled sprites must be at the beginning of
+ * the sprites array. No gaps are allowed in the array.
+ * @param scrbuf The screen buffer.
+ * @param updRectX The update rect.
+ * @param updRectY The update rect.
+ * @param updRectW The update rect.
+ * @param updRectH The update rect.
+ * @param paletteptr The screen palette.
+ * @param sprites The sprite array.
+ * @param drawSpritesOnly True, if only sprites are drawn. False, if both sprites and the screen buffer are drawn.
 */
 void Pokitto::lcdRefreshMode1Spr(
-    uint8_t * scrbuf, uint8_t screenx, uint8_t screeny, uint8_t screenw, uint8_t screenh, uint16_t* paletteptr,
+    uint8_t * scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr,
     SpriteInfo* sprites, bool drawSpritesOnly) {
 
     // In direct mode draw only sprites and their dirty rects. Return now if there are no sprites
@@ -576,16 +621,16 @@ void Pokitto::lcdRefreshMode1Spr(
     const uint8_t transparentColor = 0;  // fixed palette index 0 for transparency
 
     // If not the full screen is updated, check the validity of the update rect.
-    if ( screenx != 0 || screeny != 0 ||screenw != LCDWIDTH ||screenh != LCDHEIGHT ) {
-        uint8_t org_screenx = screenx;
-        screenx &= 0xfc; // Make the value dividable by 4.
-        screenw += org_screenx - screenx;
-        screenw = (screenw + 3) & 0xfc; // Make the value dividable by 4, round up.
+    if ( updRectX != 0 || updRectY != 0 ||updRectW != LCDWIDTH ||updRectH != LCDHEIGHT ) {
+        uint8_t org_screenx = updRectX;
+        updRectX &= 0xfc; // Make the value dividable by 4.
+        updRectW += org_screenx - updRectX;
+        updRectW = (updRectW + 3) & 0xfc; // Make the value dividable by 4, round up.
 
-        uint8_t org_screeny = screeny;
-        screeny &= 0xfc; // Make the value dividable by 4.
-        screenh += org_screeny - screeny;
-        screenh = (screenh + 7) & 0xf8; // Make the value dividable by 8 (because of loop unroll optimization), round up.
+        uint8_t org_screeny = updRectY;
+        updRectY &= 0xfc; // Make the value dividable by 4.
+        updRectH += org_screeny - updRectY;
+        updRectH = (updRectH + 7) & 0xf8; // Make the value dividable by 8 (because of loop unroll optimization), round up.
     }
 
     // Calculate the current  amount of sprites
@@ -613,8 +658,8 @@ void Pokitto::lcdRefreshMode1Spr(
         const uint8_t BITSHIFT_MODE_MIDDLE_BYTE = 0;
         const uint8_t BITSHIFT_MODE_FIRST_BYTE = 1;
         const uint8_t BITSHIFT_MODE_LAST_BYTE = 2;
-        uint8_t scanlineMinY = 255; // Init to uninitialized value.
-        uint8_t scanlineMaxY = 0; // Init to uninitialized value.
+        uint8_t scanlineMinY = 255; // Init to uninitialized value. Do not draw by default.
+        uint8_t scanlineMaxY = 0; // Init to uninitialized value. Do not draw by default.
 
         //*** CALCULATE DIRTY RECTS AND RESOLVE WHICH SPRITES BELONG TO THIS SCANLINE GROUP ***
 
@@ -643,12 +688,12 @@ void Pokitto::lcdRefreshMode1Spr(
                 // Handle the screen buffer update rect after all sprites
                 else if(!drawSpritesOnly){
 
-                    sprx = screenx;
-                    spry = screeny;
-                    sprw = screenw;
-                    sprh = screenh;
-                    sprOldX = screenx;
-                    sprOldY = screeny;
+                    sprx = updRectX;
+                    spry = updRectY;
+                    sprw = updRectW;
+                    sprh = updRectH;
+                    sprOldX = updRectX;
+                    sprOldY = updRectY;
                     isCurrentSpriteOutOfScreen = false;
                     isOldSpriteOutOfScreen = false;
                 }
@@ -738,12 +783,12 @@ void Pokitto::lcdRefreshMode1Spr(
             if (addW != 0) {
                 if (scanlineMinY > addW )
                     scanlineMinY -= addW;
-                else if( scanlineMaxY + addW < screeny+screenh)
+                else if( scanlineMaxY + addW < updRectY+updRectH)
                     scanlineMaxY += addW;
                 else {
                     // Draw full height scanline
-                    scanlineMinY = screeny;
-                    scanlineMaxY = screeny+screenh-1;
+                    scanlineMinY = updRectY;
+                    scanlineMaxY = updRectY+updRectH-1;
                 }
             }
         }

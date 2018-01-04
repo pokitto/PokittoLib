@@ -202,7 +202,7 @@ public:
     /** Fill display buffer */
     static void fillScreen(uint16_t);
     /** Send display buffer to display hardware */
-    static void update(bool useDirectMode=false, uint8_t x=0, uint8_t y=0, uint8_t w=LCDWIDTH, uint8_t h=LCDHEIGHT);
+    static void update(bool useDirectMode=false, uint8_t updRectX=0, uint8_t updRectY=0, uint8_t updRectW=LCDWIDTH, uint8_t updRectH=LCDHEIGHT);
     /** Forced update of LCD display memory with a given pixel buffer */
     static void lcdRefresh(unsigned char*, bool useDirectMode=false);
     /** Clear LCD hardware memory */

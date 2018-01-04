@@ -1025,12 +1025,12 @@
 	"Synth.h"
 	"HWSound.h"
 
-1509275042 c:\git\pokittolib2\pokitto\pokitto_settings.h
+1512078240 c:\git\pokittolib2\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1509395065 c:\git\pokittolib2\pokitto\pokitto_libs\micropython\my_settings.h
 
-1509275041 c:\git\pokittolib2\pokitto\pokitto_core\pokittocore.h
+1514924618 c:\git\pokittolib2\pokitto\pokitto_core\pokittocore.h
 	<stdint.h>
 	<math.h>
 	"pwmout_api.h"
@@ -1424,7 +1424,7 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1508094660 c:\git\pokittolib2\pokitto\pokitto_hw\hwlcd.h
+1515098415 c:\git\pokittolib2\pokitto\pokitto_hw\hwlcd.h
 	"mbed.h"
 	"gpio_api.h"
 	"pinmap.h"
@@ -1459,7 +1459,7 @@
 1508094660 c:\git\pokittolib2\pokitto\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
-1509275226 c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.h
+1514924618 c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -1903,13 +1903,13 @@
 1509275041 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
-1509275041 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittoconsole.cpp
+1511685859 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittoconsole.cpp
 	"PokittoGlobs.h"
 	"PokittoConsole.h"
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1509275041 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittocore.cpp
+1514925595 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -1925,7 +1925,7 @@
 1509275041 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1509275301 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.cpp
+1515019183 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -1968,7 +1968,7 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1508094660 source:c:\git\pokittolib2\pokitto\pokitto_hw\hwlcd.cpp
+1515100386 source:c:\git\pokittolib2\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
@@ -2146,4 +2146,13 @@
 	"CircBuffer.h"
 
 1509273051 c:\git\pokittolib2\pokitto\pokitto_libs\usbdevice\usbserial\circbuffer.h
+
+1515104006 source:c:\git\pokittolib2\examples\helloworld\main.cpp
+	"Pokitto.h"
+	"gfxdata.h"
+
+1515011510 c:\git\pokittolib2\examples\helloworld\my_settings.h
+
+1514933206 c:\git\pokittolib2\examples\helloworld\gfxdata.h
+	<stdint.h>
 

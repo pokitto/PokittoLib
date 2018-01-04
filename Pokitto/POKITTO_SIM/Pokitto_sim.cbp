@@ -90,8 +90,20 @@
 		<Unit filename="../../Examples/HelloWorld/My_settings.h">
 			<Option target="HelloWorld" />
 		</Unit>
+		<Unit filename="../../Examples/HelloWorld/gfxdata.h">
+			<Option target="HelloWorld" />
+		</Unit>
 		<Unit filename="../../Examples/HelloWorld/main.cpp">
 			<Option target="HelloWorld" />
+		</Unit>
+		<Unit filename="../../Examples/updaterect/My_settings.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="../../Examples/updaterect/gfxdata.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="../../Examples/updaterect/main.cpp">
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="../POKITTO_APP/PokittoApp.h" />
 		<Unit filename="../POKITTO_APP/PokittoAppObject.h" />

@@ -6,8 +6,10 @@ int main () {
     mygame.begin();
     while (mygame.isRunning()) {
         if (mygame.update()) {
-            mygame.display.print("Hello World!");
-            }
-        }
 
+            mygame.display.setClipRect();
+            drawBitmap();
+            mygame.display.print("Hello World!");
+        }
+    }
 }

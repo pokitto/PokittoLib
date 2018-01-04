@@ -787,8 +787,20 @@ void Core::titleScreen(const char*  name, const uint8_t *logo){
 	}
 }
 
-bool Core::update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
-#if POK_STREAMING_MUSIC
+/**
+ * Update all the subsystems, like graphics, audio, events, etc.
+ * Note: the update rect is used for drawing only part of the screen buffer to LCD. Because of speed optimizations,
+ * the x, y, and width of the update rect must be dividable by 4 pixels, and the height must be dividable by 8 pixels.
+ * The update rect is currently used for 220x176, 4 colors, screen mode only.
+ * @param useDirectMode True, if only direct screen drawing is used. False, if the screen buffer is drawn. Note: If sprites are enabled, they are drawn in both modes.
+ * @param updRectX The update rect.
+ * @param updRectY The update rect.
+ * @param updRectW The update rect.
+ * @param updRectH The update rect.
+ */
+bool Core::update(bool useDirectMode, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH) {
+
+    #if POK_STREAMING_MUSIC
         sound.updateStream();
     #endif
 
@@ -826,7 +838,7 @@ bool Core::update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h
 			updatePopup();
 			displayBattery();
 
-            display.update(useDirectMode, x, y, w, h); //send the buffer to the screen
+            display.update(useDirectMode, updRectX, updRectY, updRectW, updRectH); //send the buffer to the screen
 
             frameEndMicros = 1; //jonne
 

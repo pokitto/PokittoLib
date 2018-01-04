@@ -70,7 +70,7 @@ extern void lcdWakeUp();
 extern void lcdRefresh(uint8_t *, uint16_t*);
 extern void lcdRefreshAB(uint8_t *, uint16_t*);
 extern void lcdRefreshGB(uint8_t *, uint16_t*);
-extern void lcdRefreshMode1(uint8_t *, uint16_t*);
+extern void lcdRefreshMode1(uint8_t* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr);
 extern void lcdRefreshMode1Spr(uint8_t * scrbuf, uint8_t screenx, uint8_t screeny, uint8_t screenw, uint8_t screenh, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool drawSpritesOnly);
 extern void lcdRefreshMode2(uint8_t *, uint16_t*);
 extern void lcdRefreshMode3(uint8_t *, uint16_t*);
