@@ -1,6 +1,6 @@
 # uPyGame performance test
-# 1) Drawing a surface of 16x16 pixels 100 times a frame gives 16 Fps (full speed). 4-bit colors for both screen and the surface.  
-# 2) Drawing a surface of 16x16 pixels 200 times a frame gives 12 Fps (full speed). 4-bit colors for both screen and the surface.  
+# 1) Drawing a surface of 16x16 pixels 100 times a frame gives 16 Fps (full speed). 4-bit colors for both screen and the surface.
+# 2) Drawing a surface of 16x16 pixels 200 times a frame gives 12 Fps (full speed). 4-bit colors for both screen and the surface.
 
 import upygame as upg
 import framebuf
@@ -8,6 +8,9 @@ import urandom as random
 
 upg.display.init()
 screen_sf = upg.display.set_mode() # full screen
+
+# Set palette
+upg.display.set_palette_16bit([0,4124,1984,65535]);
 
 # pokitto picture
 w2 = 16
@@ -46,23 +49,23 @@ while True:
 
     eventtype = upg.event.poll()
     if eventtype != upg.NOEVENT:
-        if eventtype.type() == upg.KEYDOWN:
-            if eventtype.key() == upg.K_RIGHT:
+        if eventtype.type== upg.KEYDOWN:
+            if eventtype.key == upg.K_RIGHT:
                 vx = 1
-            if eventtype.key() == upg.K_LEFT:
+            if eventtype.key == upg.K_LEFT:
                 vx = -1
-            if eventtype.key() == upg.K_UP:
+            if eventtype.key == upg.K_UP:
                 vy = -1
-            if eventtype.key() == upg.K_DOWN:
+            if eventtype.key == upg.K_DOWN:
                 vy = 1
-        if eventtype.type() == upg.KEYUP:
-            if eventtype.key() == upg.K_RIGHT:
+        if eventtype.type == upg.KEYUP:
+            if eventtype.key == upg.K_RIGHT:
                 vx = 0
-            if eventtype.key() == upg.K_LEFT:
+            if eventtype.key == upg.K_LEFT:
                 vx = 0
-            if eventtype.key() == upg.K_UP:
+            if eventtype.key == upg.K_UP:
                 vy = 0
-            if eventtype.key() == upg.K_DOWN:
+            if eventtype.key == upg.K_DOWN:
                 vy = 0
 
     for i in range(1,200):
