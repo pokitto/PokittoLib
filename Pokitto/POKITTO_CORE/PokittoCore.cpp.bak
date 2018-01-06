@@ -442,18 +442,10 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
 void Core::setVolLimit() {
     display.enableDirectPrinting(true);
     display.adjustCharStep = 0;
-    //sound.setMaxVol(VOLUME_HEADPHONE_MAX);
+    sound.setMaxVol(VOLUME_HEADPHONE_MAX);
     int dstate=1;
     bool wipe = true;
     float vol = sound.getVolume(); float tvol;
-    #ifndef POK_SIM
-    vol=eeprom_read_byte((uint16_t*)EESETTINGS_VOL);
-    #endif
-    if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
-    else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
-    for (uint8_t t=0;t<vol;t++) {
-            sound.setVolume(t);
-    }
     volbar_visible=0;
     while (core.isRunning() && dstate){
         switch (dstate) {
@@ -511,7 +503,7 @@ void Core::setVolLimit() {
             if (aBtn()) {dstate=0;while(aBtn()){buttons.pollButtons();};break;}
             if (rightBtn()) {
                     if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
-                    else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.25f*VINCMULT;
+                    else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.025f*VINCMULT;
                     else vol += 0.05f*VINCMULT;
                     if (vol > VOLUME_HEADPHONE_MAX + 20) {
                             sound.setMaxVol(VOLUME_SPEAKER_MAX);
@@ -522,8 +514,7 @@ void Core::setVolLimit() {
                     break;
                     }
             if (leftBtn()) {
-                    if (vol >= VOLUME_HEADPHONE_MAX) vol -= 0.25f*VINCMULT;
-                    else vol -= 0.05f*VINCMULT;
+                    vol -= 0.025f*VINCMULT;
                     if (vol <= VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_HEADPHONE_MAX);
                     if (vol < 0) vol=0;
                     sound.setVolume(vol);
@@ -533,11 +524,6 @@ void Core::setVolLimit() {
             break;
         }
     }
-    #ifndef POK_SIM
-    if (vol != eeprom_read_byte((uint16_t*)EESETTINGS_VOL)) eeprom_write_byte((uint16_t*)EESETTINGS_VOL,(uint8_t)vol);
-    #endif
-    sound.setVolume(vol);
-    sound.volumeUp();
 }
 
 void Core::begin() {
@@ -599,7 +585,6 @@ void Core::begin() {
     #endif
 	#if POK_ENABLE_SOUND > 0
         sound.begin();
-        sound.volumeUp();
 
 	//mute when B is held during start up or if battery is low
 	battery.update();

@@ -402,8 +402,5 @@
 #define SPRITE_COUNT 4  // The default max sprite count
 #endif
 
-/** SYSTEM SETTINGS ADDRESSES IN EEPROM **/
-#define EESETTINGS_VOL 4000
-
 #endif // POKITTO_SETTINGS_H
 
