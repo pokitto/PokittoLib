@@ -166,6 +166,7 @@ public:
   static void wait(uint16_t);
   /** FPS */
   static uint32_t fps_counter;
+  static bool fps_counter_updated;
 private:
   /** Time of next refresh */
   static uint32_t refreshtime;

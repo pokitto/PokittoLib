@@ -30,6 +30,7 @@
 					<Add option="-g" />
 					<Add option="-DPOK_SIM" />
 					<Add directory="../POKITTO_LIBS/MicroPython" />
+					<Add directory="../../../../micropython2/ports/unix" />
 				</Compiler>
 				<Linker>
 					<Add library="../POKITTO_LIBS/MicroPython/libmicropython_win.a" />
@@ -83,15 +84,17 @@
 		</Unit>
 		<Unit filename="../../Examples/Bitmap/bitmap.cpp">
 			<Option target="Bitmap" />
+			<Option target="HelloWorld" />
 		</Unit>
 		<Unit filename="../../Examples/Bitmap/pokitto_icon.h">
 			<Option target="Bitmap" />
+			<Option target="HelloWorld" />
 		</Unit>
 		<Unit filename="../../Examples/HelloWorld/My_settings.h">
-			<Option target="HelloWorld" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="../../Examples/HelloWorld/main.cpp">
-			<Option target="HelloWorld" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="../POKITTO_APP/PokittoApp.h" />
 		<Unit filename="../POKITTO_APP/PokittoAppObject.h" />
@@ -211,10 +214,13 @@
 		<Unit filename="../POKITTO_LIBS/MicroPython/main.cpp">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_data.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/main.py">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/example_main.py">
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/marsattack_classes.py">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/marsattack_data.py">
 			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="../POKITTO_LIBS/MicroPython/src_py/sprite.py">
@@ -311,7 +317,12 @@
 		<Extensions>
 			<code_completion />
 			<envvars />
-			<debugger />
+			<debugger>
+				<search_path add="C:\git\micropython2\ports\unix" />
+				<search_path add="C:\git\micropython2\py" />
+				<search_path add="C:\git\micropython2\extmod" />
+				<search_path add="C:\git\micropython2\ports\pokitto\modules" />
+			</debugger>
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

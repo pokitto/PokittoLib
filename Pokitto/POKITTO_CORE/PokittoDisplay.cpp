@@ -301,37 +301,42 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
     #endif // POK_SHOW_VOLUME
 
     /** draw FPS if visible **/
-    #ifdef PROJ_USE_FPS_COUNTER
+    #ifdef PROJ_SHOW_FPS_COUNTER
 
-	// Store current state
-    bool temp = isDirectPrintingEnabled();
-    uint16_t oldcol = directcolor;
-    uint16_t oldinvisiblecolor = invisiblecolor;
-    uint16_t oldbgcol = directbgcolor;
-    bool olddirecttextrotated = directtextrotated;
-    int8_t oldadjustCharStep = adjustCharStep;
-    const unsigned char * oldFont = font;
+    if(core.fps_counter_updated) {
 
-    // Print FPS
-    char str[16];
-    sprintf(str,"FPS:%d ", (int)core.fps_counter);
-    directcolor = COLOR_WHITE;
-    invisiblecolor = COLOR_BLACK;
-    directbgcolor = 0x0001; // Cannot be black as that is transparent color
-    directtextrotated = true;
-    adjustCharStep = 0;
-    setFont(fontC64);
-    enableDirectPrinting(true);
-    print(0,0, str);
+        // Store current state
+        bool temp = isDirectPrintingEnabled();
+        uint16_t oldcol = directcolor;
+        uint16_t oldinvisiblecolor = invisiblecolor;
+        uint16_t oldbgcol = directbgcolor;
+        bool olddirecttextrotated = directtextrotated;
+        int8_t oldadjustCharStep = adjustCharStep;
+        const unsigned char * oldFont = font;
 
-	// Restore state
-    enableDirectPrinting(temp);
-    directcolor = oldcol;
-    invisiblecolor =  oldinvisiblecolor;
-    directbgcolor = oldbgcol;
-    directtextrotated = olddirecttextrotated;
-    adjustCharStep = oldadjustCharStep;
-    setFont(font);
+        // Print FPS
+        char str[16];
+        sprintf(str,"FPS:%d ", (int)core.fps_counter);
+        directcolor = COLOR_WHITE;
+        invisiblecolor = COLOR_BLACK;
+        directbgcolor = 0x0001; // Cannot be black as that is transparent color
+        directtextrotated = true;
+        adjustCharStep = 0;
+        setFont(fontC64);
+        enableDirectPrinting(true);
+        print(0,0, str);
+
+        // Restore state
+        enableDirectPrinting(temp);
+        directcolor = oldcol;
+        invisiblecolor =  oldinvisiblecolor;
+        directbgcolor = oldbgcol;
+        directtextrotated = olddirecttextrotated;
+        adjustCharStep = oldadjustCharStep;
+        setFont(font);
+
+        core.fps_counter_updated = false;
+    }
     #endif
 }
 
@@ -2276,7 +2281,7 @@ void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* pale
     }
     m_sprites[index].w = w;
     m_sprites[index].h = h;
-    memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
+    if( palette4x16bit ) memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
 }
 
 /**
