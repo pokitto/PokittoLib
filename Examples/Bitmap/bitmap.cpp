@@ -8,7 +8,7 @@ Pokitto::Core mygame; //create Pokitto application instance
 int main () {
     mygame.begin(); // start the application
     mygame.display.load565Palette(pokitto_icon_pal); //load the palette for the image
-    mygame.display.bgcolor(1);
+    mygame.display.bgcolor=0;
     /* the "while" loop runs as long as the program is running */
     while (mygame.isRunning()) {
         /* mygame.update() is processed whenever it is time to update the screen */
