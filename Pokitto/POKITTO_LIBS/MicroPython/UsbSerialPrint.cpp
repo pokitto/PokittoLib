@@ -75,7 +75,7 @@ extern "C" int pc_printf(const char* format, ...) {
     return ret;
 }
 
-#else !USE_USB_SERIAL_PRINT
+#else //!USE_USB_SERIAL_PRINT
 
 extern "C" int pc_putc(int c) { return 0;}
 extern "C" int pc_getc() {return 0;}
