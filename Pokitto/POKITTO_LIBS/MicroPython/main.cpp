@@ -38,9 +38,6 @@
 
 #ifndef POK_SIM
 #include "USBSerial.h"
-#ifdef USE_SEGGER_SERIAL_PRINT
-#include "SEGGER_RTT.h"
-#endif
 #endif
 
 #include "PythonBindings.h"
@@ -59,11 +56,10 @@ int main () {
 
     game.begin();
 
-    game.display.persistence = 1;
+    game.display.persistence = 0;
 
     game.display.setFont(fontC64);
 
-    game.setFrameRate(25);  // No limits!
     if (game.isRunning()) {
 
         #if PROJ_PYTHON_REPL
@@ -77,7 +73,7 @@ int main () {
         #pragma GCC diagnostic ignored "-Wwrite-strings" // The strings below will not be changed in the function called
         char* argv[] = {
             "",
-            PYTHON_SOURCE_FILE_PATH"main.py"
+            PYTHON_SOURCE_FILE_PATH"example_main.py"
         };
         #pragma GCC diagnostic pop
 
