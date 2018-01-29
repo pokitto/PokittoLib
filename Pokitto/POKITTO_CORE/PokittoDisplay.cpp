@@ -512,7 +512,7 @@ void Display::fillScreen(uint16_t c) {
     c = c & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
     if (bpp==1 && c) c=0xFF; // set all pixels
     else if (bpp==2) {
-        c = bgcolor & 0x3;
+        c = c & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
     } else {
