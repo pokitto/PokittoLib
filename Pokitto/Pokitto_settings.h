@@ -362,9 +362,9 @@
 
 /** AUDIO **/
 #define POK_AUD_PIN P2_19
-#define POK_AUD_PWM_US 31
-#define POK_AUD_FREQ 11025 //16000 //14285 //24000 // 14285 // 57143 // 8000 //11025// audio update frequency in Hz
-#define POK_CINC_MULTIPLIER 2 // multiplies synth cycle table
+#define POK_AUD_PWM_US 15 //31 //Default value 31
+#define POK_AUD_FREQ 22050 //Valid values: 8000, 11025, 16000, 22050 // audio update frequency in Hz
+//#define POK_CINC_MULTIPLIER 0 // multiplies synth cycle table
 #define POK_STREAMFREQ_HALVE  0  // if true, stream update freq is half audio freq
 #define POK_STREAM_LOOP 1 //master switch
 

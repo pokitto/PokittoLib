@@ -144,7 +144,6 @@ extern void update_SDAudioStream();
 
 
 extern void pokSoundIRQ();
-extern void pokSoundBufferedIRQ();
 
 #if POK_STREAMING_MUSIC > 0
     extern unsigned char buffers[][BUFFER_SIZE];
