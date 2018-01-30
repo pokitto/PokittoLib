@@ -125,7 +125,13 @@ extern "C" void TIMER32_0_IRQHandler(void)
 	if (Chip_TIMER_MatchPending(LPC_TIMER32_0, 1)) {
 		Chip_TIMER_ClearMatch(LPC_TIMER32_0, 1);
 		//pokSoundBufferedIRQ();
+		#if POK_GBSOUND > 0
+    	/** GAMEBUINO SOUND **/
+    	Pokitto::audio_IRQ();
+    	#else
+    	/** NOT GAMEBUINO SOUND **/
 		pokSoundIRQ();
+		#endif
 	}
 }
 
@@ -230,10 +236,10 @@ void Pokitto::soundInit() {
     pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
     pwmout_write(&audiopwm,0.1f);
 
-    #if POK_GBSOUND > 0
+    //#if POK_GBSOUND > 0
     /** GAMEBUINO SOUND **/
-    audio.attach_us(&audio_IRQ, 1000000/(POK_AUD_FREQ>>0));
-    #else
+    //audio.attach_us(&audio_IRQ, 1000000/(POK_AUD_FREQ>>0));
+    //#else
     /** NOT GAMEBUINO SOUND **/
     //audio.attach_us(&pokSoundBufferedIRQ, 1000000/(POK_AUD_FREQ>>0));
      /* Initialize 32-bit timer 0 clock */
@@ -266,7 +272,7 @@ void Pokitto::soundInit() {
 
 	/* Enable both timer interrupts */
 	NVIC_EnableIRQ((IRQn_Type)TIMER_32_0_IRQn);
-    #endif // POK_GAMEBUINO_SUPPORT
+    //#endif // POK_GAMEBUINO_SUPPORT
 
     //emptySong();
     //emptyOscillators();
