@@ -114,10 +114,44 @@ inline void write_data_16(uint16_t data)
 
 /**************************************************************************/
 /*!
+    @brief  Pump data to the lcd, 16-bit bus, public function
+*/
+/**************************************************************************/
+void Pokitto::pumpDRAMdata(uint16_t* data,uint16_t counter)
+{
+   while (counter--) {
+   CLR_CS;
+   SET_CD;
+   SET_RD;
+   setup_data_16(*data++);
+   CLR_WR;
+   SET_WR;
+   SET_CS;
+   }
+}
+
+
+/**************************************************************************/
+/*!
     @brief  Point to a (x,y) location in the LCD DRAM
 */
 /**************************************************************************/
 static inline void setDRAMptr(uint8_t xptr, uint8_t yoffset)
+{
+    write_command(0x20);  // Vertical DRAM Address
+    write_data(yoffset);
+    write_command(0x21);  // Horizontal DRAM Address
+    write_data(xptr);  //
+    write_command(0x22); // write data to DRAM
+    CLR_CS_SET_CD_RD_WR;
+}
+
+/**************************************************************************/
+/*!
+    @brief  Point to a (x,y) location in the LCD DRAM, public function
+*/
+/**************************************************************************/
+void Pokitto::setDRAMpoint(uint8_t xptr, uint8_t yoffset)
 {
     write_command(0x20);  // Vertical DRAM Address
     write_data(yoffset);

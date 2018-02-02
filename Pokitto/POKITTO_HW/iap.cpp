@@ -116,6 +116,7 @@ int CopyPageToFlash (uint32_t address, uint8_t* data) {
 }
 
 __attribute__((section(".IAP_Code"))) int HelloFromIAP() {
+    #ifndef NOPETITFATFS
     static uint32_t array_data[WRITECOUNT];
     int i;
     /* Initialize the array data to be written to FLASH */
@@ -189,6 +190,7 @@ default:
     SCB->AIRCR = 0x05FA0004; //issue system reset
     while(1); //should never come here
     return teahupoo;
+    #endif //NOPETITFATFS
 }
 
 

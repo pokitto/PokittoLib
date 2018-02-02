@@ -44,6 +44,7 @@
 #include "Synth.h"
 #include "timer_11u6x.h"
 #include "clock_11u6x.h"
+#include "HWLCD.h"
 //#include "beat_11025.h"
 
 
@@ -76,7 +77,11 @@ using namespace Pokitto;
 /** stream output and status */
 uint8_t Pokitto::streambyte,Pokitto::streamon;
 
-uint8_t soundbuf[256], soundbufindex=0, Pokitto::HWvolume=0;
+uint8_t soundbuf[SBUFSIZE];
+uint8_t Pokitto::HWvolume=0;
+uint16_t soundbufindex;
+uint8_t* soundbufptr;
+
 bool volpotError=false; //test for broken MCP4018
 
 uint16_t soundbyte;
@@ -119,6 +124,7 @@ uint16_t soundbyte;
  */
 
 uint32_t p=0;
+uint8_t pixx=0, pixy=0;
 
 extern "C" void TIMER32_0_IRQHandler(void)
 {
@@ -130,7 +136,11 @@ extern "C" void TIMER32_0_IRQHandler(void)
     	Pokitto::audio_IRQ();
     	#else
     	/** NOT GAMEBUINO SOUND **/
-		pokSoundIRQ();
+            #if POK_SOUND_BUFFERED
+                pokSoundBufferedIRQ();
+            #else
+                pokSoundIRQ();
+            #endif
 		#endif
 	}
 }
@@ -192,7 +202,7 @@ void Pokitto::dac_write(uint8_t value) {
     value >>= 1;
     if (value & 1) SET_DAC7 else CLR_DAC7;
     #else
-    //uint32_t val;
+
     //val = value<<28; //lower 4 bits go higher - because port mask is used, no AND is needed to clear bits
     //val += value<<(15-4); //higher 4 bits go lower. No need to shift by 15 because bits are in the higher nibble
     /* daniel has made a mistake with ports */
@@ -202,13 +212,17 @@ void Pokitto::dac_write(uint8_t value) {
     //LPC_GPIO_PORT->MPIN[1] = val; // write bits to port
     //CLR_MASK_DAC;
     /* fixed here */
-    /*val=value;
+    #define MASKED_DAC 0
+    #if MASKED_DAC
+    uint32_t val;
+    val=value;
     SET_MASK_DAC_LO;
     LPC_GPIO_PORT->MPIN[1] = val<<28; // write lower 4 bits to port
     CLR_MASK_DAC_LO;
     SET_MASK_DAC_HI;
     LPC_GPIO_PORT->MPIN[2] = val<<(20-4); // write bits to port
-    CLR_MASK_DAC_HI; */
+    CLR_MASK_DAC_HI;
+    #else
     if (value & 1) SET_DAC0 else CLR_DAC0;
     value >>= 1;
     if (value & 1) SET_DAC1 else CLR_DAC1;
@@ -224,6 +238,7 @@ void Pokitto::dac_write(uint8_t value) {
     if (value & 1) SET_DAC6 else CLR_DAC6;
     value >>= 1;
     if (value & 1) SET_DAC7 else CLR_DAC7;
+    #endif //MASKED_DAC
     //CLR_MASK_DAC;
     #endif // BOARDREV
     #endif
@@ -311,15 +326,19 @@ void pokPlayStream() {
 
 
 
-void pokSoundBufferedIRQ() {
-           uint8_t output = soundbuf[soundbufindex++];
+inline void pokSoundBufferedIRQ() {
+           uint8_t output = soundbuf[soundbufindex+=Pokitto::streamon];
+           if (soundbufindex==SBUFSIZE) soundbufindex=0;
            //if (p==sizeof(beat_11025_raw)) p=0;
            //soundbuf[soundbufindex++] = output;
-           uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
-           obj->pwm->MATCHREL1 = t_on;
+           //uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
+           //obj->pwm->MATCHREL1 = t_on;
+           dac_write(output);
+
+           //setDRAMpoint(pixx, pixy);
 }
 
-void pokSoundIRQ() {
+inline void pokSoundIRQ() {
     //#define TICKY 0xFFFF //160
     //#define INCY 409
     uint8_t output=0;
@@ -411,12 +430,14 @@ void pokSoundIRQ() {
             #endif // decide where synth is output
             soundbyte = (output+streambyte)>>1;
             soundbuf[soundbufindex++]=soundbyte;
+            if (soundbufindex==256) soundbufindex=0;
         #endif //POK_ENABLE_SOUND
     #endif // HARDWARE
 }
 
 
 void Pokitto::updateSDAudioStream() {
+    #ifndef NOPETITFATFS
     if (streamPaused()) return;
 
     #if POK_STREAMING_MUSIC > 0
@@ -442,6 +463,7 @@ void Pokitto::updateSDAudioStream() {
         #endif
     }
     #endif
+    #endif // NOPETITFATFS
 }
 
 

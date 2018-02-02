@@ -3192,7 +3192,7 @@
 	"Synth.h"
 	"dma_11u6x.h"
 
-1517247874 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
+1517553769 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"mbed.h"
@@ -3206,7 +3206,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1517248559 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1517595486 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3605,7 +3605,7 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
+1517516171 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
 	"mbed.h"
 	"gpio_api.h"
 	"pinmap.h"
@@ -3613,11 +3613,12 @@
 1517247874 c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\hal\pinmap.h
 	"PinNames.h"
 
-1517248405 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.h
+1517497192 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.h
 	"mbed.h"
 	"Pokitto_settings.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
+1517437002 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
+	"Pokitto_settings.h"
 	"diskio.h"
 	"pff.h"
 	"connect.h"
@@ -4102,7 +4103,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1517595074 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -4115,10 +4116,10 @@
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
+1517436857 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1517595076 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4137,7 +4138,7 @@
 1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.cpp
 	"PokittoLogos.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
+1517556127 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4146,7 +4147,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1517248691 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1517436913 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4167,11 +4168,11 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1517516150 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
-1517248410 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1517597051 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -4181,6 +4182,7 @@
 	"Synth.h"
 	"timer_11u6x.h"
 	"clock_11u6x.h"
+	"HWLCD.h"
 
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\softwarei2c.h
 	"mbed.h"
@@ -4189,7 +4191,7 @@
 	"lpc_defs.h"
 	<stdint.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\iap.cpp
+1517437955 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\iap.cpp
 	<stdio.h>
 	<stdint.h>
 	<iap.h>
@@ -4244,4 +4246,131 @@
 
 1517248540 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
 	"Synth.h"
+
+1517497215 c:\pokittolib_git\pokittolib_curr\examples\waveplayer\my_settings.h
+
+1517489558 source:c:\pokittolib_git\pokittolib_curr\examples\waveplayer\wave_player.cpp
+	"Pokitto.h"
+	"HWSound.h"
+	<stdio.h>
+	<wave_player.h>
+
+1517482821 c:\pokittolib_git\pokittolib_curr\examples\waveplayer\wave_player.h
+	"Pokitto.h"
+
+1517556499 source:c:\pokittolib_git\pokittolib_curr\examples\waveplayer\main.cpp
+	"Pokitto.h"
+	"SDFileSystem.h"
+	"wave_player.h"
+
+1517063654 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\sdfilesystem.h
+	"mbed.h"
+	"FATFileSystem.h"
+	<stdint.h>
+
+1517314798 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilesystem.h
+	"FileSystemLike.h"
+	"FileHandle.h"
+	"ff.h"
+	"ffconf.h"
+	<stdint.h>
+
+1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ff.h
+	"integer.h"
+	"ffconf.h"
+
+1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\integer.h
+	<windows.h>
+	<tchar.h>
+
+1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ffconf.h
+
+1517063654 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc16.cpp
+	"CRC16.h"
+
+1517063654 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc16.h
+	"mbed.h"
+
+1517063654 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc7.cpp
+	"CRC7.h"
+
+1517063654 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc7.h
+	"mbed.h"
+
+1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ccsbcs.cpp
+	"ff.h"
+
+1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\diskio.cpp
+	"ffconf.h"
+	"diskio.h"
+	"mbed_debug.h"
+	"FATFileSystem.h"
+
+1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\diskio.h
+	"integer.h"
+
+1517247874 c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\api\mbed_debug.h
+	"device.h"
+	<stdio.h>
+	<stdarg.h>
+
+1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ff.cpp
+	"ff.h"
+	"diskio.h"
+	<stdarg.h>
+
+1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatdirhandle.cpp
+	<string.h>
+	"ff.h"
+	"FATDirHandle.h"
+
+1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatdirhandle.h
+	"DirHandle.h"
+
+1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilehandle.cpp
+	"ff.h"
+	"ffconf.h"
+	"mbed_debug.h"
+	"FATFileHandle.h"
+
+1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilehandle.h
+	"FileHandle.h"
+
+1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilesystem.cpp
+	"mbed.h"
+	"ffconf.h"
+	"mbed_debug.h"
+	"FATFileSystem.h"
+	"FATFileHandle.h"
+	"FATDirHandle.h"
+
+1517486643 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\sdfilesystem.cpp
+	"SDFileSystem.h"
+	"pinmap.h"
+	"diskio.h"
+	"CRC7.h"
+	"CRC16.h"
+
+1517247872 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+	"Pokitto.h"
+
+1517247872 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
+
+1517247872 source:c:\pokittolib_git\pokittolib_curr\examples\updateandcliprect\main.cpp
+	"Pokitto.h"
+	"gfxdata.h"
+
+1517247872 c:\pokittolib_git\pokittolib_curr\examples\updateandcliprect\my_settings.h
+
+1517247872 c:\pokittolib_git\pokittolib_curr\examples\updateandcliprect\gfxdata.h
+	<stdint.h>
+
+1517247872 source:c:\pokittolib_git\pokittolib_curr\examples\bitmap\bitmap.cpp
+	"Pokitto.h"
+	"pokitto_icon.h"
+
+1517247872 c:\pokittolib_git\pokittolib_curr\examples\bitmap\my_settings.h
+
+1517247872 c:\pokittolib_git\pokittolib_curr\examples\bitmap\pokitto_icon.h
+	<stdint.h>
 

@@ -67,6 +67,8 @@
     #include "Synth.h"
     #endif
     extern uint8_t soundbuf[];
+    extern uint16_t soundbufindex;
+    extern uint8_t* soundbufptr;
     #ifndef POK_SIM
         #include "HWSound.h"
     #endif // if not POK_SIM

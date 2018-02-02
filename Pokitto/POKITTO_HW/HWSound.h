@@ -42,6 +42,8 @@
 #define SPEAKER 3
 #define BUFFER_SIZE 512*4 //*8 //*8 // 512 // was 512 (works really well with crabator) was 256
 
+#define SBUFSIZE 512*4
+
 #if POK_BOARDREV == 1
  /** 2-layer board rev 1.3 **/
  #define DAC0_PORT   1

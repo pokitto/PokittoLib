@@ -224,6 +224,7 @@ uint16_t Sound::getMaxVol() {
 }
 
 void Sound::updateStream() {
+    #ifndef NOPETITFATFS
     #if POK_STREAMING_MUSIC
     if (oldBuffer != currentBuffer) {
         if (currentBuffer==0) fileReadBytes(&buffers[3][0],BUFFER_SIZE);
@@ -248,6 +249,7 @@ void Sound::updateStream() {
         #endif // POK_SIM
     }
     #endif
+    #endif // NOPETITFATFS
 }
 
 void Sound::begin() {

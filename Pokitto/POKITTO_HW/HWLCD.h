@@ -57,6 +57,8 @@ struct SpriteInfo {
     uint16_t palette[4];
 };
 
+extern void setDRAMpoint(uint8_t, uint8_t);
+extern void pumpDRAMdata(uint16_t*, uint16_t);
 extern void initBacklight();
 extern void setBacklight(float);
 extern void lcdFillSurface(uint16_t);
