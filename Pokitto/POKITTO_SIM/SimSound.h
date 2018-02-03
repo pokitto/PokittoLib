@@ -45,6 +45,7 @@
 #include <stdio.h>
 
 extern FILE* soundfile;
+#define SBUFSIZE 512*4
 extern uint8_t soundfilebuffer[2][SFBUFSIZE];
 extern uint8_t activesfbuf, writesfbuf; extern uint16_t sfbufindex;
 

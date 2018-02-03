@@ -4,6 +4,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-
+#define SBUFSIZE 512*4
 
 #endif

@@ -75,7 +75,8 @@ uint8_t streambyte,output,streamon=0;
 uint8_t test=false;
 float test2=0;
 
-uint8_t soundbuf[256], soundbufindex=0;
+uint8_t soundbuf[SBUFSIZE];
+uint16_t soundbufindex=0;
 
 uint8_t pokStreamPaused() {
     return !streamon;
@@ -176,6 +177,7 @@ void pokSoundIRQ() {
                 obj->pwm->MATCHREL1 = t_on;
             #endif // POK_SYNTH_TO_DAC
             soundbuf[soundbufindex++]=output;
+            if (soundbufindex==SBUFSIZE) soundbufindex=0;
         #endif //POK_ENABLE_SOUND
     #endif // HARDWARE
 
@@ -187,8 +189,9 @@ void pokSoundIRQ() {
                 output = o/2;
             //}
         #endif // STREAMING
-        soundbyte = output;
-        soundbuf[soundbufindex++]=output;
+        soundbyte = output/3; //decrease volume in simulator vs hardware
+        soundbuf[soundbufindex++]=soundbyte;
+        if (soundbufindex==SBUFSIZE) soundbufindex=0;
     #endif // POK_SIM
 }
 

@@ -439,7 +439,7 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
 
 
 #ifdef POK_SIM
-#define VINCMULT 1
+#define VINCMULT 0.1f
 #else
 #define VINCMULT 50
 #endif //POK_SIM
