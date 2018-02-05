@@ -4103,7 +4103,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1517595074 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1517662050 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -4147,7 +4147,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1517436913 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1517847303 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4373,4 +4373,84 @@
 
 1517247872 c:\pokittolib_git\pokittolib_curr\examples\bitmap\pokitto_icon.h
 	<stdint.h>
+
+1517846541 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\animation.cpp
+	"PokittoCore.h"
+	"Animation.h"
+
+1517846212 c:\pokittolib_git\pokittolib_curr\examples\feelgood\my_settings.h
+
+1484569849 c:\pokittolib_git\pokittolib_curr\examples\feelgood\animation.h
+
+1484513261 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_cheeks.c
+	<stdint.h>
+	"Animation.h"
+
+1484513519 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_dreamy.c
+	<stdint.h>
+	"Animation.h"
+
+1484513325 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_eyepupil.c
+	<stdint.h>
+	"Animation.h"
+
+1484569863 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_flat.c
+	<stdint.h>
+	"Animation.h"
+
+1484513325 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_grin.c
+	<stdint.h>
+	"Animation.h"
+
+1484513325 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_halfpupil.c
+	<stdint.h>
+	"Animation.h"
+
+1484513325 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_heart.c
+	<stdint.h>
+	"Animation.h"
+
+1484513325 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_lefteye.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_lids_closed.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_lids_halfeyes.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_lids_smug.c
+	<stdint.h>
+	"Animation.h"
+
+1484513344 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_oh.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_professoreyes.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_righteye.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_smile.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_smile_open.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_squint.c
+	<stdint.h>
+	"Animation.h"
+
+1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_tongue.c
+	<stdint.h>
+	"Animation.h"
 

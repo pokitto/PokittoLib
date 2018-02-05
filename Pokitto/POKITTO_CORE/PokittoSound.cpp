@@ -243,10 +243,11 @@ void Sound::updateStream() {
         streamcounter=0;
         #if POK_STREAM_LOOP > 0
         fileRewind();
-        #endif
-        #ifndef POK_SIM
-        streamon=0;
-        #endif // POK_SIM
+        #else
+            #ifndef POK_SIM
+                streamon=0;
+            #endif // POK_SIM
+        #endif // POK_STREAM_LOOP
     }
     #endif
     #endif // NOPETITFATFS
