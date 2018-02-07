@@ -34,10 +34,12 @@ struct OSC {
   byte adsr;
   byte tonic;
 
-  uint16_t count;
+  //uint16_t count;
+  uint32_t count;
 
   uint16_t vol;
-  uint16_t cinc; // how much to add per cycle
+  //uint16_t cinc; // how much to add per cycle
+  uint32_t cinc; // how much to add per cycle
   uint16_t output; // output is stored as  16 bit value and shifted before its put in OCR2B
 
   uint8_t adsrphase;

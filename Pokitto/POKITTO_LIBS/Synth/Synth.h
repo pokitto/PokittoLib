@@ -24,6 +24,7 @@
 #include "Synth_osc.h"
 #include "Synth_song.h"
 
+
 /* PROPER WAY
 void f() {}
 
@@ -119,7 +120,8 @@ extern BLOCK block[]; // array of blocks
 extern int8_t arptable[][5];
 
 extern uint16_t freqs[];
-extern uint16_t cincs[];
+//extern uint16_t cincs[];
+extern uint32_t cincs[];
 
 extern uint8_t xorshift8();
 extern uint16_t xorshift16();

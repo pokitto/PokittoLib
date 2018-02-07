@@ -6,10 +6,10 @@ extern int CopyPageToFlash(uint32_t,uint8_t*);
 extern char iaptest();
 extern void IAPstacksave();
 #define EEPROM_PROFILE 1
-extern void writeEEPROM( uint8_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount );
-extern void readEEPROM( uint8_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount );
-extern uint8_t eeprom_read_byte(uint8_t*);
-extern void eeprom_write_byte(uint8_t*,uint8_t);
+extern void writeEEPROM( uint16_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount );
+extern void readEEPROM( uint16_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount );
+extern uint8_t eeprom_read_byte(uint16_t*);
+extern void eeprom_write_byte(uint16_t*,uint8_t);
 
 /*****************************************************************************
  * $Id$

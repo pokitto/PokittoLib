@@ -170,6 +170,7 @@ Core::Core() {
 
 int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
     #ifndef POK_SIM
+    #ifndef NOPETITFATFS
     uint32_t counter=0;
     uint8_t data[256];
     /** prepare the flash writing **/
@@ -203,6 +204,7 @@ int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
             display.print(".");
         }
         }
+        #endif // NOPETITFATFS
         #endif // POK_SIM
     return 0; //success
 }
@@ -269,6 +271,7 @@ void Core::jumpToLoader() {
     bool flashloader=false, checkforboot=true;
     //check for loa.der on SD card
     #if POK_ENABLE_LOADER_UPDATES > 0
+    #ifndef NOPETITFATFS
     pokInitSD();
     if (fileOpen("LOA.DER", FILE_MODE_BINARY)==0) {
         //LOA.DER found on SD
@@ -280,6 +283,7 @@ void Core::jumpToLoader() {
         fileReadBytes((uint8_t*)tptr,4); //read jump address of loader on sd card
         fileRewind();
     }
+    #endif //NOPETITFATFS
     #endif
     //now start searching for bootkey
     while (checkforboot)
@@ -435,17 +439,25 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
 
 
 #ifdef POK_SIM
-#define VINCMULT 1
+#define VINCMULT 0.1f
 #else
 #define VINCMULT 50
 #endif //POK_SIM
 void Core::setVolLimit() {
     display.enableDirectPrinting(true);
     display.adjustCharStep = 0;
-    sound.setMaxVol(VOLUME_HEADPHONE_MAX);
+    //sound.setMaxVol(VOLUME_HEADPHONE_MAX);
     int dstate=1;
     bool wipe = true;
     float vol = sound.getVolume(); float tvol;
+    #ifndef POK_SIM
+    vol=eeprom_read_byte((uint16_t*)EESETTINGS_VOL);
+    #endif
+    if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
+    else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
+    for (uint8_t t=0;t<vol;t++) {
+            sound.setVolume(t);
+    }
     volbar_visible=0;
     while (core.isRunning() && dstate){
         switch (dstate) {
@@ -503,7 +515,7 @@ void Core::setVolLimit() {
             if (aBtn()) {dstate=0;while(aBtn()){buttons.pollButtons();};break;}
             if (rightBtn()) {
                     if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
-                    else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.025f*VINCMULT;
+                    else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.25f*VINCMULT;
                     else vol += 0.05f*VINCMULT;
                     if (vol > VOLUME_HEADPHONE_MAX + 20) {
                             sound.setMaxVol(VOLUME_SPEAKER_MAX);
@@ -514,7 +526,8 @@ void Core::setVolLimit() {
                     break;
                     }
             if (leftBtn()) {
-                    vol -= 0.025f*VINCMULT;
+                    if (vol >= VOLUME_HEADPHONE_MAX) vol -= 0.25f*VINCMULT;
+                    else vol -= 0.05f*VINCMULT;
                     if (vol <= VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_HEADPHONE_MAX);
                     if (vol < 0) vol=0;
                     sound.setVolume(vol);
@@ -524,6 +537,12 @@ void Core::setVolLimit() {
             break;
         }
     }
+    #ifndef POK_SIM
+    if (vol != eeprom_read_byte((uint16_t*)EESETTINGS_VOL)) eeprom_write_byte((uint16_t*)EESETTINGS_VOL,(uint8_t)vol);
+    #endif
+    sound.setVolume(vol);
+    sound.volumeUp();
+    display.setCursor(0,0);
 }
 
 void Core::begin() {
@@ -585,6 +604,7 @@ void Core::begin() {
     #endif
 	#if POK_ENABLE_SOUND > 0
         sound.begin();
+        sound.volumeUp();
 
 	//mute when B is held during start up or if battery is low
 	battery.update();

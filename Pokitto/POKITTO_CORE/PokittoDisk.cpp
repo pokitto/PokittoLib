@@ -30,6 +30,7 @@
 #define SD_CS_PIN     7
 
 #if POK_ENABLE_SD > 0
+#ifndef NOPETITFATFS
 BYTE res;
 FATFS fs;            /* File system object */
 FATDIR dir;            /* Directory object */
@@ -65,7 +66,11 @@ __attribute__((section(".SD_Code"))) void initSDGPIO() {
 
 __attribute__((section(".SD_Code"))) int pokInitSD() {
     initSDGPIO();
+    #ifndef NOPETITFATFS
     res = disk_initialize();
+    #else
+    res = disk_initialize(0);
+    #endif
     res = (pf_mount(&fs));
     res = pf_opendir(&dir,"");
     if (res) diropened=false;
@@ -287,7 +292,7 @@ int dirUp() {
 
 return 0;
 }
-
+#endif // NOPETITFATFS
 #endif // POK_ENABLE_SD
 
 

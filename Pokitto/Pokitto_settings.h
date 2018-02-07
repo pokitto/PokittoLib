@@ -64,6 +64,12 @@
     #define POK_ENABLE_SOUND PROJ_ENABLE_SOUND
 #endif
 
+#ifndef PROJ_SOUND_BUFFERED
+    #define POK_SOUND_BUFFERED 0
+#else
+    #define POK_SOUND_BUFFERED PROJ_SOUND_BUFFERED
+#endif
+
 #ifndef PROJ_GBSOUND
     #if POK_ENABLE_SOUND > 0
         #define POK_GBSOUND 0
@@ -74,9 +80,7 @@
 
 
 #ifndef PROJ_STREAMING_MUSIC
-    #if POK_ENABLE_SOUND > 0
-        #define POK_STREAMING_MUSIC 1 // Define true to stream music from SD
-    #endif
+        #define POK_STREAMING_MUSIC 0 // Define true to stream music from SD
 #else
     #define POK_STREAMING_MUSIC PROJ_STREAMING_MUSIC
 #endif // PROJ_STREAMING_MUSIC
@@ -352,6 +356,10 @@
 #ifndef POK_STRETCH
     #define POK_STRETCH 1 // Stretch Gamebuino display
 #endif
+
+#ifdef PROJ_FPS
+#define POK_FPS PROJ_FPS
+#endif
 #ifndef POK_FPS
     #define POK_FPS 20
 #endif
@@ -362,9 +370,14 @@
 
 /** AUDIO **/
 #define POK_AUD_PIN P2_19
-#define POK_AUD_PWM_US 31
-#define POK_AUD_FREQ 11025 //16000 //14285 //24000 // 14285 // 57143 // 8000 //11025// audio update frequency in Hz
-#define POK_CINC_MULTIPLIER 2 // multiplies synth cycle table
+#define POK_AUD_PWM_US 15 //31 //Default value 31
+#ifndef PROJ_AUD_FREQ
+    #define POK_AUD_FREQ 22050 //Valid values: 8000, 11025, 16000, 22050 // audio update frequency in Hz
+#else
+    #define POK_AUD_FREQ PROJ_AUD_FREQ
+#endif
+
+//#define POK_CINC_MULTIPLIER 0 // multiplies synth cycle table
 #define POK_STREAMFREQ_HALVE  0  // if true, stream update freq is half audio freq
 #define POK_STREAM_LOOP 1 //master switch
 
@@ -401,6 +414,9 @@
 #ifndef SPRITE_COUNT
 #define SPRITE_COUNT 4  // The default max sprite count
 #endif
+
+/** SYSTEM SETTINGS ADDRESSES IN EEPROM **/
+#define EESETTINGS_VOL 4000
 
 #endif // POKITTO_SETTINGS_H
 
