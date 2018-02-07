@@ -346,7 +346,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
     }
 
 
-    #ifdef PROJ_USE_FPS_COUNTER
+    #ifdef PROJ_SHOW_FPS_COUNTER
     xptr = 8;
     setDRAMptr(8, 0);
     #else
@@ -376,7 +376,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
             d += 220/4; // jump to read byte directly below in screenbuffer
         }
 
-        #ifdef PROJ_USE_FPS_COUNTER
+        #ifdef PROJ_SHOW_FPS_COUNTER
         if (x>=8 ) {
         #else
         {
@@ -552,7 +552,7 @@ void Pokitto::lcdRefreshMode1Spr(
         for (;sprites[spriteCount].bitmapData != NULL && spriteCount < SPRITE_COUNT; spriteCount++);
 
     // If drawing the screen buffer, set the start pos to LCD commands only here.
-    #ifdef PROJ_USE_FPS_COUNTER
+    #ifdef PROJ_SHOW_FPS_COUNTER
     if (!drawSpritesOnly) setDRAMptr(8, 0);
     #else
     if (!drawSpritesOnly) setDRAMptr(0, 0);
@@ -750,7 +750,7 @@ void Pokitto::lcdRefreshMode1Spr(
 
         // *** DRAW THE SCANLINE GROUP TO LCD
 
-#ifdef PROJ_USE_FPS_COUNTER
+#ifdef PROJ_SHOW_FPS_COUNTER
         if (x>=8 && scanlineMaxY - scanlineMinY +1 > 0) {
 #else
         if (scanlineMaxY - scanlineMinY +1 > 0) {
@@ -852,6 +852,11 @@ for(x=0;x<110;x+=2)
     /** draw scanlines **/
     /** leftmost scanline twice**/
 
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    if (x<4) continue;
+    setDRAMptr(x<<1, 0);
+    #endif
+
     for (s=0;s<88;) {
         setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
         setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
@@ -931,6 +936,11 @@ for(x=0;x<220;x+=2)
     s=0;
     /** draw scanlines **/
     /** leftmost scanline**/
+
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    if (x<8) continue;
+    setDRAMptr(x, 0);
+    #endif
 
     for (s=0;s<176;) {
         setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
