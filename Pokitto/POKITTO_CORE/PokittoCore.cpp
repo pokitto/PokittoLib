@@ -160,6 +160,7 @@ uint32_t Core::frameStartMicros, Core::frameEndMicros;
 uint8_t Core::volbar_visible=0;
 
 uint32_t Core::fps_counter;
+bool Core::fps_counter_updated;
 uint32_t Core::fps_refreshtime;
 uint32_t Core::fps_frameCount;
 
@@ -835,7 +836,7 @@ bool Core::update(bool useDirectMode, uint8_t updRectX, uint8_t updRectY, uint8_
 		battery.update();
 
         // FPS counter
-		#ifdef PROJ_USE_FPS_COUNTER
+		#if defined(PROJ_USE_FPS_COUNTER) ||  defined(PROJ_SHOW_FPS_COUNTER)
         const uint32_t fpsInterval_ms = 1000*3;
 
         fps_frameCount++;
@@ -843,6 +844,7 @@ bool Core::update(bool useDirectMode, uint8_t updRectX, uint8_t updRectY, uint8_
             fps_counter = (1000*fps_frameCount) / (now - fps_refreshtime + fpsInterval_ms);
             fps_refreshtime = now + fpsInterval_ms;
             fps_frameCount = 0;
+            fps_counter_updated = true;
         }
         #endif
 
