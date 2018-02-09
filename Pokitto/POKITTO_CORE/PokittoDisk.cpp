@@ -227,7 +227,7 @@ void fileClose() {
     for (uint8_t i=0; i<15; i++) currentfile[i]=0;
 }
 
-int fileGetChar() {
+char fileGetChar() {
     BYTE buff[1];
     WORD br;
     int err = pf_read(buff, 1, &br);    /* Read data to the buff[] */
@@ -282,6 +282,25 @@ uint8_t filePeek(long n) {
 void filePoke(long n, uint8_t c) {
     pf_lseek(n);
     filePutChar(c);
+}
+
+int fileReadLine(char* destination, int maxchars) {
+    int n=0;
+    char c=1;
+    char linebuf[80];
+    fileReadBytes(linebuf,80);
+    int index=0;
+    while (c!=NULL) {
+        c = linebuf[index++];
+        if (n == 0) {
+            while (c == '\n' || c == '\r') c = linebuf[index++]; // skip empty lines
+        }
+        n++;
+        if (c=='\n' || c=='\r' || n==maxchars-1) c=NULL; //prevent buffer overflow
+        *destination++ = c;
+    }
+    fileSeekRelative(-80+index); //rewind
+    return n; //number of characters read
 }
 
 int dirOpen() {

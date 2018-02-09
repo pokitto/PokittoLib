@@ -3206,7 +3206,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1517595486 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1517853090 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3617,7 +3617,7 @@
 	"mbed.h"
 	"Pokitto_settings.h"
 
-1517437002 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
+1518171552 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
 	"Pokitto_settings.h"
 	"diskio.h"
 	"pff.h"
@@ -3633,7 +3633,7 @@
 1517247874 c:\pokittolib_git\pokittolib_curr\pokitto\libpff\pff.h
 	"integer.h"
 
-1517247874 c:\pokittolib_git\pokittolib_curr\pokitto\libpff\connect.h
+1517866280 c:\pokittolib_git\pokittolib_curr\pokitto\libpff\connect.h
 
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofonts.h
 	"Pokitto_settings.h"
@@ -4116,10 +4116,10 @@
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1517436857 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
+1518174251 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1517595076 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1517872107 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4168,11 +4168,11 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1517516150 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1517872222 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
-1517597051 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1517856794 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -4258,7 +4258,7 @@
 1517482821 c:\pokittolib_git\pokittolib_curr\examples\waveplayer\wave_player.h
 	"Pokitto.h"
 
-1517597267 source:c:\pokittolib_git\pokittolib_curr\examples\waveplayer\main.cpp
+1517869634 source:c:\pokittolib_git\pokittolib_curr\examples\waveplayer\main.cpp
 	"Pokitto.h"
 	"SDFileSystem.h"
 	"wave_player.h"
@@ -4453,4 +4453,204 @@
 1484513326 source:c:\pokittolib_git\pokittolib_curr\examples\feelgood\m_tongue.c
 	<stdint.h>
 	"Animation.h"
+
+1517851589 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\gameover.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851449 c:\pokittolib_git\pokittolib_curr\examples\pixonia\pixonia.h
+	<stdint.h>
+
+1517870450 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\main.cpp
+	"Pokitto.h"
+	"Pixonia.h"
+	"Synth.h"
+
+1517866411 c:\pokittolib_git\pokittolib_curr\examples\pixonia\my_settings.h
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\gold.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\gold2.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851624 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\night_palette.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851637 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\pixelman_nw_1.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\pixelman_nw_2.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\pixelman_se_1.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\pixelman_se_2.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\pixonia.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\splatter.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_beach_se.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_beach_sw.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_e.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_n.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_ne.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_nw.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_s.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_se.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_sw.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_bump_w.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_earth.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_gold.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_grain.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_hut.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_plain.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_stone.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_tree.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_water1.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\ter_water2.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\theresgold.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\werewolf_nw_1.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\werewolf_nw_2.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\werewolf_se_1.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851688 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\werewolf_se_2.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851897 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\anim_blue_flag1.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851861 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\dirt_pillar.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517851938 source:c:\pokittolib_git\pokittolib_curr\examples\pixonia\anim_blue_flag2.cpp
+	<stdint.h>
+	"Pixonia.h"
+
+1517909419 c:\pokittolib_git\pokittolib_curr\examples\doon\my_settings.h
+
+1517909611 source:c:\pokittolib_git\pokittolib_curr\examples\doon\doon.cpp
+	"Pokitto.h"
+	<vector>
+	<stdint.h>
+	"tiles.h"
+	"doon_sprites.h"
+	"backgrounds.h"
+	"creatures.h"
+	"collectable_sprites.h"
+
+1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\tiles.h
+	<stdint.h>
+
+1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\doon_sprites.h
+	<stdint.h>
+
+1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\backgrounds.h
+	<stdint.h>
+
+1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\creatures.h
+	<stdint.h>
+
+1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\collectable_sprites.h
+	<stdint.h>
+
+1518174666 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
+	"Pokitto.h"
+	"Arrays.h"
+	"Tracker.h"
+	"PatchSettings.h"
+
+1518173397 c:\pokittolib_git\pokittolib_curr\examples\tracker\my_settings.h
+
+1518158239 c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.h
+
+1518174497 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
+	"Pokitto.h"
+
+1518171113 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
 

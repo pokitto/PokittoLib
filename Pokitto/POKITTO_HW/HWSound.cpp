@@ -247,9 +247,11 @@ void Pokitto::dac_write(uint8_t value) {
 /** SOUND INIT **/
 void Pokitto::soundInit() {
     uint32_t timerFreq;
+    #if POK_USE_PWM
     pwmout_init(&audiopwm,POK_AUD_PIN);
     pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
     pwmout_write(&audiopwm,0.1f);
+    #endif
 
     //#if POK_GBSOUND > 0
     /** GAMEBUINO SOUND **/
@@ -342,13 +344,16 @@ inline void pokSoundIRQ() {
     //#define TICKY 0xFFFF //160
     //#define INCY 409
     uint8_t output=0;
+    streamon=1;
     //if (test==TICKY) test=0;
     //if (test<(TICKY/2)) { tpin=1; pwmout_write(&audiopwm,(float)0/(float)255);}//dac_write(0);}
     //else {tpin=0; pwmout_write(&audiopwm,(float)255/(float)255);}//dac_write(64);}
     //test+=INCY;
     //return;
     #ifndef POK_SIM
-    pwmout_t* obj = &audiopwm;
+        #if POK_USE_PWM
+        pwmout_t* obj = &audiopwm;
+        #endif
     #endif
     #if POK_STREAMING_MUSIC > 0
         #if POK_STREAMFREQ_HALVE
@@ -408,14 +413,16 @@ inline void pokSoundIRQ() {
                 #if POK_STREAM_TO_DAC > 0
                     /** stream goes to DAC */
                     #if POK_USE_DAC > 0
-                    if (streamstep) dac_write((uint8_t)streambyte); // duty cycle
+                    dac_write(streambyte); // duty cycle
                     #endif // POK_USE_DAC
                 #else
                     /** stream goes to PWM */
                     if (streamstep) {
                             //pwmout_write(&audiopwm,(float)streambyte/(float)255);
+                            #if POK_USE_PWM
                             uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*streambyte)>>8); //cut out float
                             obj->pwm->MATCHREL1 = t_on;
+                            #endif
                             //dac_write((uint8_t)streambyte); // duty cycle
                     }
                 #endif // POK_STREAM_TO_DAC
@@ -423,8 +430,10 @@ inline void pokSoundIRQ() {
             #if POK_STREAM_TO_DAC > 0
             /** synth goes to PWM */
             //pwmout_write(&audiopwm,(float)output/(float)255);
+            #if POK_USE_PWM
             uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
             obj->pwm->MATCHREL1 = t_on;
+            #endif
             #else
             dac_write((uint8_t)output);
             #endif // decide where synth is output

@@ -377,13 +377,28 @@
     #define POK_AUD_FREQ PROJ_AUD_FREQ
 #endif
 
-//#define POK_CINC_MULTIPLIER 0 // multiplies synth cycle table
+
+#define POK_USE_EXT 0 // if extension port is in use or not
+
 #define POK_STREAMFREQ_HALVE  0  // if true, stream update freq is half audio freq
 #define POK_STREAM_LOOP 1 //master switch
 
-#define POK_USE_DAC 1 // is DAC in use in this project
-#define POK_USE_EXT 0 // if extension port is in use or not
-#define POK_STREAM_TO_DAC 1  // 1 = stream from SD to DAC, synthesizer to PWM,  0 = opposite
+#ifndef PROJ_USE_DAC
+    #define POK_USE_DAC 1 // is DAC in use in this project
+#else
+    #define POK_USE_DAC PROJ_USE_DAC
+#endif
+#ifndef PROJ_USE_PWM
+    #define POK_USE_PWM 1 // is PWM for audio used in this project
+#else
+    #define POK_USE_PWM PROJ_USE_PWM
+#endif
+
+#ifndef PROJ_STREAM_TO_DAC
+    #define POK_STREAM_TO_DAC 1  // 1 = stream from SD to DAC, synthesizer to PWM,  0 = opposite
+#else
+    #define POK_STREAM_TO_DAC PROJ_STREAM_TO_DAC
+#endif
 
 
 #define POK_BACKLIGHT_PIN P2_2
