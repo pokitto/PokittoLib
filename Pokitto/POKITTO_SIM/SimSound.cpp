@@ -140,9 +140,9 @@ void pokSoundIRQ() {
 
         /** mixing oscillator output **/
         #ifdef POK_SIM
-        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>9;// >> 2 osc1.vol Marr;
+        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>8;// >> 2 osc1.vol Marr;
+        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>8;// >> 2 osc1.vol Marr;
+        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>8;// >> 2 osc1.vol Marr;
         #else
         uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
         op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
@@ -189,7 +189,7 @@ void pokSoundIRQ() {
                 output = o/2;
             //}
         #endif // STREAMING
-        soundbyte = output/3; //decrease volume in simulator vs hardware
+        soundbyte = output;//3; //decrease volume in simulator vs hardware
         soundbuf[soundbufindex++]=soundbyte;
         if (soundbufindex==SBUFSIZE) soundbufindex=0;
     #endif // POK_SIM

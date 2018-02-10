@@ -14,7 +14,7 @@ struct Tracker{
         uint8_t s_vLines[2] = {vLines[3] + 2, 0};
         int8_t _patch[30][64];
         int8_t _pitch[30][64];
-
+        int8_t _currpitch=34, _currpatch=0; // for faster editing and playNote();
         int8_t _songPos[10][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
         bool t1Mute = 0, t2Mute = 0, t3Mute = 0;
         char intToChar(int _int, uint8_t digit);
@@ -25,6 +25,8 @@ struct Tracker{
         char patchnames[15][10];
         bool play = 0, stop = 0;
         void checkButtons();
+        void playNote();
+        void playPtn();
         void fillArrays();
         void drawLines();
         void drawPointer();
@@ -46,6 +48,30 @@ struct Tracker{
 int16_t Tracker::getBPM(){
     return bpm;
 }
+
+void Tracker::playNote() {
+    // listed like this for easier debugging
+    uint8_t w = patch[_currpatch].wave;
+    uint8_t l = patch[_currpatch].loop;
+    uint8_t e = patch[_currpatch].echo;
+    uint8_t a = patch[_currpatch].adsr;
+    uint8_t n = _currpitch;
+    uint16_t v = patch[_currpatch].vol;
+    uint16_t att = patch[_currpatch].attack;
+    uint16_t dec = patch[_currpatch].decay;
+    uint16_t sus = patch[_currpatch].sustain;
+    uint16_t rel = patch[_currpatch].release;
+    int16_t bend = patch[_currpatch].pitchbend;
+    int16_t brate = patch[_currpatch].bendrate;
+    uint8_t arp = patch[_currpatch].arpmode;
+    uint8_t ovr = patch[_currpatch].overdrive;
+    uint8_t kick = patch[_currpatch].kick;
+
+    if (colPointer == 0)setOSC(&osc1,1,w,l,e,a,n,v,att,dec,sus,rel,bend,brate,arp,ovr,kick);
+    else if (colPointer == 1)setOSC(&osc2,1,w,l,e,a,n,v,att,dec,sus,rel,bend,brate,arp,ovr,kick);
+    else setOSC(&osc2,1,w,l,e,a,n,v,att,dec,sus,rel,bend,brate,arp,ovr,kick);
+}
+
 
 void Tracker::checkButtons(){
     if(Tracker::mode == 0){ // travel mode
@@ -89,6 +115,15 @@ void Tracker::checkButtons(){
     	if (pok.buttons.pressed(BTN_C)){
             mode = 3;
     	}
+    	if (pok.buttons.repeat(BTN_B,buttonRepeatFrame+1)){
+            // delete note
+            _pitch[_songPos[songPos][colPointer]][rowPointer] = -1;
+            _patch[_songPos[songPos][colPointer]][rowPointer] = 0;
+            // Zero all oscillators
+            setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            setOSC(&osc2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    	}
     }
     else if (mode == 1){ // edit pitches and patches
         if (pok.buttons.pressed(BTN_B)){
@@ -100,16 +135,56 @@ void Tracker::checkButtons(){
     	if (pok.buttons.pressed(BTN_RIGHT))
             edit = minMax(edit+1, 0, 1);
     	if (pok.buttons.repeat(BTN_UP, buttonRepeatFrame)){
-            if (edit == 0)
-                _pitch[_songPos[songPos][colPointer]][rowPointer] = minMax(_pitch[_songPos[songPos][colPointer]][rowPointer]+1, 0, 99);
-            if (edit == 1)
-                _patch[_songPos[songPos][colPointer]][rowPointer] = minMax(_patch[_songPos[songPos][colPointer]][rowPointer]+1, 0, 14);
+            if (edit == 0) {
+                // editing pitch
+                if (_pitch[_songPos[songPos][colPointer]][rowPointer] == -1) {
+                    //auto-fill an empty cell. We should not have cells with only pitch or patch!
+                    _pitch[_songPos[songPos][colPointer]][rowPointer] = _currpitch;
+                    _patch[_songPos[songPos][colPointer]][rowPointer] = _currpatch;
+                } else {
+                    // not an empty cell, so increment values
+                    _currpitch = _pitch[_songPos[songPos][colPointer]][rowPointer] = minMax(_pitch[_songPos[songPos][colPointer]][rowPointer]+1, 0, 99);
+                    // automatically pick up the instrument if available, for faster editing
+                    _currpatch = _patch[_songPos[songPos][colPointer]][rowPointer];
+                }
+            } else if (edit == 1) {
+                // editing patch
+                if (_pitch[_songPos[songPos][colPointer]][rowPointer] == -1) {
+                        //auto-fill an empty cell. We should not have cells with only pitch or patch!
+                        _pitch[_songPos[songPos][colPointer]][rowPointer] = _currpitch;
+                } else {
+                        //auto pick-up the pitch for faster editing
+                        _currpitch = _pitch[_songPos[songPos][colPointer]][rowPointer];
+                }
+                _currpatch = _patch[_songPos[songPos][colPointer]][rowPointer] = minMax(_patch[_songPos[songPos][colPointer]][rowPointer]+1, 0, 14);
+            }
+            playNote();
         }
         if (pok.buttons.repeat(BTN_DOWN, buttonRepeatFrame)){
-            if (edit == 0)
-                _pitch[_songPos[songPos][colPointer]][rowPointer] = minMax(_pitch[_songPos[songPos][colPointer]][rowPointer]-1, 0, 99);
-            if (edit == 1)
-                _patch[_songPos[songPos][colPointer]][rowPointer] = minMax(_patch[_songPos[songPos][colPointer]][rowPointer]-1, 0, 14);
+            if (edit == 0) {
+                // editing pitch
+                if (_pitch[_songPos[songPos][colPointer]][rowPointer] == -1) {
+                    //auto-fill an empty cell. We should not have cells with only pitch or patch!
+                    _pitch[_songPos[songPos][colPointer]][rowPointer] = _currpitch;
+                    _patch[_songPos[songPos][colPointer]][rowPointer] = _currpatch;
+                } else {
+                    // not an empty cell, so increment values
+                    _currpitch = _pitch[_songPos[songPos][colPointer]][rowPointer] = minMax(_pitch[_songPos[songPos][colPointer]][rowPointer]-1, 0, 99);
+                    // automatically pick up the instrument if available, for faster editing
+                    _currpatch = _patch[_songPos[songPos][colPointer]][rowPointer];
+                }
+            } else if (edit == 1) {
+                // editing patch
+                if (_pitch[_songPos[songPos][colPointer]][rowPointer] == -1) {
+                        //auto-fill an empty cell. We should not have cells with only pitch or patch!
+                        _pitch[_songPos[songPos][colPointer]][rowPointer] = _currpitch;
+                } else {
+                        //auto pick-up the pitch for faster editing
+                        _currpitch = _pitch[_songPos[songPos][colPointer]][rowPointer];
+                }
+                _currpatch = _patch[_songPos[songPos][colPointer]][rowPointer] = minMax(_patch[_songPos[songPos][colPointer]][rowPointer]-1, 0, 14);
+            }
+            playNote();
         }
     }
     else if(mode == 2){ // this screen settings
@@ -163,9 +238,15 @@ void Tracker::checkButtons(){
                 screenPointer = 0;
                 screenMin = 0;
                 screenMax = screenMaxInit;
+                playPtn(); // for legacy reasons
             }
     	}
     	if (pok.buttons.pressed(BTN_B)){
+            // Zero all oscillators
+            setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            setOSC(&osc2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            playing = false;
             stop = 1;
             play = 0;
             songPos = 0;
@@ -175,6 +256,11 @@ void Tracker::checkButtons(){
             screenMax = screenMaxInit;
     	}
     	if (pok.buttons.pressed(BTN_C)){
+            // Zero all oscillators
+            setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            setOSC(&osc2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            playing = false;
             play = 0;
             mode = 2;
     	}
@@ -582,4 +668,8 @@ void Tracker::filePrint(char * _string, uint8_t _size){
 void Tracker::NL(){
     filePutChar(10);
     //filePutChar(13);
+}
+
+void Tracker::playPtn() {
+
 }

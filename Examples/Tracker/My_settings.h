@@ -20,5 +20,6 @@
 //#define NOPETITFATFS
 #define PROJ_AUD_FREQ 11025//22050
 #define PROJ_FPS 15
+#define PROJ_DEVELOPER_MODE 1
 
 #endif

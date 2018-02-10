@@ -440,7 +440,7 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
 
 
 #ifdef POK_SIM
-#define VINCMULT 0.1f
+#define VINCMULT 0.9f
 #else
 #define VINCMULT 50
 #endif //POK_SIM
@@ -564,7 +564,9 @@ void Core::begin() {
 	battery.begin();
 	display.begin();
 	#if POK_DISPLAYLOGO
+        #if PROJ_DEVELOPER_MODE != 1
         showLogo();
+        #endif // PROJ_DEVELOPER_MODE
 	#endif // POK_DISPLAYLOGO
 
 	display.enableDirectPrinting(true);
@@ -584,10 +586,15 @@ void Core::begin() {
 	#endif
 
     #ifndef DISABLE_LOADER
+    #if PROJ_DEVELOPER_MODE != 1
     askLoader();
+    #endif // PROJ_DEVELOPER_MODE
     #endif
 
-	#ifndef DISABLE_SOUND_WARNING
+	#if PROJ_DEVELOPER_MODE==1
+	sound.setMaxVol(VOLUME_SPEAKER_MAX);
+	sound.setVolume(VOLUME_SPEAKER_MAX);
+	#else
 	//showWarning();
 	setVolLimit();
 	//sound.setVolume(sound.getVolume());//make sure we're at set volume before continue

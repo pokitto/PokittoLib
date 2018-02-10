@@ -288,7 +288,7 @@ int fileReadLine(char* destination, int maxchars) {
     int n=0;
     char c=1;
     char linebuf[80];
-    fileReadBytes(linebuf,80);
+    fileReadBytes((uint8_t*)linebuf,80);
     int index=0;
     while (c!=NULL) {
         c = linebuf[index++];
