@@ -540,7 +540,7 @@ int Simulator::initSDLAudio() {
     aud_len = got.freq * 5; /* 5 seconds */
     aud_position = 0;
     aud_frequency = 1.0 * SAMPLE_RATE / got.freq; /* 1.0 to make it a float */
-    aud_volume = 255/10; /* ~1/5 max volume */
+    aud_volume = 255; /* ~1/5 max volume */
 
     SDL_PauseAudioDevice(audioDevice, 0); /* play! */
     return 1;

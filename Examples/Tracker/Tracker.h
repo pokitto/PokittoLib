@@ -21,6 +21,8 @@ struct Tracker{
         uint8_t digitLength(int _int);
         int32_t extractNextInteger(char*);
         char* _textptr; //needed here because of scope
+        void initStreams();
+        void emptyPatches();
     public:
         char patchnames[15][10];
         bool play = 0, stop = 0;
@@ -47,6 +49,28 @@ struct Tracker{
 
 int16_t Tracker::getBPM(){
     return bpm;
+}
+
+void Tracker::emptyPatches() {
+    for (int i=0;i<16;i++) {
+    char pname[10];
+    for (int j=0;j<10;j++) patchnames[i][j]=0;
+    patch[i].wave = 0;
+    patch[i].vol =  0;
+    patch[i].bendrate =  0;
+    patch[i].pitchbend =  0;
+    patch[i].vibrate =  0;
+    patch[i].arpmode =  0;
+    patch[i].adsr =  0;
+    patch[i].attack =  0;
+    patch[i].decay =  0;
+    patch[i].sustain =  0;
+    patch[i].release =  0;
+    patch[i].loop =  0;
+    patch[i].echo =  0;
+    patch[i].overdrive =  0;
+    patch[i].kick =  0;
+    }
 }
 
 void Tracker::playNote() {
@@ -553,7 +577,9 @@ int Tracker::loadSong(char* songname){
         }
     }
     // Read instruments
-    for (int i=0;i<numPatches;i++) {
+    // INSTRUMENTS GO FROM 1 TO 15 !!!!!
+    Tracker::emptyPatches();
+    for (int i=1;i<numPatches;i++) {
     char pname[10];
     fileReadLine(&pname[0],10);
     strcpy(&patchnames[i][0],&pname[0]);
@@ -670,6 +696,38 @@ void Tracker::NL(){
     //filePutChar(13);
 }
 
-void Tracker::playPtn() {
-
+void Tracker::initStreams() {
+    // Put stream memory pointers in place
+    uint16_t blocknum;
+    blocknum=_songPos[songPos][0]; //read current block number for track 1
+    song.instrument_stream[0]=(uint8_t*)&_patch[blocknum][0];
+    song.note_stream[0]=(uint8_t*)&_pitch[blocknum][0];
+    // retarget pointers for track 2
+    blocknum=_songPos[songPos][1]; //read current block number for track 2
+    song.instrument_stream[1]=(uint8_t*)&_patch[blocknum][0];
+    song.note_stream[1]=(uint8_t*)&_pitch[blocknum][0];
+    // retarget pointers for track 3
+    blocknum=_songPos[songPos][2]; //read current block number for track 3
+    song.instrument_stream[2]=(uint8_t*)&_patch[blocknum][0];
+    song.note_stream[2]=(uint8_t*)&_pitch[blocknum][0];
 }
+
+void Tracker::playPtn() {
+    samplespertick = (float)((60.0f/(float)bpm)*POK_AUD_FREQ)/16;
+    samplesperpattern = samplespertick * 64;
+    playerpos=0;
+    sequencepos = songPos; //Position->GetValue();_e
+    notetick = samplespertick; // Initiate samples per tick counter, force first SetOsc
+    tick=3;
+    // Zero all oscillators
+    setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    setOSC(&osc2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
+    Tracker::initStreams();
+    streamsFunction ptr = (streamsFunction)&Tracker::initStreams;
+    registerStreamsCallback(ptr);
+
+    playing=true;
+}
+

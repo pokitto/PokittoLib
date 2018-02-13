@@ -2718,11 +2718,11 @@
 1518114367 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio.h
 	<stdint.h>
 
-1517248400 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
+1518458956 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
 	"Synth_osc.h"
 	"Synth_song.h"
 
-1517248497 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_osc.h
+1518459007 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_osc.h
 	"Pokitto.h"
 
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_song.h
@@ -2885,14 +2885,16 @@
 	<unistd.h>
 	<sys/types.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.cpp
+1518459064 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.cpp
 	"Pokitto.h"
 	"Synth.h"
+	"stdint.h"
+	"My_settings.h"
 
 1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_envfuncs.cpp
 	"Synth.h"
 
-1517248483 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_helpers.cpp
+1518458989 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_helpers.cpp
 	"Pokitto.h"
 	"Synth.h"
 	"Pokitto_settings.h"
@@ -2901,10 +2903,10 @@
 	"PokittoGlobs.h"
 	"Synth.h"
 
-1517248519 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
+1518459024 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
 	"Synth.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
+1518459048 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
 	"PokittoDisk.h"
 	"Synth.h"
 	"FileIO.h"
@@ -2938,7 +2940,7 @@
 	"PokittoSimulator.h"
 	<time.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.cpp
+1518290572 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.cpp
 	"PokittoSimulator.h"
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -2964,7 +2966,7 @@
 
 1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
 
-1518256391 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
+1518290885 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
 	"SimSound.h"
 	"PokittoSimulator.h"
 	"PokittoGlobs.h"
@@ -2978,9 +2980,9 @@
 	"Pokitto.h"
 	"Synth.h"
 
-1518255316 c:\pokittolib_git\pokittolib_curr\examples\tracker\my_settings.h
+1518288384 c:\pokittolib_git\pokittolib_curr\examples\tracker\my_settings.h
 
-1518174666 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
+1518459265 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
 	"Pokitto.h"
 	"Arrays.h"
 	"Tracker.h"
@@ -2988,7 +2990,7 @@
 
 1518158239 c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.h
 
-1518258326 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
+1518558380 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
 	"Pokitto.h"
 
 1518171113 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h

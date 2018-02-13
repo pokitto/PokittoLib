@@ -20,7 +20,7 @@ int main(){
     #endif // POK_SIM
 	pok.begin();
 	pokInitSD();
-	tracker.loadSong("test.rbs");
+	tracker.loadSong("fanf2.rbs");
 	pok.display.width = screenW;
 	pok.display.height = screenH;
 	pok.display.setFont(font5x7);

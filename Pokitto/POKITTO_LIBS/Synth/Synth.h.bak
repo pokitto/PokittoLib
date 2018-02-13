@@ -36,13 +36,9 @@ int main()
 }
 */
 
-#define OPT_ADSR 1
-#define OPT_LOOP 2
-#define OPT_ECHO 4
-#define OPT_OVERDRIVE 8
-#define OPT_NORMALIZE 0x10
-
-#define OVERDRIVE 4
+#ifndef boolean
+typedef bool boolean;
+#endif
 
 //extern void fakeISR(); // was defined in Rboy_soundsim.h
 
@@ -74,8 +70,8 @@ extern mixFunction HWMarr []; // counts down
 #define MAXPATTERNS 10
 #define MAXBLOCKS 30 // 10 *3
 
-#define VOLTICK POK_AUD_FREQ/8820 //was 5
-#define ARPTICK POK_AUD_FREQ/441 // 150 // was 200
+#define VOLTICK 5
+#define ARPTICK 50 // 150 // was 200
 
 #define NUMWAVES 5
 #define NUMENVELOPES 3
@@ -108,7 +104,7 @@ extern void readChunkFromSD(uint8_t *);
 extern void registerStreamsCallback(streamsFunction);
 extern streamsFunction streamCallbackPtr;
 
-extern bool playing, track1on, track2on, track3on, tableRefresh;
+extern boolean playing, track1on, track2on, track3on, tableRefresh;
 extern uint16_t playerpos;
 extern uint16_t samplespertick, notetick;
 extern long samplesperpattern;

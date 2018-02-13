@@ -85,10 +85,10 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
     o->adsrvol = o->vol; // will stay same all the time
   }
 
-  o->pitchbend = 0; //this has to be zeroed always!
   if (bendrate != 0) {
-        o->bendrate = (int32_t)bendrate*(o->cinc/10000); // test value
-        o->maxbend = (int32_t)maxbend*(o->cinc/100);
+        o->bendrate = bendrate; // test value
+        o->pitchbend = 0;
+        o->maxbend = maxbend;
   }
 }
 

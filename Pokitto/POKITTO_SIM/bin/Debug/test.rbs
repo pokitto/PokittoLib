@@ -1927,18 +1927,18 @@ Block 29 row 61 ,255,0
 Block 29 row 62 ,255,0
 Block 29 row 63 ,255,0
 Patchname
-Waveform=2
+Waveform=1
 Volume=127
 Pitch bend rate=0
 Pitch bend max=0
 Vibrato rate=0
-Arpeggio mode=1
+Arpeggio mode=0
 ADSR=1
 Attack=0
 Decay=100
 Sustain=50
-Release=100
-Loop=1
+Release=10
+Loop=0
 Echo=0
 Overdrive=0
 Drum kick=0

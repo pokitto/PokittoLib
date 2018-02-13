@@ -129,7 +129,8 @@ void pokSoundIRQ() {
         /** if song is being played from sd **/
         if (playing) {
                 notetick++;
-                updatePlaybackSD(playerpos&7);
+                updatePlayback();
+                //updatePlaybackSD(playerpos&7);
         }
         /** oscillators update **/
         osc1.count += osc1.cinc + (osc1.pitchbend >> 4); // counts to 65535 and overflows to zero WAS 8 !
@@ -140,9 +141,9 @@ void pokSoundIRQ() {
 
         /** mixing oscillator output **/
         #ifdef POK_SIM
-        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>8;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>8;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>8;// >> 2 osc1.vol Marr;
+        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>6;// >> 2 osc1.vol Marr;
+        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>6;// >> 2 osc1.vol Marr;
+        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>6;// >> 2 osc1.vol Marr;
         #else
         uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
         op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;

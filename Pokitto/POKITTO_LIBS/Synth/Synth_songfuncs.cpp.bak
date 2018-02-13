@@ -159,7 +159,7 @@ void updatePlayback() {
                         }
                     }
                     playerpos = 0;
-                    initStreams(sequencepos);
+                    //initStreams(sequencepos);
                     //(*streamCallbackPtr)();
                     tableRefresh=true;
             }
