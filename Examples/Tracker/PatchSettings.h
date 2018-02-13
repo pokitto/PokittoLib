@@ -49,6 +49,8 @@ void checkButtons(){
     else if(pok.buttons.repeat(BTN_LEFT, buttonRepeatFrame))
     {
         if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer-1, 0, 14);
+        else if (settingPointer == 2) patch[instrPointer].wave = tracker.minMax(patch[instrPointer].wave-1, 0, 5);
+		else if (settingPointer == 3) patch[instrPointer].arpmode = tracker.minMax(patch[instrPointer].arpmode-1, 0, 15);
         else if (settingPointer == 4) patch[instrPointer].loop = tracker.minMax(patch[instrPointer].loop-1, 0, 1);
         else if (settingPointer == 5) patch[instrPointer].echo = tracker.minMax(patch[instrPointer].echo-1, 0, 1);
         else if (settingPointer == 6) patch[instrPointer].overdrive = tracker.minMax(patch[instrPointer].overdrive-1, 0, 1);
@@ -59,6 +61,8 @@ void checkButtons(){
     else if(pok.buttons.repeat(BTN_RIGHT, buttonRepeatFrame))
     {
         if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer+1, 0, 14);
+        else if (settingPointer == 2) patch[instrPointer].wave = tracker.minMax(patch[instrPointer].wave+1, 0, 5);
+		else if (settingPointer == 3) patch[instrPointer].arpmode = tracker.minMax(patch[instrPointer].arpmode+1, 0, 15);
         else if (settingPointer == 4) patch[instrPointer].loop = tracker.minMax(patch[instrPointer].loop+1, 0, 1);
         else if (settingPointer == 5) patch[instrPointer].echo = tracker.minMax(patch[instrPointer].echo+1, 0, 1);
         else if (settingPointer == 6) patch[instrPointer].overdrive = tracker.minMax(patch[instrPointer].overdrive+1, 0, 1);
@@ -70,16 +74,6 @@ void checkButtons(){
     {
         if(settingPointer == 1)
             pok.keyboard(tracker.patchnames[instrPointer], 10);
-        else if(settingPointer == 2){
-            uint8_t old = patch[instrPointer].wave;
-            patch[instrPointer].wave = pok.menu(waveNames, 6);
-            if (patch[instrPointer].wave == -1) patch[instrPointer].wave = old;
-        }
-        else if(settingPointer == 3){
-            uint8_t old = patch[instrPointer].arpmode;
-            patch[instrPointer].arpmode = pok.menu(arpModes, 16);
-            if (patch[instrPointer].arpmode == -1) patch[instrPointer].arpmode = old;
-        }
         //else if(settingPointer == 16)
             //save instrument
         //else if(settingPointer == 17)
