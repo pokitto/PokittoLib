@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <EmBitz_project_file>
-	<EmBitzVersion release="1.11" revision="0" />
+	<EmBitzVersion release="0.42" revision="0" />
 	<FileVersion major="1" minor="0" />
 	<Project>
 		<Option title="PokittoEmBitz" />
@@ -35,64 +35,12 @@
 					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
 					<Add option="-include" />
 					<Add option="mbed_config.h" />
-					<Add symbol="TARGET_LPC11U68" />
-					<Add symbol="__MBED__=1" />
-					<Add symbol="DEVICE_I2CSLAVE=1" />
-					<Add symbol="TARGET_LIKE_MBED" />
-					<Add symbol="TARGET_NXP" />
-					<Add symbol="__MBED_CMSIS_RTOS_CM" />
-					<Add symbol="DEVICE_RTC=1" />
-					<Add symbol="TOOLCHAIN_object" />
-					<Add symbol="__CMSIS_RTOS" />
-					<Add symbol="TOOLCHAIN_GCC" />
-					<Add symbol="TARGET_CORTEX_M" />
-					<Add symbol="TARGET_M0P" />
-					<Add symbol="TARGET_UVISOR_UNSUPPORTED" />
-					<Add symbol="DEVICE_SERIAL=1" />
-					<Add symbol="DEVICE_INTERRUPTIN=1" />
-					<Add symbol="TARGET_LPCTarget" />
-					<Add symbol="TARGET_CORTEX" />
-					<Add symbol="DEVICE_I2C=1" />
-					<Add symbol="__CORTEX_M0PLUS" />
-					<Add symbol="TARGET_FF_ARDUINO" />
-					<Add symbol="TARGET_RELEASE" />
-					<Add symbol="MBED_BUILD_TIMESTAMP=1507563655.72" />
-					<Add symbol="ARM_MATH_CM0PLUS" />
-					<Add symbol="TARGET_LPC11U6X" />
-					<Add symbol="DEVICE_SLEEP=1" />
-					<Add symbol="TOOLCHAIN_GCC_ARM" />
-					<Add symbol="DEVICE_SPI=1" />
-					<Add symbol="DEVICE_ANALOGIN=1" />
-					<Add symbol="DEVICE_PWMOUT=1" />
-					<Add symbol="TARGET_LIKE_CORTEX_M0" />
-					<Add directory="." />
-					<Add directory="Pokitto" />
-					<Add directory="Pokitto\POKITTO_CORE" />
-					<Add directory="Pokitto\POKITTO_CORE\FONTS" />
-					<Add directory="Pokitto\POKITTO_CORE\PALETTES" />
-					<Add directory="Pokitto\POKITTO_HW" />
-					<Add directory="Pokitto\POKITTO_LIBS" />
-					<Add directory="Pokitto\POKITTO_LIBS\Synth" />
-					<Add directory="Pokitto\libpff" />
-					<Add directory="Pokitto\mbed-pokitto" />
-					<Add directory="Pokitto\mbed-pokitto\api" />
-					<Add directory="Pokitto\mbed-pokitto\common" />
-					<Add directory="Pokitto\mbed-pokitto\hal" />
-					<Add directory="Pokitto\mbed-pokitto\targets" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TOOLCHAIN_GCC" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X" />
+					<Add directory="Examples\HelloWorld" />
 				</Compiler>
 				<Cpp>
 					<Add option="-fno-exceptions" />
 					<Add option="-fno-rtti" />
-					<Add option="-std=gnu++98" />
+					<Add option="-std=gnu++11" />
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-fomit-frame-pointer" />
@@ -133,8 +81,628 @@
 					<Mode after="1" />
 				</ExtraCommands>
 			</Target>
+			<Target title="Bitmap">
+				<Option output=".\build\bitmap.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\Bitmap" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\bitmap.hex -O binary .\build\bitmap.bin" />
+					<Add after=".\build\lpcrc .\build\bitmap.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Sprites">
+				<Option output=".\build\clipped.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\Sprites" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\clipped.hex -O binary .\build\clipped.bin" />
+					<Add after=".\build\lpcrc .\build\clipped.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="ClippedDrawing">
+				<Option output=".\build\clipped.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\UpdateAndClipRect" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\clipped.hex -O binary .\build\clipped.bin" />
+					<Add after=".\build\lpcrc .\build\clipped.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
 			<Target title="MicroPython">
 				<Option output=".\build\pythonex.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\Bitmap" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+					<Add library="Pokitto\POKITTO_LIBS\MicroPython\libmicropython.a" />
+				</Linker>
+				<ExtraCommands>
+					<Add before="Pokitto\POKITTO_LIBS\MicroPython\compile_and_freeze_py_files.bat" />
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\pythonex.hex -O binary .\build\pythonex.bin" />
+					<Add after=".\build\lpcrc .\build\pythonex.bin" />
+					<Mode before="1" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="SynthTest">
+				<Option output=".\build\syntest.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\SynthTest" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\syntest.hex -O binary .\build\syntest.bin" />
+					<Add after=".\build\lpcrc .\build\syntest.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="WavePlayer">
+				<Option output=".\build\wavplay.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Option projectIncludeDirsRelation="1" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g3" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\WavePlayer" />
+					<Add directory="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN" />
+					<Add directory="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem" />
+					<Add directory="Pokitto\POKITTO_LIBS\SDFileSystem" />
+					<Add directory="." />
+					<Add directory="Pokitto" />
+					<Add directory="Pokitto\POKITTO_CORE" />
+					<Add directory="Pokitto\POKITTO_CORE\FONTS" />
+					<Add directory="Pokitto\POKITTO_CORE\PALETTES" />
+					<Add directory="Pokitto\POKITTO_HW" />
+					<Add directory="Pokitto\POKITTO_LIBS" />
+					<Add directory="Pokitto\POKITTO_LIBS\Synth" />
+					<Add directory="Pokitto\mbed-pokitto" />
+					<Add directory="Pokitto\mbed-pokitto\api" />
+					<Add directory="Pokitto\mbed-pokitto\common" />
+					<Add directory="Pokitto\mbed-pokitto\hal" />
+					<Add directory="Pokitto\mbed-pokitto\targets" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68" />
+					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TOOLCHAIN_GCC" />
+					<Add directory="Pokitto\mbed-pokitto\targets\hal" />
+					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP" />
+					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g3" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add option="-fpermissive" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\wavplay.hex -O binary .\build\wavplay.bin" />
+					<Add after=".\build\lpcrc .\build\wavplay.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="FeelGood">
+				<Option output=".\build\feelgood.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\FeelGood" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\feelgood.hex -O binary .\build\feelgood.bin" />
+					<Add after=".\build\lpcrc .\build\feelgood.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Pixonia">
+				<Option output=".\build\pixonia.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add directory="Examples\Pixonia" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\pixonia.hex -O binary .\build\pixonia.bin" />
+					<Add after=".\build\lpcrc .\build\pixonia.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Tracker">
+				<Option output=".\build\tracker.elf" />
 				<Option type="0" />
 				<Option create_hex="1" />
 				<Option compiler="armgcc_eb" />
@@ -161,66 +729,12 @@
 					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
 					<Add option="-include" />
 					<Add option="mbed_config.h" />
-					<Add symbol="TARGET_LPC11U68" />
-					<Add symbol="__MBED__=1" />
-					<Add symbol="DEVICE_I2CSLAVE=1" />
-					<Add symbol="TARGET_LIKE_MBED" />
-					<Add symbol="TARGET_NXP" />
-					<Add symbol="__MBED_CMSIS_RTOS_CM" />
-					<Add symbol="DEVICE_RTC=1" />
-					<Add symbol="TOOLCHAIN_object" />
-					<Add symbol="__CMSIS_RTOS" />
-					<Add symbol="TOOLCHAIN_GCC" />
-					<Add symbol="TARGET_CORTEX_M" />
-					<Add symbol="TARGET_M0P" />
-					<Add symbol="TARGET_UVISOR_UNSUPPORTED" />
-					<Add symbol="DEVICE_SERIAL=1" />
-					<Add symbol="DEVICE_INTERRUPTIN=1" />
-					<Add symbol="TARGET_LPCTarget" />
-					<Add symbol="TARGET_CORTEX" />
-					<Add symbol="DEVICE_I2C=1" />
-					<Add symbol="__CORTEX_M0PLUS" />
-					<Add symbol="TARGET_FF_ARDUINO" />
-					<Add symbol="TARGET_RELEASE" />
-					<Add symbol="MBED_BUILD_TIMESTAMP=1507563655.72" />
-					<Add symbol="ARM_MATH_CM0PLUS" />
-					<Add symbol="TARGET_LPC11U6X" />
-					<Add symbol="DEVICE_SLEEP=1" />
-					<Add symbol="TOOLCHAIN_GCC_ARM" />
-					<Add symbol="DEVICE_SPI=1" />
-					<Add symbol="DEVICE_ANALOGIN=1" />
-					<Add symbol="DEVICE_PWMOUT=1" />
-					<Add symbol="TARGET_LIKE_CORTEX_M0" />
-					<Add directory="." />
-					<Add directory="Pokitto" />
-					<Add directory="Pokitto\POKITTO_CORE" />
-					<Add directory="Pokitto\POKITTO_CORE\FONTS" />
-					<Add directory="Pokitto\POKITTO_CORE\PALETTES" />
-					<Add directory="Pokitto\POKITTO_HW" />
-					<Add directory="Pokitto\POKITTO_LIBS" />
-					<Add directory="Pokitto\POKITTO_LIBS\Synth" />
-					<Add directory="Pokitto\libpff" />
-					<Add directory="Pokitto\mbed-pokitto" />
-					<Add directory="Pokitto\mbed-pokitto\api" />
-					<Add directory="Pokitto\mbed-pokitto\common" />
-					<Add directory="Pokitto\mbed-pokitto\hal" />
-					<Add directory="Pokitto\mbed-pokitto\targets" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TOOLCHAIN_GCC" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X" />
-					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBSerial" />
-					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBDevice" />
+					<Add directory="Examples\Tracker" />
 				</Compiler>
 				<Cpp>
 					<Add option="-fno-exceptions" />
 					<Add option="-fno-rtti" />
-					<Add option="-std=gnu++98" />
+					<Add option="-std=gnu++11" />
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-fomit-frame-pointer" />
@@ -238,7 +752,7 @@
 					<Add option="-Wvla" />
 					<Add option="-include" />
 					<Add option="mbed_config.h" />
-					<Add option="-Og -ggdb3" />
+					<Add option="-fpermissive" />
 				</Cpp>
 				<Assembler>
 					<Add option="-Wa,--gdwarf-2" />
@@ -248,53 +762,444 @@
 					<Add option="-lstdc++" />
 					<Add option="-eb_start_files" />
 					<Add option="-Wl,--gc-sections" />
-					<Add option="-Wl,-n" />
 					<Add library="supc++" />
 					<Add library="m" />
 					<Add library="c" />
 					<Add library="gcc" />
 					<Add library="nosys" />
-					<Add library="Pokitto\POKITTO_LIBS\MicroPython\libmicropython.a" />
 				</Linker>
 				<ExtraCommands>
-					<Add before="Pokitto\POKITTO_LIBS\MicroPython\compile_and_freeze_py_files.bat" />
-					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\pythonex.hex -O binary .\build\pythonex.bin" />
-					<Add after=".\build\lpcrc .\build\pythonex.bin" />
-					<Mode before="1" />
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\tracker.hex -O binary .\build\tracker.bin" />
+					<Add after=".\build\lpcrc .\build\tracker.bin" />
+					<Mode before="0" />
 					<Mode after="1" />
 				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-O3" />
+			<Add symbol="TARGET_LPC11U68" />
+			<Add symbol="__MBED__=1" />
+			<Add symbol="DEVICE_I2CSLAVE=1" />
+			<Add symbol="TARGET_LIKE_MBED" />
+			<Add symbol="TARGET_NXP" />
+			<Add symbol="__MBED_CMSIS_RTOS_CM" />
+			<Add symbol="DEVICE_RTC=1" />
+			<Add symbol="TOOLCHAIN_object" />
+			<Add symbol="__CMSIS_RTOS" />
+			<Add symbol="TOOLCHAIN_GCC" />
+			<Add symbol="TARGET_CORTEX_M" />
+			<Add symbol="TARGET_M0P" />
+			<Add symbol="TARGET_UVISOR_UNSUPPORTED" />
+			<Add symbol="DEVICE_SERIAL=1" />
+			<Add symbol="DEVICE_INTERRUPTIN=1" />
+			<Add symbol="TARGET_LPCTarget" />
+			<Add symbol="TARGET_CORTEX" />
+			<Add symbol="DEVICE_I2C=1" />
+			<Add symbol="__CORTEX_M0PLUS" />
+			<Add symbol="TARGET_FF_ARDUINO" />
+			<Add symbol="TARGET_RELEASE" />
+			<Add symbol="MBED_BUILD_TIMESTAMP=1507563655.72" />
+			<Add symbol="ARM_MATH_CM0PLUS" />
+			<Add symbol="TARGET_LPC11U6X" />
+			<Add symbol="DEVICE_SLEEP=1" />
+			<Add symbol="TOOLCHAIN_GCC_ARM" />
+			<Add symbol="DEVICE_SPI=1" />
+			<Add symbol="DEVICE_ANALOGIN=1" />
+			<Add symbol="DEVICE_PWMOUT=1" />
+			<Add symbol="TARGET_LIKE_CORTEX_M0" />
+			<Add directory="." />
+			<Add directory="Pokitto" />
+			<Add directory="Pokitto\POKITTO_CORE" />
+			<Add directory="Pokitto\POKITTO_CORE\FONTS" />
+			<Add directory="Pokitto\POKITTO_CORE\PALETTES" />
+			<Add directory="Pokitto\POKITTO_HW" />
+			<Add directory="Pokitto\POKITTO_LIBS" />
+			<Add directory="Pokitto\POKITTO_LIBS\Synth" />
+			<Add directory="Pokitto\libpff" />
+			<Add directory="Pokitto\mbed-pokitto" />
+			<Add directory="Pokitto\mbed-pokitto\api" />
+			<Add directory="Pokitto\mbed-pokitto\common" />
+			<Add directory="Pokitto\mbed-pokitto\hal" />
+			<Add directory="Pokitto\mbed-pokitto\targets" />
+			<Add directory="Pokitto\mbed-pokitto\targets\cmsis" />
+			<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP" />
+			<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X" />
+			<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM" />
+			<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68" />
+			<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TOOLCHAIN_GCC" />
+			<Add directory="Pokitto\mbed-pokitto\targets\hal" />
+			<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP" />
+			<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X" />
 		</Compiler>
 		<Cpp>
 			<Add option="-O3" />
 		</Cpp>
-		<Unit filename="Examples\HelloWorld\bitmap.cpp">
+		<Unit filename="Examples\Bitmap\bitmap.cpp">
 			<Option compilerVar="CC" />
-			<Option target="HelloWorld" />
+			<Option target="Bitmap" />
+		</Unit>
+		<Unit filename="Examples\Bitmap\My_settings.h">
+			<Option target="Bitmap" />
+		</Unit>
+		<Unit filename="Examples\Bitmap\pokitto_icon.h">
+			<Option target="Bitmap" />
+		</Unit>
+		<Unit filename="Examples\Doon\backgrounds.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Doon\collectable_sprites.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Doon\creatures.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Doon\doon.cpp">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Doon\doon_sprites.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Doon\My_settings.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Doon\tiles.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\Animation.cpp">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\Animation.h">
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_cheeks.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_dreamy.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_eyepupil.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_flat.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_grin.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_halfpupil.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_heart.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_lefteye.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_lids_closed.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_lids_halfeyes.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_lids_smug.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_oh.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_professoreyes.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_righteye.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_smile.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_smile_open.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_squint.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\m_tongue.c">
+			<Option compilerVar="CC" />
+			<Option target="FeelGood" />
+		</Unit>
+		<Unit filename="Examples\FeelGood\My_settings.h">
+			<Option target="FeelGood" />
 		</Unit>
 		<Unit filename="Examples\HelloWorld\main.cpp">
 			<Option compilerVar="CC" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="&lt;{~None~}&gt;" />
+			<Option target="HelloWorld" />
 		</Unit>
 		<Unit filename="Examples\HelloWorld\My_settings.h">
 			<Option target="HelloWorld" />
 		</Unit>
-		<Unit filename="Examples\HelloWorld\pokitto_icon.h">
-			<Option target="HelloWorld" />
+		<Unit filename="Examples\Pixonia\anim_blue_flag1.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\anim_blue_flag2.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\dirt_pillar.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\gameover.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\gold.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\gold2.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\My_settings.h">
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\night_palette.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\pixelman_nw_1.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\pixelman_nw_2.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\pixelman_se_1.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\pixelman_se_2.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\pixonia.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\Pixonia.h">
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\splatter.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_beach_se.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_beach_sw.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_e.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_n.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_ne.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_nw.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_s.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_se.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_sw.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_bump_w.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_earth.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_gold.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_grain.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_hut.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_plain.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_stone.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_tree.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_water1.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\ter_water2.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\theresgold.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\werewolf_nw_1.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\werewolf_nw_2.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\werewolf_se_1.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Pixonia\werewolf_se_2.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Pixonia" />
+		</Unit>
+		<Unit filename="Examples\Sprites\gfxdata.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Sprites\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\Sprites\My_settings.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Examples\SynthTest\beat_11025.h">
+			<Option target="SynthTest" />
+		</Unit>
+		<Unit filename="Examples\SynthTest\My_settings.h">
+			<Option target="SynthTest" />
+		</Unit>
+		<Unit filename="Examples\SynthTest\SynthTest.cpp">
+			<Option compilerVar="CC" />
+			<Option target="SynthTest" />
+		</Unit>
+		<Unit filename="Examples\Tracker\Arrays.h">
+			<Option target="Tracker" />
+		</Unit>
+		<Unit filename="Examples\Tracker\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Tracker" />
+		</Unit>
+		<Unit filename="Examples\Tracker\My_settings.h">
+			<Option target="Tracker" />
+		</Unit>
+		<Unit filename="Examples\Tracker\PatchSettings.h">
+			<Option target="Tracker" />
+		</Unit>
+		<Unit filename="Examples\Tracker\Tracker.h">
+			<Option target="Tracker" />
+		</Unit>
+		<Unit filename="Examples\UpdateAndClipRect\gfxdata.h">
+			<Option target="ClippedDrawing" />
+		</Unit>
+		<Unit filename="Examples\UpdateAndClipRect\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="ClippedDrawing" />
+		</Unit>
+		<Unit filename="Examples\UpdateAndClipRect\My_settings.h">
+			<Option target="ClippedDrawing" />
+		</Unit>
+		<Unit filename="Examples\WavePlayer\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Examples\WavePlayer\My_settings.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Examples\WavePlayer\wave_player.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Examples\WavePlayer\wave_player.h">
+			<Option target="WavePlayer" />
 		</Unit>
 		<Unit filename="Pokitto\libpff\connect.h" />
 		<Unit filename="Pokitto\libpff\diskio.h" />
 		<Unit filename="Pokitto\libpff\integer.h" />
 		<Unit filename="Pokitto\libpff\mmc.cpp">
 			<Option compilerVar="CC" />
+			<Option target="HelloWorld" />
+			<Option target="Bitmap" />
+			<Option target="Sprites" />
+			<Option target="ClippedDrawing" />
+			<Option target="MicroPython" />
+			<Option target="SynthTest" />
+			<Option target="FeelGood" />
+			<Option target="Pixonia" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\libpff\pff.cpp">
 			<Option compilerVar="CC" />
+			<Option target="HelloWorld" />
+			<Option target="Bitmap" />
+			<Option target="Sprites" />
+			<Option target="ClippedDrawing" />
+			<Option target="MicroPython" />
+			<Option target="SynthTest" />
+			<Option target="FeelGood" />
+			<Option target="Pixonia" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\libpff\pff.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\AnalogIn.h" />
@@ -680,6 +1585,19 @@
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoSound.h" />
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoTimer.h" />
+		<Unit filename="Pokitto\POKITTO_HW\clock_11u6x.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\dma_11u6x.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_HW\dma_11u6x.h">
+			<Option target="SynthTest" />
+			<Option target="WavePlayer" />
+			<Option target="FeelGood" />
+			<Option target="Pixonia" />
+			<Option target="Tracker" />
+		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWButtons.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -697,6 +1615,13 @@
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\iap.h" />
 		<Unit filename="Pokitto\POKITTO_HW\loader.h" />
+		<Unit filename="Pokitto\POKITTO_HW\lpc_defs.h">
+			<Option target="SynthTest" />
+			<Option target="WavePlayer" />
+			<Option target="FeelGood" />
+			<Option target="Pixonia" />
+			<Option target="Tracker" />
+		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -712,6 +1637,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.h" />
+		<Unit filename="Pokitto\POKITTO_HW\timer_11u6x.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\frozen_mpy.c">
 			<Option compilerVar="CC" />
 			<Option target="MicroPython" />
@@ -730,13 +1658,10 @@
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\PythonBindings.h">
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\src_py\main.py">
-			<Option target="MicroPython" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\src_py\marsattack_classes.py">
-			<Option target="MicroPython" />
-		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\src_py\marsattack_data.py">
+			<Option target="MicroPython" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\src_py\marsattack_main.py">
 			<Option target="MicroPython" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\src_py\sprite.py">
@@ -746,23 +1671,74 @@
 			<Option compilerVar="CC" />
 			<Option target="MicroPython" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_LIBS\segger\RTT_Syscalls_GCC.c">
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC16.cpp">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
+			<Option target="WavePlayer" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_LIBS\segger\SEGGER_RTT.c">
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC16.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC7.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPython" />
+			<Option target="WavePlayer" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_LIBS\segger\SEGGER_RTT.h">
-			<Option target="MicroPython" />
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC7.h">
+			<Option target="WavePlayer" />
 		</Unit>
-		<Unit filename="Pokitto\POKITTO_LIBS\segger\SEGGER_RTT_Conf.h">
-			<Option target="MicroPython" />
-		</Unit>
-		<Unit filename="Pokitto\POKITTO_LIBS\segger\SEGGER_RTT_printf.c">
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ccsbcs.cpp">
 			<Option compilerVar="CC" />
-			<Option target="MicroPython" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\diskio.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\diskio.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\integer.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATDirHandle.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATDirHandle.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileHandle.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileHandle.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileSystem.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileSystem.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\MemFileSystem.h">
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\SDFileSystem.cpp">
+			<Option compilerVar="CC" />
+			<Option target="WavePlayer" />
+		</Unit>
+		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\SDFileSystem.h">
+			<Option target="WavePlayer" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.cpp">
 			<Option compilerVar="CC" />
@@ -885,12 +1861,37 @@
 			<code_completion />
 			<debugger>
 				<target_debugging_settings target="HelloWorld" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
 						<family_options family_id="All" />
 					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V622a" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
 						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U68" />
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="ClippedDrawing" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
 							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
 							<option opt_id="ID_SPEED" opt_value="1000" />
 							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
@@ -910,12 +1911,187 @@
 					</debug_interface>
 				</target_debugging_settings>
 				<target_debugging_settings target="MicroPython" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
 						<family_options family_id="All" />
 					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V622a" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
 						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U68" />
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="SynthTest" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="WavePlayer" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="FeelGood" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Tracker" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Pixonia" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Bitmap" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Sprites" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
 							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
 							<option opt_id="ID_SPEED" opt_value="1000" />
 							<option opt_id="ID_AUTO_SPEED" opt_value="1" />

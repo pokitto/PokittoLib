@@ -177,7 +177,7 @@ void Pokitto::audio_IRQ() {
         #endif
 
         streamstep &= streamon; //check if stream is on
-		
+
         if(streamvol && streamstep) {
             uint8_t output = (*currentPtr++);
             sbyte = output;
@@ -224,6 +224,7 @@ uint16_t Sound::getMaxVol() {
 }
 
 void Sound::updateStream() {
+    #ifndef NOPETITFATFS
     #if POK_STREAMING_MUSIC
     if (oldBuffer != currentBuffer) {
         if (currentBuffer==0) fileReadBytes(&buffers[3][0],BUFFER_SIZE);
@@ -242,12 +243,14 @@ void Sound::updateStream() {
         streamcounter=0;
         #if POK_STREAM_LOOP > 0
         fileRewind();
-        #endif
-        #ifndef POK_SIM
-        streamon=0;
-        #endif // POK_SIM
+        #else
+            #ifndef POK_SIM
+                streamon=0;
+            #endif // POK_SIM
+        #endif // POK_STREAM_LOOP
     }
     #endif
+    #endif // NOPETITFATFS
 }
 
 void Sound::begin() {
@@ -833,7 +836,7 @@ void Sound::playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav,uint8_t arpmo
 
 void Sound::playTone(uint8_t os, uint16_t frq, uint8_t volume, uint32_t duration)
 {
-    if (os==1) setOSC(&osc1,1,WSAW,frq,volume,duration);
+    if (os==1) setOSC(&osc1,1,WSQUARE,frq,volume,duration);
     else if (os==2) setOSC(&osc2,1,WTRI,frq,volume,duration);
     else if (os==3) setOSC(&osc3,1,WTRI,frq,volume,duration);
 }

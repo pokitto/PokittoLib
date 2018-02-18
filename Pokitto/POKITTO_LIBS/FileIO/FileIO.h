@@ -16,7 +16,7 @@ extern int pokInitSD();
 extern long getFileLength();
 extern uint8_t fileOpen(char*, char);
 extern void fileClose();
-extern int fileGetChar();
+extern char fileGetChar();
 extern void filePutChar(char);
 extern void fileWriteBytes(uint8_t *, uint16_t);
 extern uint16_t fileReadBytes(uint8_t *, uint16_t);
@@ -28,6 +28,7 @@ extern long int fileGetPosition();
 #define fileSetPosition(n)  (fileSeekAbsolute(n))
 extern uint8_t filePeek(long);
 extern void filePoke(long, uint8_t);
+extern int fileReadLine(char*,int);
 extern char* getCurrentFileName ();
 extern int isThisFileOpen(char*);
 extern int fileOK();

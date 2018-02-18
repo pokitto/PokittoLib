@@ -116,6 +116,7 @@ int CopyPageToFlash (uint32_t address, uint8_t* data) {
 }
 
 __attribute__((section(".IAP_Code"))) int HelloFromIAP() {
+    #ifndef NOPETITFATFS
     static uint32_t array_data[WRITECOUNT];
     int i;
     /* Initialize the array data to be written to FLASH */
@@ -189,6 +190,7 @@ default:
     SCB->AIRCR = 0x05FA0004; //issue system reset
     while(1); //should never come here
     return teahupoo;
+    #endif //NOPETITFATFS
 }
 
 
@@ -283,7 +285,7 @@ char iaptest() {
 //Param3: System Clock Frequency (CCLK) in kHz
 //
 //Return Code CMD_SUCCESS | SRC_ADDR_NOT_MAPPED | DST_ADDR_NOT_MAPPED
-__attribute__((section(".IAP_Code"))) void writeEEPROM( uint8_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount )
+__attribute__((section(".IAP_Code"))) void writeEEPROM( uint16_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount )
 {
 	unsigned int command[5], result[4];
 
@@ -321,7 +323,7 @@ __attribute__((section(".IAP_Code"))) void writeEEPROM( uint8_t* eeAddress, uint
 //Param3: System Clock Frequency (CCLK) in kHz
 //
 //Return Code CMD_SUCCESS | SRC_ADDR_NOT_MAPPED | DST_ADDR_NOT_MAPPED
-__attribute__((section(".IAP_Code"))) void readEEPROM( uint8_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount )
+__attribute__((section(".IAP_Code"))) void readEEPROM( uint16_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount )
 {
 	unsigned int command[5], result[4];
 
@@ -365,13 +367,13 @@ __attribute__((section(".IAP_Code"))) void IAPreadPartId( uint8_t* eeAddress, ui
 	return;
 }
 
-uint8_t eeprom_read_byte(uint8_t* index) {
+uint8_t eeprom_read_byte(uint16_t* index) {
     uint8_t val;
     readEEPROM(index,&val,1);
     return val;
 }
 
-void eeprom_write_byte(uint8_t*index , uint8_t val) {
+void eeprom_write_byte(uint16_t* index , uint8_t val) {
     writeEEPROM(index,&val,1);
 }
 

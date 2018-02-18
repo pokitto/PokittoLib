@@ -38,16 +38,22 @@
 #ifndef POKITTO_DISK_H
 #define POKITTO_DISK_H
 
+#include "Pokitto_settings.h" // needed for NOPETITFATFS
+
 #ifndef POK_SIM
 // real hardware disk driver
+#ifndef NOPETITFATFS
 #include "diskio.h"
 #include "pff.h"
 #include "connect.h"
-#include "mbed.h"
 extern BYTE res;
 extern FATFS fs;            /* File system object */
 extern FATDIR dir;            /* Directory object */
 extern FILINFO fno;        /* File information */
+#endif
+
+#include "mbed.h"
+
 extern SPI device;
 extern DigitalOut mmccs;
 
@@ -82,7 +88,7 @@ extern int pokInitSD();
 
 extern uint8_t fileOpen(char*, char);
 extern void fileClose();
-extern int fileGetChar();
+extern char fileGetChar();
 extern void filePutChar(char);
 extern void fileWriteBytes(uint8_t *, uint16_t);
 extern uint16_t fileReadBytes(uint8_t *, uint16_t);
@@ -94,6 +100,7 @@ extern long int fileGetPosition();
 #define fileSetPosition(n)  (fileSeekAbsolute(n))
 extern uint8_t filePeek(long);
 extern void filePoke(long, uint8_t);
+extern int fileReadLine(char*,int);
 extern char* getCurrentFileName ();
 extern char* getNextFile (char*);
 extern char* getNextFile ();

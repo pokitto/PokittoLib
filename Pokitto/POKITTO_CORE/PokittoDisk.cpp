@@ -30,6 +30,7 @@
 #define SD_CS_PIN     7
 
 #if POK_ENABLE_SD > 0
+#ifndef NOPETITFATFS
 BYTE res;
 FATFS fs;            /* File system object */
 FATDIR dir;            /* Directory object */
@@ -65,7 +66,11 @@ __attribute__((section(".SD_Code"))) void initSDGPIO() {
 
 __attribute__((section(".SD_Code"))) int pokInitSD() {
     initSDGPIO();
+    #ifndef NOPETITFATFS
     res = disk_initialize();
+    #else
+    res = disk_initialize(0);
+    #endif
     res = (pf_mount(&fs));
     res = pf_opendir(&dir,"");
     if (res) diropened=false;
@@ -222,7 +227,7 @@ void fileClose() {
     for (uint8_t i=0; i<15; i++) currentfile[i]=0;
 }
 
-int fileGetChar() {
+char fileGetChar() {
     BYTE buff[1];
     WORD br;
     int err = pf_read(buff, 1, &br);    /* Read data to the buff[] */
@@ -279,6 +284,25 @@ void filePoke(long n, uint8_t c) {
     filePutChar(c);
 }
 
+int fileReadLine(char* destination, int maxchars) {
+    int n=0;
+    char c=1;
+    char linebuf[80];
+    fileReadBytes((uint8_t*)linebuf,80);
+    int index=0;
+    while (c!=NULL) {
+        c = linebuf[index++];
+        if (n == 0) {
+            while (c == '\n' || c == '\r') c = linebuf[index++]; // skip empty lines
+        }
+        n++;
+        if (c=='\n' || c=='\r' || n==maxchars-1) c=NULL; //prevent buffer overflow
+        *destination++ = c;
+    }
+    fileSeekRelative(-80+index); //rewind
+    return n; //number of characters read
+}
+
 int dirOpen() {
     return pf_opendir(&dir,"");
 }
@@ -287,7 +311,7 @@ int dirUp() {
 
 return 0;
 }
-
+#endif // NOPETITFATFS
 #endif // POK_ENABLE_SD
 
 

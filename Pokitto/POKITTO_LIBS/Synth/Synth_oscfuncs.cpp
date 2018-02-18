@@ -62,7 +62,7 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
   o->count = 0;
   noiseval = xorshift16(); //random(0,0xFFFF);
 
-  o->cinc = cincs[notenumber]<<POK_CINC_MULTIPLIER; // direct cinc from table, no calculation
+  o->cinc = cincs[notenumber]; // direct cinc from table, no calculation
   o->tonic = notenumber; // save tonic for arpeggio use
   if (wave == 2) o->cinc >>= 1; // correct pitch for saw wave
   if (wave == 4) o->cinc <<= 1; // enable higher pitch for pure noise
@@ -97,26 +97,26 @@ void setOSC(OSC* o,byte on, byte wave, uint16_t frq, uint8_t volume, uint32_t du
   o->overdrive = 0;
   o->kick = 0;
   o->wave = wave;
-  o->loop = 1;
-  o->echo = 1; //echo shifts left 8 steps to zero
+  o->loop = 0;//1;
+  o->echo = 0;//1; //echo shifts left 8 steps to zero
   o->echodiv = 0;
-  o->adsr = 1;
-  o->attack = 200;
-  o->decay = 200;
-  o->sustain = 20;
-  o->release = 10;
-  o->adsrphase = 1;
+  o->adsr = 0;//1;
+  o->attack = 0;//200;
+  o->decay = 0;//200;
+  o->sustain = 0;//20;
+  o->release = 0;//10;
+  o->adsrphase = 0;//1;
   o->arpmode = 0;
   o->count = 0;
   noiseval = xorshift16(); //random(0,0xFFFF);
-  o->cinc = (frq/100)*(cincs[18]<<POK_CINC_MULTIPLIER); // its a kludge, i know. cant be bothered.
+  o->cinc = ((float)0xFFFFFFFF/(float)POK_AUD_FREQ)*frq;
   if (wave == 2) o->cinc >>= 1; // correct pitch for saw wave
   if (wave == 4) o->cinc <<= 1; // enable higher pitch for pure noise
   o->vol = volume << 8;//volume;
   o->adsrvol = o->vol;
-  o->duration = duration*100;
-  o->maxbend = -4000;
-  o->bendrate = 1000;
+  o->duration = 0;//duration*100;
+  o->maxbend = 0;//-4000;
+  o->bendrate = 0;//1000;
 }
 
 

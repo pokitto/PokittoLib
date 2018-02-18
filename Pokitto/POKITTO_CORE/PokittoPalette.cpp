@@ -60,23 +60,24 @@ void Display::load565Palette(const uint16_t* p) {
 }
 
 void Display::rotatePalette(int8_t step) {
-    uint16_t tpal[PALETTE_SIZE];
+    #define PALSIZE 16
+    uint16_t tpal[PALSIZE];
     if (step == 0) return;
     step = 0-step;
     if (step>0) {
-        for (int i=step;i<PALETTE_SIZE;i++) tpal[i]=palette[i-step]; // palette revolves up, new color 1 becomes old color 0
-        for (int i=0; i < step; i++) tpal[i]=palette[PALETTE_SIZE-step+i]; // overflow topmost values to bottom of new palette
+        for (int i=step;i<PALSIZE;i++) tpal[i]=palette[i-step]; // palette revolves up, new color 1 becomes old color 0
+        for (int i=0; i < step; i++) tpal[i]=palette[PALSIZE-step+i]; // overflow topmost values to bottom of new palette
     } else {
-        for (int i=0;i<PALETTE_SIZE+step;i++)
+        for (int i=0;i<PALSIZE+step;i++)
         {
             tpal[i]=palette[i-step];
             }// palette revolves down, new color 0 becomes old color 1
         for (int i=0;i<-step; i++) {
-                tpal[PALETTE_SIZE+step+i]=palette[i];
+                tpal[PALSIZE+step+i]=palette[i];
         }
         // overflow bottom values to top of new palette
     }
-    for (int i=0; i<PALETTE_SIZE;i++) palette[i] = tpal[i];
+    for (int i=0; i<PALSIZE;i++) palette[i] = tpal[i];
 }
 
 uint16_t Display::RGBto565(uint8_t R,uint8_t G,uint8_t B) {
