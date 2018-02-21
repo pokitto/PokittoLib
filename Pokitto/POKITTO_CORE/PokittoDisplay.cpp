@@ -2320,7 +2320,7 @@ void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* pale
     }
     m_sprites[index].w = w;
     m_sprites[index].h = h;
-    memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
+    if( palette4x16bit ) memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
 }
 
 /**

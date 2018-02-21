@@ -180,16 +180,16 @@ typedef __uint_least64_t uint_least64_t;
   typedef long long unsigned int uintmax_t;
 # 10 "c:\\program files (x86)\\embitz\\1.11\\share\\em_armgcc\\lib\\gcc\\arm-none-eabi\\5.4.1\\include\\stdint.h" 2 3 4
 # 2 "./mpconfigport.h" 2
-# 86 "./mpconfigport.h"
+# 89 "./mpconfigport.h"
 
-# 86 "./mpconfigport.h"
+# 89 "./mpconfigport.h"
 typedef int mp_int_t;
 typedef unsigned mp_uint_t;
 
 typedef long mp_off_t;
 
 extern const struct _mp_obj_module_t mp_module_pygame;
-# 106 "./mpconfigport.h"
+# 109 "./mpconfigport.h"
 # 1 "c:\\program files (x86)\\embitz\\1.11\\share\\em_armgcc\\arm-none-eabi\\include\\alloca.h" 1 3
 # 10 "c:\\program files (x86)\\embitz\\1.11\\share\\em_armgcc\\arm-none-eabi\\include\\alloca.h" 3
 # 1 "c:\\program files (x86)\\embitz\\1.11\\share\\em_armgcc\\arm-none-eabi\\include\\_ansi.h" 1 3
@@ -598,7 +598,7 @@ extern struct _reent *const _global_impure_ptr ;
 
 void _reclaim_reent (struct _reent *);
 # 12 "c:\\program files (x86)\\embitz\\1.11\\share\\em_armgcc\\arm-none-eabi\\include\\alloca.h" 2 3
-# 107 "./mpconfigport.h" 2
+# 110 "./mpconfigport.h" 2
 # 46 "../../py/mpconfig.h" 2
 # 28 "<stdin>" 2
 
@@ -644,6 +644,12 @@ Q(AttributeError)
 
 Q(AttributeError)
 
+Q(BUT_A)
+
+Q(BUT_B)
+
+Q(BUT_C)
+
 Q(BaseException)
 
 Q(BaseException)
@@ -651,6 +657,42 @@ Q(BaseException)
 Q(EOFError)
 
 Q(EOFError)
+
+Q(EXT0)
+
+Q(EXT1)
+
+Q(EXT10)
+
+Q(EXT11)
+
+Q(EXT12)
+
+Q(EXT13)
+
+Q(EXT14)
+
+Q(EXT15)
+
+Q(EXT16)
+
+Q(EXT17)
+
+Q(EXT2)
+
+Q(EXT3)
+
+Q(EXT4)
+
+Q(EXT5)
+
+Q(EXT6)
+
+Q(EXT7)
+
+Q(EXT8)
+
+Q(EXT9)
 
 Q(Ellipsis)
 
@@ -675,6 +717,8 @@ Q(GS4_HMSB)
 Q(GeneratorExit)
 
 Q(GeneratorExit)
+
+Q(IN)
 
 Q(ImportError)
 
@@ -746,9 +790,19 @@ Q(OSError)
 
 Q(OSError)
 
+Q(OUT)
+
 Q(OverflowError)
 
 Q(OverflowError)
+
+Q(PULL_DOWN)
+
+Q(PULL_UP)
+
+Q(Pin)
+
+Q(Pin)
 
 Q(PinBase)
 
@@ -1190,6 +1244,8 @@ Q(index)
 
 Q(init)
 
+Q(init)
+
 Q(insert)
 
 Q(int)
@@ -1290,6 +1346,8 @@ Q(micropython)
 
 Q(micropython)
 
+Q(mode)
+
 Q(module)
 
 Q(next)
@@ -1301,6 +1359,10 @@ Q(object)
 Q(oct)
 
 Q(off)
+
+Q(off)
+
+Q(on)
 
 Q(on)
 
@@ -1470,9 +1532,15 @@ Q(value)
 
 Q(value)
 
+Q(value)
+
+Q(value)
+
 Q(values)
 
 Q(vline)
+
+Q(wait)
 
 Q(width)
 
