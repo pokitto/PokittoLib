@@ -83,6 +83,18 @@
 					<Add directory="../../Examples/Tracker" />
 				</Compiler>
 			</Target>
+			<Target title="Mode13">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../../Examples/Mode13" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -128,6 +140,12 @@
 		</Unit>
 		<Unit filename="../../Examples/HelloWorld/main.cpp">
 			<Option target="HelloWorld" />
+		</Unit>
+		<Unit filename="../../Examples/Mode13/My_settings.h">
+			<Option target="Mode13" />
+		</Unit>
+		<Unit filename="../../Examples/Mode13/mode13.cpp">
+			<Option target="Mode13" />
 		</Unit>
 		<Unit filename="../../Examples/Sprites/My_settings.h">
 			<Option target="Sprites" />

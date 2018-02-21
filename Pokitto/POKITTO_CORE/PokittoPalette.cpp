@@ -60,7 +60,11 @@ void Display::load565Palette(const uint16_t* p) {
 }
 
 void Display::rotatePalette(int8_t step) {
+    #ifndef PROJ_MODE13
     #define PALSIZE 16
+    #else
+    #define PALSIZE 256
+    #endif
     uint16_t tpal[PALSIZE];
     if (step == 0) return;
     step = 0-step;
