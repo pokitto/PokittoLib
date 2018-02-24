@@ -151,6 +151,10 @@ uint8_t Display::bpp = POK_COLORDEPTH;
     uint8_t Display::width = 220;
     uint8_t Display::height = 176;
     uint8_t Display::screenbuffer[14520];
+#elif (POK_SCREENMODE == MODE13)
+    uint8_t Display::width = 110;
+    uint8_t Display::height = 88;
+    uint8_t Display::screenbuffer[110*88]; // 8bit 110x88
 #else
     uint8_t Display::width = 84;
     uint8_t Display::height = 48;
@@ -268,6 +272,9 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
 
     // For the screen modes that do not support sprites, return if the direct draw mode is used.
     if (! useDirectDrawMode) {
+		#if POK_SCREENMODE == MODE13
+		lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
+		#endif
 
         #if POK_SCREENMODE == MODE_GAMEBOY
         lcdRefreshModeGBC(m_scrbuf, paletteptr);
@@ -722,6 +729,11 @@ void Display::drawPixel(int16_t x,int16_t y) {
 
 uint8_t Display::getPixel(int16_t x,int16_t y) {
     if ((uint16_t)x >= width || (uint16_t)y >= height) return 0;
+    #if POK_COLORDEPTH == 8
+    uint16_t i = y*width+x;
+    return m_scrbuf[i];
+    #endif // POK_COLORDEPTH
+
     #if POK_GAMEBUINO_SUPPORT
     uint8_t color=0; //jonne
 	for (uint8_t cbit=0; cbit<POK_COLORDEPTH;cbit++) {
@@ -1471,6 +1483,10 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     return;
     }
 
+
+    /** 4bpp fast version */
+    if (m_colordepth<4) {
+
     /** 4bpp fast version */
 	int16_t scrx,scry,xclip,xjump,scrxjump;
     xclip=xjump=scrxjump=0;
@@ -1509,7 +1525,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                         uint8_t sourcepixel = *bitmap;
                         if ((sourcepixel&0x0F) != invisiblecolor) {
                             sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr & 0x0F;
+                            uint8_t targetpixel = *scrptr;// & 0x0F;
                             targetpixel |= sourcepixel;
                             *scrptr = targetpixel;
                         }
@@ -1520,7 +1536,6 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
                 bitmap += xjump; // needed if x<0 clipping occurs
             } else { /** ODD pixel starting line **/
-                //for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                 for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                     uint8_t sourcepixel = *bitmap;
                     uint8_t targetpixel = *scrptr;
@@ -1534,24 +1549,47 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                     *scrptr = targetpixel;
                     bitmap++;
                 }
-                if (xclip){
-                    if (w&1) {
-                        /**last pixel is odd pixel due to clipping & odd width*/
-                        uint8_t sourcepixel = *bitmap;
-                        sourcepixel >>=4; //top nibble of sourcebyte from bitmap...
-                        if (sourcepixel != invisiblecolor) {
-                            uint8_t targetpixel = *scrptr & 0xF0; //...put into the low nibble of the target
-                            targetpixel |= sourcepixel;
-                            *scrptr = targetpixel;
-                        }
-                        //scrptr++;
-                    }
-                }
                 bitmap+=xjump;
             }
             // increment the y jump in the scrptr
             scrptr = scrptr + ((width - w)>>1)+scrxjump;
     }
+
+    return;
+    }
+
+    if (m_colordepth==8) {
+	int16_t scrx,scry,xclip,xjump,scrxjump;
+    xclip=xjump=scrxjump=0;
+    /** y clipping */
+    if (y<0) { h+=y; bitmap -= y*w; y=0;}
+    else if (y+h>height) { h -=(y-height);}
+    /** x clipping */
+    if (x<0) { xclip=x; w+=x; xjump = (-x); bitmap += xjump; x=0;}
+    else if (x+w>width) {
+            xclip = x;
+            scrxjump = x;
+            xjump=(x+w-width)+scrxjump;
+            w = width-x;}
+
+    uint8_t* scrptr = m_scrbuf + (y*width + x);
+    for (scry = y; scry < y+h; scry+=1) {
+            if (scry>=height) return;
+                for (scrx = x; scrx < w+x; scrx++) {
+                    uint8_t sourcepixel = *bitmap;
+                    uint8_t targetpixel = *scrptr;
+                    if (sourcepixel != invisiblecolor ) targetpixel = sourcepixel;
+                    *scrptr = targetpixel;
+                    bitmap++;
+                    scrptr++;
+                }
+            bitmap += xjump; // needed if x<0 clipping occurs
+        scrptr = scrptr + (width - w)+scrxjump;
+    }
+    return;
+    }
+
+
 }
 
 void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
@@ -2338,7 +2376,7 @@ void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* pale
     }
     m_sprites[index].w = w;
     m_sprites[index].h = h;
-    memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
+    if( palette4x16bit ) memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
 }
 
 /**
@@ -2366,6 +2404,9 @@ void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
 
     // For the screen modes that do not support sprites, return if the direct draw mode is used.
     if (useDirectDrawMode) return;
+#if POK_SCREENMODE == MODE13
+    lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
+#endif
 
 #if POK_SCREENMODE == MODE_GAMEBOY
     lcdRefreshModeGBC(scr, paletteptr);

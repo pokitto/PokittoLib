@@ -39,8 +39,10 @@
 
 #ifndef POK_SIM
 #include "USBSerial.h"
+#ifdef USE_SEGGER_SERIAL_PRINT
+#include "SEGGER_RTT.h"
 #endif
-
+#endif
 #include "PythonBindings.h"
 
 #if USE_USB_SERIAL_PRINT
@@ -77,11 +79,38 @@ extern "C" int pc_printf(const char* format, ...) {
 
 #else //!USE_USB_SERIAL_PRINT
 
+#ifdef USE_SEGGER_SERIAL_PRINT
+
+extern "C" int pc_putc(int c) {
+    char cc = c;
+    return SEGGER_RTT_Write(0, &cc, 1);
+}
+extern "C" int pc_getc() {
+    return SEGGER_RTT_WaitKey();
+}
+extern "C" void pc_puts(const char* strWithNull) {
+
+    SEGGER_RTT_WriteString(0, strWithNull);
+}
+extern "C" void pc_putsn(const char* str, int len) {
+    SEGGER_RTT_Write(0, str, len);
+}
+extern "C" int pc_printf(const char* format, ...) {
+
+    std::va_list arg;
+    va_start(arg, format);
+    int ret = SEGGER_RTT_printf( 0, format, arg);
+    va_end(arg);
+    return ret;
+}
+#else
+
 extern "C" int pc_putc(int c) { return 0;}
 extern "C" int pc_getc() {return 0;}
 extern "C" void pc_puts(const char* strWithNull) {}
 extern "C" void pc_putsn(const char* str, int len) {}
 extern "C" int pc_printf(const char* format, ...) {return 0;}
 
+#endif
 #endif
 

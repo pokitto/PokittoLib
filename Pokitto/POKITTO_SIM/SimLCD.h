@@ -92,6 +92,8 @@ extern void lcdRefreshMode14(uint8_t*, uint16_t*);
 extern void lcdRefreshModeLamenes(uint8_t*, uint16_t*);
 /** Update LCD from Gameboy mode*/
 extern void lcdRefreshModeGBC(uint8_t* , uint16_t*);
+/** Update LCD from mode13 (110x88x256) mode*/
+extern void lcdRefreshMode13(uint8_t *, uint16_t*, uint8_t);
 /** Update LCD from 1-bit tile mode */
 extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
 

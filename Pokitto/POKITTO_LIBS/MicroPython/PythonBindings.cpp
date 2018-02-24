@@ -178,10 +178,20 @@ void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
         Display::setClipRect(x, y, w, h);  // Set clip rect
 }
 
+// Draw the screen surface immediately to the display. Do not care about fps limits. Do not run event loops etc.
+void Pok_Display_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
+    Display::update(useDirectMode, x, y, w, h);
+}
+
+// Run the event loops, audio loops etc. Draws the screen when the fps limit is reached and returns true.
 bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
 
-    return Core::update(useDirectMode, x, y, w, h);
+    bool ret = Core::update(useDirectMode, x, y, w, h);
+    //printf("update, %d ms\n", Core::getTime()-s);
+    return ret;
 }
+
+
 
 bool Pok_Core_isRunning() {
 
@@ -203,8 +213,17 @@ bool Pok_Core_buttons_released(uint8_t button) {
     return Core::buttons.released(button);
 }
 
+void Pok_Wait(uint32_t dur_ms) {
+#ifdef POK_SIM
+    Simulator::wait_ms(dur_ms);
+#else
+    wait_ms(dur_ms);
+#endif // POK_SIM
+}
 
-struct tm * localtime_cpp(const time_t * timer){
+
+struct tm * localtime_cpp(const time_t * timer)
+{
     return(localtime(timer));
 }
 

@@ -1336,7 +1336,7 @@ uint8_t *d;
 uint16_t xptr = 14;
 uint8_t yoffset = 24;
 #else
-uint16_t xptr = 0; //was 26
+uint16_t xptr = 0;
 uint8_t yoffset = 0;
 #endif
 
