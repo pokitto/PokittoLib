@@ -36,6 +36,9 @@
 
 #include "PokittoDisk.h"
 #include "Synth.h"
+#ifdef TRACKER_EXAMPLE
+#include "Tracker.h"
+#endif // TRACKER
 #ifdef POK_SIM
 #include "FileIO.h"
 #endif
@@ -159,7 +162,11 @@ void updatePlayback() {
                         }
                     }
                     playerpos = 0;
+                    #ifdef TRACKER_EXAMPLE
+                    tracker.initStreams();
+                    #else
                     initStreams(sequencepos);
+                    #endif // TRACKER_EXAMPLE
                     //(*streamCallbackPtr)();
                     tableRefresh=true;
             }

@@ -1,12 +1,14 @@
 Rboy Tracker song file
 0.030000
 BPM=60
-Last pattern=1
+Last pattern=3
 Loop to=0
-Patches=9
+Patches=4
 Block sequence 0 ,0,1,2
 Block sequence 1 ,3,4,5
-Block 0 row 0 ,34,1
+Block sequence 2 ,6,7,8
+Block sequence 3 ,9,10,11
+Block 0 row 0 ,31,1
 Block 0 row 1 ,255,0
 Block 0 row 2 ,255,0
 Block 0 row 3 ,255,0
@@ -14,15 +16,15 @@ Block 0 row 4 ,255,0
 Block 0 row 5 ,255,0
 Block 0 row 6 ,255,0
 Block 0 row 7 ,255,0
-Block 0 row 8 ,56,6
+Block 0 row 8 ,255,0
 Block 0 row 9 ,255,0
 Block 0 row 10 ,255,0
 Block 0 row 11 ,255,0
 Block 0 row 12 ,255,0
-Block 0 row 13 ,46,1
+Block 0 row 13 ,255,0
 Block 0 row 14 ,255,0
-Block 0 row 15 ,46,2
-Block 0 row 16 ,34,1
+Block 0 row 15 ,255,0
+Block 0 row 16 ,255,0
 Block 0 row 17 ,255,0
 Block 0 row 18 ,255,0
 Block 0 row 19 ,255,0
@@ -30,15 +32,15 @@ Block 0 row 20 ,255,0
 Block 0 row 21 ,255,0
 Block 0 row 22 ,255,0
 Block 0 row 23 ,255,0
-Block 0 row 24 ,44,1
+Block 0 row 24 ,255,0
 Block 0 row 25 ,255,0
 Block 0 row 26 ,255,0
 Block 0 row 27 ,255,0
-Block 0 row 28 ,255,0
+Block 0 row 28 ,39,2
 Block 0 row 29 ,255,0
 Block 0 row 30 ,255,0
 Block 0 row 31 ,255,0
-Block 0 row 32 ,46,1
+Block 0 row 32 ,255,0
 Block 0 row 33 ,255,0
 Block 0 row 34 ,255,0
 Block 0 row 35 ,255,0
@@ -54,7 +56,7 @@ Block 0 row 44 ,255,0
 Block 0 row 45 ,255,0
 Block 0 row 46 ,255,0
 Block 0 row 47 ,255,0
-Block 0 row 48 ,34,1
+Block 0 row 48 ,255,0
 Block 0 row 49 ,255,0
 Block 0 row 50 ,255,0
 Block 0 row 51 ,255,0
@@ -62,7 +64,7 @@ Block 0 row 52 ,255,0
 Block 0 row 53 ,255,0
 Block 0 row 54 ,255,0
 Block 0 row 55 ,255,0
-Block 0 row 56 ,48,1
+Block 0 row 56 ,36,1
 Block 0 row 57 ,255,0
 Block 0 row 58 ,255,0
 Block 0 row 59 ,255,0
@@ -70,71 +72,71 @@ Block 0 row 60 ,255,0
 Block 0 row 61 ,255,0
 Block 0 row 62 ,255,0
 Block 0 row 63 ,255,0
-Block 1 row 0 ,34,4
+Block 1 row 0 ,255,0
 Block 1 row 1 ,255,0
 Block 1 row 2 ,255,0
 Block 1 row 3 ,255,0
-Block 1 row 4 ,70,9
+Block 1 row 4 ,255,0
 Block 1 row 5 ,255,0
-Block 1 row 6 ,34,4
+Block 1 row 6 ,255,0
 Block 1 row 7 ,255,0
-Block 1 row 8 ,34,4
-Block 1 row 9 ,255,0
-Block 1 row 10 ,34,4
+Block 1 row 8 ,50,3
+Block 1 row 9 ,49,4
+Block 1 row 10 ,48,3
 Block 1 row 11 ,255,0
-Block 1 row 12 ,255,0
+Block 1 row 12 ,50,3
 Block 1 row 13 ,255,0
-Block 1 row 14 ,70,9
+Block 1 row 14 ,255,0
 Block 1 row 15 ,255,0
-Block 1 row 16 ,34,4
+Block 1 row 16 ,255,0
 Block 1 row 17 ,255,0
 Block 1 row 18 ,255,0
-Block 1 row 19 ,255,0
-Block 1 row 20 ,34,4
+Block 1 row 19 ,49,4
+Block 1 row 20 ,43,3
 Block 1 row 21 ,255,0
 Block 1 row 22 ,255,0
 Block 1 row 23 ,255,0
-Block 1 row 24 ,56,6
+Block 1 row 24 ,255,0
 Block 1 row 25 ,255,0
-Block 1 row 26 ,65,9
+Block 1 row 26 ,255,0
 Block 1 row 27 ,255,0
 Block 1 row 28 ,255,0
 Block 1 row 29 ,255,0
 Block 1 row 30 ,255,0
 Block 1 row 31 ,255,0
-Block 1 row 32 ,41,4
+Block 1 row 32 ,255,0
 Block 1 row 33 ,255,0
 Block 1 row 34 ,255,0
 Block 1 row 35 ,255,0
-Block 1 row 36 ,255,0
-Block 1 row 37 ,255,0
-Block 1 row 38 ,41,4
-Block 1 row 39 ,255,0
-Block 1 row 40 ,41,4
+Block 1 row 36 ,51,3
+Block 1 row 37 ,49,4
+Block 1 row 38 ,50,3
+Block 1 row 39 ,49,4
+Block 1 row 40 ,51,3
 Block 1 row 41 ,255,0
-Block 1 row 42 ,41,4
-Block 1 row 43 ,255,0
-Block 1 row 44 ,255,0
+Block 1 row 42 ,255,0
+Block 1 row 43 ,49,4
+Block 1 row 44 ,50,3
 Block 1 row 45 ,255,0
 Block 1 row 46 ,255,0
-Block 1 row 47 ,255,0
-Block 1 row 48 ,42,4
+Block 1 row 47 ,49,4
+Block 1 row 48 ,48,3
 Block 1 row 49 ,255,0
 Block 1 row 50 ,255,0
 Block 1 row 51 ,255,0
-Block 1 row 52 ,41,4
+Block 1 row 52 ,255,0
 Block 1 row 53 ,255,0
 Block 1 row 54 ,255,0
 Block 1 row 55 ,255,0
-Block 1 row 56 ,56,6
+Block 1 row 56 ,255,0
 Block 1 row 57 ,255,0
-Block 1 row 58 ,51,9
+Block 1 row 58 ,255,0
 Block 1 row 59 ,255,0
 Block 1 row 60 ,255,0
 Block 1 row 61 ,255,0
 Block 1 row 62 ,255,0
 Block 1 row 63 ,255,0
-Block 2 row 0 ,39,5
+Block 2 row 0 ,255,0
 Block 2 row 1 ,255,0
 Block 2 row 2 ,255,0
 Block 2 row 3 ,255,0
@@ -142,11 +144,11 @@ Block 2 row 4 ,255,0
 Block 2 row 5 ,255,0
 Block 2 row 6 ,255,0
 Block 2 row 7 ,255,0
-Block 2 row 8 ,56,6
+Block 2 row 8 ,255,0
 Block 2 row 9 ,255,0
 Block 2 row 10 ,255,0
 Block 2 row 11 ,255,0
-Block 2 row 12 ,39,5
+Block 2 row 12 ,255,0
 Block 2 row 13 ,255,0
 Block 2 row 14 ,255,0
 Block 2 row 15 ,255,0
@@ -158,7 +160,7 @@ Block 2 row 20 ,255,0
 Block 2 row 21 ,255,0
 Block 2 row 22 ,255,0
 Block 2 row 23 ,255,0
-Block 2 row 24 ,56,6
+Block 2 row 24 ,255,0
 Block 2 row 25 ,255,0
 Block 2 row 26 ,255,0
 Block 2 row 27 ,255,0
@@ -166,7 +168,7 @@ Block 2 row 28 ,255,0
 Block 2 row 29 ,255,0
 Block 2 row 30 ,255,0
 Block 2 row 31 ,255,0
-Block 2 row 32 ,39,5
+Block 2 row 32 ,255,0
 Block 2 row 33 ,255,0
 Block 2 row 34 ,255,0
 Block 2 row 35 ,255,0
@@ -174,23 +176,23 @@ Block 2 row 36 ,255,0
 Block 2 row 37 ,255,0
 Block 2 row 38 ,255,0
 Block 2 row 39 ,255,0
-Block 2 row 40 ,56,6
+Block 2 row 40 ,255,0
 Block 2 row 41 ,255,0
 Block 2 row 42 ,255,0
 Block 2 row 43 ,255,0
-Block 2 row 44 ,39,5
+Block 2 row 44 ,255,0
 Block 2 row 45 ,255,0
-Block 2 row 46 ,39,5
+Block 2 row 46 ,255,0
 Block 2 row 47 ,255,0
 Block 2 row 48 ,255,0
 Block 2 row 49 ,255,0
 Block 2 row 50 ,255,0
 Block 2 row 51 ,255,0
-Block 2 row 52 ,39,5
+Block 2 row 52 ,255,0
 Block 2 row 53 ,255,0
 Block 2 row 54 ,255,0
 Block 2 row 55 ,255,0
-Block 2 row 56 ,56,6
+Block 2 row 56 ,255,0
 Block 2 row 57 ,255,0
 Block 2 row 58 ,255,0
 Block 2 row 59 ,255,0
@@ -198,7 +200,7 @@ Block 2 row 60 ,255,0
 Block 2 row 61 ,255,0
 Block 2 row 62 ,255,0
 Block 2 row 63 ,255,0
-Block 3 row 0 ,37,1
+Block 3 row 0 ,255,0
 Block 3 row 1 ,255,0
 Block 3 row 2 ,255,0
 Block 3 row 3 ,255,0
@@ -210,19 +212,19 @@ Block 3 row 8 ,255,0
 Block 3 row 9 ,255,0
 Block 3 row 10 ,255,0
 Block 3 row 11 ,255,0
-Block 3 row 12 ,49,1
-Block 3 row 13 ,49,2
+Block 3 row 12 ,255,0
+Block 3 row 13 ,255,0
 Block 3 row 14 ,255,0
 Block 3 row 15 ,255,0
-Block 3 row 16 ,51,1
+Block 3 row 16 ,255,0
 Block 3 row 17 ,255,0
 Block 3 row 18 ,255,0
 Block 3 row 19 ,255,0
-Block 3 row 20 ,255,0
+Block 3 row 20 ,29,2
 Block 3 row 21 ,255,0
 Block 3 row 22 ,255,0
 Block 3 row 23 ,255,0
-Block 3 row 24 ,48,3
+Block 3 row 24 ,255,0
 Block 3 row 25 ,255,0
 Block 3 row 26 ,255,0
 Block 3 row 27 ,255,0
@@ -230,7 +232,7 @@ Block 3 row 28 ,255,0
 Block 3 row 29 ,255,0
 Block 3 row 30 ,255,0
 Block 3 row 31 ,255,0
-Block 3 row 32 ,34,1
+Block 3 row 32 ,255,0
 Block 3 row 33 ,255,0
 Block 3 row 34 ,255,0
 Block 3 row 35 ,255,0
@@ -238,87 +240,87 @@ Block 3 row 36 ,255,0
 Block 3 row 37 ,255,0
 Block 3 row 38 ,255,0
 Block 3 row 39 ,255,0
-Block 3 row 40 ,70,9
+Block 3 row 40 ,255,0
 Block 3 row 41 ,255,0
-Block 3 row 42 ,68,9
+Block 3 row 42 ,255,0
 Block 3 row 43 ,255,0
-Block 3 row 44 ,66,9
+Block 3 row 44 ,31,1
 Block 3 row 45 ,255,0
-Block 3 row 46 ,65,9
+Block 3 row 46 ,255,0
 Block 3 row 47 ,255,0
-Block 3 row 48 ,63,9
+Block 3 row 48 ,255,0
 Block 3 row 49 ,255,0
-Block 3 row 50 ,54,9
+Block 3 row 50 ,255,0
 Block 3 row 51 ,255,0
-Block 3 row 52 ,53,9
+Block 3 row 52 ,255,0
 Block 3 row 53 ,255,0
-Block 3 row 54 ,51,9
+Block 3 row 54 ,255,0
 Block 3 row 55 ,255,0
-Block 3 row 56 ,56,6
+Block 3 row 56 ,255,0
 Block 3 row 57 ,255,0
 Block 3 row 58 ,255,0
 Block 3 row 59 ,255,0
-Block 3 row 60 ,56,6
+Block 3 row 60 ,255,0
 Block 3 row 61 ,255,0
 Block 3 row 62 ,255,0
 Block 3 row 63 ,255,0
-Block 4 row 0 ,37,4
-Block 4 row 1 ,255,0
-Block 4 row 2 ,255,0
+Block 4 row 0 ,51,3
+Block 4 row 1 ,49,4
+Block 4 row 2 ,50,3
 Block 4 row 3 ,255,0
-Block 4 row 4 ,255,0
+Block 4 row 4 ,51,3
 Block 4 row 5 ,255,0
-Block 4 row 6 ,37,4
+Block 4 row 6 ,255,0
 Block 4 row 7 ,255,0
-Block 4 row 8 ,37,4
+Block 4 row 8 ,255,0
 Block 4 row 9 ,255,0
-Block 4 row 10 ,37,4
-Block 4 row 11 ,255,0
-Block 4 row 12 ,255,0
+Block 4 row 10 ,255,0
+Block 4 row 11 ,49,4
+Block 4 row 12 ,43,3
 Block 4 row 13 ,255,0
 Block 4 row 14 ,255,0
 Block 4 row 15 ,255,0
-Block 4 row 16 ,37,4
+Block 4 row 16 ,255,0
 Block 4 row 17 ,255,0
 Block 4 row 18 ,255,0
 Block 4 row 19 ,255,0
 Block 4 row 20 ,255,0
 Block 4 row 21 ,255,0
-Block 4 row 22 ,255,0
+Block 4 row 22 ,49,4
 Block 4 row 23 ,255,0
-Block 4 row 24 ,56,6
-Block 4 row 25 ,255,0
-Block 4 row 26 ,51,9
-Block 4 row 27 ,255,0
-Block 4 row 28 ,255,0
+Block 4 row 24 ,48,3
+Block 4 row 25 ,49,4
+Block 4 row 26 ,46,3
+Block 4 row 27 ,49,4
+Block 4 row 28 ,48,3
 Block 4 row 29 ,255,0
 Block 4 row 30 ,255,0
 Block 4 row 31 ,255,0
-Block 4 row 32 ,37,4
+Block 4 row 32 ,46,3
 Block 4 row 33 ,255,0
 Block 4 row 34 ,255,0
-Block 4 row 35 ,255,0
-Block 4 row 36 ,255,0
+Block 4 row 35 ,49,4
+Block 4 row 36 ,45,3
 Block 4 row 37 ,255,0
-Block 4 row 38 ,37,4
-Block 4 row 39 ,255,0
-Block 4 row 40 ,37,4
+Block 4 row 38 ,255,0
+Block 4 row 39 ,49,4
+Block 4 row 40 ,48,3
 Block 4 row 41 ,255,0
-Block 4 row 42 ,37,4
+Block 4 row 42 ,255,0
 Block 4 row 43 ,255,0
-Block 4 row 44 ,255,0
+Block 4 row 44 ,46,3
 Block 4 row 45 ,255,0
 Block 4 row 46 ,255,0
 Block 4 row 47 ,255,0
-Block 4 row 48 ,37,4
+Block 4 row 48 ,255,0
 Block 4 row 49 ,255,0
 Block 4 row 50 ,255,0
 Block 4 row 51 ,255,0
-Block 4 row 52 ,255,0
-Block 4 row 53 ,255,0
-Block 4 row 54 ,255,0
+Block 4 row 52 ,50,3
+Block 4 row 53 ,49,4
+Block 4 row 54 ,48,3
 Block 4 row 55 ,255,0
-Block 4 row 56 ,39,4
+Block 4 row 56 ,50,3
 Block 4 row 57 ,255,0
 Block 4 row 58 ,255,0
 Block 4 row 59 ,255,0
@@ -326,7 +328,7 @@ Block 4 row 60 ,255,0
 Block 4 row 61 ,255,0
 Block 4 row 62 ,255,0
 Block 4 row 63 ,255,0
-Block 5 row 0 ,39,5
+Block 5 row 0 ,255,0
 Block 5 row 1 ,255,0
 Block 5 row 2 ,255,0
 Block 5 row 3 ,255,0
@@ -334,15 +336,15 @@ Block 5 row 4 ,255,0
 Block 5 row 5 ,255,0
 Block 5 row 6 ,255,0
 Block 5 row 7 ,255,0
-Block 5 row 8 ,56,6
+Block 5 row 8 ,255,0
 Block 5 row 9 ,255,0
-Block 5 row 10 ,39,5
+Block 5 row 10 ,255,0
 Block 5 row 11 ,255,0
 Block 5 row 12 ,255,0
 Block 5 row 13 ,255,0
 Block 5 row 14 ,255,0
 Block 5 row 15 ,255,0
-Block 5 row 16 ,39,5
+Block 5 row 16 ,255,0
 Block 5 row 17 ,255,0
 Block 5 row 18 ,255,0
 Block 5 row 19 ,255,0
@@ -350,7 +352,7 @@ Block 5 row 20 ,255,0
 Block 5 row 21 ,255,0
 Block 5 row 22 ,255,0
 Block 5 row 23 ,255,0
-Block 5 row 24 ,56,6
+Block 5 row 24 ,255,0
 Block 5 row 25 ,255,0
 Block 5 row 26 ,255,0
 Block 5 row 27 ,255,0
@@ -358,7 +360,7 @@ Block 5 row 28 ,255,0
 Block 5 row 29 ,255,0
 Block 5 row 30 ,255,0
 Block 5 row 31 ,255,0
-Block 5 row 32 ,39,5
+Block 5 row 32 ,255,0
 Block 5 row 33 ,255,0
 Block 5 row 34 ,255,0
 Block 5 row 35 ,255,0
@@ -366,13 +368,13 @@ Block 5 row 36 ,255,0
 Block 5 row 37 ,255,0
 Block 5 row 38 ,255,0
 Block 5 row 39 ,255,0
-Block 5 row 40 ,56,6
+Block 5 row 40 ,255,0
 Block 5 row 41 ,255,0
 Block 5 row 42 ,255,0
 Block 5 row 43 ,255,0
 Block 5 row 44 ,255,0
 Block 5 row 45 ,255,0
-Block 5 row 46 ,39,5
+Block 5 row 46 ,255,0
 Block 5 row 47 ,255,0
 Block 5 row 48 ,255,0
 Block 5 row 49 ,255,0
@@ -382,11 +384,11 @@ Block 5 row 52 ,255,0
 Block 5 row 53 ,255,0
 Block 5 row 54 ,255,0
 Block 5 row 55 ,255,0
-Block 5 row 56 ,56,6
+Block 5 row 56 ,255,0
 Block 5 row 57 ,255,0
-Block 5 row 58 ,39,5
+Block 5 row 58 ,255,0
 Block 5 row 59 ,255,0
-Block 5 row 60 ,39,5
+Block 5 row 60 ,255,0
 Block 5 row 61 ,255,0
 Block 5 row 62 ,255,0
 Block 5 row 63 ,255,0
@@ -454,7 +456,7 @@ Block 6 row 60 ,255,0
 Block 6 row 61 ,255,0
 Block 6 row 62 ,255,0
 Block 6 row 63 ,255,0
-Block 7 row 0 ,255,0
+Block 7 row 0 ,43,3
 Block 7 row 1 ,255,0
 Block 7 row 2 ,255,0
 Block 7 row 3 ,255,0
@@ -470,19 +472,19 @@ Block 7 row 12 ,255,0
 Block 7 row 13 ,255,0
 Block 7 row 14 ,255,0
 Block 7 row 15 ,255,0
-Block 7 row 16 ,255,0
-Block 7 row 17 ,255,0
-Block 7 row 18 ,255,0
-Block 7 row 19 ,255,0
-Block 7 row 20 ,255,0
+Block 7 row 16 ,51,3
+Block 7 row 17 ,49,4
+Block 7 row 18 ,50,3
+Block 7 row 19 ,49,4
+Block 7 row 20 ,51,3
 Block 7 row 21 ,255,0
 Block 7 row 22 ,255,0
-Block 7 row 23 ,255,0
-Block 7 row 24 ,255,0
+Block 7 row 23 ,49,4
+Block 7 row 24 ,50,3
 Block 7 row 25 ,255,0
 Block 7 row 26 ,255,0
-Block 7 row 27 ,255,0
-Block 7 row 28 ,255,0
+Block 7 row 27 ,49,4
+Block 7 row 28 ,48,3
 Block 7 row 29 ,255,0
 Block 7 row 30 ,255,0
 Block 7 row 31 ,255,0
@@ -498,19 +500,19 @@ Block 7 row 40 ,255,0
 Block 7 row 41 ,255,0
 Block 7 row 42 ,255,0
 Block 7 row 43 ,255,0
-Block 7 row 44 ,255,0
-Block 7 row 45 ,255,0
-Block 7 row 46 ,255,0
+Block 7 row 44 ,51,3
+Block 7 row 45 ,49,4
+Block 7 row 46 ,50,3
 Block 7 row 47 ,255,0
-Block 7 row 48 ,255,0
+Block 7 row 48 ,51,3
 Block 7 row 49 ,255,0
 Block 7 row 50 ,255,0
 Block 7 row 51 ,255,0
 Block 7 row 52 ,255,0
 Block 7 row 53 ,255,0
 Block 7 row 54 ,255,0
-Block 7 row 55 ,255,0
-Block 7 row 56 ,255,0
+Block 7 row 55 ,49,4
+Block 7 row 56 ,43,3
 Block 7 row 57 ,255,0
 Block 7 row 58 ,255,0
 Block 7 row 59 ,255,0
@@ -1926,105 +1928,57 @@ Block 29 row 60 ,255,0
 Block 29 row 61 ,255,0
 Block 29 row 62 ,255,0
 Block 29 row 63 ,255,0
-inst0
-Waveform=1
-Volume=200
-Pitch bend rate=-10
-Pitch bend max=0
-Vibrato rate=0
-Arpeggio mode=7
-ADSR=1
-Attack=0
-Decay=10
-Sustain=0
-Release=0
-Loop=1
-Echo=1
-Overdrive=0
-Drum kick=0
-inst1
+ChordMin
 Waveform=2
-Volume=127
+Volume=190
 Pitch bend rate=0
 Pitch bend max=0
-Vibrato rate=0
-Arpeggio mode=0
-ADSR=0
-Attack=0
-Decay=20
-Sustain=0
-Release=0
-Loop=0
-Echo=0
-Overdrive=0
-Drum kick=0
-
-Waveform=1
-Volume=230
-Pitch bend rate=-1
-Pitch bend max=-1
 Vibrato rate=0
 Arpeggio mode=4
 ADSR=1
 Attack=0
-Decay=60
+Decay=5
 Sustain=0
 Release=0
 Loop=0
 Echo=0
 Overdrive=0
 Drum kick=0
-basso
-Waveform=1
-Volume=120
-Pitch bend rate=1
-Pitch bend max=1
+ChordMaj
+Waveform=2
+Volume=190
+Pitch bend rate=0
+Pitch bend max=0
 Vibrato rate=0
-Arpeggio mode=10
+Arpeggio mode=1
 ADSR=1
 Attack=0
-Decay=65
-Sustain=0
-Release=0
-Loop=1
-Echo=1
-Overdrive=1
-Drum kick=0
-bd
-Waveform=1
-Volume=255
-Pitch bend rate=-100
-Pitch bend max=-90
-Vibrato rate=0
-Arpeggio mode=0
-ADSR=1
-Attack=0
-Decay=200
+Decay=5
 Sustain=0
 Release=0
 Loop=0
 Echo=0
 Overdrive=0
 Drum kick=0
-clap
-Waveform=4
+Solo
+Waveform=2
 Volume=255
-Pitch bend rate=100
-Pitch bend max=190
+Pitch bend rate=0
+Pitch bend max=0
 Vibrato rate=0
 Arpeggio mode=0
-ADSR=1
+ADSR=0
 Attack=0
-Decay=200
-Sustain=5
-Release=1
+Decay=50
+Sustain=0
+Release=0
 Loop=0
-Echo=1
+Echo=0
 Overdrive=0
 Drum kick=0
-
-Waveform=1
-Volume=127
+KillNote
+Waveform=0
+Volume=0
 Pitch bend rate=0
 Pitch bend max=0
 Vibrato rate=0
@@ -2037,36 +1991,4 @@ Release=0
 Loop=0
 Echo=0
 Overdrive=0
-Drum kick=0
-
-Waveform=1
-Volume=127
-Pitch bend rate=0
-Pitch bend max=0
-Vibrato rate=0
-Arpeggio mode=0
-ADSR=0
-Attack=0
-Decay=20
-Sustain=0
-Release=0
-Loop=0
-Echo=0
-Overdrive=0
-Drum kick=0
-piip
-Waveform=5
-Volume=150
-Pitch bend rate=1
-Pitch bend max=1
-Vibrato rate=0
-Arpeggio mode=12
-ADSR=1
-Attack=0
-Decay=200
-Sustain=0
-Release=0
-Loop=0
-Echo=0
-Overdrive=1
 Drum kick=0

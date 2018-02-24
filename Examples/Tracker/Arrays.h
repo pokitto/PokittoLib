@@ -6,61 +6,48 @@
 //const char noteLetters[12][2] = {{'C', '-'}, {'C', '#'}, {'D', '-'}, {'D', '#'}, {'E', '-'}, {'F', '-'},
 //                           {'F', '#'}, {'G', '-'}, {'G', '#'}, {'A', '-'}, {'A', '#'}, {'B', '-'}};
 
-const char noteLetters[12][2] = {{'B', '-'},{'C', '-'}, {'C', '#'}, {'D', '-'}, {'D', '#'}, {'E', '-'}, {'F', '-'},
-                           {'F', '#'}, {'G', '-'}, {'G', '#'}, {'A', '-'}, {'A', '#'}};
+#ifndef ARRAYS_H
+#define ARRAYS H
 
-const char* waveNames[]={"OFF", "SQUARE", "SAW", "TRIANGLE", "NOISE", "TONE NOISE"};
-const char* arpModes[]={"OFF" ,"M Slow", "M Med", "M Fast", "m Slow", "m Med", "m Fast", "Vib Slow", "Vib Med", "Vib Fast", "Oct Slow", "Oct Med", "Oct Fast", "Funk Slow", "Funk Med", "Funk Fast"};
+#include <stdint.h>
 
-const char rboyChar[] = "Rboy Tracker song file\n";
-const char BPMChar[] = "BPM=";
-const char lastPatternChar[] = "Last pattern=";
-const char loopToChar[] = "Loop to=";
-const char patchesChar[] = "Patches=";
-const char blockSeqChar[] = "Block sequence ";
-const char blockChar[] = "Block ";
-const char rowChar[] = " row ";
-const char unknownChar[] = "0.030000";
-const char waveChar[] = "Waveform=";
-const char volChar[] = "Volume=";
-const char pitchRateChar[] = "Pitch bend rate=";
-const char pitchMaxChar[] = "Pitch bend max=";
-const char vibChar[] = "Vibrato rate=";
-const char arpChar[] = "Arpeggio mode=";
-const char ADSRChar[] = "ADSR=";
-const char attackChar[] = "Attack=";
-const char decayChar[] = "Decay=";
-const char sustainChar[] = "Sustain=";
-const char releaseChar[] = "Release=";
-const char loopChar[] = "Loop=";
-const char echoChar[] = "Echo=";
-const char overdriveChar[] = "Overdrive=";
-const char drumChar[] = "Drum kick=";
+extern const char noteLetters[12][2];
 
-const uint8_t pauseBitmap[] = {8, 5,
-0b00010100,0b00010100,
-0b00010100,0b00010100,
-0b00010100,0b00010100,
-0b00010100,0b00010100,
-0b00010100,0b00010100};
+extern const char* waveNames[];
+extern const char* arpModes[];
 
-const uint8_t playBitmap[] = {8, 5,
-0b00010101,0b01000000,
-0b00010101,0b01010000,
-0b00010101,0b01010100,
-0b00010101,0b01010000,
-0b00010101,0b01000000};
+extern const char rboyChar[] ;
+extern const char BPMChar[] ;
+extern const char lastPatternChar[] ;
+extern const char loopToChar[];
+extern const char patchesChar[]  ;
+extern const char blockSeqChar[] ;
+extern const char blockChar[] ;
+extern const char rowChar[] ;
+extern const char unknownChar[] ;
+extern const char waveChar[] ;
+extern const char volChar[] ;
+extern const char pitchRateChar[] ;
+extern const char pitchMaxChar[] ;
+extern const char vibChar[] ;
+extern const char arpChar[] ;
+extern const char ADSRChar[] ;
+extern const char attackChar[] ;
+extern const char decayChar[] ;
+extern const char sustainChar[] ;
+extern const char releaseChar[] ;
+extern const char loopChar[] ;
+extern const char echoChar[] ;
+extern const char overdriveChar[];
+extern const char drumChar[] ;
 
-const uint8_t stopBitmap[] = {8, 5,
-0b00010101,0b01010100,
-0b00010101,0b01010100,
-0b00010101,0b01010100,
-0b00010101,0b01010100,
-0b00010101,0b01010100};
+extern const uint8_t pauseBitmap[];
 
-const uint8_t pointBitmap[] = {8, 5,
-0b00000001,0b01010100,
-0b00000101,0b01010100,
-0b00010101,0b01010100,
-0b00000101,0b01010100,
-0b00000001,0b01010100};
+extern const uint8_t playBitmap[];
+
+extern const uint8_t stopBitmap[];
+
+extern const uint8_t pointBitmap[];
+
+
+#endif // ARRAYS_H

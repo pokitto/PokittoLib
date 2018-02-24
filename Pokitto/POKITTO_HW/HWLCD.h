@@ -71,6 +71,7 @@ extern void lcdSleep();
 extern void lcdWakeUp();
 extern void lcdRefresh(uint8_t *, uint16_t*);
 extern void lcdRefreshAB(uint8_t *, uint16_t*);
+extern void lcdRefreshMode14(uint8_t *, uint16_t*);
 extern void lcdRefreshGB(uint8_t *, uint16_t*);
 extern void lcdRefreshMode1(uint8_t* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr);
 extern void lcdRefreshMode1Spr(uint8_t * scrbuf, uint8_t screenx, uint8_t screeny, uint8_t screenw, uint8_t screenh, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool drawSpritesOnly);
@@ -122,7 +123,8 @@ extern void blitWord(uint16_t);
 #define CLR_CD { LPC_GPIO_PORT->CLR[LCD_CD_PORT] = 1 << LCD_CD_PIN; } // RS = (0); // Clear pin
 #define SET_CD { LPC_GPIO_PORT->SET[LCD_CD_PORT] = 1 << LCD_CD_PIN; }// RS = (1); // Set pin
 
-#define CLR_WR { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN; __asm("nop");__asm("nop");}//WR = (0); // Clear pin
+#define CLR_WR { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;__asm("nop");}//__asm("nop");}//WR = (0); // Clear pin
+#define CLR_WR_SLOW { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;__asm("nop");__asm("nop");}//WR = (0); // Clear pin
 #define SET_WR LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN; //WR = (1); // Set pin
 
 #define CLR_RD LPC_GPIO_PORT->CLR[LCD_RD_PORT] = 1 << LCD_RD_PIN; //RD = (0); // Clear pin

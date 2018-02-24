@@ -197,14 +197,6 @@
 #endif // PROJ_GAMEBUINO
 #endif // PROJ_TILEDMODE
 
-#if PROJ_MODE13 > 0
-    #define PROJ_SCREENMODE MODE13
-    #define POK_COLORDEPTH 8
-    #define POK_STRETCH 0
-    #define POK_FPS 30
-    #define POK_COLORDEPTH 8
-#endif
-
 
 /** SCREEN MODES TABLE -- DO NOT CHANGE THESE **/
 
@@ -237,11 +229,16 @@
 #define BUFSIZE_MODE_12              4176 // 72 x 58
 #define MODE13                      13
 #define BUFSIZE_MODE13              9680 // 110*88
+#define MODE14                      14
+#define BUFSIZE_MODE14              14520
 // Tiled modes
 #define MODE_TILED_1BIT             1001
 #define MODE_TILED_8BIT             1002
 
 
+    #define R_MASK  0xF800
+    #define G_MASK  0x7E0
+    #define B_MASK  0x1F
 
 /** SCREENMODE - USE THIS SELECTION FOR YOUR PROJECT **/
 
@@ -281,6 +278,20 @@
     #define POK_SCREENMODE PROJ_SCREENMODE
 #endif
 #endif // POK_TILEDMODE
+
+#if PROJ_MODE13 > 0
+    #define PROJ_SCREENMODE MODE13
+    #define POK_COLORDEPTH 8
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
+
+#if PROJ_MODE14 > 0
+    #define POK_SCREENMODE MODE14
+    #define POK_COLORDEPTH 3
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
 
 /* DEFINE SCREENMODE AS THE MAXIMUM SCREEN SIZE NEEDED BY YOUR APP ... SEE SIZES LISTED ABOVE */
 
@@ -349,6 +360,11 @@
     #define LCDWIDTH 110
     #define LCDHEIGHT 88
     #define POK_BITFRAME 110*88
+#elif POK_SCREENMODE == MODE14
+    #define POK_SCREENBUFFERSIZE 14520
+    #define LCDWIDTH 220
+    #define LCDHEIGHT 176
+    #define POK_BITFRAME 4840
 #else
     #define POK_SCREENBUFFERSIZE 0
 #endif // POK_SCREENMODE

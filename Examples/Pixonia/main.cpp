@@ -994,6 +994,15 @@ void drawworld(int32_t x, int32_t y) {
     }
 }
 
+DigitalOut ptest(EXT0); //P1_19
+
+#define TEST_PORT          1
+#define TEST_PIN           19
+#define CLR_TEST LPC_GPIO_PORT->CLR[TEST_PORT] = 1 << TEST_PIN;
+#define SET_TEST LPC_GPIO_PORT->SET[TEST_PORT] = 1 << TEST_PIN;
+
+int s=0;
+
 int main () {
     gb.sound.playMusicStream("play22u.snd");
 
@@ -1019,6 +1028,9 @@ int main () {
     gb.display.bgcolor = 13;
     while (gb.isRunning()) {
         if (gb.update()) {
+        if (s) {SET_TEST}
+        else {CLR_TEST}
+        s=1-s;
         switch (gamestate) {
     case TITLE:
         while(!gb.buttons.pressed(BTN_A)&&gb.isRunning()) {

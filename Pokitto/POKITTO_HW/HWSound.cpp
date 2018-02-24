@@ -301,6 +301,9 @@ void Pokitto::soundInit() {
     #if POK_BOARDREV == 2
         initHWvolumecontrol();
     #endif
+    #if POK_ENABLE_SYNTH
+        emptyOscillators();
+    #endif
 
 }
 
@@ -387,7 +390,7 @@ inline void pokSoundIRQ() {
         /** if song is being played from sd **/
         if (playing) {
                 notetick++;
-                updatePlaybackSD(playerpos&7);
+                updatePlayback();
         }
         /** oscillators update **/
         osc1.count += osc1.cinc + (osc1.pitchbend >> 4); // counts to 65535 and overflows to zero WAS 8 !
@@ -428,15 +431,15 @@ inline void pokSoundIRQ() {
                 #endif // POK_STREAM_TO_DAC
             #endif // POK_STREAMING_MUSIC
             #if POK_STREAM_TO_DAC > 0
-            /** synth goes to PWM */
-            //pwmout_write(&audiopwm,(float)output/(float)255);
-            #if POK_USE_PWM
-            uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
-            obj->pwm->MATCHREL1 = t_on;
+                /** synth goes to PWM */
+                //pwmout_write(&audiopwm,(float)output/(float)255);
+                #if POK_USE_PWM
+                    uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
+                    obj->pwm->MATCHREL1 = t_on;
+                #endif
+            #else // POK_STREAMING_MUSIC
+                dac_write((uint8_t)output); // SYNTH to DAC
             #endif
-            #else
-            dac_write((uint8_t)output);
-            #endif // decide where synth is output
             soundbyte = (output+streambyte)>>1;
             soundbuf[soundbufindex++]=soundbyte;
             if (soundbufindex==256) soundbufindex=0;

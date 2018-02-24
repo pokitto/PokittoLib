@@ -1,3 +1,6 @@
+
+bool stopexit=true;
+
 struct Instrument{
     char name[10];
     int8_t wave;
@@ -28,24 +31,28 @@ void changeValues(int8_t i){
     else if (settingPointer == 10) patch[instrPointer].decay += i;
     else if (settingPointer == 11) patch[instrPointer].sustain += i;
     else if (settingPointer == 12) patch[instrPointer].release += i;
-    else if (settingPointer == 13) patch[instrPointer].bendrate = tracker.minMax(patch[instrPointer].bendrate+i, -1000, 1000);
-    else if (settingPointer == 14) patch[instrPointer].pitchbend = tracker.minMax(patch[instrPointer].pitchbend+i, -6000, 6000);
+    else if (settingPointer == 13) patch[instrPointer].bendrate = tracker.minMax(patch[instrPointer].bendrate+i, -100, 100);
+    else if (settingPointer == 14) patch[instrPointer].maxbend = tracker.minMax(patch[instrPointer].maxbend+i, -90, 190);
     else if (settingPointer == 15) patch[instrPointer].vol = tracker.minMax(patch[instrPointer].vol+i, 0, 300);
 }
 
-void checkButtons(){
+bool checkButtons(){
+    bool changed=false;
+    if (pok.buttons.released(BTN_C)) {
+            stopexit=false; // quick hack to stop jumping back immediately
+    }
     if(pok.buttons.repeat(BTN_DOWN, buttonRepeatFrame))
-        settingPointer = tracker.minMax(settingPointer+1, 0, 19);
+        {settingPointer = tracker.minMax(settingPointer+1, 0, 19); changed=true;}
     else if(pok.buttons.repeat(BTN_UP, buttonRepeatFrame))
-        settingPointer = tracker.minMax(settingPointer-1, 0, 19);
+        {settingPointer = tracker.minMax(settingPointer-1, 0, 19); changed=true;}
     else if(pok.buttons.aBtn() && pok.buttons.repeat(BTN_LEFT, buttonRepeatFrame))
-        changeValues(-10);
+        {changeValues(-10);changed=true;}
     else if(pok.buttons.aBtn() && pok.buttons.repeat(BTN_RIGHT, buttonRepeatFrame))
-        changeValues(10);
+        {changeValues(10);changed=true;}
     else if(pok.buttons.bBtn() && pok.buttons.repeat(BTN_LEFT, buttonRepeatFrame))
-        changeValues(-100);
+        {changeValues(-100);changed=true;}
     else if(pok.buttons.bBtn() && pok.buttons.repeat(BTN_RIGHT, buttonRepeatFrame))
-        changeValues(100);
+        {changeValues(100);changed=true;}
     else if(pok.buttons.repeat(BTN_LEFT, buttonRepeatFrame))
     {
         if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer-1, 0, 14);
@@ -57,6 +64,7 @@ void checkButtons(){
         else if (settingPointer == 7) patch[instrPointer].kick = tracker.minMax(patch[instrPointer].kick-1, 0, 1);
         else if (settingPointer == 8) patch[instrPointer].adsr = tracker.minMax(patch[instrPointer].adsr-1, 0, 1);
         changeValues(-1);
+        changed=true;
     }
     else if(pok.buttons.repeat(BTN_RIGHT, buttonRepeatFrame))
     {
@@ -69,26 +77,34 @@ void checkButtons(){
         else if (settingPointer == 7) patch[instrPointer].kick = tracker.minMax(patch[instrPointer].kick+1, 0, 1);
         else if (settingPointer == 8) patch[instrPointer].adsr = tracker.minMax(patch[instrPointer].adsr+1, 0, 1);
         changeValues(1);
+        changed=true;
     }
     else if(pok.buttons.pressed(BTN_A))
     {
+        tracker._currpatch=instrPointer;
         if(settingPointer == 1)
-            pok.keyboard(tracker.patchnames[instrPointer], 10);
+            {pok.keyboard(tracker.patchnames[instrPointer], 10);changed=true;}
         //else if(settingPointer == 16)
             //save instrument
         //else if(settingPointer == 17)
             //load instrument
-        else if(settingPointer == 18)
+        else if(settingPointer == 18){
             tracker.saveSong();
             saveInstrInSong();
+            changed=true;
+            }
         //else if(settingPointer == 19)
             //load song
+        else tracker.playNote(); // try the note
     }
-    else if(pok.buttons.pressed(BTN_C))
+    else if(pok.buttons.pressed(BTN_C) && stopexit==false)
     {
         screen = 0;
         settingPointer = 0;
+        changed=true;
+        stopexit=true; // a low an mean, dirty, unprofessional hack
     }
+    return changed;
 }
 
 void printSettings(){
@@ -137,7 +153,7 @@ void printSettings(){
     pok.display.print(patch[instrPointer].bendrate, 10);
     pok.display.setCursor(2, (14 * fontH) + 14);
     pok.display.print("Pitch Bend Max: ");
-    pok.display.print(patch[instrPointer].pitchbend, 10);
+    pok.display.print(patch[instrPointer].maxbend, 10);
     pok.display.setCursor(2, (15 * fontH) + 15);
     pok.display.print("Volume: ");
     pok.display.print(patch[instrPointer].vol, 10);
@@ -160,49 +176,49 @@ void saveInstrInSong(){
         if (tracker.patchnames[0] == 0) tracker.filePutInt(j);
         else tracker.filePrint(tracker.patchnames[j], sizeof(tracker.patchnames[j]));
         tracker.NL();
-        tracker.filePrint(waveChar, sizeof(waveChar));
+//        tracker.filePrint(waveChar, sizeof(waveChar));
         tracker.filePutInt(patch[j].wave);
         tracker.NL();
-        tracker.filePrint(volChar, sizeof(volChar));
+//        tracker.filePrint(volChar, sizeof(volChar));
         tracker.filePutInt(patch[j].vol);
         tracker.NL();
-        tracker.filePrint(pitchRateChar, sizeof(pitchRateChar));
+//        tracker.filePrint(pitchRateChar, sizeof(pitchRateChar));
         tracker.filePutInt(patch[j].bendrate);
         tracker.NL();
-        tracker.filePrint(pitchMaxChar, sizeof(pitchMaxChar));
-        tracker.filePutInt(patch[j].pitchbend);
+//        tracker.filePrint(pitchMaxChar, sizeof(pitchMaxChar));
+        tracker.filePutInt(patch[j].maxbend);
         tracker.NL();
-        tracker.filePrint(vibChar, sizeof(vibChar));
+ //       tracker.filePrint(vibChar, sizeof(vibChar));
         tracker.filePutInt(0);
         tracker.NL();
-        tracker.filePrint(arpChar, sizeof(arpChar));
+   //     tracker.filePrint(arpChar, sizeof(arpChar));
         tracker.filePutInt(patch[j].arpmode);
         tracker.NL();
-        tracker.filePrint(ADSRChar, sizeof(ADSRChar));
+     //   tracker.filePrint(ADSRChar, sizeof(ADSRChar));
         tracker.filePutInt(patch[j].adsr);
         tracker.NL();
-        tracker.filePrint(attackChar, sizeof(attackChar));
+    //    tracker.filePrint(attackChar, sizeof(attackChar));
         tracker.filePutInt(patch[j].attack);
         tracker.NL();
-        tracker.filePrint(decayChar, sizeof(decayChar));
+  //      tracker.filePrint(decayChar, sizeof(decayChar));
         tracker.filePutInt(patch[j].decay);
         tracker.NL();
-        tracker.filePrint(sustainChar, sizeof(sustainChar));
+  //      tracker.filePrint(sustainChar, sizeof(sustainChar));
         tracker.filePutInt(patch[j].sustain);
         tracker.NL();
-        tracker.filePrint(releaseChar, sizeof(releaseChar));
+   //     tracker.filePrint(releaseChar, sizeof(releaseChar));
         tracker.filePutInt(patch[j].release);
         tracker.NL();
-        tracker.filePrint(loopChar, sizeof(loopChar));
+   //     tracker.filePrint(loopChar, sizeof(loopChar));
         tracker.filePutInt(patch[j].loop);
         tracker.NL();
-        tracker.filePrint(echoChar, sizeof(echoChar));
+   //     tracker.filePrint(echoChar, sizeof(echoChar));
         tracker.filePutInt(patch[j].echo);
         tracker.NL();
-        tracker.filePrint(overdriveChar, sizeof(overdriveChar));
+   //     tracker.filePrint(overdriveChar, sizeof(overdriveChar));
         tracker.filePutInt(patch[j].overdrive);
         tracker.NL();
-        tracker.filePrint(drumChar, sizeof(drumChar));
+    //    tracker.filePrint(drumChar, sizeof(drumChar));
         tracker.filePutInt(patch[j].kick);
         tracker.NL();
     }

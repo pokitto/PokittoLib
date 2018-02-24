@@ -21,6 +21,7 @@
 #define PROJ_GBSOUND            0       // 1 = use Gamebuino-compatible sound interrupt (choose this or the one below)
 #define PROJ_ENABLE_SYNTH       0       // 1 = use Rboy-compatible sound interrupt
 #define PROJ_GAMEBUINO          0       // 1 if you are making a Gamebuino-based graphics mode (84x48)
+#define PROJ_SHOW_FPS_COUNTER
 
 
 #endif

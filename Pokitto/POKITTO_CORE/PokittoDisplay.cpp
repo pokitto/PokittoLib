@@ -147,6 +147,10 @@ uint8_t Display::bpp = POK_COLORDEPTH;
     uint8_t Display::width = 160;
     uint8_t Display::height = 144;
     uint8_t Display::screenbuffer[160*144/4];
+#elif (POK_SCREENMODE == MODE14)
+    uint8_t Display::width = 220;
+    uint8_t Display::height = 176;
+    uint8_t Display::screenbuffer[14520];
 #else
     uint8_t Display::width = 84;
     uint8_t Display::height = 48;
@@ -283,6 +287,10 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
 
         #if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
         lcdRefreshAB(m_scrbuf, paletteptr);
+        #endif
+
+        #if POK_SCREENMODE == MODE14
+        lcdRefreshMode14(m_scrbuf, paletteptr);
         #endif
 
         #if POK_SCREENMODE == MODE_TILED_1BIT
@@ -480,6 +488,16 @@ void Display::clear() {
         c = bgcolor & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
+    } else if (bpp==3){
+        uint16_t j = POK_BITFRAME;
+        if (bgcolor & 0x1) memset((void*)m_scrbuf,0xFF,j);// R
+        else memset((void*)m_scrbuf,0x00,j);// R
+        if ((bgcolor>>1) & 0x1) memset((void*)m_scrbuf+POK_BITFRAME,0xFF,j);// G
+        else memset((void*)m_scrbuf+POK_BITFRAME,0x00,j);// G
+        if ((bgcolor>>2) & 0x1) memset((void*)m_scrbuf+POK_BITFRAME*2,0xFF,j);// B
+        else memset((void*)m_scrbuf+POK_BITFRAME*2,0x00,j);// B
+        setCursor(0,0);
+        return;
     } else {
         c = (c & 0x0F) | (c << 4);
     }
@@ -607,6 +625,20 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
         else pixel = (pixel&0x3F)|(col<<6); // bits 6-7
         m_scrbuf[i] = pixel;
     #elif POK_COLORDEPTH == 3
+    uint8_t c = col;
+	uint8_t ct = col;
+
+    uint16_t bitptr=0;
+    for (uint8_t cbit=0;cbit<POK_COLORDEPTH;cbit++) {
+	c = ct & 1; // take the lowest bit of the color index number
+	if(c == 0){ //white - or actually "Clear bit"
+		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] &= ~_BV(y % 8);
+	} else { //black - or actually "Set bit"
+		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] |= _BV(y % 8);
+	}
+	ct >>=1; // shift to get next bit
+	bitptr += POK_BITFRAME; // move one screen worth of buffer forward to get to the next color bit
+    } // POK_COLOURDEPTH
     #elif POK_COLORDEPTH == 4
     uint16_t i = y*(width>>1) + (x>>1);
     uint8_t pixel = m_scrbuf[i];
@@ -1368,7 +1400,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     return;
     }
     /** 2 bpp mode */
-    if (m_colordepth<4) {
+    if (m_colordepth==2) {
         if(clipH > 0) {
 
             // Clip
@@ -1414,6 +1446,31 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
         }
         return;
     }
+
+    /** 3 bpp mode */
+    if (m_colordepth==3) {
+        int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
+        int16_t bitFrame = w * h / 8;
+        for (i = 0; i < w; i++) {
+        byteNum = i / 8;
+        bitNum = i % 8;
+
+        uint8_t bitcount=0;
+        for (j = 0; j <= h/8; j++) {
+            uint8_t r_val = *(bitmap + j * byteWidth + byteNum);
+            uint8_t g_val = *(bitmap + bitFrame + j * byteWidth + byteNum);
+            uint8_t b_val = *(bitmap + (bitFrame<<1) + j * byteWidth + byteNum);
+            for (bitcount=0; bitcount<8; bitcount++) {
+                uint8_t col = (r_val&0x1) | ((g_val&0x1)<<1) | ((b_val&0x1)<<2);
+                r_val >>= 1; g_val >>= 1; b_val >>= 1;
+                drawPixel(x + i, y + j+bitcount,col);
+            }
+            }
+        }
+
+    return;
+    }
+
     /** 4bpp fast version */
 	int16_t scrx,scry,xclip,xjump,scrxjump;
     xclip=xjump=scrxjump=0;

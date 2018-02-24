@@ -135,7 +135,7 @@ extern uint16_t xorshift16();
 extern uint16_t noiseval;
 
 extern void setOSC(OSC*,byte, byte, byte, byte, byte,
-            uint8_t, uint8_t,
+            uint8_t, uint16_t,
             uint16_t, uint16_t, uint16_t, uint16_t,
             int16_t, int16_t, uint8_t, uint8_t, uint8_t);
 

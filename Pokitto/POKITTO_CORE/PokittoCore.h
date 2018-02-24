@@ -127,7 +127,7 @@ public:
   static bool isRunning();
   /** Stop running */
   static void quit();
-private:
+//private:
   /** run_state is true as long as program is running */
   static bool run_state;
 

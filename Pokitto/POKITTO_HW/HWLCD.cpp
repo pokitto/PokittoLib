@@ -62,21 +62,21 @@ uint16_t prevdata=0; // if data does not change, do not adjust LCD bus lines
 
 static inline void setup_data_16(uint16_t data)
 {
-    uint32_t p2=0;
+    //uint32_t p2=0;
 
-    if (data != prevdata) {
-
-    prevdata=data;
+    //if (data != prevdata) {
+    //
+    //prevdata=data;
 
     /** D0...D16 = P2_3 ... P2_18 **/
-    p2 = data << 3;
+    //p2 = data << 3;
 
     //__disable_irq();    // Disable Interrupts
     SET_MASK_P2;
-    LPC_GPIO_PORT->MPIN[2] = p2; // write bits to port
+    LPC_GPIO_PORT->MPIN[2] = (data<<3); // write bits to port
     CLR_MASK_P2;
     //__enable_irq();     // Enable Interrupts
-    }
+    //}
 }
 
 
@@ -91,7 +91,7 @@ inline void write_command_16(uint16_t data)
    CLR_CD; // clear CD = command
    SET_RD; // RD high, do not read
    setup_data_16(data); // function that inputs the data into the relevant bus lines
-   CLR_WR;  // WR low
+   CLR_WR_SLOW;  // WR low
    SET_WR;  // WR low, then high = write strobe
    SET_CS; // de-select lcd
 }
@@ -1336,7 +1336,8 @@ uint8_t *d;
 uint16_t xptr = 14;
 uint8_t yoffset = 24;
 #else
-xptr = 0; //was 26
+uint16_t xptr = 0; //was 26
+uint8_t yoffset = 0;
 #endif
 
 for(x=0;x<128;x++)
@@ -1705,6 +1706,113 @@ for(x=0;x<110;x+=2)
     }
   }
 
+}
+
+
+
+void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
+uint16_t x,y,data,xptr;
+uint16_t scanline[176]; uint16_t* scptr;
+uint8_t *d;
+
+write_command(0x20); write_data(0);
+write_command(0x21); write_data(0);
+write_command(0x22);
+CLR_CS_SET_CD_RD_WR;
+
+for(x=0;x<220;x++)
+  {
+        d = scrbuf+x;
+        scptr = &scanline[0];
+
+        /** find colours in one scanline **/
+        /*for(y=0;y<22;y++)
+            {
+
+            uint16_t t = *d;
+            uint16_t t2 = *(d+POK_BITFRAME);
+            uint16_t t3 = *(d+POK_BITFRAME+POK_BITFRAME);
+
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+
+
+            d+=220; // jump to word directly below
+            }
+        */
+        /** alternative way: go through one color at a time **/
+            scptr = &scanline[0]; // set to beginning of scanline
+            for(y=0;y<22;y++, d +=220)
+            {
+            uint16_t t = *d & 0xFF;
+
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1);
+            }
+            scptr = &scanline[0]; // set to beginning of scanline
+            d = scrbuf+x+POK_BITFRAME;
+            for(y=0;y<22;y++, d +=220)
+            {
+            uint16_t t = *d & 0xFF;
+
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1);
+            }
+            scptr = &scanline[0]; // set to beginning of scanline
+            d = scrbuf+x+POK_BITFRAME*2;
+            for(y=0;y<22;y++, d +=220)
+            {
+            uint16_t t = *d & 0xFF;
+
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1);
+            }
+
+
+        #ifdef PROJ_SHOW_FPS_COUNTER
+        if (x<8) continue;
+        setDRAMptr(x, 0);
+        #endif
+
+        /** draw scanlines **/
+        for (int s=0;s<176;) {
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+
+        }
+
+    }
 }
 
 
