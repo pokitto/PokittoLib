@@ -3187,10 +3187,9 @@
 1515192330 c:\pokittolibcompare\pokittolib\examples\updateandcliprect\gfxdata.h
 	<stdint.h>
 
-1515935932 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
+1517662517 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
 	"Pokitto.h"
 	"Synth.h"
-	"dma_11u6x.h"
 
 1517553769 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
 	"Pokitto_settings.h"
@@ -3660,7 +3659,7 @@
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.h
 	<stdint.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
+1519715428 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -3933,7 +3932,7 @@
 1517247874 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\cmsis_nvic.c
 	"cmsis_nvic.h"
 
-1517247874 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.c
+1519677641 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\system_lpc11u6x.c
 	<stdint.h>
 	"LPC11U6x.h"
 	"power_api.h"
@@ -4119,7 +4118,7 @@
 1518175861 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1518739396 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1519497718 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4138,7 +4137,7 @@
 1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.cpp
 	"PokittoLogos.h"
 
-1517556127 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
+1519497470 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4147,7 +4146,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1517847303 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1519715392 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4168,11 +4167,11 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1518733445 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1519497807 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
-1519045074 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1519712429 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -4201,7 +4200,7 @@
 1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokitto_extport.cpp
 	"Pokitto.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokittoclock.cpp
+1519678677 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokittoclock.cpp
 	"PokittoCore.h"
 	"pinmap.h"
 	"HWLCD.h"

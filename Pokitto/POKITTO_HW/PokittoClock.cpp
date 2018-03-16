@@ -64,7 +64,11 @@ void Core::initClock() {
     ptimer = &pt_count;
     SysTick->LOAD = 480000-1;
     #else
+    #ifdef _OSCTI
+    SysTick->LOAD = (480000*3/_OSCTI)-1;
+    #else
     SysTick->LOAD = 480000-1;
+    #endif
     #endif
     SysTick->VAL  = 0;
     SysTick->CTRL  = 4 | 2 | 1; //CLKSOURCE=CPU clock | TICKINT | ENABLE

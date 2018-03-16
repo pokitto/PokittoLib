@@ -82,6 +82,7 @@ Pokitto::Core _soundc;
 uint8_t Sound::prescaler;
 uint16_t Sound::globalVolume;
 uint16_t Sound::volumeMax = VOLUME_HEADPHONE_MAX;
+uint8_t Sound::headPhoneLevel=true;
 
 bool Sound::trackIsPlaying[NUM_CHANNELS];
 bool Sound::patternIsPlaying[NUM_CHANNELS];
@@ -728,7 +729,7 @@ void Sound::updateOutput() {
 
         #if POK_STREAMING_MUSIC
             if (streamstep) {
-                pwmout_write(&audiopwm,(float)sbyte/(float)255);
+                pwmout_write(&audiopwm,(float)sbyte>>headPhoneLevel/(float)255);
             }
         #endif
             dac_write((uint8_t)output); //direct hardware mixing baby !
@@ -739,10 +740,10 @@ void Sound::updateOutput() {
         #if POK_STREAMING_MUSIC
             if (streamstep) {
                 uint16_t o = output + sbyte;
-                output = o/2;
+                output = (o/2)>>headPhoneLevel;
             }
         #endif
-        soundbyte = output;
+        soundbyte = output<<headPhoneLevel;
     #endif // POK_SIM
 #endif
 }
@@ -783,12 +784,14 @@ void Sound::setVolume(int16_t volume) {
 //#if NUM_CHANNELS > 0
 	if (volume<0) volume = 0;
 	if (volume>volumeMax) volume = volumeMax;
+	if (volume<=VOLUME_HEADPHONE_MAX) headPhoneLevel=2;
+	else headPhoneLevel=0;
 	globalVolume = volume; // % (volumeMax+1);
 	#ifndef POK_SIM
 	volume = (volume / 2)-10;
 	if (volume<0) volume = 0;
 	#if POK_ENABLE_SOUND > 0
-	setHWvolume(volume);
+	setHWvolume(volume<<headPhoneLevel); //boost volume if headphonelevel
 	#endif
 	#endif
 	#if POK_SHOW_VOLUME > 0

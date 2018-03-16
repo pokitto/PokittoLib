@@ -48,7 +48,7 @@
 //#include "beat_11025.h"
 
 
-
+Pokitto::Sound __shw;
 
 using namespace Pokitto;
 
@@ -416,14 +416,14 @@ inline void pokSoundIRQ() {
                 #if POK_STREAM_TO_DAC > 0
                     /** stream goes to DAC */
                     #if POK_USE_DAC > 0
-                    dac_write(streambyte); // duty cycle
+                    dac_write(streambyte>>__shw.headPhoneLevel); // duty cycle
                     #endif // POK_USE_DAC
                 #else
                     /** stream goes to PWM */
                     if (streamstep) {
                             //pwmout_write(&audiopwm,(float)streambyte/(float)255);
                             #if POK_USE_PWM
-                            uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*streambyte)>>8); //cut out float
+                            uint32_t t_on = (uint32_t)((((obj->pwm->MATCHREL0)*streambyte)>>8)>>__shw.headPhoneLevel); //cut out float
                             obj->pwm->MATCHREL1 = t_on;
                             #endif
                             //dac_write((uint8_t)streambyte); // duty cycle
@@ -434,11 +434,11 @@ inline void pokSoundIRQ() {
                 /** synth goes to PWM */
                 //pwmout_write(&audiopwm,(float)output/(float)255);
                 #if POK_USE_PWM
-                    uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
+                    uint32_t t_on = (uint32_t)((((obj->pwm->MATCHREL0)*output)>>8)>>__shw.headPhoneLevel); //cut out float
                     obj->pwm->MATCHREL1 = t_on;
                 #endif
             #else // POK_STREAMING_MUSIC
-                dac_write((uint8_t)output); // SYNTH to DAC
+                dac_write((uint8_t)output>>__shw.headPhoneLevel); // SYNTH to DAC
             #endif
             soundbyte = (output+streambyte)>>1;
             soundbuf[soundbufindex++]=soundbyte;
