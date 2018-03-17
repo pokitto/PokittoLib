@@ -48,10 +48,10 @@ int CopyPageToFlash (uint32_t address, uint8_t* data) {
     else sector = 24;
 
     /* Check is it the first page in the sector */
-    if (sector<24) {
+    if (sector < 24) {
         if (address == sector * 0x1000) firstpage = true;
     } else {
-        if (address == (sector-24)*0x4000 + 0x18000) firstpage = true;
+        if (address == (sector - 24) * 0x8000 + 0x18000) firstpage = true;
     }
 
 	/* Prepare the sector for writing */
