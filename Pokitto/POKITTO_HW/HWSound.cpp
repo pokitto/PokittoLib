@@ -246,8 +246,10 @@ void Pokitto::dac_write(uint8_t value) {
 
 /** SOUND INIT **/
 void Pokitto::soundInit() {
+    #if POK_ENABLE_SOUND > 0
     uint32_t timerFreq;
     #if POK_USE_PWM
+
     pwmout_init(&audiopwm,POK_AUD_PIN);
     pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
     pwmout_write(&audiopwm,0.1f);
@@ -301,9 +303,13 @@ void Pokitto::soundInit() {
     #if POK_BOARDREV == 2
         initHWvolumecontrol();
     #endif
+
     #if POK_ENABLE_SYNTH
         emptyOscillators();
     #endif
+
+
+    #endif // POK_ENABLE_SOUND
 
 }
 
@@ -344,6 +350,7 @@ inline void pokSoundBufferedIRQ() {
 }
 
 inline void pokSoundIRQ() {
+    #if POK_ENABLE_SOUND > 0
     //#define TICKY 0xFFFF //160
     //#define INCY 409
     uint8_t output=0;
@@ -445,6 +452,7 @@ inline void pokSoundIRQ() {
             if (soundbufindex==256) soundbufindex=0;
         #endif //POK_ENABLE_SOUND
     #endif // HARDWARE
+#endif //POK_ENABLE_SOUND
 }
 
 

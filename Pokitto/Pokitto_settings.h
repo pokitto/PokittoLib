@@ -447,7 +447,22 @@
 #endif
 
 /** SYSTEM SETTINGS ADDRESSES IN EEPROM **/
-#define EESETTINGS_VOL 4000
+#define EESETTINGS_FILENAME         3980 // 0xF8C 20bytes last filename requested
+#define EESETTINGS_VOL              4000 // 0xFA0 Volume
+#define EESETTINGS_DEFAULTVOL       4001 // 0xFA1 Default volume
+#define EESETTINGS_LOADERWAIT       4002 //	0xFA2 Loader wait in sec
+#define EESETTINGS_VOLWAIT          4003 // 0xFA3 Volume screen wait in sec
+#define EESETTINGS_TIMEFORMAT       4004 // 0xFA4 Time format (0=24 hrs, 1 = 12 hrs)
+#define EESETTINGS_LASTHOURSSET     4005 // 0xFA5 Last time set in hours
+#define EESETTINGS_LASTMINUTESSET   4006 // 0xFA6 Last time set in minutes
+#define EESETTINGS_DATEFORMAT       4007 // 0xFA7 Date format (0=D/M/Y, 1 = M/D/Y)
+#define EESETTINGS_LASTDAYSET       4008 // 0xFA8 Last Day set
+#define EESETTINGS_LASTMONTHSET     4009 // 0xFA9 Last Month set
+#define EESETTINGS_LASTYEARSET      4010 // 0xFAA Last Year set (counting from 2000)
+#define EESETTINGS_RTCALARMMODE     4011 // 0xFAB RTC alarm mode (0=disabled, 1=enabled, 3 = enabled with sound)
+#define EESETTINGS_RESERVED         4012 // 0xFAC 4bytes reserved (additional sleep configuration)
+#define EESETTINGS_WAKEUPTIME       4016 // 0xFB0 Wake-up time as 32bit value for 1Hz RTC clock
+
 
 #endif // POKITTO_SETTINGS_H
 

@@ -1,6 +1,8 @@
 #ifndef IAP_H_INCLUDED
 #define IAP_H_INCLUDED
 
+#include "Pokitto_settings.h"
+
 extern int HelloFromIAP();
 extern int CopyPageToFlash(uint32_t,uint8_t*);
 extern char iaptest();

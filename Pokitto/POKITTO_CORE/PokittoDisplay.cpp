@@ -78,6 +78,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "SimLCD.h"
 #endif
 
+extern "C" void CheckStack();
+extern char _ebss[];  // In map file
+extern char _vStackTop[];  // In map file
+
 Pokitto::Core core;
 Pokitto::Sound _pdsound;
 
@@ -1412,7 +1416,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     return;
     }
     /** 2 bpp mode */
-    if (m_colordepth==2) {
+    else if (m_colordepth==2) {
         if(clipH > 0) {
 
             // Clip
@@ -1460,7 +1464,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     }
 
     /** 3 bpp mode */
-    if (m_colordepth==3) {
+    else if (m_colordepth==3) {
         int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
         int16_t bitFrame = w * h / 8;
         for (i = 0; i < w; i++) {
@@ -1485,7 +1489,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
 
 
     /** 4bpp fast version */
-    if (m_colordepth<4) {
+    else if (m_colordepth==4) {
 
     /** 4bpp fast version */
 	int16_t scrx,scry,xclip,xjump,scrxjump;
@@ -2443,6 +2447,99 @@ void Display::setTile(uint16_t i, uint8_t t) {
     m_tilebuf[i]=t;
 };
 
+// Convert an integer to a hexadecimal string
+char* itoa_hex(int num, char* dest, int destLen) {
+    int i = destLen-1;
+    do {
+        char c = (num % 16) + '0';
+        if (c > '9') c += 7;
+        dest[i--] = c;
+        num /= 16;
+    } while (num && i >= 0);
+    return &(dest[i+1]);
+}
+
+// Draw the crash screen and wait forever
+void ShowCrashScreenAndWait( const char* texLine1, const char* texLine2, const char* texLine3, const char* texLine4, const char* texLine5 ) {
+
+    // draw screen red
+    lcdFillSurface(COLOR_RED);
+
+    // Draw text
+    Display::directcolor = COLOR_WHITE;
+    Display::invisiblecolor = COLOR_RED;
+    Display::directbgcolor = COLOR_RED; // Cannot be black as that is a transparent color
+    Display::directtextrotated = false;
+    Display::adjustCharStep = 0;
+    Display::adjustLineStep = 0;
+    Display::setFont(fntC64UIGfx);  // A special font set that contains UI gfx in lower case letters.
+    Display::fixedWidthFont = true; // Needed for the non-proportional C64 font (default value=false)
+    Display::enableDirectPrinting(true);
+
+    // Draw texts
+    int  yOffsetInPixels = 5;
+    Display::set_cursor(0, 9 + yOffsetInPixels);
+    Display::print("  ");    Display::println(texLine1);
+    Display::print("  ");    Display::println(texLine2);
+    Display::print("  ");    Display::println(texLine3);
+    Display::println();
+    Display::print("  *");   Display::println(texLine4);
+    Display::print("  *");   Display::println(texLine5);
+
+    Display::set_cursor(0, 0 + yOffsetInPixels);
+
+    // Frame
+    Display::println(" abbbbbbbbbbbbbbbbbbbbbbbbc");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::println(" dbbbzybbbbbbbbbbbbbbbbbbbe");
+    Display::println("     {e");
+
+     // Pokitto image
+    Display::println  ("");
+    Display::println  ("  ijkl");
+    Display::println  ("  mnop");
+    Display::println  ("  qrst");
+    Display::println  ("  uvwx");
+
+   // loop forever
+    while(1){;}
+ }
+
+// Check the stack size and show a crash screen if the stack is too big.
+void CheckStack() {
+    #ifndef POK_SIM
+    int currStackTop;
+    const int freeStackThreshold = 400;
+    if ((int)&currStackTop - (int)_ebss < freeStackThreshold) {
+
+        // Create info string: "<stack size>:<current stack pointer>", e.g. "12345ABC:12345ABC"
+        const int infoStringLen = 8+1+8;
+        static char infoString[infoStringLen+1];
+        memset(infoString,0,infoStringLen+1);
+        const int stackSize = (int)_vStackTop - (int)&currStackTop;
+        const int tmpStrLen = 8;
+        static char tmpStr[tmpStrLen+1];
+        memset(tmpStr,0,tmpStrLen+1);
+        char* subStr = itoa_hex(stackSize, tmpStr, tmpStrLen); // keep ending null
+        strcat(infoString, subStr); // Add stack size as hex string
+        strcat(infoString, ":");
+        subStr = itoa_hex((int)&currStackTop, tmpStr, tmpStrLen); // keep ending null
+        strcat(infoString, subStr); // Add stack pointer address as hex string
+
+        // Draw the crash screen and wait forever. Use static const strings to avoid more stack usage.
+        static const char* texLine1 = "OOPS! PLEASE, RESTART";
+        static const char* texLine2 = "POKITTO OR RELOAD";
+        static const char* texLine3 = "SOFTWARE.";
+        static const char* texLine4 = "STACK TOO BIG!";
+        ShowCrashScreenAndWait(texLine1, texLine2, texLine3, texLine4, infoString);
+    }
+    #endif
+}
 
 /** Eof */
 

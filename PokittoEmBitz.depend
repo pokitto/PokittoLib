@@ -3205,7 +3205,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1518679594 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1521318496 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3682,11 +3682,12 @@
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokitto_extport.h
 	"mbed.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokittoeeprom.h
+1521318923 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokittoeeprom.h
 	<stdint.h>
 	"iap.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\iap.h
+1521318923 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\iap.h
+	"Pokitto_settings.h"
 	<stdint.h>
 
 1518985832 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
@@ -4030,7 +4031,7 @@
 1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontc64.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontc64uigfx.cpp
+1521227775 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontc64uigfx.cpp
 	"PokittoFonts.h"
 
 1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\karateka8x11.cpp
@@ -4118,7 +4119,7 @@
 1518175861 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1519497718 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1521228245 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4171,7 +4172,7 @@
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
-1519712429 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1521228295 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -4353,11 +4354,10 @@
 	"CRC7.h"
 	"CRC16.h"
 
-1518738727 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+1521229697 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
 	"Pokitto.h"
-	"lemm.h"
 
-1518733687 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
+1521229874 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
 
 1517247872 source:c:\pokittolib_git\pokittolib_curr\examples\updateandcliprect\main.cpp
 	"Pokitto.h"
@@ -5721,4 +5721,18 @@
 
 1519157837 source:c:\users\spinal\documents\github\pokittolib\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
 	"Synth.h"
+
+1519497470 source:c:\pokittolib_git\pokittolib_curr\examples\mode13\mode13.cpp
+	"Pokitto.h"
+
+1519497470 c:\pokittolib_git\pokittolib_curr\examples\mode13\my_settings.h
+
+1518700111 c:\pokittolib_git\pokittolib_curr\examples\sprites\my_settings.h
+
+1517247872 source:c:\pokittolib_git\pokittolib_curr\examples\sprites\main.cpp
+	"Pokitto.h"
+	"gfxdata.h"
+
+1517247872 c:\pokittolib_git\pokittolib_curr\examples\sprites\gfxdata.h
+	<stdint.h>
 

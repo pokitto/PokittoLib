@@ -123,7 +123,7 @@ struct EEPROMClass{
     //STL and C++11 iteration capability.
     EEPtr begin()                        { return 0x00; }
     EEPtr end()                          { return length(); } //Standards requires this to be the item after the last valid entry. The returned pointer is invalid.
-    uint16_t length()                    { return 0x1000; } // length for pokitto is 4kB
+    uint16_t length()                    { return EESETTINGS_VOL; } // length for pokitto is 4kB MINUS settings area!!
 
     //Functionality to 'get' and 'put' objects to and from EEPROM.
     template< typename T > T &get( int idx, T &t ){
