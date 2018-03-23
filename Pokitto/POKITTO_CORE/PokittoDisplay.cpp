@@ -307,6 +307,10 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
         #if POK_SCREENMODE == MODE14
         lcdRefreshMode14(m_scrbuf, paletteptr);
         #endif
+	
+	#if POK_SCREENMODE == MODE15
+        lcdRefreshMode15(paletteptr, m_scrbuf);
+        #endif
 
         #if POK_SCREENMODE == MODE_TILED_1BIT
         lcdRefreshT1(m_tilebuf, m_tilecolorbuf, m_tileset, paletteptr);
