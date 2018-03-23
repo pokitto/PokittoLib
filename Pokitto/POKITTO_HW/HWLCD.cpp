@@ -1815,7 +1815,17 @@ for(x=0;x<220;x++)
     }
 }
 
-
+void Pokitto::lcdRefreshMode15(uint16_t* pal, uint8_t* scrbuf){
+    write_command(0x03); write_data(0x1038); //realy only need to call this once
+    write_command(0x20); write_data(0); 
+    write_command(0x21); write_data(0);
+ 
+    write_command(0x22);
+    for (int x=0; x<0x4BA0;x++) {
+        write_data(pal[(((scrbuf[x]) & 0xf0) >> 4)]);
+        write_data(pal[( (scrbuf[x]) & 0x0f)]);
+    }
+}
 
 
 void Pokitto::blitWord(uint16_t c) {
