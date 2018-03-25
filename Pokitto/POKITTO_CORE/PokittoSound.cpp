@@ -729,7 +729,7 @@ void Sound::updateOutput() {
 
         #if POK_STREAMING_MUSIC
             if (streamstep) {
-                pwmout_write(&audiopwm,(float)sbyte>>headPhoneLevel/(float)255);
+                pwmout_write(&audiopwm,(float)(sbyte>>headPhoneLevel)/(float)255);
             }
         #endif
             dac_write((uint8_t)output); //direct hardware mixing baby !

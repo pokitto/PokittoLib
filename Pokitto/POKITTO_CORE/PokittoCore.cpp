@@ -379,7 +379,11 @@ void Core::askLoader() {
     display.print("FOR LOADER");
     display.directcolor=COLOR_WHITE;
     display.fontSize=2;
-    int countd=POK_LOADER_COUNTDOWN; uint16_t c2 = getTime();
+    int countd;
+    //read countdown time from settings
+    countd = eeprom_read_byte((uint16_t*)EESETTINGS_LOADERWAIT);
+    if (countd==0 || countd > 5) countd=3;
+    uint16_t c2 = getTime();
     while (countd) {
         buttons.pollButtons();
         display.set_cursor(13*8,15*8);
@@ -456,11 +460,27 @@ void Core::setVolLimit() {
     #endif
     if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
     else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
+    #ifdef PRODUCTIONTESTING
+    vol=255;
+    sound.setMaxVol(VOLUME_SPEAKER_MAX);
+    #endif
     for (uint8_t t=0;t<vol;t++) {
             sound.setVolume(t);
     }
     volbar_visible=0;
-    while (core.isRunning() && dstate){
+    int countd;
+    //read countdown time from settings
+    countd = eeprom_read_byte((uint16_t*)EESETTINGS_VOLWAIT);
+    if (countd==0 || countd > 10) countd=10;
+    #ifdef PRODUCTIONTESTING
+    countd=2;
+    #endif
+    uint16_t c2 = getTime();
+    while (core.isRunning() && dstate && countd){
+        if (getTime()>c2+1000) {
+            c2=getTime();
+            countd--;
+        }
         switch (dstate) {
         case 1:
             //redraw
@@ -515,6 +535,7 @@ void Core::setVolLimit() {
             buttons.pollButtons();
             if (aBtn()) {dstate=0;while(aBtn()){buttons.pollButtons();};break;}
             if (rightBtn()) {
+                    countd=0xFFFF; //disable countdown
                     if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
                     else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.25f*VINCMULT;
                     else vol += 0.05f*VINCMULT;
@@ -527,6 +548,7 @@ void Core::setVolLimit() {
                     break;
                     }
             if (leftBtn()) {
+                    countd=0xFFFF; //disable countdown
                     if (vol >= VOLUME_HEADPHONE_MAX) vol -= 0.25f*VINCMULT;
                     else vol -= 0.05f*VINCMULT;
                     if (vol <= VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_HEADPHONE_MAX);
