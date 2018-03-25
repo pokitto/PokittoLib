@@ -379,9 +379,11 @@ void Core::askLoader() {
     display.print("FOR LOADER");
     display.directcolor=COLOR_WHITE;
     display.fontSize=2;
-    int countd;
+    int countd = 0;
+    #ifndef POK_SIM
     //read countdown time from settings
     countd = eeprom_read_byte((uint16_t*)EESETTINGS_LOADERWAIT);
+    #endif
     if (countd==0 || countd > 5) countd=3;
     uint16_t c2 = getTime();
     while (countd) {
@@ -468,9 +470,11 @@ void Core::setVolLimit() {
             sound.setVolume(t);
     }
     volbar_visible=0;
-    int countd;
+    int countd=0;
+    #ifndef POK_SIM
     //read countdown time from settings
     countd = eeprom_read_byte((uint16_t*)EESETTINGS_VOLWAIT);
+    #endif
     if (countd==0 || countd > 10) countd=10;
     #ifdef PRODUCTIONTESTING
     countd=2;
