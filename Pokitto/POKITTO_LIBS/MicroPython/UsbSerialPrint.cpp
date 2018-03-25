@@ -39,9 +39,18 @@
 
 #ifndef POK_SIM
 #include "USBSerial.h"
+
 #ifdef USE_SEGGER_SERIAL_PRINT
+// Note that to be able to use TeraTerm with Segger J-Link, Tera Term must be configured
+// not to send the whole line only after <return>. Each char should be send immediately:
+// TERATERM.INI: EnableLineMode=off
+// That is needed e.g. Python interactive prompt via the terminal. Normally, this mode is set
+// automatically but somehow TeraTerm does not recognize J-Link connection correctly.
+// TeraTerm must be connected to the telnet port "localhost:19021".
+
 #include "SEGGER_RTT.h"
 #endif
+
 #endif
 #include "PythonBindings.h"
 
