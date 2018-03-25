@@ -1338,7 +1338,70 @@ for(x=0;x<160;x+=4)
 }
 
 
-<<<<<<< HEAD
+void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
+uint16_t x,y;
+uint16_t scanline[2][110]; // read two nibbles = pixels at a time
+uint8_t *d;
+
+setDRAMptr(0,0);
+
+for(x=0;x<110;x+=2)
+  {
+    d = scrbuf+x;// point to beginning of line in data
+    uint8_t s=0;
+    for(y=0;y<88;y++)
+    {
+        uint8_t t = *d;
+        uint8_t t1 = *(d+1);
+        scanline[0][s] = paletteptr[(t+offset)&255];
+        scanline[1][s++] = paletteptr[(t1+offset)&255];
+        d+=110; // jump to read byte directly below in screenbuffer
+    }
+    s=0;
+    for (s=0;s<88;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+    for (s=0;s<88;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+    for (s=0;s<88;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+    for (s=0;s<88;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+  }
+
+}
+
 void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y,data,xptr;
 uint16_t scanline[176];
@@ -1420,71 +1483,3 @@ for(x=0;x<220;x++)
     }
     simulator.refreshDisplay();
 }
-
-=======
-void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
-uint16_t x,y;
-uint16_t scanline[2][110]; // read two nibbles = pixels at a time
-uint8_t *d;
-
-setDRAMptr(0,0);
-
-for(x=0;x<110;x+=2)
-  {
-    d = scrbuf+x;// point to beginning of line in data
-    uint8_t s=0;
-    for(y=0;y<88;y++)
-    {
-        uint8_t t = *d;
-        uint8_t t1 = *(d+1);
-        scanline[0][s] = paletteptr[(t+offset)&255];
-        scanline[1][s++] = paletteptr[(t1+offset)&255];
-        d+=110; // jump to read byte directly below in screenbuffer
-    }
-    s=0;
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-  }
-
-}
-
-
->>>>>>> refs/remotes/origin/master
