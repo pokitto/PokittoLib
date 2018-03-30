@@ -280,7 +280,7 @@
 #endif // POK_TILEDMODE
 
 #if PROJ_MODE13 > 0
-    #define PROJ_SCREENMODE MODE13
+    #define POK_SCREENMODE MODE13
     #define POK_COLORDEPTH 8
     #define POK_STRETCH 0
     #define POK_FPS 30
@@ -374,7 +374,7 @@
     #define POK_SCREENBUFFERSIZE 0x4BA0
     #define LCDWIDTH 220
     #define LCDHEIGHT 176
-    
+
 #else
     #define POK_SCREENBUFFERSIZE 0
 #endif // POK_SCREENMODE
