@@ -88,6 +88,8 @@ extern void lcdRefreshGB(uint8_t* , uint16_t*);
 extern void lcdRefreshAB(uint8_t*, uint16_t*);
 /** Update LCD from Mode 14 */
 extern void lcdRefreshMode14(uint8_t*, uint16_t*);
+/** Update LCD from Mode 15 */
+extern void lcdRefreshMode15(uint16_t*, uint8_t*);
 /** Update LCD from Lamenes mode */
 extern void lcdRefreshModeLamenes(uint8_t*, uint16_t*);
 /** Update LCD from Gameboy mode*/

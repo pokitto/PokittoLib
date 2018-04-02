@@ -307,8 +307,8 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
         #if POK_SCREENMODE == MODE14
         lcdRefreshMode14(m_scrbuf, paletteptr);
         #endif
-	
-	#if POK_SCREENMODE == MODE15
+
+        #if POK_SCREENMODE == MODE15
         lcdRefreshMode15(paletteptr, m_scrbuf);
         #endif
 
@@ -1569,6 +1569,8 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
 
     return;
     }
+
+    /** 4bpp fast version */
 
     if (m_colordepth==8) {
 	int16_t scrx,scry,xclip,xjump,scrxjump;

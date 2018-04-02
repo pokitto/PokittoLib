@@ -2213,7 +2213,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1522440511 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1522700077 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1518679197 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
@@ -2252,7 +2252,7 @@
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_object.h
 
-1519031029 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
+1522709191 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
 	<stdint.h>
 	<SDL2/SDL.h>
 	"Pokitto_settings.h"
@@ -2578,7 +2578,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519501070 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.h
+1522704292 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.h
 	<stdint.h>
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.h
@@ -2670,7 +2670,7 @@
 	"mbed.h"
 	<stdint.h>
 
-1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofonts.h
+1522702735 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofonts.h
 	"Pokitto_settings.h"
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
@@ -2824,7 +2824,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1522439286 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1522704135 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2961,7 +2961,7 @@
 	<stdint.h>
 	<stdio.h>
 
-1522439286 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.cpp
+1522705104 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.cpp
 	"SimLCD.h"
 	"PokittoSimulator.h"
 
@@ -3798,4 +3798,16 @@
 	"Pokitto.h"
 
 1519501070 c:\pokittolib_git\pokittolib_curr\examples\mode13\my_settings.h
+
+1522708887 source:c:\pokittolib_git\pokittolib_curr\examples\mode15\mode15.cpp
+	"Pokitto.h"
+	"monkey16.h"
+
+1522708946 c:\pokittolib_git\pokittolib_curr\examples\mode15\my_settings.h
+
+1522709181 c:\pokittolib_git\pokittolib_curr\examples\mode15\monkey16.h
+	<stdint.h>
+
+1522702717 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontmonkey.cpp
+	"PokittoFonts.h"
 

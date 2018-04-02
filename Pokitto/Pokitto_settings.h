@@ -280,6 +280,9 @@
 #endif // POK_TILEDMODE
 
 #if PROJ_MODE13 > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
     #define POK_SCREENMODE MODE13
     #define POK_COLORDEPTH 8
     #define POK_STRETCH 0
@@ -287,12 +290,18 @@
 #endif
 
 #if PROJ_MODE14 > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
     #define POK_SCREENMODE MODE14
     #define POK_COLORDEPTH 3
     #define POK_STRETCH 0
     #define POK_FPS 30
 #endif
 #if PROJ_MODE15 > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
     #define POK_SCREENMODE MODE15
     #define POK_COLORDEPTH 4
     #define POK_STRETCH 0

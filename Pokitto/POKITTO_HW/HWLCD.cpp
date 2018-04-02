@@ -1815,18 +1815,98 @@ for(x=0;x<220;x++)
     }
 }
 
+//#define ADEKTOSMODE15
+
+#ifdef ADEKTOSMODE15
 void Pokitto::lcdRefreshMode15(uint16_t* pal, uint8_t* scrbuf){
     write_command(0x03); write_data(0x1038); //realy only need to call this once
-    write_command(0x20); write_data(0); 
+    write_command(0x20); write_data(0);
     write_command(0x21); write_data(0);
- 
+
     write_command(0x22);
+
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    for (int x=0,xt=0; x<0x4BA0;x++,xt++) {
+    if (xt==110) xt=0;
+    if (xt<8) {
+        write_data(0);
+        write_data(0);
+    } else {
+        write_data(pal[(((scrbuf[x]) & 0xf0) >> 4)]);
+        write_data(pal[( (scrbuf[x]) & 0x0f)]);
+    }
+
+    }
+    #else
     for (int x=0; x<0x4BA0;x++) {
         write_data(pal[(((scrbuf[x]) & 0xf0) >> 4)]);
         write_data(pal[( (scrbuf[x]) & 0x0f)]);
     }
+    #endif //PROJ_SHOW_FPS_COUNTER
 }
 
+#else
+
+void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
+uint16_t x,y,xptr;
+uint16_t scanline[2][176]; // read two nibbles = pixels at a time
+uint8_t *d, yoffset=0;
+
+xptr = 0;
+//setDRAMptr(xptr,yoffset);
+
+write_command(0x20); write_data(0);
+write_command(0x21); write_data(0);
+write_command(0x22);
+CLR_CS_SET_CD_RD_WR;
+
+for(x=0;x<220;x+=2)
+  {
+    d = scrbuf+(x>>1);// point to beginning of line in data
+    // find colours in one scanline
+    uint8_t s=0;
+    for(y=0;y<176;y++)
+    {
+    uint8_t t = *d >> 4; // higher nibble
+    uint8_t t2 = *d & 0xF; // lower nibble
+    // higher nibble = left pixel in pixel pair
+    scanline[0][s] = paletteptr[t];
+    scanline[1][s++] = paletteptr[t2];
+
+    d+=220/2; // jump to read byte directly below in screenbuffer
+    }
+    s=0;
+    // draw scanlines
+
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    if (x<8) continue;
+    setDRAMptr(x, 0);
+    #endif
+
+    for (s=0;s<176;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+    }
+
+    for (s=0;s<176;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+    }
+  }
+}
+#endif //ADEKTOSMODE15
 
 void Pokitto::blitWord(uint16_t c) {
     setup_data_16(c);CLR_WR;SET_WR;

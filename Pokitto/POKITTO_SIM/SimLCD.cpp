@@ -1483,3 +1483,66 @@ for(x=0;x<220;x++)
     }
     simulator.refreshDisplay();
 }
+
+void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
+uint16_t x,y,xptr;
+uint16_t scanline[2][176]; // read two nibbles = pixels at a time
+uint8_t *d, yoffset=0;
+
+xptr = 0;
+setDRAMptr(xptr,yoffset);
+
+for(x=0;x<220;x+=2)
+  {
+    d = scrbuf+(x>>1);// point to beginning of line in data
+    /** find colours in one scanline **/
+    uint8_t s=0;
+    for(y=0;y<176;y++)
+    {
+    uint8_t t = *d >> 4; // higher nibble
+    uint8_t t2 = *d & 0xF; // lower nibble
+    /** higher nibble = left pixel in pixel pair **/
+    scanline[0][s] = paletteptr[t];
+    scanline[1][s++] = paletteptr[t2];
+    /** testing only **/
+    //scanline[0][s] = 0xFFFF*(s&1);
+    //scanline[1][s] = 0xFFFF*(!(s&1));
+    //s++;
+    /** until here **/
+    d+=220/2; // jump to read byte directly below in screenbuffer
+    }
+    s=0;
+    /** draw scanlines **/
+    /** leftmost scanline twice**/
+
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    if (x<4) continue;
+    setDRAMptr(x<<1, 0);
+    #endif
+
+    for (s=0;s<176;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+    }
+
+    /** rightmost scanline twice**/
+    //setDRAMptr(xptr++,yoffset);
+    for (s=0;s<176;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+    }
+  }
+    simulator.refreshDisplay();
+}

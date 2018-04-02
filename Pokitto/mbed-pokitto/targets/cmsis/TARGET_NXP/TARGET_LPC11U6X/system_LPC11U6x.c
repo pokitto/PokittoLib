@@ -94,7 +94,7 @@
 #ifdef _OSCT
 #define SYSPLLCTRL_Val         (0x00000023+_OSCT)              // Reset value: 0x000
 #else
-#define SYSPLLCTRL_Val         0x00000023
+#define SYSPLLCTRL_Val         0x00000023 //23 default
 #endif
 //
 //     <o.0..1> Main Clock Source Select (MAINCLKSEL)
