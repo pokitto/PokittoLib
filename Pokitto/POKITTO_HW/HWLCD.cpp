@@ -407,32 +407,32 @@ void Pokitto::lcdTile(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t* 
 
 
 void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color) {
-    	int16_t temp;
+	int16_t temp;
 	if (x0>x1) {temp=x0;x0=x1;x1=temp;}
 	if (y0>y1) {temp=y0;y0=y1;y1=temp;}
 	if (x0 > POK_LCD_W) return;
 	if (y0 > POK_LCD_H) return;
-    if (x1 > POK_LCD_W) x1=POK_LCD_W;
-	if (y1 > POK_LCD_H) y1=POK_LCD_W;
+	if (x1 > POK_LCD_W) x1=POK_LCD_W;
+	if (y1 > POK_LCD_H) y1=POK_LCD_H;
 	if (x0 < 0) x0=0;
 	if (y0 < 0) y0=0;
 
 	int16_t x,y;
-    for (x=x0; x<=x1;x++) {
-        write_command(0x20);  // Horizontal DRAM Address (=y on pokitto screen)
-        write_data(y0);
-        write_command(0x21);  // Vertical DRAM Address (=x on pokitto screen)
-        write_data(x);
-        write_command(0x22); // write data to DRAM
+	for (x=x0; x<=x1;x++) {
+		write_command(0x20);  // Horizontal DRAM Address (=y on pokitto screen)
+		write_data(y0);
+		write_command(0x21);  // Vertical DRAM Address (=x on pokitto screen)
+		write_data(x);
+		write_command(0x22); // write data to DRAM
 
-        CLR_CS_SET_CD_RD_WR; // go to vram write mode
+		CLR_CS_SET_CD_RD_WR; // go to vram write mode
 
 
-        for (y=y0; y<y1;y++) {
-                setup_data_16(color); // setup the data (flat color = no change between pixels)
-                CLR_WR;SET_WR; //CLR_WR;SET_WR;//toggle writeline, pokitto screen writes a column up to down
-        }
-    }
+		for (y=y0; y<y1;y++) {
+				setup_data_16(color); // setup the data (flat color = no change between pixels)
+				CLR_WR;SET_WR; //CLR_WR;SET_WR;//toggle writeline, pokitto screen writes a column up to down
+		}
+	}
 }
 
 /***
