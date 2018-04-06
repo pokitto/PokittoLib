@@ -413,7 +413,7 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
 	if (x0 > POK_LCD_W) return;
 	if (y0 > POK_LCD_H) return;
     if (x1 > POK_LCD_W) x1=POK_LCD_W;
-	if (y1 > POK_LCD_H) y1=POK_LCD_W;
+	if (y1 > POK_LCD_H) y1=POK_LCD_H;
 	if (x0 < 0) x0=0;
 	if (y0 < 0) y0=0;
 
