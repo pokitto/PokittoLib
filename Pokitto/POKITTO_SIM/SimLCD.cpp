@@ -36,6 +36,10 @@
 
 #include "SimLCD.h"
 #include "PokittoSimulator.h"
+#ifdef DISABLEAVRMIN
+#include <algorithm>
+using namespace std;
+#endif // DISABLEAVRMIN
 
 #define CLR_WR
 #define SET_WR toggle_data()
@@ -636,14 +640,14 @@ void Pokitto::lcdRefreshMode1Spr(
 
                     // Dirty rect
                     int16_t sprDirtyYMin = min(spry, sprOldY);
-                    sprDirtyYMin = max(sprDirtyYMin, 0);
+                    sprDirtyYMin = max(sprDirtyYMin, (int16_t)0);
                     int16_t sprDirtyYMax = max(spry, sprOldY);
                     if (isCurrentSpriteOutOfScreen)
                         sprDirtyYMax = sprOldY;
                     if (isOldSpriteOutOfScreen)
                         sprDirtyYMax = spry;
                     int16_t sprDirtyYMaxEnd = sprDirtyYMax + sprh - 1;
-                    sprDirtyYMaxEnd = min(sprDirtyYMaxEnd, LCDHEIGHT - 1);  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
+                    sprDirtyYMaxEnd = min(sprDirtyYMaxEnd, (int16_t)(LCDHEIGHT - 1));  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
 
                     // Get the scanline min and max y values for drawing
                     if (sprDirtyYMin < scanlineMinY)

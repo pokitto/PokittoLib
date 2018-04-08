@@ -71,6 +71,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "PokittoSound.h"
 #include <stdio.h>
 #include <string.h>
+#ifdef DISABLEAVRMIN
+#include <algorithm>
+using namespace std;
+#endif // DISABLEAVRMIN
 
 #ifndef POK_SIM
 #include "HWLCD.h"
