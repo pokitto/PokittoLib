@@ -73,7 +73,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #ifdef DISABLEAVRMIN
 #include <algorithm>
-using namespace std;
+using std::min;
+using std::max;
 #endif // DISABLEAVRMIN
 
 #ifndef POK_SIM

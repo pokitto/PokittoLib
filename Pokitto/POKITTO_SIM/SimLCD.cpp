@@ -38,7 +38,8 @@
 #include "PokittoSimulator.h"
 #ifdef DISABLEAVRMIN
 #include <algorithm>
-using namespace std;
+using std::min;
+using std::max;
 #endif // DISABLEAVRMIN
 
 #define CLR_WR
