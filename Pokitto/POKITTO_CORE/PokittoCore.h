@@ -179,8 +179,6 @@ public:
   static void setVolLimit();
 
 // BUTTON INPUT HANDLING
-private:
-  static uint8_t heldStates[];
 public:
   static void initButtons();
   static void pollButtons();
