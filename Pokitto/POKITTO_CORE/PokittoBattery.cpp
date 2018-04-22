@@ -44,12 +44,14 @@ uint16_t Battery::voltage;
 uint16_t Battery::thresholds[NUM_LVL];
 uint8_t  Battery::nextUpdate;
 
-void Battery::begin() {
+AnalogIn BatLevelPin(P0_23);
 
+void Battery::begin() {
+    level = BatLevelPin*0xFF;
 }
 
 void Battery::update() {
     //ToDo - make a real function
-    level=0xFF; //full battery all the time
+    level = BatLevelPin*0xFF;
 }
 

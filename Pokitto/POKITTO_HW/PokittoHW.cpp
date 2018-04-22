@@ -47,7 +47,9 @@ void Core::quit() {
 }
 
 void Core::initRandom() {
-    //TODO: hook random seed to battery level
+    time_t seconds = time(NULL);
+    Pokitto::Battery::update();
+    srand((unsigned int) (Pokitto::Battery::level + (seconds)));
 }
 
 void Core::initGPIO() {
