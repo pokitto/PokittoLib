@@ -53,7 +53,9 @@ Pokitto::Sound __shw;
 using namespace Pokitto;
 
 #ifndef POK_SIM
+#if POK_ENABLE_SOUND
 pwmout_t* obj = &audiopwm;
+#endif
 #endif
 
 /** Sound Variables **/
