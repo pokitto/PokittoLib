@@ -58,8 +58,12 @@ InterruptIn RBtn(POK_BTN_RIGHT_PIN);
 
 uint8_t Pokitto::heldStates[NUM_BTN];
 
-void APressed() { Pokitto::heldStates[BTN_A] = 1; }
-void AReleased() { Pokitto::heldStates[BTN_A] = 0; }
+void APressed() {
+    Pokitto::heldStates[BTN_A] = 1;
+    }
+void AReleased() {
+    Pokitto::heldStates[BTN_A] = 0;
+    }
 void BPressed() { Pokitto::heldStates[BTN_B] = 1; }
 void BReleased() { Pokitto::heldStates[BTN_B] = 0; }
 void CPressed() {
@@ -83,6 +87,67 @@ void LPressed() {
     }
 void LReleased() { Pokitto::heldStates[BTN_LEFT] = 0; }
 
+static inline void ClearPinInt(LPC_PIN_INT_T *pPININT, uint32_t pins)
+{
+	pPININT->IST = pins;
+}
+
+void PIN_INT0_IRQHandler(void)
+{
+	//Pokitto::heldStates[BTN_A] = 1 - Pokitto::heldStates[BTN_A];
+	//uint32_t  pins = ((LPC_PIN_INT_T*)LPC_PININT)->FALL;
+	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<0)) Pokitto::heldStates[BTN_A] = 1;
+	else Pokitto::heldStates[BTN_A] = 0;
+	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(0));
+}
+
+void PIN_INT1_IRQHandler(void)
+{
+	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<1)) Pokitto::heldStates[BTN_B] = 1;
+	else Pokitto::heldStates[BTN_B] = 0;
+	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(1));
+}
+
+void PIN_INT2_IRQHandler(void)
+{
+	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<2)) Pokitto::heldStates[BTN_C] = 1;
+	else Pokitto::heldStates[BTN_C] = 0;
+	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(2));
+}
+
+void PIN_INT3_IRQHandler(void)
+{
+	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<3)) Pokitto::heldStates[BTN_UP] = 1;
+	else Pokitto::heldStates[BTN_UP] = 0;
+	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(3));
+}
+
+void PIN_INT4_IRQHandler(void)
+{
+	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<4)) Pokitto::heldStates[BTN_DOWN] = 1;
+	else Pokitto::heldStates[BTN_DOWN] = 0;
+	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(4));
+}
+
+void PIN_INT5_IRQHandler(void)
+{
+    /* Hardware volume control */
+    if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<5)) Pokitto::heldStates[BTN_LEFT] = 1;
+	else Pokitto::heldStates[BTN_LEFT] = 0;
+    if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_LEFT]==0) _s.volumeDown();
+	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(5));
+}
+
+void PIN_INT6_IRQHandler(void)
+{
+    /* Hardware volume control */
+    if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<6)) Pokitto::heldStates[BTN_RIGHT] = 1;
+	else Pokitto::heldStates[BTN_RIGHT] = 0;
+    if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_RIGHT]==0) _s.volumeUp();
+	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(6));
+}
+
+
 void Pokitto::initButtons() {
   ABtn.fall(&AReleased);
   ABtn.rise(&APressed);
@@ -98,6 +163,13 @@ void Pokitto::initButtons() {
   LBtn.rise(&LPressed);
   RBtn.fall(&RReleased);
   RBtn.rise(&RPressed);
+  NVIC_SetVector((IRQn_Type)(PIN_INT0_IRQn), (uint32_t)&PIN_INT0_IRQHandler);
+  NVIC_SetVector((IRQn_Type)(PIN_INT1_IRQn), (uint32_t)&PIN_INT1_IRQHandler);
+  NVIC_SetVector((IRQn_Type)(PIN_INT2_IRQn), (uint32_t)&PIN_INT2_IRQHandler);
+  NVIC_SetVector((IRQn_Type)(PIN_INT3_IRQn), (uint32_t)&PIN_INT3_IRQHandler);
+  NVIC_SetVector((IRQn_Type)(PIN_INT4_IRQn), (uint32_t)&PIN_INT4_IRQHandler);
+  NVIC_SetVector((IRQn_Type)(PIN_INT5_IRQn), (uint32_t)&PIN_INT5_IRQHandler);
+  NVIC_SetVector((IRQn_Type)(PIN_INT6_IRQn), (uint32_t)&PIN_INT6_IRQHandler);
 }
 
 uint8_t Pokitto::Core::aBtn() {
