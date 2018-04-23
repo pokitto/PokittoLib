@@ -97,35 +97,35 @@ void PIN_INT0_IRQHandler(void)
 	//Pokitto::heldStates[BTN_A] = 1 - Pokitto::heldStates[BTN_A];
 	//uint32_t  pins = ((LPC_PIN_INT_T*)LPC_PININT)->FALL;
 	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<0)) Pokitto::heldStates[BTN_A] = 1;
-	else Pokitto::heldStates[BTN_A] = 0;
+	else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<0)) Pokitto::heldStates[BTN_A] = 0;
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(0));
 }
 
 void PIN_INT1_IRQHandler(void)
 {
 	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<1)) Pokitto::heldStates[BTN_B] = 1;
-	else Pokitto::heldStates[BTN_B] = 0;
+	else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<1)) Pokitto::heldStates[BTN_B] = 0;
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(1));
 }
 
 void PIN_INT2_IRQHandler(void)
 {
 	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<2)) Pokitto::heldStates[BTN_C] = 1;
-	else Pokitto::heldStates[BTN_C] = 0;
+	else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<2)) Pokitto::heldStates[BTN_C] = 0;
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(2));
 }
 
 void PIN_INT3_IRQHandler(void)
 {
 	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<3)) Pokitto::heldStates[BTN_UP] = 1;
-	else Pokitto::heldStates[BTN_UP] = 0;
+	else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<3)) Pokitto::heldStates[BTN_UP] = 0;
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(3));
 }
 
 void PIN_INT4_IRQHandler(void)
 {
 	if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<4)) Pokitto::heldStates[BTN_DOWN] = 1;
-	else Pokitto::heldStates[BTN_DOWN] = 0;
+	else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<4)) Pokitto::heldStates[BTN_DOWN] = 0;
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(4));
 }
 
@@ -133,7 +133,7 @@ void PIN_INT5_IRQHandler(void)
 {
     /* Hardware volume control */
     if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<5)) Pokitto::heldStates[BTN_LEFT] = 1;
-	else Pokitto::heldStates[BTN_LEFT] = 0;
+	else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<5)) Pokitto::heldStates[BTN_LEFT] = 0;
     if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_LEFT]==0) _s.volumeDown();
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(5));
 }
@@ -142,7 +142,7 @@ void PIN_INT6_IRQHandler(void)
 {
     /* Hardware volume control */
     if ((((LPC_PIN_INT_T*)LPC_PININT)->RISE)&(1<<6)) Pokitto::heldStates[BTN_RIGHT] = 1;
-	else Pokitto::heldStates[BTN_RIGHT] = 0;
+	else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<6)) Pokitto::heldStates[BTN_RIGHT] = 0;
     if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_RIGHT]==0) _s.volumeUp();
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(6));
 }
