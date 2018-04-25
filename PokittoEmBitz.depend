@@ -3210,7 +3210,7 @@
 
 1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
 
-1518729552 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.h
+1524431339 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.h
 	<stdint.h>
 	<math.h>
 	"pwmout_api.h"
@@ -3280,7 +3280,7 @@
 
 1517251474 c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\api\mbed_assert.h
 
-1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwbuttons.h
+1524440401 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwbuttons.h
 	"mbed.h"
 	"Pokitto_settings.h"
 
@@ -4091,7 +4091,7 @@
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.cpp
 	"PokittoBacklight.h"
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
+1524435590 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
 	"PokittoBattery.h"
 
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
@@ -4119,7 +4119,7 @@
 1518179461 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1522704135 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1524431305 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4127,6 +4127,7 @@
 	"PokittoSound.h"
 	<stdio.h>
 	<string.h>
+	<algorithm>
 	"HWLCD.h"
 	"SimLCD.h"
 
@@ -4162,17 +4163,17 @@
 1515715502 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\dma_11u6x.c
 	"dma_11u6x.h"
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwbuttons.cpp
+1524667849 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwbuttons.cpp
 	"HWButtons.h"
 	"PokittoCore.h"
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1522708498 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1524430917 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
-1521231895 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1522712173 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -4208,7 +4209,7 @@
 	"Pokitto_settings.h"
 	"wait_api.h"
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokittohw.cpp
+1524436713 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\pokittohw.cpp
 	"PokittoCore.h"
 	"pinmap.h"
 	"HWLCD.h"
@@ -4354,10 +4355,10 @@
 	"CRC7.h"
 	"CRC16.h"
 
-1521229697 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+1524435607 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
 	"Pokitto.h"
 
-1521229874 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
+1521233474 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
 
 1517247872 source:c:\pokittolib_git\pokittolib_curr\examples\updateandcliprect\main.cpp
 	"Pokitto.h"
@@ -5753,4 +5754,18 @@
 
 1522702717 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontmonkey.cpp
 	"PokittoFonts.h"
+
+1524433659 source:c:\pokittolib_git\pokittolib_curr\examples\zuzupong\zuzupong.cpp
+	"Pokitto.h"
+	"textures.h"
+
+1517251472 c:\pokittolib_git\pokittolib_curr\examples\zuzupong\my_settings.h
+
+1517251472 c:\pokittolib_git\pokittolib_curr\examples\zuzupong\textures.h
+	<stdint.h>
+
+1524441857 source:c:\pokittolib_git\pokittolib_curr\examples\drawdemo\drawdemo.cpp
+	"Pokitto.h"
+
+1521233474 c:\pokittolib_git\pokittolib_curr\examples\drawdemo\my_settings.h
 
