@@ -44,14 +44,25 @@ uint16_t Battery::voltage;
 uint16_t Battery::thresholds[NUM_LVL];
 uint8_t  Battery::nextUpdate;
 
+#ifndef POK_SIM
 AnalogIn BatLevelPin(P0_23);
+#endif
 
 void Battery::begin() {
-    level = BatLevelPin*0xFF;
+	#ifndef POK_SIM
+    level = BatLevelPin * 0xFF;
+	#else
+	//ToDo - simulate the battery on the simulator
+	level = 0;
+	#endif
 }
 
 void Battery::update() {
+	#ifndef POK_SIM
     //ToDo - make a real function
-    level = BatLevelPin*0xFF;
+    level = BatLevelPin * 0xFF;
+	#else
+	//ToDo - simulate the battery on the simulator
+	#endif
 }
 
