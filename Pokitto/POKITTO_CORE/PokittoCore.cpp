@@ -406,8 +406,12 @@ void Core::askLoader() {
 
 void Core::drawvolbar(int x, int y, int level, bool text) {
     uint16_t oldcol = display.directcolor;
+    level = level >> 5;
     if (text) display.directRectangle(0,0,50,50,COLOR_BLACK);
-    display.directcolor = COLOR_GREEN;
+    if (level<4)  display.directcolor = COLOR_GREEN;
+    if (level==4) display.directcolor = COLOR_YELLOW;
+    if (level>4) display.directcolor = COLOR_RED;
+
     if (text) {
             bool temp = display.isDirectPrintingEnabled();
             display.enableDirectPrinting(true);
@@ -415,25 +419,24 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
             display.print("  ");
             display.enableDirectPrinting(temp);
     }
-    if (level<12) display.directcolor = COLOR_GRAY_80;
+    if (level<1) display.directcolor = COLOR_GRAY_80;
     display.directBitmap(x,y,Pokitto_volumebar,1,1);
-    if (level<24) display.directcolor = COLOR_GRAY_80;
+    if (level<2) display.directcolor = COLOR_GRAY_80;
     display.directBitmap(x+8,y,Pokitto_volumebar,1,1);
     display.directBitmap(x+8,y-4,Pokitto_volumebar,1,1);
-    display.directcolor = COLOR_RED;
-    if (level<48) display.directcolor = COLOR_GRAY_80;
+    if (level<3) display.directcolor = COLOR_GRAY_80;
     display.directBitmap(x+16,y,Pokitto_volumebar,1,1);
     display.directBitmap(x+16,y-4,Pokitto_volumebar,1,1);
     display.directBitmap(x+16,y-8,Pokitto_volumebar,1,1);
-
-    if (level<96) {
+    if (level<4) {
             display.directcolor = COLOR_GRAY_80;
     }
     display.directBitmap(x+24,y,Pokitto_volumebar,1,1);
     display.directBitmap(x+24,y-4,Pokitto_volumebar,1,1);
     display.directBitmap(x+24,y-8,Pokitto_volumebar,1,1);
     display.directBitmap(x+24,y-12,Pokitto_volumebar,1,1);
-    if (level<160) {
+
+    if (level<5) {
             display.directcolor = COLOR_GRAY_80;
     }
     display.directBitmap(x+32,y,Pokitto_volumebar,1,1);
@@ -441,6 +444,16 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
     display.directBitmap(x+32,y-8,Pokitto_volumebar,1,1);
     display.directBitmap(x+32,y-12,Pokitto_volumebar,1,1);
     display.directBitmap(x+32,y-16,Pokitto_volumebar,1,1);
+
+    if (level<6) {
+            display.directcolor = COLOR_GRAY_80;
+    }
+    display.directBitmap(x+40,y,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-4,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-8,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-12,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-16,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-20,Pokitto_volumebar,1,1);
     display.directcolor = oldcol;
 }
 
@@ -459,6 +472,7 @@ void Core::setVolLimit() {
     float vol = sound.getVolume(); float tvol;
     #ifndef POK_SIM
     vol=eeprom_read_byte((uint16_t*)EESETTINGS_VOL);
+    Pokitto::Sound::globalVolume=vol;
     #endif
     if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
     else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
@@ -466,7 +480,7 @@ void Core::setVolLimit() {
     vol=255;
     sound.setMaxVol(VOLUME_SPEAKER_MAX);
     #endif
-    for (uint8_t t=0;t<vol;t++) {
+    for (uint8_t t=0;t<=vol;t++) {
             sound.setVolume(t);
     }
     volbar_visible=0;
@@ -475,7 +489,7 @@ void Core::setVolLimit() {
     //read countdown time from settings
     countd = eeprom_read_byte((uint16_t*)EESETTINGS_VOLWAIT);
     #endif
-    if (countd==0 || countd > 10) countd=10;
+    if (countd==0 || countd > 10) countd=0xFFFF;
     #ifdef PRODUCTIONTESTING
     countd=2;
     #endif
@@ -483,7 +497,7 @@ void Core::setVolLimit() {
     while (core.isRunning() && dstate && countd){
         if (getTime()>c2+1000) {
             c2=getTime();
-            countd--;
+            if (countd<0xFFFF) countd--;
         }
         switch (dstate) {
         case 1:
@@ -510,65 +524,72 @@ void Core::setVolLimit() {
             display.println(" dbbbbbbbbbbbbbbbbbbbbbbbe");
             } // wipe = true
             display.setCursor(6*8,17*9);
-            if (sound.getVolume()-5<=VOLUME_HEADPHONE_MAX) display.directcolor = COLOR_WHITE;
+            if (discrete_vol<4) display.directcolor = COLOR_WHITE;
             else display.directcolor = COLOR_RED;
             display.directBitmap(21*8-4,6*8,Pokitto_headphones,1,2);
             display.setCursor(3*8,6*8+6);
             display.print("HEADPHONES");
             display.setCursor(3*8,8*8+2);
-            if (sound.getVolume()-8>VOLUME_HEADPHONE_MAX) display.print("TOO LOUD!");
+            if (discrete_vol>3) display.print("TOO LOUD!");
             else display.print("OK        ");
             display.directcolor = COLOR_GREEN;
             display.directBitmap(21*8-4,12*8,Pokitto_speaker,1,2);
             display.setCursor(3*8,12*8+6);
             display.print("VOLUME MAX");
             display.setCursor(3*8,14*8+2);
-            tvol = (vol/float(VOLUME_HEADPHONE_MAX))*100;
-            if (tvol > 100 && tvol < 120) tvol=100;
-            if (sound.getVolume()-5>VOLUME_HEADPHONE_MAX) { display.directcolor=COLOR_RED;}
+            //tvol = (vol/float(VOLUME_HEADPHONE_MAX))*100;
+            //if (tvol > 100 && tvol < 120) tvol=100;
+            //if (sound.getVolume()-5>VOLUME_HEADPHONE_MAX) { display.directcolor=COLOR_RED;}
+            if ((sound.getVolume()>>5)>3) { display.directcolor=COLOR_RED;}
             else display.directcolor=COLOR_GREEN;
-            display.print(int(sound.getVolume()));
+            if (discrete_vol==4) display.directcolor=COLOR_YELLOW;
+            if (discrete_vol==7) discrete_vol=6;
+            display.print((int)discrete_vol);
             //display.print(int(tvol));
             display.print("  ");
             display.directcolor=COLOR_GREEN;
-            drawvolbar(14*8,14*8+4+2,sound.getVolume(),false);
+            drawvolbar(14*8,14*8+4+3,sound.getVolume(),false);
             //display.setCursor(1,10);
             //display.print(vol);
             dstate=2; break;
         case 2:
             buttons.pollButtons();
+            buttons.update();
             if (aBtn()) {dstate=0;while(aBtn()){buttons.pollButtons();};break;}
-            if (rightBtn()) {
+            if (buttons.pressed(BTN_RIGHT)) {
                     countd=0xFFFF; //disable countdown
-                    if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
+                    /*if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
                     else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.25f*VINCMULT;
                     else vol += 0.05f*VINCMULT;
                     if (vol > VOLUME_HEADPHONE_MAX + 20) {
                             sound.setMaxVol(VOLUME_SPEAKER_MAX);
                     }
                     if (vol > VOLUME_SPEAKER_MAX) vol=VOLUME_SPEAKER_MAX;
-                    sound.setVolume(vol);
+                    sound.setVolume(vol);*/
+                    sound.volumeUp();
                     dstate=1; wipe=false;
                     break;
                     }
-            if (leftBtn()) {
+            if (buttons.pressed(BTN_LEFT)) {
                     countd=0xFFFF; //disable countdown
-                    if (vol >= VOLUME_HEADPHONE_MAX) vol -= 0.25f*VINCMULT;
+                    /*if (vol >= VOLUME_HEADPHONE_MAX) vol -= 0.25f*VINCMULT;
                     else vol -= 0.05f*VINCMULT;
                     if (vol <= VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_HEADPHONE_MAX);
                     if (vol < 0) vol=0;
-                    sound.setVolume(vol);
+                    sound.setVolume(vol);*/
+                    sound.volumeDown();
                     dstate=1; wipe=false;
                     break;
                     }
             break;
         }
     }
+    vol = sound.getVolume();
     #ifndef POK_SIM
     if (vol != eeprom_read_byte((uint16_t*)EESETTINGS_VOL)) eeprom_write_byte((uint16_t*)EESETTINGS_VOL,(uint8_t)vol);
     #endif
     sound.setVolume(vol);
-    sound.volumeUp();
+    //sound.volumeUp();
     display.setCursor(0,0);
 }
 
@@ -624,7 +645,6 @@ void Core::begin() {
 	//showWarning();
 	setVolLimit();
 	//sound.setVolume(sound.getVolume());//make sure we're at set volume before continue
-	sound.volumeUp();
 	#endif
 	display.enableDirectPrinting(false);
 	display.adjustCharStep=1;
@@ -638,7 +658,6 @@ void Core::begin() {
     #endif
 	#if POK_ENABLE_SOUND > 0
         sound.begin();
-        sound.volumeUp();
 
 	//mute when B is held during start up or if battery is low
 	battery.update();

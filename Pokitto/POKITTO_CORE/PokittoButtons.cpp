@@ -61,6 +61,7 @@ void Buttons::update() {
     for (uint8_t thisButton = 0; thisButton < NUM_BTN; thisButton++) {
         if (Pokitto::heldStates[thisButton]) { //if button pressed
             states[thisButton]++; //increase button hold time
+            if (states[thisButton]==0xFF) states[thisButton]=2; // PREVENT WRAPAROUND!!!!
         } else {
             if (states[thisButton] == 0)//button idle
                 continue;

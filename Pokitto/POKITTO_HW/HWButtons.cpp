@@ -57,6 +57,7 @@ InterruptIn RBtn(POK_BTN_RIGHT_PIN);
 #define BS_UP 2
 
 uint8_t Pokitto::heldStates[NUM_BTN];
+bool vol_control_clicked=false;
 
 void APressed() {
     Pokitto::heldStates[BTN_A] = 1;
@@ -141,7 +142,13 @@ void PIN_INT5_IRQHandler(void)
 	//else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<5)) Pokitto::heldStates[BTN_LEFT] = 0;
     Pokitto::heldStates[BTN_C]=CBtn.read();
     Pokitto::heldStates[BTN_LEFT]=LBtn.read();
-    if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_LEFT]==0) _s.volumeDown();
+    if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_LEFT])
+    {
+        if (!vol_control_clicked) _s.volumeDown();
+        Pokitto::heldStates[BTN_LEFT]=0; //do not do normal button operation
+        vol_control_clicked=true;
+    } else vol_control_clicked=false;
+
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(5));
 }
 
@@ -152,7 +159,13 @@ void PIN_INT6_IRQHandler(void)
 	//else if ((((LPC_PIN_INT_T*)LPC_PININT)->FALL)&(1<<6)) Pokitto::heldStates[BTN_RIGHT] = 0;
     Pokitto::heldStates[BTN_C]=CBtn.read();
     Pokitto::heldStates[BTN_RIGHT]=RBtn.read();
-    if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_RIGHT]==0) _s.volumeUp();
+    if (Pokitto::heldStates[BTN_C] && Pokitto::heldStates[BTN_RIGHT])
+    {
+        if (!vol_control_clicked) _s.volumeUp();
+        Pokitto::heldStates[BTN_RIGHT]=0; //do not do normal button operation
+        vol_control_clicked=true;
+    } else vol_control_clicked=false;
+
 	ClearPinInt((LPC_PIN_INT_T *)LPC_PININT, PININTCH(6));
 }
 

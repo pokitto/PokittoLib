@@ -5,6 +5,7 @@ Pokitto::Core game;
 Pokitto::Display disp;
 Pokitto::Sound snd;
 Pokitto::Buttons btn;
+DigitalOut enable(EXT4);
 
 int tonefreq=46;
 uint8_t amplitude = 255;//127;
@@ -16,8 +17,9 @@ uint8_t sbindx=0,sbx=0,prevy=0;
 
 int main()
 {
+    enable=0;
     game.begin();
-    snd.setVolume(snd.getMaxVol()); // volume to max level depending on headset/speaker safety level
+    //snd.setVolume(snd.getMaxVol()); // volume to max level depending on headset/speaker safety level
     disp.persistence = true;
     disp.color=wavetype+1;
     disp.bgcolor=0;
@@ -54,7 +56,9 @@ int main()
     case 5:
         disp.println(" SqNois");break;
     }
-    disp.print("HWvol:");
+    disp.print("Vol:");
+    disp.print((int)Pokitto::getHWvolume());
+    disp.print(", ");
     disp.println((int)snd.getVolume());
     disp.lcdRefresh(disp.screenbuffer);
 
@@ -105,7 +109,9 @@ int main()
                     case 5:
                         disp.println(" SqNois");break;
                     }
-                    disp.print("HWvol:");
+                    disp.print("Vol:");
+                    disp.print((int)Pokitto::getHWvolume());
+                    disp.print(", ");
                     disp.println((int)snd.getVolume());
                     snd.playTone(1,tonefreq,amplitude,wavetype,arpmode);
                     oldvol = (int) snd.getVolume();

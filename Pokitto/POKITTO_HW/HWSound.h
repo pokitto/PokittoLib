@@ -114,8 +114,8 @@
 /** the output holder **/
 extern uint16_t soundbyte;
 
-namespace Pokitto {
 
+namespace Pokitto {
 
 /** stream output and status */
 extern uint8_t streambyte, streamon, HWvolume;

@@ -76,6 +76,7 @@ pwmout_t* obj = &audiopwm;
 
 using namespace Pokitto;
 
+
 /** stream output and status */
 uint8_t Pokitto::streambyte,Pokitto::streamon;
 
@@ -152,11 +153,13 @@ void initHWvolumecontrol() {
     HWvolume=0;
    	volpotError=true;
     //if (volpot.put(HWvolume)) volpotError=true; //try if MCP4018 answers
-    setHWvolume(VOLUME_STARTUP);
+    setHWvolume(discrete_vol_hw_levels[VOLUME_STARTUP>>5]);
 }
 
 int Pokitto::setHWvolume(uint8_t v) {
-    HWvolume = 0x7F&v;
+    HWvolume=v;
+    if (HWvolume>127) HWvolume=127;
+    //HWvolume = 0x7F&v;
     //if (!volpotError) return volpot.put(HWvolume); //use normal I2C
     /* fallback method for broken MCP4018 */
     SoftwareI2C swvolpot(P0_4, P0_5); //swapped SDA,SCL
@@ -303,7 +306,7 @@ void Pokitto::soundInit() {
         testOsc();
     #endif // TEST_SOUND
     #if POK_BOARDREV == 2
-        initHWvolumecontrol();
+        //initHWvolumecontrol();
     #endif
 
     #if POK_ENABLE_SYNTH
@@ -340,12 +343,14 @@ void pokPlayStream() {
 
 
 inline void pokSoundBufferedIRQ() {
-           uint8_t output = soundbuf[soundbufindex+=Pokitto::streamon];
+           uint32_t output = soundbuf[soundbufindex+=Pokitto::streamon];
            if (soundbufindex==SBUFSIZE) soundbufindex=0;
            //if (p==sizeof(beat_11025_raw)) p=0;
            //soundbuf[soundbufindex++] = output;
            //uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
            //obj->pwm->MATCHREL1 = t_on;
+           output *= discrete_vol_multipliers[discrete_vol];
+           output >>= 8;
            dac_write(output);
 
            //setDRAMpoint(pixx, pixy);
@@ -355,7 +360,7 @@ inline void pokSoundIRQ() {
     #if POK_ENABLE_SOUND > 0
     //#define TICKY 0xFFFF //160
     //#define INCY 409
-    uint8_t output=0;
+    uint32_t output=0;uint32_t op;
     streamon=1;
     //if (test==TICKY) test=0;
     //if (test<(TICKY/2)) { tpin=1; pwmout_write(&audiopwm,(float)0/(float)255);}//dac_write(0);}
@@ -410,10 +415,12 @@ inline void pokSoundIRQ() {
 
         /** mixing oscillator output **/
 
-        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        output = (uint8_t) op;
+        op = (uint32_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
+        op += (uint32_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
+        op += (uint32_t) ((osc3.output)*(osc3.vol>>8))>>9;// >> 2 osc1.vol Marr;
+        op *= discrete_vol_multipliers[discrete_vol];
+        op >>= 8;
+        output = op & 0xFF;
 
     #endif // POK_ENABLE_SYNTH
 
@@ -425,14 +432,20 @@ inline void pokSoundIRQ() {
                 #if POK_STREAM_TO_DAC > 0
                     /** stream goes to DAC */
                     #if POK_USE_DAC > 0
-                    dac_write(streambyte>>__shw.headPhoneLevel); // duty cycle
+                    uint32_t sbyte = streambyte;
+                    sbyte *= discrete_vol_multipliers[discrete_vol];
+                    sbyte >>= 8;
+                    dac_write((uint8_t)sbyte); // duty cycle
                     #endif // POK_USE_DAC
                 #else
                     /** stream goes to PWM */
                     if (streamstep) {
                             //pwmout_write(&audiopwm,(float)streambyte/(float)255);
                             #if POK_USE_PWM
-                            uint32_t t_on = (uint32_t)((((obj->pwm->MATCHREL0)*streambyte)>>8)>>__shw.headPhoneLevel); //cut out float
+                            uint32_t sbyte = streambyte;
+                            sbyte *= discrete_vol_multipliers[discrete_vol];
+                            sbyte >>= 8;
+                            uint32_t t_on = (uint32_t)((((obj->pwm->MATCHREL0)*sbyte)>>8)); //cut out float
                             obj->pwm->MATCHREL1 = t_on;
                             #endif
                             //dac_write((uint8_t)streambyte); // duty cycle
@@ -443,11 +456,17 @@ inline void pokSoundIRQ() {
                 /** synth goes to PWM */
                 //pwmout_write(&audiopwm,(float)output/(float)255);
                 #if POK_USE_PWM
-                    uint32_t t_on = (uint32_t)((((obj->pwm->MATCHREL0)*output)>>8)>>__shw.headPhoneLevel); //cut out float
+                    op = output;
+                    op *= discrete_vol_multipliers[discrete_vol];
+                    op >>= 8;
+                    uint32_t t_on = (uint32_t)((((obj->pwm->MATCHREL0)*op)>>8)); //cut out float
                     obj->pwm->MATCHREL1 = t_on;
                 #endif
             #else // POK_STREAMING_MUSIC
-                dac_write((uint8_t)output>>__shw.headPhoneLevel); // SYNTH to DAC
+                op = output;
+                op *= discrete_vol_multipliers[discrete_vol];
+                op >>= 8;
+                dac_write((uint8_t)op); // SYNTH to DAC
             #endif
             soundbyte = (output+streambyte)>>1;
             soundbuf[soundbufindex++]=soundbyte;

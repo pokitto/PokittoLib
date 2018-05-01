@@ -50,6 +50,8 @@ extern uint8_t pokStreamPaused();
 
 //volume levels
 #define GLOBVOL_SHIFT 5 //shift global volume to allow for finer increments
+
+
 #ifndef MAX_VOL_TEST
     #define VOLUME_SPEAKER_MAX 255 //((8<<GLOBVOL_SHIFT)-1)
     #define VOLUME_HEADPHONE_MAX 127
@@ -88,6 +90,12 @@ namespace Pokitto {
  *  be used through a simple Sound class object or as a member of the Core class.
  *
  */
+
+/** discrete_vol* are needed for more accurate volume control levels on hardware **/
+extern uint8_t discrete_vol;
+extern const uint8_t discrete_vol_levels[];
+extern const uint8_t discrete_vol_hw_levels[];
+extern const uint8_t discrete_vol_multipliers[];
 
 extern void audio_IRQ();  // audio interrupt
 
