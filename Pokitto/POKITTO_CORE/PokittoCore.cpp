@@ -553,9 +553,11 @@ void Core::setVolLimit() {
             //display.print(vol);
             dstate=2; break;
         case 2:
+            #ifndef POK_SIM
             buttons.pollButtons();
+            #endif // POK_SIM
             buttons.update();
-            if (aBtn()) {dstate=0;while(aBtn()){buttons.pollButtons();};break;}
+            if (aBtn()) {dstate=0;break;}
             if (buttons.pressed(BTN_RIGHT)) {
                     countd=0xFFFF; //disable countdown
                     /*if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
@@ -644,6 +646,13 @@ void Core::begin() {
 	#else
 	//showWarning();
 	setVolLimit();
+	display.clear();
+	display.update();
+	while(!buttons.released(BTN_A))
+    {
+        buttons.update();
+    }
+
 	//sound.setVolume(sound.getVolume());//make sure we're at set volume before continue
 	#endif
 	display.enableDirectPrinting(false);
@@ -661,7 +670,7 @@ void Core::begin() {
 
 	//mute when B is held during start up or if battery is low
 	battery.update();
-	if(buttons.pressed(BTN_B) || (battery.level == 0)){
+	if(buttons.pressed(BTN_B)){
 		sound.setVolume(0);
 	}
 	else{ //play the startup sound on each channel for it to be louder

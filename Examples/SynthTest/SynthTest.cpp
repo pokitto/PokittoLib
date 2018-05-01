@@ -5,7 +5,9 @@ Pokitto::Core game;
 Pokitto::Display disp;
 Pokitto::Sound snd;
 Pokitto::Buttons btn;
+#ifndef POK_SIM
 DigitalOut enable(EXT4);
+#endif // POK_SIM
 
 int tonefreq=46;
 uint8_t amplitude = 255;//127;
@@ -17,7 +19,9 @@ uint8_t sbindx=0,sbx=0,prevy=0;
 
 int main()
 {
+    #ifndef POK_SIM
     enable=0;
+    #endif // POK_SIM
     game.begin();
     //snd.setVolume(snd.getMaxVol()); // volume to max level depending on headset/speaker safety level
     disp.persistence = true;
@@ -57,8 +61,10 @@ int main()
         disp.println(" SqNois");break;
     }
     disp.print("Vol:");
+    #ifndef POK_SIM
     disp.print((int)Pokitto::getHWvolume());
     disp.print(", ");
+    #endif // POK_SIM
     disp.println((int)snd.getVolume());
     disp.lcdRefresh(disp.screenbuffer);
 
@@ -110,8 +116,10 @@ int main()
                         disp.println(" SqNois");break;
                     }
                     disp.print("Vol:");
+                    #ifndef POK_SIM
                     disp.print((int)Pokitto::getHWvolume());
                     disp.print(", ");
+                    #endif // POK_SIM
                     disp.println((int)snd.getVolume());
                     snd.playTone(1,tonefreq,amplitude,wavetype,arpmode);
                     oldvol = (int) snd.getVolume();

@@ -97,6 +97,7 @@ void Buttons::update() {
 
         if (temp == HIGH) { //if button pressed
             states[thisButton]++; //increase button hold time
+            if (states[thisButton]==0xFF) states[thisButton] = 2; //prevent wraparound and retrigger
         } else {
             if (states[thisButton] == 0)//button idle
                 continue;

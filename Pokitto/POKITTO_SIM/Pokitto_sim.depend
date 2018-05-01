@@ -2218,7 +2218,7 @@
 
 1518679197 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
 
-1518729552 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.h
+1524431339 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.h
 	<stdint.h>
 	<math.h>
 	"pwmout_api.h"
@@ -2252,7 +2252,7 @@
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_object.h
 
-1522709191 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
+1525175313 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
 	<stdint.h>
 	<SDL2/SDL.h>
 	"Pokitto_settings.h"
@@ -2608,7 +2608,7 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1517664967 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.h
+1525172331 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.h
 	"PokittoSimulator.h"
 	<stdint.h>
 	<stdio.h>
@@ -2695,7 +2695,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.h
 	<stdint.h>
 
-1519719028 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
+1524817648 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2799,10 +2799,10 @@
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.cpp
 	"PokittoBacklight.h"
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
+1525163501 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
 	"PokittoBattery.h"
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
+1525171722 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.cpp
@@ -2811,7 +2811,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1522439286 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1525175227 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -2824,7 +2824,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1522704135 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1524431305 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2832,6 +2832,7 @@
 	"PokittoSound.h"
 	<stdio.h>
 	<string.h>
+	<algorithm>
 	"HWLCD.h"
 	"SimLCD.h"
 
@@ -2852,7 +2853,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1521932961 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1525172363 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -2936,12 +2937,12 @@
 	<SDL2/SDL.h>
 	<iostream>
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimcore.cpp
+1524436164 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimcore.cpp
 	"PokittoCore.h"
 	"PokittoSimulator.h"
 	<time.h>
 
-1518294172 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.cpp
+1525173468 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.cpp
 	"PokittoSimulator.h"
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -2961,13 +2962,14 @@
 	<stdint.h>
 	<stdio.h>
 
-1522705104 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.cpp
+1524431305 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.cpp
 	"SimLCD.h"
 	"PokittoSimulator.h"
+	<algorithm>
 
-1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
+1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
 
-1519025038 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
+1525173363 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
 	"SimSound.h"
 	"PokittoSimulator.h"
 	"PokittoGlobs.h"
@@ -2977,7 +2979,7 @@
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\writewav.cpp
 	"WriteWav.h"
 
-1517662517 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
+1525163813 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
 	"Pokitto.h"
 	"Synth.h"
 

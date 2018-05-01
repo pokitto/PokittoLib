@@ -60,6 +60,7 @@ void Pokitto::pauseAudio(uint8_t v) {
     SDL_PauseAudio(v);
 }
 
+
 #if (POK_STREAMING_MUSIC > 0)
     unsigned char buffers[4][BUFFER_SIZE];
     volatile int currentBuffer = 0, oldBuffer = 0;
@@ -190,7 +191,7 @@ void pokSoundIRQ() {
                 output = o/2;
             //}
         #endif // STREAMING
-        soundbyte = output;//3; //decrease volume in simulator vs hardware
+        soundbyte = output/3; //decrease volume in simulator vs hardware
         soundbuf[soundbufindex++]=soundbyte;
         if (soundbufindex==SBUFSIZE) soundbufindex=0;
     #endif // POK_SIM

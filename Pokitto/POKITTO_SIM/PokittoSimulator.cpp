@@ -503,7 +503,8 @@ void simAudioCallback(void* userdata, uint8_t* stream, int len) {
         /** Move outputted sound to output buffer **/
         if (sound_on == false) soundbyte = 0;
         else fakeISR(); /** create sample **/
-        *buf++ = ((soundbyte*(s.getVolume()>>GLOBVOL_SHIFT))/16);
+        //*buf++ = ((soundbyte*(s.getVolume()>>GLOBVOL_SHIFT))/16);
+        *buf++ = soundbyte*s.getVolume()>>8;
         #if SOUNDCAPTURE > 0
         soundfilebuffer[activesfbuf][sfbufindex++] = soundbyte;
         if (sfbufindex == SFBUFSIZE) {

@@ -804,9 +804,9 @@ void Sound::setVolume(int16_t volume) {
 	if (volume<0) volume = 0;
 	//if (volume>volumeMax) volume = volumeMax;
 	globalVolume = volume;
-	#ifndef POK_SIM
 	#if POK_ENABLE_SOUND > 0
 	discrete_vol = (volume>>5);
+	#ifndef POK_SIM
 	setHWvolume(discrete_vol_hw_levels[discrete_vol]); //boost volume if headphonelevel
 	#endif
 	#endif
