@@ -477,7 +477,7 @@ void Core::setVolLimit() {
     if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
     else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
     #ifdef PRODUCTIONTESTING
-    vol=255;
+    vol=240;
     sound.setMaxVol(VOLUME_SPEAKER_MAX);
     #endif
     for (uint8_t t=0;t<=vol;t++) {
