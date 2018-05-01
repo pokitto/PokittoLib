@@ -2528,6 +2528,7 @@ void ShowCrashScreenAndWait( const char* texLine1, const char* texLine2, const c
 // Check the stack size and show a crash screen if the stack is too big.
 void CheckStack() {
     #ifndef POK_SIM
+    #ifndef __ARMCC_VERSION
     int currStackTop;
     const int freeStackThreshold = 400;
     if ((int)&currStackTop - (int)_ebss < freeStackThreshold) {
@@ -2553,6 +2554,7 @@ void CheckStack() {
         static const char* texLine4 = "STACK TOO BIG!";
         ShowCrashScreenAndWait(texLine1, texLine2, texLine3, texLine4, infoString);
     }
+    #endif
     #endif
 }
 

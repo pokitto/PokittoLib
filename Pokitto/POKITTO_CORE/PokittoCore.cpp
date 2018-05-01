@@ -648,7 +648,8 @@ void Core::begin() {
 	setVolLimit();
 	display.clear();
 	display.update();
-	while(!buttons.released(BTN_A))
+
+	while(buttons.states[BTN_A])
     {
         buttons.update();
     }
