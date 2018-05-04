@@ -853,61 +853,59 @@ void Display::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
 
 uint8_t Display::clipLine(int16_t *x0, int16_t *y0, int16_t *x1, int16_t *y1){
     // Check X bounds
-	if (*x1<*x0) {
+	if (*x1 < *x0) {
         //std::swap (*x1,*x0); // swap so that we dont have to check x1 also
-        swapWT(int16_t*,x1,x0);
+        swapWT(int16_t*, x1, x0);
         //std::swap (*y1,*y0); // y needs to be swaaped also
-        swapWT(int16_t*,y1,y0);
+        swapWT(int16_t*, y1, y0);
 	}
 
-	if (*x0>=width) return 0; // whole line is out of bounds
+	if (*x0 >= width) return 0; // whole line is out of bounds
 
 	// Clip against X0 = 0
 	if (*x0 < 0) {
-        if ( *x1 < 0) return 0; // nothing visible
-        int16_t dx = (*x1 - *x0);
-        int16_t dy = ((*y1 - *y0) << 8); // 8.8 fixed point calculation trick
-        int16_t m = dy/dx;
-        *y0 = *y0 + ((m*-*x0)>>8); // get y0 at boundary
+        if (*x1 < 0) return 0; // nothing visible
+        int32_t dx = (*x1 - *x0);
+        int32_t dy = ((*y1 - *y0) << 16); // 16.16 fixed point calculation trick
+        int32_t m = dy/dx;
+        *y0 = *y0 + ((m*-*x0) >> 16); // get y0 at boundary
         *x0 = 0;
 	}
 
-	// Clip against x1 = 83
+	// Clip against x1 >= width
 	if (*x1 >= width) {
-        int16_t dx = (*x1 - *x0);
-        int16_t dy = ((*y1 - *y0) << 8); // 8.8 fixed point calculation trick
-        int16_t m = dy/dx;
-        //*y1 = *y1 + ((m*(*x1-XMAX))>>8); // get y0 at boundary
-        *y1 = *y1 + ((m*(width-1-*x1))>>8); // get y0 at boundary
+        int32_t dx = (*x1 - *x0);
+        int32_t dy = ((*y1 - *y0) << 16); // 16.16 fixed point calculation trick
+        int32_t m = dy / dx;
+        *y1 = *y1 + ((m * ((width - 1) - *x1)) >> 16); // get y0 at boundary
         *x1 = width-1;
 	}
 
     // Check Y bounds
-	if (*y1<*y0) {
+	if (*y1 < *y0) {
         //std::swap (*x1,*x0); // swap so that we dont have to check x1 also
-        swapWT(int16_t*,x1,x0);
+        swapWT(int16_t*, x1, x0);
         //std::swap (*y1,*y0); // y needs to be swaaped also
-        swapWT(int16_t*,y1,y0);
+        swapWT(int16_t*, y1, y0);
 	}
 
-	if (*y0>=height) return 0; // whole line is out of bounds
+	if (*y0 >= height) return 0; // whole line is out of bounds
 
     if (*y0 < 0) {
-        if ( *y1 < 0) return 0; // nothing visible
-        int16_t dx = (*x1 - *x0) << 8;
-        int16_t dy = (*y1 - *y0); // 8.8 fixed point calculation trick
-        int16_t m = dx/dy;
-        *x0 = *x0 + ((m*-*y0)>>8); // get x0 at boundary
+        if (*y1 < 0) return 0; // nothing visible
+        int32_t dx = (*x1 - *x0) << 16;
+        int32_t dy = (*y1 - *y0); // 16.16 fixed point calculation trick
+        int32_t m = dx / dy;
+        *x0 = *x0 + ((m * -(*y0)) >> 16); // get x0 at boundary
         *y0 = 0;
 	}
 
-    // Clip against y1 = 47
+    // Clip against y1 >= height
 	if (*y1 >= height) {
-        int16_t dx = (*x1 - *x0) << 8;
-        int16_t dy = (*y1 - *y0); // 8.8 fixed point calculation trick
-        int16_t m = dx/dy;
-        *x1 = *x1 + ((m*(height-1-*y1))>>8); // get y0 at boundary
-        //*x1 = *x1 + ((m*(*y1-YMAX))>>8); // get y0 at boundary
+        int32_t dx = (*x1 - *x0) << 16;
+        int32_t dy = (*y1 - *y0); // 16.16 fixed point calculation trick
+        int32_t m = dx / dy;
+        *x1 = *x1 + ((m * ((height - 1) - *y1)) >> 16); // get y0 at boundary
         *y1 = height-1;
 	}
 	return 1; // clipped succesfully
