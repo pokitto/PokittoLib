@@ -11,6 +11,8 @@
 
 #include <stdint.h>
 
+#define NUM_PATCHES 15
+
 extern const char noteLetters[12][2];
 
 extern const char* waveNames[];

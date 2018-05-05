@@ -3,6 +3,12 @@
 extern uint8_t screenW, screenH, frameRate, fontW, fontH, screen, buttonRepeatFrame;
 extern Pokitto::Core pok;
 
+enum class Modes {
+    travel = 0,
+    edit,
+    settings,
+    play
+};
 
 struct Tracker{
     private:
@@ -13,7 +19,7 @@ struct Tracker{
         int16_t bpm = 60, _tempo = 60;
         uint32_t playTime = 0;
         int8_t songPos = 0, lastPattern = 0, loopTo = 0, numPatches=0;
-        uint8_t mode = 0; //mode0 = travel mode, mode1 = edit pitches and patches, mode2 = screen1 settings, mode3 = play, pause, stop
+        Modes mode = Modes::travel; //mode0 = travel mode, mode1 = edit pitches and patches, mode2 = screen1 settings, mode3 = play, pause, stop
         int8_t edit = 0;
         uint8_t vLines[4] = {((fontW + 1) * 2) + 1, (((fontW + 1) * 9) + vLines[0]) + 1, (((fontW + 1) * 9) + vLines[1]) + 1, (((fontW + 1) * 9) + vLines[2]) + 1}; //(((fontW + 1) * number of chars) + left line) + 1
         uint8_t s_vLines[2] = {vLines[3] + 2, 0};
@@ -27,6 +33,7 @@ struct Tracker{
         char* _textptr; //needed here because of scope
 
     public:
+        void SetColorPalette();
         void initStreams();
         void emptyPatches();
         int8_t _currpitch=34, _currpatch=1; // for faster editing and playNote();
@@ -38,13 +45,14 @@ struct Tracker{
         void fillArrays();
         void drawLines();
         void drawPointer();
+        void drawHelpBar();
         void drawIsPlaying();
         void printValues();
         void printSettings();
         bool playTracker();
         int16_t getBPM();
         int minMax(int _val, int _min, int _max);
-        void saveSong();
+        void saveSong(FILE* fp);
         int loadSong(char*);
         void filePutInt(int _int);
         void filePrint(const char *_string, uint8_t _size);
