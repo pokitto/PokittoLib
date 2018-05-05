@@ -14,21 +14,22 @@
 /
 /----------------------------------------------------------------------------*/
 
-#ifndef _FATFS
-#define _FATFS  4004    /* Revision ID */
+#ifndef _SDFS_FATFS
+#define _SDFS_FATFS  4004    /* Revision ID */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "integer.h"    /* Basic integer types */
+#include "sdfs_integer.h"    /* Basic integer types */
 #include "ffconf.h"     /* FatFs configuration options */
 
-#if _FATFS != _FFCONF
+#if _SDFS_FATFS != _FFCONF
 #error Wrong configuration file (ffconf.h).
 #endif
 
-
+namespace SDFS
+{
 
 /* Definitions of volume management */
 
@@ -334,4 +335,6 @@ int ff_del_syncobj (_SYNC_t);       /* Delete a sync object */
 }
 #endif
 
-#endif /* _FATFS */
+} // namespace SDFS
+
+#endif /* _SDFS_FATFS */

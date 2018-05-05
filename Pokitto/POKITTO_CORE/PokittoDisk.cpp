@@ -30,11 +30,10 @@
 #define SD_CS_PIN     7
 
 #if POK_ENABLE_SD > 0
-#ifndef NOPETITFATFS
-BYTE res;
-FATFS fs;            /* File system object */
-FATDIR dir;            /* Directory object */
-FILINFO fno;        /* File information */
+PFFS::BYTE res;
+PFFS::FATFS fs;            /* File system object */
+PFFS::FATDIR dir;            /* Directory object */
+PFFS::FILINFO fno;        /* File information */
 
 //static FATFS *FatFs;    /* Pointer to the file system object (logical drive) */
 
@@ -66,11 +65,8 @@ __attribute__((section(".SD_Code"))) void initSDGPIO() {
 
 __attribute__((section(".SD_Code"))) int pokInitSD() {
     initSDGPIO();
-    #ifndef NOPETITFATFS
-    res = disk_initialize();
-    #else
-    res = disk_initialize(0);
-    #endif
+    res = PFFS::disk_initialize();
+    //res = disk_initialize(0);
     res = (pf_mount(&fs));
     res = pf_opendir(&dir,"");
     if (res) diropened=false;
@@ -212,7 +208,7 @@ uint8_t fileOpen(char* buffer, char fmode) {
     }
 
     filemode = fmode;
-    err = pf_open(buffer);
+    err = PFFS::pf_open(buffer);
     if (err==0) {
             strcpy(currentfile,(const char*)buffer);
             return 0; // 0 means all clear
@@ -228,46 +224,46 @@ void fileClose() {
 }
 
 char fileGetChar() {
-    BYTE buff[1];
-    WORD br;
-    int err = pf_read(buff, 1, &br);    /* Read data to the buff[] */
+    PFFS::BYTE buff[1];
+    PFFS::WORD br;
+    int err = PFFS::pf_read(buff, 1, &br);    /* Read data to the buff[] */
     return buff[0];
 }
 
 void filePutChar(char c) {
-    WORD bw;
-    pf_write((const void*)&c, 1, &bw);
-    pf_write(0, 0, &bw);
+    PFFS::WORD bw;
+    PFFS::pf_write((const void*)&c, 1, &bw);
+    PFFS::pf_write(0, 0, &bw);
 }
 
 void fileWriteBytes(uint8_t * b, uint16_t n) {
-    WORD bw;
-    pf_write((const void*)&b, n, &bw);
-    pf_write(0, 0, &bw);
+    PFFS::WORD bw;
+    PFFS::pf_write((const void*)&b, n, &bw);
+    PFFS::pf_write(0, 0, &bw);
 }
 
 uint16_t fileReadBytes(uint8_t * b, uint16_t n) {
-    WORD br;
-    pf_read(b, n, &br);    /* Read data to the buff[] */
+    PFFS::WORD br;
+    PFFS::pf_read(b, n, &br);    /* Read data to the buff[] */
     return br;             /* Return number of bytes read */
 }
 
 void fileSeekAbsolute(long n) {
-    res = pf_lseek(n);
+    res = PFFS::pf_lseek(n);
 }
 
 void fileSeekRelative(long n) {
     if (n<0) if (fs.fptr < -n) n=-fs.fptr;
     else if (n>0) if (fs.fptr+n > fs.fsize) n=fs.fsize-fs.fptr;
-    res = pf_lseek(fs.fptr + n);
+    res = PFFS::pf_lseek(fs.fptr + n);
 }
 
 void fileRewind() {
-  res = pf_lseek(0);
+  res = PFFS::pf_lseek(0);
 }
 
 void fileEnd() {
-  res = pf_lseek(fs.fsize);
+  res = PFFS::pf_lseek(fs.fsize);
 }
 
 long int fileGetPosition() {
@@ -275,12 +271,12 @@ long int fileGetPosition() {
 }
 
 uint8_t filePeek(long n) {
-    pf_lseek(n);
+    PFFS::pf_lseek(n);
     return fileGetChar();
 }
 
 void filePoke(long n, uint8_t c) {
-    pf_lseek(n);
+    PFFS::pf_lseek(n);
     filePutChar(c);
 }
 
@@ -304,14 +300,13 @@ int fileReadLine(char* destination, int maxchars) {
 }
 
 int dirOpen() {
-    return pf_opendir(&dir,"");
+    return PFFS::pf_opendir(&dir,"");
 }
 
 int dirUp() {
 
 return 0;
 }
-#endif // NOPETITFATFS
 #endif // POK_ENABLE_SD
 
 

@@ -5,12 +5,15 @@
 /* disk I/O modules and attach it to FatFs module with common interface. */
 /*-----------------------------------------------------------------------*/
 #include "ffconf.h"
-#include "diskio.h"
+#include "sdfs_diskio.h"
 
 #include "mbed_debug.h"
 #include "FATFileSystem.h"
 
 using namespace mbed;
+
+namespace SDFS
+{
 
 DSTATUS disk_initialize (
     BYTE drv                /* Physical drive nmuber (0..) */
@@ -92,3 +95,5 @@ DRESULT disk_ioctl (
     }
     return RES_PARERR;
 }
+
+} // namespace SDFS

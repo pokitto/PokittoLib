@@ -171,7 +171,6 @@ Core::Core() {
 
 int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
     #ifndef POK_SIM
-    #ifndef NOPETITFATFS
     uint32_t counter=0;
     uint8_t data[256];
     /** prepare the flash writing **/
@@ -205,7 +204,6 @@ int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
             display.print(".");
         }
         }
-        #endif // NOPETITFATFS
         #endif // POK_SIM
     return 0; //success
 }
@@ -272,7 +270,6 @@ void Core::jumpToLoader() {
     bool flashloader=false, checkforboot=true;
     //check for loa.der on SD card
     #if POK_ENABLE_LOADER_UPDATES > 0
-    #ifndef NOPETITFATFS
     pokInitSD();
     if (fileOpen("LOA.DER", FILE_MODE_BINARY)==0) {
         //LOA.DER found on SD
@@ -284,7 +281,6 @@ void Core::jumpToLoader() {
         fileReadBytes((uint8_t*)tptr,4); //read jump address of loader on sd card
         fileRewind();
     }
-    #endif //NOPETITFATFS
     #endif
     //now start searching for bootkey
     while (checkforboot)

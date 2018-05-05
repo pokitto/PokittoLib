@@ -478,7 +478,6 @@ inline void pokSoundIRQ() {
 
 
 void Pokitto::updateSDAudioStream() {
-    #ifndef NOPETITFATFS
     if (streamPaused()) return;
 
     #if POK_STREAMING_MUSIC > 0
@@ -504,7 +503,6 @@ void Pokitto::updateSDAudioStream() {
         #endif
     }
     #endif
-    #endif // NOPETITFATFS
 }
 
 
