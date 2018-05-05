@@ -51,7 +51,7 @@
 #if POK_ENABLE_SD > 0
 
 
-#include "Pokittodisplay.h"
+#include "PokittoDisplay.h"
 #include "ImageFormat.h"
 
 Pokitto::Core _game;
