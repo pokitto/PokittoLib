@@ -60,6 +60,7 @@ void Pokitto::pauseAudio(uint8_t v) {
     SDL_PauseAudio(v);
 }
 
+
 #if (POK_STREAMING_MUSIC > 0)
     unsigned char buffers[4][BUFFER_SIZE];
     volatile int currentBuffer = 0, oldBuffer = 0;
@@ -129,12 +130,13 @@ void pokSoundIRQ() {
         /** if song is being played from sd **/
         if (playing) {
                 notetick++;
-                updatePlaybackSD(playerpos&7);
+                updatePlayback();
+                //updatePlaybackSD(playerpos&7);
         }
         /** oscillators update **/
-        osc1.count += osc1.cinc + (osc1.pitchbend >> 4); // counts to 65535 and overflows to zero WAS 8 !
-        osc2.count += osc2.cinc + (osc2.pitchbend >> 4); // counts to 65535 and overflows to zero
-        osc3.count += osc3.cinc + (osc3.pitchbend >> 4); // counts to 65535 and overflows to zero
+        osc1.count += osc1.cinc + (osc1.pitchbend); // counts to 65535 and overflows to zero WAS 8 !
+        osc2.count += osc2.cinc + (osc2.pitchbend); // counts to 65535 and overflows to zero
+        osc3.count += osc3.cinc + (osc3.pitchbend); // counts to 65535 and overflows to zero
         Marr[tick](); // call mixing function
         --tick;
 

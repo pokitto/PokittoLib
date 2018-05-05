@@ -36,6 +36,11 @@
 
 #include "SimLCD.h"
 #include "PokittoSimulator.h"
+#ifdef DISABLEAVRMIN
+#include <algorithm>
+using std::min;
+using std::max;
+#endif // DISABLEAVRMIN
 
 #define CLR_WR
 #define SET_WR toggle_data()
@@ -636,14 +641,14 @@ void Pokitto::lcdRefreshMode1Spr(
 
                     // Dirty rect
                     int16_t sprDirtyYMin = min(spry, sprOldY);
-                    sprDirtyYMin = max(sprDirtyYMin, 0);
+                    sprDirtyYMin = max(sprDirtyYMin, (int16_t)0);
                     int16_t sprDirtyYMax = max(spry, sprOldY);
                     if (isCurrentSpriteOutOfScreen)
                         sprDirtyYMax = sprOldY;
                     if (isOldSpriteOutOfScreen)
                         sprDirtyYMax = spry;
                     int16_t sprDirtyYMaxEnd = sprDirtyYMax + sprh - 1;
-                    sprDirtyYMaxEnd = min(sprDirtyYMaxEnd, LCDHEIGHT - 1);  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
+                    sprDirtyYMaxEnd = min(sprDirtyYMaxEnd, (int16_t)(LCDHEIGHT - 1));  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
 
                     // Get the scanline min and max y values for drawing
                     if (sprDirtyYMin < scanlineMinY)
@@ -1333,6 +1338,216 @@ for(x=0;x<160;x+=4)
         setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
     }
     setDRAMptr(++xptr,yoffset);
+  }
+    simulator.refreshDisplay();
+}
+
+
+void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
+uint16_t x,y;
+uint16_t scanline[2][110]; // read two nibbles = pixels at a time
+uint8_t *d;
+
+setDRAMptr(0,0);
+
+for(x=0;x<110;x+=2)
+  {
+    d = scrbuf+x;// point to beginning of line in data
+    uint8_t s=0;
+    for(y=0;y<88;y++)
+    {
+        uint8_t t = *d;
+        uint8_t t1 = *(d+1);
+        scanline[0][s] = paletteptr[(t+offset)&255];
+        scanline[1][s++] = paletteptr[(t1+offset)&255];
+        d+=110; // jump to read byte directly below in screenbuffer
+    }
+    s=0;
+    for (s=0;s<88;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+    for (s=0;s<88;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+    for (s=0;s<88;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+    for (s=0;s<88;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+  }
+
+}
+
+void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
+uint16_t x,y,data,xptr;
+uint16_t scanline[176];
+uint8_t *d, yoffset=0;
+xptr = 0; //was 26
+
+
+for(x=0;x<220;x++)
+  {
+    setDRAMptr(xptr++,yoffset);
+
+        d = scrbuf + x;// point to beginning of line in data
+
+        /** find colours in one scanline **/
+        uint8_t s=0;
+        for(y=0;y<22;y++)
+            {
+            uint8_t t = *d;
+            uint8_t t2 = *(d+POK_BITFRAME);
+            uint8_t t3 = *(d+POK_BITFRAME+POK_BITFRAME);
+            uint16_t color = 0;
+
+            /** bit 1 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+            t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            /** bit 2 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+            t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            /** bit 3 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+            t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            /** bit 4 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+            t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            /** bit 5 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+            t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            /** bit 6 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+            t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            /** bit 7 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+            t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            /** bit 8 **/
+            color = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK;
+            scanline[s++] = color;
+
+            d+=220; // jump to byte directly below
+            }
+
+        s=0;
+
+        /** draw scanlines **/
+        for (s=0;s<176;) {
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+        }
+
+    }
+    simulator.refreshDisplay();
+}
+
+void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
+uint16_t x,y,xptr;
+uint16_t scanline[2][176]; // read two nibbles = pixels at a time
+uint8_t *d, yoffset=0;
+
+xptr = 0;
+setDRAMptr(xptr,yoffset);
+
+for(x=0;x<220;x+=2)
+  {
+    d = scrbuf+(x>>1);// point to beginning of line in data
+    /** find colours in one scanline **/
+    uint8_t s=0;
+    for(y=0;y<176;y++)
+    {
+    uint8_t t = *d >> 4; // higher nibble
+    uint8_t t2 = *d & 0xF; // lower nibble
+    /** higher nibble = left pixel in pixel pair **/
+    scanline[0][s] = paletteptr[t];
+    scanline[1][s++] = paletteptr[t2];
+    /** testing only **/
+    //scanline[0][s] = 0xFFFF*(s&1);
+    //scanline[1][s] = 0xFFFF*(!(s&1));
+    //s++;
+    /** until here **/
+    d+=220/2; // jump to read byte directly below in screenbuffer
+    }
+    s=0;
+    /** draw scanlines **/
+    /** leftmost scanline twice**/
+
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    if (x<4) continue;
+    setDRAMptr(x<<1, 0);
+    #endif
+
+    for (s=0;s<176;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+    }
+
+    /** rightmost scanline twice**/
+    //setDRAMptr(xptr++,yoffset);
+    for (s=0;s<176;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+    }
   }
     simulator.refreshDisplay();
 }

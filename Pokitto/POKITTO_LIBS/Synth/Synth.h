@@ -36,15 +36,20 @@ int main()
 }
 */
 
-#ifndef boolean
-typedef bool boolean;
-#endif
+#define OPT_ADSR 1
+#define OPT_LOOP 2
+#define OPT_ECHO 4
+#define OPT_OVERDRIVE 8
+#define OPT_NORMALIZE 0x10
+
+#define OVERDRIVE 4
 
 //extern void fakeISR(); // was defined in Rboy_soundsim.h
 
 typedef void (*waveFunction)(OSC*);
 typedef void (*envFunction)(OSC*);
 typedef void (*mixFunction)();
+typedef void (*streamsFunction)();
 
 extern waveFunction Farr [];
 extern envFunction Earr [];
@@ -69,8 +74,8 @@ extern mixFunction HWMarr []; // counts down
 #define MAXPATTERNS 10
 #define MAXBLOCKS 30 // 10 *3
 
-#define VOLTICK 5
-#define ARPTICK 50 // 150 // was 200
+#define VOLTICK POK_AUD_FREQ/8820 //was 5
+#define ARPTICK POK_AUD_FREQ/441 // 150 // was 200
 
 #define NUMWAVES 5
 #define NUMENVELOPES 3
@@ -100,9 +105,10 @@ extern void emptySong();
 extern int openSongFromSD(char *);
 extern void writeChunkToSD(uint8_t *);
 extern void readChunkFromSD(uint8_t *);
+extern void registerStreamsCallback(streamsFunction);
+extern streamsFunction streamCallbackPtr;
 
-
-extern boolean playing, track1on, track2on, track3on, tableRefresh;
+extern bool playing, track1on, track2on, track3on, tableRefresh;
 extern uint16_t playerpos;
 extern uint16_t samplespertick, notetick;
 extern long samplesperpattern;
@@ -129,7 +135,7 @@ extern uint16_t xorshift16();
 extern uint16_t noiseval;
 
 extern void setOSC(OSC*,byte, byte, byte, byte, byte,
-            uint8_t, uint8_t,
+            uint8_t, uint16_t,
             uint16_t, uint16_t, uint16_t, uint16_t,
             int16_t, int16_t, uint8_t, uint8_t, uint8_t);
 

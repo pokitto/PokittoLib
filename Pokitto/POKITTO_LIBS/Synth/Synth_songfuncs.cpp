@@ -36,6 +36,9 @@
 
 #include "PokittoDisk.h"
 #include "Synth.h"
+#ifdef TRACKER_EXAMPLE
+#include "Tracker.h"
+#endif // TRACKER
 #ifdef POK_SIM
 #include "FileIO.h"
 #endif
@@ -45,6 +48,8 @@
 //uint8_t chunk1[CHUNKSIZE], chunk2[CHUNKSIZE]; // 8 rows, 3 channels (columns), 2 bytes per entry
 uint8_t chunk[2][CHUNKSIZE]; // 8 rows, 3 channels (columns), 2 bytes per entry
 uint8_t cc = 0;
+
+streamsFunction streamCallbackPtr;
 
 
 #if POK_ENABLE_SOUND > 0
@@ -157,7 +162,12 @@ void updatePlayback() {
                         }
                     }
                     playerpos = 0;
+                    #ifdef TRACKER_EXAMPLE
+                    tracker.initStreams();
+                    #else
                     initStreams(sequencepos);
+                    #endif // TRACKER_EXAMPLE
+                    //(*streamCallbackPtr)();
                     tableRefresh=true;
             }
             notetick =0;
@@ -241,6 +251,11 @@ void readChunkFromSD(uint8_t* buffer) {
         fileReadBytes(buffer, CHUNKSIZE);
     }
 }
+
+void registerStreamsCallback(streamsFunction ptr) {
+    streamCallbackPtr = ptr;
+}
+
 #endif
 #endif // POK_ENABLE_SOUND
 

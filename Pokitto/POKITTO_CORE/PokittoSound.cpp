@@ -77,11 +77,19 @@ typedef uint8_t byte;
 
 using namespace Pokitto;
 
+/** discrete hardware volume control **/
+
+uint8_t Pokitto::discrete_vol = 0;
+uint8_t const Pokitto::discrete_vol_levels[8]      {0,32,64,96,128,160,192,224};
+uint8_t const Pokitto::discrete_vol_hw_levels[8]   {0,27,64,96,36,117,127,127};
+uint8_t const Pokitto::discrete_vol_multipliers[8] {0,127,127,127,192,192,255,255};
+
 Pokitto::Core _soundc;
 
 uint8_t Sound::prescaler;
 uint16_t Sound::globalVolume;
 uint16_t Sound::volumeMax = VOLUME_HEADPHONE_MAX;
+uint8_t Sound::headPhoneLevel=1;
 
 bool Sound::trackIsPlaying[NUM_CHANNELS];
 bool Sound::patternIsPlaying[NUM_CHANNELS];
@@ -132,9 +140,9 @@ uint8_t Sound::chanVolumes[NUM_CHANNELS];
 
 #if(NUM_CHANNELS > 0)
     #ifndef POK_SIM
-        uint8_t sbyte;
+        uint32_t sbyte;
     #else
-    uint8_t sbyte;
+    uint32_t sbyte;
     float pwm1;
     #endif // POK_SIM
 
@@ -200,13 +208,20 @@ void Pokitto::audio_IRQ() {
 }
 
 void Sound::volumeUp() {
-    if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()+VOLUME_STEP*2);
-    else setVolume(getVolume()+VOLUME_STEP);
+    Pokitto::discrete_vol++;
+    if (discrete_vol>7) discrete_vol=7;
+    globalVolume = discrete_vol_levels[discrete_vol];
+    setVolume(globalVolume);
+    //if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()+VOLUME_STEP*2);
+    //else setVolume(getVolume()+VOLUME_STEP);
 }
 
 void Sound::volumeDown() {
-    if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()-VOLUME_STEP*4);
-    else setVolume(getVolume()-VOLUME_STEP);
+    if (discrete_vol) Pokitto::discrete_vol--;
+    globalVolume = discrete_vol_levels[discrete_vol];
+    setVolume(globalVolume);
+    //if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()-VOLUME_STEP*4);
+    //else setVolume(getVolume()-VOLUME_STEP);
 }
 
 
@@ -694,7 +709,7 @@ void Sound::generateOutput() {
 
 void Sound::updateOutput() {
 #if(NUM_CHANNELS > 0)
-	uint8_t output = 0;
+	uint32_t output = 0;
 
 	//CHANNEL 0
 	if (_chanState[0]) {
@@ -728,9 +743,14 @@ void Sound::updateOutput() {
 
         #if POK_STREAMING_MUSIC
             if (streamstep) {
-                pwmout_write(&audiopwm,(float)sbyte/(float)255);
+                //pwmout_write(&audiopwm,(float)(sbyte>>headPhoneLevel)/(float)255);
+                sbyte *= discrete_vol_multipliers[discrete_vol];
+                sbyte >>= 8;
+                pwmout_write(&audiopwm,(float)(sbyte)/(float)255);
             }
         #endif
+            output *= discrete_vol_multipliers[discrete_vol];
+            output >>= 8;
             dac_write((uint8_t)output); //direct hardware mixing baby !
     soundbyte = output;
     #endif //POK_ENABLE_SOUND
@@ -739,10 +759,10 @@ void Sound::updateOutput() {
         #if POK_STREAMING_MUSIC
             if (streamstep) {
                 uint16_t o = output + sbyte;
-                output = o/2;
+                output = (o/2);//>>headPhoneLevel;
             }
         #endif
-        soundbyte = output;
+        soundbyte = output;//<<headPhoneLevel;
     #endif // POK_SIM
 #endif
 }
@@ -782,13 +802,12 @@ void Sound::playTick(){
 void Sound::setVolume(int16_t volume) {
 //#if NUM_CHANNELS > 0
 	if (volume<0) volume = 0;
-	if (volume>volumeMax) volume = volumeMax;
-	globalVolume = volume; // % (volumeMax+1);
-	#ifndef POK_SIM
-	volume = (volume / 2)-10;
-	if (volume<0) volume = 0;
+	//if (volume>volumeMax) volume = volumeMax;
+	globalVolume = volume;
 	#if POK_ENABLE_SOUND > 0
-	setHWvolume(volume);
+	discrete_vol = (volume>>5);
+	#ifndef POK_SIM
+	setHWvolume(discrete_vol_hw_levels[discrete_vol]); //boost volume if headphonelevel
 	#endif
 	#endif
 	#if POK_SHOW_VOLUME > 0

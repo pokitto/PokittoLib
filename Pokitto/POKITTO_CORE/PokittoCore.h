@@ -127,7 +127,7 @@ public:
   static bool isRunning();
   /** Stop running */
   static void quit();
-private:
+//private:
   /** run_state is true as long as program is running */
   static bool run_state;
 
@@ -179,8 +179,6 @@ public:
   static void setVolLimit();
 
 // BUTTON INPUT HANDLING
-private:
-  static uint8_t heldStates[];
 public:
   static void initButtons();
   static void pollButtons();

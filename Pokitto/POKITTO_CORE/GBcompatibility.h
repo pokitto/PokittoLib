@@ -63,8 +63,8 @@
 #define EXTENDED_NOTE_RANGE 0 //allows the use of notes above A 5... please avoid that they sound really bad
 
 //not really useful
-#define ENABLE_BATTERY 1 //disable battery monitoring
-#define ENABLE_BACKLIGHT 1 //disable automatic back-light
+#define ENABLE_BATTERY 0 //disable battery monitoring
+#define ENABLE_BACKLIGHT 0 //disable automatic back-light
 
 //IT'S STRONGLY ADVISED TO LEAVE THE FOLLOWING SETTINGS ALONE
 

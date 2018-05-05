@@ -50,12 +50,14 @@ extern uint8_t pokStreamPaused();
 
 //volume levels
 #define GLOBVOL_SHIFT 5 //shift global volume to allow for finer increments
+
+
 #ifndef MAX_VOL_TEST
     #define VOLUME_SPEAKER_MAX 255 //((8<<GLOBVOL_SHIFT)-1)
-    #define VOLUME_HEADPHONE_MAX (1<<GLOBVOL_SHIFT)
-    #define VOLUME_STARTUP ((1<<GLOBVOL_SHIFT)/2)
+    #define VOLUME_HEADPHONE_MAX 127
+    #define VOLUME_STARTUP VOLUME_HEADPHONE_MAX
 #else
-    #define VOLUME_SPEAKER_MAX ((8<<GLOBVOL_SHIFT)-1)
+    #define VOLUME_SPEAKER_MAX 255
     #define VOLUME_HEADPHONE_MAX VOLUME_SPEAKER_MAX
     #define VOLUME_STARTUP VOLUME_SPEAKER_MAX
 #endif // MAXVOLTEST
@@ -89,6 +91,12 @@ namespace Pokitto {
  *
  */
 
+/** discrete_vol* are needed for more accurate volume control levels on hardware **/
+extern uint8_t discrete_vol;
+extern const uint8_t discrete_vol_levels[];
+extern const uint8_t discrete_vol_hw_levels[];
+extern const uint8_t discrete_vol_multipliers[];
+
 extern void audio_IRQ();  // audio interrupt
 
 class Sound {
@@ -98,6 +106,7 @@ public:
 	static void begin();
 
 	// Headphonemode
+	static uint8_t headPhoneLevel; // a workaround to disappearing sound at low volume
 	static void setMaxVol(int16_t);
     static uint16_t getMaxVol();
     static void volumeUp();

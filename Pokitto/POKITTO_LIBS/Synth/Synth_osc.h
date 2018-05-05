@@ -49,9 +49,9 @@ struct OSC {
   uint16_t sustain; // Attack change
   uint16_t release; // Attack change
 
-  int16_t pitchbend;   // bends cycle counter (more is higher pitch)
-  int16_t maxbend; // maximum bend before stopping
-  int16_t bendrate; // how much to bend by every cycle
+  int32_t pitchbend;   // bends cycle counter (more is higher pitch)
+  int32_t maxbend; // maximum bend before stopping
+  int32_t bendrate; // how much to bend by every cycle
 
   uint8_t vibrate;
   uint8_t arpmode;

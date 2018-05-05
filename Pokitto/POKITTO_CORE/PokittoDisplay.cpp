@@ -71,12 +71,21 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "PokittoSound.h"
 #include <stdio.h>
 #include <string.h>
+#ifdef DISABLEAVRMIN
+#include <algorithm>
+using std::min;
+using std::max;
+#endif // DISABLEAVRMIN
 
 #ifndef POK_SIM
 #include "HWLCD.h"
 #else
 #include "SimLCD.h"
 #endif
+
+extern "C" void CheckStack();
+extern char _ebss[];  // In map file
+extern char _vStackTop[];  // In map file
 
 Pokitto::Core core;
 Pokitto::Sound _pdsound;
@@ -147,6 +156,18 @@ uint8_t Display::bpp = POK_COLORDEPTH;
     uint8_t Display::width = 160;
     uint8_t Display::height = 144;
     uint8_t Display::screenbuffer[160*144/4];
+#elif (POK_SCREENMODE == MODE14)
+    uint8_t Display::width = 220;
+    uint8_t Display::height = 176;
+    uint8_t Display::screenbuffer[14520];
+#elif (POK_SCREENMODE == MODE13)
+    uint8_t Display::width = 110;
+    uint8_t Display::height = 88;
+    uint8_t Display::screenbuffer[110*88]; // 8bit 110x88
+#elif (POK_SCREENMODE == MODE15)
+    uint8_t Display::width = 220;
+    uint8_t Display::height = 176;
+    uint8_t Display::screenbuffer[0x4BA0];
 #else
     uint8_t Display::width = 84;
     uint8_t Display::height = 48;
@@ -264,6 +285,9 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
 
     // For the screen modes that do not support sprites, return if the direct draw mode is used.
     if (! useDirectDrawMode) {
+		#if POK_SCREENMODE == MODE13
+		lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
+		#endif
 
         #if POK_SCREENMODE == MODE_GAMEBOY
         lcdRefreshModeGBC(m_scrbuf, paletteptr);
@@ -283,6 +307,14 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
 
         #if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
         lcdRefreshAB(m_scrbuf, paletteptr);
+        #endif
+
+        #if POK_SCREENMODE == MODE14
+        lcdRefreshMode14(m_scrbuf, paletteptr);
+        #endif
+
+        #if POK_SCREENMODE == MODE15
+        lcdRefreshMode15(paletteptr, m_scrbuf);
         #endif
 
         #if POK_SCREENMODE == MODE_TILED_1BIT
@@ -480,6 +512,16 @@ void Display::clear() {
         c = bgcolor & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
+    } else if (bpp==3){
+        uint16_t j = POK_BITFRAME;
+        if (bgcolor & 0x1) memset((void*)m_scrbuf,0xFF,j);// R
+        else memset((void*)m_scrbuf,0x00,j);// R
+        if ((bgcolor>>1) & 0x1) memset((void*)m_scrbuf+POK_BITFRAME,0xFF,j);// G
+        else memset((void*)m_scrbuf+POK_BITFRAME,0x00,j);// G
+        if ((bgcolor>>2) & 0x1) memset((void*)m_scrbuf+POK_BITFRAME*2,0xFF,j);// B
+        else memset((void*)m_scrbuf+POK_BITFRAME*2,0x00,j);// B
+        setCursor(0,0);
+        return;
     } else {
         c = (c & 0x0F) | (c << 4);
     }
@@ -607,6 +649,20 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
         else pixel = (pixel&0x3F)|(col<<6); // bits 6-7
         m_scrbuf[i] = pixel;
     #elif POK_COLORDEPTH == 3
+    uint8_t c = col;
+	uint8_t ct = col;
+
+    uint16_t bitptr=0;
+    for (uint8_t cbit=0;cbit<POK_COLORDEPTH;cbit++) {
+	c = ct & 1; // take the lowest bit of the color index number
+	if(c == 0){ //white - or actually "Clear bit"
+		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] &= ~_BV(y % 8);
+	} else { //black - or actually "Set bit"
+		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] |= _BV(y % 8);
+	}
+	ct >>=1; // shift to get next bit
+	bitptr += POK_BITFRAME; // move one screen worth of buffer forward to get to the next color bit
+    } // POK_COLOURDEPTH
     #elif POK_COLORDEPTH == 4
     uint16_t i = y*(width>>1) + (x>>1);
     uint8_t pixel = m_scrbuf[i];
@@ -690,6 +746,11 @@ void Display::drawPixel(int16_t x,int16_t y) {
 
 uint8_t Display::getPixel(int16_t x,int16_t y) {
     if ((uint16_t)x >= width || (uint16_t)y >= height) return 0;
+    #if POK_COLORDEPTH == 8
+    uint16_t i = y*width+x;
+    return m_scrbuf[i];
+    #endif // POK_COLORDEPTH
+
     #if POK_GAMEBUINO_SUPPORT
     uint8_t color=0; //jonne
 	for (uint8_t cbit=0; cbit<POK_COLORDEPTH;cbit++) {
@@ -792,61 +853,59 @@ void Display::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
 
 uint8_t Display::clipLine(int16_t *x0, int16_t *y0, int16_t *x1, int16_t *y1){
     // Check X bounds
-	if (*x1<*x0) {
+	if (*x1 < *x0) {
         //std::swap (*x1,*x0); // swap so that we dont have to check x1 also
-        swapWT(int16_t*,x1,x0);
+        swapWT(int16_t*, x1, x0);
         //std::swap (*y1,*y0); // y needs to be swaaped also
-        swapWT(int16_t*,y1,y0);
+        swapWT(int16_t*, y1, y0);
 	}
 
-	if (*x0>=width) return 0; // whole line is out of bounds
+	if (*x0 >= width) return 0; // whole line is out of bounds
 
 	// Clip against X0 = 0
 	if (*x0 < 0) {
-        if ( *x1 < 0) return 0; // nothing visible
-        int16_t dx = (*x1 - *x0);
-        int16_t dy = ((*y1 - *y0) << 8); // 8.8 fixed point calculation trick
-        int16_t m = dy/dx;
-        *y0 = *y0 + ((m*-*x0)>>8); // get y0 at boundary
+        if (*x1 < 0) return 0; // nothing visible
+        int32_t dx = (*x1 - *x0);
+        int32_t dy = ((*y1 - *y0) << 16); // 16.16 fixed point calculation trick
+        int32_t m = dy/dx;
+        *y0 = *y0 + ((m*-*x0) >> 16); // get y0 at boundary
         *x0 = 0;
 	}
 
-	// Clip against x1 = 83
+	// Clip against x1 >= width
 	if (*x1 >= width) {
-        int16_t dx = (*x1 - *x0);
-        int16_t dy = ((*y1 - *y0) << 8); // 8.8 fixed point calculation trick
-        int16_t m = dy/dx;
-        //*y1 = *y1 + ((m*(*x1-XMAX))>>8); // get y0 at boundary
-        *y1 = *y1 + ((m*(width-1-*x1))>>8); // get y0 at boundary
+        int32_t dx = (*x1 - *x0);
+        int32_t dy = ((*y1 - *y0) << 16); // 16.16 fixed point calculation trick
+        int32_t m = dy / dx;
+        *y1 = *y1 + ((m * ((width - 1) - *x1)) >> 16); // get y0 at boundary
         *x1 = width-1;
 	}
 
     // Check Y bounds
-	if (*y1<*y0) {
+	if (*y1 < *y0) {
         //std::swap (*x1,*x0); // swap so that we dont have to check x1 also
-        swapWT(int16_t*,x1,x0);
+        swapWT(int16_t*, x1, x0);
         //std::swap (*y1,*y0); // y needs to be swaaped also
-        swapWT(int16_t*,y1,y0);
+        swapWT(int16_t*, y1, y0);
 	}
 
-	if (*y0>=height) return 0; // whole line is out of bounds
+	if (*y0 >= height) return 0; // whole line is out of bounds
 
     if (*y0 < 0) {
-        if ( *y1 < 0) return 0; // nothing visible
-        int16_t dx = (*x1 - *x0) << 8;
-        int16_t dy = (*y1 - *y0); // 8.8 fixed point calculation trick
-        int16_t m = dx/dy;
-        *x0 = *x0 + ((m*-*y0)>>8); // get x0 at boundary
+        if (*y1 < 0) return 0; // nothing visible
+        int32_t dx = (*x1 - *x0) << 16;
+        int32_t dy = (*y1 - *y0); // 16.16 fixed point calculation trick
+        int32_t m = dx / dy;
+        *x0 = *x0 + ((m * -(*y0)) >> 16); // get x0 at boundary
         *y0 = 0;
 	}
 
-    // Clip against y1 = 47
+    // Clip against y1 >= height
 	if (*y1 >= height) {
-        int16_t dx = (*x1 - *x0) << 8;
-        int16_t dy = (*y1 - *y0); // 8.8 fixed point calculation trick
-        int16_t m = dx/dy;
-        *x1 = *x1 + ((m*(height-1-*y1))>>8); // get y0 at boundary
-        //*x1 = *x1 + ((m*(*y1-YMAX))>>8); // get y0 at boundary
+        int32_t dx = (*x1 - *x0) << 16;
+        int32_t dy = (*y1 - *y0); // 16.16 fixed point calculation trick
+        int32_t m = dx / dy;
+        *x1 = *x1 + ((m * ((height - 1) - *y1)) >> 16); // get y0 at boundary
         *y1 = height-1;
 	}
 	return 1; // clipped succesfully
@@ -1368,7 +1427,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     return;
     }
     /** 2 bpp mode */
-    if (m_colordepth<4) {
+    else if (m_colordepth==2) {
         if(clipH > 0) {
 
             // Clip
@@ -1414,6 +1473,35 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
         }
         return;
     }
+
+    /** 3 bpp mode */
+    else if (m_colordepth==3) {
+        int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
+        int16_t bitFrame = w * h / 8;
+        for (i = 0; i < w; i++) {
+        byteNum = i / 8;
+        bitNum = i % 8;
+
+        uint8_t bitcount=0;
+        for (j = 0; j <= h/8; j++) {
+            uint8_t r_val = *(bitmap + j * byteWidth + byteNum);
+            uint8_t g_val = *(bitmap + bitFrame + j * byteWidth + byteNum);
+            uint8_t b_val = *(bitmap + (bitFrame<<1) + j * byteWidth + byteNum);
+            for (bitcount=0; bitcount<8; bitcount++) {
+                uint8_t col = (r_val&0x1) | ((g_val&0x1)<<1) | ((b_val&0x1)<<2);
+                r_val >>= 1; g_val >>= 1; b_val >>= 1;
+                drawPixel(x + i, y + j+bitcount,col);
+            }
+            }
+        }
+
+    return;
+    }
+
+
+    /** 4bpp fast version */
+    else if (m_colordepth==4) {
+
     /** 4bpp fast version */
 	int16_t scrx,scry,xclip,xjump,scrxjump;
     xclip=xjump=scrxjump=0;
@@ -1452,7 +1540,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                         uint8_t sourcepixel = *bitmap;
                         if ((sourcepixel&0x0F) != invisiblecolor) {
                             sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr & 0x0F;
+                            uint8_t targetpixel = *scrptr;// & 0x0F;
                             targetpixel |= sourcepixel;
                             *scrptr = targetpixel;
                         }
@@ -1463,7 +1551,6 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
                 bitmap += xjump; // needed if x<0 clipping occurs
             } else { /** ODD pixel starting line **/
-                //for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                 for (scrx = x; scrx < w+x-xclip; scrx+=2) {
                     uint8_t sourcepixel = *bitmap;
                     uint8_t targetpixel = *scrptr;
@@ -1477,24 +1564,49 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                     *scrptr = targetpixel;
                     bitmap++;
                 }
-                if (xclip){
-                    if (w&1) {
-                        /**last pixel is odd pixel due to clipping & odd width*/
-                        uint8_t sourcepixel = *bitmap;
-                        sourcepixel >>=4; //top nibble of sourcebyte from bitmap...
-                        if (sourcepixel != invisiblecolor) {
-                            uint8_t targetpixel = *scrptr & 0xF0; //...put into the low nibble of the target
-                            targetpixel |= sourcepixel;
-                            *scrptr = targetpixel;
-                        }
-                        //scrptr++;
-                    }
-                }
                 bitmap+=xjump;
             }
             // increment the y jump in the scrptr
             scrptr = scrptr + ((width - w)>>1)+scrxjump;
     }
+
+    return;
+    }
+
+    /** 4bpp fast version */
+
+    if (m_colordepth==8) {
+	int16_t scrx,scry,xclip,xjump,scrxjump;
+    xclip=xjump=scrxjump=0;
+    /** y clipping */
+    if (y<0) { h+=y; bitmap -= y*w; y=0;}
+    else if (y+h>height) { h -=(y-height);}
+    /** x clipping */
+    if (x<0) { xclip=x; w+=x; xjump = (-x); bitmap += xjump; x=0;}
+    else if (x+w>width) {
+            xclip = x;
+            scrxjump = x;
+            xjump=(x+w-width)+scrxjump;
+            w = width-x;}
+
+    uint8_t* scrptr = m_scrbuf + (y*width + x);
+    for (scry = y; scry < y+h; scry+=1) {
+            if (scry>=height) return;
+                for (scrx = x; scrx < w+x; scrx++) {
+                    uint8_t sourcepixel = *bitmap;
+                    uint8_t targetpixel = *scrptr;
+                    if (sourcepixel != invisiblecolor ) targetpixel = sourcepixel;
+                    *scrptr = targetpixel;
+                    bitmap++;
+                    scrptr++;
+                }
+            bitmap += xjump; // needed if x<0 clipping occurs
+        scrptr = scrptr + (width - w)+scrxjump;
+    }
+    return;
+    }
+
+
 }
 
 void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
@@ -2281,7 +2393,7 @@ void Display::setSprite(uint8_t index, const uint8_t* data, const uint16_t* pale
     }
     m_sprites[index].w = w;
     m_sprites[index].h = h;
-    memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
+    if( palette4x16bit ) memcpy(m_sprites[index].palette, palette4x16bit, 4*2);
 }
 
 /**
@@ -2309,6 +2421,9 @@ void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
 
     // For the screen modes that do not support sprites, return if the direct draw mode is used.
     if (useDirectDrawMode) return;
+#if POK_SCREENMODE == MODE13
+    lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
+#endif
 
 #if POK_SCREENMODE == MODE_GAMEBOY
     lcdRefreshModeGBC(scr, paletteptr);
@@ -2345,6 +2460,101 @@ void Display::setTile(uint16_t i, uint8_t t) {
     m_tilebuf[i]=t;
 };
 
+// Convert an integer to a hexadecimal string
+char* itoa_hex(int num, char* dest, int destLen) {
+    int i = destLen-1;
+    do {
+        char c = (num % 16) + '0';
+        if (c > '9') c += 7;
+        dest[i--] = c;
+        num /= 16;
+    } while (num && i >= 0);
+    return &(dest[i+1]);
+}
+
+// Draw the crash screen and wait forever
+void ShowCrashScreenAndWait( const char* texLine1, const char* texLine2, const char* texLine3, const char* texLine4, const char* texLine5 ) {
+
+    // draw screen red
+    lcdFillSurface(COLOR_RED);
+
+    // Draw text
+    Display::directcolor = COLOR_WHITE;
+    Display::invisiblecolor = COLOR_RED;
+    Display::directbgcolor = COLOR_RED; // Cannot be black as that is a transparent color
+    Display::directtextrotated = false;
+    Display::adjustCharStep = 0;
+    Display::adjustLineStep = 0;
+    Display::setFont(fntC64UIGfx);  // A special font set that contains UI gfx in lower case letters.
+    Display::fixedWidthFont = true; // Needed for the non-proportional C64 font (default value=false)
+    Display::enableDirectPrinting(true);
+
+    // Draw texts
+    int  yOffsetInPixels = 5;
+    Display::set_cursor(0, 9 + yOffsetInPixels);
+    Display::print("  ");    Display::println(texLine1);
+    Display::print("  ");    Display::println(texLine2);
+    Display::print("  ");    Display::println(texLine3);
+    Display::println();
+    Display::print("  *");   Display::println(texLine4);
+    Display::print("  *");   Display::println(texLine5);
+
+    Display::set_cursor(0, 0 + yOffsetInPixels);
+
+    // Frame
+    Display::println(" abbbbbbbbbbbbbbbbbbbbbbbbc");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::println(" dbbbzybbbbbbbbbbbbbbbbbbbe");
+    Display::println("     {e");
+
+     // Pokitto image
+    Display::println  ("");
+    Display::println  ("  ijkl");
+    Display::println  ("  mnop");
+    Display::println  ("  qrst");
+    Display::println  ("  uvwx");
+
+   // loop forever
+    while(1){;}
+ }
+
+// Check the stack size and show a crash screen if the stack is too big.
+void CheckStack() {
+    #ifndef POK_SIM
+    #ifndef __ARMCC_VERSION
+    int currStackTop;
+    const int freeStackThreshold = 400;
+    if ((int)&currStackTop - (int)_ebss < freeStackThreshold) {
+
+        // Create info string: "<stack size>:<current stack pointer>", e.g. "12345ABC:12345ABC"
+        const int infoStringLen = 8+1+8;
+        static char infoString[infoStringLen+1];
+        memset(infoString,0,infoStringLen+1);
+        const int stackSize = (int)_vStackTop - (int)&currStackTop;
+        const int tmpStrLen = 8;
+        static char tmpStr[tmpStrLen+1];
+        memset(tmpStr,0,tmpStrLen+1);
+        char* subStr = itoa_hex(stackSize, tmpStr, tmpStrLen); // keep ending null
+        strcat(infoString, subStr); // Add stack size as hex string
+        strcat(infoString, ":");
+        subStr = itoa_hex((int)&currStackTop, tmpStr, tmpStrLen); // keep ending null
+        strcat(infoString, subStr); // Add stack pointer address as hex string
+
+        // Draw the crash screen and wait forever. Use static const strings to avoid more stack usage.
+        static const char* texLine1 = "OOPS! PLEASE, RESTART";
+        static const char* texLine2 = "POKITTO OR RELOAD";
+        static const char* texLine3 = "SOFTWARE.";
+        static const char* texLine4 = "STACK TOO BIG!";
+        ShowCrashScreenAndWait(texLine1, texLine2, texLine3, texLine4, infoString);
+    }
+    #endif
+    #endif
+}
 
 /** Eof */
 

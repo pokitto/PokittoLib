@@ -197,14 +197,6 @@
 #endif // PROJ_GAMEBUINO
 #endif // PROJ_TILEDMODE
 
-#if PROJ_MODE13 > 0
-    #define PROJ_SCREENMODE MODE13
-    #define POK_COLORDEPTH 8
-    #define POK_STRETCH 0
-    #define POK_FPS 30
-    #define POK_COLORDEPTH 8
-#endif
-
 
 /** SCREEN MODES TABLE -- DO NOT CHANGE THESE **/
 
@@ -237,11 +229,16 @@
 #define BUFSIZE_MODE_12              4176 // 72 x 58
 #define MODE13                      13
 #define BUFSIZE_MODE13              9680 // 110*88
+#define MODE14                      14
+#define BUFSIZE_MODE14              14520
 // Tiled modes
 #define MODE_TILED_1BIT             1001
 #define MODE_TILED_8BIT             1002
 
 
+    #define R_MASK  0xF800
+    #define G_MASK  0x7E0
+    #define B_MASK  0x1F
 
 /** SCREENMODE - USE THIS SELECTION FOR YOUR PROJECT **/
 
@@ -282,6 +279,34 @@
 #endif
 #endif // POK_TILEDMODE
 
+#if PROJ_MODE13 > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
+    #define POK_SCREENMODE MODE13
+    #define POK_COLORDEPTH 8
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
+
+#if PROJ_MODE14 > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
+    #define POK_SCREENMODE MODE14
+    #define POK_COLORDEPTH 3
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
+#if PROJ_MODE15 > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
+    #define POK_SCREENMODE MODE15
+    #define POK_COLORDEPTH 4
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
 /* DEFINE SCREENMODE AS THE MAXIMUM SCREEN SIZE NEEDED BY YOUR APP ... SEE SIZES LISTED ABOVE */
 
 /** AUTOMATIC COLOR DEPTH SETTING - DO NOT CHANGE **/
@@ -349,6 +374,16 @@
     #define LCDWIDTH 110
     #define LCDHEIGHT 88
     #define POK_BITFRAME 110*88
+#elif POK_SCREENMODE == MODE14
+    #define POK_SCREENBUFFERSIZE 14520
+    #define LCDWIDTH 220
+    #define LCDHEIGHT 176
+    #define POK_BITFRAME 4840
+#elif POK_SCREENMODE == MODE15
+    #define POK_SCREENBUFFERSIZE 0x4BA0
+    #define LCDWIDTH 220
+    #define LCDHEIGHT 176
+
 #else
     #define POK_SCREENBUFFERSIZE 0
 #endif // POK_SCREENMODE
@@ -377,13 +412,28 @@
     #define POK_AUD_FREQ PROJ_AUD_FREQ
 #endif
 
-//#define POK_CINC_MULTIPLIER 0 // multiplies synth cycle table
+
+#define POK_USE_EXT 0 // if extension port is in use or not
+
 #define POK_STREAMFREQ_HALVE  0  // if true, stream update freq is half audio freq
 #define POK_STREAM_LOOP 1 //master switch
 
-#define POK_USE_DAC 1 // is DAC in use in this project
-#define POK_USE_EXT 0 // if extension port is in use or not
-#define POK_STREAM_TO_DAC 1  // 1 = stream from SD to DAC, synthesizer to PWM,  0 = opposite
+#ifndef PROJ_USE_DAC
+    #define POK_USE_DAC 1 // is DAC in use in this project
+#else
+    #define POK_USE_DAC PROJ_USE_DAC
+#endif
+#ifndef PROJ_USE_PWM
+    #define POK_USE_PWM 1 // is PWM for audio used in this project
+#else
+    #define POK_USE_PWM PROJ_USE_PWM
+#endif
+
+#ifndef PROJ_STREAM_TO_DAC
+    #define POK_STREAM_TO_DAC 1  // 1 = stream from SD to DAC, synthesizer to PWM,  0 = opposite
+#else
+    #define POK_STREAM_TO_DAC PROJ_STREAM_TO_DAC
+#endif
 
 
 #define POK_BACKLIGHT_PIN P2_2
@@ -416,7 +466,22 @@
 #endif
 
 /** SYSTEM SETTINGS ADDRESSES IN EEPROM **/
-#define EESETTINGS_VOL 4000
+#define EESETTINGS_FILENAME         3980 // 0xF8C 20bytes last filename requested
+#define EESETTINGS_VOL              4000 // 0xFA0 Volume
+#define EESETTINGS_DEFAULTVOL       4001 // 0xFA1 Default volume
+#define EESETTINGS_LOADERWAIT       4002 //	0xFA2 Loader wait in sec
+#define EESETTINGS_VOLWAIT          4003 // 0xFA3 Volume screen wait in sec
+#define EESETTINGS_TIMEFORMAT       4004 // 0xFA4 Time format (0=24 hrs, 1 = 12 hrs)
+#define EESETTINGS_LASTHOURSSET     4005 // 0xFA5 Last time set in hours
+#define EESETTINGS_LASTMINUTESSET   4006 // 0xFA6 Last time set in minutes
+#define EESETTINGS_DATEFORMAT       4007 // 0xFA7 Date format (0=D/M/Y, 1 = M/D/Y)
+#define EESETTINGS_LASTDAYSET       4008 // 0xFA8 Last Day set
+#define EESETTINGS_LASTMONTHSET     4009 // 0xFA9 Last Month set
+#define EESETTINGS_LASTYEARSET      4010 // 0xFAA Last Year set (counting from 2000)
+#define EESETTINGS_RTCALARMMODE     4011 // 0xFAB RTC alarm mode (0=disabled, 1=enabled, 3 = enabled with sound)
+#define EESETTINGS_RESERVED         4012 // 0xFAC 4bytes reserved (additional sleep configuration)
+#define EESETTINGS_WAKEUPTIME       4016 // 0xFB0 Wake-up time as 32bit value for 1Hz RTC clock
+
 
 #endif // POKITTO_SETTINGS_H
 

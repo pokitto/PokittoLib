@@ -62,21 +62,21 @@ uint16_t prevdata=0; // if data does not change, do not adjust LCD bus lines
 
 static inline void setup_data_16(uint16_t data)
 {
-    uint32_t p2=0;
+    //uint32_t p2=0;
 
-    if (data != prevdata) {
-
-    prevdata=data;
+    //if (data != prevdata) {
+    //
+    //prevdata=data;
 
     /** D0...D16 = P2_3 ... P2_18 **/
-    p2 = data << 3;
+    //p2 = data << 3;
 
     //__disable_irq();    // Disable Interrupts
     SET_MASK_P2;
-    LPC_GPIO_PORT->MPIN[2] = p2; // write bits to port
+    LPC_GPIO_PORT->MPIN[2] = (data<<3); // write bits to port
     CLR_MASK_P2;
     //__enable_irq();     // Enable Interrupts
-    }
+    //}
 }
 
 
@@ -91,7 +91,7 @@ inline void write_command_16(uint16_t data)
    CLR_CD; // clear CD = command
    SET_RD; // RD high, do not read
    setup_data_16(data); // function that inputs the data into the relevant bus lines
-   CLR_WR;  // WR low
+   CLR_WR_SLOW;  // WR low
    SET_WR;  // WR low, then high = write strobe
    SET_CS; // de-select lcd
 }
@@ -407,32 +407,32 @@ void Pokitto::lcdTile(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t* 
 
 
 void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color) {
-    	int16_t temp;
+	int16_t temp;
 	if (x0>x1) {temp=x0;x0=x1;x1=temp;}
 	if (y0>y1) {temp=y0;y0=y1;y1=temp;}
 	if (x0 > POK_LCD_W) return;
 	if (y0 > POK_LCD_H) return;
-    if (x1 > POK_LCD_W) x1=POK_LCD_W;
-	if (y1 > POK_LCD_H) y1=POK_LCD_W;
+	if (x1 > POK_LCD_W) x1=POK_LCD_W;
+	if (y1 > POK_LCD_H) y1=POK_LCD_H;
 	if (x0 < 0) x0=0;
 	if (y0 < 0) y0=0;
 
 	int16_t x,y;
-    for (x=x0; x<=x1;x++) {
-        write_command(0x20);  // Horizontal DRAM Address (=y on pokitto screen)
-        write_data(y0);
-        write_command(0x21);  // Vertical DRAM Address (=x on pokitto screen)
-        write_data(x);
-        write_command(0x22); // write data to DRAM
+	for (x=x0; x<=x1;x++) {
+		write_command(0x20);  // Horizontal DRAM Address (=y on pokitto screen)
+		write_data(y0);
+		write_command(0x21);  // Vertical DRAM Address (=x on pokitto screen)
+		write_data(x);
+		write_command(0x22); // write data to DRAM
 
-        CLR_CS_SET_CD_RD_WR; // go to vram write mode
+		CLR_CS_SET_CD_RD_WR; // go to vram write mode
 
 
-        for (y=y0; y<y1;y++) {
-                setup_data_16(color); // setup the data (flat color = no change between pixels)
-                CLR_WR;SET_WR; //CLR_WR;SET_WR;//toggle writeline, pokitto screen writes a column up to down
-        }
-    }
+		for (y=y0; y<y1;y++) {
+				setup_data_16(color); // setup the data (flat color = no change between pixels)
+				CLR_WR;SET_WR; //CLR_WR;SET_WR;//toggle writeline, pokitto screen writes a column up to down
+		}
+	}
 }
 
 /***
@@ -1336,7 +1336,8 @@ uint8_t *d;
 uint16_t xptr = 14;
 uint8_t yoffset = 24;
 #else
-xptr = 0; //was 26
+uint16_t xptr = 0;
+uint8_t yoffset = 0;
 #endif
 
 for(x=0;x<128;x++)
@@ -1709,6 +1710,203 @@ for(x=0;x<110;x+=2)
 
 
 
+void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
+uint16_t x,y,data,xptr;
+uint16_t scanline[176]; uint16_t* scptr;
+uint8_t *d;
+
+write_command(0x20); write_data(0);
+write_command(0x21); write_data(0);
+write_command(0x22);
+CLR_CS_SET_CD_RD_WR;
+
+for(x=0;x<220;x++)
+  {
+        d = scrbuf+x;
+        scptr = &scanline[0];
+
+        /** find colours in one scanline **/
+        /*for(y=0;y<22;y++)
+            {
+
+            uint16_t t = *d;
+            uint16_t t2 = *(d+POK_BITFRAME);
+            uint16_t t3 = *(d+POK_BITFRAME+POK_BITFRAME);
+
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+            *scptr++ = (t & 0x1)*R_MASK | (t2 & 0x1)*G_MASK | (t3 & 0x1)*B_MASK; t >>= 1;t2 >>= 1;t3 >>= 1;
+
+
+            d+=220; // jump to word directly below
+            }
+        */
+        /** alternative way: go through one color at a time **/
+            scptr = &scanline[0]; // set to beginning of scanline
+            for(y=0;y<22;y++, d +=220)
+            {
+            uint16_t t = *d & 0xFF;
+
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1); t >>= 1;
+            *scptr++ = R_MASK * (t&0x1);
+            }
+            scptr = &scanline[0]; // set to beginning of scanline
+            d = scrbuf+x+POK_BITFRAME;
+            for(y=0;y<22;y++, d +=220)
+            {
+            uint16_t t = *d & 0xFF;
+
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= G_MASK * (t&0x1);
+            }
+            scptr = &scanline[0]; // set to beginning of scanline
+            d = scrbuf+x+POK_BITFRAME*2;
+            for(y=0;y<22;y++, d +=220)
+            {
+            uint16_t t = *d & 0xFF;
+
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1); t >>= 1;
+            *scptr++ |= B_MASK * (t&0x1);
+            }
+
+
+        #ifdef PROJ_SHOW_FPS_COUNTER
+        if (x<8) continue;
+        setDRAMptr(x, 0);
+        #endif
+
+        /** draw scanlines **/
+        for (int s=0;s<176;) {
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+
+        }
+
+    }
+}
+
+//#define ADEKTOSMODE15
+
+#ifdef ADEKTOSMODE15
+void Pokitto::lcdRefreshMode15(uint16_t* pal, uint8_t* scrbuf){
+    write_command(0x03); write_data(0x1038); //realy only need to call this once
+    write_command(0x20); write_data(0);
+    write_command(0x21); write_data(0);
+
+    write_command(0x22);
+
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    for (int x=0,xt=0; x<0x4BA0;x++,xt++) {
+    if (xt==110) xt=0;
+    if (xt<8) {
+        write_data(0);
+        write_data(0);
+    } else {
+        write_data(pal[(((scrbuf[x]) & 0xf0) >> 4)]);
+        write_data(pal[( (scrbuf[x]) & 0x0f)]);
+    }
+
+    }
+    #else
+    for (int x=0; x<0x4BA0;x++) {
+        write_data(pal[(((scrbuf[x]) & 0xf0) >> 4)]);
+        write_data(pal[( (scrbuf[x]) & 0x0f)]);
+    }
+    #endif //PROJ_SHOW_FPS_COUNTER
+}
+
+#else
+
+void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
+uint16_t x,y,xptr;
+uint16_t scanline[2][176]; // read two nibbles = pixels at a time
+uint8_t *d, yoffset=0;
+
+xptr = 0;
+//setDRAMptr(xptr,yoffset);
+
+write_command(0x20); write_data(0);
+write_command(0x21); write_data(0);
+write_command(0x22);
+CLR_CS_SET_CD_RD_WR;
+
+for(x=0;x<220;x+=2)
+  {
+    d = scrbuf+(x>>1);// point to beginning of line in data
+    // find colours in one scanline
+    uint8_t s=0;
+    for(y=0;y<176;y++)
+    {
+    uint8_t t = *d >> 4; // higher nibble
+    uint8_t t2 = *d & 0xF; // lower nibble
+    // higher nibble = left pixel in pixel pair
+    scanline[0][s] = paletteptr[t];
+    scanline[1][s++] = paletteptr[t2];
+
+    d+=220/2; // jump to read byte directly below in screenbuffer
+    }
+    s=0;
+    // draw scanlines
+
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    if (x<8) continue;
+    setDRAMptr(x, 0);
+    #endif
+
+    for (s=0;s<176;) {
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
+    }
+
+    for (s=0;s<176;) {
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+    }
+  }
+}
+#endif //ADEKTOSMODE15
 
 void Pokitto::blitWord(uint16_t c) {
     setup_data_16(c);CLR_WR;SET_WR;

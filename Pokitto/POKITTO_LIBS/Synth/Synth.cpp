@@ -36,17 +36,19 @@
 
 #include "Pokitto.h"
 #include "Synth.h"
+#include "stdint.h"
+#include "My_settings.h"
 
 /** COMMON TO BOTH HW AND SIMULATED SOUND **/
 
-boolean playing=false; //external to share between player and synth
-boolean track1on = true, track2on = true, track3on = true, tableRefresh = false;
+bool playing=false; //external to share between player and synth
+bool track1on = true, track2on = true, track3on = true, tableRefresh = false;
 
 uint8_t sequencepos=0, tempo = 120;
 long writeindex=0, readindex=0;
 uint16_t playerpos=0;
-long per = 1000*60/tempo/4; // ms per minute was 1000*60
-uint16_t samplespertick = (uint16_t)per*57, notetick; // samplespertick is a calculated value based on song speed. notetick is a counter
+uint16_t samplespertick = (float)((60.0f/(float)tempo)*POK_AUD_FREQ)/16;
+uint16_t notetick=0; // samplespertick is a calculated value based on song speed. notetick is a counter
 long samplesperpattern=0;
 
 uint8_t tick=3; // loops between 3 channels. Tick 3 is used to calculate volume envelopes
@@ -55,7 +57,7 @@ uint8_t tick=3; // loops between 3 channels. Tick 3 is used to calculate volume 
 SONG song;
 OSC osc1,osc2,osc3;
 OSC patch[15];
-BLOCK block[1]; //30 blocks maximum
+BLOCK block[30]; //30 blocks maximum
 
 
 

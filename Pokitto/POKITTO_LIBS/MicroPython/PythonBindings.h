@@ -49,6 +49,9 @@
 #define BTN_RIGHT   2
 #define BTN_DOWN    3
 #define BTN_LEFT    0
+#define BTN_A       4
+#define BTN_B       5
+#define BTN_C       6
 
 // Main function in uPy library
 EXTERNC int PythonMain(int argc, char **argv);
@@ -79,6 +82,7 @@ EXTERNC void Pok_Display_print(uint8_t x, uint8_t y, const char str[], uint8_t c
 EXTERNC uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b);
 EXTERNC void POK_game_display_setPalette(uint16_t* paletteArray, int16_t len);
 EXTERNC void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h);
+EXTERNC void Pok_Display_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h);
 
 // Core
 EXTERNC bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h);
@@ -86,6 +90,8 @@ EXTERNC bool Pok_Core_isRunning();
 EXTERNC bool Pok_Core_buttons_repeat(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_held(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_released(uint8_t button);
+
+EXTERNC void Pok_Wait(uint32_t dur_ms);
 
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
 EXTERNC time_t time_cpp(time_t* timer);

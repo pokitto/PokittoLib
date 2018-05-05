@@ -39,7 +39,7 @@
 /** OSCILLATOR FUNCTIONS **/
 
 void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0,
-            uint8_t notenumber=25, uint8_t volume=127,
+            uint8_t notenumber=25, uint16_t volume=127,
             uint16_t attack=0, uint16_t decay=0, uint16_t sustain=0, uint16_t release=0,
             int16_t maxbend=0, int16_t bendrate=0, uint8_t arpmode = 0, uint8_t overdrive=0, uint8_t kick=0){
   //Serial.println("SetOsc "); osc1
@@ -85,10 +85,13 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
     o->adsrvol = o->vol; // will stay same all the time
   }
 
+  o->pitchbend = 0; //this has to be zeroed always!
   if (bendrate != 0) {
-        o->bendrate = bendrate; // test value
-        o->pitchbend = 0;
-        o->maxbend = maxbend;
+        o->bendrate = (int32_t)bendrate*(o->cinc/10000); // test value
+        o->maxbend = (int32_t)maxbend*(o->cinc/100);
+  } else {
+        o->bendrate = 0;
+        o->maxbend = 0;
   }
 }
 

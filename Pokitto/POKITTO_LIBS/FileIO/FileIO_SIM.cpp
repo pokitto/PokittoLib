@@ -182,8 +182,8 @@ void fileClose() {
     }
 }
 
-int fileGetChar() {
-    return fgetc(fp);
+char fileGetChar() {
+    return (char)fgetc(fp);
 }
 
 void filePutChar(char c) {
@@ -227,4 +227,19 @@ uint8_t filePeek(long n) {
 void filePoke(long n, uint8_t c) {
     fileSeekAbsolute(n);
     fputc( c, fp );
+}
+
+int fileReadLine(char* source, int maxchars) {
+    int n=0;
+    char c=1;
+    while (c!=NULL) {
+        c = fileGetChar();
+        if (n == 0) {
+            while (c == '\n' || c == '\r') c = fileGetChar(); // skip empty lines
+        }
+        n++;
+        if (c=='\n' || c=='\r' || n==maxchars-1) c=NULL; //prevent buffer overflow
+        *source++ = c;
+    }
+    return n; //number of characters read
 }

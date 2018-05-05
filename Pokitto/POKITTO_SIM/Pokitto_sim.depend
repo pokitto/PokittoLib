@@ -2196,10 +2196,10 @@
 1514730136 e:\pokittodev\pokittolib\examples\doon\creatures.h
 	<stdint.h>
 
-1517247872 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+1518696815 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
 	"Pokitto.h"
 
-1517553769 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
+1517557369 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"mbed.h"
@@ -2213,12 +2213,12 @@
 	"Synth.h"
 	"HWSound.h"
 
-1517595486 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1522700077 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
-1517247872 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
+1518679197 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.h
+1524431339 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.h
 	<stdint.h>
 	<math.h>
 	"pwmout_api.h"
@@ -2235,31 +2235,31 @@
 	"PokittoSound.h"
 	"PokittoFakeavr.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\pwmout_api.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\pwmout_api.h
 	"device.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\device.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\device.h
 	"objects.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\objects.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\objects.h
 	"PeripheralNames.h"
 	"PinNames.h"
 	"gpio_object.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\peripheralnames.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\peripheralnames.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\pinnames.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\pinnames.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_object.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_object.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
+1525175313 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
 	<stdint.h>
 	<SDL2/SDL.h>
 	"Pokitto_settings.h"
 	"SimLCD.h"
 	<SDL2/SDL_joystick.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -2290,12 +2290,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_main.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_stdinc.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -2324,34 +2324,34 @@
 	<stdlib.h>
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_config.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_platform.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\begin_code.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\begin_code.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\close_code.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\close_code.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_assert.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_atomic.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	<mbarrier.h>
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_audio.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -2361,24 +2361,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_error.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_endian.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_mutex.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_thread.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -2387,18 +2387,18 @@
 	<process.h>
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_rwops.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_clipboard.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_cpuinfo.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -2410,7 +2410,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_events.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -2424,7 +2424,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_video.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -2432,12 +2432,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_pixels.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_rect.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -2445,7 +2445,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_surface.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -2454,11 +2454,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_blendmode.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_keyboard.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -2466,27 +2466,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_keycode.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_scancode.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_mouse.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_joystick.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_gamecontroller.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -2494,11 +2494,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_quit.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_gesture.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -2506,60 +2506,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_touch.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_filesystem.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_haptic.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_hints.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_loadso.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_log.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_messagebox.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_power.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_render.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_system.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -2567,26 +2567,26 @@
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_timer.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_version.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.h
+1522704292 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.h
 	<stdint.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.h
 	"Pokitto_settings.h"
 	"PokittoButtons.h"
 	<stdint.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2594,12 +2594,12 @@
 	"HWButtons.h"
 	"PokittoSimulator.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
+1518728392 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
 	"binary.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\binary.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\binary.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoglobs.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoglobs.h
 	<stdint.h>
 	"SimLCD.h"
 	"SimSound.h"
@@ -2608,12 +2608,12 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1517661367 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.h
+1525172331 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.h
 	"PokittoSimulator.h"
 	<stdint.h>
 	<stdio.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\mbed.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\mbed.h
 	<stdint.h>
 	"LPC11U6x.h"
 	"PinNames.h"
@@ -2622,47 +2622,47 @@
 	"AnalogIn.h"
 	"InterruptIn.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\lpc11u6x.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\lpc11u6x.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\digitalout.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\digitalout.h
 	"platform.h"
 	"gpio_api.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\platform.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\platform.h
 	"PinNames.h"
 	<cstddef>
 	<cstdlib>
 	<cstdio>
 	<cstring>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_api.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_api.h
 	"device.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\pwmout.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\pwmout.h
 	"platform.h"
 	"pwmout_api.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\analogin.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\analogin.h
 	"platform.h"
 	"analogin_api.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\analogin_api.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\analogin_api.h
 	"device.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\interruptin.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\interruptin.h
 	"platform.h"
 	"gpio_api.h"
 	"gpio_irq_api.h"
 	"FunctionPointer.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_irq_api.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_irq_api.h
 	"device.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\functionpointer.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\functionpointer.h
 	<string.h>
 	<stdint.h>
 
-1517437002 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
+1518175152 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
 	"Pokitto_settings.h"
 	"diskio.h"
 	"pff.h"
@@ -2670,13 +2670,13 @@
 	"mbed.h"
 	<stdint.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofonts.h
+1522702735 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofonts.h
 	"Pokitto_settings.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -2686,23 +2686,23 @@
 	<stdlib.h>
 	<string.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
 	"PokittoGlobs.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.h
 	<stdint.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
+1524817648 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
 	"PokittoFakeavr.h"
 	"PokittoGlobs.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofakeavr.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofakeavr.h
 	"PokittoItoa.h"
 	"binary.h"
 	<stdint.h>
@@ -2710,108 +2710,108 @@
 	<stdbool.h>
 	<stdbool.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoitoa.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoitoa.h
 	<stdint.h>
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittotimer.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittotimer.h
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio.h
+1518117967 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio.h
 	<stdint.h>
 
-1517248400 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
+1518989432 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
 	"Synth_osc.h"
 	"Synth_song.h"
 
-1517248497 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_osc.h
+1518462607 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_osc.h
 	"Pokitto.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_song.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_song.h
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\adventurer12x16.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\adventurer12x16.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\donut7x10.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\donut7x10.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\dragon6x8.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\dragon6x8.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\font3x3.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\font3x3.cpp
 	<stdint.h>
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\font3x5.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\font3x5.cpp
 	<stdint.h>
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\font5x7.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\font5x7.cpp
 	<stdint.h>
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontc64.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontc64.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontc64uigfx.cpp
+1521231375 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontc64uigfx.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\karateka8x11.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\karateka8x11.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\koubit7x7.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\koubit7x7.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\mini4x6.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\mini4x6.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\runes6x8.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\runes6x8.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\tight4x7.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\tight4x7.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\tiny5x7.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\tiny5x7.cpp
 	"PokittoFonts.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palaction.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palaction.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palcga.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palcga.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\paldefault.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\paldefault.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palgameboy.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palgameboy.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palmagma.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palmagma.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palmono.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palmono.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palpico.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palpico.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palrainbow.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palrainbow.cpp
 	"PokittoPalettes.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.cpp
 	"PokittoBacklight.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
+1525163501 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
 	"PokittoBattery.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
+1525171722 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.cpp
 	"PokittoGlobs.h"
 	"PokittoConsole.h"
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1517662050 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1525175227 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -2821,10 +2821,10 @@
 	<stdlib.h>
 	"iap.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1517595076 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1524431305 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2832,18 +2832,19 @@
 	"PokittoSound.h"
 	<stdio.h>
 	<string.h>
+	<algorithm>
 	"HWLCD.h"
 	"SimLCD.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoitoa.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoitoa.cpp
 	"PokittoItoa.h"
 	<string.h>
 	<stdint.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.cpp
 	"PokittoLogos.h"
 
-1517556127 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
+1519501070 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2852,7 +2853,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1517436913 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1525172363 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -2861,7 +2862,7 @@
 	"SimSound.h"
 	"PokittoSimulator.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio_sim.cpp
+1518118641 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio_sim.cpp
 	<stdint.h>
 	<stdio.h>
 	<math.h>
@@ -2869,7 +2870,7 @@
 	"FileIO.h"
 	"tinydir.h"
 
-1517247874 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\tinydir\tinydir.h
+1517251474 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\tinydir\tinydir.h
 	<errno.h>
 	<stdlib.h>
 	<string.h>
@@ -2885,46 +2886,49 @@
 	<unistd.h>
 	<sys/types.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.cpp
+1518462664 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.cpp
 	"Pokitto.h"
 	"Synth.h"
+	"stdint.h"
+	"My_settings.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_envfuncs.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_envfuncs.cpp
 	"Synth.h"
 
-1517248483 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_helpers.cpp
+1518462589 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_helpers.cpp
 	"Pokitto.h"
 	"Synth.h"
 	"Pokitto_settings.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
 	"PokittoGlobs.h"
 	"Synth.h"
 
-1517248519 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
+1519022413 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
 	"Synth.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
+1518981636 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
 	"PokittoDisk.h"
 	"Synth.h"
+	"Tracker.h"
 	"FileIO.h"
 
-1517248540 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
+1517252140 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
 	"Synth.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\mbed_sim.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\mbed_sim.cpp
 	"PokittoSimulator.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokitto_simport.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokitto_simport.cpp
 	"Pokitto.h"
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittoclock.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittoclock.cpp
 	"PokittoCore.h"
 	"PokittoConsole.h"
 	"Pokitto_settings.h"
 	<SDL2/SDL.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimbuttons.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimbuttons.cpp
 	"PokittoSimulator.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -2933,12 +2937,12 @@
 	<SDL2/SDL.h>
 	<iostream>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimcore.cpp
+1524436164 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimcore.cpp
 	"PokittoCore.h"
 	"PokittoSimulator.h"
 	<time.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.cpp
+1525173468 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.cpp
 	"PokittoSimulator.h"
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -2954,27 +2958,858 @@
 	"WriteWav.h"
 	"PokittoConsole.h"
 
-1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\writewav.h
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\writewav.h
 	<stdint.h>
 	<stdio.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.cpp
+1524431305 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simlcd.cpp
 	"SimLCD.h"
 	"PokittoSimulator.h"
+	<algorithm>
 
-1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
+1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
 
-1517662266 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
+1525173363 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
 	"SimSound.h"
 	"PokittoSimulator.h"
 	"PokittoGlobs.h"
 	"Synth.h"
 	<stdint.h>
 
-1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\writewav.cpp
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\writewav.cpp
 	"WriteWav.h"
 
-1517662517 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
+1525163813 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
 	"Pokitto.h"
 	"Synth.h"
+
+1519044736 c:\pokittolib_git\pokittolib_curr\examples\tracker\my_settings.h
+
+1519027247 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
+	"Pokitto.h"
+	"Arrays.h"
+	"Tracker.h"
+	"PatchSettings.h"
+
+1518978384 c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.h
+	<stdint.h>
+
+1519025775 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
+	"Pokitto.h"
+
+1519032474 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
+
+1518167522 c:\pokittolib_git\pokittolib_curr\examples\tracker\trackerglobs.h
+
+1518169094 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.cpp
+	"PatchSettings.h"
+	"Pokitto.h"
+	"TrackerGlobs.h"
+	"Tracker.h"
+	"Arrays.h"
+
+1519032544 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.cpp
+	"Tracker.h"
+	"Arrays.h"
+
+1518978230 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.cpp
+	"Arrays.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\examples\helloworld\main.cpp
+	"Pokitto.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto.h
+	"Pokitto_settings.h"
+	"PokittoCore.h"
+	"mbed.h"
+	"HWLCD.h"
+	"PokittoTimer.h"
+	"Pokitto_extport.h"
+	"PokittoEEPROM.h"
+	"PokittoSimulator.h"
+	"PokittoDisk.h"
+	"FileIO.h"
+	"Synth.h"
+	"HWSound.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_settings.h
+	"My_settings.h"
+
+1519241448 c:\pokittocompare\pokittolib\examples\helloworld\my_settings.h
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittocore.h
+	<stdint.h>
+	<math.h>
+	"pwmout_api.h"
+	"HWButtons.h"
+	"PokittoSimulator.h"
+	"PokittoConsole.h"
+	"PokittoDisk.h"
+	"PokittoFonts.h"
+	"PokittoPalettes.h"
+	"PokittoDisplay.h"
+	"PokittoButtons.h"
+	"PokittoBattery.h"
+	"PokittoBacklight.h"
+	"PokittoSound.h"
+	"PokittoFakeavr.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\pwmout_api.h
+	"device.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\device.h
+	"objects.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\objects.h
+	"PeripheralNames.h"
+	"PinNames.h"
+	"gpio_object.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\peripheralnames.h
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\pinnames.h
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\gpio_object.h
+
+1519243316 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\pokittosimulator.h
+	<stdint.h>
+	<SDL2/SDL.h>
+	"Pokitto_settings.h"
+	"SimLCD.h"
+	<SDL2/SDL_joystick.h>
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\begin_code.h
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\close_code.h
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1519243024 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\simlcd.h
+	<stdint.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittoconsole.h
+	"Pokitto_settings.h"
+	"PokittoButtons.h"
+	<stdint.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittobuttons.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoGlobs.h"
+	"HWButtons.h"
+	"PokittoSimulator.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\gbcompatibility.h
+	"binary.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\binary.h
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittoglobs.h
+	<stdint.h>
+	"SimLCD.h"
+	"SimSound.h"
+	"PokittoSimulator.h"
+	"mbed.h"
+	"HWLCD.h"
+	"HWSound.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\simsound.h
+	"PokittoSimulator.h"
+	<stdint.h>
+	<stdio.h>
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\mbed.h
+	<stdint.h>
+	"LPC11U6x.h"
+	"PinNames.h"
+	"DigitalOut.h"
+	"PwmOut.h"
+	"AnalogIn.h"
+	"InterruptIn.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\lpc11u6x.h
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\digitalout.h
+	"platform.h"
+	"gpio_api.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\platform.h
+	"PinNames.h"
+	<cstddef>
+	<cstdlib>
+	<cstdio>
+	<cstring>
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\gpio_api.h
+	"device.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\pwmout.h
+	"platform.h"
+	"pwmout_api.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\analogin.h
+	"platform.h"
+	"analogin_api.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\analogin_api.h
+	"device.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\interruptin.h
+	"platform.h"
+	"gpio_api.h"
+	"gpio_irq_api.h"
+	"FunctionPointer.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\gpio_irq_api.h
+	"device.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\functionpointer.h
+	<string.h>
+	<stdint.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittodisk.h
+	"Pokitto_settings.h"
+	"diskio.h"
+	"pff.h"
+	"connect.h"
+	"mbed.h"
+	<stdint.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittofonts.h
+	"Pokitto_settings.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittopalettes.h
+	"Pokitto_settings.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittodisplay.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"PokittoGlobs.h"
+	"PokittoFonts.h"
+	"PokittoPalettes.h"
+	<stdint.h>
+	<stdlib.h>
+	<string.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittobattery.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoGlobs.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittobacklight.h
+	<stdint.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittosound.h
+	<stdint.h>
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoFakeavr.h"
+	"PokittoGlobs.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittofakeavr.h
+	"PokittoItoa.h"
+	"binary.h"
+	<stdint.h>
+	<stdlib.h>
+	<stdbool.h>
+	<stdbool.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittoitoa.h
+	<stdint.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittotimer.h
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_libs\fileio\fileio.h
+	<stdint.h>
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth.h
+	"Synth_osc.h"
+	"Synth_song.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_osc.h
+	"Pokitto.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_song.h
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\adventurer12x16.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\donut7x10.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\dragon6x8.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\font3x3.cpp
+	<stdint.h>
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\font3x5.cpp
+	<stdint.h>
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\font5x7.cpp
+	<stdint.h>
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\fontc64.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\fontc64uigfx.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\karateka8x11.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\koubit7x7.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\mini4x6.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\runes6x8.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\tight4x7.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\fonts\tiny5x7.cpp
+	"PokittoFonts.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\palaction.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\palcga.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\paldefault.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\palgameboy.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\palmagma.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\palmono.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\palpico.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\palettes\palrainbow.cpp
+	"PokittoPalettes.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittobacklight.cpp
+	"PokittoBacklight.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittobattery.cpp
+	"PokittoBattery.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittobuttons.cpp
+	"PokittoCore.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittoconsole.cpp
+	"PokittoGlobs.h"
+	"PokittoConsole.h"
+	"PokittoFonts.h"
+	"PokittoDisplay.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittocore.cpp
+	"PokittoCore.h"
+	"Pokitto_settings.h"
+	"PokittoConsole.h"
+	"PokittoFonts.h"
+	"PokittoTimer.h"
+	"PokittoLogos.h"
+	<stdlib.h>
+	"iap.h"
+
+1519241448 c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittologos.h
+	<stdint.h>
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittodisplay.cpp
+	"PokittoDisplay.h"
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	"PokittoCore.h"
+	"PokittoSound.h"
+	<stdio.h>
+	<string.h>
+	"HWLCD.h"
+	"SimLCD.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittoitoa.cpp
+	"PokittoItoa.h"
+	<string.h>
+	<stdint.h>
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittologos.cpp
+	"PokittoLogos.h"
+
+1519242287 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittopalette.cpp
+	"PokittoDisplay.h"
+	"Pokitto_settings.h"
+	"GBcompatibility.h"
+	<stdio.h>
+	<string.h>
+	"HWLCD.h"
+	"SimLCD.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_core\pokittosound.cpp
+	"PokittoSound.h"
+	"Pokitto_settings.h"
+	"PokittoCore.h"
+	"Synth.h"
+	"HWSound.h"
+	"SimSound.h"
+	"PokittoSimulator.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\fileio\fileio_sim.cpp
+	<stdint.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+	"FileIO.h"
+	"tinydir.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\tinydir\tinydir.h
+	<errno.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+	<tchar.h>
+	<dirent.h>
+	<libgen.h>
+	<sys/stat.h>
+	<stddef.h>
+	<tchar.h>
+	<windows.h>
+	<linux/limits.h>
+	<unistd.h>
+	<sys/types.h>
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth.cpp
+	"Pokitto.h"
+	"Synth.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_envfuncs.cpp
+	"Synth.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_helpers.cpp
+	"Pokitto.h"
+	"Synth.h"
+	"Pokitto_settings.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
+	"PokittoGlobs.h"
+	"Synth.h"
+
+1519241448 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
+	"Synth.h"
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
+	"PokittoDisk.h"
+	"Synth.h"
+	"FileIO.h"
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
+	"Synth.h"
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\mbed_sim\mbed_sim.cpp
+	"PokittoSimulator.h"
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\pokitto_simport.cpp
+	"Pokitto.h"
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\pokittoclock.cpp
+	"PokittoCore.h"
+	"PokittoConsole.h"
+	"Pokitto_settings.h"
+	<SDL2/SDL.h>
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\pokittosimbuttons.cpp
+	"PokittoSimulator.h"
+	"Pokitto_settings.h"
+	"PokittoConsole.h"
+	"PokittoSound.h"
+	"PokittoCore.h"
+	<SDL2/SDL.h>
+	<iostream>
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\pokittosimcore.cpp
+	"PokittoCore.h"
+	"PokittoSimulator.h"
+	<time.h>
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\pokittosimulator.cpp
+	"PokittoSimulator.h"
+	"Pokitto_settings.h"
+	"PokittoGlobs.h"
+	"PokittoSound.h"
+	<SDL2/SDL.h>
+	<iostream>
+	<stdlib.h>
+	<sstream>
+	<stdint.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+	"WriteWav.h"
+	"PokittoConsole.h"
+
+1519241449 c:\pokittocompare\pokittolib\pokitto\pokitto_sim\writewav.h
+	<stdint.h>
+	<stdio.h>
+
+1519243102 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\simlcd.cpp
+	"SimLCD.h"
+	"PokittoSimulator.h"
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\simsound.cpp
+	"SimSound.h"
+	"PokittoSimulator.h"
+	"PokittoGlobs.h"
+	"Synth.h"
+	<stdint.h>
+
+1519241449 source:c:\pokittocompare\pokittolib\pokitto\pokitto_sim\writewav.cpp
+	"WriteWav.h"
+
+1519242120 c:\pokittocompare\pokittolib\examples\mode13\my_settings.h
+
+1519242954 source:c:\pokittocompare\pokittolib\examples\mode13\mode13.cpp
+	"Pokitto.h"
+
+1522440174 source:c:\pokittolib_git\pokittolib_curr\examples\mode13\mode13.cpp
+	"Pokitto.h"
+
+1519501070 c:\pokittolib_git\pokittolib_curr\examples\mode13\my_settings.h
+
+1522708887 source:c:\pokittolib_git\pokittolib_curr\examples\mode15\mode15.cpp
+	"Pokitto.h"
+	"monkey16.h"
+
+1522708946 c:\pokittolib_git\pokittolib_curr\examples\mode15\my_settings.h
+
+1522709181 c:\pokittolib_git\pokittolib_curr\examples\mode15\monkey16.h
+	<stdint.h>
+
+1522702717 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\fontmonkey.cpp
+	"PokittoFonts.h"
 

@@ -13,7 +13,7 @@ static FILE *fp = NULL;
 int main() {
 
     //uint8_t bitstream[88];
-    fp = fopen("/sd/audio.wav", "rb");
+    fp = fopen("/sd/play11.wav", "rb");
 
     if(fp == NULL){
         game.display.println("Couldn't open file");
