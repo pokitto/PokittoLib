@@ -996,11 +996,9 @@ char* Core::filemenu(char *ext) {
     bool updated = true;
 	while (isRunning()) {
 		if (update(true)) {
-            //getFirstFile(ext);
 			if (buttons.pressed(BTN_A) || buttons.pressed(BTN_B) || buttons.pressed(BTN_C)) {
 				exit = true; //time to exit menu !
 				if (buttons.pressed(BTN_A)) {
-					//answer = activeItem;
 					sound.playOK();
 				} else {
 				    *selectedfile = 0;
@@ -1082,7 +1080,6 @@ char* Core::filemenu(char *ext) {
                             if (i == activeItem)
                                 strcpy(selectedfile,txt);
                         }
-                    //} else i--;
                     } else
                         break; // break loop as no more files found
 
