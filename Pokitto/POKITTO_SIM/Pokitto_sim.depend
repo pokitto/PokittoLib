@@ -1196,7 +1196,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1525638579 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittocore.cpp
+1525640426 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -1211,7 +1211,7 @@
 1508098260 c:\git\pokittolib2\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1525541697 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.cpp
+1525641460 source:c:\git\pokittolib2\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -3831,4 +3831,28 @@
 
 1525524012 source:c:\git\pokittolib2\pokitto\pokitto_core\fonts\fontmonkey.cpp
 	"PokittoFonts.h"
+
+1525524012 source:c:\git\pokittolib2\examples\tracker\arrays.cpp
+	"Arrays.h"
+
+1525728476 c:\git\pokittolib2\examples\tracker\arrays.h
+	<stdint.h>
+
+1525729471 source:c:\git\pokittolib2\examples\tracker\main.cpp
+	"Pokitto.h"
+	"Arrays.h"
+	"Tracker.h"
+	"PatchSettings.h"
+
+1525728476 c:\git\pokittolib2\examples\tracker\my_settings.h
+
+1525729517 c:\git\pokittolib2\examples\tracker\tracker.h
+	"Pokitto.h"
+
+1525730427 c:\git\pokittolib2\examples\tracker\patchsettings.h
+	"SDFileSystem.h"
+
+1525730264 source:c:\git\pokittolib2\examples\tracker\tracker.cpp
+	"Tracker.h"
+	"Arrays.h"
 
