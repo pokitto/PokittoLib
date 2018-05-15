@@ -365,7 +365,7 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
         directbgcolor = oldbgcol;
         directtextrotated = olddirecttextrotated;
         adjustCharStep = oldadjustCharStep;
-        setFont(font);
+        setFont(oldFont);
 
         core.fps_counter_updated = false;
     }

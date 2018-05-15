@@ -26,6 +26,8 @@
 
 using namespace mbed;
 
+using namespace SDFS;
+
 class FATDirHandle : public DirHandle {
 
  public:

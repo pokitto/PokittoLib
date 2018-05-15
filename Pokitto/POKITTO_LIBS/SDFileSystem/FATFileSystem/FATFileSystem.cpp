@@ -28,6 +28,8 @@
 #include "FATFileHandle.h"
 #include "FATDirHandle.h"
 
+namespace SDFS // Use SDFS namespace because the function is declared in ff.h, which is under SDFS scope.
+{
 DWORD get_fattime(void) {
     time_t rawtime;
     time(&rawtime);
@@ -39,6 +41,7 @@ DWORD get_fattime(void) {
          | (DWORD)(ptm->tm_min      ) << 5
          | (DWORD)(ptm->tm_sec/2    );
 }
+}  // namespace SDFS
 
 FATFileSystem *FATFileSystem::_ffs[_VOLUMES] = {0};
 

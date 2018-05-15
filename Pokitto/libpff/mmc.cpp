@@ -2,12 +2,16 @@
 /* PFF - Low level disk control module for ATtiny85     (C)ChaN, 2009    */
 /*-----------------------------------------------------------------------*/
 
-#define _WRITE_FUNC    1
+
 
 #include "diskio.h"
 #include "mbed.h"
 #include "connect.h"
 #include "PokittoDisk.h"
+
+namespace PFFS {
+
+#define _WRITE_FUNC    1
 
 /* Definitions for MMC/SDC command */
 #define CMD0    (0x40+0)    /* GO_IDLE_STATE */
@@ -268,4 +272,6 @@ DRESULT disk_writep (
     return res;
 }
 #endif
+
+} // namespace PFFS
 

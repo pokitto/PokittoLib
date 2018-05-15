@@ -20,9 +20,11 @@
 /                     Changed stream read mode interface.
 /----------------------------------------------------------------------------*/
 
+
 #include "pff.h"        /* Petit FatFs configurations and declarations */
 #include "diskio.h"        /* Declarations of low level disk I/O functions */
 
+namespace PFFS {
 
 /*--------------------------------------------------------------------------
 
@@ -838,4 +840,5 @@ FRESULT pf_readdir (
 
 #endif /* _USE_DIR */
 
+} // namespace PFFS
 

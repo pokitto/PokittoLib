@@ -2,8 +2,8 @@
 /* Integer type definitions for FatFs module */
 /*-------------------------------------------*/
 
-#ifndef _INTEGER
-#define _INTEGER
+#ifndef _SDFS_INTEGER
+#define _SDFS_INTEGER
 
 #ifdef _WIN32    /* FatFs development platform */
 
@@ -11,6 +11,9 @@
 #include <tchar.h>
 
 #else            /* Embedded platform */
+
+namespace SDFS
+{
 
 /* These types must be 16-bit, 32-bit or larger integer */
 typedef int             INT;
@@ -31,6 +34,8 @@ typedef unsigned short  WCHAR;
 typedef long            LONG;
 typedef unsigned long   ULONG;
 typedef unsigned long   DWORD;
+
+} // namespace SDFS
 
 #endif
 

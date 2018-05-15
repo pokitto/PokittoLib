@@ -16,7 +16,7 @@
 
 #include "SDFileSystem.h"
 #include "pinmap.h"
-#include "diskio.h"
+#include "sdfs_diskio.h"
 #include "CRC7.h"
 #include "CRC16.h"
 

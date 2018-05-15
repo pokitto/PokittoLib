@@ -9,7 +9,9 @@
 #ifndef _FFCONF
 #define _FFCONF 4004    /* Revision ID */
 
-#define FFS_DBG     0
+namespace SDFS
+{
+ #define FFS_DBG     0
 
 /*---------------------------------------------------------------------------/
 / Functions and Buffer Configurations
@@ -194,5 +196,8 @@
    Clusters are group of sectors (eg: 8 sectors). Flushing on new cluster means
    it would be less often than flushing on new sector. Sectors are generally
    512 Bytes long. */
+
+
+} // namespace SDFS
 
 #endif /* _FFCONFIG */

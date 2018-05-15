@@ -26,6 +26,8 @@
 
 using namespace mbed;
 
+using namespace SDFS;
+
 class FATFileHandle : public FileHandle {
 public:
 

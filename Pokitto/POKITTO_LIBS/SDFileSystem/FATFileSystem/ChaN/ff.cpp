@@ -96,7 +96,10 @@
 /---------------------------------------------------------------------------*/
 
 #include "ff.h"         /* FatFs configurations and declarations */
-#include "diskio.h"     /* Declarations of low level disk I/O functions */
+#include "sdfs_diskio.h"     /* Declarations of low level disk I/O functions */
+
+namespace SDFS
+{
 
 
 /*--------------------------------------------------------------------------
@@ -105,7 +108,7 @@
 
 ---------------------------------------------------------------------------*/
 
-#if _FATFS != 4004  /* Revision ID */
+#if _SDFS_FATFS != 4004  /* Revision ID */
 #error Wrong include file (ff.h).
 #endif
 
@@ -816,7 +819,6 @@ DWORD clust2sect (  /* !=0: Sector number, 0: Failed - invalid cluster# */
 /*-----------------------------------------------------------------------*/
 /* FAT access - Read value of a FAT entry                                */
 /*-----------------------------------------------------------------------*/
-
 
 DWORD get_fat ( /* 0xFFFFFFFF:Disk error, 1:Internal error, Else:Cluster status */
     FATFS *fs,  /* File system object */
@@ -4151,3 +4153,6 @@ int f_printf (
 
 #endif /* !_FS_READONLY */
 #endif /* _USE_STRFUNC */
+
+
+} // namespace SDFS

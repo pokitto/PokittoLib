@@ -66,38 +66,36 @@ long getFileLength() {
 uint8_t fileOpen(char* buffer, char fmode) {
 
     filemode = fmode;
-    if (fmode & FILE_MODE_ASCII) {
-            // ASCII file
-            if (fmode & FILE_MODE_READONLY) {
-                // RO ASCII
-                fp=fopen(buffer, "r");
+    if (fmode & FILE_MODE_BINARY) {
+        // Binary file
+        if (fmode & FILE_MODE_READONLY) {
+            // RO Binary
+            fp=fopen(buffer, "rb");
+        } else {
+            // RW Binary
+            if (fmode & FILE_MODE_APPEND) {
+                // APPEND TO EXISTING Binary
+                fp=fopen(buffer, "a+b");
             } else {
-                // RW ASCII
-                if (fmode & FILE_MODE_APPEND) {
-                    // APPEND TO EXISTING RW ASCII
-                    fp=fopen(buffer, "a+");
-                } else {
-                    // OVERWRITE RW ASCII
-                    fp=fopen(buffer, "w+");
-                }
-
+                // OVERWRITE Binary
+                fp=fopen(buffer, "w+b"); //w+b will wipe the file !!!
             }
-    } else {
-            // Binary file
-            if (fmode & FILE_MODE_READONLY) {
-                // RO Binary
-                fp=fopen(buffer, "rb");
+        }
+    } else { // FILE_MODE_ASCII
+        // ASCII file
+        if (fmode & FILE_MODE_READONLY) {
+            // RO ASCII
+            fp=fopen(buffer, "r");
+        } else {
+            // RW ASCII
+            if (fmode & FILE_MODE_APPEND) {
+                // APPEND TO EXISTING RW ASCII
+                fp=fopen(buffer, "a+");
             } else {
-                // RW Binary
-                if (fmode & FILE_MODE_APPEND) {
-                    // APPEND TO EXISTING Binary
-                    fp=fopen(buffer, "a+b");
-                } else {
-                    // OVERWRITE Binary
-                    fp=fopen(buffer, "r+b"); //w+b will wipe the file !!!
-                }
-
+                // OVERWRITE RW ASCII
+                fp=fopen(buffer, "w+");
             }
+        }
     }
 
     if (fp) {
@@ -237,8 +235,8 @@ int fileReadLine(char* source, int maxchars) {
         if (n == 0) {
             while (c == '\n' || c == '\r') c = fileGetChar(); // skip empty lines
         }
-        n++;
         if (c=='\n' || c=='\r' || n==maxchars-1) c=NULL; //prevent buffer overflow
+        n++;
         *source++ = c;
     }
     return n; //number of characters read
