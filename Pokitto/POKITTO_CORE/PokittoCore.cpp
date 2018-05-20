@@ -171,7 +171,6 @@ Core::Core() {
 
 int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
     #ifndef POK_SIM
-    #ifndef NOPETITFATFS
     uint32_t counter=0;
     uint8_t data[256];
     /** prepare the flash writing **/
@@ -205,7 +204,6 @@ int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
             display.print(".");
         }
         }
-        #endif // NOPETITFATFS
         #endif // POK_SIM
     return 0; //success
 }
@@ -272,7 +270,6 @@ void Core::jumpToLoader() {
     bool flashloader=false, checkforboot=true;
     //check for loa.der on SD card
     #if POK_ENABLE_LOADER_UPDATES > 0
-    #ifndef NOPETITFATFS
     pokInitSD();
     if (fileOpen("LOA.DER", FILE_MODE_BINARY)==0) {
         //LOA.DER found on SD
@@ -284,7 +281,6 @@ void Core::jumpToLoader() {
         fileReadBytes((uint8_t*)tptr,4); //read jump address of loader on sd card
         fileRewind();
     }
-    #endif //NOPETITFATFS
     #endif
     //now start searching for bootkey
     while (checkforboot)
@@ -973,6 +969,7 @@ display.cursorY = oy;
 }
 
 char* Core::filemenu(char *ext) {
+    uint8_t oldPersistence = display.persistence;
     display.persistence = false;
     uint16_t oldpal0=display.palette[0];
     uint16_t oldpal1=display.palette[1];
@@ -985,89 +982,116 @@ char* Core::filemenu(char *ext) {
     display.color=1;
     display.bgcolor=0;
 
+	int16_t rowh = display.fontHeight + 2;
     int8_t activeItem = 0;
-	int16_t currentY = 100;
-	int16_t targetY = 0, rowh = display.fontHeight + 2;
+	int16_t currentTopItem = 0;
+	int16_t itemsPerScreen = (display.height+1) / rowh;
+	int16_t numOfItemsFound = 0;
 	boolean exit = false;
 
 	char* txt;
 
+    pokInitSD();
 
+    bool updated = true;
 	while (isRunning()) {
-		if (update()) {
-            getFirstFile(ext);
+		if (update(true)) {
 			if (buttons.pressed(BTN_A) || buttons.pressed(BTN_B) || buttons.pressed(BTN_C)) {
 				exit = true; //time to exit menu !
-				targetY = - display.fontHeight * 10 - 2; //send the menu out of the screen
 				if (buttons.pressed(BTN_A)) {
-					//answer = activeItem;
 					sound.playOK();
 				} else {
+				    *selectedfile = 0;
 					sound.playCancel();
 				}
+				updated = true; // update screen
 			}
 			if (exit == false) {
 				if (buttons.repeat(BTN_DOWN,4)) {
-					activeItem++;
+                    if( ++activeItem >= numOfItemsFound ) activeItem = numOfItemsFound - 1;
+					if( activeItem >= currentTopItem + itemsPerScreen) currentTopItem += itemsPerScreen; // next page
 					sound.playTick();
+                    updated = true; // update screen
 				}
 				if (buttons.repeat(BTN_UP,4)) {
-					activeItem--;
+				    if( --activeItem < 0 ) activeItem = 0;
+ 					if( activeItem < currentTopItem) currentTopItem -= itemsPerScreen;  // previous page
 					sound.playTick();
+                    updated = true; // update screen
 				}
-				//don't go out of the menu
-				//if (activeItem == length) activeItem = 0;
-				//if (activeItem < 0) activeItem = length - 1;
-                if (currentY>targetY) currentY-=16;
-                if (currentY<targetY) currentY=targetY;
-				//targetY = -rowh * activeItem + (rowh+4); //center the menu on the active item
+
 			} else { //exit :
-			    if (currentY>targetY) currentY-=16;
-                if (currentY<targetY) currentY=targetY;
-				if ((currentY - targetY) <= 1)
-				{
 				    display.bgcolor=oldbg;
 				    display.color=oldfg;
 				    display.palette[0] = oldpal0;
 				    display.palette[1] = oldpal1;
 				    display.palette[2] = oldpal2;
+				    display.persistence = oldPersistence;
 				    return selectedfile;
-				}
-
 			}
+
 			//draw a fancy menu
-			//currentY = 0;//(currentY + targetY) / 2 + 5;
-			display.cursorX = 0;
-			display.cursorY = currentY;
 			display.textWrap = false;
 			uint16_t fc,bc;
 			fc = display.color;
             bc = display.bgcolor;
-            //getFirstFile(ext);
-			for (int i = 0; i<20; i++) {
-				display.invisiblecolor=255;
-				display.cursorY = currentY + rowh * i;
-				if (i==3) display.color=1;
-				if (i == activeItem){
-					display.cursorX = 3;
+            if( updated ) { // update screen?
+                #if POK_SIM
+                getFirstFile(ext);
+                #else
+                bool isFirstFile = true;
+                #endif
+                for (int i = 0; ; i++) {
+                    display.cursorX = 0;
+                    display.invisiblecolor=255;
+                    display.cursorY = (i - currentTopItem ) * rowh;
 
-                    //display.fillRoundRect(0, currentY + display.fontHeight * activeItem - 2, LCDWIDTH, (display.fontHeight+3), 3);
-                    display.color=2;
-                    display.fillRect(0, currentY + rowh * activeItem - 2, LCDWIDTH, (rowh));
-                    display.setColor(0,2);
-				} else display.setColor(1,0);
-				//display.println((char*)*(const unsigned int*)(items+i));
-				//display.println((int)i);
-                txt = getNextFile(ext);
-                if (txt) {
-                        display.println(txt);
-                        if (i == activeItem) {
-                            strcpy(selectedfile,txt);
+                    // read the file name from SD
+                    #ifndef POK_SIM
+                    if(isFirstFile) {
+                        txt = getFirstFile(ext);
+                        isFirstFile = false;
+                    }
+                    else
+                    #endif
+
+                    txt = getNextFile(ext);
+
+                    if (txt) {
+
+                        numOfItemsFound = i+1;
+
+                        // Draw active line with diffrent backgtound and char color
+                        if (i == activeItem){
+                            display.cursorX = 3;
+                            display.color=2;
+                            display.fillRect(0, display.cursorY - 2, LCDWIDTH, rowh);
+                            display.setColor(0,2);
+                        } else display.setColor(1,0);
+
+                        // break loop if going out of screen
+                        if(i >= currentTopItem + itemsPerScreen ) {
+                            break;
                         }
-                } else i--;
-                display.setColor(1,0);
-			} // draw menu loop
+
+                        // Display only if the file is on the current page
+                        if( i >= currentTopItem) {
+                            display.print(display.cursorX, display.cursorY, txt);
+                            if (i == activeItem)
+                                strcpy(selectedfile,txt);
+                        }
+                    } else
+                        break; // break loop as no more files found
+
+                    display.setColor(1,0);
+                } // end for
+
+                display.update();
+            }
+            updated = false;
 		} // update
+
+        display.setColor(1,0);
 	}
 	return 0;
 }

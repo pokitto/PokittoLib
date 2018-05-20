@@ -4,6 +4,8 @@
 
 #ifndef _INTEGER
 
+namespace PFFS {
+
 /* These types must be 16-bit, 32-bit or larger integer */
 typedef int                INT;
 typedef unsigned int    UINT;
@@ -26,6 +28,8 @@ typedef unsigned long    DWORD;
 
 /* Boolean type */
 // typedef enum { FALSE = 0, TRUE } BOOL; // for soe reason does not work, but otoh isnt used anywhere
+
+} // namespace PFFS
 
 #define _INTEGER
 #endif

@@ -38,19 +38,19 @@
 #ifndef POKITTO_DISK_H
 #define POKITTO_DISK_H
 
-#include "Pokitto_settings.h" // needed for NOPETITFATFS
-
 #ifndef POK_SIM
+
 // real hardware disk driver
-#ifndef NOPETITFATFS
 #include "diskio.h"
 #include "pff.h"
 #include "connect.h"
-extern BYTE res;
-extern FATFS fs;            /* File system object */
-extern FATDIR dir;            /* Directory object */
-extern FILINFO fno;        /* File information */
-#endif
+
+//using namespace PFFS;
+
+extern PFFS::BYTE res;
+extern PFFS::FATFS fs;            /* File system object */
+extern PFFS::FATDIR dir;            /* Directory object */
+extern PFFS::FILINFO fno;        /* File information */
 
 #include "mbed.h"
 

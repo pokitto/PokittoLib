@@ -30,6 +30,8 @@
 
 using namespace mbed;
 
+using namespace SDFS;
+
 /**
  * FATFileSystem based on ChaN's Fat Filesystem library v0.8
  */
@@ -40,7 +42,7 @@ public:
     virtual ~FATFileSystem();
 
     static FATFileSystem * _ffs[_VOLUMES];   // FATFileSystem objects, as parallel to FatFs drives array
-    FATFS _fs;                               // Work area (file system object) for logical drive
+    SDFS::FATFS _fs;                               // Work area (file system object) for logical drive
     int _fsid;
 
     /**
