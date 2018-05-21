@@ -883,7 +883,7 @@ void Sound::ampEnable(uint8_t v) {
 
 int Sound::playMusicStream(char* filename)
 {
-    return playMusicStream(filename,0);
+    return playMusicStream(filename,FILE_MODE_READONLY | FILE_MODE_BINARY);
 }
 
 int Sound::playMusicStream()
@@ -909,7 +909,7 @@ int Sound::playMusicStream(char* filename, uint8_t options)
         result = pokInitSD();
         if (!isThisFileOpen(filename)) {
             fileClose(); // close any open files
-            result = fileOpen(filename,FILE_MODE_OVERWRITE | FILE_MODE_BINARY);
+            result = fileOpen(filename,FILE_MODE_READONLY | FILE_MODE_BINARY);
         }
 
         if (result) {
@@ -932,3 +932,10 @@ int Sound::playMusicStream(char* filename, uint8_t options)
     return 1; // opening music file succeeded
 }
 
+uint32_t Sound::getMusicStreamElapsedSec() {
+    return streamcounter/POK_AUD_FREQ;
+}
+
+uint32_t Sound::getMusicStreamElapsedMilliSec() {
+    return streamcounter/(POK_AUD_FREQ/1000);
+}

@@ -191,8 +191,8 @@ void pokSoundIRQ() {
                 output = o/2;
             //}
         #endif // STREAMING
-        soundbyte = output/3; //decrease volume in simulator vs hardware
-        soundbuf[soundbufindex++]=soundbyte;
+        soundbyte = output;
+        soundbuf[soundbufindex++]=soundbyte/3;
         if (soundbufindex==SBUFSIZE) soundbufindex=0;
     #endif // POK_SIM
 }

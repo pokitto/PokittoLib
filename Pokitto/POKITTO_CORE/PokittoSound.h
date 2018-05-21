@@ -102,6 +102,7 @@ extern void audio_IRQ();  // audio interrupt
 class Sound {
 private:
     static uint16_t volumeMax;
+
 public:
 	static void begin();
 
@@ -122,6 +123,8 @@ public:
     static int playMusicStream(char* filename);
     static int playMusicStream();
     static void pauseMusicStream();
+    static uint32_t getMusicStreamElapsedSec();
+    static uint32_t getMusicStreamElapsedMilliSec();
 
 	// GB compatibility functions
 	static void playTrack(const uint16_t* track, uint8_t channel);

@@ -1,4 +1,4 @@
-#include "PokittoCore.h"
+#include "Pokitto.h"
 #include "Animation.h"
 
 #define X_L_EYE 6
@@ -22,13 +22,18 @@
 #define Y_BLINKF 6
 #define X_BLINKH 2
 #define Y_BLINKH 12
-#define READLEVEL 15
-#define GRINLEVEL 30
-#define GRINOUT 130
-#define TALKPROBABILITY 0x90
+#define READLEVEL 4 // was 15
+#define MIDPOINT 65
+#define GRINLEVEL 230
+#define GRINOUT 30000
+#define TALKPROBABILITY 0x90 //was 90
 
 Pokitto::Core gb;
-
+#ifndef POK_SIM
+DigitalOut enable(EXT4);
+#else
+uint8_t enable;
+#endif
 
 void popShowButton(char c) {
     gb.display.color=0;
@@ -39,13 +44,15 @@ void popShowButton(char c) {
 }
 
 int main () {
-
+    enable=0;
     pokInitSD();
-    gb.sound.playMusicStream("feelgood.SND");
+    gb.sound.playMusicStream("intro44.snd");
     int16_t x,y,x_lpupil,x_rpupil,y_pupil, squint=1;
-    uint8_t mouth=0,eyes=1,blink=0,blinkcount=0, eyecount=0, grincounter=0, grinout=GRINOUT;
+    uint8_t mouth=0,eyes=1,blink=0,blinkcount=0, eyecount=0;
+    uint16_t grincounter=0, grinout=GRINOUT;
     bool blockmouth=false;
     bool talking=false;
+    uint8_t sbtemp=0;
 
     x_lpupil = X_LPUPIL; x_rpupil = X_RPUPIL; y_pupil=Y_PUPIL;
     gb.begin();
@@ -57,9 +64,17 @@ int main () {
     gb.sound.playMusicStream();
     while (gb.isRunning()) {
 
-
-        if (soundbyte > 127 + READLEVEL|| soundbyte < 127-READLEVEL) talking = true;
+        #ifdef POK_SIM]
+        sbtemp = (uint8_t)(soundbyte * 3);
+        #else
+        sbtemp = (uint8_t)soundbyte;
+        #endif // POK_SIM
+        if (sbtemp > MIDPOINT + READLEVEL|| sbtemp < MIDPOINT-READLEVEL) talking = true;
+        //if (sbtemp > MIDPOINT + READLEVEL) talking = true;
         else talking=false;
+        if (gb.sound.getMusicStreamElapsedSec()<6) talking=false;
+        if (gb.sound.getMusicStreamElapsedMilliSec()>10270 && gb.sound.getMusicStreamElapsedMilliSec() < 11303) talking=false;
+         if (gb.sound.getMusicStreamElapsedMilliSec()>15800 && gb.sound.getMusicStreamElapsedMilliSec() < 17400) talking=false;
         //talking = false;
         //if (gb.buttons.leftBtn()) talking=true;
         //if (gb.buttons.aBtn()) squint=false;
@@ -208,7 +223,7 @@ int main () {
         }
         //gb.display.color = 0;
         //gb.display.setCursor(0,0);
-        //gb.display.print(soundbyte);
+        //gb.display.print((int)sbtemp);
         //if (gb.buttons.pressed(BTN_A)) gb.display.rotatePalette(1);
 
         }
