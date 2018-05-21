@@ -933,9 +933,15 @@ int Sound::playMusicStream(char* filename, uint8_t options)
 }
 
 uint32_t Sound::getMusicStreamElapsedSec() {
+    #if POK_STREAMING_MUSIC
     return streamcounter/POK_AUD_FREQ;
+    #endif
+    return 0;
 }
 
 uint32_t Sound::getMusicStreamElapsedMilliSec() {
+    #if POK_STREAMING_MUSIC
     return streamcounter/(POK_AUD_FREQ/1000);
+    #endif
+    return 0;
 }

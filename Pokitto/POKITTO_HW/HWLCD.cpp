@@ -37,9 +37,13 @@
 #include "HWLCD.h" //HWLCD.h" #include "HWLCD.h"
 #include "Pokitto_settings.h"
 
-#ifndef DISABLEAVRMIN
-#define max(a,b) ((a)>(b)?(a):(b))
-#define min(a,b) ((a)<(b)?(a):(b))
+#define avrmax(a,b) ((a)>(b)?(a):(b))
+#define avrmin(a,b) ((a)<(b)?(a):(b))
+
+#ifdef DISABLEAVRMIN
+#include <algorithm>
+using std::min;
+using std::max;
 #endif // DISABLEAVRMIN
 
 #define AB_JUMP 1024 // jump one 1-bit Arduboy screen forward to get next color bit
@@ -743,8 +747,8 @@ void Pokitto::lcdRefreshMode1Spr(
                     continue;
 
                 // Detect the dirty rect x-span by combining the previous and current sprite position.
-                int16_t sprDirtyXMin = min(sprx, sprOldX);
-                int16_t sprDirtyXMax = max(sprx, sprOldX);
+                int16_t sprDirtyXMin = avrmin(sprx, sprOldX);
+                int16_t sprDirtyXMax = avrmax(sprx, sprOldX);
                 if (isCurrentSpriteOutOfScreen)
                     sprDirtyXMax = sprOldX;
                 if (isOldSpriteOutOfScreen)
@@ -757,15 +761,15 @@ void Pokitto::lcdRefreshMode1Spr(
                     // *** COMBINE DIRTY RECTS FOR THIS SCANLINE GROUP ***
 
                     // Dirty rect
-                    int16_t sprDirtyYMin = min(spry, sprOldY);
-                    sprDirtyYMin = max(sprDirtyYMin, 0);
-                    int16_t sprDirtyYMax = max(spry, sprOldY);
+                    int sprDirtyYMin = avrmin(spry, sprOldY);
+                    sprDirtyYMin = avrmax((int)sprDirtyYMin, 0);
+                    int sprDirtyYMax = avrmax(spry, sprOldY);
                     if (isCurrentSpriteOutOfScreen)
                         sprDirtyYMax = sprOldY;
                     if (isOldSpriteOutOfScreen)
                         sprDirtyYMax = spry;
-                    int16_t sprDirtyYMaxEnd = sprDirtyYMax + sprh - 1;
-                    sprDirtyYMaxEnd = min(sprDirtyYMaxEnd, LCDHEIGHT - 1);  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
+                    int sprDirtyYMaxEnd = sprDirtyYMax + sprh - 1;
+                    sprDirtyYMaxEnd = avrmin(sprDirtyYMaxEnd, LCDHEIGHT - 1);  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
 
                     // Get the scanline min and max y values for drawing
                     if (sprDirtyYMin < scanlineMinY)

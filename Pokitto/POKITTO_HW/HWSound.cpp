@@ -50,7 +50,14 @@
 
 Pokitto::Sound __shw;
 
+#ifdef XPERIMENTAL
+DigitalOut e4(EXT4);
+e4=0;
+#endif
+
 using namespace Pokitto;
+
+
 
 #ifndef POK_SIM
 #if POK_ENABLE_SOUND

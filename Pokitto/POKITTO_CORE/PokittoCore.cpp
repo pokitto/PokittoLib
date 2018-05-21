@@ -34,13 +34,14 @@
 */
 /**************************************************************************/
 
-#include "PokittoCore.h"
 #include "Pokitto_settings.h"
+#include "PokittoCore.h"
 #include "PokittoConsole.h"
 #include "PokittoFonts.h"
 #include "PokittoTimer.h"
 #include "PokittoLogos.h"
 #include <stdlib.h>
+
 #ifndef DISABLEAVRMIN
 #define max(a,b) ((a)>(b)?(a):(b))
 #endif // DISABLEAVRMIN

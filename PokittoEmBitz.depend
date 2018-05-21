@@ -4111,9 +4111,9 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1526852676 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
-	"PokittoCore.h"
+1526923050 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
+	"PokittoCore.h"
 	"PokittoConsole.h"
 	"PokittoFonts.h"
 	"PokittoTimer.h"
@@ -4156,7 +4156,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1526890946 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1526929677 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4177,11 +4177,12 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1524430917 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1526932604 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
+	<algorithm>
 
-1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1526926506 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -5985,4 +5986,46 @@
 1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_tongue.c
 	<stdint.h>
 	"Animation.h"
+
+1508394580 source:c:\pokittolib_git\pokittolib_curr\examples\coffins\classes.cpp
+
+1508394476 source:c:\pokittolib_git\pokittolib_curr\examples\coffins\mapgen.c
+	<stdio.h>
+	<stdlib.h>
+
+1526926522 source:c:\pokittolib_git\pokittolib_curr\examples\coffins\main.cpp
+	"Pokitto.h"
+	<vector>
+	<string>
+	"sprites.h"
+	"mapgen.c"
+	"classes.cpp"
+	"gui.h"
+	"crapai.h"
+
+1526925763 c:\pokittolib_git\pokittolib_curr\examples\coffins\my_settings.h
+
+1508394476 c:\pokittolib_git\pokittolib_curr\examples\coffins\sprites.h
+
+1508394476 c:\pokittolib_git\pokittolib_curr\examples\coffins\mapgen.c
+	<stdio.h>
+	<stdlib.h>
+
+1508394580 c:\pokittolib_git\pokittolib_curr\examples\coffins\classes.cpp
+
+1508394468 c:\pokittolib_git\pokittolib_curr\examples\coffins\gui.h
+
+1508394460 c:\pokittolib_git\pokittolib_curr\examples\coffins\crapai.h
+
+1526920186 source:c:\pokittolib_git\pokittolib_curr\examples\crabator\crabator.cpp
+	<Pokitto.h>
+	"Crabator.h"
+
+1526932798 c:\pokittolib_git\pokittolib_curr\examples\crabator\my_settings.h
+
+1507922852 c:\pokittolib_git\pokittolib_curr\examples\crabator\crabator.h
+	<stdint.h>
+
+1507922854 source:c:\pokittolib_git\pokittolib_curr\examples\crabator\main.cpp
+	"Pokitto.h"
 
