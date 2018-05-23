@@ -1102,6 +1102,7 @@ char* Core::filemenu() {
 }
 
 int8_t Core::menu(const char* const* items, uint8_t length) {
+if (display.color>3) display.color=1;
 #if (ENABLE_GUI > 0)
 	display.persistence = false;
 	int8_t activeItem = 0;

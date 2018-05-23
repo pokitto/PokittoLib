@@ -3214,7 +3214,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1522700077 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1527114451 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -4111,7 +4111,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1526923050 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1527065918 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -4147,7 +4147,7 @@
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.cpp
 	"PokittoLogos.h"
 
-1519501070 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
+1527021921 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -6028,4 +6028,54 @@
 
 1507922854 source:c:\pokittolib_git\pokittolib_curr\examples\crabator\main.cpp
 	"Pokitto.h"
+
+1527032376 source:c:\pokittolib_git\pokittolib_curr\examples\pokittris\tetris.cpp
+	"pokitto.h"
+	"tetris_gfx.h"
+	"easing.h"
+
+1527031497 c:\pokittolib_git\pokittolib_curr\examples\pokittris\my_settings.h
+
+1506536576 c:\pokittolib_git\pokittolib_curr\examples\pokittris\tetris_gfx.h
+
+1527021522 c:\pokittolib_git\pokittolib_curr\examples\pokittris\easing.h
+
+1527114279 c:\pokittolib_git\pokittolib_curr\examples\chip8\my_settings.h
+
+1496591713 source:c:\pokittolib_git\pokittolib_curr\examples\chip8\chip8editor.cpp
+	"CHIP8Editor.h"
+
+1496792797 c:\pokittolib_git\pokittolib_curr\examples\chip8\chip8editor.h
+	"pokitto.h"
+
+1527113950 source:c:\pokittolib_git\pokittolib_curr\examples\chip8\chip8player.cpp
+	"CHIP8Player.h"
+	"PokittoDisk.h"
+
+1499814675 c:\pokittolib_git\pokittolib_curr\examples\chip8\chip8player.h
+	"pokitto.h"
+	"ListBox.h"
+	"FieldsList.h"
+
+1498955511 c:\pokittolib_git\pokittolib_curr\examples\chip8\listbox.h
+	"pokitto.h"
+
+1527112253 c:\pokittolib_git\pokittolib_curr\examples\chip8\fieldslist.h
+	"Pokitto.h"
+
+1527112270 source:c:\pokittolib_git\pokittolib_curr\examples\chip8\fieldslist.cpp
+	"FieldsList.h"
+
+1527112727 source:c:\pokittolib_git\pokittolib_curr\examples\chip8\hello.cpp
+	"pokitto.h"
+	"CHIP8Player.h"
+
+1499982158 source:c:\pokittolib_git\pokittolib_curr\examples\chip8\listbox.cpp
+	"ListBox.h"
+
+1499382200 source:c:\pokittolib_git\pokittolib_curr\examples\chip8\spriteeditor.cpp
+	"SpriteEditor.h"
+
+1499382168 c:\pokittolib_git\pokittolib_curr\examples\chip8\spriteeditor.h
+	"pokitto.h"
 
