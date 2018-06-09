@@ -38,6 +38,9 @@
 
 #ifndef POK_SIM
 #include "USBSerial.h"
+#ifdef USE_SEGGER_SERIAL_PRINT
+#include "SEGGER_RTT.h"
+#endif
 #endif
 
 #include "PythonBindings.h"
@@ -50,7 +53,7 @@
 
 Pokitto::Core game;
 
-extern "C" int main_upython(int argc, char **argv);
+extern "C" int PythonMain(int argc, char **argv);
 
 int main () {
 
