@@ -2652,6 +2652,10 @@
 		<Unit filename="Examples\TestCrashScreen\My_settings.h">
 			<Option target="TestCrashScreen" />
 		</Unit>
+		<Unit filename="Examples\Tracker\Arrays.cpp">
+			<Option compilerVar="CC" />
+			<Option target="Tracker" />
+		</Unit>
 		<Unit filename="Examples\Tracker\Arrays.h">
 			<Option target="Tracker" />
 		</Unit>
@@ -2663,6 +2667,10 @@
 			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Examples\Tracker\PatchSettings.h">
+			<Option target="Tracker" />
+		</Unit>
+		<Unit filename="Examples\Tracker\Tracker.cpp">
+			<Option compilerVar="CC" />
 			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Examples\Tracker\Tracker.h">
@@ -3248,29 +3256,35 @@
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC16.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC7.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC7.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ccsbcs.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\diskio.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\diskio.h">
 			<Option target="WavePlayer" />
@@ -3279,63 +3293,77 @@
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\integer.h">
 			<Option target="WavePlayer" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\sdfs_diskio.h">
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\sdfs_integer.h">
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATDirHandle.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATDirHandle.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileHandle.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileHandle.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileSystem.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileSystem.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\MemFileSystem.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\SDFileSystem.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\SDFileSystem.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
+			<Option target="Tracker" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.cpp">
 			<Option compilerVar="CC" />
@@ -3632,7 +3660,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
-				<target_debugging_settings target="Pixonia" active_interface="J-link">
+				<target_debugging_settings target="Zuzupong" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -3832,7 +3860,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
-				<target_debugging_settings target="SynthTest" active_interface="J-link">
+				<target_debugging_settings target="DrawDemo" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -3933,6 +3961,7 @@
 					</debug_interface>
 				</target_debugging_settings>
 				<target_debugging_settings target="Chip8" active_interface="J-link">
+
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -3983,6 +4012,7 @@
 					</debug_interface>
 				</target_debugging_settings>
 				<target_debugging_settings target="Crabator" active_interface="J-link">
+
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -4008,6 +4038,7 @@
 					</debug_interface>
 				</target_debugging_settings>
 				<target_debugging_settings target="Introduction" active_interface="J-link">
+
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -4032,6 +4063,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
+
 				<target_debugging_settings target="Coffins" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
@@ -4057,6 +4089,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
+
 				<target_debugging_settings target="3DBlobs" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
@@ -4082,6 +4115,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
+
 				<target_debugging_settings target="Pokittris" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
@@ -4108,6 +4142,7 @@
 					</debug_interface>
 				</target_debugging_settings>
 				<target_debugging_settings target="Bitmap" active_interface="J-link">
+
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>

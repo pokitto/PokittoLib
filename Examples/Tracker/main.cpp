@@ -32,20 +32,23 @@ int main(){
 	pok.display.setFont(font5x7);
 	pok.setFrameRate(frameRate);
 	//tracker.fillArrays(); // there are 30 blocks and all block have 64 pitch and patch storage. Fill them -1
+	
 	while(pok.isRunning()){
         if (screen){ //Settings mode
             if(pok.update(true)){
                 updatenow=true;
                 checkButtons();
+                tracker.SetColorPalette();
                 pok.display.clear();
                 printSettings();
                 drawPointer();
-            }
+                tracker.drawHelpBar();
+           }
         }
-        else{ //Tracker mode
+        if(!screen) { //Tracker mode
             if (tracker.play){
                 if (tracker.playTracker()) {
-                        updatenow=true;
+                    updatenow = true;
                 }
             }
             if(pok.update(true)){
@@ -53,19 +56,22 @@ int main(){
                         updatenow=true;
                 }
             }
+
             if (!screen && updatenow) {
-                        pok.display.clear();
-                        tracker.drawIsPlaying();
-                        tracker.drawLines();
-                        tracker.printValues();
-                        tracker.printSettings();
-                        tracker.drawPointer();
+                tracker.SetColorPalette();
+                pok.display.clear();
+                tracker.drawIsPlaying();
+                tracker.drawLines();
+                tracker.printValues();
+                tracker.printSettings();
+                tracker.drawPointer();
+                tracker.drawHelpBar();
             }
         }
-	if (updatenow) {
+        if (updatenow) {
 	        pok.display.update(); // Update screen only when we have need to do so!
-	// In this way we save ALOT of cpu power!
-        updatenow=false;
-	}
+			// In this way we save ALOT of cpu power!
+       		updatenow = false;
+		}
 	}
 }
