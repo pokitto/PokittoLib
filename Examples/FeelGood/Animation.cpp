@@ -29,6 +29,7 @@
 
 Pokitto::Core gb;
 
+
 void popShowButton(char c) {
     gb.display.color=0;
     gb.display.fillRect(gb.display.width/2-10,gb.display.height/2-10,20,20);
@@ -38,6 +39,7 @@ void popShowButton(char c) {
 }
 
 int main () {
+
     pokInitSD();
     gb.sound.playMusicStream("feelgood.SND");
     int16_t x,y,x_lpupil,x_rpupil,y_pupil, squint=1;

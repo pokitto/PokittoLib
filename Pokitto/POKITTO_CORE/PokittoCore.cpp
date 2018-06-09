@@ -34,13 +34,14 @@
 */
 /**************************************************************************/
 
-#include "PokittoCore.h"
 #include "Pokitto_settings.h"
+#include "PokittoCore.h"
 #include "PokittoConsole.h"
 #include "PokittoFonts.h"
 #include "PokittoTimer.h"
 #include "PokittoLogos.h"
 #include <stdlib.h>
+
 #ifndef DISABLEAVRMIN
 #define max(a,b) ((a)>(b)?(a):(b))
 #endif // DISABLEAVRMIN
@@ -473,7 +474,7 @@ void Core::setVolLimit() {
     if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
     else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
     #ifdef PRODUCTIONTESTING
-    vol=240;
+    vol=170;
     sound.setMaxVol(VOLUME_SPEAKER_MAX);
     #endif
     for (uint8_t t=0;t<=vol;t++) {
@@ -1101,6 +1102,7 @@ char* Core::filemenu() {
 }
 
 int8_t Core::menu(const char* const* items, uint8_t length) {
+if (display.color>3) display.color=1;
 #if (ENABLE_GUI > 0)
 	display.persistence = false;
 	int8_t activeItem = 0;

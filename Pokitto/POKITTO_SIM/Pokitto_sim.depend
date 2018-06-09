@@ -2668,8 +2668,7 @@
 	<string.h>
 	<stdint.h>
 
-1518175152 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
-	"Pokitto_settings.h"
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
 	"diskio.h"
 	"pff.h"
 	"connect.h"
@@ -2701,7 +2700,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobacklight.h
 	<stdint.h>
 
-1524817648 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
+1526891000 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2817,7 +2816,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1525175227 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1526852676 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -2830,7 +2829,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1524431305 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -2859,7 +2858,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1525172363 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1526890946 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -2868,7 +2867,7 @@
 	"SimSound.h"
 	"PokittoSimulator.h"
 
-1518118641 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio_sim.cpp
+1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio_sim.cpp
 	<stdint.h>
 	<stdio.h>
 	<math.h>
@@ -2975,7 +2974,7 @@
 
 1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
 
-1525173363 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
+1526827794 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
 	"SimSound.h"
 	"PokittoSimulator.h"
 	"PokittoGlobs.h"
@@ -3855,4 +3854,84 @@
 1525730264 source:c:\git\pokittolib2\examples\tracker\tracker.cpp
 	"Tracker.h"
 	"Arrays.h"
+
+1526893370 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\animation.cpp
+	"Pokitto.h"
+	"Animation.h"
+
+1526850663 c:\pokittolib_git\pokittolib_curr\examples\introduction\my_settings.h
+
+1484573449 c:\pokittolib_git\pokittolib_curr\examples\introduction\animation.h
+
+1484516861 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_cheeks.c
+	<stdint.h>
+	"Animation.h"
+
+1484517119 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_dreamy.c
+	<stdint.h>
+	"Animation.h"
+
+1484516925 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_eyepupil.c
+	<stdint.h>
+	"Animation.h"
+
+1484573463 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_flat.c
+	<stdint.h>
+	"Animation.h"
+
+1484516925 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_grin.c
+	<stdint.h>
+	"Animation.h"
+
+1484516925 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_halfpupil.c
+	<stdint.h>
+	"Animation.h"
+
+1484516925 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_heart.c
+	<stdint.h>
+	"Animation.h"
+
+1484516925 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_lefteye.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_lids_closed.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_lids_halfeyes.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_lids_smug.c
+	<stdint.h>
+	"Animation.h"
+
+1484516944 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_oh.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_professoreyes.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_righteye.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_smile.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_smile_open.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_squint.c
+	<stdint.h>
+	"Animation.h"
+
+1484516926 source:c:\pokittolib_git\pokittolib_curr\examples\introduction\m_tongue.c
+	<stdint.h>
+	"Animation.h"
 

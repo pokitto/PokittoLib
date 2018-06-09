@@ -46,25 +46,26 @@ Software License Agreement (BSD License)
 #include "SimLCD.h"
 #endif
 
+#ifndef PROJ_MODE13
+#define PALSIZE 16
+#else
+#define PALSIZE 256
+#endif
+
 using namespace Pokitto;
 
 
 void Display::loadRGBPalette(const unsigned char* p) {
-    for (int i=0;i<PALETTE_SIZE;i++) palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
+    for (int i=0;i<PALSIZE;i++) palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
     paletteptr = palette;
 }
 
 void Display::load565Palette(const uint16_t* p) {
-    for (int i=0;i<PALETTE_SIZE;i++) palette[i] = p[i];
+    for (int i=0;i<PALSIZE;i++) palette[i] = p[i];
     paletteptr = palette;
 }
 
 void Display::rotatePalette(int8_t step) {
-    #ifndef PROJ_MODE13
-    #define PALSIZE 16
-    #else
-    #define PALSIZE 256
-    #endif
     uint16_t tpal[PALSIZE];
     if (step == 0) return;
     step = 0-step;

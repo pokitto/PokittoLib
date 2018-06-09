@@ -50,7 +50,14 @@
 
 Pokitto::Sound __shw;
 
+#ifdef XPERIMENTAL
+DigitalOut e4(EXT4);
+e4=0;
+#endif
+
 using namespace Pokitto;
+
+
 
 #ifndef POK_SIM
 #if POK_ENABLE_SOUND
@@ -361,7 +368,7 @@ inline void pokSoundIRQ() {
     //#define TICKY 0xFFFF //160
     //#define INCY 409
     uint32_t output=0;uint32_t op;
-    streamon=1;
+    //streamon=1;
     //if (test==TICKY) test=0;
     //if (test<(TICKY/2)) { tpin=1; pwmout_write(&audiopwm,(float)0/(float)255);}//dac_write(0);}
     //else {tpin=0; pwmout_write(&audiopwm,(float)255/(float)255);}//dac_write(64);}

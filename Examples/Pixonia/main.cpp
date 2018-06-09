@@ -1004,7 +1004,7 @@ DigitalOut ptest(EXT0); //P1_19
 int s=0;
 
 int main () {
-    gb.sound.playMusicStream("play22u.snd");
+    gb.sound.playMusicStream("music/pixonia.snd");
 
     gb.begin();
     gb.display.load565Palette(pokulous_pal);
@@ -1024,7 +1024,7 @@ int main () {
     uint8_t newtime;
     int tgold=0;
 
-
+    gb.sound.playMusicStream();
     gb.display.bgcolor = 13;
     while (gb.isRunning()) {
         if (gb.update()) {
