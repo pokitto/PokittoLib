@@ -4182,7 +4182,7 @@
 	"Pokitto_settings.h"
 	<algorithm>
 
-1526926506 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1527202105 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -6078,4 +6078,37 @@
 
 1499382168 c:\pokittolib_git\pokittolib_curr\examples\chip8\spriteeditor.h
 	"pokitto.h"
+
+1517251472 c:\pokittolib_git\pokittolib_curr\examples\3dblobs\my_settings.h
+
+1527201943 source:c:\pokittolib_git\pokittolib_curr\examples\polarparcel\polar.cpp
+	"Pokitto.h"
+	<vector>
+	<stdint.h>
+	"sprites.h"
+	"bear_sprites.h"
+
+1527200124 c:\pokittolib_git\pokittolib_curr\examples\polarparcel\my_settings.h
+
+1527199995 c:\pokittolib_git\pokittolib_curr\examples\polarparcel\sprites.h
+	<stdint.h>
+
+1527199892 c:\pokittolib_git\pokittolib_curr\examples\polarparcel\bear_sprites.h
+	<stdint.h>
+
+1527352561 source:c:\pokittolib_git\pokittolib_curr\examples\aquarium256\main.cpp
+	"PokittoMicro.h"
+	"Pokitto.h"
+	"bitmaps.h"
+
+1527352561 c:\pokittolib_git\pokittolib_curr\examples\aquarium256\pokittomicro.h
+
+1527377441 c:\pokittolib_git\pokittolib_curr\examples\aquarium256\my_settings.h
+	"PokittoMicro.h"
+
+1527352561 c:\pokittolib_git\pokittolib_curr\examples\aquarium256\bitmaps.h
+
+1527352561 source:c:\pokittolib_git\pokittolib_curr\examples\aquarium256\pokittomicro.cpp
+	"PokittoMicro.h"
+	"Pokitto.h"
 
