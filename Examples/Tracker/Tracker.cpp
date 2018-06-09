@@ -2,6 +2,32 @@
 #include "Tracker.h"
 #include "Arrays.h"
 
+void Tracker::SetColorPalette() {
+
+    switch( mode ) {
+
+    case Modes::edit:
+        pok.display.paletteptr[0] = pok.display.RGBto565(176,46,245); // violet
+        break;
+
+    case Modes::play:
+        pok.display.paletteptr[0] = pok.display.RGBto565(18,46,129);  // blue
+        break;
+
+    case Modes::travel:
+        if(screen==0)
+            pok.display.paletteptr[0] = COLOR_BLACK;
+        else
+            pok.display.paletteptr[0] = pok.display.RGBto565(100,100,100);  // grey , Settings screen
+
+        break;
+
+    case Modes::settings:
+        pok.display.paletteptr[0] = pok.display.RGBto565(100,100,100);  // grey
+        break;
+    }
+}
+
 int16_t Tracker::getBPM(){
     return bpm;
 }
@@ -55,7 +81,7 @@ void Tracker::playNote() {
 
 bool Tracker::checkButtons(){
     bool changed=false;
-    if(Tracker::mode == 0){ // travel mode
+    if(Tracker::mode == Modes::travel ){ // travel mode
         if (pok.buttons.repeat(BTN_LEFT, buttonRepeatFrame))
             {colPointer = minMax(colPointer-1, 0, maxColumn - 1); changed=true;}
     	if (pok.buttons.repeat(BTN_RIGHT, buttonRepeatFrame))
@@ -93,10 +119,10 @@ bool Tracker::checkButtons(){
             changed=true;
     	}
     	if (pok.buttons.pressed(BTN_A)){
-            mode = 1; changed=true;
+            mode = Modes::edit; changed=true;
     	}
     	if (pok.buttons.pressed(BTN_C)){
-            mode = 3; changed=true;
+            mode = Modes::play; changed=true;
     	}
     	if (pok.buttons.repeat(BTN_B,buttonRepeatFrame+1)){
             // delete note
@@ -109,9 +135,9 @@ bool Tracker::checkButtons(){
             changed=true;
     	}
     }
-    else if (mode == 1){ // edit pitches and patches
+    else if (mode == Modes::edit){ // edit pitches and patches
         if (pok.buttons.pressed(BTN_B)){
-            mode = 0;
+            mode = Modes::travel;
             edit = 0;
             changed=true;
         }
@@ -175,10 +201,10 @@ bool Tracker::checkButtons(){
             playNote();
         }
     }
-    else if(mode == 2){ // this screen settings
+    else if(mode == Modes::settings){ // this screen settings
         if (pok.buttons.pressed(BTN_C)){
             screen = 1;
-            mode = 0;
+            mode = Modes::travel;
             edit = 0;
             changed=true;
             return changed; // do not process more buttons if C has already been pressed!
@@ -199,9 +225,21 @@ bool Tracker::checkButtons(){
             else if (edit == 4) _songPos[songPos][0] = minMax(_songPos[songPos][0]-1, 0, 29);
             else if (edit == 5) _songPos[songPos][1] = minMax(_songPos[songPos][1]-1, 0, 29);
             else if (edit == 6) _songPos[songPos][2] = minMax(_songPos[songPos][2]-1, 0, 29);
-            else if (edit == 7) t1Mute = minMax(t1Mute-1, 0, 1);
-            else if (edit == 8) t2Mute = minMax(t2Mute-1, 0, 1);
-            else if (edit == 9) t3Mute = minMax(t3Mute-1, 0, 1);
+            else if (edit == 7) {
+                // Mute or unmute channel 1.
+                if( track1on ) { track1on=0; setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0); }
+                else track1on = 1;
+            }
+            else if (edit == 8) {
+                // Mute or unmute channel 2.
+               if( track2on ) { track2on=0; setOSC(&osc2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0); }
+                else track2on = 1;
+            }
+            else if (edit == 9) {
+                // Mute or unmute channel 3.
+               if( track3on ) { track3on=0; setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0); }
+                else track3on = 1;
+            }
         }
         if (pok.buttons.repeat(BTN_RIGHT, buttonRepeatFrame)){
             changed=true;
@@ -215,12 +253,24 @@ bool Tracker::checkButtons(){
             if (edit == 4) _songPos[songPos][0] = minMax(_songPos[songPos][0]+1, 0, 29);
             if (edit == 5) _songPos[songPos][1] = minMax(_songPos[songPos][1]+1, 0, 29);
             if (edit == 6) _songPos[songPos][2] = minMax(_songPos[songPos][2]+1, 0, 29);
-            else if (edit == 7) t1Mute = minMax(t1Mute+1, 0, 1);
-            else if (edit == 8) t2Mute = minMax(t2Mute+1, 0, 1);
-            else if (edit == 9) t3Mute = minMax(t3Mute+1, 0, 1);
+            else if (edit == 7) {
+                // Mute or unmute channel 1.
+                if( track1on ) { track1on=0; setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0); }
+                else track1on = 1;
+            }
+            else if (edit == 8) {
+                // Mute or unmute channel 2.
+               if( track2on ) { track2on=0; setOSC(&osc2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0); }
+                else track2on = 1;
+            }
+            else if (edit == 9) {
+                // Mute or unmute channel 3.
+               if( track3on ) { track3on=0; setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0); }
+                else track3on = 1;
+            }
         }
     }
-    else if(mode == 3){ // play, pause, stop
+    else if(mode == Modes::play){ // play, pause, stop
         if (pok.buttons.pressed(BTN_A)){
             changed=true;
             stop = 0;
@@ -235,6 +285,12 @@ bool Tracker::checkButtons(){
             }
     	}
     	if (pok.buttons.pressed(BTN_B)){
+
+            // If already stopped go to travel mode
+            if(!playing) {
+                mode = Modes::travel;
+            }
+
             changed=true;
             // Zero all oscillators
             setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
@@ -257,7 +313,7 @@ bool Tracker::checkButtons(){
             setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
             playing = false;
             play = 0;
-            mode = 2;
+            mode = Modes::settings;
     	}
     }
     return changed; //return bool true if buttons were pressed
@@ -290,10 +346,10 @@ void Tracker::drawLines(){ // draw lines in tracker mode
 
 void Tracker::drawPointer(){
     pok.display.setColor(2);
-    if (mode == 0){
+    if (mode == Modes::travel){
         pok.display.drawRect(vLines[colPointer], (fontH + 1) * (screenPointer + 1), (9 * fontW) + 10, fontH + 1);
     }
-    if (mode == 1){
+    if (mode == Modes::edit){
         if (edit == 0){
             pok.display.drawRect(vLines[colPointer], (fontH + 1) * (screenPointer + 1), (3 * fontW) + 5, fontH + 1);
         }
@@ -301,12 +357,47 @@ void Tracker::drawPointer(){
             pok.display.drawRect(vLines[colPointer] + ((fontH * 3) + 1), (fontH + 1) * (screenPointer + 1), (2 * fontW) + 5, fontH + 1);
         }
     }
-    if (mode == 2){
+    if (mode == Modes::settings){
         pok.display.drawRect(vLines[3] + 1, (fontH + 1) * ((edit * 2) + 1), (6 * fontW) + 7, fontH + 1);
     }
-    if (mode == 3){
+    if (mode == Modes::play){
         pok.display.drawRect(vLines[0], (fontH + 1) * (screenPointer + 1), vLines[3] - vLines[0], fontH + 1);
     }
+}
+
+void Tracker::drawHelpBar(){
+
+    pok.display.setColor(3);
+    uint16_t bgcolor_org = pok.display.bgcolor;
+    pok.display.fillRect(0, screenH-10+1, screenW+1, 10);
+    pok.display.setColor(0,3);
+    if (mode == Modes::travel){
+        if(screen==0)
+            pok.display.print(2, screenH-8,         "C: Play mode   B: Delete   A: Edit mode");
+        else
+            pok.display.print(2, screenH-8,         "C: Travel mode");
+    }
+    if (mode == Modes::edit){
+        pok.display.print(2, screenH-8,             "               B: Travel mode");
+    }
+    if (mode == Modes::settings){
+        pok.display.print(2, screenH-8,             "C: More settings");
+    }
+    if (mode == Modes::play){
+        if(playing) {
+            if(!play)
+                pok.display.print(2, screenH-8,     "C: Settings     B: Stop    A: Play");
+            else
+                pok.display.print(2, screenH-8,     "C: Settings     B: Stop    A: Pause");
+        }
+        else {
+            if(!play)
+                pok.display.print(2, screenH-8,     "C: Settings  B: Travel mode  A: Play");
+            else
+                pok.display.print(2, screenH-8,     "C: Settings  B: Travel mode  A: Pause");
+        }
+    }
+    pok.display.bgcolor = bgcolor_org;
 }
 
 void Tracker::drawIsPlaying(){
@@ -415,15 +506,15 @@ void Tracker::printSettings(){
     pok.display.setCursor(s_vLines[0], (14 * fontH) + 15);
     pok.display.print("MuteT1");
     pok.display.setCursor(s_vLines[0], (15 * fontH) + 16);
-    pok.display.print(t1Mute, 10);
+    pok.display.print(!track1on, 10);
     pok.display.setCursor(s_vLines[0], (16 * fontH) + 17);
     pok.display.print("MuteT2");
     pok.display.setCursor(s_vLines[0], (17 * fontH) + 18);
-    pok.display.print(t2Mute, 10);
+    pok.display.print(!track2on, 10);
     pok.display.setCursor(s_vLines[0], (18 * fontH) + 19);
     pok.display.print("MuteT3");
     pok.display.setCursor(s_vLines[0], (19 * fontH) + 20);
-    pok.display.print(t3Mute, 10);
+    pok.display.print(!track3on, 10);
 }
 
 bool Tracker::playTracker(){
@@ -509,8 +600,9 @@ int32_t Tracker::extractNextInteger(char* str) {
 int Tracker::loadSong(char* songname){
     pok.display.clear();
     char text[80]; // for reading lines of text from the file
-    if (fileOpen(songname, FILE_MODE_READWRITE)) return 1; //open failed
+    if (fileOpen(songname, FILE_MODE_READONLY)) return 1; //open failed
     int numinst=1; int numpat=1;
+
     // Song header
     fileReadLine(&text[0],80); // vanity text only
     fileReadLine(&text[0],80); // version number
@@ -524,6 +616,7 @@ int Tracker::loadSong(char* songname){
     song.song_loop = loopTo; //legacy synth code
     fileReadLine(&text[0],80);
     numPatches = extractNextInteger(&text[0]);
+
     // Read Block Sequence from file
     uint8_t highestBlockInUse=0;
     for (int i=0; i<=lastPattern; i++) {
@@ -538,25 +631,25 @@ int Tracker::loadSong(char* songname){
     }
     // Read blocks into pitch and patch arrays
     for (int b=0; b<30; b++) { //#of blocks, should actually be handled with dynamic memory
-        int temp=0;
+       int temp=0;
         if (pok.update()) {
-        pok.display.setCursor(0,0);
-        pok.display.println("Loading...");
-        pok.display.print(b);
-        pok.display.print("/30");
+            pok.display.setCursor(0,0);
+            pok.display.println("Loading...");
+            pok.display.print(b);
+            pok.display.print("/30");
         }
         for (int r=0; r<64; r++) { //#of rows
             fileReadLine(&text[0],80); // read text in
             if (b>highestBlockInUse) {
-              _pitch[b][r] = 255; // read in pitch
-              _patch[b][r] = 0; // read in patch
+                _pitch[b][r] = 255; // read in pitch
+                _patch[b][r] = 0; // read in patch
             } else {
-            temp = extractNextInteger(&text[0]); // dummy read block #
-            temp = extractNextInteger(_textptr); // dummy read row#
-            temp = extractNextInteger(_textptr); //iterate over remainder
-            _pitch[b][r] = temp; // read in pitch
-            temp = extractNextInteger(_textptr); //iterate over remainder
-            _patch[b][r] = temp; // read in patch
+                temp = extractNextInteger(&text[0]); // dummy read block #
+                temp = extractNextInteger(_textptr); // dummy read row#
+                temp = extractNextInteger(_textptr); //iterate over remainder
+                _pitch[b][r] = temp; // read in pitch
+                temp = extractNextInteger(_textptr); //iterate over remainder
+                _patch[b][r] = temp; // read in patch
             }
         }
     }
@@ -565,84 +658,84 @@ int Tracker::loadSong(char* songname){
     //Tracker::emptyPatches(); - this causes file to close!!
     //fileReadLine(&text[0],80); // dummy read
     for (int i=1;i<=numPatches;i++) {
-    char pname[10];
-    fileReadLine(&pname[0],10);
-    strcpy(&patchnames[i][0],&pname[0]);
-    fileReadLine(&text[0],80);
-    patch[i].wave = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].vol = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].bendrate = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].maxbend = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].vibrate = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].arpmode = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].adsr = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].attack = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].decay = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].sustain = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].release = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].loop = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].echo = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].overdrive = extractNextInteger(&text[0]);
-    fileReadLine(&text[0],80);
-    patch[i].kick = extractNextInteger(&text[0]);
+        char pname[10];
+        fileReadLine(&pname[0],10);
+        strcpy(&patchnames[i][0],&pname[0]);
+        fileReadLine(&text[0],80);
+        patch[i].wave = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].vol = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].bendrate = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].maxbend = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].vibrate = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].arpmode = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].adsr = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].attack = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].decay = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].sustain = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].release = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].loop = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].echo = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].overdrive = extractNextInteger(&text[0]);
+        fileReadLine(&text[0],80);
+        patch[i].kick = extractNextInteger(&text[0]);
     }
+
+    fileClose();
+
     return 0; // no error
 }
 
-void Tracker::saveSong(){
-    fileOpen("SavedSong.rbs", FILE_MODE_READWRITE);
- //   filePrint(rboyChar, sizeof(rboyChar));
- //   filePrint(unknownChar, sizeof(unknownChar));
-    NL();
- //   filePrint(BPMChar, sizeof(BPMChar));
-    filePutInt(bpm);
-    NL();
- //   filePrint(lastPatternChar, sizeof(lastPatternChar));
-    filePutChar(lastPattern + '0');
-    NL();
- //   filePrint(loopToChar, sizeof(loopToChar));
-    filePutChar(loopTo + '0');
-    NL();
- //   filePrint(patchesChar, sizeof(patchesChar));
-    filePutChar('1');
-    filePutChar('4');
-    NL();
+void Tracker::saveSong(FILE* fp){
+
+    // Song header
+    fprintf(fp, rboyChar);
+    fprintf(fp, unknownChar);
+    fprintf(fp, "\n");
+    fprintf(fp, BPMChar);
+    fprintf(fp, "%d", bpm);
+    fprintf(fp, "\n");
+    fprintf(fp, lastPatternChar);
+    fprintf(fp, "%d", lastPattern);
+    fprintf(fp, "\n");
+    fprintf(fp, loopToChar);
+    fprintf(fp, "%d", loopTo);
+    fprintf(fp, "\n");
+    fprintf(fp, patchesChar);
+    fprintf(fp, "15");
+    fprintf(fp, "\n");
+
+    // Write Block Sequence
     for(uint8_t j = 0; j < lastPattern + 1; j++){
-  //      filePrint(blockSeqChar, sizeof(blockSeqChar));
-        filePutChar(j + '0'); filePutChar(' '); filePutChar(',');
-        filePutInt(_songPos[j][0]);
-        filePutChar(',');
-        filePutInt(_songPos[j][1]);
-        filePutChar(',');
-        filePutInt(_songPos[j][2]);
-        NL();
+        fprintf(fp, blockSeqChar);
+        fprintf(fp, "%d ,", j);
+        fprintf(fp, "%d,%d,%d\n", _songPos[j][0], _songPos[j][1], _songPos[j][2]);
     }
+
+    // Write blocks from pitch and patch arrays
     for (uint8_t k = 0; k < 30; k++){
-        for (uint8_t j = 0; j < 64; j++){
-    //        filePrint(blockChar, sizeof(blockChar));
-            filePutInt(k);
-      //      filePrint(rowChar, sizeof(rowChar));
-            filePutInt(j);
-            filePutChar(' '); filePutChar(',');
-            if(_pitch[k][j] == -1) filePutInt(255);
-            else filePutInt(_pitch[k][j]);
-            filePutChar(',');
-            if(_patch[k][j] == -1) filePutInt(0);
-            else filePutInt(_patch[k][j]);
-            NL();
+        for (uint8_t j = 0; j < 64; j++){ //#of rows
+
+            fprintf(fp, blockChar);
+            fprintf(fp, "%d", k);
+            fprintf(fp, rowChar);
+            fprintf(fp, "%d ,", j);
+            if(_pitch[k][j] == -1) fprintf(fp, "255,");
+            else fprintf(fp, "%d,", _pitch[k][j]);
+            if(_patch[k][j] == -1) fprintf(fp, "0");
+            else fprintf(fp, "%d\n", _patch[k][j]);
         }
     }
 }
@@ -658,10 +751,9 @@ uint8_t Tracker::digitLength(int _int){
 }
 
 void Tracker::filePutInt(int _int){
-    uint8_t _size = digitLength(_int);
-    for(int8_t i = _size; i >= 0; i--){
-        filePutChar(intToChar(_int, i));
-    }
+    char text[16];
+    itoa(_int, text, 10);
+    filePrint(text, strlen(text)+1);
 }
 
 void Tracker::filePrint(const char *_string, uint8_t _size){
@@ -684,17 +776,30 @@ void Tracker::NL(){
 void Tracker::initStreams() {
     // Put stream memory pointers in place
     uint16_t blocknum;
-    blocknum=_songPos[songPos][0]; //read current block number for track 1
-    song.instrument_stream[0]=(uint8_t*)&_patch[blocknum][0];
-    song.note_stream[0]=(uint8_t*)&_pitch[blocknum][0];
+
+    // retarget pointers for track 1
+    //if(!t1Mute)
+    {
+        blocknum=_songPos[songPos][0]; //read current block number for track 1
+        song.instrument_stream[0]=(uint8_t*)&_patch[blocknum][0];
+        song.note_stream[0]=(uint8_t*)&_pitch[blocknum][0];
+    }
+
     // retarget pointers for track 2
-    blocknum=_songPos[songPos][1]; //read current block number for track 2
-    song.instrument_stream[1]=(uint8_t*)&_patch[blocknum][0];
-    song.note_stream[1]=(uint8_t*)&_pitch[blocknum][0];
+    //if(!t2Mute)
+    {
+        blocknum=_songPos[songPos][1]; //read current block number for track 2
+        song.instrument_stream[1]=(uint8_t*)&_patch[blocknum][0];
+        song.note_stream[1]=(uint8_t*)&_pitch[blocknum][0];
+    }
+
     // retarget pointers for track 3
-    blocknum=_songPos[songPos][2]; //read current block number for track 3
-    song.instrument_stream[2]=(uint8_t*)&_patch[blocknum][0];
-    song.note_stream[2]=(uint8_t*)&_pitch[blocknum][0];
+    //if(!t3Mute)
+    {
+        blocknum=_songPos[songPos][2]; //read current block number for track 3
+        song.instrument_stream[2]=(uint8_t*)&_patch[blocknum][0];
+        song.note_stream[2]=(uint8_t*)&_pitch[blocknum][0];
+    }
 }
 
 void Tracker::playPtn() {

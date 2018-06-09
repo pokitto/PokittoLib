@@ -824,6 +824,10 @@ Q(Signal)
 
 Q(Signal)
 
+Q(Sound)
+
+Q(Sound)
+
 Q(StopIteration)
 
 Q(StopIteration)
@@ -925,6 +929,8 @@ Q(__main__)
 Q(__main__)
 
 Q(__module__)
+
+Q(__name__)
 
 Q(__name__)
 
@@ -1156,6 +1162,8 @@ Q(fill)
 
 Q(fill)
 
+Q(fill_buffer)
+
 Q(fill_rect)
 
 Q(find)
@@ -1200,7 +1208,13 @@ Q(generator)
 
 Q(get)
 
+Q(get_current_soundbuffer_index)
+
+Q(get_current_soundbuffer_pos)
+
 Q(get_rect)
+
+Q(get_soundbuffer_size)
 
 Q(getattr)
 
@@ -1346,6 +1360,10 @@ Q(micropython)
 
 Q(micropython)
 
+Q(mixer)
+
+Q(mixer)
+
 Q(mode)
 
 Q(module)
@@ -1372,7 +1390,11 @@ Q(opt_level)
 
 Q(ord)
 
+Q(pause)
+
 Q(pixel)
+
+Q(play)
 
 Q(poll)
 
@@ -1403,6 +1425,8 @@ Q(remove)
 Q(replace)
 
 Q(repr)
+
+Q(reset)
 
 Q(reverse)
 

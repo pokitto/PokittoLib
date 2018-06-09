@@ -1,4 +1,8 @@
 
+#ifndef POK_SIM
+#include "SDFileSystem.h"
+#endif
+
 bool stopexit=true;
 
 struct Instrument{
@@ -24,7 +28,7 @@ struct Instrument instr[15];
 int8_t instrPointer = 0;
 int8_t settingPointer = 0;
 
-void saveInstrInSong();
+void saveInstrInSong(FILE* fp);
 
 void changeValues(int8_t i){
     if (settingPointer == 9) patch[instrPointer].attack += i;
@@ -88,13 +92,28 @@ bool checkButtons(){
             //save instrument
         //else if(settingPointer == 17)
             //load instrument
-        else if(settingPointer == 18){
-            tracker.saveSong();
-            saveInstrInSong();
-            changed=true;
+        else if(settingPointer == 18){  // Save song
+            #ifndef POK_SIM
+            SDFileSystem sd(/*MOSI*/P0_9, /*MISO*/P0_8, /*SCK*/P0_6, /*CS*/P0_7, /*Mountpoint*/"sd"); //!!HV
+            #endif
+            char* filePathAndName = "/sd/SavedSong.rbs";
+
+            FILE* fp=fopen(filePathAndName, "w+");
+            if(fp) {
+                tracker.saveSong(fp);
+                saveInstrInSong(fp);
+                fclose(fp);
+                changed=true;
             }
-        //else if(settingPointer == 19)
-            //load song
+        }
+        else if(settingPointer == 19)//load song
+        {
+            char* selectedFile = pok.filemenu("RBS");
+            if( *selectedFile != 0 ) {
+                pokInitSD();
+                tracker.loadSong(selectedFile);
+            }
+        }
         else tracker.playNote(); // try the note
     }
     else if(pok.buttons.pressed(BTN_C) && stopexit==false)
@@ -164,63 +183,50 @@ void printSettings(){
     pok.display.setCursor(2, (18 * fontH) + 18);
     pok.display.print("Save Song");
     pok.display.setCursor(2, (19 * fontH) + 19);
-    pok.display.print("Load Song");
+    pok.display.print("Load Song...");
 }
 
 void drawPointer(){
     pok.display.drawBitmap(130, (settingPointer * fontH) + settingPointer, pointBitmap);
 }
 
-void saveInstrInSong(){
-    for (uint8_t j = 0; j < tracker.getLP() + 1; j++){
-        if (tracker.patchnames[0] == 0) tracker.filePutInt(j);
-        else tracker.filePrint(tracker.patchnames[j], sizeof(tracker.patchnames[j]));
-        tracker.NL();
-//        tracker.filePrint(waveChar, sizeof(waveChar));
-        tracker.filePutInt(patch[j].wave);
-        tracker.NL();
-//        tracker.filePrint(volChar, sizeof(volChar));
-        tracker.filePutInt(patch[j].vol);
-        tracker.NL();
-//        tracker.filePrint(pitchRateChar, sizeof(pitchRateChar));
-        tracker.filePutInt(patch[j].bendrate);
-        tracker.NL();
-//        tracker.filePrint(pitchMaxChar, sizeof(pitchMaxChar));
-        tracker.filePutInt(patch[j].maxbend);
-        tracker.NL();
- //       tracker.filePrint(vibChar, sizeof(vibChar));
-        tracker.filePutInt(0);
-        tracker.NL();
-   //     tracker.filePrint(arpChar, sizeof(arpChar));
-        tracker.filePutInt(patch[j].arpmode);
-        tracker.NL();
-     //   tracker.filePrint(ADSRChar, sizeof(ADSRChar));
-        tracker.filePutInt(patch[j].adsr);
-        tracker.NL();
-    //    tracker.filePrint(attackChar, sizeof(attackChar));
-        tracker.filePutInt(patch[j].attack);
-        tracker.NL();
-  //      tracker.filePrint(decayChar, sizeof(decayChar));
-        tracker.filePutInt(patch[j].decay);
-        tracker.NL();
-  //      tracker.filePrint(sustainChar, sizeof(sustainChar));
-        tracker.filePutInt(patch[j].sustain);
-        tracker.NL();
-   //     tracker.filePrint(releaseChar, sizeof(releaseChar));
-        tracker.filePutInt(patch[j].release);
-        tracker.NL();
-   //     tracker.filePrint(loopChar, sizeof(loopChar));
-        tracker.filePutInt(patch[j].loop);
-        tracker.NL();
-   //     tracker.filePrint(echoChar, sizeof(echoChar));
-        tracker.filePutInt(patch[j].echo);
-        tracker.NL();
-   //     tracker.filePrint(overdriveChar, sizeof(overdriveChar));
-        tracker.filePutInt(patch[j].overdrive);
-        tracker.NL();
-    //    tracker.filePrint(drumChar, sizeof(drumChar));
-        tracker.filePutInt(patch[j].kick);
-        tracker.NL();
+void saveInstrInSong(FILE* fp){
+    //for (uint8_t j = 0; j < tracker.getLP() + 1; j++){
+    for (uint8_t j = 1; j <= NUM_PATCHES; j++){
+        if (tracker.patchnames[j][0] != 0) {
+            fprintf(fp, tracker.patchnames[j]);
+            fprintf(fp, "\n");
+            fprintf(fp, waveChar);
+            fprintf(fp, "%d\n", patch[j].wave);
+            fprintf(fp, volChar);
+            fprintf(fp, "%d\n", patch[j].vol);
+            fprintf(fp, pitchRateChar);
+            fprintf(fp, "%d\n", patch[j].bendrate);
+            fprintf(fp, pitchMaxChar);
+            fprintf(fp, "%d\n", patch[j].maxbend);
+            fprintf(fp, vibChar);
+            fprintf(fp, "0\n");
+            fprintf(fp, arpChar);
+            fprintf(fp, "%d\n", patch[j].arpmode);
+            fprintf(fp, ADSRChar);
+            fprintf(fp, "%d\n", patch[j].adsr);
+            fprintf(fp, attackChar);
+            fprintf(fp, "%d\n", patch[j].attack);
+            fprintf(fp, decayChar);
+            fprintf(fp, "%d\n", patch[j].decay);
+            fprintf(fp, sustainChar);
+            fprintf(fp, "%d\n", patch[j].sustain);
+            fprintf(fp, releaseChar);
+            fprintf(fp, "%d\n", patch[j].release);
+            fprintf(fp, loopChar);
+            fprintf(fp, "%d\n", patch[j].loop);
+            fprintf(fp, echoChar);
+            fprintf(fp, "%d\n", patch[j].echo);
+            fprintf(fp, overdriveChar);
+            fprintf(fp, "%d\n", patch[j].overdrive);
+            fprintf(fp, drumChar);
+            fprintf(fp, "%d\n", patch[j].kick);
+
+        }
     }
-    fileClose();
 }

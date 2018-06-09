@@ -38,7 +38,6 @@
 #define PYTHON_BINDINGS_H
 
 #if MICROPY_ENABLE_GC==1  // This means micropython is used
-
 #ifdef __cplusplus
 #define EXTERNC extern "C"
 #else
@@ -90,6 +89,15 @@ EXTERNC bool Pok_Core_isRunning();
 EXTERNC bool Pok_Core_buttons_repeat(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_held(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_released(uint8_t button);
+
+// Sound functions
+EXTERNC void Pok_Sound_Reset();
+EXTERNC uint8_t Pok_Sound_GetCurrentBufferIndex();
+EXTERNC uint32_t Pok_Sound_GetCurrentBufferPos();
+EXTERNC uint32_t Pok_Sound_GetBufferSize();
+EXTERNC void Pok_Sound_FillBuffer(void* buf, uint16_t len, uint8_t soundBufferIndex, uint16_t soundBufferPos);
+EXTERNC void Pok_Sound_Play();
+EXTERNC void Pok_Sound_Pause();
 
 EXTERNC void Pok_Wait(uint32_t dur_ms);
 
