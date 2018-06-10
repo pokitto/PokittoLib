@@ -4127,7 +4127,7 @@
 1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1528585913 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4364,8 +4364,9 @@
 	"CRC7.h"
 	"CRC16.h"
 
-1524435607 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+1528597864 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
 	"Pokitto.h"
+	"PokittoSaveblock.h"
 
 1521233474 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
 
@@ -6096,14 +6097,14 @@
 1527199892 c:\pokittolib_git\pokittolib_curr\examples\polarparcel\bear_sprites.h
 	<stdint.h>
 
-1527352561 source:c:\pokittolib_git\pokittolib_curr\examples\aquarium256\main.cpp
+1527377990 source:c:\pokittolib_git\pokittolib_curr\examples\aquarium256\main.cpp
 	"PokittoMicro.h"
 	"Pokitto.h"
 	"bitmaps.h"
 
 1527352561 c:\pokittolib_git\pokittolib_curr\examples\aquarium256\pokittomicro.h
 
-1527377441 c:\pokittolib_git\pokittolib_curr\examples\aquarium256\my_settings.h
+1527377997 c:\pokittolib_git\pokittolib_curr\examples\aquarium256\my_settings.h
 	"PokittoMicro.h"
 
 1527352561 c:\pokittolib_git\pokittolib_curr\examples\aquarium256\bitmaps.h
@@ -6111,4 +6112,14 @@
 1527352561 source:c:\pokittolib_git\pokittolib_curr\examples\aquarium256\pokittomicro.cpp
 	"PokittoMicro.h"
 	"Pokitto.h"
+
+1528597487 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosaveblock.cpp
+	"Pokitto_settings.h"
+	"Pokitto.h"
+	"PokittoSaveblock.h"
+	"PokittoSimulator.h"
+
+1528597418 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosaveblock.h
+	"Pokitto_settings.h"
+	<stdint.h>
 
