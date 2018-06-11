@@ -491,15 +491,28 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
                 } else drawPixel(x + i, y + 7 - j,bgcolor);
                 bitcolumn>>=1;
                 #else
-                if (bitcolumn&0x1) {
-                    drawPixel(x + i, y + j,color);
-                } else drawPixel(x + i, y + j,bgcolor);
+                if (fontSize==2) {
+                  if (bitcolumn&0x1) {
+                            drawPixel(x + (i<<1)  , y + (j<<1),color);
+                            drawPixel(x + (i<<1)+1, y + (j<<1),color);
+                            drawPixel(x + (i<<1)  , y + (j<<1)+1,color);
+                            drawPixel(x + (i<<1)+1, y + (j<<1)+1,color);
+                        } else {
+                            drawPixel(x + (i<<1)  , y + (j<<1),bgcolor);
+                            drawPixel(x + (i<<1)+1, y + (j<<1),bgcolor);
+                            drawPixel(x + (i<<1)  , y + (j<<1)+1,bgcolor);
+                            drawPixel(x + (i<<1)+1, y + (j<<1)+1,bgcolor);
+                        }
+                } else {
+                    if (bitcolumn&0x1) drawPixel(x + i, y + j,color);
+                    else drawPixel(x + i, y + j,bgcolor);
+                }
                 bitcolumn>>=1;
                 #endif // PROJ_ARDUBOY
 
             }
     }
-
+    if (fontSize==2) return (numBytes+adjustCharStep)<<1;
     return numBytes+adjustCharStep; // for character stepping
 }
 
@@ -2020,7 +2033,9 @@ void Display::write(uint8_t c) {
 			}
 			else
 				charstep=print_char(cursorX,cursorY,c);
+			#ifndef FULLWIDTHSPACES
 			if (c==' ' && adjustCharStep) charstep=(charstep>>1)+1;
+			#endif
 			cursorX += charstep;
 	}
 }
