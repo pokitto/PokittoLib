@@ -1,8 +1,10 @@
 #include "Pokitto.h"
 #include "PokittoCookie.h"
-#include <string>
 
 Pokitto::Core mygame;
+
+
+/* Random stuff to store in the EEPROM */
 
 const char playerrank[3][10] = {
     "Rookie",
@@ -11,6 +13,9 @@ const char playerrank[3][10] = {
 };
 
 const char* blabla = "This is extra long text that is needed to waste fill cookie memory";
+
+
+/* Three classes that extend the base Cookie class */
 
 class mycookie : public Pokitto::Cookie {
 public:
@@ -35,31 +40,37 @@ public:
     int e=5;
 };
 
+/* create instances */
 mycookie highscore;
 myothercookie yogibear;
 mythirdcookie numbercookie;
 
 int main () {
+    /* game state variables, only for the show */
     int state=0; //game display state
     int currentblock = 0;
     int currentblockowner = -1;
     char temp; //
+
+    /* wipe the keytable so we start from fresh. You can comment this out */
     highscore.formatKeytable();
+
     mygame.begin(); //start game
 
-    //put numbers cookie first
+    /* put 'numbers' cookie first into memory */
     numbercookie.begin("NUMBERS",sizeof(numbercookie),(char*)&numbercookie);
     numbercookie.saveCookie();
-    //prepare and save the demo cookie
+
+    /* populate and save the 'demo' cookie */
     if (!highscore.rank[0]) strcpy(highscore.rank,playerrank[0]);
     if (highscore.playtime==0) highscore.playtime=1234567890;
-    strcpy(highscore.message,blabla);
     highscore.begin("HISCTEST",sizeof(highscore),(char*)&highscore); //initialize cookie
     highscore.loadCookie();
-    //and to the end, the YogiBear cookie
+    strcpy(highscore.message,blabla);
+
+    /* and to the last slot in order, put the YogiBear cookie */
     yogibear.begin("YOGISAVE",sizeof(yogibear),(char*)&yogibear); //init other cookie
     yogibear.saveCookie(); //store it in eeprom
-
 
     while (mygame.isRunning()) {
 
@@ -107,7 +118,7 @@ int main () {
             } else currentblockowner = -1;
             mygame.display.color=1;
             mygame.display.setFont(font5x7);
-            mygame.display.println("EEPROM Key Table:\n");
+            mygame.display.println("EEPROM Cookie Keytable:\n");
             for (int i=0, k=0, r=0;i<12;i++) {
                     mygame.display.color=2;
                     if (i<10) mygame.display.print(" ");
@@ -188,7 +199,7 @@ int main () {
             }
             mygame.display.color=1;
             mygame.display.println("\nPress C to go back to highscore");
-            if (currentblockowner != -1) mygame.display.print("Press B to erase demo cookie");
+            if (currentblockowner != -1) mygame.display.print("Press B to erase the demo cookie");
             break;
             } //game state
             if (mygame.buttons.pressed(BTN_C)) state = 1-state;

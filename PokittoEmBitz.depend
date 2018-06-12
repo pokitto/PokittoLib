@@ -6127,10 +6127,9 @@
 	"Pokitto_settings.h"
 	<stdint.h>
 
-1528770683 source:c:\pokittolib_git\pokittolib_curr\examples\savehighscore\savehi.cpp
+1528797468 source:c:\pokittolib_git\pokittolib_curr\examples\savehighscore\savehi.cpp
 	"Pokitto.h"
 	"PokittoCookie.h"
-	<string>
 
 1528751116 c:\pokittolib_git\pokittolib_curr\examples\savehighscore\my_settings.h
 
