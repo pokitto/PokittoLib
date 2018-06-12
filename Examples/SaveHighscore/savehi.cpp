@@ -58,18 +58,18 @@ int main () {
     mygame.begin(); //start game
 
     /* put 'numbers' cookie first into memory */
-    numbercookie.begin("NUMBERS",sizeof(numbercookie),(char*)&numbercookie);
+    numbercookie.begin("NUMBERS", numbercookie);
     numbercookie.saveCookie();
 
     /* populate and save the 'demo' cookie */
     if (!highscore.rank[0]) strcpy(highscore.rank,playerrank[0]);
     if (highscore.playtime==0) highscore.playtime=1234567890;
-    highscore.begin("HISCTEST",sizeof(highscore),(char*)&highscore); //initialize cookie
+    highscore.begin("HISCTEST", highscore); //initialize cookie
     highscore.loadCookie();
     strcpy(highscore.message,blabla);
 
     /* and to the last slot in order, put the YogiBear cookie */
-    yogibear.begin("YOGISAVE",sizeof(yogibear),(char*)&yogibear); //init other cookie
+    yogibear.begin("YOGISAVE", yogibear); //init other cookie
     yogibear.saveCookie(); //store it in eeprom
 
     while (mygame.isRunning()) {
