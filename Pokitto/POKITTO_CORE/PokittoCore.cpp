@@ -133,7 +133,11 @@ int random(int maxVal)
 int random(int minVal, int maxVal)
 {
   // int rand(void); included by default from newlib
+  #ifdef OLDINCLUSIVERANDOM
   return rand() % (maxVal-minVal+1) + minVal;
+  #else
+  return rand() % (maxVal-minVal) + minVal;
+  #endif
 }
 
 using namespace Pokitto;

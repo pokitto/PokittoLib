@@ -4111,7 +4111,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1527065918 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1528752789 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -6123,17 +6123,18 @@
 	"Pokitto_settings.h"
 	<stdint.h>
 
-1528720784 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.h
+1528750457 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.h
 	"Pokitto_settings.h"
 	<stdint.h>
 
-1528719201 source:c:\pokittolib_git\pokittolib_curr\examples\savehighscore\savehi.cpp
+1528770683 source:c:\pokittolib_git\pokittolib_curr\examples\savehighscore\savehi.cpp
 	"Pokitto.h"
 	"PokittoCookie.h"
+	<string>
 
-1528682307 c:\pokittolib_git\pokittolib_curr\examples\savehighscore\my_settings.h
+1528751116 c:\pokittolib_git\pokittolib_curr\examples\savehighscore\my_settings.h
 
-1528722244 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.cpp
+1528769764 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.cpp
 	"Pokitto_settings.h"
 	"Pokitto.h"
 	"PokittoCookie.h"

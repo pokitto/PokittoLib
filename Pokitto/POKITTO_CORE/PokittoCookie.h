@@ -93,6 +93,13 @@ public:
      */
      int begin(const char*, int, char*);
 
+    /** initialize - create cookie structure. Can be called many times
+     *  @returns
+     *       0 on success (free blocks available),
+     *   non-0 on failure (no more free keys/blocks)
+     */
+     int initialize();
+
     /** saveCookie - Save your Cookie
      *
      *  @returns
@@ -280,7 +287,7 @@ public:
     /** keystring
     * identification string for the Cookie
     */
-     //char _key[SBKEYSIZE];
+     char _key[SBKEYSIZE];
 
     /** Keyorder
     * order number of key in key table

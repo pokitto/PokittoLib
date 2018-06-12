@@ -1,25 +1,65 @@
 #include "Pokitto.h"
 #include "PokittoCookie.h"
+#include <string>
 
 Pokitto::Core mygame;
+
+const char playerrank[3][10] = {
+    "Rookie",
+    "Medium",
+    "Expert"
+};
+
+const char* blabla = "This is extra long text that is needed to waste fill cookie memory";
 
 class mycookie : public Pokitto::Cookie {
 public:
     char initials[4] = {'A','D','A',0};
     int score=10;
+    char rank[10];
+    long playtime = 1234567890;
+    char message[100];
+};
+
+class myothercookie : public Pokitto::Cookie {
+public:
+    char fun[9] = {'Y','o','g','i','B','e','a','r'};
+};
+
+class mythirdcookie : public Pokitto::Cookie {
+public:
+    int a=1;
+    int b=2;
+    int c=3;
+    int d=4;
+    int e=5;
 };
 
 mycookie highscore;
+myothercookie yogibear;
+mythirdcookie numbercookie;
 
 int main () {
-    int state=1; //game display state
+    int state=0; //game display state
     int currentblock = 0;
     int currentblockowner = -1;
     char temp; //
+    highscore.formatKeytable();
     mygame.begin(); //start game
-    //mygame.display.adjustCharStep=0;
-    highscore.begin("FOOBOO",sizeof(highscore),(char*)&highscore); //initialize cookie
-    //highscore.loadCookie(); //return stored values
+
+    //put numbers cookie first
+    numbercookie.begin("NUMBERS",sizeof(numbercookie),(char*)&numbercookie);
+    numbercookie.saveCookie();
+    //prepare and save the demo cookie
+    if (!highscore.rank[0]) strcpy(highscore.rank,playerrank[0]);
+    if (highscore.playtime==0) highscore.playtime=1234567890;
+    strcpy(highscore.message,blabla);
+    highscore.begin("HISCTEST",sizeof(highscore),(char*)&highscore); //initialize cookie
+    highscore.loadCookie();
+    //and to the end, the YogiBear cookie
+    yogibear.begin("YOGISAVE",sizeof(yogibear),(char*)&yogibear); //init other cookie
+    yogibear.saveCookie(); //store it in eeprom
+
 
     while (mygame.isRunning()) {
 
@@ -30,7 +70,7 @@ int main () {
             mygame.display.color=1;
             mygame.display.println("Highscore Cookie test\n");
             mygame.display.color=2;
-            mygame.display.println("Current highscore:\n");
+            mygame.display.println("Random \"data\":\n");
             mygame.display.color=3;
             mygame.display.setFont(fontZXSpec);
             mygame.display.fontSize=2;
@@ -38,8 +78,14 @@ int main () {
             mygame.display.print(" ");
             mygame.display.println((int)highscore.score);
             mygame.display.println("\n");
-            mygame.display.setFont(font5x7);
             mygame.display.fontSize=1;
+            mygame.display.print("Rank: ");
+            mygame.display.println((const char*)highscore.rank);
+            mygame.display.print("Playtime: ");
+            mygame.display.println(highscore.playtime);
+            mygame.display.print("Blabla: ");
+            mygame.display.println(highscore.message);
+            mygame.display.setFont(font5x7);
             mygame.display.color=1;
             mygame.display.println("\n\nPress A to generate random highscore\nand store it ");
             mygame.display.println("\nPress C for EEPROM view");
@@ -49,6 +95,8 @@ int main () {
                 highscore.initials[1] = random(65,90);
                 highscore.initials[2] = random(65,90);
                 highscore.score += random(10);
+                strcpy(highscore.rank,playerrank[random(0,3)]);
+                highscore.playtime = (long)random(0,0xFFFF)*(long)random(0,0xFFFF);
                 // save new highscore
                 highscore.saveCookie();
             }
@@ -103,7 +151,10 @@ int main () {
             mygame.display.print(' ');
             //print owner of block
             if (eeprom_read_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+currentblock))&0x80) {
-            for (int i = 0;i<SBKEYSIZE;i++) mygame.display.print((const char)eeprom_read_byte((uint16_t*)(SBKEYSIZE*currentblock+i)));
+            currentblockowner = eeprom_read_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+currentblock))&0x7F;
+            for (int i = 0;i<SBKEYSIZE;i++) {
+                    mygame.display.print((const char)eeprom_read_byte((uint16_t*)(SBKEYSIZE*currentblockowner+i)));
+                    }
             } else mygame.display.print("free");
             mygame.display.println('\n');
             mygame.display.color=1;
@@ -137,7 +188,7 @@ int main () {
             }
             mygame.display.color=1;
             mygame.display.println("\nPress C to go back to highscore");
-            if (currentblockowner != -1) mygame.display.print("Press B to erase cookie");
+            if (currentblockowner != -1) mygame.display.print("Press B to erase demo cookie");
             break;
             } //game state
             if (mygame.buttons.pressed(BTN_C)) state = 1-state;

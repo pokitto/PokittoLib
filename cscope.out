@@ -1,4 +1,4 @@
-cscope 15 C:\PokittoLib_Git\PokittoLib_curr"               0001557111
+cscope 15 C:\PokittoLib_Git\PokittoLib_curr"               0001561521
 	@C:\PokittoLib_Git\PokittoLib_curr\Examples\3Dblobs\3Dblobs.cpp
 
 174 
@@ -54325,7 +54325,9 @@ MY_SETTINGS_H
 	#FULLWIDTHSPACES
 
 
-18 
+18 
+	#DISABLEAVRMIN
+
 
 	)
 
@@ -54339,7 +54341,11 @@ MY_SETTINGS_H
 	~"PokôtoCookõ.h
 "
 
-4 
+3 
+	~<°rög
+>
+
+5 
 	gPokôto
 ::
 C‹e
@@ -54347,7 +54353,15 @@ C‹e
 mygame
 ;
 
-6 ˛as†
+7 c⁄° 
+	g∂ayîønk
+[3][10] = {
+
+13 c⁄° * 
+	gbœbœ
+ = "This isÉxtraÜongÅextÅhat isÇeededÅo waste fill cookie memory";
+
+15 ˛as†
 	cmycookõ
  : 
 public
@@ -54357,71 +54371,111 @@ Pokôto
 Cookõ
  {
 
-7 
+16 
 public
 :
 
-8 
+17 
 öôüls
 [4] = {'A','D','A',0};
 
-9 
+18 
 	gsc‹e
 =10;
 
-12 
+19 
+	gønk
+[10];
+
+20 
+	g∂aytime
+ = 1234567890;
+
+21 
+	gmesßge
+[100];
+
+24 
 mycookõ
  
 	ghighsc‹e
 ;
 
-14 
+26 
 	$maö
  () {
 
-15 
+27 
 °©e
-=1;
+=0;
 
-16 
+28 
+cuºítblock
+ = 0;
+
+29 
+cuºítblockow√r
+ = -1;
+
+30 
 ãmp
 ;
 
-17 
+31 
 mygame
 .
 	`begö
 ();
 
-19 
+33 i‡(!
 highsc‹e
 .
-	`f‹m©KeyèbÀ
-();
+ønk
+[0]Ë
+	`°r˝y
+(highsc‹e.ønk,
+∂ayîønk
+[0]);
 
-20 
+34 i‡(
+highsc‹e
+.
+∂aytime
+==0) highscore.playtime=1234567890;
+
+35 
+	`°r˝y
+(
+highsc‹e
+.
+mesßge
+,
+bœbœ
+);
+
+36 
 highsc‹e
 .
 	`begö
 ("FOOBOO",(highscore),(*)&highscore);
 
-23 
+39 
 mygame
 .
 	`isRu¬ög
 ()) {
 
-25 i‡(
+41 i‡(
 mygame
 .
 	`upd©e
 ()) {
 
-26 
+42 
 °©e
 ) {
 
-28 
+44 
 mygame
 .
 di•œy
@@ -54431,7 +54485,7 @@ di•œy
 f⁄t5x7
 );
 
-29 
+45 
 mygame
 .
 di•œy
@@ -54439,7 +54493,7 @@ di•œy
 cﬁ‹
 =1;
 
-30 
+46 
 mygame
 .
 di•œy
@@ -54447,7 +54501,7 @@ di•œy
 	`¥öén
 ("Highscore CookieÅest\n");
 
-31 
+47 
 mygame
 .
 di•œy
@@ -54455,7 +54509,7 @@ di•œy
 cﬁ‹
 =2;
 
-32 
+48 
 mygame
 .
 di•œy
@@ -54463,7 +54517,7 @@ di•œy
 	`¥öén
 ("Current highscore:\n");
 
-33 
+49 
 mygame
 .
 di•œy
@@ -54471,7 +54525,7 @@ di•œy
 cﬁ‹
 =3;
 
-34 
+50 
 mygame
 .
 di•œy
@@ -54481,7 +54535,7 @@ di•œy
 f⁄tZXS≥c
 );
 
-35 
+51 
 mygame
 .
 di•œy
@@ -54489,7 +54543,7 @@ di•œy
 f⁄tSize
 =2;
 
-36 
+52 
 mygame
 .
 di•œy
@@ -54501,7 +54555,7 @@ highsc‹e
 öôüls
 );
 
-37 
+53 
 mygame
 .
 di•œy
@@ -54509,7 +54563,7 @@ di•œy
 	`¥öt
 (" ");
 
-38 
+54 
 mygame
 .
 di•œy
@@ -54521,7 +54575,7 @@ highsc‹e
 sc‹e
 );
 
-39 
+55 
 mygame
 .
 di•œy
@@ -54529,7 +54583,47 @@ di•œy
 	`¥öén
 ("\n");
 
-40 
+56 
+mygame
+.
+di•œy
+.
+f⁄tSize
+=1;
+
+57 
+mygame
+.
+di•œy
+.
+	`¥öén
+((c⁄° *)
+highsc‹e
+.
+ønk
+);
+
+58 
+mygame
+.
+di•œy
+.
+	`¥öt
+("Playtime: ");
+
+59 
+mygame
+.
+di•œy
+.
+	`¥öén
+(
+highsc‹e
+.
+∂aytime
+);
+
+60 
 mygame
 .
 di•œy
@@ -54539,15 +54633,7 @@ di•œy
 f⁄t5x7
 );
 
-41 
-mygame
-.
-di•œy
-.
-f⁄tSize
-=1;
-
-42 
+61 
 mygame
 .
 di•œy
@@ -54555,23 +54641,23 @@ di•œy
 cﬁ‹
 =1;
 
-43 
+62 
 mygame
 .
 di•œy
 .
 	`¥öén
-("\n\nPress AÅo makeáÇew highscore\n");
+("\n\nPress AÅo generateÑandom highscore\nand store it ");
 
-44 
+63 
 mygame
 .
 di•œy
 .
 	`¥öén
-("\n\nPress C for diagnostics");
+("\nPress C for EEPROM view");
 
-45 i‡(
+64 i‡(
 mygame
 .
 buâ⁄s
@@ -54581,7 +54667,7 @@ buâ⁄s
 BTN_A
 )) {
 
-47 
+66 
 highsc‹e
 .
 öôüls
@@ -54589,7 +54675,7 @@ highsc‹e
 	`øndom
 (65,90);
 
-48 
+67 
 highsc‹e
 .
 öôüls
@@ -54597,7 +54683,7 @@ highsc‹e
 	`øndom
 (65,90);
 
-49 
+68 
 highsc‹e
 .
 öôüls
@@ -54605,7 +54691,7 @@ highsc‹e
 	`øndom
 (65,90);
 
-50 
+69 
 highsc‹e
 .
 sc‹e
@@ -54613,13 +54699,63 @@ sc‹e
 	`øndom
 (10);
 
-52 
+70 
+	`°r˝y
+(
+highsc‹e
+.
+ønk
+,
+∂ayîønk
+[
+	`øndom
+(0,3)]);
+
+71 
+highsc‹e
+.
+∂aytime
+ = ()
+	`øndom
+(0,0xFFFF)*()random(0,0xFFFF);
+
+73 
 highsc‹e
 .
 	`ßveCookõ
 ();
 
-56 
+77 i‡(
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+SBKEYSIZE
+*
+SBMAXKEYS
++
+cuºítblock
+))&0x80) {
+
+78 
+cuºítblockow√r
+ = 
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+SBKEYSIZE
+*
+SBMAXKEYS
++
+cuºítblock
+))&0x7F;
+
+79 } 
+cuºítblockow√r
+ = -1;
+
+80 
 mygame
 .
 di•œy
@@ -54627,17 +54763,17 @@ di•œy
 cﬁ‹
 =1;
 
-57 
+81 
 mygame
 .
 di•œy
 .
 	`£tF⁄t
 (
-f⁄t3x5
+f⁄t5x7
 );
 
-58 
+82 
 mygame
 .
 di•œy
@@ -54645,15 +54781,15 @@ di•œy
 	`¥öén
 ("EEPROM Key Table:\n");
 
-59 
+83 
 i
 =0, 
 k
 =0, 
 r
-=0;i<24;i++) {
+=0;i<12;i++) {
 
-60 
+84 
 mygame
 .
 di•œy
@@ -54661,7 +54797,7 @@ di•œy
 cﬁ‹
 =2;
 
-61 i‡(
+85 i‡(
 i
 <10Ë
 mygame
@@ -54671,7 +54807,7 @@ di•œy
 	`¥öt
 (" ");
 
-62 
+86 
 mygame
 .
 di•œy
@@ -54681,7 +54817,7 @@ di•œy
 i
 );
 
-63 
+87 
 mygame
 .
 di•œy
@@ -54689,7 +54825,19 @@ di•œy
 	`¥öt
 (":");
 
-64 
+88 i‡(
+cuºítblockow√r
+==
+i
+Ë
+mygame
+.
+di•œy
+.
+cﬁ‹
+=1;
+
+89 
 mygame
 .
 di•œy
@@ -54697,13 +54845,13 @@ di•œy
 cﬁ‹
 =3;
 
-65 
+90 
 j
 =0; j<8; j++, 
 k
 ++) {
 
-66 
+91 
 ãmp
  = 
 	`ì¥om_ªad_byã
@@ -54713,7 +54861,7 @@ uöt16_t
 k
 );
 
-67 i‡(
+92 i‡(
 ãmp
 >31Ë
 mygame
@@ -54723,7 +54871,7 @@ di•œy
 	`¥öt
 ((const )temp);
 
-68 
+93 
 mygame
 .
 di•œy
@@ -54731,13 +54879,13 @@ di•œy
 	`¥öt
 ("-");
 
-70 
+95 
 r
 ++;
 
-71 i‡(
+96 i‡(
 r
-==4Ë{
+==3Ë{
 mygame
 .
 di•œy
@@ -54745,7 +54893,7 @@ di•œy
 	`¥öt
 ("\n");r=0;}
 
-72 
+97 
 mygame
 .
 di•œy
@@ -54753,7 +54901,7 @@ di•œy
 	`¥öt
 (" ");
 
-74 
+99 
 mygame
 .
 di•œy
@@ -54761,23 +54909,23 @@ di•œy
 cﬁ‹
 =1;
 
-75 
+100 
 mygame
 .
 di•œy
 .
 	`¥öén
-("\nEEPROM Block Table:\n");
+("\nEEPROM Block Reservation Table:\n");
 
-76 
+101 
 i
 =0, 
 k
 =0, 
 r
-=0;i<24;i++,k++) {
+=0;i<21;i++,k++) {
 
-77 
+102 
 mygame
 .
 di•œy
@@ -54785,7 +54933,7 @@ di•œy
 cﬁ‹
 =2;
 
-78 i‡(
+103 i‡(
 i
 <10Ë
 mygame
@@ -54795,7 +54943,19 @@ di•œy
 	`¥öt
 (" ");
 
-79 
+104 i‡(
+k
+==
+cuºítblock
+Ë
+mygame
+.
+di•œy
+.
+cﬁ‹
+=1;
+
+105 
 mygame
 .
 di•œy
@@ -54805,7 +54965,15 @@ di•œy
 k
 );
 
-80 
+106 
+mygame
+.
+di•œy
+.
+cﬁ‹
+=2;
+
+107 
 mygame
 .
 di•œy
@@ -54813,7 +54981,7 @@ di•œy
 	`¥öt
 (":");
 
-81 
+108 
 ãmp
  = 
 	`ì¥om_ªad_byã
@@ -54827,7 +54995,7 @@ SBMAXKEYS
 SBKEYSIZE
 ));
 
-82 i‡(
+109 i‡(
 ãmp
 &0x80Ë
 mygame
@@ -54837,7 +55005,7 @@ di•œy
 cﬁ‹
 =3;
 
-83 
+110 
 mygame
 .
 di•œy
@@ -54845,7 +55013,7 @@ di•œy
 cﬁ‹
 =1;
 
-84 i‡(
+111 i‡(
 ãmp
 &0x80Ë
 mygame
@@ -54855,7 +55023,7 @@ di•œy
 	`¥öt
 (()(temp&0x7F),16);
 
-85 
+112 
 mygame
 .
 di•œy
@@ -54863,7 +55031,7 @@ di•œy
 	`¥öt
 ("-");
 
-86 i‡((
+113 i‡((
 ãmp
 &0x7F)<16Ë
 mygame
@@ -54873,13 +55041,13 @@ di•œy
 	`¥öt
 (" ");
 
-87 
+114 
 r
 ++;
 
-88 i‡(
+115 i‡(
 r
-==8Ë{
+==7Ë{
 mygame
 .
 di•œy
@@ -54887,15 +55055,7 @@ di•œy
 	`¥öt
 ("\n");r=0;}
 
-89 
-mygame
-.
-di•œy
-.
-	`¥öt
-(" ");
-
-91 
+118 
 mygame
 .
 di•œy
@@ -54903,15 +55063,123 @@ di•œy
 cﬁ‹
 =1;
 
-92 
+119 
+mygame
+.
+di•œy
+.
+	`¥öt
+("\nEEPROM Block ");
+
+120 
+mygame
+.
+di•œy
+.
+cﬁ‹
+=2;
+
+121 
+mygame
+.
+di•œy
+.
+	`¥öt
+(
+cuºítblock
+);
+
+122 
+mygame
+.
+di•œy
+.
+cﬁ‹
+=3;
+
+123 
+mygame
+.
+di•œy
+.
+	`¥öt
+(' ');
+
+125 i‡(
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+SBKEYSIZE
+*
+SBMAXKEYS
++
+cuºítblock
+))&0x80) {
+
+126 
+cuºítblockow√r
+ = 
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+SBKEYSIZE
+*
+SBMAXKEYS
++
+cuºítblock
+))&0x7F;
+
+127 
+i
+ = 0;i<
+SBKEYSIZE
+;i++) {
+
+128 
+mygame
+.
+di•œy
+.
+	`¥öt
+((c⁄° )
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+SBKEYSIZE
+*
+cuºítblockow√r
++
+i
+)));
+
+130 } 
+mygame
+.
+di•œy
+.
+	`¥öt
+("free");
+
+131 
 mygame
 .
 di•œy
 .
 	`¥öén
-("\nEEPROM Block Content:\n");
+('\n');
 
-93 
+132 
+mygame
+.
+di•œy
+.
+cﬁ‹
+=1;
+
+133 
 i
 =0, 
 k
@@ -54921,7 +55189,7 @@ r
 SBBLOCKSIZE
 ;i++,k++) {
 
-94 
+134 
 ãmp
  = 
 	`ì¥om_ªad_byã
@@ -54935,9 +55203,13 @@ SBMAXKEYS
 SBKEYSIZE
 +
 SBMAXBLOCKS
++
+SBBLOCKSIZE
+*
+cuºítblock
 ));
 
-95 
+135 
 mygame
 .
 di•œy
@@ -54945,11 +55217,11 @@ di•œy
 cﬁ‹
 =3;
 
-96 i‡(
+136 i‡(
 ãmp
 >31 &&Åemp <127) {
 
-97 
+138 
 mygame
 .
 di•œy
@@ -54957,7 +55229,7 @@ di•œy
 cﬁ‹
 =1;
 
-98 
+139 
 mygame
 .
 di•œy
@@ -54967,15 +55239,19 @@ di•œy
 ãmp
 ));
 
-99 
+140 } i‡(
+ãmp
+) {
+
+142 
 mygame
 .
 di•œy
 .
-	`¥öt
-(" ");
+cﬁ‹
+=2;
 
-101 
+143 
 mygame
 .
 di•œy
@@ -54983,23 +55259,23 @@ di•œy
 	`¥öt
 (()(
 ãmp
-),16);
+));
 
-102 i‡(
-ãmp
-<16Ë
+146 
 mygame
 .
 di•œy
 .
 	`¥öt
-(" ");
+(()(
+ãmp
+));
 
-103 
+148 
 r
 ++;
 
-104 i‡(
+149 i‡(
 r
 ==16Ë{
 mygame
@@ -55009,7 +55285,7 @@ di•œy
 	`¥öt
 ("\n");r=0;}
 
-105 
+150 
 mygame
 .
 di•œy
@@ -55017,7 +55293,105 @@ di•œy
 	`¥öt
 (" ");
 
-109 i‡(
+152 i‡(
+mygame
+.
+buâ⁄s
+.
+	`¥es£d
+(
+BTN_LEFT
+)Ë
+cuºítblock
+--;
+
+153 i‡(
+mygame
+.
+buâ⁄s
+.
+	`¥es£d
+(
+BTN_RIGHT
+)Ë
+cuºítblock
+++;
+
+154 i‡(
+mygame
+.
+buâ⁄s
+.
+	`¥es£d
+(
+BTN_UP
+)Ë
+cuºítblock
+-=7;
+
+155 i‡(
+mygame
+.
+buâ⁄s
+.
+	`¥es£d
+(
+BTN_DOWN
+)Ë
+cuºítblock
++=7;
+
+156 i‡(
+cuºítblock
+<0) currentblock += 21;
+
+157 i‡(
+cuºítblock
+>20) currentblock -= 21;
+
+158 i‡(
+mygame
+.
+buâ⁄s
+.
+	`¥es£d
+(
+BTN_B
+)) {
+
+159 
+highsc‹e
+.
+	`dñëeCookõ
+();
+
+161 
+mygame
+.
+di•œy
+.
+cﬁ‹
+=1;
+
+162 
+mygame
+.
+di•œy
+.
+	`¥öén
+("\nPress CÅo go backÅo highscore");
+
+163 i‡(
+cuºítblockow√r
+ !-1Ë
+mygame
+.
+di•œy
+.
+	`¥öt
+("Press BÅoÉrase cookie");
+
+166 i‡(
 mygame
 .
 buâ⁄s
@@ -55029,7 +55403,7 @@ BTN_C
 °©e
  = 1-state;
 
-114 
+172 
 	}
 }
 
@@ -76003,29 +76377,189 @@ usög
 	gPokôto
 ;
 
-52 
+52 
+	#HARDCODEDOFFSET
+ 25
+
+53 
+
+	)
+
+54 
 	gCookõ
 ::
 	$Cookõ
 () {
 
-53 
+55 
 _°©us
  = 
 Ál£
 ;
 
-54 
+56 
 _key‹dî
  = 
 SBINVALIDSLOT
 ;
 
-55 
+57 
 	}
 }
 
-57 
+59 
+	gCookõ
+::
+	$öôülize
+() {
+
+61 
+d©asize
+ = 
+_d©asize
+;
+
+63 
+_key‹dî
+ = 
+	`exi°s
+(
+_key
+);
+
+64 i‡(
+_key‹dî
+ < 
+SBMAXKEYS
+) {
+
+67 
+d©asize
+ -
+	`gëAssig√dBlocks
+()*
+SBBLOCKSIZE
+;
+
+68 i‡(
+d©asize
+<=0) {
+
+71 
+_°©us
+ = 
+åue
+;
+
+72 
+	`lﬂdCookõ
+();
+
+76 
+d©asize
+>0) {
+
+77 if(
+	`ª£rveBlock
+()Ë
+d©asize
+ -
+SBBLOCKSIZE
+;
+
+78  
+SBNOTENOUGHBLOCKSFREE
+;
+
+80 
+_°©us
+ = 
+åue
+;
+
+81 
+	`îa£KeyèbÀE¡ry
+(
+_key‹dî
+);
+
+82 
+	`wrôeKeyToKeyèbÀ
+(
+_key
+,
+_key‹dî
+);
+
+83 
+	`ßveCookõ
+();
+
+88 
+_key‹dî
+ = 
+	`gëFªeKeyèbÀSlŸ
+();
+
+89 i‡(
+_key‹dî
+>=
+SBMAXKEYS
+Ë 
+SBNOMOREKEYS
+;
+
+91 i‡(
+	`gëFªeBlocks
+()*
+SBBLOCKSIZE
+<
+d©asize
+Ë 
+SBNOTENOUGHBLOCKSFREE
+;
+
+92 
+d©asize
+>0) {
+
+94 if(
+	`ª£rveBlock
+()Ë
+d©asize
+ -
+SBBLOCKSIZE
+;
+
+95  
+SBNOTENOUGHBLOCKSFREE
+;
+
+98 
+_°©us
+ = 
+åue
+;
+
+99 
+	`îa£KeyèbÀE¡ry
+(
+_key‹dî
+);
+
+100 
+	`wrôeKeyToKeyèbÀ
+(
+_key
+,
+_key‹dî
+);
+
+102 
+	}
+}
+
+104 
 	gCookõ
 ::
 	$begö
@@ -76037,125 +76571,69 @@ d©asize
 ±r
 ) {
 
-58 
+105 
 _°©us
 =
 Ál£
 ;
 
-59 
+106 
 _d©asize
 =
 d©asize
+-
+HARDCODEDOFFSET
 ;
 
-60 
+107 
 _poöãr
-=
+ = 
 ±r
+ + 
+HARDCODEDOFFSET
 ;
 
-62 
-_key‹dî
- = 
-	`exi°s
-(
+108 
+_idkey
+[8];
+
+110 
+t
+ = 0 ;Å < 8 ;Å++Ë
+_idkey
+[t]=' ';
+
+111 
+t
+ = 0 ;Å < 8 ;Å++Ë{i‡(
 idkey
-);
+[t]==0Ë; 
+_idkey
+[t]=idkey[t];}
 
-63 i‡(
-_key‹dî
- < 
-SBMAXKEYS
-) {
-
-66 
-d©asize
- -
-	`gëAssig√dBlocks
-()*
-SBBLOCKSIZE
-;
-
-69 
-d©asize
->0) {
-
-70 if(
-	`ª£rveBlock
-()Ë
-d©asize
- -
-SBBLOCKSIZE
-;
-
-71  
-SBNOTENOUGHBLOCKSFREE
-;
-
-76 
-_key‹dî
- = 
-	`gëFªeKeyèbÀSlŸ
+113 
+	`˛ónKeyèbÀ
 ();
 
-77 i‡(
-_key‹dî
->=
-SBMAXKEYS
-Ë 
-SBNOMOREKEYS
-;
-
-79 i‡(
-	`gëFªeBlocks
-()<
-d©asize
-Ë 
-SBNOTENOUGHBLOCKSFREE
-;
-
-80 
-d©asize
->0) {
-
-82 if(
-	`ª£rveBlock
-()Ë
-d©asize
- -
-SBBLOCKSIZE
-;
-
-83  
-SBNOTENOUGHBLOCKSFREE
-;
-
-86 
-_°©us
- = 
-åue
-;
-
-88 
-	`îa£KeyèbÀE¡ry
+114 
+	`mem˝y
 (
-_key‹dî
+_key
+, 
+_idkey
+, 
+SBKEYSIZE
 );
 
-89 
-	`wrôeKeyToKeyèbÀ
-(
-idkey
-,
-_key‹dî
-);
+115 
+	`öôülize
+();
 
-91 
+117 
 	}
 }
 
-93 
+119 
 boﬁ
  
 	gCookõ
@@ -76163,7 +76641,15 @@ boﬁ
 	$ßveCookõ
 () {
 
-94 i‡(!
+120 i‡(!
+_°©us
+ || !
+_poöãr
+Ë
+	`öôülize
+();
+
+121 i‡(!
 _°©us
  || !
 _poöãr
@@ -76171,23 +76657,23 @@ _poöãr
 Ál£
 ;
 
-95 * 
+122 * 
 p
  = 
 _poöãr
 ;
 
-96 
+123 
 _hód
 =0;
 
-97 
+124 
 _block
 =
 	`födMyNextBlock
 ();
 
-98 
+125 
 i
 =0; i<
 _d©asize
@@ -76197,11 +76683,11 @@ _d©asize
 p
 ++);
 
-99 
+126 
 	}
 }
 
-101 
+128 
 boﬁ
  
 	gCookõ
@@ -76209,7 +76695,7 @@ boﬁ
 	$lﬂdCookõ
 () {
 
-102 i‡(!
+129 i‡(!
 _°©us
  || !
 _poöãr
@@ -76217,23 +76703,23 @@ _poöãr
 Ál£
 ;
 
-103 * 
+130 * 
 p
  = 
 _poöãr
 ;
 
-104 
+131 
 _hód
 =0;
 
-105 
+132 
 _block
 =
 	`födMyNextBlock
 ();
 
-106 
+133 
 i
 =0; i<
 _d©asize
@@ -76243,25 +76729,51 @@ p
 	`ªadQueue
 ();
 
-107 
+134 
 	}
 }
 
-109 
+136 
 	gCookõ
 ::
 	$dñëeCookõ
 () {
 
-110 i‡(!
+137 i‡(!
 _°©us
 ) ;
 
-111 
+139 
+i
+=0; i<
+SBMAXBLOCKS
+; i++) {
+
+140 i‡(
+	`isMyBlock
+(
+i
+)Ë
+	`‰ìBlock
+(i);
+
+143 
+	`îa£KeyèbÀE¡ry
+(
+_key‹dî
+);
+
+145 
+_°©us
+ = 
+Ál£
+;
+
+146 
 	}
 }
 
-113 
+148 
 	gCookõ
 ::
 	$exi°s
@@ -76269,17 +76781,17 @@ _°©us
 idkey
 ) {
 
-114 
+149 
 i
 =0; i< 
 SBMAXKEYS
 ; i++) {
 
-115 #i‚de‡
+150 #i‚de‡
 POK_SIM
 
 
-116 if(
+151 if(
 	`ì¥om_ªad_byã
 ((
 uöt16_t
@@ -76291,17 +76803,17 @@ SBKEYSIZE
 idkey
 [0]) {
 
-117 
+152 
 tŸÆ
 =0;
 
-118 
+153 
 j
 =0; j<
 SBKEYSIZE
 ;j++) {
 
-119 if(
+154 if(
 	`ì¥om_ªad_byã
 ((
 uöt16_t
@@ -76317,7 +76829,7 @@ idkey
 tŸÆ
 ++;
 
-121 i‡(
+156 i‡(
 tŸÆ
 ==
 SBKEYSIZE
@@ -76325,37 +76837,37 @@ SBKEYSIZE
 i
 ;
 
-125  
+160  
 SBINVALIDSLOT
 ;
 
-126 
+161 
 	}
 }
 
-128 
+163 
 	gCookõ
 ::
 	$gëFªeKeyèbÀSlŸ
 () {
 
-129 
+164 
 ‰ì¶Ÿ
 =
 SBINVALIDSLOT
 ;
 
-130 
+165 
 i
 =0; i<
 SBMAXKEYS
 ; i++) {
 
-131 #i‚de‡
+166 #i‚de‡
 POK_SIM
 
 
-132 i‡(
+167 i‡(
 	`ì¥om_ªad_byã
 ((
 uöt16_t
@@ -76367,31 +76879,31 @@ SBKEYSIZE
 ‰ì¶Ÿ
 =i; ;}
 
-135  
+170  
 ‰ì¶Ÿ
 ;
 
-136 
+171 
 	}
 }
 
-138 
+173 
 	gCookõ
 ::
 	$gëAssig√dBlocks
 () {
 
-139 
+174 
 assig√dblocks
 =0;
 
-140 
+175 
 i
 =0;i<
 SBMAXBLOCKS
 ;i++) {
 
-141 i‡(
+176 i‡(
 	`isMyBlock
 (
 i
@@ -76399,31 +76911,31 @@ i
 assig√dblocks
 ++;
 
-143  
+178  
 assig√dblocks
 ;
 
-144 
+179 
 	}
 }
 
-146 
+181 
 	gCookõ
 ::
 	$gëFªeBlocks
 () {
 
-147 
+182 
 ‰ìblocks
 =0;
 
-148 
+183 
 i
 =0;i<
 SBMAXBLOCKS
 ;i++) {
 
-149 i‡(
+184 i‡(
 	`isFªeBlock
 (
 i
@@ -76431,15 +76943,15 @@ i
 ‰ìblocks
 ++;
 
-151  
+186  
 ‰ìblocks
 ;
 
-152 
+187 
 	}
 }
 
-154 
+189 
 boﬁ
  
 	gCookõ
@@ -76449,7 +76961,7 @@ boﬁ
 n
 ) {
 
-155 i‡(
+190 i‡(
 n
 >=
 SBMAXBLOCKS
@@ -76457,11 +76969,11 @@ SBMAXBLOCKS
 Ál£
 ;
 
-156 #i‚de‡
+191 #i‚de‡
 POK_SIM
 
 
-157 i‡(!(
+192 i‡(!(
 	`ì¥om_ªad_byã
 ((
 uöt16_t
@@ -76475,15 +76987,15 @@ n
 åue
 ;
 
-159  
+194  
 Ál£
 ;
 
-160 
+195 
 	}
 }
 
-162 
+197 
 boﬁ
  
 	gCookõ
@@ -76493,7 +77005,7 @@ boﬁ
 n
 ) {
 
-163 i‡(
+198 i‡(
 n
 >=
 SBMAXBLOCKS
@@ -76501,7 +77013,7 @@ SBMAXBLOCKS
 Ál£
 ;
 
-164 i‡(
+199 i‡(
 	`isFªeBlock
 (
 n
@@ -76509,17 +77021,17 @@ n
 Ál£
 ;
 
-165 #i‚de‡
+200 #i‚de‡
 POK_SIM
 
 
-166 
+201 
 ãmp
 ; 
 addªss
 ;
 
-167 
+202 
 addªss
  = (
 SBMAXKEYS
@@ -76529,7 +77041,7 @@ SBKEYSIZE
 n
 );
 
-168 
+203 
 ãmp
  = 
 	`ì¥om_ªad_byã
@@ -76539,7 +77051,7 @@ uöt16_t
 addªss
 );
 
-169 i‡((
+204 i‡((
 ãmp
 &0x7FË==
 _key‹dî
@@ -76547,15 +77059,97 @@ _key‹dî
 åue
 ;
 
-171  
+206  
 Ál£
 ;
 
-172 
+207 
 	}
 }
 
-174 
+209 
+boﬁ
+ 
+	gCookõ
+::
+	$blockIsOw√dBy
+(
+n
+, 
+k
+) {
+
+210 i‡(
+n
+>=
+SBMAXBLOCKS
+Ë 
+Ál£
+;
+
+211 i‡(
+k
+>=
+SBMAXKEYS
+Ë 
+Ál£
+;
+
+212 i‡(
+	`isFªeBlock
+(
+n
+)Ë 
+Ál£
+;
+
+213 #i‚de‡
+POK_SIM
+
+
+214 
+ãmp
+; 
+addªss
+;
+
+215 
+addªss
+ = (
+SBMAXKEYS
+*
+SBKEYSIZE
++
+n
+);
+
+216 
+ãmp
+ = 
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)
+addªss
+);
+
+217 i‡((
+ãmp
+&0x7FË=
+k
+Ë 
+åue
+;
+
+219  
+Ál£
+;
+
+220 
+	}
+}
+
+222 
 	gCookõ
 ::
 	$wrôeKeyToKeyèbÀ
@@ -76565,17 +77159,31 @@ key
 ¶Ÿ
 ) {
 
-175 
+223 
 i
 =0; i<=
 SBKEYSIZE
 ; i++) {
 
-176 #i‚de‡
+224 #i‚de‡
 POK_SIM
 
 
-177 
+225 i‡(
+key
+[
+i
+]Ë
+	`ì¥om_wrôe_byã
+((
+uöt16_t
+*)(
+¶Ÿ
+*
+SBKEYSIZE
++i),key[i]);
+
+226 
 	`ì¥om_wrôe_byã
 ((
 uöt16_t
@@ -76585,15 +77193,13 @@ uöt16_t
 SBKEYSIZE
 +
 i
-),
-key
-[i]);
+),0);
 
-180 
+229 
 	}
 }
 
-182 
+231 
 	gCookõ
 ::
 	$ªadKeyèbÀE¡ry
@@ -76603,27 +77209,27 @@ n
 ™swî
 ) {
 
-183 
+232 
 ™swî
 [8]=0;
 
-184 i‡(
+233 i‡(
 n
  >
 SBMAXKEYS
 )Ç=SBMAXKEYS-1;
 
-185 
+234 
 i
 =0; i<
 SBKEYSIZE
 ; i++) {
 
-186 #i‚de‡
+235 #i‚de‡
 POK_SIM
 
 
-187 
+236 
 ™swî
 [
 i
@@ -76637,11 +77243,11 @@ n
 SBKEYSIZE
 +i));
 
-190 
+239 
 	}
 }
 
-192 
+241 
 	gCookõ
 ::
 	$gëBlockTabÀE¡ry
@@ -76649,17 +77255,17 @@ SBKEYSIZE
 n
 ) {
 
-193 i‡(
+242 i‡(
 n
 >=
 SBMAXBLOCKS
 )  0x80;
 
-194 #i‚de‡
+243 #i‚de‡
 POK_SIM
 
 
-195  
+244  
 	`ì¥om_ªad_byã
 ((
 uöt16_t
@@ -76671,11 +77277,11 @@ SBMAXKEYS
 n
 ));
 
-198 
+247 
 	}
 }
 
-200 
+249 
 	gCookõ
 ::
 	$ªadBlock
@@ -76685,23 +77291,23 @@ n
 d©a
 ) {
 
-201 
+250 
 i
 =0; i<
 SBBLOCKSIZE
 ; i++) {
 
-202 
+251 
 d©a
 [
 i
 ]=0;
 
-203 #i‚de‡
+252 #i‚de‡
 POK_SIM
 
 
-204 i‡(
+253 i‡(
 n
  < 
 SBMAXBLOCKS
@@ -76721,33 +77327,33 @@ SBMAXKEYS
 SBBLOCKSIZE
 +i));
 
-207 
+256 
 	}
 }
 
-209 
+258 
 	gCookõ
 ::
 	$f‹m©KeyèbÀ
 () {
 
-210 
+259 
 j
 =0; j<
 SBMAXKEYS
 ; j++) {
 
-211 
+260 
 i
 =0; i<
 SBKEYSIZE
 ; i++) {
 
-212 #i‚de‡
+261 #i‚de‡
 POK_SIM
 
 
-213 
+262 
 	`ì¥om_wrôe_byã
 ((
 uöt16_t
@@ -76759,11 +77365,11 @@ SBKEYSIZE
 i
 ),0);
 
-217 
+266 
 	}
 }
 
-219 
+268 
 	gCookõ
 ::
 	$‰ìBlock
@@ -76771,17 +77377,17 @@ i
 n
 ) {
 
-220 i‡(
+269 i‡(
 n
  >
 SBMAXBLOCKS
 ) ;
 
-221 #i‚de‡
+270 #i‚de‡
 POK_SIM
 
 
-223 
+272 
 	`ì¥om_wrôe_byã
 ((
 uöt16_t
@@ -76790,22 +77396,20 @@ SBKEYSIZE
 *
 SBMAXKEYS
 +
-SBBLOCKSIZE
-*
 n
 ),0);
 
-225 
+274 
 i
 =0; i<
 SBBLOCKSIZE
 ;i++) {
 
-226 #i‚de‡
+275 #i‚de‡
 POK_SIM
 
 
-228 
+277 
 	`ì¥om_wrôe_byã
 ((
 uöt16_t
@@ -76814,20 +77418,20 @@ SBKEYSIZE
 *
 SBMAXKEYS
 +
-SBBLOCKSIZE
-*
 SBMAXBLOCKS
 +
 n
-*SBBLOCKSIZE+
+*
+SBBLOCKSIZE
++
 i
 ),0);
 
-231 
+280 
 	}
 }
 
-233 
+282 
 boﬁ
  
 	gCookõ
@@ -76835,23 +77439,23 @@ boﬁ
 	$ª£rveBlock
 () {
 
-234 
+283 
 i
 =0; i<
 SBMAXBLOCKS
 ;i++) {
 
-235 #i‚de‡
+284 #i‚de‡
 POK_SIM
 
 
-237 i‡(
+286 i‡(
 	`isFªeBlock
 (
 i
 )) {
 
-239 
+288 
 	`ì¥om_wrôe_byã
 ((
 uöt16_t
@@ -76860,26 +77464,24 @@ SBKEYSIZE
 *
 SBMAXKEYS
 +
-SBBLOCKSIZE
-*
 i
 ),
 _key‹dî
  | 0x80);
 
-240  
+289  
 åue
 ;
 
-244  
+293  
 Ál£
 ;
 
-245 
+294 
 	}
 }
 
-247 
+296 
 	gCookõ
 ::
 	$îa£KeyèbÀE¡ry
@@ -76887,23 +77489,23 @@ _key‹dî
 n
 ) {
 
-248 i‡(
+297 i‡(
 n
  >
 SBMAXKEYS
 )Ç=SBMAXKEYS-1;
 
-249 
+298 
 i
 =0; i<
 SBKEYSIZE
 ; i++) {
 
-250 #i‚de‡
+299 #i‚de‡
 POK_SIM
 
 
-251 
+300 
 	`ì¥om_wrôe_byã
 ((
 uöt16_t
@@ -76915,29 +77517,155 @@ SBKEYSIZE
 i
 ),0);
 
-254 
+303 
 	}
 }
 
-256 
+305 
+	gCookõ
+::
+	$˛ónKeyèbÀ
+() {
+
+307 
+íåy
+=0;É¡ry<
+SBMAXKEYS
+;Éntry++) {
+
+308 i‡(
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+íåy
+*
+SBKEYSIZE
+))) {
+
+309 
+boﬁ
+ 
+isEm±y
+=
+åue
+;
+
+310 
+block
+=0; block<
+SBMAXBLOCKS
+; block++Ëi‡(
+	`blockIsOw√dBy
+(block,
+íåy
+)Ë{
+isEm±y
+=
+Ál£
+;;}
+
+312 i‡(
+isEm±y
+Ë
+	`îa£KeyèbÀE¡ry
+(
+íåy
+);
+
+315 
+block
+=0;block<
+SBMAXBLOCKS
+;block++) {
+
+316 
+blockíåy
+ = 
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+SBMAXKEYS
+*
+SBKEYSIZE
++
+block
+));
+
+317 i‡(
+blockíåy
+&0x80) {
+
+318 
+blockíåy
+ &= 0x7F;
+
+319 
+boﬁ
+ 
+isEm±y
+=
+åue
+;
+
+320 
+key
+=0;key<
+SBMAXKEYS
+;key++) {
+
+321 i‡(
+	`ì¥om_ªad_byã
+((
+uöt16_t
+*)(
+key
+*
+SBKEYSIZE
+))Ë{
+isEm±y
+=
+Ál£
+;;}
+
+323 i‡(
+isEm±y
+Ë
+	`ì¥om_wrôe_byã
+((
+uöt16_t
+*)(
+SBMAXKEYS
+*
+SBKEYSIZE
++
+block
+),0);
+
+326 
+	}
+}
+
+328 
 	gCookõ
 ::
 	$ªadQueue
 () {
 
-257 
+329 
 d©a
 =0;
 
-258 #i‚de‡
+330 #i‚de‡
 POK_SIM
 
 
-259 
+331 
 addªss
 ;
 
-260 
+332 
 addªss
  = 
 SBMAXKEYS
@@ -76953,7 +77681,7 @@ _block
 _hód
 %SBBLOCKSIZE;
 
-261 
+333 
 d©a
 =
 	`ì¥om_ªad_byã
@@ -76963,29 +77691,35 @@ uöt16_t
 addªss
 );
 
-263 
+335 
 _hód
 ++;
 
-264 i‡(
+336 i‡(
 _hód
 %
 SBBLOCKSIZE
-==0Ë
+==0 && _head) {
+
+337 
+_block
+++;
+
+338 
 _block
 =
 	`födMyNextBlock
 ();
 
-265  
+340  
 d©a
 ;
 
-266 
+341 
 	}
 }
 
-268 
+343 
 	gCookõ
 ::
 	$wrôeQueue
@@ -76993,11 +77727,11 @@ d©a
 d©a
 ) {
 
-269 #i‚de‡
+344 #i‚de‡
 POK_SIM
 
 
-270 
+345 
 	`ì¥om_wrôe_byã
 ((
 uöt16_t
@@ -77017,37 +77751,43 @@ _hód
 d©a
 );
 
-272 
+347 
 _hód
 ++;
 
-273 i‡(
+348 i‡(
 _hód
 %
 SBBLOCKSIZE
-==0Ë
+==0 && _head) {
+
+349 
+_block
+++;
+
+350 
 _block
 =
 	`födMyNextBlock
 ();
 
-274 
+352 
 	}
 }
 
-276 
+354 
 	gCookõ
 ::
 	$födMyNextBlock
 () {
 
-277 i‡(!
+355 i‡(!
 _°©us
 Ë 
 SBINVALIDBLOCK
 ;
 
-278 
+356 
 i
 =
 _block
@@ -77057,7 +77797,7 @@ SBMAXBLOCKS
 	`isMyBlock
 (i))  i;
 
-279 
+357 
 	}
 }
 
@@ -77145,129 +77885,149 @@ Cookõ
 begö
 (const *, , *);
 
-102 
+101 
+öôülize
+();
+
+109 
 boﬁ
  
 ßveCookõ
 ();
 
-110 
+117 
 boﬁ
  
 lﬂdCookõ
 ();
 
-114 
+121 
 dñëeCookõ
 ();
 
-122 
+129 
 boﬁ
  
 isOK
 ();
 
-130 
+137 
 ªadKeyèbÀE¡ry
 (, *);
 
-138 
+145 
 f‹m©KeyèbÀ
 ();
 
-146 
+153 
 îa£KeyèbÀE¡ry
 ();
 
-149 
+158 
+˛ónKeyèbÀ
+();
+
+161 
 	gpublic
 :
 
-159 
+171 
 exi°s
 (const *);
 
-167 
+179 
 gëFªeKeyèbÀSlŸ
 ();
 
-174 
+186 
 gëFªeBlocks
 ();
 
-181 
+193 
 gëAssig√dBlocks
 ();
 
-191 
+203 
 boﬁ
  
 isFªeBlock
 ();
 
-200 
+212 
 boﬁ
  
 isMyBlock
 ();
 
-210 
+222 
+boﬁ
+ 
+blockIsOw√dBy
+(,);
+
+230 
 wrôeKeyToKeyèbÀ
 (const *, );
 
-220 
+240 
 gëBlockTabÀE¡ry
 ();
 
-228 
+248 
 ªadBlock
 (, *);
 
-235 
+255 
 ‰ìBlock
 ();
 
-244 
+264 
 boﬁ
  
 ª£rveBlock
 ();
 
-250 
+270 
 wrôeQueue
 ();
 
-257 
+277 
 ªadQueue
 ();
 
-265 
+285 
 födMyNextBlock
 ();
 
-275 
+290 
+	g_key
+[
+SBKEYSIZE
+];
+
+295 
 	g_key‹dî
 ;
 
-281 
+301 
 boﬁ
  
 	g_°©us
 ;
 
-286 
+306 
 	g_d©asize
 ;
 
-291 * 
+311 * 
 	g_poöãr
 ;
 
-296 
+316 
 	g_hód
 ;
 
-301 
+321 
 	g_block
 ;
 
@@ -77579,7 +78339,11 @@ möVÆ
 maxVÆ
 )
 
-136  
+136 #ifde‡
+OLDINCLUSIVERANDOM
+
+
+137  
 	`ønd
 (Ë% (
 maxVÆ
@@ -77587,11 +78351,19 @@ maxVÆ
 möVÆ
 +1) + minVal;
 
-137 
+139  
+	`ønd
+(Ë% (
+maxVÆ
+-
+möVÆ
+) + minVal;
+
+141 
 	}
 }
 
-139 
+143 
 usög
  
 «me•a˚
@@ -77599,7 +78371,7 @@ usög
 	gPokôto
 ;
 
-141 
+145 
 boﬁ
  
 	gC‹e
@@ -77607,7 +78379,7 @@ boﬁ
 run_°©e
 ;
 
-144 
+148 
 Backlight
  
 	gC‹e
@@ -77615,7 +78387,7 @@ Backlight
 backlight
 ;
 
-145 
+149 
 Buâ⁄s
  
 	gC‹e
@@ -77623,7 +78395,7 @@ Buâ⁄s
 buâ⁄s
 ;
 
-146 
+150 
 B©ãry
  
 	gC‹e
@@ -77631,11 +78403,11 @@ B©ãry
 b©ãry
 ;
 
-147 #i‡
+151 #i‡
 POK_ENABLE_SOUND
  > 0
 
-148 
+152 
 Sound
  
 	gC‹e
@@ -77643,7 +78415,7 @@ Sound
 sound
 ;
 
-150 
+154 
 Di•œy
  
 	gC‹e
@@ -77651,7 +78423,7 @@ Di•œy
 di•œy
 ;
 
-153 
+157 
 uöt8_t
  
 	gC‹e
@@ -77659,7 +78431,7 @@ uöt8_t
 °¨tMíuTimî
 ;
 
-154 
+158 
 uöt8_t
  
 	gC‹e
@@ -77667,7 +78439,7 @@ uöt8_t
 timePîFøme
 ;
 
-155 
+159 
 uöt32_t
  
 	gC‹e
@@ -77675,7 +78447,7 @@ uöt32_t
 √xtFømeMûlis
 ;
 
-156 
+160 
 uöt32_t
  
 	gC‹e
@@ -77683,13 +78455,13 @@ uöt32_t
 ‰ameCou¡
 ;
 
-157 c⁄° * 
+161 c⁄° * 
 	gC‹e
 ::
 p›upText
 ;
 
-158 
+162 
 uöt8_t
  
 	gC‹e
@@ -77697,7 +78469,7 @@ uöt8_t
 p›upTimeLe·
 ;
 
-159 
+163 
 uöt16_t
  
 	gC‹e
@@ -77705,7 +78477,7 @@ uöt16_t
 ‰ameDuøti⁄Mi¸os
 ;
 
-160 
+164 
 uöt32_t
  
 	gC‹e
@@ -77715,7 +78487,7 @@ uöt32_t
 ‰ameEndMi¸os
 ;
 
-161 
+165 
 uöt8_t
  
 	gC‹e
@@ -77723,7 +78495,7 @@ uöt8_t
 vﬁb¨_visibÀ
 =0;
 
-163 
+167 
 uöt32_t
  
 	gC‹e
@@ -77731,7 +78503,7 @@ uöt32_t
 Âs_cou¡î
 ;
 
-164 
+168 
 boﬁ
  
 	gC‹e
@@ -77739,7 +78511,7 @@ boﬁ
 Âs_cou¡î_upd©ed
 ;
 
-165 
+169 
 uöt32_t
  
 	gC‹e
@@ -77747,7 +78519,7 @@ uöt32_t
 Âs_ª‰eshtime
 ;
 
-166 
+170 
 uöt32_t
  
 	gC‹e
@@ -77755,17 +78527,17 @@ uöt32_t
 Âs_‰ameCou¡
 ;
 
-168 
+172 
 	gC‹e
 ::
 	$C‹e
 () {
 
-170 
+174 
 	}
 }
 
-173 
+177 
 C‹e
 ::
 	$upd©eLﬂdî
@@ -77777,93 +78549,93 @@ vîsi⁄
 jum∑ddªss
 ) {
 
-174 #i‚de‡
+178 #i‚de‡
 POK_SIM
 
 
-175 
+179 
 uöt32_t
  
 cou¡î
 =0;
 
-176 
+180 
 uöt8_t
  
 d©a
 [256];
 
-178 
+182 
 ¥ogªss
 =0;
 
-179 
+183 
 ›g
 =-1;
 
-180 
+184 
 uöt32_t
  
 fsize
 =0;
 
-181 
+185 
 	`fûeEnd
 ();
 
-182 
+186 
 fsize
  = 
 	`fûeGëPosôi⁄
 ();
 
-183 i‡(
+187 i‡(
 fsize
 >0x40000-
 jum∑ddªss
 ) fsize = 0x40000-jumpaddress;
 
-184 
+188 
 	`fûeRewöd
 ();
 
-185 
+189 
 di•œy
 .
 	`¥öén
 ("PLEASE WAIT");
 
-190 i‡(
+194 i‡(
 cou¡î
  >
 fsize
 ) {
 
-193 
+197 
 ›g
 =
 ¥ogªss
 ;
 
-194 i‡(
+198 i‡(
 	`fûeRódByãs
 (&
 d©a
 [0],0x100)<0x100) {
 
-195 i‡(
+199 i‡(
 fsize
 -
 cou¡î
 >0x100) {
 
-196 
+200 
 di•œy
 .
 	`¥öén
 ("ERROR READING LOA.DER FILE");
 
-200 i‡(
+204 i‡(
 	`C›yPageToFœsh
 (
 jum∑ddªss
@@ -77873,33 +78645,33 @@ cou¡î
 d©a
 )) {
 
-201 
+205 
 di•œy
 .
 	`¥öén
 ("FLASH WRITE ERROR");
 
-204 
+208 
 cou¡î
  += 0x100;
 
-205 
+209 
 di•œy
 .
 	`¥öt
 (".");
 
-210 
+214 
 	}
 }
 
-212 
+216 
 	gC‹e
 ::
 	$showW¨nög
 () {
 
-213 
+217 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -77907,7 +78679,7 @@ di•œy
 åue
 );
 
-214 
+218 
 di•œy
 .
 dúe˘bgcﬁ‹
@@ -77915,13 +78687,13 @@ dúe˘bgcﬁ‹
 COLOR_BLACK
 ;
 
-215 
+219 
 di•œy
 .
 	`˛órLCD
 ();
 
-216 
+220 
 di•œy
 .
 dúe˘cﬁ‹
@@ -77929,7 +78701,7 @@ dúe˘cﬁ‹
 COLOR_RED
 ;
 
-217 
+221 
 di•œy
 .
 	`£tF⁄t
@@ -77937,31 +78709,31 @@ di•œy
 ‚tC64UIGfx
 );
 
-218 
+222 
 di•œy
 .
 adju°Ch¨Sãp
  = 0;
 
-219 
+223 
 di•œy
 .
 adju°LöeSãp
  = 0;
 
-220 
+224 
 di•œy
 .
 	`£tCurs‹
 (10*8,9);
 
-221 
+225 
 di•œy
 .
 	`¥öt
 ("WARNING!");
 
-222 
+226 
 di•œy
 .
 dúe˘cﬁ‹
@@ -77969,49 +78741,49 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-223 
+227 
 di•œy
 .
 	`£tCurs‹
 (5*8,4*9);
 
-224 
+228 
 di•œy
 .
 	`¥öt
 ("LOUD SOUND THROUGH");
 
-225 
+229 
 di•œy
 .
 	`£tCurs‹
 (2*8,5*9);
 
-226 
+230 
 di•œy
 .
 	`¥öt
 ("HEADPHONES COULD DAMAGE");
 
-227 
+231 
 di•œy
 .
 	`£tCurs‹
 (7*8,6*9);
 
-228 
+232 
 di•œy
 .
 	`¥öt
 ("YOUR HEARING.");
 
-229 
+233 
 di•œy
 .
 	`£tCurs‹
 (5*8,8*9);
 
-230 
+234 
 di•œy
 .
 	`¥öt
@@ -78021,13 +78793,13 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-231 
+235 
 di•œy
 .
 	`¥öt
 ("0-100% VOLUME");
 
-232 
+236 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78035,37 +78807,37 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-233 
+237 
 di•œy
 .
 	`£tCurs‹
 (5*8,9*9);
 
-234 
+238 
 di•œy
 .
 	`¥öt
 ("FOR LISTENING WITH");
 
-235 
+239 
 di•œy
 .
 	`£tCurs‹
 (8*8,10*9);
 
-236 
+240 
 di•œy
 .
 	`¥öt
 ("HEADPHONES");
 
-237 
+241 
 di•œy
 .
 	`£tCurs‹
 (5*8,12*9);
 
-238 
+242 
 di•œy
 .
 	`¥öt
@@ -78075,7 +78847,7 @@ dúe˘cﬁ‹
 COLOR_RED
 ;
 
-239 
+243 
 di•œy
 .
 	`¥öt
@@ -78085,7 +78857,7 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-240 
+244 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78093,37 +78865,37 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-241 
+245 
 di•œy
 .
 	`£tCurs‹
 (1*8,13*9);
 
-242 
+246 
 di•œy
 .
 	`¥öt
 ("ONLY FOR LISTENING VIA THE");
 
-243 
+247 
 di•œy
 .
 	`£tCurs‹
 (5*8,14*9);
 
-244 
+248 
 di•œy
 .
 	`¥öt
 ("BUILT-IN SPEAKER");
 
-245 
+249 
 di•œy
 .
 	`£tCurs‹
 (5*8,17*9);
 
-246 
+250 
 di•œy
 .
 	`¥öt
@@ -78133,7 +78905,7 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-247 
+251 
 di•œy
 .
 	`¥öt
@@ -78143,29 +78915,29 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-248 
+252 
 di•œy
 .
 	`¥öt
 ("TO ACCEPT");
 
-249 !
+253 !
 buâ⁄s
 .
 	`cBä
 ()) {
 
-250 
+254 
 	`waô
 (100);
 
-252 
+256 
 di•œy
 .
 	`˛órLCD
 ();
 
-253 
+257 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -78173,23 +78945,23 @@ di•œy
 Ál£
 );
 
-254 
+258 
 	}
 }
 
-256 
+260 
 	gC‹e
 ::
 	$jumpToLﬂdî
 () {
 
-260 
+264 
 di•œy
 .
 f⁄tSize
 =1;
 
-261 
+265 
 di•œy
 .
 dúe˘bgcﬁ‹
@@ -78197,7 +78969,7 @@ dúe˘bgcﬁ‹
 COLOR_BLACK
 ;
 
-262 
+266 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78205,19 +78977,19 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-263 
+267 
 di•œy
 .
 	`˛órLCD
 ();
 
-264 
+268 
 di•œy
 .
 	`£tCurs‹
 (0,0);
 
-265 
+269 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -78225,23 +78997,23 @@ di•œy
 åue
 );
 
-266 #ifde‡
+270 #ifde‡
 POK_SIM
 
 
-267 
+271 
 di•œy
 .
 	`¥öén
 ("LOADER IS NOT AVAILABLE ON THE SIMULATOR. PRESS A TO RETURN.");
 
-269 
+273 
 uöt32_t
 * 
 boŸöfo
 ;
 
-270 
+274 
 uöt32_t
  
 boŸvîsi⁄
@@ -78251,7 +79023,7 @@ sdvîsi⁄
 sdjump
 =0;
 
-271 
+275 
 boﬁ
  
 Êashlﬂdî
@@ -78263,29 +79035,29 @@ checkf‹boŸ
 åue
 ;
 
-273 #i‡
+277 #i‡
 POK_ENABLE_LOADER_UPDATES
  > 0
 
-274 
+278 
 	`pokInôSD
 ();
 
-275 i‡(
+279 i‡(
 	`fûeO≥n
 ("LOA.DER", 
 FILE_MODE_BINARY
 )==0) {
 
-277 
+281 
 	`fûeEnd
 ();
 
-278 
+282 
 	`fûeSìkRñ©ive
 (-8);
 
-279 
+283 
 uöt32_t
 * 
 çå
@@ -78293,7 +79065,7 @@ uöt32_t
 sdvîsi⁄
 ;
 
-280 
+284 
 	`fûeRódByãs
 ((
 uöt8_t
@@ -78301,13 +79073,13 @@ uöt8_t
 çå
 ,4);
 
-281 
+285 
 çå
  = &
 sdjump
 ;
 
-282 
+286 
 	`fûeRódByãs
 ((
 uöt8_t
@@ -78315,15 +79087,15 @@ uöt8_t
 çå
 ,4);
 
-283 
+287 
 	`fûeRewöd
 ();
 
-287 
+291 
 checkf‹boŸ
 )
 
-289 
+293 
 checkf‹boŸ
 =
 Ál£
@@ -78331,35 +79103,35 @@ checkf‹boŸ
 Êashlﬂdî
 =false;
 
-290 
+294 
 boŸöfo
  = (
 uöt32_t
 *)0x3FFF4;
 
-291 i‡(*
+295 i‡(*
 boŸöfo
  !0xB007AB1EËboŸöfÿ(
 uöt32_t
 *)0x3FF04;
 
-292 i‡(*
+296 i‡(*
 boŸöfo
  !0xB007AB1EËboŸöfÿ(
 uöt32_t
 *)0x3FE04;
 
-293 i‡(*
+297 i‡(*
 boŸöfo
  !0xB007AB1EËboŸöfÿ(
 uöt32_t
 *)0x3F004;
 
-294 i‡(*
+298 i‡(*
 boŸöfo
  != 0xB007AB1E) {
 
-296 
+300 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78367,31 +79139,31 @@ dúe˘cﬁ‹
 COLOR_YELLOW
 ;
 
-297 
+301 
 di•œy
 .
 	`¥öén
 ("NO LOADER INSTALLED");
 
-298 i‡(
+302 i‡(
 sdvîsi⁄
 ==0 || 
 sdjump
  < 0x38000) {
 
-300 
+304 
 di•œy
 .
 	`¥öén
 ("NO VALID LOA.DER ON SD");
 
-301 
+305 
 di•œy
 .
 	`¥öén
 ("");
 
-302 
+306 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78399,19 +79171,19 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-303 
+307 
 di•œy
 .
 	`¥öén
 ("PUT LOA.DER ON SD & REBOOT");
 
-304 } 
+308 } 
 Êashlﬂdî
 =
 åue
 ;
 
-308 
+312 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78419,13 +79191,13 @@ dúe˘cﬁ‹
 COLOR_CYAN
 ;
 
-309 
+313 
 di•œy
 .
 	`¥öt
 ("LOADER V.");
 
-310 
+314 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78433,7 +79205,7 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-311 
+315 
 di•œy
 .
 	`¥öén
@@ -78441,11 +79213,11 @@ di•œy
 boŸöfo
 +1));
 
-312 #i‡
+316 #i‡
 POK_ENABLE_LOADER_UPDATES
 
 
-313 i‡(
+317 i‡(
 sdvîsi⁄
 >(*(
 boŸöfo
@@ -78455,23 +79227,23 @@ boŸöfo
 åue
 ;
 
-314 
+318 
 	`°¨t_≠∂iˇti⁄
 (*(
 boŸöfo
 +2));
 
-316 
+320 
 	`°¨t_≠∂iˇti⁄
 (*(
 boŸöfo
 +2));
 
-320 if(
+324 if(
 Êashlﬂdî
 ) {
 
-321 
+325 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78479,13 +79251,13 @@ dúe˘cﬁ‹
 COLOR_MAGENTA
 ;
 
-322 
+326 
 di•œy
 .
 	`¥öt
 ("NEW LOADER ON SD V.");
 
-323 
+327 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78493,7 +79265,7 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-324 
+328 
 di•œy
 .
 	`¥öén
@@ -78501,7 +79273,7 @@ di•œy
 sdvîsi⁄
 );
 
-325 
+329 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78509,19 +79281,19 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-326 
+330 
 di•œy
 .
 	`¥öén
 ("UPDATE LOADER?\n(UP=YES, DOWN=CANCEL)");
 
-328 i‡(
+332 i‡(
 buâ⁄s
 .
 	`upBä
 ()) {
 
-329 i‡(
+333 i‡(
 	`upd©eLﬂdî
 (
 sdvîsi⁄
@@ -78529,71 +79301,71 @@ sdvîsi⁄
 sdjump
 )) {
 
-330 
+334 
 di•œy
 .
 	`¥öén
 ("PUT LOA.DER ON SD AND RETRY");
 
-332 
+336 
 di•œy
 .
 	`¥öén
 ("SUCCESS!!");
 
-333 
+337 
 checkf‹boŸ
 =
 åue
 ;
 
-337 i‡(
+341 i‡(
 buâ⁄s
 .
 	`downBä
 ()) ;
 
-342 !
+346 !
 buâ⁄s
 .
 	`aBä
 ()) {
 
-343 
+347 
 buâ⁄s
 .
 	`pﬁlBuâ⁄s
 ();
 
-344 i‡(
+348 i‡(
 buâ⁄s
 .
 	`aBä
 ()) {
 
-345 
+349 
 buâ⁄s
 .
 	`aBä
 ()) {
 
-346 
+350 
 buâ⁄s
 .
 	`pﬁlBuâ⁄s
 ();
 
-351 
+355 
 	}
 }
 
-353 
+357 
 	gC‹e
 ::
 	$askLﬂdî
 () {
 
-354 
+358 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -78601,7 +79373,7 @@ di•œy
 åue
 );
 
-355 
+359 
 di•œy
 .
 dúe˘bgcﬁ‹
@@ -78609,13 +79381,13 @@ dúe˘bgcﬁ‹
 COLOR_BLACK
 ;
 
-356 
+360 
 di•œy
 .
 	`˛órLCD
 ();
 
-357 
+361 
 di•œy
 .
 dúe˘cﬁ‹
@@ -78623,7 +79395,7 @@ dúe˘cﬁ‹
 COLOR_RED
 ;
 
-358 
+362 
 di•œy
 .
 	`£tF⁄t
@@ -78631,119 +79403,91 @@ di•œy
 ‚tC64UIGfx
 );
 
-359 
+363 
 di•œy
 .
 f⁄tSize
 =1;
 
-360 
+364 
 di•œy
 .
 adju°Ch¨Sãp
  = 0;
 
-361 
+365 
 di•œy
 .
 adju°LöeSãp
  = 0;
 
-362 
+366 
 di•œy
 .
 dúe˘cﬁ‹
 =
 COLOR_GREEN
 ;
-
-363 
-di•œy
-.
-	`£t_curs‹
-(12*8,6*8);
-
-364 
-di•œy
-.
-	`¥öt
-("ijkl");
-
-365 
-di•œy
-.
-	`£t_curs‹
-(12*8,7*8);
-
-366 
-di•œy
-.
-	`¥öt
-("mnop");
 
 367 
 di•œy
 .
 	`£t_curs‹
-(12*8,8*8);
+(12*8,6*8);
 
 368 
 di•œy
 .
 	`¥öt
-("qrst");
+("ijkl");
 
 369 
 di•œy
 .
 	`£t_curs‹
-(12*8,9*8);
+(12*8,7*8);
 
 370 
 di•œy
 .
 	`¥öt
-("uvwx");
+("mnop");
 
 371 
 di•œy
 .
 	`£t_curs‹
-(5*8,12*8);
+(12*8,8*8);
 
 372 
 di•œy
 .
 	`¥öt
-("PRESS");
+("qrst");
 
 373 
 di•œy
 .
-dúe˘cﬁ‹
-=
-COLOR_WHITE
-;
+	`£t_curs‹
+(12*8,9*8);
 
 374 
 di•œy
 .
 	`¥öt
-(" C ");
+("uvwx");
 
 375 
 di•œy
 .
-dúe˘cﬁ‹
-=
-COLOR_GREEN
-;
+	`£t_curs‹
+(5*8,12*8);
 
 376 
 di•œy
 .
 	`¥öt
-("FOR LOADER");
+("PRESS");
 
 377 
 di•œy
@@ -78756,18 +79500,46 @@ COLOR_WHITE
 378 
 di•œy
 .
+	`¥öt
+(" C ");
+
+379 
+di•œy
+.
+dúe˘cﬁ‹
+=
+COLOR_GREEN
+;
+
+380 
+di•œy
+.
+	`¥öt
+("FOR LOADER");
+
+381 
+di•œy
+.
+dúe˘cﬁ‹
+=
+COLOR_WHITE
+;
+
+382 
+di•œy
+.
 f⁄tSize
 =2;
 
-379 
+383 
 cou¡d
  = 0;
 
-380 #i‚de‡
+384 #i‚de‡
 POK_SIM
 
 
-382 
+386 
 cou¡d
  = 
 	`ì¥om_ªad_byã
@@ -78777,11 +79549,11 @@ uöt16_t
 EESETTINGS_LOADERWAIT
 );
 
-384 i‡(
+388 i‡(
 cou¡d
 ==0 || countd > 5) countd=3;
 
-385 
+389 
 uöt16_t
  
 c2
@@ -78789,23 +79561,23 @@ c2
 	`gëTime
 ();
 
-386 
+390 
 cou¡d
 ) {
 
-387 
+391 
 buâ⁄s
 .
 	`pﬁlBuâ⁄s
 ();
 
-388 
+392 
 di•œy
 .
 	`£t_curs‹
 (13*8,15*8);
 
-389 
+393 
 di•œy
 .
 	`¥öt
@@ -78813,23 +79585,23 @@ di•œy
 cou¡d
 );
 
-390 i‡(
+394 i‡(
 	`gëTime
 ()>
 c2
 +1000) {
 
-391 
+395 
 c2
 =
 	`gëTime
 ();
 
-392 
+396 
 cou¡d
 --;
 
-394 i‡(
+398 i‡(
 	`cBä
 ()Ë{cBä()Ë
 buâ⁄s
@@ -78841,7 +79613,7 @@ buâ⁄s
 cou¡d
 =0;}
 
-395 i‡(
+399 i‡(
 	`aBä
 ()Ë{aBä()Ë
 buâ⁄s
@@ -78851,7 +79623,7 @@ buâ⁄s
 cou¡d
 =0;}
 
-396 i‡(
+400 i‡(
 	`bBä
 ()Ë{bBä()Ë
 buâ⁄s
@@ -78861,19 +79633,19 @@ buâ⁄s
 cou¡d
 =0;}
 
-398 
+402 
 di•œy
 .
 f⁄tSize
 =1;
 
-399 
+403 
 di•œy
 .
 	`˛órLCD
 ();
 
-400 
+404 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -78881,11 +79653,11 @@ di•œy
 Ál£
 );
 
-401 
+405 
 	}
 }
 
-404 
+408 
 	gC‹e
 ::
 	$døwvﬁb¨
@@ -78901,7 +79673,7 @@ boﬁ
 ãxt
 ) {
 
-405 
+409 
 uöt16_t
  
 ﬁdcﬁ
@@ -78911,11 +79683,11 @@ di•œy
 dúe˘cﬁ‹
 ;
 
-406 
+410 
 Àvñ
  =Üevel >> 5;
 
-407 i‡(
+411 i‡(
 ãxt
 Ë
 di•œy
@@ -78925,7 +79697,7 @@ di•œy
 COLOR_BLACK
 );
 
-408 i‡(
+412 i‡(
 Àvñ
 <4Ë
 di•œy
@@ -78935,7 +79707,7 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-409 i‡(
+413 i‡(
 Àvñ
 ==4Ë
 di•œy
@@ -78945,7 +79717,7 @@ dúe˘cﬁ‹
 COLOR_YELLOW
 ;
 
-410 i‡(
+414 i‡(
 Àvñ
 >4Ë
 di•œy
@@ -78955,11 +79727,11 @@ dúe˘cﬁ‹
 COLOR_RED
 ;
 
-412 i‡(
+416 i‡(
 ãxt
 ) {
 
-413 
+417 
 boﬁ
  
 ãmp
@@ -78969,7 +79741,7 @@ di•œy
 	`isDúe˘PrötögE«bÀd
 ();
 
-414 
+418 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -78977,7 +79749,7 @@ di•œy
 åue
 );
 
-415 
+419 
 di•œy
 .
 	`¥öt
@@ -78991,13 +79763,13 @@ sound
 	`gëVﬁume
 ());
 
-416 
+420 
 di•œy
 .
 	`¥öt
 (" ");
 
-417 
+421 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -79005,7 +79777,7 @@ di•œy
 ãmp
 );
 
-419 i‡(
+423 i‡(
 Àvñ
 <1Ë
 di•œy
@@ -79015,7 +79787,7 @@ dúe˘cﬁ‹
 COLOR_GRAY_80
 ;
 
-420 
+424 
 di•œy
 .
 	`dúe˘Bôm≠
@@ -79027,7 +79799,7 @@ y
 Pokôto_vﬁumeb¨
 ,1,1);
 
-421 i‡(
+425 i‡(
 Àvñ
 <2Ë
 di•œy
@@ -79037,61 +79809,15 @@ dúe˘cﬁ‹
 COLOR_GRAY_80
 ;
 
-422 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+8,
-y
-,
-Pokôto_vﬁumeb¨
-,1,1);
-
-423 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+8,
-y
--4,
-Pokôto_vﬁumeb¨
-,1,1);
-
-424 i‡(
-Àvñ
-<3Ë
-di•œy
-.
-dúe˘cﬁ‹
- = 
-COLOR_GRAY_80
-;
-
-425 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+16,
-y
-,
-Pokôto_vﬁumeb¨
-,1,1);
-
 426 
 di•œy
 .
 	`dúe˘Bôm≠
 (
 x
-+16,
++8,
 y
--4,
+,
 Pokôto_vﬁumeb¨
 ,1,1);
 
@@ -79101,23 +79827,45 @@ di•œy
 	`dúe˘Bôm≠
 (
 x
-+16,
++8,
 y
--8,
+-4,
 Pokôto_vﬁumeb¨
 ,1,1);
 
 428 i‡(
 Àvñ
-<4) {
-
-429 
+<3Ë
 di•œy
 .
 dúe˘cﬁ‹
  = 
 COLOR_GRAY_80
 ;
+
+429 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++16,
+y
+,
+Pokôto_vﬁumeb¨
+,1,1);
+
+430 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++16,
+y
+-4,
+Pokôto_vﬁumeb¨
+,1,1);
 
 431 
 di•œy
@@ -79125,53 +79873,17 @@ di•œy
 	`dúe˘Bôm≠
 (
 x
-+24,
-y
-,
-Pokôto_vﬁumeb¨
-,1,1);
-
-432 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+24,
-y
--4,
-Pokôto_vﬁumeb¨
-,1,1);
-
-433 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+24,
++16,
 y
 -8,
 Pokôto_vﬁumeb¨
 ,1,1);
 
-434 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+24,
-y
--12,
-Pokôto_vﬁumeb¨
-,1,1);
-
-436 i‡(
+432 i‡(
 Àvñ
-<5) {
+<4) {
 
-437 
+433 
 di•œy
 .
 dúe˘cﬁ‹
@@ -79179,53 +79891,65 @@ dúe˘cﬁ‹
 COLOR_GRAY_80
 ;
 
-439 
+435 
 di•œy
 .
 	`dúe˘Bôm≠
 (
 x
-+32,
++24,
 y
 ,
 Pokôto_vﬁumeb¨
 ,1,1);
 
-440 
+436 
 di•œy
 .
 	`dúe˘Bôm≠
 (
 x
-+32,
++24,
 y
 -4,
 Pokôto_vﬁumeb¨
 ,1,1);
 
-441 
+437 
 di•œy
 .
 	`dúe˘Bôm≠
 (
 x
-+32,
++24,
 y
 -8,
 Pokôto_vﬁumeb¨
 ,1,1);
 
-442 
+438 
 di•œy
 .
 	`dúe˘Bôm≠
 (
 x
-+32,
++24,
 y
 -12,
 Pokôto_vﬁumeb¨
 ,1,1);
+
+440 i‡(
+Àvñ
+<5) {
+
+441 
+di•œy
+.
+dúe˘cﬁ‹
+ = 
+COLOR_GRAY_80
+;
 
 443 
 di•œy
@@ -79235,69 +79959,69 @@ di•œy
 x
 +32,
 y
+,
+Pokôto_vﬁumeb¨
+,1,1);
+
+444 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++32,
+y
+-4,
+Pokôto_vﬁumeb¨
+,1,1);
+
+445 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++32,
+y
+-8,
+Pokôto_vﬁumeb¨
+,1,1);
+
+446 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++32,
+y
+-12,
+Pokôto_vﬁumeb¨
+,1,1);
+
+447 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++32,
+y
 -16,
 Pokôto_vﬁumeb¨
 ,1,1);
 
-445 i‡(
+449 i‡(
 Àvñ
 <6) {
 
-446 
+450 
 di•œy
 .
 dúe˘cﬁ‹
  = 
 COLOR_GRAY_80
 ;
-
-448 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+40,
-y
-,
-Pokôto_vﬁumeb¨
-,1,1);
-
-449 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+40,
-y
--4,
-Pokôto_vﬁumeb¨
-,1,1);
-
-450 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+40,
-y
--8,
-Pokôto_vﬁumeb¨
-,1,1);
-
-451 
-di•œy
-.
-	`dúe˘Bôm≠
-(
-x
-+40,
-y
--12,
-Pokôto_vﬁumeb¨
-,1,1);
 
 452 
 di•œy
@@ -79307,7 +80031,7 @@ di•œy
 x
 +40,
 y
--16,
+,
 Pokôto_vﬁumeb¨
 ,1,1);
 
@@ -79319,11 +80043,59 @@ di•œy
 x
 +40,
 y
--20,
+-4,
 Pokôto_vﬁumeb¨
 ,1,1);
 
 454 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++40,
+y
+-8,
+Pokôto_vﬁumeb¨
+,1,1);
+
+455 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++40,
+y
+-12,
+Pokôto_vﬁumeb¨
+,1,1);
+
+456 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++40,
+y
+-16,
+Pokôto_vﬁumeb¨
+,1,1);
+
+457 
+di•œy
+.
+	`dúe˘Bôm≠
+(
+x
++40,
+y
+-20,
+Pokôto_vﬁumeb¨
+,1,1);
+
+458 
 di•œy
 .
 dúe˘cﬁ‹
@@ -79331,33 +80103,33 @@ dúe˘cﬁ‹
 ﬁdcﬁ
 ;
 
-455 
+459 
 	}
 }
 
-458 #ifde‡
+462 #ifde‡
 POK_SIM
 
 
-459 
+463 
 	#VINCMULT
  0.9f
 
 	)
 
-461 
+465 
 	#VINCMULT
  50
 
 	)
 
-463 
+467 
 	gC‹e
 ::
 	$£tVﬁLimô
 () {
 
-464 
+468 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -79365,17 +80137,17 @@ di•œy
 åue
 );
 
-465 
+469 
 di•œy
 .
 adju°Ch¨Sãp
  = 0;
 
-467 
+471 
 d°©e
 =1;
 
-468 
+472 
 boﬁ
  
 wùe
@@ -79383,7 +80155,7 @@ wùe
 åue
 ;
 
-469 
+473 
 vﬁ
  = 
 sound
@@ -79393,11 +80165,11 @@ sound
 tvﬁ
 ;
 
-470 #i‚de‡
+474 #i‚de‡
 POK_SIM
 
 
-471 
+475 
 vﬁ
 =
 	`ì¥om_ªad_byã
@@ -79407,7 +80179,7 @@ uöt16_t
 EESETTINGS_VOL
 );
 
-472 
+476 
 Pokôto
 ::
 Sound
@@ -79417,7 +80189,7 @@ globÆVﬁume
 vﬁ
 ;
 
-474 i‡(
+478 i‡(
 vﬁ
 >
 VOLUME_HEADPHONE_MAX
@@ -79429,7 +80201,7 @@ sound
 VOLUME_SPEAKER_MAX
 );
 
-475 
+479 
 sound
 .
 	`£tMaxVﬁ
@@ -79437,15 +80209,15 @@ sound
 VOLUME_HEADPHONE_MAX
 );
 
-476 #ifde‡
+480 #ifde‡
 PRODUCTIONTESTING
 
 
-477 
+481 
 vﬁ
 =170;
 
-478 
+482 
 sound
 .
 	`£tMaxVﬁ
@@ -79453,7 +80225,7 @@ sound
 VOLUME_SPEAKER_MAX
 );
 
-480 
+484 
 uöt8_t
  
 t
@@ -79461,7 +80233,7 @@ t
 vﬁ
 ;t++) {
 
-481 
+485 
 sound
 .
 	`£tVﬁume
@@ -79469,19 +80241,19 @@ sound
 t
 );
 
-483 
+487 
 vﬁb¨_visibÀ
 =0;
 
-484 
+488 
 cou¡d
 =0;
 
-485 #i‚de‡
+489 #i‚de‡
 POK_SIM
 
 
-487 
+491 
 cou¡d
  = 
 	`ì¥om_ªad_byã
@@ -79491,19 +80263,19 @@ uöt16_t
 EESETTINGS_VOLWAIT
 );
 
-489 i‡(
+493 i‡(
 cou¡d
 ==0 || countd > 10) countd=0xFFFF;
 
-490 #ifde‡
+494 #ifde‡
 PRODUCTIONTESTING
 
 
-491 
+495 
 cou¡d
 =2;
 
-493 
+497 
 uöt16_t
  
 c2
@@ -79511,7 +80283,7 @@ c2
 	`gëTime
 ();
 
-494 
+498 
 c‹e
 .
 	`isRu¬ög
@@ -79521,37 +80293,37 @@ d°©e
 cou¡d
 ){
 
-495 i‡(
+499 i‡(
 	`gëTime
 ()>
 c2
 +1000) {
 
-496 
+500 
 c2
 =
 	`gëTime
 ();
 
-497 i‡(
+501 i‡(
 cou¡d
 <0xFFFF) countd--;
 
-499 
+503 
 d°©e
 ) {
 
-502 i‡(
+506 i‡(
 wùe
 ) {
 
-503 
+507 
 di•œy
 .
 	`˛órLCD
 ();
 
-504 
+508 
 di•œy
 .
 dúe˘cﬁ‹
@@ -79559,57 +80331,29 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-505 
+509 
 di•œy
 .
 	`£tCurs‹
 (4*8,2*8);
 
-506 
+510 
 di•œy
 .
 	`¥öt
 ("SELECT VOLUME LIMIT");
 
-507 
+511 
 di•œy
 .
 	`£tCurs‹
 (5*8,17*9);
 
-508 
-di•œy
-.
-	`¥öt
-("PRESS ");
-
-509 
-di•œy
-.
-dúe˘cﬁ‹
- = 
-COLOR_GREEN
-;
-
-510 
-di•œy
-.
-	`¥öt
-("A");
-
-511 
-di•œy
-.
-dúe˘cﬁ‹
- = 
-COLOR_WHITE
-;
-
 512 
 di•œy
 .
 	`¥öt
-(" TO ACCEPT");
+("PRESS ");
 
 513 
 di•œy
@@ -79619,55 +80363,83 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
+514 
+di•œy
+.
+	`¥öt
+("A");
+
 515 
+di•œy
+.
+dúe˘cﬁ‹
+ = 
+COLOR_WHITE
+;
+
+516 
+di•œy
+.
+	`¥öt
+(" TO ACCEPT");
+
+517 
+di•œy
+.
+dúe˘cﬁ‹
+ = 
+COLOR_GREEN
+;
+
+519 
 di•œy
 .
 	`£tCurs‹
 (0,11*8);
 
-516 
+520 
 di•œy
 .
 	`¥öén
 ("ábbbbbbbbbbbbbbbbbbbbbbbc");
 
-517 
-di•œy
-.
-	`¥öén
-(" | |");
-
-518 
-di•œy
-.
-	`¥öén
-(" | |");
-
-519 
-di•œy
-.
-	`¥öén
-(" | |");
-
-520 
-di•œy
-.
-	`¥öén
-(" | |");
-
 521 
+di•œy
+.
+	`¥öén
+(" | |");
+
+522 
+di•œy
+.
+	`¥öén
+(" | |");
+
+523 
+di•œy
+.
+	`¥öén
+(" | |");
+
+524 
+di•œy
+.
+	`¥öén
+(" | |");
+
+525 
 di•œy
 .
 	`¥öén
 (" dbbbbbbbbbbbbbbbbbbbbbbbe");
 
-523 
+527 
 di•œy
 .
 	`£tCurs‹
 (6*8,17*9);
 
-524 i‡(
+528 i‡(
 dis¸ëe_vﬁ
 <4Ë
 di•œy
@@ -79677,7 +80449,7 @@ dúe˘cﬁ‹
 COLOR_WHITE
 ;
 
-525 
+529 
 di•œy
 .
 dúe˘cﬁ‹
@@ -79685,7 +80457,7 @@ dúe˘cﬁ‹
 COLOR_RED
 ;
 
-526 
+530 
 di•œy
 .
 	`dúe˘Bôm≠
@@ -79693,25 +80465,25 @@ di•œy
 Pokôto_hódph⁄es
 ,1,2);
 
-527 
+531 
 di•œy
 .
 	`£tCurs‹
 (3*8,6*8+6);
 
-528 
+532 
 di•œy
 .
 	`¥öt
 ("HEADPHONES");
 
-529 
+533 
 di•œy
 .
 	`£tCurs‹
 (3*8,8*8+2);
 
-530 i‡(
+534 i‡(
 dis¸ëe_vﬁ
 >3Ë
 di•œy
@@ -79719,13 +80491,13 @@ di•œy
 	`¥öt
 ("TOO LOUD!");
 
-531 
+535 
 di•œy
 .
 	`¥öt
 ("OK ");
 
-532 
+536 
 di•œy
 .
 dúe˘cﬁ‹
@@ -79733,7 +80505,7 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-533 
+537 
 di•œy
 .
 	`dúe˘Bôm≠
@@ -79741,25 +80513,25 @@ di•œy
 Pokôto_•ókî
 ,1,2);
 
-534 
+538 
 di•œy
 .
 	`£tCurs‹
 (3*8,12*8+6);
 
-535 
+539 
 di•œy
 .
 	`¥öt
 ("VOLUME MAX");
 
-536 
+540 
 di•œy
 .
 	`£tCurs‹
 (3*8,14*8+2);
 
-540 i‡((
+544 i‡((
 sound
 .
 	`gëVﬁume
@@ -79771,7 +80543,7 @@ dúe˘cﬁ‹
 COLOR_RED
 ;}
 
-541 
+545 
 di•œy
 .
 dúe˘cﬁ‹
@@ -79779,7 +80551,7 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-542 i‡(
+546 i‡(
 dis¸ëe_vﬁ
 ==4Ë
 di•œy
@@ -79789,11 +80561,11 @@ dúe˘cﬁ‹
 COLOR_YELLOW
 ;
 
-543 i‡(
+547 i‡(
 dis¸ëe_vﬁ
 ==7) discrete_vol=6;
 
-544 
+548 
 di•œy
 .
 	`¥öt
@@ -79801,13 +80573,13 @@ di•œy
 dis¸ëe_vﬁ
 );
 
-546 
+550 
 di•œy
 .
 	`¥öt
 (" ");
 
-547 
+551 
 di•œy
 .
 dúe˘cﬁ‹
@@ -79815,7 +80587,7 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-548 
+552 
 	`døwvﬁb¨
 (14*8,14*8+4+3,
 sound
@@ -79825,33 +80597,33 @@ sound
 Ál£
 );
 
-551 
+555 
 d°©e
 =2; ;
 
-553 #i‚de‡
+557 #i‚de‡
 POK_SIM
 
 
-554 
+558 
 buâ⁄s
 .
 	`pﬁlBuâ⁄s
 ();
 
-556 
+560 
 buâ⁄s
 .
 	`upd©e
 ();
 
-557 i‡(
+561 i‡(
 	`aBä
 ()Ë{
 d°©e
 =0;;}
 
-558 i‡(
+562 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -79859,17 +80631,17 @@ buâ⁄s
 BTN_RIGHT
 )) {
 
-559 
+563 
 cou¡d
 =0xFFFF;
 
-568 
+572 
 sound
 .
 	`vﬁumeUp
 ();
 
-569 
+573 
 d°©e
 =1; 
 wùe
@@ -79877,7 +80649,7 @@ wùe
 Ál£
 ;
 
-572 i‡(
+576 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -79885,17 +80657,17 @@ buâ⁄s
 BTN_LEFT
 )) {
 
-573 
+577 
 cou¡d
 =0xFFFF;
 
-579 
+583 
 sound
 .
 	`vﬁumeDown
 ();
 
-580 
+584 
 d°©e
 =1; 
 wùe
@@ -79903,7 +80675,7 @@ wùe
 Ál£
 ;
 
-586 
+590 
 vﬁ
  = 
 sound
@@ -79911,11 +80683,11 @@ sound
 	`gëVﬁume
 ();
 
-587 #i‚de‡
+591 #i‚de‡
 POK_SIM
 
 
-588 i‡(
+592 i‡(
 vﬁ
  !
 	`ì¥om_ªad_byã
@@ -79929,7 +80701,7 @@ EESETTINGS_VOL
 uöt8_t
 )vol);
 
-590 
+594 
 sound
 .
 	`£tVﬁume
@@ -79937,51 +80709,51 @@ sound
 vﬁ
 );
 
-592 
+596 
 di•œy
 .
 	`£tCurs‹
 (0,0);
 
-593 
+597 
 	}
 }
 
-595 
+599 
 	gC‹e
 ::
 	$begö
 () {
 
-597 
+601 
 	`öô
 ();
 
-598 
+602 
 timePîFøme
  = 
 POK_FRAMEDURATION
 ;
 
-601 
+605 
 ‰ameEndMi¸os
  = 1;
 
-602 
+606 
 °¨tMíuTimî
  = 255;
 
-604 
+608 
 	`ªadSëtögs
 ();
 
-606 
+610 
 backlight
 .
 	`begö
 ();
 
-607 
+611 
 backlight
 .
 	`£t
@@ -79989,43 +80761,43 @@ backlight
 BACKLIGHT_MAX
 );
 
-608 
+612 
 buâ⁄s
 .
 	`begö
 ();
 
-609 
+613 
 buâ⁄s
 .
 	`upd©e
 ();
 
-610 
+614 
 b©ãry
 .
 	`begö
 ();
 
-611 
+615 
 di•œy
 .
 	`begö
 ();
 
-612 #i‡
+616 #i‡
 POK_DISPLAYLOGO
 
 
-613 #i‡
+617 #i‡
 PROJ_DEVELOPER_MODE
  != 1
 
-614 
+618 
 	`showLogo
 ();
 
-618 
+622 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -80033,7 +80805,7 @@ di•œy
 åue
 );
 
-619 
+623 
 di•œy
 .
 dúe˘bgcﬁ‹
@@ -80041,13 +80813,13 @@ dúe˘bgcﬁ‹
 COLOR_BLACK
 ;
 
-620 
+624 
 di•œy
 .
 	`˛órLCD
 ();
 
-621 
+625 
 di•œy
 .
 	`£tF⁄t
@@ -80055,7 +80827,7 @@ di•œy
 ‚tC64UIGfx
 );
 
-623 
+627 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -80063,7 +80835,7 @@ di•œy
 åue
 );
 
-624 
+628 
 di•œy
 .
 dúe˘bgcﬁ‹
@@ -80071,7 +80843,7 @@ dúe˘bgcﬁ‹
 COLOR_BLACK
 ;
 
-625 
+629 
 di•œy
 .
 dúe˘cﬁ‹
@@ -80079,13 +80851,13 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-626 
+630 
 di•œy
 .
 	`˛órLCD
 ();
 
-627 
+631 
 di•œy
 .
 	`£tF⁄t
@@ -80093,43 +80865,43 @@ di•œy
 ‚tC64UIGfx
 );
 
-628 
+632 
 di•œy
 .
 adju°Ch¨Sãp
 =0;
 
-629 
+633 
 di•œy
 .
 adju°LöeSãp
 =1;
 
-630 #ifde‡
+634 #ifde‡
 JUSTLOAD
 
 
-631 
+635 
 	`jumpToLﬂdî
 ();
 
-634 #i‚de‡
+638 #i‚de‡
 DISABLE_LOADER
 
 
-635 #i‡
+639 #i‡
 PROJ_DEVELOPER_MODE
  != 1
 
-636 
+640 
 	`askLﬂdî
 ();
 
-640 #i‡
+644 #i‡
 PROJ_DEVELOPER_MODE
 ==1
 
-641 
+645 
 sound
 .
 	`£tMaxVﬁ
@@ -80137,7 +80909,7 @@ sound
 VOLUME_SPEAKER_MAX
 );
 
-642 
+646 
 sound
 .
 	`£tVﬁume
@@ -80145,23 +80917,23 @@ sound
 VOLUME_SPEAKER_MAX
 );
 
-645 
+649 
 	`£tVﬁLimô
 ();
 
-646 
+650 
 di•œy
 .
 	`˛ór
 ();
 
-647 
+651 
 di•œy
 .
 	`upd©e
 ();
 
-649 
+653 
 buâ⁄s
 .
 °©es
@@ -80169,13 +80941,13 @@ buâ⁄s
 BTN_A
 ])
 
-651 
+655 
 buâ⁄s
 .
 	`upd©e
 ();
 
-656 
+660 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -80183,25 +80955,25 @@ di•œy
 Ál£
 );
 
-657 
+661 
 di•œy
 .
 adju°Ch¨Sãp
 =1;
 
-658 
+662 
 di•œy
 .
 adju°LöeSãp
 =1;
 
-659 
+663 
 di•œy
 .
 f⁄tSize
 =1;
 
-660 
+664 
 di•œy
 .
 ãxtWøp
@@ -80209,11 +80981,11 @@ di•œy
 åue
 ;
 
-661 #i‡
+665 #i‡
 POK_GAMEBUINO_SUPPORT
  > 0
 
-662 
+666 
 di•œy
 .
 	`£tF⁄t
@@ -80221,7 +80993,7 @@ di•œy
 f⁄t5x7
 );
 
-664 
+668 
 di•œy
 .
 	`£tF⁄t
@@ -80229,23 +81001,23 @@ di•œy
 f⁄tC64
 );
 
-666 #i‡
+670 #i‡
 POK_ENABLE_SOUND
  > 0
 
-667 
+671 
 sound
 .
 	`begö
 ();
 
-670 
+674 
 b©ãry
 .
 	`upd©e
 ();
 
-671 if(
+675 if(
 buâ⁄s
 .
 	`¥es£d
@@ -80253,21 +81025,21 @@ buâ⁄s
 BTN_B
 )){
 
-672 
+676 
 sound
 .
 	`£tVﬁume
 (0);
 
-675 #i‡
+679 #i‡
 POK_GBSOUND
  > 0
 
-676 #if(
+680 #if(
 NUM_CHANNELS
  > 0)
 
-677 
+681 
 sound
 .
 	`∂ayP©ã∫
@@ -80275,11 +81047,11 @@ sound
 °¨tupSound
 , 0);
 
-679 #if(
+683 #if(
 NUM_CHANNELS
  > 1)
 
-680 
+684 
 sound
 .
 	`∂ayP©ã∫
@@ -80287,11 +81059,11 @@ sound
 °¨tupSound
 , 1);
 
-682 #if(
+686 #if(
 NUM_CHANNELS
  > 2)
 
-683 
+687 
 sound
 .
 	`∂ayP©ã∫
@@ -80299,11 +81071,11 @@ sound
 °¨tupSound
 , 2);
 
-685 #if(
+689 #if(
 NUM_CHANNELS
  > 3)
 
-686 
+690 
 sound
 .
 	`∂ayP©ã∫
@@ -80311,23 +81083,23 @@ sound
 °¨tupSound
 , 3);
 
-691 
+695 
 	}
 }
 
-693 
+697 
 	gC‹e
 ::
 	$öô
 () {
 
-694 
+698 
 run_°©e
  = 
 åue
 ;
 
-695 
+699 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -80335,7 +81107,7 @@ di•œy
 Ál£
 );
 
-696 
+700 
 di•œy
 .
 	`£tF⁄t
@@ -80343,27 +81115,27 @@ di•œy
 DEFAULT_FONT
 );
 
-697 
+701 
 	`öôClock
 ();
 
-698 
+702 
 	`öôGPIO
 ();
 
-699 
+703 
 	`öôBuâ⁄s
 ();
 
-700 
+704 
 	`öôR™dom
 ();
 
-703 
+707 
 	}
 }
 
-705 
+709 
 	gC‹e
 ::
 	$öô
@@ -80373,13 +81145,13 @@ uöt8_t
 swôches
 ) {
 
-706 
+710 
 run_°©e
  = 
 åue
 ;
 
-707 
+711 
 di•œy
 .
 	`íabÀDúe˘Prötög
@@ -80387,7 +81159,7 @@ di•œy
 Ál£
 );
 
-708 
+712 
 di•œy
 .
 	`£tF⁄t
@@ -80395,47 +81167,47 @@ di•œy
 DEFAULT_FONT
 );
 
-709 
+713 
 	`öôClock
 ();
 
-710 
+714 
 	`öôGPIO
 ();
 
-711 
+715 
 	`öôBuâ⁄s
 ();
 
-712 
+716 
 	`öôR™dom
 ();
 
-715 
+719 
 	}
 }
 
-717 
+721 
 	gC‹e
 ::
 	$öôBuâ⁄s
 () {
 
-718 #i‚de‡
+722 #i‚de‡
 POK_SIM
 
 
-719 
+723 
 Pokôto
 ::
 	`öôBuâ⁄s
 ();
 
-721 
+725 
 	}
 }
 
-723 
+727 
 boﬁ
  
 	gC‹e
@@ -80443,11 +81215,11 @@ boﬁ
 	$isRu¬ög
 () {
 
-724 #ifde‡
+728 #ifde‡
 POK_SIM
 
 
-725 
+729 
 run_°©e
  = 
 simuœt‹
@@ -80455,33 +81227,33 @@ simuœt‹
 	`isRu¬ög
 ();
 
-727  
+731  
 run_°©e
 ;
 
-728 
+732 
 	}
 }
 
-730 
+734 
 	gC‹e
 ::
 	$öôDi•œy
 () {
 
-731 #i‡
+735 #i‡
 POK_DISPLAYLOGO
  > 0
 
-732 
+736 
 	`showLogo
 ();
 
-734 #i‡
+738 #i‡
 POK_USE_CONSOLE
  > 0
 
-735 
+739 
 c⁄sﬁe
 .
 	`AddMesßge
@@ -80491,29 +81263,29 @@ MSOURCE_LCD
 MSG_INIT_OK
 );
 
-737 
+741 
 	}
 }
 
-739 
+743 
 	gC‹e
 ::
 	$showLogo
 () {
 
-740 
+744 
 uöt32_t
  
 now
 ;
 
-741 
+745 
 uöt8_t
  
 °©e
 =0;
 
-742 
+746 
 uöt16_t
  
 cou¡î
@@ -80521,39 +81293,39 @@ cou¡î
 i
 =0;
 
-743 
+747 
 uöt16_t
  
 sc
 ;
 
-744 
+748 
 °©e
  < 255/6) {
 
-745 
+749 
 now
 =
 	`gëTime
 ();
 
-746 i‡(
+750 i‡(
 now
 >
 ª‰eshtime
 ) {
 
-747 
+751 
 ª‰eshtime
 =
 now
 +30;
 
-748 
+752 
 °©e
 ) {
 
-751 
+755 
 di•œy
 .
 dúe˘bgcﬁ‹
@@ -80561,7 +81333,7 @@ dúe˘bgcﬁ‹
 COLOR_BLACK
 ;
 
-752 
+756 
 di•œy
 .
 	`fûlLCD
@@ -80569,17 +81341,17 @@ di•œy
 dúe˘bgcﬁ‹
 );
 
-753 
+757 
 sc
  = 
 COLOR_BLACK
 ;
 
-754 
+758 
 °©e
 ++;
 
-758 
+762 
 di•œy
 .
 dúe˘cﬁ‹
@@ -80593,7 +81365,7 @@ COLOR_GREEN
 i
 );
 
-759 
+763 
 di•œy
 .
 	`dúe˘Bôm≠
@@ -80605,17 +81377,17 @@ Pokôto_logo
 POK_LCD_H
 /2-(*(Pokitto_logo+1)/2),Pokitto_logo,1,1);
 
-760 
+764 
 i
  += 28;
 
-761 i‡(
+765 i‡(
 i
 >=0xFFË{ 
 °©e
 ++; i=0;}
 
-765 
+769 
 di•œy
 .
 dúe˘cﬁ‹
@@ -80623,7 +81395,7 @@ dúe˘cﬁ‹
 COLOR_GREEN
 ;
 
-766 
+770 
 di•œy
 .
 	`dúe˘Bôm≠
@@ -80635,17 +81407,17 @@ Pokôto_logo
 POK_LCD_H
 /2-(*(Pokitto_logo+1)/2),Pokitto_logo,1,1);
 
-767 
+771 
 i
 += 0x3F;
 
-768 i‡(
+772 i‡(
 i
 >0x3FFË
 °©e
  = 255;
 
-771 if(
+775 if(
 buâ⁄s
 .
 	`aBä
@@ -80653,17 +81425,17 @@ buâ⁄s
 °©e
 =255;
 
-774 
+778 
 	}
 }
 
-776 
+780 
 	gC‹e
 ::
 	$ªadSëtögs
 () {
 
-784 
+788 
 sound
 .
 	`£tMaxVﬁ
@@ -80671,7 +81443,7 @@ sound
 VOLUME_HEADPHONE_MAX
 );
 
-785 
+789 
 sound
 .
 globÆVﬁume
@@ -80679,29 +81451,11 @@ globÆVﬁume
 VOLUME_STARTUP
 ;
 
-787 
+791 
 °¨tMíuTimî
  = 
 START_MENU_TIMER
 ;
-
-793 
-	}
-}
-
-795 
-	gC‹e
-::
-	$tôÀS¸ìn
-(c⁄° * 
-«me
-){
-
-796 
-	`tôÀS¸ìn
-(
-«me
-, 0);
 
 797 
 	}
@@ -80711,17 +81465,15 @@ START_MENU_TIMER
 	gC‹e
 ::
 	$tôÀS¸ìn
-(c⁄° 
-uöt8_t
-* 
-logo
+(c⁄° * 
+«me
 ){
 
 800 
 	`tôÀS¸ìn
-((""), 
-logo
-);
+(
+«me
+, 0);
 
 801 
 	}
@@ -80731,17 +81483,37 @@ logo
 	gC‹e
 ::
 	$tôÀS¸ìn
-(){
+(c⁄° 
+uöt8_t
+* 
+logo
+){
 
 804 
 	`tôÀS¸ìn
-((""));
+((""), 
+logo
+);
 
 805 
 	}
 }
 
 807 
+	gC‹e
+::
+	$tôÀS¸ìn
+(){
+
+808 
+	`tôÀS¸ìn
+((""));
+
+809 
+	}
+}
+
+811 
 	gC‹e
 ::
 	$tôÀS¸ìn
@@ -80753,7 +81525,7 @@ uöt8_t
 logo
 ){
 
-808 
+812 
 di•œy
 .
 	`£tF⁄t
@@ -80761,17 +81533,17 @@ di•œy
 f⁄t5x7
 );
 
-809 if(
+813 if(
 °¨tMíuTimî
 ){
 
-810 
+814 
 di•œy
 .
 f⁄tSize
  = 1;
 
-811 
+815 
 di•œy
 .
 ãxtWøp
@@ -80779,7 +81551,7 @@ di•œy
 Ál£
 ;
 
-812 
+816 
 di•œy
 .
 ≥rsi°í˚
@@ -80787,7 +81559,7 @@ di•œy
 Ál£
 ;
 
-813 
+817 
 b©ãry
 .
 show
@@ -80795,7 +81567,7 @@ show
 Ál£
 ;
 
-814 
+818 
 di•œy
 .
 	`£tCﬁ‹
@@ -80803,15 +81575,15 @@ di•œy
 BLACK
 );
 
-815 
+819 
 	`isRu¬ög
 ()){
 
-816 if(
+820 if(
 	`upd©e
 ()){
 
-817 
+821 
 uöt8_t
  
 logoOff£t
@@ -80823,29 +81595,29 @@ di•œy
 f⁄tHeight
 :0;
 
-819 
+823 
 di•œy
 .
 	`£tCﬁ‹Dïth
 (1);
 
-820 
+824 
 di•œy
 .
 	`£tCﬁ‹
 (3);
 
-822 
+826 
 di•œy
 .
 	`£tCﬁ‹
 (1);
 
-823 if(
+827 if(
 logo
 ){
 
-824 
+828 
 di•œy
 .
 	`døwBôm≠
@@ -80855,19 +81627,19 @@ logoOff£t
 logo
 );
 
-826 
+830 
 di•œy
 .
 curs‹X
  = 0;
 
-827 
+831 
 di•œy
 .
 curs‹Y
  = 12;
 
-828 
+832 
 di•œy
 .
 	`¥öt
@@ -80875,7 +81647,7 @@ di•œy
 «me
 );
 
-831 
+835 
 di•œy
 .
 curs‹X
@@ -80885,7 +81657,7 @@ LCDWIDTH
 f⁄tWidth
 *3 -1;
 
-832 
+836 
 di•œy
 .
 curs‹Y
@@ -80895,23 +81667,23 @@ LCDHEIGHT
 f⁄tHeight
 *3 - 3;
 
-833 if((
+837 if((
 ‰ameCou¡
 /16)%2)
 
-834 
+838 
 di•œy
 .
 	`¥öén
 (("\25 \20"));
 
-836 
+840 
 di•œy
 .
 	`¥öén
 (("\25\20 "));
 
-838 
+842 
 di•œy
 .
 curs‹X
@@ -80921,31 +81693,31 @@ LCDWIDTH
 f⁄tWidth
 *3 - 1;
 
-839 
+843 
 di•œy
 .
 curs‹Y
 ++;
 
-840 if(
+844 if(
 sound
 .
 globÆVﬁume
 )
 
-841 
+845 
 di•œy
 .
 	`¥öén
 (("\26\23\24"));
 
-843 
+847 
 di•œy
 .
 	`¥öén
 (("\26\23x"));
 
-845 
+849 
 di•œy
 .
 curs‹X
@@ -80955,13 +81727,13 @@ LCDWIDTH
 f⁄tWidth
 *3 - 1;
 
-846 
+850 
 di•œy
 .
 curs‹Y
 ++;
 
-850 if(
+854 if(
 buâ⁄s
 .
 	`¥es£d
@@ -80969,7 +81741,7 @@ buâ⁄s
 BTN_B
 )){
 
-851 
+855 
 sound
 .
 	`£tVﬁume
@@ -80977,13 +81749,13 @@ sound
 	`gëVﬁume
 () + 1);
 
-852 
+856 
 sound
 .
 	`∂ayTick
 ();
 
-855 if(
+859 if(
 buâ⁄s
 .
 	`¥es£d
@@ -80995,23 +81767,23 @@ BTN_A
 °¨tMíuTimî
 )&&(startMenuTimer != 255))){
 
-856 
+860 
 °¨tMíuTimî
  = 255;
 
-857 
+861 
 sound
 .
 	`°›P©ã∫
 (0);
 
-858 
+862 
 sound
 .
 	`∂ayOK
 ();
 
-866 
+870 
 b©ãry
 .
 show
@@ -81019,11 +81791,11 @@ show
 åue
 ;
 
-868 
+872 
 	}
 }
 
-881 
+885 
 boﬁ
  
 	gC‹e
@@ -81045,17 +81817,17 @@ updRe˘W
 updRe˘H
 ) {
 
-883 #i‡
+887 #i‡
 POK_STREAMING_MUSIC
 
 
-884 
+888 
 sound
 .
 	`upd©eSåóm
 ();
 
-887 
+891 
 uöt32_t
  
 now
@@ -81063,7 +81835,7 @@ now
 	`gëTime
 ();
 
-888 i‡((((
+892 i‡((((
 √xtFømeMûlis
  - 
 now
@@ -81073,7 +81845,7 @@ timePîFøme
 ‰ameEndMi¸os
 ) {
 
-889 
+893 
 √xtFømeMûlis
  = 
 now
@@ -81081,33 +81853,33 @@ now
 timePîFøme
 ;
 
-890 
+894 
 ‰ameCou¡
 ++;
 
-892 
+896 
 ‰ameEndMi¸os
  = 0;
 
-893 
+897 
 backlight
 .
 	`upd©e
 ();
 
-894 
+898 
 buâ⁄s
 .
 	`upd©e
 ();
 
-895 
+899 
 b©ãry
 .
 	`upd©e
 ();
 
-898 #i‡
+902 #i‡
 	`deföed
 (
 PROJ_USE_FPS_COUNTER
@@ -81115,23 +81887,23 @@ PROJ_USE_FPS_COUNTER
 PROJ_SHOW_FPS_COUNTER
 )
 
-899 c⁄° 
+903 c⁄° 
 uöt32_t
  
 ÂsI¡îvÆ_ms
  = 1000*3;
 
-901 
+905 
 Âs_‰ameCou¡
 ++;
 
-902 i‡(
+906 i‡(
 now
  > 
 Âs_ª‰eshtime
 ) {
 
-903 
+907 
 Âs_cou¡î
  = (1000*
 Âs_‰ameCou¡
@@ -81143,7 +81915,7 @@ now
 ÂsI¡îvÆ_ms
 );
 
-904 
+908 
 Âs_ª‰eshtime
  = 
 now
@@ -81151,55 +81923,55 @@ now
 ÂsI¡îvÆ_ms
 ;
 
-905 
+909 
 Âs_‰ameCou¡
  = 0;
 
-906 
+910 
 Âs_cou¡î_upd©ed
  = 
 åue
 ;
 
-910  
+914  
 åue
 ;
 
-913 i‡(!
+917 i‡(!
 ‰ameEndMi¸os
 ) {
 
-914 #i‡
+918 #i‡
 POK_ENABLE_SOUND
  > 0
 
-915 
+919 
 sound
 .
 	`upd©eTøck
 ();
 
-916 
+920 
 sound
 .
 	`upd©eP©ã∫
 ();
 
-917 
+921 
 sound
 .
 	`upd©eNŸe
 ();
 
-919 
+923 
 	`upd©eP›up
 ();
 
-920 
+924 
 	`di•œyB©ãry
 ();
 
-922 
+926 
 di•œy
 .
 	`upd©e
@@ -81215,29 +81987,29 @@ updRe˘W
 updRe˘H
 );
 
-924 
+928 
 ‰ameEndMi¸os
  = 1;
 
-927  
+931  
 Ál£
 ;
 
-929 
+933 
 	}
 }
 
-931 
+935 
 	gC‹e
 ::
 	$di•œyB©ãry
 (){
 
-932 #i‡(
+936 #i‡(
 ENABLE_BATTERY
  > 0)
 
-934 
+938 
 uöt8_t
  
 ox
@@ -81245,7 +82017,7 @@ ox
 oy
 ;
 
-935 
+939 
 ox
 =
 di•œy
@@ -81253,7 +82025,7 @@ di•œy
 curs‹X
 ;
 
-936 
+940 
 oy
 =
 di•œy
@@ -81261,7 +82033,7 @@ di•œy
 curs‹Y
 ;
 
-937 
+941 
 di•œy
 .
 curs‹X
@@ -81271,49 +82043,49 @@ LCDWIDTH
 f⁄tWidth
 +1;
 
-938 
+942 
 di•œy
 .
 curs‹Y
  = 0;
 
-939 
+943 
 b©ãry
 .
 Àvñ
 ){
 
-941 
+945 
 sound
 .
 	`°›P©ã∫
 ();
 
-942 
+946 
 backlight
 .
 	`£t
 (0);
 
-943 
+947 
 di•œy
 .
 	`˛ór
 ();
 
-944 
+948 
 di•œy
 .
 f⁄tSize
  = 1;
 
-945 
+949 
 di•œy
 .
 	`¥öt
 (("LOW BATTERY\n"));
 
-946 
+950 
 di•œy
 .
 	`¥öt
@@ -81323,19 +82095,19 @@ b©ãry
 vﬁège
 );
 
-947 
+951 
 di•œy
 .
 	`¥öt
 (("mV\n\nPLEASE\nTURN OFF"));
 
-948 
+952 
 di•œy
 .
 	`upd©e
 ();
 
-951 if((
+955 if((
 ‰ameCou¡
  % 16Ë< 8Ë
 di•œy
@@ -81343,19 +82115,19 @@ di•œy
 	`¥öt
 ('\7');
 
-952 
+956 
 di•œy
 .
 	`¥öt
 ('x');
 
-957 if(
+961 if(
 b©ãry
 .
 show
 ){
 
-958 
+962 
 di•œy
 .
 	`¥öt
@@ -81365,19 +82137,19 @@ b©ãry
 Àvñ
 ));
 
-962 if(
+966 if(
 b©ãry
 .
 show
 ){
 
-963 
+967 
 di•œy
 .
 	`¥öt
 ('/');
 
-967 
+971 
 di•œy
 .
 curs‹X
@@ -81385,7 +82157,7 @@ curs‹X
 ox
 ;
 
-968 
+972 
 di•œy
 .
 curs‹Y
@@ -81393,11 +82165,11 @@ curs‹Y
 oy
 ;
 
-970 
+974 
 	}
 }
 
-972 * 
+976 * 
 	gC‹e
 ::
 	$fûemíu
@@ -81405,7 +82177,7 @@ oy
 ext
 ) {
 
-973 
+977 
 uöt8_t
  
 ﬁdPîsi°í˚
@@ -81415,7 +82187,7 @@ di•œy
 ≥rsi°í˚
 ;
 
-974 
+978 
 di•œy
 .
 ≥rsi°í˚
@@ -81423,7 +82195,7 @@ di•œy
 Ál£
 ;
 
-975 
+979 
 uöt16_t
  
 ﬁd∑l0
@@ -81433,7 +82205,7 @@ di•œy
 ∑Àâe
 [0];
 
-976 
+980 
 uöt16_t
  
 ﬁd∑l1
@@ -81443,7 +82215,7 @@ di•œy
 ∑Àâe
 [1];
 
-977 
+981 
 uöt16_t
  
 ﬁd∑l2
@@ -81453,7 +82225,7 @@ di•œy
 ∑Àâe
 [2];
 
-978 
+982 
 di•œy
 .
 ∑Àâe
@@ -81461,7 +82233,7 @@ di•œy
 COLOR_GREEN
 ;
 
-979 
+983 
 di•œy
 .
 ∑Àâe
@@ -81469,7 +82241,7 @@ di•œy
 COLOR_WHITE
 ;
 
-980 
+984 
 di•œy
 .
 ∑Àâe
@@ -81477,7 +82249,7 @@ di•œy
 COLOR_BLACK
 ;
 
-981 
+985 
 uöt8_t
  
 ﬁdbg
@@ -81487,7 +82259,7 @@ di•œy
 bgcﬁ‹
 ;
 
-982 
+986 
 uöt8_t
  
 ﬁdfg
@@ -81497,19 +82269,19 @@ di•œy
 cﬁ‹
 ;
 
-983 
+987 
 di•œy
 .
 cﬁ‹
 =1;
 
-984 
+988 
 di•œy
 .
 bgcﬁ‹
 =0;
 
-986 
+990 
 öt16_t
  
 rowh
@@ -81519,19 +82291,19 @@ di•œy
 f⁄tHeight
  + 2;
 
-987 
+991 
 öt8_t
  
 a˘iveIãm
  = 0;
 
-988 
+992 
 öt16_t
  
 cuºítT›Iãm
  = 0;
 
-989 
+993 
 öt16_t
  
 ôemsPîS¸ìn
@@ -81543,13 +82315,13 @@ height
 rowh
 ;
 
-990 
+994 
 öt16_t
  
 numOfIãmsFound
  = 0;
 
-991 
+995 
 boﬁón
  
 exô
@@ -81557,15 +82329,15 @@ exô
 Ál£
 ;
 
-993 * 
+997 * 
 txt
 ;
 
-995 
+999 
 	`pokInôSD
 ();
 
-997 
+1001 
 boﬁ
  
 upd©ed
@@ -81573,17 +82345,17 @@ upd©ed
 åue
 ;
 
-998 
+1002 
 	`isRu¬ög
 ()) {
 
-999 i‡(
+1003 i‡(
 	`upd©e
 (
 åue
 )) {
 
-1000 i‡(
+1004 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -81595,13 +82367,13 @@ BTN_B
 BTN_C
 )) {
 
-1001 
+1005 
 exô
  = 
 åue
 ;
 
-1002 i‡(
+1006 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -81609,35 +82381,35 @@ buâ⁄s
 BTN_A
 )) {
 
-1003 
+1007 
 sound
 .
 	`∂ayOK
 ();
 
-1005 *
+1009 *
 £À˘edfûe
  = 0;
 
-1006 
+1010 
 sound
 .
 	`∂ayC™˚l
 ();
 
-1008 
+1012 
 upd©ed
  = 
 åue
 ;
 
-1010 i‡(
+1014 i‡(
 exô
  =
 Ál£
 ) {
 
-1011 i‡(
+1015 i‡(
 buâ⁄s
 .
 	`ª≥©
@@ -81645,13 +82417,13 @@ buâ⁄s
 BTN_DOWN
 ,4)) {
 
-1012 if–++
+1016 if–++
 a˘iveIãm
  >
 numOfIãmsFound
  )áctiveItem =ÇumOfItemsFound - 1;
 
-1013 if–
+1017 if–
 a˘iveIãm
  >
 cuºítT›Iãm
@@ -81659,19 +82431,19 @@ cuºítT›Iãm
 ôemsPîS¸ìn
 ) currentTopItem += itemsPerScreen;
 
-1014 
+1018 
 sound
 .
 	`∂ayTick
 ();
 
-1015 
+1019 
 upd©ed
  = 
 åue
 ;
 
-1017 i‡(
+1021 i‡(
 buâ⁄s
 .
 	`ª≥©
@@ -81679,11 +82451,11 @@ buâ⁄s
 BTN_UP
 ,4)) {
 
-1018 if–--
+1022 if–--
 a˘iveIãm
  < 0 )áctiveItem = 0;
 
-1019 if–
+1023 if–
 a˘iveIãm
  < 
 cuºítT›Iãm
@@ -81691,19 +82463,19 @@ cuºítT›Iãm
 ôemsPîS¸ìn
 ;
 
-1020 
+1024 
 sound
 .
 	`∂ayTick
 ();
 
-1021 
+1025 
 upd©ed
  = 
 åue
 ;
 
-1025 
+1029 
 di•œy
 .
 bgcﬁ‹
@@ -81711,7 +82483,7 @@ bgcﬁ‹
 ﬁdbg
 ;
 
-1026 
+1030 
 di•œy
 .
 cﬁ‹
@@ -81719,7 +82491,7 @@ cﬁ‹
 ﬁdfg
 ;
 
-1027 
+1031 
 di•œy
 .
 ∑Àâe
@@ -81727,7 +82499,7 @@ di•œy
 ﬁd∑l0
 ;
 
-1028 
+1032 
 di•œy
 .
 ∑Àâe
@@ -81735,7 +82507,7 @@ di•œy
 ﬁd∑l1
 ;
 
-1029 
+1033 
 di•œy
 .
 ∑Àâe
@@ -81743,7 +82515,7 @@ di•œy
 ﬁd∑l2
 ;
 
-1030 
+1034 
 di•œy
 .
 ≥rsi°í˚
@@ -81751,11 +82523,11 @@ di•œy
 ﬁdPîsi°í˚
 ;
 
-1031  
+1035  
 £À˘edfûe
 ;
 
-1035 
+1039 
 di•œy
 .
 ãxtWøp
@@ -81763,7 +82535,7 @@ di•œy
 Ál£
 ;
 
-1036 
+1040 
 uöt16_t
  
 fc
@@ -81771,7 +82543,7 @@ fc
 bc
 ;
 
-1037 
+1041 
 fc
  = 
 di•œy
@@ -81779,7 +82551,7 @@ di•œy
 cﬁ‹
 ;
 
-1038 
+1042 
 bc
  = 
 di•œy
@@ -81787,21 +82559,21 @@ di•œy
 bgcﬁ‹
 ;
 
-1039 if–
+1043 if–
 upd©ed
  ) {
 
-1040 #i‡
+1044 #i‡
 POK_SIM
 
 
-1041 
+1045 
 	`gëFú°Fûe
 (
 ext
 );
 
-1043 
+1047 
 boﬁ
  
 isFú°Fûe
@@ -81809,23 +82581,23 @@ isFú°Fûe
 åue
 ;
 
-1045 
+1049 
 i
  = 0; ; i++) {
 
-1046 
+1050 
 di•œy
 .
 curs‹X
  = 0;
 
-1047 
+1051 
 di•œy
 .
 övisibÀcﬁ‹
 =255;
 
-1048 
+1052 
 di•œy
 .
 curs‹Y
@@ -81837,15 +82609,15 @@ cuºítT›Iãm
 rowh
 ;
 
-1051 #i‚de‡
+1055 #i‚de‡
 POK_SIM
 
 
-1052 if(
+1056 if(
 isFú°Fûe
 ) {
 
-1053 
+1057 
 txt
  = 
 	`gëFú°Fûe
@@ -81853,13 +82625,13 @@ txt
 ext
 );
 
-1054 
+1058 
 isFú°Fûe
  = 
 Ál£
 ;
 
-1059 
+1063 
 txt
  = 
 	`gëNextFûe
@@ -81867,35 +82639,35 @@ txt
 ext
 );
 
-1061 i‡(
+1065 i‡(
 txt
 ) {
 
-1063 
+1067 
 numOfIãmsFound
  = 
 i
 +1;
 
-1066 i‡(
+1070 i‡(
 i
  =
 a˘iveIãm
 ){
 
-1067 
+1071 
 di•œy
 .
 curs‹X
  = 3;
 
-1068 
+1072 
 di•œy
 .
 cﬁ‹
 =2;
 
-1069 
+1073 
 di•œy
 .
 	`fûlRe˘
@@ -81907,19 +82679,19 @@ LCDWIDTH
 rowh
 );
 
-1070 
+1074 
 di•œy
 .
 	`£tCﬁ‹
 (0,2);
 
-1071 } 
+1075 } 
 di•œy
 .
 	`£tCﬁ‹
 (1,0);
 
-1074 if(
+1078 if(
 i
  >
 cuºítT›Iãm
@@ -81927,13 +82699,13 @@ cuºítT›Iãm
 ôemsPîS¸ìn
  ) {
 
-1079 if–
+1083 if–
 i
  >
 cuºítT›Iãm
 ) {
 
-1080 
+1084 
 di•œy
 .
 	`¥öt
@@ -81945,13 +82717,13 @@ curs‹Y
 txt
 );
 
-1081 i‡(
+1085 i‡(
 i
  =
 a˘iveIãm
 )
 
-1082 
+1086 
 	`°r˝y
 (
 £À˘edfûe
@@ -81959,49 +82731,49 @@ a˘iveIãm
 txt
 );
 
-1087 
+1091 
 di•œy
 .
 	`£tCﬁ‹
 (1,0);
 
-1090 
+1094 
 di•œy
 .
 	`upd©e
 ();
 
-1092 
+1096 
 upd©ed
  = 
 Ál£
 ;
 
-1095 
+1099 
 di•œy
 .
 	`£tCﬁ‹
 (1,0);
 
-1098 
+1102 
 	}
 }
 
-1100 * 
+1104 * 
 	gC‹e
 ::
 	$fûemíu
 () {
 
-1101  
+1105  
 	`fûemíu
 ("");
 
-1102 
+1106 
 	}
 }
 
-1104 
+1108 
 öt8_t
  
 	gC‹e
@@ -82015,17 +82787,17 @@ uöt8_t
 Àngth
 ) {
 
-1105 i‡(
+1109 i‡(
 di•œy
 .
 cﬁ‹
 >3) display.color=1;
 
-1106 #i‡(
+1110 #i‡(
 ENABLE_GUI
  > 0)
 
-1107 
+1111 
 di•œy
 .
 ≥rsi°í˚
@@ -82033,13 +82805,13 @@ di•œy
 Ál£
 ;
 
-1108 
+1112 
 öt8_t
  
 a˘iveIãm
  = 0;
 
-1109 
+1113 
 öt16_t
  
 cuºítY
@@ -82049,7 +82821,7 @@ di•œy
 height
 ;
 
-1110 
+1114 
 öt16_t
  
 èrgëY
@@ -82061,7 +82833,7 @@ di•œy
 f⁄tHeight
  + 2;
 
-1111 
+1115 
 boﬁón
  
 exô
@@ -82069,21 +82841,21 @@ exô
 Ál£
 ;
 
-1112 
+1116 
 öt8_t
  
 ™swî
  = -1;
 
-1113 
+1117 
 	`isRu¬ög
 ()) {
 
-1114 i‡(
+1118 i‡(
 	`upd©e
 ()) {
 
-1115 i‡(
+1119 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -82095,13 +82867,13 @@ BTN_B
 BTN_C
 )) {
 
-1116 
+1120 
 exô
  = 
 åue
 ;
 
-1117 
+1121 
 èrgëY
  = - 
 di•œy
@@ -82111,7 +82883,7 @@ f⁄tHeight
 Àngth
  - 2;
 
-1118 i‡(
+1122 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -82119,31 +82891,31 @@ buâ⁄s
 BTN_A
 )) {
 
-1119 
+1123 
 ™swî
  = 
 a˘iveIãm
 ;
 
-1120 
+1124 
 sound
 .
 	`∂ayOK
 ();
 
-1122 
+1126 
 sound
 .
 	`∂ayC™˚l
 ();
 
-1125 i‡(
+1129 i‡(
 exô
  =
 Ál£
 ) {
 
-1126 i‡(
+1130 i‡(
 buâ⁄s
 .
 	`ª≥©
@@ -82151,27 +82923,9 @@ buâ⁄s
 BTN_DOWN
 ,4)) {
 
-1127 
-a˘iveIãm
-++;
-
-1128 
-sound
-.
-	`∂ayTick
-();
-
-1130 i‡(
-buâ⁄s
-.
-	`ª≥©
-(
-BTN_UP
-,4)) {
-
 1131 
 a˘iveIãm
---;
+++;
 
 1132 
 sound
@@ -82179,19 +82933,37 @@ sound
 	`∂ayTick
 ();
 
-1135 i‡(
+1134 i‡(
+buâ⁄s
+.
+	`ª≥©
+(
+BTN_UP
+,4)) {
+
+1135 
+a˘iveIãm
+--;
+
+1136 
+sound
+.
+	`∂ayTick
+();
+
+1139 i‡(
 a˘iveIãm
  =
 Àngth
 )áctiveItem = 0;
 
-1136 i‡(
+1140 i‡(
 a˘iveIãm
  < 0Ëa˘iveIãm = 
 Àngth
  - 1;
 
-1138 
+1142 
 èrgëY
  = -
 rowh
@@ -82199,29 +82971,29 @@ rowh
 a˘iveIãm
  + (rowh+4);
 
-1140 i‡((
+1144 i‡((
 cuºítY
  - 
 èrgëY
 ) <= 1)
 
-1141  (
+1145  (
 ™swî
 );
 
-1144 
+1148 
 cuºítY
  = (cuºítY + 
 èrgëY
 ) / 2;
 
-1145 
+1149 
 di•œy
 .
 curs‹X
  = 0;
 
-1146 
+1150 
 di•œy
 .
 curs‹Y
@@ -82229,7 +83001,7 @@ curs‹Y
 cuºítY
 ;
 
-1147 
+1151 
 di•œy
 .
 ãxtWøp
@@ -82237,7 +83009,7 @@ di•œy
 Ál£
 ;
 
-1148 
+1152 
 uöt16_t
  
 fc
@@ -82245,7 +83017,7 @@ fc
 bc
 ;
 
-1149 
+1153 
 fc
  = 
 di•œy
@@ -82253,7 +83025,7 @@ di•œy
 cﬁ‹
 ;
 
-1150 
+1154 
 bc
  = 
 di•œy
@@ -82261,7 +83033,7 @@ di•œy
 bgcﬁ‹
 ;
 
-1151 
+1155 
 byã
  
 i
@@ -82269,7 +83041,7 @@ i
 Àngth
 ; i++) {
 
-1152 
+1156 
 di•œy
 .
 curs‹Y
@@ -82281,19 +83053,19 @@ rowh
 i
 ;
 
-1153 i‡(
+1157 i‡(
 i
  =
 a˘iveIãm
 ){
 
-1154 
+1158 
 di•œy
 .
 curs‹X
  = 3;
 
-1157 
+1161 
 di•œy
 .
 	`fûlRe˘
@@ -82307,7 +83079,7 @@ a˘iveIãm
 LCDWIDTH
 , (rowh));
 
-1158 
+1162 
 di•œy
 .
 	`£tCﬁ‹
@@ -82317,7 +83089,7 @@ bc
 fc
 );
 
-1159 } 
+1163 } 
 di•œy
 .
 	`£tCﬁ‹
@@ -82327,7 +83099,7 @@ fc
 bc
 );
 
-1161 
+1165 
 di•œy
 .
 	`¥öén
@@ -82337,7 +83109,7 @@ di•œy
 i
 ));
 
-1162 
+1166 
 di•œy
 .
 	`£tCﬁ‹
@@ -82347,11 +83119,11 @@ fc
 bc
 );
 
-1171 
+1175 
 	}
 }
 
-1173 
+1177 
 	gC‹e
 ::
 	$keybﬂrd
@@ -82363,11 +83135,11 @@ uöt8_t
 Àngth
 ) {
 
-1174 #i‡(
+1178 #i‡(
 ENABLE_GUI
  > 0)
 
-1175 
+1179 
 di•œy
 .
 ≥rsi°í˚
@@ -82375,31 +83147,31 @@ di•œy
 Ál£
 ;
 
-1177 
+1181 
 ãxt
 [
 Àngth
 -1] = '\0';
 
-1179 
+1183 
 öt8_t
  
 a˘iveCh¨
  = 0;
 
-1181 
+1185 
 öt8_t
  
 a˘iveX
  = 0;
 
-1182 
+1186 
 öt8_t
  
 a˘iveY
  = 2;
 
-1184 
+1188 
 öt8_t
  
 cuºítX
@@ -82407,7 +83179,7 @@ cuºítX
 LCDWIDTH
 ;
 
-1185 
+1189 
 öt8_t
  
 cuºítY
@@ -82415,23 +83187,23 @@ cuºítY
 LCDHEIGHT
 ;
 
-1186 
+1190 
 öt8_t
  
 èrgëX
  = 0;
 
-1187 
+1191 
 öt8_t
  
 èrgëY
  = 0;
 
-1190 i‡(
+1194 i‡(
 	`upd©e
 ()) {
 
-1192 i‡(
+1196 i‡(
 buâ⁄s
 .
 	`ª≥©
@@ -82439,27 +83211,9 @@ buâ⁄s
 BTN_DOWN
 , 4)) {
 
-1193 
-a˘iveY
-++;
-
-1194 
-sound
-.
-	`∂ayTick
-();
-
-1196 i‡(
-buâ⁄s
-.
-	`ª≥©
-(
-BTN_UP
-, 4)) {
-
 1197 
 a˘iveY
---;
+++;
 
 1198 
 sound
@@ -82472,12 +83226,12 @@ buâ⁄s
 .
 	`ª≥©
 (
-BTN_RIGHT
+BTN_UP
 , 4)) {
 
 1201 
-a˘iveX
-++;
+a˘iveY
+--;
 
 1202 
 sound
@@ -82490,12 +83244,12 @@ buâ⁄s
 .
 	`ª≥©
 (
-BTN_LEFT
+BTN_RIGHT
 , 4)) {
 
 1205 
 a˘iveX
---;
+++;
 
 1206 
 sound
@@ -82503,31 +83257,49 @@ sound
 	`∂ayTick
 ();
 
-1209 i‡(
+1208 i‡(
+buâ⁄s
+.
+	`ª≥©
+(
+BTN_LEFT
+, 4)) {
+
+1209 
+a˘iveX
+--;
+
+1210 
+sound
+.
+	`∂ayTick
+();
+
+1213 i‡(
 a˘iveX
  =
 KEYBOARD_W
 )áctiveX = 0;
 
-1210 i‡(
+1214 i‡(
 a˘iveX
  < 0Ëa˘iveX = 
 KEYBOARD_W
  - 1;
 
-1211 i‡(
+1215 i‡(
 a˘iveY
  =
 KEYBOARD_H
 )áctiveY = 0;
 
-1212 i‡(
+1216 i‡(
 a˘iveY
  < 0Ëa˘iveY = 
 KEYBOARD_H
  - 1;
 
-1214 
+1218 
 èrgëX
  = -(
 di•œy
@@ -82539,7 +83311,7 @@ a˘iveX
 LCDWIDTH
  / 2 - 3;
 
-1215 
+1219 
 èrgëY
  = -(
 di•œy
@@ -82551,19 +83323,19 @@ a˘iveY
 LCDHEIGHT
  / 2 - 4 - display.fontHeight;
 
-1217 
+1221 
 cuºítX
  = (
 èrgëX
  + currentX) / 2;
 
-1218 
+1222 
 cuºítY
  = (
 èrgëY
  + currentY) / 2;
 
-1220 i‡(
+1224 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -82571,13 +83343,13 @@ buâ⁄s
 BTN_A
 )) {
 
-1221 i‡(
+1225 i‡(
 a˘iveCh¨
  < (
 Àngth
 -1)) {
 
-1222 
+1226 
 byã
  
 thisCh¨
@@ -82589,11 +83361,11 @@ KEYBOARD_W
 a˘iveY
 ;
 
-1223 if((
+1227 if((
 thisCh¨
  == 0)||(thisChar == 10)||(thisChar == 13))
 
-1225 
+1229 
 ãxt
 [
 a˘iveCh¨
@@ -82601,35 +83373,35 @@ a˘iveCh¨
 thisCh¨
 ;
 
-1226 
+1230 
 ãxt
 [
 a˘iveCh¨
 +1] = '\0';
 
-1228 
+1232 
 a˘iveCh¨
 ++;
 
-1229 
+1233 
 sound
 .
 	`∂ayOK
 ();
 
-1230 i‡(
+1234 i‡(
 a˘iveCh¨
  > 
 Àngth
 )
 
-1231 
+1235 
 a˘iveCh¨
  = 
 Àngth
 ;
 
-1234 i‡(
+1238 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -82637,31 +83409,31 @@ buâ⁄s
 BTN_B
 )) {
 
-1235 
+1239 
 a˘iveCh¨
 --;
 
-1236 
+1240 
 sound
 .
 	`∂ayC™˚l
 ();
 
-1237 i‡(
+1241 i‡(
 a˘iveCh¨
  >= 0)
 
-1238 
+1242 
 ãxt
 [
 a˘iveCh¨
 ] = 0;
 
-1240 
+1244 
 a˘iveCh¨
  = 0;
 
-1243 i‡(
+1247 i‡(
 buâ⁄s
 .
 	`¥es£d
@@ -82669,23 +83441,23 @@ buâ⁄s
 BTN_C
 )) {
 
-1244 
+1248 
 sound
 .
 	`∂ayOK
 ();
 
-1246 i‡(
+1250 i‡(
 	`upd©e
 ()) {
 
-1248 
+1252 
 di•œy
 .
 	`¥öén
 (("YouÉntered\n"));
 
-1249 
+1253 
 di•œy
 .
 	`¥öt
@@ -82693,13 +83465,13 @@ di•œy
 ãxt
 );
 
-1250 
+1254 
 di•œy
 .
 	`¥öén
 (("\n\n\n\x15:okay \x16:edit"));
 
-1251 if(
+1255 if(
 buâ⁄s
 .
 	`¥es£d
@@ -82707,13 +83479,13 @@ buâ⁄s
 BTN_A
 )){
 
-1252 
+1256 
 sound
 .
 	`∂ayOK
 ();
 
-1255 if(
+1259 if(
 buâ⁄s
 .
 	`¥es£d
@@ -82721,13 +83493,13 @@ buâ⁄s
 BTN_B
 )){
 
-1256 
+1260 
 sound
 .
 	`∂ayC™˚l
 ();
 
-1263 
+1267 
 öt8_t
  
 y
@@ -82735,7 +83507,7 @@ y
 KEYBOARD_H
 ; y++) {
 
-1264 
+1268 
 öt8_t
  
 x
@@ -82743,7 +83515,7 @@ x
 KEYBOARD_W
 ; x++) {
 
-1265 
+1269 
 di•œy
 .
 	`døwCh¨
@@ -82763,32 +83535,6 @@ f⁄tHeight
 KEYBOARD_W
 , 1);
 
-1269 
-di•œy
-.
-curs‹X
- = 
-cuºítX
--di•œy.
-f⁄tWidth
-*6-2;
-
-1270 
-di•œy
-.
-curs‹Y
- = 
-cuºítY
-+1*(di•œy.
-f⁄tHeight
-+1);
-
-1271 
-di•œy
-.
-	`¥öt
-(("\25type"));
-
 1273 
 di•œy
 .
@@ -82805,7 +83551,7 @@ di•œy
 curs‹Y
  = 
 cuºítY
-+2*(di•œy.
++1*(di•œy.
 f⁄tHeight
 +1);
 
@@ -82813,7 +83559,7 @@ f⁄tHeight
 di•œy
 .
 	`¥öt
-(("\26back"));
+(("\25type"));
 
 1277 
 di•œy
@@ -82831,7 +83577,7 @@ di•œy
 curs‹Y
  = 
 cuºítY
-+3*(di•œy.
++2*(di•œy.
 f⁄tHeight
 +1);
 
@@ -82839,9 +83585,35 @@ f⁄tHeight
 di•œy
 .
 	`¥öt
-(("\27save"));
+(("\26back"));
+
+1281 
+di•œy
+.
+curs‹X
+ = 
+cuºítX
+-di•œy.
+f⁄tWidth
+*6-2;
 
 1282 
+di•œy
+.
+curs‹Y
+ = 
+cuºítY
++3*(di•œy.
+f⁄tHeight
++1);
+
+1283 
+di•œy
+.
+	`¥öt
+(("\27save"));
+
+1286 
 di•œy
 .
 	`£tCﬁ‹
@@ -82849,7 +83621,7 @@ di•œy
 WHITE
 );
 
-1283 
+1287 
 di•œy
 .
 	`døwFa°HLöe
@@ -82867,7 +83639,7 @@ a˘iveY
 f⁄tHeight
 +1) - 2, 7);
 
-1285 
+1289 
 di•œy
 .
 	`£tCﬁ‹
@@ -82875,7 +83647,7 @@ di•œy
 BLACK
 );
 
-1286 
+1290 
 di•œy
 .
 	`døwRoundRe˘
@@ -82893,7 +83665,7 @@ a˘iveY
 f⁄tHeight
 +1) - 3, (display.fontWidth+2)+(display.fontWidth-1)%2, (display.fontHeight+5), 3);
 
-1290 
+1294 
 di•œy
 .
 	`døwFa°HLöe
@@ -82905,7 +83677,7 @@ f⁄tHeight
 LCDWIDTH
 );
 
-1291 
+1295 
 di•œy
 .
 	`£tCﬁ‹
@@ -82913,7 +83685,7 @@ di•œy
 WHITE
 );
 
-1292 
+1296 
 di•œy
 .
 	`fûlRe˘
@@ -82925,13 +83697,13 @@ f⁄tHeight
 LCDWIDTH
 , display.fontHeight+1);
 
-1294 
+1298 
 di•œy
 .
 curs‹X
  = 0;
 
-1295 
+1299 
 di•œy
 .
 curs‹Y
@@ -82941,7 +83713,7 @@ LCDHEIGHT
 f⁄tHeight
 ;
 
-1296 
+1300 
 di•œy
 .
 	`£tCﬁ‹
@@ -82949,7 +83721,7 @@ di•œy
 BLACK
 );
 
-1297 
+1301 
 di•œy
 .
 	`¥öt
@@ -82957,7 +83729,7 @@ di•œy
 ãxt
 );
 
-1299 i‡(((
+1303 i‡(((
 ‰ameCou¡
  % 8Ë< 4Ë&& (
 a˘iveCh¨
@@ -82965,7 +83737,7 @@ a˘iveCh¨
 Àngth
 -1)))
 
-1300 
+1304 
 di•œy
 .
 	`døwCh¨
@@ -82979,11 +83751,11 @@ LCDHEIGHT
 f⁄tHeight
 , '_',1);
 
-1304 
+1308 
 	}
 }
 
-1306 
+1310 
 	gC‹e
 ::
 	$p›up
@@ -82995,63 +83767,63 @@ uöt8_t
 duøti⁄
 ){
 
-1307 #i‡(
+1311 #i‡(
 ENABLE_GUI
  > 0)
 
-1308 
+1312 
 p›upText
  = 
 ãxt
 ;
 
-1309 
+1313 
 p›upTimeLe·
  = 
 duøti⁄
 +12;
 
-1311 
+1315 
 	}
 }
 
-1313 
+1317 
 	gC‹e
 ::
 	$upd©eP›up
 (){
 
-1314 #i‡(
+1318 #i‡(
 ENABLE_GUI
  > 0)
 
-1315 i‡(
+1319 i‡(
 p›upTimeLe·
 ){
 
-1316 
+1320 
 uöt8_t
  
 yOff£t
  = 0;
 
-1317 if(
+1321 if(
 p›upTimeLe·
 <12){
 
-1318 
+1322 
 yOff£t
  = 12-
 p›upTimeLe·
 ;
 
-1320 
+1324 
 di•œy
 .
 f⁄tSize
  = 1;
 
-1321 
+1325 
 di•œy
 .
 	`£tCﬁ‹
@@ -83059,7 +83831,7 @@ di•œy
 WHITE
 );
 
-1322 
+1326 
 di•œy
 .
 	`fûlRoundRe˘
@@ -83071,7 +83843,7 @@ f⁄tHeight
 yOff£t
 -3,84,display.fontHeight+3,3);
 
-1323 
+1327 
 di•œy
 .
 	`£tCﬁ‹
@@ -83079,7 +83851,7 @@ di•œy
 BLACK
 );
 
-1324 
+1328 
 di•œy
 .
 	`døwRoundRe˘
@@ -83091,13 +83863,13 @@ f⁄tHeight
 yOff£t
 -3,84,display.fontHeight+3,3);
 
-1325 
+1329 
 di•œy
 .
 curs‹X
  = 4;
 
-1326 
+1330 
 di•œy
 .
 curs‹Y
@@ -83109,7 +83881,7 @@ f⁄tHeight
 yOff£t
 -1;
 
-1327 
+1331 
 di•œy
 .
 	`¥öt
@@ -83117,15 +83889,15 @@ di•œy
 p›upText
 );
 
-1328 
+1332 
 p›upTimeLe·
 --;
 
-1331 
+1335 
 	}
 }
 
-1333 
+1337 
 	gC‹e
 ::
 	$£tFømeR©e
@@ -83135,13 +83907,13 @@ uöt8_t
 Âs
 ) {
 
-1334 
+1338 
 timePîFøme
  = 1000 / 
 Âs
 ;
 
-1335 
+1339 
 sound
 .
 ¥esˇÀr
@@ -83149,7 +83921,7 @@ sound
 Âs
  / 20;
 
-1336 
+1340 
 sound
 .
 ¥esˇÀr
@@ -83157,25 +83929,25 @@ sound
 	`__avrmax
 (1, sound.prescaler);
 
-1337 
+1341 
 	}
 }
 
-1339 
+1343 
 	gC‹e
 ::
 	$pickR™domSìd
 (){
 
-1340 
+1344 
 	`öôR™dom
 ();
 
-1341 
+1345 
 	}
 }
 
-1343 
+1347 
 boﬁ
  
 	gC‹e
@@ -83197,7 +83969,7 @@ w
 h
 ){
 
-1344 if((
+1348 if((
 x1
 >=
 x2
@@ -83205,7 +83977,7 @@ x2
 w
 ))
 
-1345 if((
+1349 if((
 y1
 >=
 y2
@@ -83213,19 +83985,19 @@ y2
 h
 ))
 
-1346  
+1350  
 åue
 ;
 
-1347  
+1351  
 Ál£
 ;
 
-1348 
+1352 
 	}
 }
 
-1350 
+1354 
 boﬁ
  
 	gC‹e
@@ -83251,7 +84023,7 @@ w2
 h2
 ){
 
-1351  !–
+1355  !–
 x2
  >
 x1
@@ -83259,7 +84031,7 @@ x1
 w1
  ||
 
-1352 
+1356 
 x2
 +
 w2
@@ -83267,7 +84039,7 @@ w2
 x1
  ||
 
-1353 
+1357 
 y2
  >
 y1
@@ -83275,7 +84047,7 @@ y1
 h1
  ||
 
-1354 
+1358 
 y2
 +
 h2
@@ -83283,11 +84055,11 @@ h2
 y1
  );
 
-1355 
+1359 
 	}
 }
 
-1357 
+1361 
 boﬁ
  
 	gC‹e
@@ -83311,7 +84083,7 @@ y2
 b2
 ){
 
-1358 
+1362 
 öt16_t
  
 w1
@@ -83321,7 +84093,7 @@ w1
 b1
 );
 
-1359 
+1363 
 öt16_t
  
 h1
@@ -83331,7 +84103,7 @@ h1
 b1
  + 1);
 
-1360 
+1364 
 öt16_t
  
 w2
@@ -83341,7 +84113,7 @@ w2
 b2
 );
 
-1361 
+1365 
 öt16_t
  
 h2
@@ -83351,7 +84123,7 @@ h2
 b2
  + 1);
 
-1363 if(
+1367 if(
 	`cﬁlideRe˘Re˘
 (
 x1
@@ -83373,11 +84145,11 @@ h2
 Ál£
 ){
 
-1364  
+1368  
 Ál£
 ;
 
-1367 
+1371 
 öt16_t
  
 xmö
@@ -83387,7 +84159,7 @@ x1
 x2
 )? 0 : x2-x1;
 
-1368 
+1372 
 öt16_t
  
 ymö
@@ -83397,7 +84169,7 @@ y1
 y2
 )? 0 : y2-y1;
 
-1369 
+1373 
 öt16_t
  
 xmax
@@ -83411,7 +84183,7 @@ x2
 w2
 )? x2+w2-x1 : w1;
 
-1370 
+1374 
 öt16_t
  
 ymax
@@ -83425,7 +84197,7 @@ y2
 h2
 )? y2+h2-y1 : h1;
 
-1371 
+1375 
 uöt8_t
  
 y
@@ -83435,7 +84207,7 @@ ymö
 ymax
 ; y++){
 
-1372 
+1376 
 uöt8_t
  
 x
@@ -83445,7 +84217,7 @@ xmö
 xmax
 ; x++){
 
-1373 if(
+1377 if(
 di•œy
 .
 	`gëBôm≠Pixñ
@@ -83467,15 +84239,15 @@ y1
 y2
 )){
 
-1374  
+1378  
 åue
 ;
 
-1378  
+1382  
 Ál£
 ;
 
-1379 
+1383 
 	}
 }
 

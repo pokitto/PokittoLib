@@ -49,23 +49,18 @@ using namespace Pokitto;
 //char Cookie::_keyorder;
 //bool Cookie::_status;
 
+#define HARDCODEDOFFSET 25 //bypasses Cookie parent instance general data (that does not need to be saved in EEPROM)
+
 Cookie::Cookie() {
     _status = false;
     _keyorder = SBINVALIDSLOT;
 }
 
-int Cookie::begin(const char* idkey, int datasize, char* ptr) {
-    _status=false;
-    _datasize=datasize-17;// warning! hardcoded! sizeof(this); //do not include the data of the parent Cookie instance
-    _pointer = ptr + 17;// warning! hardcoded! sizeof(this); //point to the beginning of the inherited instance
-    char _idkey[8];
-    // make _idkey exactly 8 readable characters long
-    for (int t = 0 ; t < 8 ; t++) _idkey[t]=' ';
-    for (int t = 0 ; t < 8 ; t++) {if (idkey[t]==0) break; _idkey[t]=idkey[t];}
-    // clean Keytable of keys with no storage
-    cleanKeytable();
+int Cookie::initialize() {
+    //initialize is called from begin() and can be called several times during program run
+    int datasize = _datasize;
     // check if key already exists
-    _keyorder = exists(_idkey);
+    _keyorder = exists(_key);
     if (_keyorder < SBMAXKEYS) {
             // key already exists
             // check amount of existing storage reserved for cookie
@@ -82,6 +77,9 @@ int Cookie::begin(const char* idkey, int datasize, char* ptr) {
                     if(reserveBlock()) datasize -= SBBLOCKSIZE;
                     else return SBNOTENOUGHBLOCKSFREE; //no space to allocate
                 }
+                _status = true; //were good to go
+                eraseKeytableEntry(_keyorder);
+                writeKeyToKeytable(_key,_keyorder); // write the key in the key table in EEPROM
                 saveCookie();
             }
     } else {
@@ -90,7 +88,7 @@ int Cookie::begin(const char* idkey, int datasize, char* ptr) {
             _keyorder = getFreeKeytableSlot();
             if (_keyorder>=SBMAXKEYS) return SBNOMOREKEYS; //no space for key
             // check if we have free storage blocks
-            if (getFreeBlocks()<datasize) return SBNOTENOUGHBLOCKSFREE; //no space to allocate
+            if (getFreeBlocks()*SBBLOCKSIZE<datasize) return SBNOTENOUGHBLOCKSFREE; //no space to allocate
             while (datasize>0) {
                 //reserve enough blocks for the data until all data can fit
                 if(reserveBlock()) datasize -= SBBLOCKSIZE;
@@ -98,16 +96,32 @@ int Cookie::begin(const char* idkey, int datasize, char* ptr) {
             }
     }
     _status = true; //were good to go
-    //memcpy(_key, idkey, SBKEYSIZE); //store name of key
     eraseKeytableEntry(_keyorder);
-    writeKeyToKeytable(_idkey,_keyorder); // write the key in the key table in EEPROM
+    writeKeyToKeytable(_key,_keyorder); // write the key in the key table in EEPROM
+    return 0;
+}
+
+int Cookie::begin(const char* idkey, int datasize, char* ptr) {
+    _status=false;
+    _datasize=datasize-HARDCODEDOFFSET;// warning! hardcoded! sizeof(this); //do not include the data of the parent Cookie instance
+    _pointer = ptr + HARDCODEDOFFSET;// warning! hardcoded! sizeof(this); //point to the beginning of the inherited instance
+    char _idkey[8];
+    // make _idkey exactly 8 readable characters long
+    for (int t = 0 ; t < 8 ; t++) _idkey[t]=' ';
+    for (int t = 0 ; t < 8 ; t++) {if (idkey[t]==0) break; _idkey[t]=idkey[t];}
+    // clean Keytable of keys with no storage
+    cleanKeytable();
+    memcpy(_key, _idkey, SBKEYSIZE); //store name of key
+    initialize();
     return 0; //success
 }
 
 bool Cookie::saveCookie() {
-    if (!_status || !_pointer) return false;
+    if (!_status || !_pointer) initialize(); //reinitialize if needed
+    if (!_status || !_pointer) return false; //return if initialize still failed
     char* p = _pointer;
     _head=0;
+    _block=0;
     _block=findMyNextBlock();
     for (int i=0; i<_datasize; i++) writeQueue(*p++);
 }
@@ -116,6 +130,7 @@ bool Cookie::loadCookie() {
     if (!_status || !_pointer) return false;
     char* p = _pointer;
     _head=0;
+    _block=0;
     _block=findMyNextBlock();
     for (int i=0; i<_datasize; i++) *p++ = readQueue();
 }
@@ -207,7 +222,7 @@ bool Cookie::blockIsOwnedBy(int n, int k) {
 }
 
 void Cookie::writeKeyToKeytable(const char* key, int slot) {
-    for (int i=0; i<=SBKEYSIZE; i++) {
+    for (int i=0; i<SBKEYSIZE; i++) {
     #ifndef POK_SIM
     if (key[i]) eeprom_write_byte((uint16_t*)(slot*SBKEYSIZE+i),key[i]);
     else eeprom_write_byte((uint16_t*)(slot*SBKEYSIZE+i),0);
@@ -256,7 +271,7 @@ void Cookie::freeBlock(int n) {
     if (n >= SBMAXBLOCKS) return; //out of bounds
     #ifndef POK_SIM
         // delete entry from blocktable
-        eeprom_write_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+SBBLOCKSIZE*n),0);
+        eeprom_write_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+n),0);
     #endif
     for (int i=0; i<SBBLOCKSIZE;i++) {
     #ifndef POK_SIM
@@ -272,7 +287,7 @@ bool Cookie::reserveBlock() {
         // reserve block from blocktable
         if (isFreeBlock(i)) {
                 //free block found, mark it for us in the blocktable
-                eeprom_write_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+SBBLOCKSIZE*i),_keyorder | 0x80);
+                eeprom_write_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+i),_keyorder | 0x80);
                 return true;
         }
     #endif
@@ -290,12 +305,24 @@ void Cookie::eraseKeytableEntry(int n) {
 }
 
 void Cookie::cleanKeytable() {
+    //Remove any keys without blocks
     for (int entry=0; entry<SBMAXKEYS; entry++) {
             if (eeprom_read_byte((uint16_t*)(entry*SBKEYSIZE))) {
                 bool isEmpty=true;
                 for (int block=0; block<SBMAXBLOCKS; block++) if (blockIsOwnedBy(block,entry)) {isEmpty=false;break;}
                 //this entry has no blocks reserved, so lets clean it from the keytable
                 if (isEmpty) eraseKeytableEntry(entry);
+            }
+    }
+    for (int block=0;block<SBMAXBLOCKS;block++) {
+            int blockentry = eeprom_read_byte((uint16_t*)(SBMAXKEYS*SBKEYSIZE+block));
+            if (blockentry&0x80) {
+                    blockentry &= 0x7F;
+                    bool isEmpty=true;
+                    for (int key=0;key<SBMAXKEYS;key++) {
+                            if (eeprom_read_byte((uint16_t*)(key*SBKEYSIZE))) {isEmpty=false;break;}
+                    }
+                    if (isEmpty) eeprom_write_byte((uint16_t*)(SBMAXKEYS*SBKEYSIZE+block),0);
             }
     }
 }
@@ -308,7 +335,10 @@ char Cookie::readQueue() {
     data=eeprom_read_byte((uint16_t*)address);
     #endif
     _head++;
-    if (_head%SBBLOCKSIZE==0) _block=findMyNextBlock();
+    if (_head%SBBLOCKSIZE==0 && _head) {
+            _block++;
+            _block=findMyNextBlock();
+    }
     return data;
 }
 
@@ -317,7 +347,10 @@ void Cookie::writeQueue(char data) {
     eeprom_write_byte((uint16_t*)(SBMAXKEYS*SBKEYSIZE+SBMAXBLOCKS+SBBLOCKSIZE*_block+_head%SBBLOCKSIZE),data);
     #endif
     _head++;
-    if (_head%SBBLOCKSIZE==0) _block=findMyNextBlock();
+    if (_head%SBBLOCKSIZE==0 && _head) {
+            _block++;
+            _block=findMyNextBlock();
+    }
 }
 
 int Cookie::findMyNextBlock() {
