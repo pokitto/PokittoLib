@@ -155,6 +155,7 @@ private:
   static uint16_t sc_count; // counter to decide at which intervals a screen capture is taken
   static uint16_t framenumber; // framenumber is the number of the frame
   static uint16_t audframenumber; // framenumber is the number of the frame
+  static const char * screencapPath;
 
   /** button input related */
   static uint8_t buttons_state;
