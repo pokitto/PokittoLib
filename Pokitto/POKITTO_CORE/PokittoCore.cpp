@@ -810,6 +810,7 @@ void Core::titleScreen(){
 
 void Core::titleScreen(const char*  name, const uint8_t *logo){
 	display.setFont(font5x7);
+	while(buttons.aBtn()) wait(10); //don't accidentally skip menu
 	if(startMenuTimer){
 		display.fontSize = 1;
 		display.textWrap = false;

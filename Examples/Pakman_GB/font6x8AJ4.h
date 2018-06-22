@@ -4,8 +4,8 @@
  * @file: font6x8AJ4.h
  * @created: 2014-08-12, edited by andy jackson 2018 (see below)
  * @author: Neven Boyanov
- * 
- * Hacked by andy jackson to optimise size for the AttinyArcade - hence several characters 
+ *
+ * Hacked by andy jackson to optimise size for the AttinyArcade - hence several characters
  * are missing and a couple have been moved to limit the amount of software remapping required
  * to map ASCII values onto locations in this array.
  *
@@ -15,7 +15,8 @@
 
 // ----------------------------------------------------------------------------
 
-#include <avr/pgmspace.h>
+//#include <avr/pgmspace.h>
+#include "Pokitto.h"
 
 // ----------------------------------------------------------------------------
 

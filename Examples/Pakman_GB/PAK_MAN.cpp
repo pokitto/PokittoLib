@@ -2,51 +2,52 @@
 /* by PokittoParser v0.1 Copyright 2016 Jonne Valola              */
 /* USE AT YOUR OWN RISK - NO GUARANTEES GIVEN OF 100% CORRECTNESS */
 /*  2018
- *   
+ *
  *  PAK-MAN for MakerBuino and GameBuino by Andy Jackson - Twitter @andyhighnumber
- *  
+ *
  *  You need to install the 'Classic' GameBuino libraries in your Arduino IDE, like this:
  *  http://legacy.gamebuino.com/wiki/index.php?title=Getting_started#Install_the_Gamebuino_Library_.28Automatic.29
- *  
- *  Everything you need to build and run this game is contained in this file and the font 
- *  header (font6x8AJ3.h) 
- *  
+ *
+ *  Everything you need to build and run this game is contained in this file and the font
+ *  header (font6x8AJ3.h)
+ *
  *  This is a port of a Pac-Man clone written for the AttinyArcade, which is why some of
  *  the display routines look a bit weird. More info here:
  *  https://github.com/andyhighnumber/Attiny-Arduino-Games
- *  
- *  Permission is hereby granted, free of charge, to any person obtaining a copy of 
- *  this software and associated documentation files (the "Software"), to deal in the 
- *  Software without restriction, including without limitation the rights to use, copy, 
- *  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- *  and to permit persons to whom the Software is furnished to do so, subject to the 
- *  following conditions: 
- *  
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
- *  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
- *  FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in the
+ *  Software without restriction, including without limitation the rights to use, copy,
+ *  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ *  and to permit persons to whom the Software is furnished to do so, subject to the
+ *  following conditions:
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ *  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ *  FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  *  DEALINGS IN THE SOFTWARE.
- * 
+ *
 */
 
 //imports the SPI library (needed to communicate with Gamebuino's screen)
-#include <SPI.h>
+//#include <SPI.h>
 //imports the Gamebuino library
-#include <Gamebuino.h>
+//#include <Gamebuino.h>
 //creates a Gamebuino object named gb
-Gamebuino gb;
+//Gamebuino gb;
 
 
-#include <EEPROM.h>
+//#include <EEPROM.h>
 #include "font6x8AJ4.h"
 #include "Pokitto.h"
+Pokitto::Core gb;
 /* Auto-generated function declarations */
-void lcdDisplay_send_byte(byte);
-void lcdDisplay_setpos(int,int);
-void lcdDisplay_fillscreen(int);
-void lcdDisplay_char_f6x8(char);
+//void lcdDisplay_send_byte(byte);
+//void lcdDisplay_setpos(int,int);
+//void lcdDisplay_fillscreen(int);
+//void lcdDisplay_char_f6x8(char);
 char f6x8(char);
 void doNumber (int,int,int);
 void beep(int,int);
@@ -62,38 +63,25 @@ void pacDie(void);
 void eatenGhost(void);
 void moveGhosts(void);
 byte drawPacman(byte,byte);
-char cters );
+//char characters();
 void beep(int,int);
 void displayTitle(void);
-byte pgm_read_byte);
+//byte pgm_read_byte);
 void setup();
 void displayOpenScreen(int);
-char f6x8);
-char f6x8);
-char f6x8);
-void loop();
-char f6x8);
-char f6x8);
-char f6x8);
-char f6x8);
-char f6x8);
-char f6x8);
-char f6x8);
-char f6x8);
-char f6x8);
-char f6x8);
+
 void showScore(void);
-char f6x8);
+
 void levelUp();
-char f6x8);
+
 void doNumber (int,int,int);
-char f6x8);
-void lcdDisplay_send_byte(int);
-void lcdDisplay_setpos(int,int);
-void lcdDisplay_fillscreen(int);
-void lcdDisplay_char_f6x8(char);
-char f6x8(char);
-byte pgm_read_byte);
+
+//void lcdDisplay_send_byte(int);
+void lcdDisplay_setpos(uint8_t,uint8_t);
+//void lcdDisplay_fillscreen(int);
+//void lcdDisplay_char_f6x8(char);
+
+
 byte drawPacman(byte,byte);
 byte drawGhostSprite(byte,byte,byte);
 byte drawPills(byte,byte);
@@ -408,13 +396,13 @@ static const byte gameScreen[] PROGMEM = {
 void beep(int bCount,int bDelay){
   if (mute) return;
   for (int i = 0; i<=bCount; i++){
-    digitalWrite(3,HIGH);
+    //digitalWrite(3,HIGH);
     for(int i2=0; i2<bDelay; i2++){
-      __asm__("nop\n\t"); // 62.5ns delay @ 16MHz
+     // __asm__("nop\n\t"); // 62.5ns delay @ 16MHz
       }
-    digitalWrite(3,LOW);
+   // digitalWrite(3,LOW);
     for(int i2=0; i2<bDelay; i2++) {
-      __asm__("nop\n\t"); // 62.5ns delay @ 16Mhz
+     // __asm__("nop\n\t"); // 62.5ns delay @ 16Mhz
     }
   }
 }
@@ -436,13 +424,16 @@ void setup() {
   // initialize the Gamebuino object
   gb.begin();
   //display the main menu:
-  gb.titleScreen(F("PAK-MAN"),openScreen);
+  gb.display.setColor(1,0);
+  gb.display.clear();
+  gb.titleScreen(("PAK-MAN"),openScreen);
+  gb.display.setColorDepth(1);
 }
 
 void displayOpenScreen(int incr) {
     lcdDisplay_fillscreen(1);
     if (incr < 99) screenLeft = incr;
-    
+
     lcdDisplay_char_f6x8(0, 1, "P A K-M A N");
     lcdDisplay_char_f6x8(0, 3, "andy jackson");
     lcdDisplay_char_f6x8(64, 5, "Press A...");
@@ -451,7 +442,7 @@ void displayOpenScreen(int incr) {
     for (int incr2 = 0; incr2 < 76; incr2++) {
       lcdDisplay_send_byte(B00111000);
     }
-    
+
     lcdDisplay_setpos(0, 2);
     for (int incr2 = 0; incr2 < 76; incr2++) {
       lcdDisplay_send_byte(B00011100);
@@ -463,36 +454,37 @@ void displayOpenScreen(int incr) {
 // Arduino stuff - loop
 void loop() {
   lcdDisplay_fillscreen(1);
+  gb.display.clear();
   int sChange = 0;
 
   screenLeft = 0;
-  
+
   if (gb.buttons.pressed(BTN_B) == true) {
-      sChange = 1;     
-      EEPROM.write(0,0);
-      EEPROM.write(1,0);
+      sChange = 1;
+     // EEPROM.write(0,0);
+     // EEPROM.write(1,0);
       lcdDisplay_char_f6x8(0, 0, "--------------");
       lcdDisplay_char_f6x8(0, 1, "HI SCORE RESET");
       lcdDisplay_char_f6x8(0, 3, "--------------");
       while(!gb.update());
-      delay(2000);
+      gb.wait(2000);
   }
-  
+
   if (sChange == 0) {
 
     lcdDisplay_fillscreen(1);
 
     playPacman();
 
-    topScore = EEPROM.read(0);
+//    topScore = EEPROM.read(0);
     topScore = topScore << 8;
-    topScore = topScore |  EEPROM.read(1);
+  //  topScore = topScore |  EEPROM.read(1);
 
     newHigh = 0;
     if (score > topScore) {
       topScore = score;
-      EEPROM.write(1, score & 0xFF);
-      EEPROM.write(0, (score >> 8) & 0xFF);
+ //     EEPROM.write(1, score & 0xFF);
+  //    EEPROM.write(0, (score >> 8) & 0xFF);
       newHigh = 1;
     }
 
@@ -504,7 +496,7 @@ void loop() {
     lcdDisplay_char_f6x8(0, 3, "------------");
     showScore();
     while(!gb.update());
-    delay(2500);
+    gb.wait(2500);
     lcdDisplay_fillscreen(0x00);
     lcdDisplay_char_f6x8(0, 0, "---------------");
     lcdDisplay_char_f6x8(0, 3, "---------------");
@@ -518,28 +510,28 @@ void loop() {
       }
     }
     while(!gb.update());
-    delay(2500);
+    gb.wait(2500);
   }
-  
+
   lcdDisplay_fillscreen(1);
   gb.display.update();
 
-  while(gb.buttons.pressed(BTN_A) == true) { while(!gb.update()); delay(5);}
+  while(gb.buttons.pressed(BTN_A) == true) { while(!gb.update()); gb.wait(5);}
 
   gb.sound.playNote(63,1,0);
   while(!gb.update());
-  
+
   screenLeft = 0;
   for (int incr = 0; incr < 42 ; incr+=3) {
     displayOpenScreen(incr);
     gb.display.update();
-    if (incr == 0) delay(1700);
+    if (incr == 0) gb.wait(1700);
   }
 
   while(gb.buttons.pressed(BTN_A) == false && gb.buttons.pressed(BTN_B) == false ) {
-    displayOpenScreen(100);    
+    displayOpenScreen(100);
     while(!gb.update());
-  } 
+  }
 }
 
 void showScore(void) {
@@ -564,7 +556,7 @@ void levelUp() {
   showScore();
   gb.display.update();
 
-  delay(2500);
+  gb.wait(2500);
   lcdDisplay_fillscreen(0x00);
   displayScreen();
 }
@@ -691,12 +683,12 @@ byte drawPills(byte c, byte r) {
           }
         }
       }
-  return out;  
+  return out;
 }
 
 byte drawBigPills(byte c, byte r) {
   byte out = 0;
-  
+
   for (byte lxn = 0; lxn < 2; lxn++) {
     if (bigPillsActive[lxn] == 1 && c == 6 && (r == pgm_read_byte(&bigPillLocations[lxn]) || r == (pgm_read_byte(&bigPillLocations[lxn]) + 1) )) {
       out |= B11100000;
@@ -734,6 +726,8 @@ byte createScreenOut(byte c, byte r) {
 }
 
 void displayScreen(void) {
+  gb.display.fillScreen(0);
+  //return;
   int pacDir = directions[3];
   byte out;
   uint8_t *disp;
@@ -753,11 +747,11 @@ void displayScreen(void) {
     for (byte r = screenLeft; r < screenLeft+84; r++) {
 
     byte thisRow = createScreenOut(c, r);
-    
+
     out = ( (thisRow >> screenTop % 8) | (nextRow[r-screenLeft] << 8- screenTop % 8));
 
     nextRow[r-screenLeft] = thisRow;
-    
+
     *(disp + r - screenLeft + ((c - screenTop/8) * 84)) = out;
 
     }
@@ -769,7 +763,7 @@ void displayScreen(void) {
     out = ( (thisRow >> screenTop % 8) | (nextRow[r-screenLeft] << 8- screenTop % 8));
     *(disp + r - screenLeft + ((c - screenTop/8) * 84)) = out;
   }
-  
+
   //gb.display.update();
 }
 
@@ -898,7 +892,7 @@ void pacDie(void) {
   directions[3] = DIR_UP;
   mouth = 1;
   displayScreen();
-  for (i = 0; i<500; i = i+ 50){  
+  for (i = 0; i<500; i = i+ 50){
     beep(50,i);
   }
   while(!gb.update());
@@ -906,12 +900,12 @@ void pacDie(void) {
   while(!gb.update());
   mouth = 0;
   displayScreen();
-  for (i = 500; i<1000; i = i+ 50){  
+  for (i = 500; i<1000; i = i+ 50){
     beep(50,i);
   }
   while(!gb.update());
   displayScreen();
-  delay(500);
+  gb.wait(500);
   stopAnimate = 1;
 }
 
@@ -1085,7 +1079,7 @@ void playPacman() {
       lives--;
       initScreen();
     }
-    
+
     displayScreen();
 
   }

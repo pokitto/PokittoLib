@@ -4111,7 +4111,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1528752789 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1529692311 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -6171,5 +6171,17 @@
 1529687558 c:\pokittolib_git\pokittolib_curr\examples\artillery_gb\my_settings.h
 
 1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\artillery_gb\main.cpp
+	"Pokitto.h"
+
+1529691312 c:\pokittolib_git\pokittolib_curr\examples\pakman_gb\my_settings.h
+
+1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\pakman_gb\main.cpp
+	"Pokitto.h"
+
+1529692827 source:c:\pokittolib_git\pokittolib_curr\examples\pakman_gb\pak_man.cpp
+	"font6x8AJ4.h"
+	"Pokitto.h"
+
+1529690667 c:\pokittolib_git\pokittolib_curr\examples\pakman_gb\font6x8aj4.h
 	"Pokitto.h"
 
