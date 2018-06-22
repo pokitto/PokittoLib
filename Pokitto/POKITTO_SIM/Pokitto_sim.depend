@@ -2707,7 +2707,7 @@
 	"PokittoFakeavr.h"
 	"PokittoGlobs.h"
 
-1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofakeavr.h
+1529701112 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittofakeavr.h
 	"PokittoItoa.h"
 	"binary.h"
 	<stdint.h>
@@ -3980,4 +3980,36 @@
 
 1529690667 c:\pokittolib_git\pokittolib_curr\examples\pakman_gb\font6x8aj4.h
 	"Pokitto.h"
+
+1529687558 c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\my_settings.h
+
+1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\main.cpp
+	"Pokitto.h"
+
+1507796184 source:c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\wstring.cpp
+	"WString.h"
+
+1507797468 c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\wstring.h
+	<Arduino.h>
+	"PokittoFakeavr.h"
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1529699345 c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\arduino.h
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"PokittoFakeavr.h"
+	<stdint.h>
+	"binary.h"
+	"WCharacter.h"
+	"WString.h"
+
+1507797468 c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\wcharacter.h
+	<ctype.h>
+
+1529701168 source:c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\cratebuino.cpp
+	"Pokitto.h"
+	"Wstring.h"
 

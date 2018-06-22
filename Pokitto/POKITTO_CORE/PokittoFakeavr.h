@@ -50,6 +50,8 @@
 
 #define _BV(bit) (1 << (bit)) //jonne
 
+
+
 /** data types */
 #ifndef _RPCNDR_H
 typedef bool boolean;
