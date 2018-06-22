@@ -156,7 +156,7 @@
 					<Add directory="../../Examples/Jetpack" />
 				</Compiler>
 			</Target>
-			<Target title="Digger_Gamebuino">
+			<Target title="Digger_GB">
 				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin/Debug" />
 				<Option object_output="obj/Debug/" />
@@ -166,6 +166,19 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="../../Examples/Digger_GB" />
+				</Compiler>
+			</Target>
+			<Target title="Artillery_GB">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DJONNE" />
+					<Add directory="../../Examples/Artillery_GB" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -199,6 +212,15 @@
 			<Add library="dxguid" />
 			<Add directory="SDL2/lib" />
 		</Linker>
+		<Unit filename="../../Examples/Artillery_GB/Artillery.cpp">
+			<Option target="Artillery_GB" />
+		</Unit>
+		<Unit filename="../../Examples/Artillery_GB/My_settings.h">
+			<Option target="Artillery_GB" />
+		</Unit>
+		<Unit filename="../../Examples/Artillery_GB/main.cpp">
+			<Option target="Artillery_GB" />
+		</Unit>
 		<Unit filename="../../Examples/Bitmap/My_settings.h">
 			<Option target="Bitmap" />
 		</Unit>
@@ -209,25 +231,25 @@
 			<Option target="Bitmap" />
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/Defines.h">
-			<Option target="Digger_Gamebuino" />
+			<Option target="Digger_GB" />
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/Digger.cpp">
-			<Option target="Digger_Gamebuino" />
+			<Option target="Digger_GB" />
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/Level.h">
-			<Option target="Digger_Gamebuino" />
+			<Option target="Digger_GB" />
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/My_settings.h">
-			<Option target="Digger_Gamebuino" />
+			<Option target="Digger_GB" />
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/README.md">
-			<Option target="Digger_Gamebuino" />
+			<Option target="Digger_GB" />
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/main.cpp">
-			<Option target="Digger_Gamebuino" />
+			<Option target="Digger_GB" />
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/sprites.h">
-			<Option target="Digger_Gamebuino" />
+			<Option target="Digger_GB" />
 		</Unit>
 		<Unit filename="../../Examples/HelloWorld/My_settings.h">
 			<Option target="SDCardFileIO" />
