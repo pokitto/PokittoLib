@@ -136,17 +136,20 @@ Simulator::Simulator() {
     recordingstarttime = 0;
     videoframesize = POK_FRAMEDURATION * (SCREENCAPTURE ? SCREENCAPTURE : 1);
     audioframesize = ((SFBUFSIZE*1000)/POK_AUD_FREQ);
-	
+
 	#if SCREENCAPTURE > 0
 	char * basePath = SDL_GetBasePath();
 	size_t length = strlen(basePath);
 	size_t newLength = length + 10;
-	
-	char * newPath = new char[newLength];	
+
+	char * newPath = new char[newLength];
     sprintf(newPath,"%s\\screencap\\", basePath);
-	
+
 	SDL_free(basePath);
-	screencapPath = newPath;	
+	screencapPath = newPath;
+	#ifdef JONNE
+	screencapPath = "C:\\screencap\\";
+	#endif // JONNE
 	#endif
 }
 
@@ -333,7 +336,7 @@ void Simulator::refreshDisplay() {
 		// Marked static to prevent reallocating the buffer each frame
         static char framestr[261];
         sprintf(framestr,"%s%i.bmp", screencapPath, framenumber);
-		
+
         sc_count = 1; framenumber++;
         videotime += videoframesize;
         // Read the pixels from the current render target and save them onto the surface
@@ -407,7 +410,7 @@ void Simulator::CleanUp() {
     SDL_GameControllerClose( gGameController );
     gGameController = NULL;
     #endif // USE_JOYSTICK
-	
+
     #if SCREENCAPTURE > 0
         killSound();
         SDL_DestroyWindow(sdlSimWin);
@@ -415,7 +418,7 @@ void Simulator::CleanUp() {
         uint64_t elapsedtime = SDL_GetTicks()-recordingstarttime;
         float realfps = ((framenumber)/(float)(elapsedtime*0.9f))*1000;
         int64_t realfreq = (audframenumber*SFBUFSIZE)/(float)(elapsedtime*0.9f)*1000;
-		
+
         std::cout << "Recording time in ticks: " << elapsedtime << "\n";
         std::cout << "Videoframes: " << framenumber << "\n";
         std::cout << "Audioframes: " << audframenumber << "\n";
@@ -427,15 +430,15 @@ void Simulator::CleanUp() {
             if (type == 'y' || type == 'Y')
             {
                 std::cout << "Converting video, please wait...\n";
-								
-				{				
+
+				{
 					const char * commands[] =
 					{
 						"del %soutput.avi",
 						"del %soutput2.avi",
 						"del %soutput.mp4",
 					};
-					
+
 					char buffer[261];
 					for(size_t i = 0; i < 3; ++i)
 					{
@@ -443,7 +446,7 @@ void Simulator::CleanUp() {
 						system(buffer);
 					}
 				}
-				
+
 				std::string s;
 				std::ostringstream os;
 				std::ostringstream os2;
@@ -457,7 +460,7 @@ void Simulator::CleanUp() {
                     os << screencapPath << "ffmpeg -r " << realfps << " -i " << screencapPath << "%d.bmp -qscale:v 0 -r " << realfps << ' ' << screencapPath << "output2.avi";
                     s = os.str();
                     system(s.c_str());
-					
+
                     std::cout << "Cropping video, please wait...\n";
                     /** fix stupid green line at bottom **/
                     os3  << screencapPath << "ffmpeg -i "  << screencapPath << "output2.avi -qscale:v 0 -vf \"crop=" << ww << ":" << wh-2 << ":0:0\" -c:a copy "  << screencapPath << "output.avi";
@@ -487,7 +490,7 @@ void Simulator::CleanUp() {
 					{
 						char buffer[261];
 						sprintf(buffer, "del %soutput.wav", screencapPath);
-						
+
 						system(buffer);
 					}
                     //frcorr = (float)POK_AUD_FREQ;// * ((float)audiotime/(float)videotime);
@@ -497,21 +500,21 @@ void Simulator::CleanUp() {
                     s = os2.str();
                     system(s.c_str());
                     fclose(soundfile);
-					
+
 					{
 						char bufferA[261];
 						sprintf(bufferA, "%s%s", screencapPath, "soundcapture.raw");
-						
+
 						char bufferB[261];
 						sprintf(bufferB, "%s%s", screencapPath, "soundcapture.wav");
-						
+
 						writeWav(bufferA, bufferB, realfreq);
 					}
 					{
 						/** video and sound joined here **/
 						char buffer[261];
 						sprintf(buffer, "%sffmpeg -i %soutput.avi -i %soutput.wav -shortest -c:v copy -c:a aac -strict experimental %soutput.mp4", screencapPath, screencapPath, screencapPath, screencapPath);
-						
+
 						system(buffer);
 					}
                 #else
@@ -519,14 +522,14 @@ void Simulator::CleanUp() {
 						/** only video **/
 						char buffer[261];
 						sprintf(buffer, "%sffmpeg -i %soutput.avi -c:v copy -strict experimental %soutput.mp4", screencapPath, screencapPath, screencapPath);
-						
+
 						system(buffer);
 					}
                 #endif // SOUNDCAPTURE
                 PromptForChar( "Press any key...", type );
                 std::cout << "Deleting temporary files\n";
-				
-				{				
+
+				{
 					const char * commands[] =
 					{
 						"del %s*.bmp",
@@ -536,7 +539,7 @@ void Simulator::CleanUp() {
 						"del %soutput2.avi",
 						"explorer %s",
 					};
-					
+
 					char buffer[261];
 					for(size_t i = 0; i < 6; ++i)
 					{
@@ -549,8 +552,8 @@ void Simulator::CleanUp() {
 
             if (type == 'n' || type ==  'N')
             {
-                std::cout << "Deleting temporary files\n";				
-				{				
+                std::cout << "Deleting temporary files\n";
+				{
 					const char * commands[] =
 					{
 						"del %s*.bmp",
@@ -558,7 +561,7 @@ void Simulator::CleanUp() {
 						"del %soutput.wav",
 						"del %soutput.avi",
 					};
-					
+
 					char buffer[261];
 					for(size_t i = 0; i < 4; ++i)
 					{
@@ -569,7 +572,7 @@ void Simulator::CleanUp() {
                 break;
             }
         }
-		
+
 		if(screencapPath != NULL)
 		{
 			delete[] screencapPath;

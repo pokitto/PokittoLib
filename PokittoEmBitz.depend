@@ -6123,7 +6123,7 @@
 	"Pokitto_settings.h"
 	<stdint.h>
 
-1528750457 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.h
+1529063642 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.h
 	"Pokitto_settings.h"
 	<stdint.h>
 
@@ -6138,4 +6138,30 @@
 	"Pokitto.h"
 	"PokittoCookie.h"
 	"PokittoSimulator.h"
+
+1526925763 c:\pokittolib_git\pokittolib_curr\examples\jetpack\my_settings.h
+
+1529626261 source:c:\pokittolib_git\pokittolib_curr\examples\jetpack\jet.cpp
+	"Pokitto.h"
+	<math.h>
+	<vector>
+	<stdint.h>
+
+1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\digger_gb\main.cpp
+	"Pokitto.h"
+
+1529687558 c:\pokittolib_git\pokittolib_curr\examples\digger_gb\my_settings.h
+
+1529688632 source:c:\pokittolib_git\pokittolib_curr\examples\digger_gb\digger.cpp
+	"Defines.h"
+	"Sprites.h"
+	"Level.h"
+	"Pokitto.h"
+
+1440580827 c:\pokittolib_git\pokittolib_curr\examples\digger_gb\defines.h
+
+1529685816 c:\pokittolib_git\pokittolib_curr\examples\digger_gb\sprites.h
+	"Pokitto.h"
+
+1440580827 c:\pokittolib_git\pokittolib_curr\examples\digger_gb\level.h
 
