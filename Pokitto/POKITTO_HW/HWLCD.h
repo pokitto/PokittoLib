@@ -44,6 +44,8 @@
 #define write_command write_command_16
 #define write_data write_data_16
 
+extern volatile uint32_t *LCD;
+
 namespace Pokitto {
 
 struct SpriteInfo {
@@ -79,9 +81,9 @@ extern void lcdRefreshMode2(uint8_t *, uint16_t*);
 extern void lcdRefreshMode3(uint8_t *, uint16_t*);
 extern void lcdRefreshModeGBC(uint8_t *, uint16_t*);
 extern void lcdRefreshMode13(uint8_t *, uint16_t*, uint8_t);
- 
+
 extern void lcdRefreshMode15(uint16_t*, uint8_t*);
- 
+
 
 /** Update LCD from 1-bit tile mode */
 extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
@@ -144,7 +146,15 @@ extern void blitWord(uint16_t);
 #define SET_MASK_P2 LPC_GPIO_PORT->MASK[2] = ~(0x7FFF8); //mask P2_3 ...P2_18
 #define CLR_MASK_P2 LPC_GPIO_PORT->MASK[2] = 0; // all on
 
+#define TGL_WR_OP(OP)							\
+  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
+  OP;									\
+  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;
 
+#define TGL_WR								\
+  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
+  __asm("nop"); \
+  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;
 
 /**************************************************************************/
 /**                          SETUP GPIO & DATA                           **/

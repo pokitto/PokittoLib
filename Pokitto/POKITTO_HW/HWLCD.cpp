@@ -57,6 +57,7 @@ uint16_t prevdata=0; // if data does not change, do not adjust LCD bus lines
     pwmout_t backlightpwm;
 #endif
 
+volatile uint32_t *LCD = reinterpret_cast< volatile uint32_t * >(0xA0002188);
 
 /**************************************************************************/
 /*!
@@ -946,91 +947,61 @@ void Pokitto::lcdRefreshMode1Spr(
     #endif
 }
 
-void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr) {
-uint16_t x,y;
-uint16_t scanline[2][88]; // read two nibbles = pixels at a time
+void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
+uint32_t x,y;
+uint32_t scanline[110]; // read two nibbles = pixels at a time
 uint8_t *d;
 
+write_command(0x03); write_data(0x1038);
 write_command(0x20);  // Horizontal DRAM Address
 write_data(0);  // 0
 write_command(0x21);  // Vertical DRAM Address
 write_data(0);
 write_command(0x22); // write data to DRAM
 CLR_CS_SET_CD_RD_WR;
+SET_MASK_P2;
 
-for(x=0;x<110;x+=2)
+d = scrbuf;// point to beginning of line in data
+
+  #ifdef PROJ_SHOW_FPS_COUNTER
+  setDRAMptr(0, 8);
+  wait_us(200); // Add wait to compensate skipping of 8 lines. Makes FPS counter to show the correct value.
+  for(y=4;y<88;y++)
+  #else
+  for(y=0;y<88;y++)
+  #endif
   {
-    d = scrbuf+(x>>1);// point to beginning of line in data
+
+
     /** find colours in one scanline **/
     uint8_t s=0;
-    for(y=0;y<88;y++)
+    for(x=0;x<110;x+=2)
     {
-    uint8_t t = *d >> 4; // higher nibble
-    uint8_t t2 = *d & 0xF; // lower nibble
-    /** higher nibble = left pixel in pixel pair **/
-    scanline[0][s] = paletteptr[t];
-    scanline[1][s++] = paletteptr[t2];
-    /** testing only **/
-    //scanline[0][s] = 0xFFFF*(s&1);
-    //scanline[1][s] = 0xFFFF*(!(s&1));
-    //s++;
-    /** until here **/
-    d+=110/2; // jump to read byte directly below in screenbuffer
+      uint8_t t = *d++;
+      uint32_t color;
+      color = uint32_t(paletteptr[t>>4])<<3;
+      scanline[s]=*LCD=color;TGL_WR_OP(s++);TGL_WR;
+      color = uint32_t(paletteptr[t&0xF])<<3;
+      scanline[s]=*LCD=color;TGL_WR_OP(s++);TGL_WR;
     }
+
     s=0;
-    /** draw scanlines **/
-    /** leftmost scanline twice**/
-
-    #ifdef PROJ_SHOW_FPS_COUNTER
-    if (x<4) continue;
-    setDRAMptr(x<<1, 0);
-    #endif
-
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    for (s=0;s<110;) {
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
+      *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;
     }
 
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    /** rightmost scanline twice**/
-    //setDRAMptr(xptr++,yoffset);
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
   }
+
+ CLR_MASK_P2;
 }
 
 void Pokitto::lcdRefreshMode3(uint8_t * scrbuf, uint16_t* paletteptr) {
