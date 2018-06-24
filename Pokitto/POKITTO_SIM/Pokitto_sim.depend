@@ -2829,7 +2829,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1528682321 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1529882423 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4045,5 +4045,37 @@
 
 1529712581 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\101starships.cpp
 	"Pokitto.h"
+	"WString.h"
+
+1529687558 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\my_settings.h
+
+1529884711 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\lander.cpp
+	"Pokitto.h"
+	"WString.h"
+
+1507797468 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\wstring.h
+	<Arduino.h>
+	"PokittoFakeavr.h"
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1529699345 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\arduino.h
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"PokittoFakeavr.h"
+	<stdint.h>
+	"binary.h"
+	"WCharacter.h"
+	"WString.h"
+
+1507797468 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\wcharacter.h
+	<ctype.h>
+
+1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\main.cpp
+	"Pokitto.h"
+
+1507796184 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\wstring.cpp
 	"WString.h"
 
