@@ -6,8 +6,8 @@
 - SFX with the help of FX Synth by yodasvideoarcade http://gamebuino.com/forum/viewtopic.php?f=17&t=1018
 */
 
-#include <SPI.h> //imports the SPI library (needed to communicate with Gamebuino's screen)
-#include <Gamebuino.h> //imports the Gamebuino library
+//#include <SPI.h> //imports the SPI library (needed to communicate with Gamebuino's screen)
+//#include <Gamebuino.h> //imports the Gamebuino library
 #include "Pokitto.h"
 /* Auto-generated function declarations */
 void setup();
@@ -32,7 +32,7 @@ void drawScore();
 void updateHighscore();
 void playsoundfx(int,int);
 void soundMute();
-Gamebuino gb; //creates a Gamebuino object named gb
+Pokitto::Core gb; //creates a Gamebuino object named gb
 
 //IMAGES
 const byte bird1Bitmap[] PROGMEM = {16, 10, 0xF, 0x0, 0x3C, 0x80, 0x79, 0x40, 0xF8, 0x40, 0xFD, 0xC0, 0xC6, 0x20, 0x8D, 0xC0, 0x9E, 0x20, 0x7F, 0xC0, 0x1E, 0x0,};
@@ -106,8 +106,8 @@ void setup() {
 }
 
 void initGame() {
-  gb.titleScreen(F(""), titleBitmap); //
-  gb.titleScreen(F("FLAPPY BIRD clone\n\nHOW TO PLAY\n.ARROWS/A to fly\n.B to mute\n.C to reset")); //Sub-menu with keys infos.
+  gb.titleScreen((""), titleBitmap); //
+  gb.titleScreen(("FLAPPY BIRD clone\n\nHOW TO PLAY\n.ARROWS/A to fly\n.B to mute\n.C to reset")); //Sub-menu with keys infos.
   initVariables(); //reset all variables.
   difficulty_menu = true; //will display the menu.
   difficulty_level = 1; //reset to NORMAL.
@@ -244,7 +244,7 @@ void initDifficulty() {
 
   gb.display.cursorX = 0;
   gb.display.cursorY = 16 + (8 * floor(difficulty_level));
-  //gb.display.print(F("\20")); //arrow
+  //gb.display.print(("\20")); //arrow
   playerAnimation();
   gb.display.setColor(BLACK);
   if (player_animation > 2) {
@@ -261,16 +261,16 @@ void initDifficulty() {
   gb.display.setFont(font5x7);
   gb.display.cursorX = 0;
   gb.display.cursorY = 0;
-  gb.display.print(F("DIFFICULTY:\n \n\n  SLOW\n  NORMAL\n  FAST"));
+  gb.display.print(("DIFFICULTY:\n \n\n  SLOW\n  NORMAL\n  FAST"));
   gb.display.setFont(font3x5);
   gb.display.cursorY = 2;
-  gb.display.print(F("\nUP/DOWN to choose\nA to validate"));
+  gb.display.print(("\nUP/DOWN to choose\nA to validate"));
   //gb.display.println(difficulty_level);//test
   //HIGHSCORE
   for (int pp = 0; pp < 3; pp++) { //
     gb.display.cursorX = 49;
     gb.display.cursorY = 25 + (pp * 8);
-    gb.display.print(F("HIGH:"));
+    gb.display.print(("HIGH:"));
     gb.display.cursorY = 25 + (pp * 8);
     gb.display.cursorX = 70;
     gb.display.print(round(pipe[pp].hs));

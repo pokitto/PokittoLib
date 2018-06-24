@@ -218,6 +218,19 @@
 					<Add directory="../../Examples/101Starships_GB" />
 				</Compiler>
 			</Target>
+			<Target title="Flappy_GB">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DJONNE" />
+					<Add directory="../../Examples/Flappy_GB" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -324,6 +337,15 @@
 		</Unit>
 		<Unit filename="../../Examples/Digger_GB/sprites.h">
 			<Option target="Digger_GB" />
+		</Unit>
+		<Unit filename="../../Examples/Flappy_GB/Flappy.cpp">
+			<Option target="Flappy_GB" />
+		</Unit>
+		<Unit filename="../../Examples/Flappy_GB/My_settings.h">
+			<Option target="Flappy_GB" />
+		</Unit>
+		<Unit filename="../../Examples/Flappy_GB/main.cpp">
+			<Option target="Flappy_GB" />
 		</Unit>
 		<Unit filename="../../Examples/HelloWorld/My_settings.h">
 			<Option target="SDCardFileIO" />
