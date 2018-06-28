@@ -1616,73 +1616,57 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 }
 
 
-void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
-uint16_t x,y;
-uint16_t scanline[2][110]; // read two nibbles = pixels at a time
-uint8_t *d;
+ void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
+   uint16_t x,y;
+   uint32_t scanline[110]; // read two nibbles = pixels at a time
+   uint8_t *d;
+   volatile uint32_t *s;
 
-write_command(0x20); write_data(0);
-write_command(0x21); write_data(0);
-write_command(0x22);
-CLR_CS_SET_CD_RD_WR;
+   write_command_16(0x03); write_data_16(0x1038);
+   write_command(0x20); write_data(0);
+   write_command(0x21); write_data(0);
+   write_command(0x22);
+   CLR_CS_SET_CD_RD_WR;
+   SET_MASK_P2;
 
-for(x=0;x<110;x+=2)
-  {
-    d = scrbuf+x;// point to beginning of line in data
-    uint8_t s=0;
-    for(y=0;y<88;y++)
-    {
-        uint8_t t = *d;
-        uint8_t t1 = *(d+1);
-        scanline[0][s] = paletteptr[(t+offset)&255];
-        scanline[1][s++] = paletteptr[(t1+offset)&255];
-        d+=110; // jump to read byte directly below in screenbuffer
-    }
-    s=0;
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-  }
+   volatile uint32_t *LCD = reinterpret_cast< volatile uint32_t * >(0xA0002188);
 
-}
+   d = scrbuf;// point to beginning of line in data
+   for(y=0;y<88;y++){
 
+     s = scanline;
+
+     for(x=0;x<110;x+=10){
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR(s++);TGL_WR(d++);	
+     }
+
+     s = scanline;
+     volatile uint32_t c = *s;
+     for(x=0;x<110;x+=10){
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+       *LCD = c; TGL_WR(s++);TGL_WR(c=*s);
+     }
+     
+   }
+   
+ }
 
 
 void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
