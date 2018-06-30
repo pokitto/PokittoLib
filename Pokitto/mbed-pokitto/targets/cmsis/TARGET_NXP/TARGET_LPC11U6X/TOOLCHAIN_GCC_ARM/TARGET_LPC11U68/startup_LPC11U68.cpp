@@ -15,7 +15,6 @@ extern unsigned int __bss_section_table_end;
 extern void __libc_init_array(void);
 extern int main(void);
 extern void _vStackTop(void);
-extern void __valid_user_code_checksum(void);
 extern void (* const g_pfnVectors[])(void);
 
      void ResetISR(void);
@@ -68,7 +67,7 @@ void (* const g_pfnVectors[])(void) = {
     0,                               // Reserved
     0,                               // Reserved
     0,                               // Reserved
-    __valid_user_code_checksum,                               // Reserved
+    0,                               // Reserved
     0,                               // Reserved
     0,                               // Reserved
     0,                               // Reserved
