@@ -361,6 +361,8 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
         enableDirectPrinting(true);
         print(0,0, str);
 
+	while( !*((uint8_t *) 0xA0000001) );
+
         // Restore state
         enableDirectPrinting(temp);
         directcolor = oldcol;
