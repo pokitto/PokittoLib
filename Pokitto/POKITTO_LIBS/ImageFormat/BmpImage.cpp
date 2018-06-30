@@ -36,9 +36,7 @@
 
 #if POKITTO_USE_WIN_SIMULATOR
 #include "defines_win_SIM.h"
-#endif
-
-#if PROJ_LINUX
+#else
 #include "defines_linux_SIM.h"
 #endif
 
