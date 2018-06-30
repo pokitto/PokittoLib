@@ -947,22 +947,6 @@ void Pokitto::lcdRefreshMode1Spr(
     #endif
 }
 
-#define MODE2_INNER_LOOP_A						\
-  "	ldrb %[t], [%[scrbuf],0]"   "\n"				\
-	       "	add %[t], %[t], %[offset]"  "\n"		\
-	       "	uxtb %[c], %[t] " "\n"				\
-	       "	lsls %[c], 1"             "\n"			\
-	       "	ldrh %[t], [%[paletteptr], %[c]]"      "\n"	\
-	       "	lsls %[t], %[t], 3"       "\n"			\
-	       "	str %[t], [%[LCD], 0]"    "\n"			\
-	       "	mov %[c], r11" "\n"				\
-	       "	str %[c], [%[LCD], 124]"  "\n"			\
-	       "	stm %[scanline]!, {%[t]}" "\n"			\
-	       "	movs %[t], 252"   "\n"				\
-	       "	str %[c], [%[LCD], %[t]]" "\n"			\
-	       "	str %[c], [%[LCD], 124]"  "\n"			\
-	       "	adds %[scrbuf], %[scrbuf], 1" "\n"		\
-	       "	str %[c], [%[LCD], %[t]]" "\n"
   
 #define MODE2_INNER_LOOP_B				\
   "	ldm %[scanline]!, {%[c]}"   "\n"		\
