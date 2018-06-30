@@ -235,9 +235,9 @@ SECTIONS
 
     PROVIDE(__valid_user_code_checksum = 0 - (
     				       _vStackTop +
-				       (ResetISR + 1) +                        // The reset handler
-				       (NMI_Handler + 1) +                     // The NMI handler
-				       (HardFault_Handler + 1)               // The hard fault handler
+				       (ResetISR + 1) +
+				       (NMI_Handler + 1) +
+				       (HardFault_Handler + 1)
 				       
     ) );
 
