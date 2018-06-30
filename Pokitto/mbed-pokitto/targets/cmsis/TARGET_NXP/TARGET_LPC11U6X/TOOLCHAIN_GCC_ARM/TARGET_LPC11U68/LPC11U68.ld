@@ -232,4 +232,13 @@ SECTIONS
     
     PROVIDE(_pvHeapStart = .);
     PROVIDE(_vStackTop = __top_Ram0_32 - 0);
+
+    PROVIDE(__valid_user_code_checksum = 0 - (
+    				       _vStackTop +
+				       (ResetISR + 1) +                        // The reset handler
+				       (NMI_Handler + 1) +                     // The NMI handler
+				       (HardFault_Handler + 1)               // The hard fault handler
+				       
+    ) );
+
 }
