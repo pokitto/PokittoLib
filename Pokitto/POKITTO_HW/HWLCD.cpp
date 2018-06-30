@@ -1709,7 +1709,7 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	   [paletteptr]"l" (paletteptr),
 	   [offset]"l" (offset)
 	 : // clobbers
-	   "cc", "r9", "r10", "r11"
+	   "cc", "r10", "r11"
        );
    /*
    d = scrbuf;// point to beginning of line in data
