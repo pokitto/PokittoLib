@@ -1615,75 +1615,139 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
     #endif
 }
 
+#define MODE13_INNER_LOOP_A						\
+  "	ldrb %[t], [%[scrbuf],0]"   "\n"				\
+	       "	add %[t], %[t], %[offset]"  "\n"		\
+	       "	uxtb %[c], %[t] " "\n"				\
+	       "	lsls %[c], 1"             "\n"			\
+	       "	ldrh %[t], [%[paletteptr], %[c]]"      "\n"	\
+	       "	lsls %[t], %[t], 3"       "\n"			\
+	       "	str %[t], [%[LCD], 0]"    "\n"			\
+	       "	mov %[c], r11" "\n"				\
+	       "	str %[c], [%[LCD], 124]"  "\n"			\
+	       "	stm %[scanline]!, {%[t]}" "\n"			\
+	       "	movs %[t], 252"   "\n"				\
+	       "	str %[c], [%[LCD], %[t]]" "\n"			\
+	       "	str %[c], [%[LCD], 124]"  "\n"			\
+	       "	adds %[scrbuf], %[scrbuf], 1" "\n"		\
+	       "	str %[c], [%[LCD], %[t]]" "\n"
+  
+#define MODE13_INNER_LOOP_B				\
+  "	ldm %[scanline]!, {%[c]}"   "\n"		\
+	       "	str %[c], [%[LCD], 0]"    "\n"	\
+	       "	str %[t], [%[LCD], 124]"  "\n"	\
+	       "	movs %[c], 252"   "\n"		\
+	       "	str %[t], [%[LCD], %[c]]" "\n"	\
+	       "	str %[t], [%[LCD], 124]"  "\n"	\
+	       "	subs %[x], 1"             "\n"	\
+	       "	str %[t], [%[LCD], %[c]]" "\n"	\
 
-void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
-uint16_t x,y;
-uint16_t scanline[2][110]; // read two nibbles = pixels at a time
-uint8_t *d;
+ 
+ void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
+   uint32_t scanline[110]; // read two nibbles = pixels at a time
+   
+   write_command_16(0x03); write_data_16(0x1038);
+   write_command(0x20); write_data(0);
+   write_command(0x21); write_data(1);
+   write_command(0x22);
+   CLR_CS_SET_CD_RD_WR;
+   SET_MASK_P2;
+   
+   uint32_t x, y=0, c, t;
+   
+   asm volatile(
+	 ".syntax unified"         "\n"
+	 
+	 "mov r10, %[scanline]"    "\n"
+	 
+	 "movs %[t], 1"            "\n"
+	 "lsls %[t], %[t], 12"     "\n"
+	 "mov r11, %[t]"           "\n"
+	 
+	 "mode13OuterLoop:"        "\n"
+	 
+	 "movs %[x], 110"          "\n"
+	 "mode13InnerLoopA:"
+	 MODE13_INNER_LOOP_A
+	 MODE13_INNER_LOOP_A
+	 "	subs %[x], 2"          "\n"	
+	 "	bne mode13InnerLoopA"  "\n"
 
-write_command(0x20); write_data(0);
-write_command(0x21); write_data(0);
-write_command(0x22);
-CLR_CS_SET_CD_RD_WR;
-
-for(x=0;x<110;x+=2)
-  {
-    d = scrbuf+x;// point to beginning of line in data
-    uint8_t s=0;
-    for(y=0;y<88;y++)
-    {
-        uint8_t t = *d;
-        uint8_t t1 = *(d+1);
-        scanline[0][s] = paletteptr[(t+offset)&255];
-        scanline[1][s++] = paletteptr[(t1+offset)&255];
-        d+=110; // jump to read byte directly below in screenbuffer
-    }
-    s=0;
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-  }
-
-}
-
-
+	 "mov %[scanline], r10"    "\n"
+	 "movs %[x], 110"          "\n"
+	 "mov %[t], r11"           "\n"
+	 "mode13InnerLoopB:"
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 MODE13_INNER_LOOP_B	 
+	 "	bne mode13InnerLoopB"     "\n"
+	 
+	 "mov %[scanline], r10"    "\n"
+	 "movs %[t], 1"              "\n"
+	 "movs %[c], 88"             "\n"
+	 "add %[y], %[t]"            "\n" // y++... derpy, but it's the outer loop
+	 "cmp %[y], %[c]"            "\n"
+	 "bne mode13OuterLoop"       "\n" // if y != 88, loop
+	 
+	 : // outputs
+	   [c]"+l" (c),
+	   [t]"+l" (t),
+	   [x]"+l" (x),
+	   [y]"+h" (y),  // +:Read-Write l:lower (0-7) register
+	   [scrbuf]"+l" (scrbuf)
+	   
+	 : // inputs
+	   [LCD]"l" (0xA0002188),
+	   [scanline]"l" (scanline),
+	   [paletteptr]"l" (paletteptr),
+	   [offset]"l" (offset)
+	 : // clobbers
+	   "cc", "r10", "r11"
+       );
+   /*
+   d = scrbuf;// point to beginning of line in data
+   for(y=0;y<88;y++){
+     
+     s = scanline;
+     
+     for(x=0;x<110;x+=10){
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+       *LCD = *s = paletteptr[(*d + offset)&255]<<3; TGL_WR_OP(s++);TGL_WR_OP(d++);	
+     }
+     
+     s = scanline;
+     uint32_t c = *s;
+     for(x=0;x<110;x+=10){
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+       *LCD = c; TGL_WR_OP(s++);TGL_WR_OP(c=*s);
+     }
+   
+   }
+   */
+ }
 
 void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y,data,xptr;
