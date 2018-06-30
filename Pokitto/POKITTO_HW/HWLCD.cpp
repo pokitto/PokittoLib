@@ -947,20 +947,119 @@ void Pokitto::lcdRefreshMode1Spr(
     #endif
 }
 
+  
+#define MODE2_INNER_LOOP_B				\
+  "	ldm %[scanline]!, {%[c]}"   "\n"		\
+	       "	str %[c], [%[LCD], 0]"    "\n"	\
+	       "	str %[t], [%[LCD], 124]"  "\n"	\
+	       "	movs %[c], 252"   "\n"		\
+	       "	str %[t], [%[LCD], %[c]]" "\n"	\
+	       "	str %[t], [%[LCD], 124]"  "\n"	\
+	       "	subs %[x], 1"             "\n"	\
+	       "	str %[t], [%[LCD], %[c]]" "\n"	\
+    
+
 void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
-uint32_t x,y;
-uint32_t scanline[110]; // read two nibbles = pixels at a time
-uint8_t *d;
+  uint32_t x,y,byte,c,t=1<<12;
+  uint32_t scanline[110];
 
-write_command(0x03); write_data(0x1038);
-write_command(0x20);  // Horizontal DRAM Address
-write_data(0);  // 0
-write_command(0x21);  // Vertical DRAM Address
-write_data(0);
-write_command(0x22); // write data to DRAM
-CLR_CS_SET_CD_RD_WR;
-SET_MASK_P2;
+  write_command(0x03); write_data(0x1038);
+  write_command(0x20);  // Horizontal DRAM Address
+  write_data(0);  // 0
+  write_command(0x21);  // Vertical DRAM Address
+  write_data(1);
+  write_command(0x22); // write data to DRAM
+  CLR_CS_SET_CD_RD_WR;
+  SET_MASK_P2;
 
+
+   asm volatile(
+	 ".syntax unified"         "\n"
+	 
+	 "mov r10, %[scanline]"    "\n"
+	 "mov r11, %[t]"           "\n"
+	 
+	 "mode2OuterLoop:"        "\n"
+	 
+	 "movs %[x], 110"          "\n"
+	 "mode2InnerLoopA:"
+
+
+	 "	ldrb %[byte], [%[scrbuf],0]"   "\n"				
+	 "	lsrs %[c], %[byte], 4"    "\n"
+
+	 "	movs %[t], 15" "\n"
+	 "	ands %[byte], %[t]"    "\n"		
+	 
+	 "	lsls %[c], 1"             "\n"			
+	 "	ldrh %[t], [%[paletteptr], %[c]]"      "\n"	
+	 "	lsls %[t], %[t], 3"       "\n"			
+	 "	str %[t], [%[LCD], 0]"    "\n"			
+	 "	mov %[c], r11" "\n"				
+	 "	str %[c], [%[LCD], 124]"  "\n"			
+	 "	stm %[scanline]!, {%[t]}" "\n"			
+	 "	movs %[t], 252"   "\n"				
+	 "	str %[c], [%[LCD], %[t]]" "\n"			
+	 "	str %[c], [%[LCD], 124]"  "\n"			
+	 "	lsls %[byte], %[byte], 1"             "\n"			
+	 "	str %[c], [%[LCD], %[t]]" "\n"
+
+	 "	ldrh %[t], [%[paletteptr], %[byte]]"      "\n"	
+	 "	lsls %[t], %[t], 3"       "\n"			
+	 "	str %[t], [%[LCD], 0]"    "\n"			
+	 "	mov %[c], r11" "\n"				
+	 "	str %[c], [%[LCD], 124]"  "\n"			
+	 "	stm %[scanline]!, {%[t]}" "\n"			
+	 "	movs %[t], 252"   "\n"				
+	 "	str %[c], [%[LCD], %[t]]" "\n"			
+	 "	str %[c], [%[LCD], 124]"  "\n"			
+	 "	adds %[scrbuf], %[scrbuf], 1" "\n"		
+	 "	str %[c], [%[LCD], %[t]]" "\n"
+	 
+	 "	subs %[x], 2"          "\n"	
+	 "	bne mode2InnerLoopA"  "\n"
+
+	 "mov %[scanline], r10"    "\n"
+	 "movs %[x], 110"          "\n"
+	 "mov %[t], r11"           "\n"
+	 "mode2InnerLoopB:"
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 MODE2_INNER_LOOP_B	 
+	 "	bne mode2InnerLoopB"     "\n"
+	 
+	 "mov %[scanline], r10"    "\n"
+	 "movs %[t], 1"              "\n"
+	 "movs %[c], 88"             "\n"
+	 "add %[y], %[t]"            "\n" // y++... derpy, but it's the outer loop
+	 "cmp %[y], %[c]"            "\n"
+	 "bne mode2OuterLoop"       "\n" // if y != 88, loop
+	 
+	 : // outputs
+	   [c]"+l" (c),
+	   [t]"+l" (t),
+	   [x]"+l" (x),
+	   [y]"+h" (y),  // +:Read-Write l:lower (0-7) register
+	   [scrbuf]"+l" (scrbuf)
+	   
+	 : // inputs
+	   [LCD]"l" (0xA0002188),
+	   [scanline]"l" (scanline),
+	   [paletteptr]"l" (paletteptr),
+	   [byte]"l" (byte)
+	 : // clobbers
+	   "cc", "r10", "r11"
+       );
+
+ 
+/*
 d = scrbuf;// point to beginning of line in data
 
   #ifdef PROJ_SHOW_FPS_COUNTER
@@ -973,7 +1072,6 @@ d = scrbuf;// point to beginning of line in data
   {
 
 
-    /** find colours in one scanline **/
     uint8_t s=0;
     for(x=0;x<110;x+=2)
     {
@@ -1000,6 +1098,7 @@ d = scrbuf;// point to beginning of line in data
     }
 
   }
+*/
 
  CLR_MASK_P2;
 }
