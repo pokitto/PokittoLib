@@ -20,6 +20,7 @@ class gdata : public Pokitto::Cookie {
     public:
     uint32_t highscores[NUM_HIGHSCORES];
     char names[NUM_HIGHSCORES][NAME_SIZE+1];
+    int check_number;
     gdata() {
     }
 };
@@ -871,10 +872,12 @@ void loadHighscores(){
   uint32_t allscores=0;
   for (int i=0;i<NUM_HIGHSCORES;i++) allscores += gamedata.highscores[i];
 
-  if (allscores<1000) {
-        //no highscores saved yet, so put in "defaults"
+  if (gamedata.check_number != 12345) {
+        //checknumber indicates that no highscores saved yet, so put in "defaults"
         for (int i=0;i<NUM_HIGHSCORES;i++) gamedata.highscores[i]=defdata[i];
         for (int i=0;i<NUM_HIGHSCORES;i++) strcpy(gamedata.names[i],defnames[i]);
+        gamedata.check_number = 12345; // put the checking number
+        gamedata.saveCookie();//save the default values
   }
   /*
   for( uint8_t entry = 0; entry < NUM_HIGHSCORES; entry++ ){
