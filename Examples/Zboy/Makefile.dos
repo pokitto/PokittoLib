@@ -1,0 +1,15 @@
+CFLAGS = -s -std=gnu89 -O3 -Wall -Wextra -pedantic -Wfatal-errors -Wstrict-prototypes -D__zboy4dos__
+
+
+all: zboy.exe
+
+zboy.exe: zboy.o drv_alle.o loadpal.o loadrom.o net_none.o config.o crc32.o wordwrap.o
+	gcc zboy.o drv_alle.o loadpal.o loadrom.o net_none.o config.o crc32.o wordwrap.o -o zboy.exe $(CFLAGS) -lalleg
+	upx --best zboy.exe
+
+zboy.o: adjtiming.c battery.c cpu-divider.c cpu-microcode.c cpu-timer.c cpu-z80.c debug.c font.c getsnapshotfilename.c hiscores.c joypad.c mbc0.c mbc1.c mbc2.c mbc3.c mbc5.c mingw_inet_aton.c mmu.c numconv.c presskey.c printmsg.c qsort.c reset.c save.c savepcx.c serial.c video.c video_out.c zboy.c
+	gcc -c zboy.c -o zboy.o $(CFLAGS)
+
+clean:
+	del *.o
+	del zboy.exe

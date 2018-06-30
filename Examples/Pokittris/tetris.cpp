@@ -3,6 +3,7 @@
 #include "pokitto.h"
 #include "tetris_gfx.h"
 #include "easing.h"
+#include "PokittoCookie.h"
 
 #define REPSPEED 12
 

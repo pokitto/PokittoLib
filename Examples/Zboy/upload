@@ -1,0 +1,1 @@
+mcopy -o -i /dev/sdg BUILD/HelloWorld.bin ::/firmware.bin

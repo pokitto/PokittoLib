@@ -385,7 +385,7 @@ void Core::askLoader() {
     //read countdown time from settings
     countd = eeprom_read_byte((uint16_t*)EESETTINGS_LOADERWAIT);
     #endif
-    if (countd==0 || countd > 5) countd=3;
+    if (countd<=0 || countd > 5) countd=3;
     uint16_t c2 = getTime();
     while (countd) {
         buttons.pollButtons();

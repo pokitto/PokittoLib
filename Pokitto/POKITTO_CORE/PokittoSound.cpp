@@ -608,6 +608,7 @@ void Sound::updateNote(uint8_t i) {
 		// jonnehw noInterrupts();
 		_chanHalfPeriod[i] = pgm_read_byte(_halfPeriods + outputPitch[i]);
 		_chanOutput[i] = _chanOutputVolume[i] = outputVolume[i] * (globalVolume>>GLOBVOL_SHIFT) * chanVolumes[i] * stepVolume[i];
+		//_chanOutput[i] = _chanOutputVolume[i] = outputVolume[i] * (globalVolume) * chanVolumes[i] * stepVolume[i];
 		//Serial.println(outputVolume[i]);
 		// jonnehw interrupts();
 	}

@@ -1,0 +1,187 @@
+
+      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      *                                                                 *
+      *  zBoy - a full-featured, multiplatform GameBoy emulator         *
+      *  Copyright (C) Mateusz Viste 2010, 2011, 2012, 2013, 2014, 2015 *
+      *                                                                 *
+      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
++----------------------------------------------------------------------------+
+| Available keys:                                                            |
+|                                                                            |
+| Joypad actions | Keys mapping (on default keyboard mapping)                |
+|  UP            | Up arrow                                                  |
+|  DOWN          | Down arrow                                                |
+|  LEFT          | Left arrow                                                |
+|  RIGHT         | Right arrow                                               |
+|  START         | Enter (return)                                            |
+|  SELECT        | TAB                                                       |
+|  Button A      | CTRL                                                      |
+|  Button B      | ALT                                                       |
+|                                                                            |
+| Emulator's functions (using default keys assignements):                    |
+|  F1  - enables/disables game's background                                  |
+|  F2  - enables/disables game's sprites                                     |
+|  F3  - enables/disables game's window                                      |
+|  F5  - saves the current state of the game on disk (a.k.a. "QuickSave")    |
+|  F7  - loads the saved state of the game from disk (a.k.a. "QuickLoad")    |
+|  F8  - enables/disables autoscreenshot (does a screenshot every 10 seconds)|
+|  F9  - performs a PCX screenshot (saved to current directory)              |
+|  F10 - resets the CPU (restarts the game)                                  |
+|  ESC - quits the emulator                                                  |
++----------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------+
+| Command-line usage:                                                        |
+|  zboy [--option1 --option2 ...] file.gb                                    |
+|                                                                            |
+| Available options:                                                         |
+|  --[no]colorize  Activates or disables colorization. When enabled, zBoy    |
+|                  will colorize some games using special palettes.          |
+|  --custcolor pal Use a custom palette from file 'pal'. The palette file is |
+|                  a text file containing RGB triplets. See colorize.txt.    |
+|  --eaglescale x  Scales the video screen x times using the EAGLE scaling   |
+|                  algorithm. Possible values are 2, 4, 6 or 8.              |
+|  --fpslimit x    Limit the FPS rendering to x frames per second. x must be |
+|                  in the range 1..60 (defaults to 60 FPS). This option will |
+|                  give odd results if combined with --fullspeed.            |
+|  --scale x       Scales the video screen x times. Possible values are      |
+|                  1..8 (defaults to 4 = 640x576).                           |
+|  --scale2x x     Scales the video screen x times using the Scale2x         |
+|                  algorithm. Possible values are 2, 4, 6 or 8.              |
+|  --scale3x x     Scales the video screen x times using the Scale3x         |
+|                  algorithm. Possible values are 3 or 6.                    |
+|  --palette name  Use an alternative palette of colors. Possible palettes   |
+|                  are: gbmicro or peasoup. The default one is gbmicro.      |
+|  --input keys    Redefine keys used to emulate the GameBoy's joypad. Need  |
+|                  to be followed by the list of scancodes in this exact     |
+|                  order: Up Down Left Right Select Start A B TurboA TurboB  |
+|                  See the list of available scancodes below.                |
+|  --fnkeys keys   Redefine keys used for calling functions of the emulator. |
+|                  Need to be followed by the list of scancodes in this exact|
+|                  order: bgCtrl spriteCtrl windowCtrl Save Load Autoshot    |
+|                  Screenshot Reset Quit                                     |
+|                  See the list of available scancodes below.                |
+|  --[no]cpuburn   Do not try to idle the CPU when the emulator have some    |
+|                  spare time. This might give better results on hi-latency  |
+|                  systems, at the cost of using the CPU at full speed.      |
+|  --[no]fullspeed Runs zBoy at full (unlimited) speed. This is not a good   |
+|                  idea if you want to play games, but might be useful for   |
+|                  some benchmarking needs.                                  |
+|  --[no]showfps   Shows the FPS counter (frames per second) in the title    |
+|                  bar of zBoy's window.                                     |
+|  --[no]hiscores  This option will tell zBoy to memorize HiScores in games  |
+|                  that aren't able to do so by themselves (eg. Pipe Dream). |
+|  --[no]rominfo   Displays various informations about the ROM before start. |
+|  --resetcfg      Resets zBoy's configuration to default values.            |
+|  --netplay x     Establish a 2 player session mode with the IP 'x'.        |
+|  --bindaddr x    In case of using --netplay, the --bindaddr parameter      |
+|                  allows to force the local IP (automatic by default).      |
++----------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------+
+| List of available scancodes (useable with --input or --fnkeys)             |
+|                                                                            |
+| zBoy's key name | Description                                              |
+| ----------------+------------------------------                            |
+|    kb.f1        | F1 key                                                   |
+|    kb.f2        | F2 key                                                   |
+|    kb.f3        | F3 key                                                   |
+|    kb.f4        | F4 key                                                   |
+|    kb.f5        | F5 key                                                   |
+|    kb.f6        | F6 key                                                   |
+|    kb.f7        | F7 key                                                   |
+|    kb.f8        | F8 key                                                   |
+|    kb.f9        | F9 key                                                   |
+|    kb.f10       | F10 key                                                  |
+|    kb.f11       | F11 key                                                  |
+|    kb.f12       | F12 key                                                  |
+|    kb.esc       | Escape key                                               |
+|    kb.tab       | TAB                                                      |
+|    kb.lctrl     | Left control key                                         |
+|    kb.lalt      | Left ALT key                                             |
+|    kb.rctrl     | Right control key                                        |
+|    kb.ralt      | Right ALT key                                            |
+|    kb.spc       | Space                                                    |
+|    kb.ret       | Return (enter)                                           |
+|    kb.bks       | Backspace                                                |
+|    kb.left      | Left arrow                                               |
+|    kb.right     | Right arrow                                              |
+|    kb.up        | Up arrow                                                 |
+|    kb.down      | Down arrow                                               |
+|    kb.rshift    | Right shift key                                          |
+|    kb.lshift    | Left shift key                                           |
+|    kb.lwin      | Left "Windows" key                                       |
+|    kb.rwin      | Right "Windows" key                                      |
+|    kb.menu      | "Menu" key                                               |
+|    kb.pgup      | Page up                                                  |
+|    kb.pgdw      | Page down                                                |
+|    kb.home      | Home key                                                 |
+|    kb.end       | End key                                                  |
+|    kb.ins       | Insert key                                               |
+|    kb.del       | Delete key                                               |
+|    kb.a         | Key "a"                                                  |
+|    kb.b         | Key "b"                                                  |
+|    kb.c         | Key "c"                                                  |
+|    kb.d         | Key "d"                                                  |
+|    kb.e         | Key "e"                                                  |
+|    kb.f         | Key "f"                                                  |
+|    kb.g         | Key "g"                                                  |
+|    kb.h         | Key "h"                                                  |
+|    kb.i         | Key "i"                                                  |
+|    kb.j         | Key "j"                                                  |
+|    kb.k         | Key "k"                                                  |
+|    kb.l         | Key "l"                                                  |
+|    kb.m         | Key "m"                                                  |
+|    kb.n         | Key "n"                                                  |
+|    kb.o         | Key "o"                                                  |
+|    kb.p         | Key "p"                                                  |
+|    kb.q         | Key "q"                                                  |
+|    kb.r         | Key "r"                                                  |
+|    kb.s         | Key "s"                                                  |
+|    kb.t         | Key "t"                                                  |
+|    kb.u         | Key "u"                                                  |
+|    kb.v         | Key "v"                                                  |
+|    kb.w         | Key "w"                                                  |
+|    kb.x         | Key "x"                                                  |
+|    kb.y         | Key "y"                                                  |
+|    kb.z         | Key "z"                                                  |
+|    kb.0         | Key "0"                                                  |
+|    kb.1         | Key "1"                                                  |
+|    kb.2         | Key "2"                                                  |
+|    kb.3         | Key "3"                                                  |
+|    kb.4         | Key "4"                                                  |
+|    kb.5         | Key "5"                                                  |
+|    kb.6         | Key "6"                                                  |
+|    kb.7         | Key "7"                                                  |
+|    kb.8         | Key "8"                                                  |
+|    kb.9         | Key "9"                                                  |
+|    joy.a1pos    | Axis #1 on joypad #1 (positive value of the axis)        |
+|    joy.a1neg    | Axis #1 on joypad #1 (negative value of the axis)        |
+|    joy.a2pos    | Axis #2 on joypad #1 (positive value of the axis)        |
+|    joy.a2neg    | Axis #2 on joypad #1 (negative value of the axis)        |
+|    joy.a3pos    | Axis #3 on joypad #1 (positive value of the axis)        |
+|    joy.a3neg    | Axis #3 on joypad #1 (negative value of the axis)        |
+|    joy.a4pos    | Axis #4 on joypad #1 (positive value of the axis)        |
+|    joy.a4neg    | Axis #4 on joypad #1 (negative value of the axis)        |
+|    joy.b1       | Button #1 on joypad #1                                   |
+|    joy.b2       | Button #2 on joypad #1                                   |
+|    joy.b3       | Button #3 on joypad #1                                   |
+|    joy.b4       | Button #4 on joypad #1                                   |
+|    joy.b5       | Button #5 on joypad #1                                   |
+|    joy.b6       | Button #6 on joypad #1                                   |
+|    joy.b7       | Button #7 on joypad #1                                   |
+|    joy.b8       | Button #8 on joypad #1                                   |
+|    joy.b9       | Button #9 on joypad #1                                   |
+|    joy.b10      | Button #10 on joypad #1                                  |
+|    joy.b11      | Button #11 on joypad #1                                  |
+|    joy.b12      | Button #12 on joypad #1                                  |
+|    joy.b13      | Button #13 on joypad #1                                  |
+|    joy.b14      | Button #14 on joypad #1                                  |
+|    joy.b15      | Button #15 on joypad #1                                  |
+|    joy.b16      | Button #16 on joypad #1                                  |
+|    none         | No key assigned (useful if we don't need some keys)      |
+|                                                                            |
++----------------------------------------------------------------------------+
+                    homepage: http://zboy.sourceforge.net/
+

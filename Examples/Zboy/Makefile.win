@@ -1,0 +1,13 @@
+INCLUDE = /mingw/include
+CFLAGS = -s -std=gnu89 -O3 -Wall -pedantic -Wfatal-errors -Wstrict-prototypes -D__zboy4windows__ -DNETPLAY -DLFNAVAIL
+
+
+zboy.exe: about.o drv_sdl2.o loadpal.o loadrom.o net_sock.o config.o crc32.o wordwrap.o zboy.o
+	windres zboy.rc -O coff -o zboy.res
+	gcc zboy.o zboy.res drv_sdl2.o loadpal.o loadrom.o net_sock.o config.o crc32.o wordwrap.o -o zboy.exe -Wl,--subsystem,windows -lmingw32 -lws2_32 -lSDL2 $(CFLAGS)
+
+zboy.o: adjtiming.c battery.c cpu-divider.c cpu-microcode.c cpu-timer.c cpu-z80.c debug.c font.c getsnapshotfilename.c hiscores.c joypad.c mbc0.c mbc1.c mbc2.c mbc3.c mbc5.c mingw_inet_aton.c mmu.c numconv.c presskey.c printmsg.c qsort.c reset.c save.c savepcx.c serial.c video.c video_out.c zboy.c
+	gcc -c zboy.c -o zboy.o $(CFLAGS)
+
+clean:
+	del *.o

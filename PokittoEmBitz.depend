@@ -3214,7 +3214,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1527114451 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1530228992 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3613,7 +3613,7 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1522439286 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
+1529882423 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
 	"mbed.h"
 	"gpio_api.h"
 	"pinmap.h"
@@ -4111,7 +4111,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1529692311 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1530108590 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -4127,7 +4127,7 @@
 1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1528682321 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1529882423 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4156,7 +4156,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1526929677 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1530231392 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4177,7 +4177,7 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1526932604 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1529882423 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 	<algorithm>
@@ -6250,4 +6250,10 @@
 1529712581 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\101starships.cpp
 	"Pokitto.h"
 	"WString.h"
+
+1530232136 source:c:\pokittolib_git\pokittolib_curr\examples\armageddon\ageddon.cpp
+	"PokittoCore.h"
+	"PokittoCookie.h"
+
+1530226700 c:\pokittolib_git\pokittolib_curr\examples\armageddon\my_settings.h
 

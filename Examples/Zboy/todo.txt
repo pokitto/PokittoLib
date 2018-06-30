@@ -1,0 +1,44 @@
+TODO
+ - joystick selection (in case I have two joysticks..)
+ - sound emulation http://gbdev.gg8.se/wiki/articles/Gameboy_sound_hardware
+ - color from super gameboy palettes
+ - Netplay is not compatible with Tetris Attack, Tennis, Tetris Plus, Battle City, Flipull and Spy vs Spy (but works more or less okay with Tetris, Tetris 2 Dr. Mario and Tetris Blast so far) - doing it right should enforce communication so both emulators block when needing to receive data from the other one (and send anything even when no data is actually transferred). Also, I am not sure if I fire serial INTerrupts after sending/receiving data... need to check.
+ - Figure out whether I should increment LY when LCD is off or not
+ - When Yoshi's cookie asks for continuing after a gameover, the selection choice is not visible (only empty boxes are displayed)
+ - Add Hi-Scores saving to Tetris 2
+ - Add Hi-Scores saving to Crystal Quest
+ - Add Hi-Scores saving to Yoshi's Cookie
+ - Add Hi-Scores saving to Tail Gator
+ - Add Hi-Scores saving to Pinball - revenge of the gator
+ - WordZap is hanging after intro screen with an invalid mem bank
+ - Blaster Master crashes with an invalid ROM bank message
+ - When playing Aladdin, the status bar is not displayed (garbage is shown instead)
+ - In Gameboy Wars Turbo some games sprites are totally screwed
+ - The "Pac-Attack" game from the "Pac-Man special color edition (GBC)" ROM is crashing with invalid ROM bank message
+ - Check if no way to merge some areas of virtual memory.. it would make MMU processing easier (and faster)
+ - Turok: Battle of the Bionosaurs is crashing with a stop-like instruction when entering to the first cave
+ - Amazing penguin is hanging with an invalid ROM bank message
+ - Great Greed is hanging with an invalid ROM bank message
+ - A-Force is not starting (stuck with a white screen)
+ - The intro screen of Magic Maze tries to use a special effect which is severly fucked up
+ - 2nd Space is immediately hanging with unknown opcode "FD"
+ - Kirby's Pinball Land is not starting (white screen)
+ - Daffy Duck: The Marvin mission have a bad intro display
+ - Add support for reseting the LY counter (what should I do when it happens?)
+ - Race Days (Dirty Racing) at intro is wrongly scrolling background graphic at intro
+ - Pinball Fantasies, Pinball Deluxe, Pinball Mania and Pinball Dreams have the first pixel row flashing when playing
+ - Kirby Dreamland 2 is hanging after few seconds of intro with an unknown opcode "FD"
+ - Super Mario Land 2 crash with an "UNKNOWN OPCODE" message
+ - In intro screen of the "Swamp Thing", the window part is flashing
+ - In intro screen of the "Attack of Killer Tomatoes", the window part is flashing
+ - DrawBackground seems buggy - check on Worm Visitor
+ - Donkey Kong is displaying some trash before starting
+ - Test MemoryWrite16() (opcode 08h)
+ - Check the part of MBC1.c file taged as "#784632" (why am I doing such thing?)
+ - Add support for RUMBLES (at least interpret in a right way ROM addressing when rumbles are available)
+ - Add support for RAM bank disabling (not sure if RAM banks are disableable one by one or as a whole...)
+ - Check support for SCX and SCY (ScrollX/ScrollY) register
+ - Ant Soldiers intro is scrolling text OR picture, both are never displayed (probably related bad scanline timing)
+ - Check if I need to request interrupts for LCD modes 0,1,2,3 depending of STAT (FF41) - see page 53 of Gameboy CPU manual
+ - Batman: return of the Joker: When playing, the window part (water) is flashing
+ - Detect GBC ROMs which are known to not run in GB mode, and display an error screen

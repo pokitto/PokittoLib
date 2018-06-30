@@ -76,6 +76,9 @@
     #endif
 #else
     #define POK_GBSOUND PROJ_GBSOUND
+    #ifndef NUM_CHANNELS
+    #define NUM_CHANNELS 2
+    #endif
 #endif
 
 

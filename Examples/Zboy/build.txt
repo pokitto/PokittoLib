@@ -1,0 +1,29 @@
+
+zBoy can be built on several platforms. Below are notes for some of them.
+
+
+====== Linux ======
+Command....: make -f Makefile.linux
+Builds with: gcc
+Requires...: the SDL2 library
+
+
+====== Windows ======
+Command....: make -f Makefile.win
+Builds with: Mingw32
+Requires...: the SDL2 library
+
+
+====== DOS ======
+Command....: make -f Makefile.dos
+Builds with: DJGPP v2.04 (v2.03 and older won't do, before of missing
+             functions like snprintf(), strcasecmp() and friends...)
+Requires...: the Allegro library (tested with Allegro v4.23)
+
+
+------------------------------[ Configuration ]------------------------------
+zBoy is configured at compile time using a few defines that are set by
+Makefile files:
+  NETPLAY   - includes network playing code
+  LFNAVAIL  - zBoy will use long filenames (otherwise it sticks to 8+3)
+  DEBUGMODE - enabled verbose outputs usefull for debugging
