@@ -25,7 +25,6 @@ class gdata : public Pokitto::Cookie {
     }
 };
 
-
 gdata gamedata;
 
 /* Auto-generated function declarations */
