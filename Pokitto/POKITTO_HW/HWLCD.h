@@ -147,14 +147,14 @@ extern void blitWord(uint16_t);
 #define CLR_MASK_P2 LPC_GPIO_PORT->MASK[2] = 0; // all on
 
 #define TGL_WR_OP(OP)							\
-  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
+  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
   OP;									\
-  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;
+  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			
 
 #define TGL_WR								\
-  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
-  __asm("nop"); \
-  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;
+  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
+  __asm("nop");								\
+  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			
 
 /**************************************************************************/
 /**                          SETUP GPIO & DATA                           **/
