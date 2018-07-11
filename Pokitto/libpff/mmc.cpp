@@ -48,6 +48,7 @@ inline BYTE rcv_spi (void) {
 inline uint32_t ign_spi (void) {
   while( !(SPI[12] & (1<<1)) ); // wait until writeable
   SPI[8] = 0xFF; // write
+  while( !(SPI[12] & (1<<2)) ); // wait until readable
   return SPI[8]; // read
 }
   
@@ -212,9 +213,9 @@ DRESULT disk_readp (
             }
 
             /* Receive a part of the sector */
-	    while( !(SPI[12] & (1<<1)) ); // wait until writeable
             if (buff) {    /* Store data to the memory */
                 do {
+		  while( !(SPI[12] & (1<<1)) ); // wait until writeable
 		  SPI[8] = 0xFF; // write
 		  while( !(SPI[12] & (1<<2)) ); // wait until readable
 		  *buff++ = SPI[8]; // read
@@ -222,6 +223,7 @@ DRESULT disk_readp (
             } else {    /* Forward data to the outgoing stream (depends on the project) */
 		uint8_t dud;
                 do {
+		  while( !(SPI[12] & (1<<1)) ); // wait until writeable
 		  SPI[8] = 0xFF; // write
 		  while( !(SPI[12] & (1<<2)) ); // wait until readable
 		  dud = SPI[8]; // read
