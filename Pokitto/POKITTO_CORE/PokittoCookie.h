@@ -307,7 +307,7 @@ public:
     /** Keyorder
     * order number of key in key table
     */
-     char _keyorder;
+     unsigned char _keyorder;
 
     /** Status
     * false = uninitialized

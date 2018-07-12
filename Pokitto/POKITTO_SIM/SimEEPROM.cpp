@@ -32,7 +32,7 @@ uint8_t eeprom_read_byte(uint16_t* index) {
 
 void eeprom_write_byte(uint16_t* index , uint8_t val) {
     FILE *eeprom_file;
-    eeprom_file=fopen("EEP.ROM","wb");
+    eeprom_file=fopen("EEP.ROM","rb+");
     if (!eeprom_file)
     {
         printf("Could not open/create EEP.ROM file.");
@@ -40,5 +40,7 @@ void eeprom_write_byte(uint16_t* index , uint8_t val) {
     }
     fseek(eeprom_file, (long int) index, SEEK_SET);
     fputc(val,eeprom_file);
+    fseek(eeprom_file, (long int) 0xFFF, SEEK_SET);
+    fputc(0xFF,eeprom_file); //prevent truncation of 4kB file
     fclose(eeprom_file);
 }

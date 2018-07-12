@@ -2817,7 +2817,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1531416270 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1531416839 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -2859,7 +2859,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1531412605 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1531416907 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4080,11 +4080,27 @@
 1507796184 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\wstring.cpp
 	"WString.h"
 
-1531416685 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simeeprom.cpp
+1531423085 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simeeprom.cpp
 	"SimEEPROM.h"
 	<stdio.h>
 
 1531416091 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simeeprom.h
 	<stdint.h>
 	"Pokitto_settings.h"
+
+1530383582 source:c:\pokittolib_git\pokittolib_curr\examples\armageddon\ageddon.cpp
+	"PokittoCore.h"
+	"PokittoCookie.h"
+
+1530226700 c:\pokittolib_git\pokittolib_curr\examples\armageddon\my_settings.h
+
+1531422660 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.h
+	"Pokitto_settings.h"
+	<stdint.h>
+
+1531417176 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.cpp
+	"Pokitto_settings.h"
+	"Pokitto.h"
+	"PokittoCookie.h"
+	"PokittoSimulator.h"
 

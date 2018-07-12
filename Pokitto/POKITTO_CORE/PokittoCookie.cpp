@@ -149,7 +149,7 @@ void Cookie::deleteCookie() {
 
 int Cookie::exists(const char* idkey) {
     for (int i=0; i< SBMAXKEYS; i++) {
-        #ifndef POK_SIM
+
             if(eeprom_read_byte((uint16_t*)(i*SBKEYSIZE))==idkey[0]) {
                     int total=0;
                     for (int j=0; j<SBKEYSIZE;j++) {
@@ -157,7 +157,7 @@ int Cookie::exists(const char* idkey) {
                     }
                     if (total==SBKEYSIZE) return i; // return the keyslot number where key exists
             }
-        #endif
+
     }
     return SBINVALIDSLOT; //not found
 }
@@ -165,9 +165,9 @@ int Cookie::exists(const char* idkey) {
 int Cookie::getFreeKeytableSlot() {
     int freeslot=SBINVALIDSLOT;
     for (int i=0; i<SBMAXKEYS; i++) {
-    #ifndef POK_SIM
+
     if (eeprom_read_byte((uint16_t*)(i*SBKEYSIZE))==0) {freeslot=i; break;}
-    #endif
+
     }
     return freeslot;
 }
@@ -190,21 +190,21 @@ int Cookie::getFreeBlocks() {
 
 bool Cookie::isFreeBlock(int n) {
     if (n>=SBMAXBLOCKS) return false;
-    #ifndef POK_SIM
+
     if (!(eeprom_read_byte((uint16_t*)(SBMAXKEYS*SBKEYSIZE+n))&0x80)) return true; //highest bit 0, its free
-    #endif
+
     return false; //its not free
 }
 
 bool Cookie::isMyBlock(int n) {
     if (n>=SBMAXBLOCKS) return false;
     if (isFreeBlock(n)) return false; //"free" blocks can not be "reserved" at the same time!
-    #ifndef POK_SIM
+
     char temp; int address;
     address = (SBMAXKEYS*SBKEYSIZE+n);
     temp = eeprom_read_byte((uint16_t*)address);
     if ((temp&0x7F) ==_keyorder) return true;
-    #endif
+
     return false; //its not your block
 }
 
@@ -212,21 +212,21 @@ bool Cookie::blockIsOwnedBy(int n, int k) {
     if (n>=SBMAXBLOCKS) return false;
     if (k>=SBMAXKEYS) return false;
     if (isFreeBlock(n)) return false; //"free" blocks can not be "owned" by anyone
-    #ifndef POK_SIM
+
     char temp; int address;
     address = (SBMAXKEYS*SBKEYSIZE+n);
     temp = eeprom_read_byte((uint16_t*)address);
     if ((temp&0x7F) == k) return true;
-    #endif
+
     return false; //its not your block
 }
 
 void Cookie::writeKeyToKeytable(const char* key, int slot) {
     for (int i=0; i<SBKEYSIZE; i++) {
-    #ifndef POK_SIM
+
     if (key[i]) eeprom_write_byte((uint16_t*)(slot*SBKEYSIZE+i),key[i]);
     else eeprom_write_byte((uint16_t*)(slot*SBKEYSIZE+i),0);
-    #endif
+
     }
 }
 
@@ -234,63 +234,63 @@ void Cookie::readKeytableEntry(int n, char* answer) {
     answer[8]=0;
     if (n >= SBMAXKEYS) n=SBMAXKEYS-1;
     for (int i=0; i<SBKEYSIZE; i++) {
-        #ifndef POK_SIM
+
         answer[i] = eeprom_read_byte((uint16_t*)(n*SBKEYSIZE+i));
-        #endif
+
     }
 }
 
 char Cookie::getBlockTableEntry(int n) {
     if (n>=SBMAXBLOCKS) return 0x80; // out of bounds will return a reserved block marker
-    #ifndef POK_SIM
+
         return eeprom_read_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+n));
-    #endif
+
     return 0x80;
 }
 
 void Cookie::readBlock(int n, char* data) {
     for (int i=0; i<SBBLOCKSIZE; i++) {
     data[i]=0;
-    #ifndef POK_SIM
+
         if (n < SBMAXBLOCKS) data[i] = eeprom_read_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+SBMAXBLOCKS+n*SBBLOCKSIZE+i));
-    #endif
+
     }
 }
 
 void Cookie::formatKeytable() {
     for (int j=0; j<SBMAXKEYS; j++) {
     for (int i=0; i<SBKEYSIZE; i++) {
-        #ifndef POK_SIM
+
         eeprom_write_byte((uint16_t*)(j*SBKEYSIZE+i),0);
-        #endif
+
     }
     }
 }
 
 void Cookie::freeBlock(int n) {
     if (n >= SBMAXBLOCKS) return; //out of bounds
-    #ifndef POK_SIM
+
         // delete entry from blocktable
         eeprom_write_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+n),0);
-    #endif
+
     for (int i=0; i<SBBLOCKSIZE;i++) {
-    #ifndef POK_SIM
+
         // wipe data in the block
         eeprom_write_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+SBMAXBLOCKS+n*SBBLOCKSIZE+i),0);
-    #endif
+
     }
 }
 
 bool Cookie::reserveBlock() {
     for (int i=0; i<SBMAXBLOCKS;i++) {
-    #ifndef POK_SIM
+
         // reserve block from blocktable
         if (isFreeBlock(i)) {
                 //free block found, mark it for us in the blocktable
                 eeprom_write_byte((uint16_t*)(SBKEYSIZE*SBMAXKEYS+i),_keyorder | 0x80);
                 return true;
         }
-    #endif
+
     }
     return false; // no free block found
 }
@@ -298,9 +298,9 @@ bool Cookie::reserveBlock() {
 void Cookie::eraseKeytableEntry(int n) {
     if (n >= SBMAXKEYS) n=SBMAXKEYS-1;
     for (int i=0; i<SBKEYSIZE; i++) {
-        #ifndef POK_SIM
+
         eeprom_write_byte((uint16_t*)(n*SBKEYSIZE+i),0);
-        #endif
+
     }
 }
 
@@ -329,11 +329,11 @@ void Cookie::cleanKeytable() {
 
 char Cookie::readQueue() {
     char data=0;
-    #ifndef POK_SIM
+
     int address;
     address = SBMAXKEYS*SBKEYSIZE+SBMAXBLOCKS+SBBLOCKSIZE*_block+_head%SBBLOCKSIZE;
     data=eeprom_read_byte((uint16_t*)address);
-    #endif
+
     _head++;
     if (_head%SBBLOCKSIZE==0 && _head) {
             _block++;
@@ -343,9 +343,9 @@ char Cookie::readQueue() {
 }
 
 void Cookie::writeQueue(char data) {
-    #ifndef POK_SIM
+
     eeprom_write_byte((uint16_t*)(SBMAXKEYS*SBKEYSIZE+SBMAXBLOCKS+SBBLOCKSIZE*_block+_head%SBBLOCKSIZE),data);
-    #endif
+
     _head++;
     if (_head%SBBLOCKSIZE==0 && _head) {
             _block++;
