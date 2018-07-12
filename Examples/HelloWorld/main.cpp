@@ -2,14 +2,15 @@
 
 Pokitto::Core mygame;
 
-int main () {
-    mygame.begin();
+int main ()
+{
+	mygame.begin();
 
-    while (mygame.isRunning()) {
-
-        if (mygame.update()) {
-            mygame.display.println("Hello World!");
-        }
-        }
-
+	while (mygame.isRunning())
+	{
+		if (mygame.update())
+		{
+			mygame.display.println("Hello World!");
+		}
+	}
 }
