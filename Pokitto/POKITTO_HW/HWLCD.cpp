@@ -967,13 +967,14 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
   write_command(0x20);  // Horizontal DRAM Address
   write_data(0);  // 0
   write_command(0x21);  // Vertical DRAM Address
-  write_data(1);
+
+#ifndef __ARMCC_VERSION
+  write_data(1); // still has pixel 0 bug
   write_command(0x22); // write data to DRAM
   CLR_CS_SET_CD_RD_WR;
   SET_MASK_P2;
 
-#ifndef __ARMCC_VERSION
-   asm volatile(
+  asm volatile(
 	 ".syntax unified"         "\n"
 
 	 "mov r10, %[scanline]"    "\n"
@@ -1060,6 +1061,11 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
 
 
 #else
+  write_data(0); // does not have pixel 0 bug
+  write_command(0x22); // write data to DRAM
+  CLR_CS_SET_CD_RD_WR;
+  SET_MASK_P2;
+  
 uint8_t* d = scrbuf;// point to beginning of line in data
 
   #ifdef PROJ_SHOW_FPS_COUNTER
@@ -1715,31 +1721,32 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 }
 
 #define MODE13_INNER_LOOP_A						\
-  "	ldrb %[t], [%[scrbuf],0]"   "\n"				\
-	       "	add %[t], %[t], %[offset]"  "\n"		\
+	       "	add %[t], %[t], r10"	   "\n" 		\
 	       "	uxtb %[c], %[t] " "\n"				\
 	       "	lsls %[c], 1"             "\n"			\
 	       "	ldrh %[t], [%[paletteptr], %[c]]"      "\n"	\
 	       "	lsls %[t], %[t], 3"       "\n"			\
 	       "	str %[t], [%[LCD], 0]"    "\n"			\
-	       "	mov %[c], r11" "\n"				\
-	       "	str %[c], [%[LCD], 124]"  "\n"			\
-	       "	stm %[scanline]!, {%[t]}" "\n"			\
-	       "	movs %[t], 252"   "\n"				\
-	       "	str %[c], [%[LCD], %[t]]" "\n"			\
-	       "	str %[c], [%[LCD], 124]"  "\n"			\
+	       "	movs %[c], 252"   "\n"				\
+	       "	str %[offset], [%[LCD], %[c]]" "\n"		\
+	       "	stm %[scanline]!, {%[t]}"      "\n"		\
+	       "	str %[offset], [%[LCD], 124]"  "\n"		\
+	       "	str %[offset], [%[LCD], %[c]]" "\n"		\
 	       "	adds %[scrbuf], %[scrbuf], 1" "\n"		\
-	       "	str %[c], [%[LCD], %[t]]" "\n"
+	       "	ldrb %[t], [%[scrbuf],0]"   "\n"		\
+	       "	str %[offset], [%[LCD], 124]"  "\n"
 
-#define MODE13_INNER_LOOP_B				\
-  "	ldm %[scanline]!, {%[c]}"   "\n"		\
-	       "	str %[c], [%[LCD], 0]"    "\n"	\
-	       "	str %[t], [%[LCD], 124]"  "\n"	\
-	       "	movs %[c], 252"   "\n"		\
-	       "	str %[t], [%[LCD], %[c]]" "\n"	\
-	       "	str %[t], [%[LCD], 124]"  "\n"	\
-	       "	subs %[x], 1"             "\n"	\
-	       "	str %[t], [%[LCD], %[c]]" "\n"	\
+// This can be made 1 cycle faster (x -= 10 instead of x--),
+// but there will be noise
+#define MODE13_INNER_LOOP_B					\
+	       "	str %[c], [%[LCD], 0]"    "\n"		\
+	       "	str %[offset], [%[LCD], %[t]]" "\n"	\
+	       "	ldr %[c], [%[scanline]]"   "\n"		\
+	       "	str %[offset], [%[LCD], 124]"  "\n"	\
+	       "	str %[offset], [%[LCD], %[t]]" "\n"	\
+	       "	adds %[scanline], 4"             "\n"	\
+	       "	subs %[x], 1"			"\n"	\
+	       "	str %[offset], [%[LCD], 124]"  "\n"	
 
 
  void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
@@ -1747,7 +1754,7 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 
    write_command_16(0x03); write_data_16(0x1038);
    write_command(0x20); write_data(0);
-   write_command(0x21); write_data(1);
+   write_command(0x21); write_data(0);
    write_command(0x22);
    CLR_CS_SET_CD_RD_WR;
    SET_MASK_P2;
@@ -1758,24 +1765,26 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
    asm volatile(
 	 ".syntax unified"         "\n"
 
-	 "mov r10, %[scanline]"    "\n"
-
-	 "movs %[t], 1"            "\n"
-	 "lsls %[t], %[t], 12"     "\n"
-	 "mov r11, %[t]"           "\n"
+	 "mov r10, %[offset]"	   "\n"
+	 "movs %[offset], 1"            "\n"
+	 "lsls %[offset], %[offset], 12"     "\n"
 
 	 "mode13OuterLoop:"        "\n"
 
 	 "movs %[x], 110"          "\n"
+	 "ldrb %[t], [%[scrbuf],0]"   "\n"
 	 "mode13InnerLoopA:"
 	 MODE13_INNER_LOOP_A
 	 MODE13_INNER_LOOP_A
 	 "	subs %[x], 2"          "\n"
 	 "	bne mode13InnerLoopA"  "\n"
 
-	 "mov %[scanline], r10"    "\n"
+	 "subs %[scanline], 220"    "\n"
+	 "subs %[scanline], 220"    "\n"
+
 	 "movs %[x], 110"          "\n"
-	 "mov %[t], r11"           "\n"
+	 "movs %[t], 252"           "\n"
+	 "ldm %[scanline]!, {%[c]}"   "\n"
 	 "mode13InnerLoopB:"
 	 MODE13_INNER_LOOP_B
 	 MODE13_INNER_LOOP_B
@@ -1789,10 +1798,11 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	 MODE13_INNER_LOOP_B
 	 "	bne mode13InnerLoopB"     "\n"
 
-	 "mov %[scanline], r10"    "\n"
+	 "subs %[scanline], 220"    "\n"
+	 "subs %[scanline], 224"    "\n"
 	 "movs %[t], 1"              "\n"
 	 "movs %[c], 88"             "\n"
-	 "add %[y], %[t]"            "\n" // y++... derpy, but it's the outer loop
+	 "add %[y], %[t]"            "\n"
 	 "cmp %[y], %[c]"            "\n"
 	 "bne mode13OuterLoop"       "\n" // if y != 88, loop
 
@@ -1801,15 +1811,16 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	   [t]"+l" (t),
 	   [x]"+l" (x),
 	   [y]"+h" (y),  // +:Read-Write l:lower (0-7) register
-	   [scrbuf]"+l" (scrbuf)
+	   [scrbuf]"+l" (scrbuf),
+	   [offset]"+l" (offset)
 
 	 : // inputs
 	   [LCD]"l" (0xA0002188),
 	   [scanline]"l" (scanline),
-	   [paletteptr]"l" (paletteptr),
-	   [offset]"l" (offset)
+	   [paletteptr]"l" (paletteptr)
+	   
 	 : // clobbers
-	   "cc", "r10", "r11"
+	   "cc", "r10"
        );
 
 #else
