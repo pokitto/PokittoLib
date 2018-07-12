@@ -42,6 +42,7 @@
 
 #include "Pokitto_settings.h"
 #include "SimLCD.h"
+#include "SimEEPROM.h"
 
 #define SIMW POK_LCD_W
 #define SIMH POK_LCD_H
@@ -54,7 +55,7 @@
 #define SIM_SDL_AUDIO   1       // nonzero = initialize SDL audio
 #define SIM_FULLSCREEN  0       // nonzero = run in fullscreen. WARNING ! Debug may hang !
 #define SIM_SHOWDEVICE  0       // nonzero = show Pokitto device in simulation
-#define SCREENCAPTURE   2      // nonzero = the nth frame will be written to disk
+#define SCREENCAPTURE   0      // nonzero = the nth frame will be written to disk
 #define SOUNDCAPTURE    0       // nonzero = continuous capture of sound stream to disk
 #define USE_JOYSTICK    0       // check for presence & use a game controller (analog stick is not supported yet)
 #define MAKE_GIF        0       // nonzero = make a gif using ImageMagick Convert

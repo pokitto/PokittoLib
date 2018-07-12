@@ -284,7 +284,6 @@ void Console::Draw() {
     int16_t oldx,oldy;
     uint16_t oldcolor;
     uint8_t oldsize;
-    bool oldenable;
     oldfont = (unsigned char*) _display->font;
     oldx = _display->cursorX;
     oldy = _display->cursorY;

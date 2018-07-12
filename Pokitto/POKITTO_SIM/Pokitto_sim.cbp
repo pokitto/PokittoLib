@@ -598,9 +598,6 @@
 		<Unit filename="../POKITTO_CORE/PokittoSound.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoSound.h" />
 		<Unit filename="../POKITTO_CORE/PokittoTimer.h" />
-		<Unit filename="../POKITTO_CORE/WString.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="../POKITTO_LIBS/FileIO/FileIO.h" />
 		<Unit filename="../POKITTO_LIBS/FileIO/FileIO_SIM.cpp" />
 		<Unit filename="../POKITTO_LIBS/FixMath/fix16.c">
@@ -730,6 +727,8 @@
 		<Unit filename="Pokitto_simport.cpp" />
 		<Unit filename="Pokitto_simport.h" />
 		<Unit filename="Pokitto_simsound.h" />
+		<Unit filename="SimEEPROM.cpp" />
+		<Unit filename="SimEEPROM.h" />
 		<Unit filename="SimLCD.cpp" />
 		<Unit filename="SimLCD.h" />
 		<Unit filename="SimSound.cpp" />

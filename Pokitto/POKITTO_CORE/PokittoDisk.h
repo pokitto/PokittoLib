@@ -64,7 +64,7 @@ extern DigitalOut mmccs;
 // CS ... #define CONNECT_CS      P0_7 //p13
 #define CLR_SD_CS LPC_GPIO_PORT->CLR[0] = (1 << 7)
 #define SET_SD_CS LPC_GPIO_PORT->SET[0] = (1 << 7)
-#define GET_SD_CS LPC_GPIO_PORT->PIN[0] & (1 << 7)
+#define GET_SD_CS ((LPC_GPIO_PORT->PIN[0]) & (1 << 7))
 
 #else
 // simulated disk driver

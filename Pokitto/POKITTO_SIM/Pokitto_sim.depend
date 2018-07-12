@@ -2202,7 +2202,7 @@
 1514730136 e:\pokittodev\pokittolib\examples\doon\creatures.h
 	<stdint.h>
 
-1518696815 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+1531409158 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
 	"Pokitto.h"
 
 1517557369 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
@@ -2219,10 +2219,10 @@
 	"Synth.h"
 	"HWSound.h"
 
-1527114451 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1530228992 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
-1518679197 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
+1521233474 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
 
 1524431339 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.h
 	<stdint.h>
@@ -2258,11 +2258,12 @@
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_object.h
 
-1529689700 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
+1531416011 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
 	<stdint.h>
 	<SDL2/SDL.h>
 	"Pokitto_settings.h"
 	"SimLCD.h"
+	"SimEEPROM.h"
 	<SDL2/SDL_joystick.h>
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\sdl2\include\sdl2\sdl.h
@@ -2600,7 +2601,7 @@
 	"HWButtons.h"
 	"PokittoSimulator.h"
 
-1518728392 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
+1531409847 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
 	"binary.h"
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\binary.h
@@ -2668,7 +2669,7 @@
 	<string.h>
 	<stdint.h>
 
-1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
+1531412740 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.h
 	"diskio.h"
 	"pff.h"
 	"connect.h"
@@ -2810,13 +2811,13 @@
 1525171722 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.cpp
+1531409924 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.cpp
 	"PokittoGlobs.h"
 	"PokittoConsole.h"
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1529692311 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1531416270 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -2858,7 +2859,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1526929677 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1531412605 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -2867,7 +2868,7 @@
 	"SimSound.h"
 	"PokittoSimulator.h"
 
-1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio_sim.cpp
+1531410331 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio_sim.cpp
 	<stdint.h>
 	<stdio.h>
 	<math.h>
@@ -4049,7 +4050,7 @@
 
 1529687558 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\my_settings.h
 
-1529884711 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\lander.cpp
+1529884865 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\lander.cpp
 	"Pokitto.h"
 	"WString.h"
 
@@ -4060,7 +4061,7 @@
 	<string.h>
 	<ctype.h>
 
-1529699345 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\arduino.h
+1531409859 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\arduino.h
 	<stdlib.h>
 	<string.h>
 	<math.h>
@@ -4078,4 +4079,12 @@
 
 1507796184 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\wstring.cpp
 	"WString.h"
+
+1531416685 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simeeprom.cpp
+	"SimEEPROM.h"
+	<stdio.h>
+
+1531416091 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simeeprom.h
+	<stdint.h>
+	"Pokitto_settings.h"
 

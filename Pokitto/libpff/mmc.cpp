@@ -51,7 +51,7 @@ inline uint32_t ign_spi (void) {
   while( !(SPI[12] & (1<<2)) ); // wait until readable
   return SPI[8]; // read
 }
-  
+
 /*--------------------------------------------------------------------------
 
    Module Private Functions

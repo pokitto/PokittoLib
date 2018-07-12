@@ -381,17 +381,17 @@ void Core::askLoader() {
     display.directcolor=COLOR_WHITE;
     display.fontSize=2;
     int countd = 0;
-    #ifndef POK_SIM
+    //#ifndef POK_SIM
     //read countdown time from settings
     countd = eeprom_read_byte((uint16_t*)EESETTINGS_LOADERWAIT);
-    #endif
+    //#endif
     if (countd<=0 || countd > 5) countd=3;
     uint16_t c2 = getTime();
     while (countd) {
         buttons.pollButtons();
         display.set_cursor(13*8,15*8);
         display.print(countd);
-        if (getTime()>c2+1000) {
+        if (getTime()>uint32_t(c2+1000)) {
             c2=getTime();
             countd--;
         }
@@ -470,11 +470,11 @@ void Core::setVolLimit() {
     //sound.setMaxVol(VOLUME_HEADPHONE_MAX);
     int dstate=1;
     bool wipe = true;
-    float vol = sound.getVolume(); float tvol;
-    #ifndef POK_SIM
+    float vol = sound.getVolume();
+    //#ifndef POK_SIM
     vol=eeprom_read_byte((uint16_t*)EESETTINGS_VOL);
     Pokitto::Sound::globalVolume=vol;
-    #endif
+    //#endif
     if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
     else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
     #ifdef PRODUCTIONTESTING
@@ -486,17 +486,17 @@ void Core::setVolLimit() {
     }
     volbar_visible=0;
     int countd=0;
-    #ifndef POK_SIM
+    //#ifndef POK_SIM
     //read countdown time from settings
     countd = eeprom_read_byte((uint16_t*)EESETTINGS_VOLWAIT);
-    #endif
+    //#endif
     if (countd==0 || countd > 10) countd=0xFFFF;
     #ifdef PRODUCTIONTESTING
     countd=2;
     #endif
     uint16_t c2 = getTime();
     while (core.isRunning() && dstate && countd){
-        if (getTime()>c2+1000) {
+        if (getTime()>uint32_t(c2+1000)) {
             c2=getTime();
             if (countd<0xFFFF) countd--;
         }
@@ -588,9 +588,9 @@ void Core::setVolLimit() {
         }
     }
     vol = sound.getVolume();
-    #ifndef POK_SIM
+    //#ifndef POK_SIM
     if (vol != eeprom_read_byte((uint16_t*)EESETTINGS_VOL)) eeprom_write_byte((uint16_t*)EESETTINGS_VOL,(uint8_t)vol);
-    #endif
+    //#endif
     sound.setVolume(vol);
     //sound.volumeUp();
     display.setCursor(0,0);
@@ -743,7 +743,7 @@ void Core::initDisplay() {
 void Core::showLogo() {
     uint32_t now;
     uint8_t state=0; //jump directly to logo, bypass teeth
-    uint16_t counter=0, i=0;
+    uint16_t i=0;
     uint16_t sc;
     while (state < 255/6) {
     now=getTime();
@@ -1038,9 +1038,6 @@ char* Core::filemenu(char *ext) {
 
 			//draw a fancy menu
 			display.textWrap = false;
-			uint16_t fc,bc;
-			fc = display.color;
-            bc = display.bgcolor;
             if( updated ) { // update screen?
                 #if POK_SIM
                 getFirstFile(ext);
@@ -1099,11 +1096,12 @@ char* Core::filemenu(char *ext) {
 
         display.setColor(1,0);
 	}
+
 	return 0;
 }
 
 char* Core::filemenu() {
-    return filemenu("");
+    return filemenu((char*)"");
 }
 
 int8_t Core::menu(const char* const* items, uint8_t length) {

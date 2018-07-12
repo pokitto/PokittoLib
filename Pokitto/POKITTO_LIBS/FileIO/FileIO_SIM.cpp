@@ -129,11 +129,12 @@ char* getNextFile (char* ext){
         if (a == 0 && tinyfile.is_dir==0) return tinyfile.name;
 
 	}
+	return 0;
 }
 
 
 char* getNextFile() {
-    return getNextFile("");
+    return getNextFile((char*)"");
 }
 
 char* getFirstFile(char* ext) {
@@ -158,7 +159,7 @@ char* getFirstFile(char* ext) {
 }
 
 char* getFirstFile() {
-    return getFirstFile("");
+    return getFirstFile((char*)"");
 }
 
 int isThisFileOpen(char* buffer){
@@ -230,12 +231,12 @@ void filePoke(long n, uint8_t c) {
 int fileReadLine(char* source, int maxchars) {
     int n=0;
     char c=1;
-    while (c!=NULL) {
+    while (c!=0) {
         c = fileGetChar();
         if (n == 0) {
             while (c == '\n' || c == '\r') c = fileGetChar(); // skip empty lines
         }
-        if (c=='\n' || c=='\r' || n==maxchars-1) c=NULL; //prevent buffer overflow
+        if (c=='\n' || c=='\r' || n==maxchars-1) c=0; //prevent buffer overflow
         n++;
         *source++ = c;
     }

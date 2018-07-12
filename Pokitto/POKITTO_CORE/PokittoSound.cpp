@@ -135,6 +135,7 @@ uint8_t Sound::stepPitch[NUM_CHANNELS];
 uint8_t Sound::chanVolumes[NUM_CHANNELS];
 
 #if (POK_ENABLE_SOUND < 1)
+ #undef NUM_CHANNELS
  #define NUM_CHANNELS 0
 #endif
 
@@ -803,12 +804,12 @@ void Sound::setVolume(int16_t volume) {
 	if (volume<0) volume = 0;
 	//if (volume>volumeMax) volume = volumeMax;
 	globalVolume = volume;
-	#if POK_ENABLE_SOUND > 0
+	//#if POK_ENABLE_SOUND > 0
 	discrete_vol = (volume>>5);
 	#ifndef POK_SIM
 	setHWvolume(discrete_vol_hw_levels[discrete_vol]); //boost volume if headphonelevel
 	#endif
-	#endif
+	//#endif
 	#if POK_SHOW_VOLUME > 0
 	_soundc.volbar_visible = VOLUMEBAR_TIMEOUT;
 	#endif
@@ -893,8 +894,9 @@ int Sound::playMusicStream()
     if (currentPtr) {
             pokPlayStream();
             return 1;
-    } else return 0; //no stream
+    }
     #endif // POK_STREAMING_MUSIC
+    return 0; //no stream
 }
 
 void Sound::pauseMusicStream() {

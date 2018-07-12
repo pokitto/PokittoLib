@@ -15,15 +15,25 @@
 extern "C"{
 #endif
 
+#ifndef HIGH
 #define HIGH 0x1
 #define LOW  0x0
+#endif // HIGH
 
 //#define INPUT 0x0
 //#define OUTPUT 0x1
 //#define INPUT_PULLUP 0x2
 
+#ifndef true
 #define true 0x1
 #define false 0x0
+#endif // true
+
+#undef PI
+#undef HALF_PI
+#undef TWO_PI
+#undef DEG_TO_RAD
+#undef RAD_TO_DEG
 
 #define PI 3.1415926535897932384626433832795
 #define HALF_PI 1.5707963267948966192313216916398
