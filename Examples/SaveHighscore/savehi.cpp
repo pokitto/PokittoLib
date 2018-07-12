@@ -53,9 +53,7 @@ int main () {
     char temp; //
 
     /* wipe the keytable so we start from fresh. You can comment this out */
-    highscore.formatKeytable();
-
-    mygame.begin(); //start game
+    //highscore.formatKeytable();
 
     /* put 'numbers' cookie first into memory */
     numbercookie.begin("NUMBERS", numbercookie);
@@ -71,6 +69,8 @@ int main () {
     /* and to the last slot in order, put the YogiBear cookie */
     yogibear.begin("YOGISAVE", yogibear); //init other cookie
     yogibear.saveCookie(); //store it in eeprom
+
+    mygame.begin(); //start game
 
     while (mygame.isRunning()) {
 

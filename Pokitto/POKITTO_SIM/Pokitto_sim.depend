@@ -2258,7 +2258,7 @@
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_object.h
 
-1531416011 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
+1531426623 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
 	<stdint.h>
 	<SDL2/SDL.h>
 	"Pokitto_settings.h"
@@ -4080,7 +4080,7 @@
 1507796184 source:c:\pokittolib_git\pokittolib_curr\examples\lander_gb\wstring.cpp
 	"WString.h"
 
-1531423085 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simeeprom.cpp
+1531424410 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simeeprom.cpp
 	"SimEEPROM.h"
 	<stdio.h>
 
@@ -4103,4 +4103,16 @@
 	"Pokitto.h"
 	"PokittoCookie.h"
 	"PokittoSimulator.h"
+
+1531426533 source:c:\pokittolib_git\pokittolib_curr\examples\savehighscore\savehi.cpp
+	"Pokitto.h"
+	"PokittoCookie.h"
+
+1528751116 c:\pokittolib_git\pokittolib_curr\examples\savehighscore\my_settings.h
+
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\palettes\palzxspec.cpp
+	"PokittoPalettes.h"
+
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\zxspec.cpp
+	"PokittoFonts.h"
 
