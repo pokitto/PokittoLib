@@ -32,7 +32,7 @@ int main(){
 	pok.display.setFont(font5x7);
 	pok.setFrameRate(frameRate);
 	//tracker.fillArrays(); // there are 30 blocks and all block have 64 pitch and patch storage. Fill them -1
-	
+
 	while(pok.isRunning()){
         if (screen){ //Settings mode
             if(pok.update(true)){

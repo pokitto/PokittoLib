@@ -337,11 +337,17 @@ void Tracker::drawLines(){ // draw lines in tracker mode
     pok.display.drawFastHLine(0, fontH + 1, vLines[3]);
     pok.display.setColor(1);
     pok.display.setCursor(vLines[0] + 1, 0);
-    pok.display.print("  Track 1");
+    pok.display.print("Trk 1 (");
+    pok.display.print(_songPos[songPos][0], 10);
+    pok.display.print(")");
     pok.display.setCursor(vLines[1] + 1, 0);
-    pok.display.print("  Track 2");
+    pok.display.print("Trk 2 (");
+    pok.display.print(_songPos[songPos][1], 10);
+    pok.display.print(")");
     pok.display.setCursor(vLines[2] + 1, 0);
-    pok.display.print("  Track 3");
+    pok.display.print("Trk 3 (");
+    pok.display.print(_songPos[songPos][2], 10);
+    pok.display.print(")");
 }
 
 void Tracker::drawPointer(){
@@ -369,35 +375,37 @@ void Tracker::drawHelpBar(){
 
     pok.display.setColor(3);
     uint16_t bgcolor_org = pok.display.bgcolor;
-    pok.display.fillRect(0, screenH-10+1, screenW+1, 10);
+    pok.display.fillRect(0, screenH-10+3, screenW+1, 10);
     pok.display.setColor(0,3);
+    pok.display.setFont(font3x5);
     if (mode == Modes::travel){
         if(screen==0)
-            pok.display.print(2, screenH-8,         "C: Play mode   B: Delete   A: Edit mode");
+            pok.display.print(2, screenH-6,         "C: Play mode   B: Delete   A: Edit mode");
         else
-            pok.display.print(2, screenH-8,         "C: Travel mode");
+            pok.display.print(2, screenH-6,         "C: Travel mode");
     }
     if (mode == Modes::edit){
-        pok.display.print(2, screenH-8,             "               B: Travel mode");
+        pok.display.print(2, screenH-6,             "               B: Travel mode");
     }
     if (mode == Modes::settings){
-        pok.display.print(2, screenH-8,             "C: More settings");
+        pok.display.print(2, screenH-6,             "C: More settings");
     }
     if (mode == Modes::play){
         if(playing) {
             if(!play)
-                pok.display.print(2, screenH-8,     "C: Settings     B: Stop    A: Play");
+                pok.display.print(2, screenH-6,     "C: Settings     B: Stop    A: Play");
             else
-                pok.display.print(2, screenH-8,     "C: Settings     B: Stop    A: Pause");
+                pok.display.print(2, screenH-6,     "C: Settings     B: Stop    A: Pause");
         }
         else {
             if(!play)
-                pok.display.print(2, screenH-8,     "C: Settings  B: Travel mode  A: Play");
+                pok.display.print(2, screenH-6,     "C: Settings  B: Travel mode  A: Play");
             else
-                pok.display.print(2, screenH-8,     "C: Settings  B: Travel mode  A: Pause");
+                pok.display.print(2, screenH-6,     "C: Settings  B: Travel mode  A: Pause");
         }
     }
     pok.display.bgcolor = bgcolor_org;
+    pok.display.setFont(font5x7);
 }
 
 void Tracker::drawIsPlaying(){
@@ -521,24 +529,31 @@ bool Tracker::playTracker(){
     bool changed=false;
     if (playerpos!=oplayerpos) { //(pok.getTime() - playTime) >= _tempo){
         changed=true;
-        uint8_t a = 20;//screenMaxInit / 2;
+        uint8_t a = screenMaxInit;//screenMaxInit / 2;
         uint8_t b = 42;//((maxRow - 1) - (screenMaxInit / 2)) - 1;
         rowPointer=playerpos;
 
-        if (rowPointer < a){
+        if (rowPointer <= 10){
+            /* rowPointer on rows up to 10, only cursor moves down*/
             //rowPointer++;
             //screenPointer++;
             screenPointer=rowPointer;
         }
-        else if ((rowPointer >= a) && (rowPointer <= b)){
+        else if ((rowPointer >= 11) && (rowPointer <= 54)){
+            /* rowPointer 11 to 42, 'roll screen' with cursor stationary on row 10 */
             //rowPointer++;
             //screenMin++;
-            screenMin=rowPointer;
+            screenMin=rowPointer+9-screenMaxInit; // 11+9-19 = 1, check.
             //screenMax++;
-            screenMax=rowPointer+b;
+            screenMax=screenMin+screenMaxInit; //1+19=20, check.
+            screenPointer=10; //stick cursor on row 10
+
         }
-        else if (rowPointer > b){
-            screenPointer=rowPointer;
+        else if (rowPointer > 54){
+            /* row pointer is 53 or above, do not scroll screen. Cursor moves down */
+            screenPointer=rowPointer-44; // 63 - 44 = 19
+            screenMin=44;
+            screenMax=63;
             //rowPointer++;
             //screenPointer++;
         }
@@ -546,7 +561,7 @@ bool Tracker::playTracker(){
             songPos=sequencepos;
             rowPointer = 0;
             screenMin = 0;
-            screenMax = 20;//screenMaxInit;
+            screenMax = screenMaxInit;
             screenPointer = 0;
         }
         //if (songPos == (lastPattern + 1)){

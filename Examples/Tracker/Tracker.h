@@ -15,7 +15,7 @@ struct Tracker{
         uint16_t oplayerpos=255, oseqpos=0;
         uint8_t maxColumn = 3, maxRow = 64;
         int8_t colPointer = 0, rowPointer = 0;
-        int8_t screenMaxInit = 20, screenMin = 0, screenMax = screenMaxInit, screenPointer = 0, playPointer = 0;
+        int8_t screenMaxInit = 19, screenMin = 0, screenMax = screenMaxInit, screenPointer = 0, playPointer = 0;
         int16_t bpm = 60, _tempo = 60;
         uint32_t playTime = 0;
         int8_t songPos = 0, lastPattern = 0, loopTo = 0, numPatches=0;
