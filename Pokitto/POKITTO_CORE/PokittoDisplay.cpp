@@ -139,7 +139,7 @@ uint8_t Display::bpp = POK_COLORDEPTH;
 #elif (POK_SCREENMODE == MODE_HI_4COLOR)
     uint8_t Display::width = POK_LCD_W;
     uint8_t Display::height = POK_LCD_H;
-    uint8_t __attribute__((section (".bss"))) Display::screenbuffer[((POK_LCD_H)*POK_LCD_W)/4]; // maximum resolution
+    uint8_t __attribute__((section (".bss"))) __attribute__ ((aligned)) Display::screenbuffer[((POK_LCD_H)*POK_LCD_W)/4]; // maximum resolution
 #elif (POK_SCREENMODE == MODE_FAST_16COLOR)
     uint8_t Display::width = POK_LCD_W/2;
     uint8_t Display::height = POK_LCD_H/2;
