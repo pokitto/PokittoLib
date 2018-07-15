@@ -487,13 +487,17 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
 void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr) {
 
 
+#ifdef XPERIMENTAL
+#define __ARMCC_VERSION 1
+#endif
+
 #ifndef __ARMCC_VERSION
 
   write_command(0x03); write_data(0x1038);
   write_command(0x20);  // Horizontal DRAM Address
   write_data(0);
   write_command(0x21);  // Vertical DRAM Address
-  write_data(0); 
+  write_data(0);
   write_command(0x22); // write data to DRAM
   CLR_CS_SET_CD_RD_WR;
 
@@ -509,7 +513,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
   SET_MASK_P2;
 
   asm volatile(
-	       
+
 	 ".syntax unified"         		"\n"
 	 "ldm %[scrbuf]!, {%[c]}"		"\n" // load 4 bytes (16 pixels)
 	 "movs %[t], 0xF0"			"\n"
@@ -522,7 +526,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
 	 "	adds %[t], %[palette]"			"\n"
 	 "	ldm %[t], {%[t], %[x]}"			"\n"
 	 "	str %[t], [%[LCD], 0]"			"\n"
-	 "	movs %[t], 252"	"\n"			    
+	 "	movs %[t], 252"	"\n"
 	 "	str %[WRBit], [%[LCD], %[t]]"   	"\n"
 	 "	str %[WRBit], [%[LCD], 124]"		"\n"
 	 "	str %[x], [%[LCD], 0]"			"\n"
@@ -530,12 +534,12 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
 	 "	movs %[t], 0x0F"			"\n"
 	 "	ands %[t], %[t], %[c]"			"\n"
 	 "	str %[WRBit], [%[LCD], 124]"		"\n"
-						    
+
 	 "	lsls %[t], 3"				"\n"
 	 "	adds %[t], %[palette]"			"\n"
 	 "	ldm %[t], {%[t], %[x]}"			"\n"
 	 "	str %[t], [%[LCD], 0]"			"\n"
-	 "	movs %[t], 252"	"\n"			    
+	 "	movs %[t], 252"	"\n"
 	 "	str %[WRBit], [%[LCD], %[t]]"   	"\n"
 	 "	str %[WRBit], [%[LCD], 124]"		"\n"
 	 "	str %[x], [%[LCD], 0]"			"\n"
@@ -546,10 +550,10 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
 	 "	ands %[t], %[t], %[c]"		"\n"
 	 "	lsrs %[t], %[t], 1"		"\n"
 	 "	str %[WRBit], [%[LCD], 124]"		"\n"
-	 
+
 	 "cmp %[end], %[scrbuf]"            	"\n"
 	 "bne mode1Loop%="       		"\n" // if scrbuf < end, loop
-	 
+
 	 : // outputs
 	   [c]"+l" (c),
 	   [t]"+l" (t),
@@ -561,13 +565,13 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
 	 : // inputs
 	   [LCD]"l" (0xA0002188),
 	   [palette]"l" (palette)
-	   
+
 	 : // clobbers
 	   "cc"
 	       );
-  
-  
-#else  
+
+
+#else
     uint16_t x,y,xptr;
     uint16_t scanline[4][176]; // read 4 half-nibbles = 4 pixels at a time
     uint8_t *d, yoffset=0;
@@ -671,7 +675,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
         }
     }
 #endif
-	
+
     #ifdef POK_SIM
     simulator.refreshDisplay();
     #endif
@@ -1179,7 +1183,7 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
   write_command(0x22); // write data to DRAM
   CLR_CS_SET_CD_RD_WR;
   SET_MASK_P2;
-  
+
 uint8_t* d = scrbuf;// point to beginning of line in data
 
   #ifdef PROJ_SHOW_FPS_COUNTER
@@ -1860,7 +1864,7 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	       "	str %[offset], [%[LCD], %[t]]" "\n"	\
 	       "	adds %[scanline], 4"             "\n"	\
 	       "	subs %[x], 1"			"\n"	\
-	       "	str %[offset], [%[LCD], 124]"  "\n"	
+	       "	str %[offset], [%[LCD], 124]"  "\n"
 
 
  void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
@@ -1932,7 +1936,7 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	   [LCD]"l" (0xA0002188),
 	   [scanline]"l" (scanline),
 	   [paletteptr]"l" (paletteptr)
-	   
+
 	 : // clobbers
 	   "cc", "r10"
        );

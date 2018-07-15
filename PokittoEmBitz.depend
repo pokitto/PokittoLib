@@ -4127,7 +4127,7 @@
 1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1529882423 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1531683986 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4177,7 +4177,7 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1531409158 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1531685357 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 	<algorithm>
@@ -4276,80 +4276,80 @@
 	"SDFileSystem.h"
 	"wave_player.h"
 
-1517063654 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\sdfilesystem.h
+1517067254 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\sdfilesystem.h
 	"mbed.h"
 	"FATFileSystem.h"
 	<stdint.h>
 
-1517314798 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilesystem.h
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilesystem.h
 	"FileSystemLike.h"
 	"FileHandle.h"
 	"ff.h"
 	"ffconf.h"
 	<stdint.h>
 
-1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ff.h
-	"integer.h"
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ff.h
+	"sdfs_integer.h"
 	"ffconf.h"
 
 1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\integer.h
 	<windows.h>
 	<tchar.h>
 
-1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ffconf.h
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ffconf.h
 
-1517063654 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc16.cpp
+1517067254 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc16.cpp
 	"CRC16.h"
 
-1517063654 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc16.h
+1517067254 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc16.h
 	"mbed.h"
 
-1517063654 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc7.cpp
+1517067254 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc7.cpp
 	"CRC7.h"
 
-1517063654 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc7.h
+1517067254 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\crc7.h
 	"mbed.h"
 
-1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ccsbcs.cpp
+1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ccsbcs.cpp
 	"ff.h"
 
-1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\diskio.cpp
+1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\diskio.cpp
 	"ffconf.h"
-	"diskio.h"
+	"sdfs_diskio.h"
 	"mbed_debug.h"
 	"FATFileSystem.h"
 
 1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\diskio.h
 	"integer.h"
 
-1517247874 c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\api\mbed_debug.h
+1517251474 c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\api\mbed_debug.h
 	"device.h"
 	<stdio.h>
 	<stdarg.h>
 
-1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ff.cpp
+1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\ff.cpp
 	"ff.h"
-	"diskio.h"
+	"sdfs_diskio.h"
 	<stdarg.h>
 
-1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatdirhandle.cpp
+1517067256 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatdirhandle.cpp
 	<string.h>
 	"ff.h"
 	"FATDirHandle.h"
 
-1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatdirhandle.h
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatdirhandle.h
 	"DirHandle.h"
 
-1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilehandle.cpp
+1517067256 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilehandle.cpp
 	"ff.h"
 	"ffconf.h"
 	"mbed_debug.h"
 	"FATFileHandle.h"
 
-1517063656 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilehandle.h
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilehandle.h
 	"FileHandle.h"
 
-1517063656 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilesystem.cpp
+1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\fatfilesystem.cpp
 	"mbed.h"
 	"ffconf.h"
 	"mbed_debug.h"
@@ -4357,10 +4357,10 @@
 	"FATFileHandle.h"
 	"FATDirHandle.h"
 
-1517486643 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\sdfilesystem.cpp
+1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\sdfilesystem.cpp
 	"SDFileSystem.h"
 	"pinmap.h"
-	"diskio.h"
+	"sdfs_diskio.h"
 	"CRC7.h"
 	"CRC16.h"
 
@@ -4653,28 +4653,29 @@
 1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\collectable_sprites.h
 	<stdint.h>
 
-1519146242 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
+1531679874 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
 	"Pokitto.h"
 	"Arrays.h"
 	"Tracker.h"
 	"PatchSettings.h"
 
-1519145745 c:\pokittolib_git\pokittolib_curr\examples\tracker\my_settings.h
+1528585913 c:\pokittolib_git\pokittolib_curr\examples\tracker\my_settings.h
 
-1518981984 c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.h
+1528585913 c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.h
 	<stdint.h>
 
-1519124881 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
+1531667926 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
 	"Pokitto.h"
 
-1519145277 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
+1528585913 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
+	"SDFileSystem.h"
 
 1518738660 c:\pokittolib_git\pokittolib_curr\examples\helloworld\lemm.h
 
-1518978230 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.cpp
+1518981830 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.cpp
 	"Arrays.h"
 
-1519141230 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.cpp
+1531682366 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.cpp
 	"Tracker.h"
 	"Arrays.h"
 
@@ -6258,4 +6259,11 @@
 	"PokittoCookie.h"
 
 1530226700 c:\pokittolib_git\pokittolib_curr\examples\armageddon\my_settings.h
+
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\sdfs_integer.h
+	<windows.h>
+	<tchar.h>
+
+1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\sdfs_diskio.h
+	"sdfs_integer.h"
 
