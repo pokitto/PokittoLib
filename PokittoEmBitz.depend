@@ -3214,7 +3214,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1530228992 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1531613629 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3599,7 +3599,7 @@
 	"HWButtons.h"
 	"PokittoSimulator.h"
 
-1531409847 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
+1531511175 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
 	"binary.h"
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\binary.h
@@ -3621,7 +3621,7 @@
 1517251474 c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\hal\pinmap.h
 	"PinNames.h"
 
-1524816304 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.h
+1531618559 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.h
 	"mbed.h"
 	"Pokitto_settings.h"
 
@@ -3721,7 +3721,7 @@
 1515715503 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\lpc_defs.h
 	<stdint.h>
 
-1531409158 source:c:\pokittolib_git\pokittolib_curr\pokitto\libpff\mmc.cpp
+1531412831 source:c:\pokittolib_git\pokittolib_curr\pokitto\libpff\mmc.cpp
 	"diskio.h"
 	"mbed.h"
 	"connect.h"
@@ -4111,7 +4111,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1531410712 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1531416839 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -4139,7 +4139,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoitoa.cpp
+1531616525 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoitoa.cpp
 	"PokittoItoa.h"
 	<string.h>
 	<stdint.h>
@@ -4156,7 +4156,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1531412605 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1531613584 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4182,7 +4182,7 @@
 	"Pokitto_settings.h"
 	<algorithm>
 
-1527202105 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1531618560 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -6123,7 +6123,7 @@
 	"Pokitto_settings.h"
 	<stdint.h>
 
-1529063642 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.h
+1531422660 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.h
 	"Pokitto_settings.h"
 	<stdint.h>
 
@@ -6133,7 +6133,7 @@
 
 1528751116 c:\pokittolib_git\pokittolib_curr\examples\savehighscore\my_settings.h
 
-1528769764 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.cpp
+1531618589 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocookie.cpp
 	"Pokitto_settings.h"
 	"Pokitto.h"
 	"PokittoCookie.h"
@@ -6185,8 +6185,9 @@
 1529690667 c:\pokittolib_git\pokittolib_curr\examples\pakman_gb\font6x8aj4.h
 	"Pokitto.h"
 
-1529701362 source:c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\cratebuino.cpp
+1531617532 source:c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\cratebuino.cpp
 	"Pokitto.h"
+	"PokittoCookie.h"
 	"Wstring.h"
 
 1529687558 c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\my_settings.h
@@ -6220,7 +6221,7 @@
 1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\main.cpp
 	"Pokitto.h"
 
-1529687558 c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\my_settings.h
+1531518542 c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\my_settings.h
 
 1414064592 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\settings.c
 
@@ -6247,8 +6248,9 @@
 1507797468 c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\wcharacter.h
 	<ctype.h>
 
-1529712581 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\101starships.cpp
+1531617051 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\101starships.cpp
 	"Pokitto.h"
+	"PokittoCookie.h"
 	"WString.h"
 
 1530383582 source:c:\pokittolib_git\pokittolib_curr\examples\armageddon\ageddon.cpp

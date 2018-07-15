@@ -76,9 +76,7 @@
     #endif
 #else
     #define POK_GBSOUND PROJ_GBSOUND
-    #ifndef NUM_CHANNELS
-    #define NUM_CHANNELS 2
-    #endif
+    //#define NUM_CHANNELS 2
 #endif
 
 
@@ -212,8 +210,6 @@
 #define BUFSIZE_HI_4                9680
 #define MODE_FAST_16COLOR           2   //Size: 4840
 #define BUFSIZE_FAST_16             4840
-#define MODE_HI_16COLOR             3
-#define BUFSIZE_HI_16               19360
 #define MODE_GAMEBUINO_16COLOR      4   //Size: 2016
 #define BUFSIZE_GAMEBUINO_16        2016
 #define MODE_ARDUBOY_16COLOR        5   //Size: 4096
@@ -234,6 +230,8 @@
 #define BUFSIZE_MODE13              9680 // 110*88
 #define MODE14                      14
 #define BUFSIZE_MODE14              14520
+#define MODE15                      15
+#define BUFSIZE_MODE15              19360
 // Tiled modes
 #define MODE_TILED_1BIT             1001
 #define MODE_TILED_8BIT             1002
@@ -282,7 +280,7 @@
 #endif
 #endif // POK_TILEDMODE
 
-#if PROJ_MODE13 > 0
+#if PROJ_MODE13 > 0 || PROJ_SCREENMODE == 13
     #undef POK_SCREENMODE //get rid of warnings
     #undef POK_COLORDEPTH
     #undef POK_FPS
@@ -292,7 +290,7 @@
     #define POK_FPS 30
 #endif
 
-#if PROJ_MODE14 > 0
+#if PROJ_MODE14 > 0 || PROJ_SCREENMODE == 14
     #undef POK_SCREENMODE //get rid of warnings
     #undef POK_COLORDEPTH
     #undef POK_FPS
@@ -301,7 +299,7 @@
     #define POK_STRETCH 0
     #define POK_FPS 30
 #endif
-#if PROJ_MODE15 > 0
+#if PROJ_MODE15 > 0 || PROJ_SCREENMODE == 15
     #undef POK_SCREENMODE //get rid of warnings
     #undef POK_COLORDEPTH
     #undef POK_FPS
@@ -309,6 +307,7 @@
     #define POK_COLORDEPTH 4
     #define POK_STRETCH 0
     #define POK_FPS 30
+    #define POK_BITFRAME 4840
 #endif
 /* DEFINE SCREENMODE AS THE MAXIMUM SCREEN SIZE NEEDED BY YOUR APP ... SEE SIZES LISTED ABOVE */
 
@@ -327,11 +326,6 @@
     #define POK_SCREENBUFFERSIZE POK_LCD_W*POK_LCD_H*POK_COLORDEPTH/8
     #define LCDWIDTH POK_LCD_W
     #define LCDHEIGHT POK_LCD_H
-    #define POK_BITFRAME 4840
-#elif POK_SCREENMODE == MODE_HI_16COLOR
-    #define POK_SCREENBUFFERSIZE POK_LCD_W*POK_LCD_H/2
-    #define LCDWIDTH 220
-    #define LCDHEIGHT 176
     #define POK_BITFRAME 4840
 #elif POK_SCREENMODE == MODE_HI_4COLOR || POK_SCREENMODE == MODE_HI_GRAYSCALE
     #define POK_SCREENBUFFERSIZE POK_LCD_W*POK_LCD_H*POK_COLORDEPTH/4

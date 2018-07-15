@@ -24,6 +24,7 @@
 //#include <SPI.h>
 //#include <Gamebuino.h>
 #include "Pokitto.h"
+#include "PokittoCookie.h"
 #include "Wstring.h"
 
 long map(long x, long in_min, long in_max, long out_min, long out_max)
@@ -156,8 +157,8 @@ const byte logo[] PROGMEM = {64,30,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0
 #define W_EXPLOSION 13
 #define W_SHELL 14
 
-byte unlockedWeapons = 0;
-byte unlockedMaps = 0;
+//byte unlockedWeapons = 0;
+//byte unlockedMaps = 0;
 
 #define SCORETHRESHOLD_1 4
 #define SCORETHRESHOLD_2 8
@@ -325,7 +326,24 @@ const byte* const maps[NUMMAPS] = {
   map0, map1, map2, map3, map4
 };
 
-unsigned int score[NUMMAPS];
+//unsigned int score[NUMMAPS];
+
+//cratesaveclass
+class cratesavecookie : public Pokitto::Cookie {
+public:
+  unsigned int score[NUMMAPS];
+  byte unlockedWeapons;
+  byte unlockedMaps;
+
+  //constructor function
+  cratesavecookie() {
+    unlockedMaps=0;
+    unlockedWeapons=0;
+    for (int i=0;i<NUMMAPS;i++) score[i]=0;
+  }
+};
+
+cratesavecookie csc; //cratesave instance
 
 const byte bricks[] PROGMEM = {
   8, 6, 0xFC, 0x24, 0xFC, 0x90, 0xFC, 0x48
@@ -458,9 +476,9 @@ class World {
 
     void chooseMap() {
       int thisMap = mapNumber;
-      while (1) {
+      while (gb.isRunning()) {
         if (gb.update()) {
-
+          gb.display.setColor(1,0);
           //assign the selected map
           tiles = maps[thisMap];
           mapNumber = thisMap;
@@ -492,7 +510,7 @@ class World {
           gb.display.cursorX = 24;
           gb.display.cursorY = LCDHEIGHT - 11;
           gb.display.print(("Score: "));
-          gb.display.print(score[thisMap]);
+          gb.display.print(csc.score[thisMap]);
           //draw the map centered on the screen
           gb.display.drawBitmap(LCDWIDTH / 2 - getWidth() / 2 / SCALE / SPRITE_SIZE, LCDHEIGHT / 2 - getHeight() / 2 / SCALE / SPRITE_SIZE - 5, maps[thisMap]);
 
@@ -511,30 +529,31 @@ class World {
             gb.display.drawBitmap(0, 0, platform);
             gb.display.drawBitmap(LCDWIDTH - SPRITE_SIZE, 0, platform);
           }
-          if (thisMap == unlockedMaps) {
+          if (thisMap == csc.unlockedMaps) {
             for (byte i = 0; i < sizeof(scoreThresholds); i++) {
-              if (score[thisMap] < scoreThresholds[i]) {
+              if (csc.score[thisMap] < scoreThresholds[i]) {
                 gb.display.cursorY = LCDHEIGHT - 5;
                 gb.display.cursorX = 12;
                 if ((gb.frameCount % 10) > 3) { //make it blink !
                   gb.display.print(("Next unlock: "));
-                  gb.display.print(scoreThresholds[i]);
+                  gb.display.print((int)scoreThresholds[i]);
                 }
                 break;
               }
             }
           }
-          if (thisMap > unlockedMaps) {
+          if (thisMap > csc.unlockedMaps) {
             if ((gb.frameCount % 10) > 3) { //make it blink !
-              gb.display.setColor(BLACK);
+              gb.display.setColor(BLACK,WHITE);
               gb.display.fillRect(28, 15, 28, 7);
-              gb.display.setColor(WHITE);
+              gb.display.setColor(WHITE,BLACK);
               gb.display.cursorX = 29;
               gb.display.cursorY = 16;
               gb.display.print(("LOCKED!"));
+              gb.display.setColor(BLACK,WHITE);
             }
           }
-          if (gb.buttons.pressed(BTN_A) && (thisMap <= unlockedMaps)) {
+          if (gb.buttons.pressed(BTN_A) && (thisMap <= csc.unlockedMaps)) {
             initGame();
             return;
           }
@@ -550,8 +569,8 @@ class World {
     }
 
     boolean addScore(unsigned int newScore) {
-      if (newScore > score[mapNumber]) {
-        score[mapNumber] = newScore;
+      if (newScore > csc.score[mapNumber]) {
+        csc.score[mapNumber] = newScore;
         return true;
       }
       return false;
@@ -1678,7 +1697,7 @@ class Crate :
         gb.sound.playOK();
         //add a random value to the weapon type inferior to the number of weapons
         //to avoid picking the same weapon
-        player.weapon.subtype = (player.weapon.subtype + random(1, unlockedWeapons + 1)) % (unlockedWeapons + 1);
+        player.weapon.subtype = (player.weapon.subtype + random(1, csc.unlockedWeapons + 1)) % (csc.unlockedWeapons + 1);
         switch (player.weapon.subtype) {
           case W_CLUB :
             popup(("CLUB"));
@@ -1723,24 +1742,24 @@ class Crate :
         if (world.mapNumber == 0) {
           switch (player.score) {
             case (SCORETHRESHOLD_1):
-              if (unlockedWeapons < W_RIFLE) {
-                unlockedWeapons = W_RIFLE;
+              if (csc.unlockedWeapons < W_RIFLE) {
+                csc.unlockedWeapons = W_RIFLE;
                 player.weapon.subtype = W_RIFLE;
                 popup(("RIFLE UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 2);
               }
               break;
             case (SCORETHRESHOLD_2):
-              if (unlockedWeapons < W_SHOTGUN) {
-                unlockedWeapons = W_SHOTGUN;
+              if (csc.unlockedWeapons < W_SHOTGUN) {
+                csc.unlockedWeapons = W_SHOTGUN;
                 player.weapon.subtype = W_SHOTGUN;
                 popup(("SHOTGUN UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 2);
               }
               break;
             case (SCORETHRESHOLD_3):
-              if (unlockedMaps < 1) {
-                unlockedMaps = 1;
+              if (csc.unlockedMaps < 1) {
+                csc.unlockedMaps = 1;
                 popup(("NEW MAP UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
@@ -1750,40 +1769,40 @@ class Crate :
         if (world.mapNumber == 1) {
           switch (player.score) {
             case (SCORETHRESHOLD_1):
-              if (unlockedWeapons < W_ROCKET) {
-                unlockedWeapons = W_ROCKET;
+              if (csc.unlockedWeapons < W_ROCKET) {
+                csc.unlockedWeapons = W_ROCKET;
                 player.weapon.subtype = W_ROCKET;
                 popup(("ROCKETS UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_2):
-              if (unlockedWeapons < W_CLUB) {
-                unlockedWeapons = W_CLUB;
+              if (csc.unlockedWeapons < W_CLUB) {
+                csc.unlockedWeapons = W_CLUB;
                 player.weapon.subtype = W_CLUB;
                 popup(("CLUB UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_3):
-              if (unlockedWeapons < W_REVOLVER) {
-                unlockedWeapons = W_REVOLVER;
+              if (csc.unlockedWeapons < W_REVOLVER) {
+                csc.unlockedWeapons = W_REVOLVER;
                 player.weapon.subtype = W_REVOLVER;
                 popup(("REVOLVER UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_4):
-              if (unlockedWeapons < W_MINE) {
-                unlockedWeapons = W_MINE;
+              if (csc.unlockedWeapons < W_MINE) {
+                csc.unlockedWeapons = W_MINE;
                 player.weapon.subtype = W_MINE;
                 popup(("MINES UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_5):
-              if (unlockedMaps < 2) {
-                unlockedMaps = 2;
+              if (csc.unlockedMaps < 2) {
+                csc.unlockedMaps = 2;
                 popup(("NEW MAP UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
@@ -1793,40 +1812,40 @@ class Crate :
         if (world.mapNumber == 2) {
           switch (player.score) {
             case (SCORETHRESHOLD_1):
-              if (unlockedWeapons < W_SNIPER) {
-                unlockedWeapons = W_SNIPER;
+              if (csc.unlockedWeapons < W_SNIPER) {
+                csc.unlockedWeapons = W_SNIPER;
                 player.weapon.subtype = W_SNIPER;
                 popup(("SNIPER UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_2):
-              if (unlockedWeapons < W_MACHINEGUN) {
-                unlockedWeapons = W_MACHINEGUN;
+              if (csc.unlockedWeapons < W_MACHINEGUN) {
+                csc.unlockedWeapons = W_MACHINEGUN;
                 player.weapon.subtype = W_MACHINEGUN;
                 popup(("MACHINEGUN UNLOCKED!"));
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_3):
-              if (unlockedWeapons < W_GRENADE) {
-                unlockedWeapons = W_GRENADE;
+              if (csc.unlockedWeapons < W_GRENADE) {
+                csc.unlockedWeapons = W_GRENADE;
                 player.weapon.subtype = W_GRENADE;
                 popup(("GRENADES UNLOCKED!"), 40);
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_4):
-              if (unlockedWeapons < W_AKIMBO) {
-                unlockedWeapons = W_AKIMBO;
+              if (csc.unlockedWeapons < W_AKIMBO) {
+                csc.unlockedWeapons = W_AKIMBO;
                 player.weapon.subtype = W_AKIMBO;
                 popup(("AKIMBO UNLOCKED!"), 40);
                 gb.sound.playPattern(power_up_sound, 0);
               }
               break;
             case (SCORETHRESHOLD_5):
-              if (unlockedMaps < 3) {
-                unlockedMaps = 3;
+              if (csc.unlockedMaps < 3) {
+                csc.unlockedMaps = 3;
                 popup(("NEW MAP UNLOCKED!"), 40);
                 gb.sound.playPattern(power_up_sound, 0);
               }
@@ -1836,22 +1855,22 @@ class Crate :
         if (world.mapNumber == 3) {
           switch (player.score) {
             case (SCORETHRESHOLD_3):
-              if (unlockedWeapons < W_DISK) {
-                unlockedWeapons = W_DISK;
+              if (csc.unlockedWeapons < W_DISK) {
+                csc.unlockedWeapons = W_DISK;
                 player.weapon.subtype = W_DISK;
                 popup(("DISK UNLOCKED!"), 40);
               }
               break;
             case (SCORETHRESHOLD_4):
-              if (unlockedWeapons < W_LASER) {
-                unlockedWeapons = W_LASER;
+              if (csc.unlockedWeapons < W_LASER) {
+                csc.unlockedWeapons = W_LASER;
                 player.weapon.subtype = W_LASER;
                 popup(("LASER UNLOCKED!"), 40);
               }
               break;
             case (SCORETHRESHOLD_5):
-              if (unlockedMaps < 4) {
-                unlockedMaps = 4;
+              if (csc.unlockedMaps < 4) {
+                csc.unlockedMaps = 4;
                 popup(("LAST MAP UNLOCKED!"), 40);
               }
               break;
@@ -1870,11 +1889,13 @@ class Crate :
 
 Crate crate;
 
+
+
 ///////////////////////////////////////////// SETUP
 void setup() {
+  loadEEPROM();
   gb.begin();
 
-  loadEEPROM();
   gb.sound.chanVolumes[2] = 1;
   mainMenu();
   gb.display.setFont(font3x5);
@@ -1891,7 +1912,7 @@ void loop() {
     crate.update();
     player.update();
     enemiesEngine.update();
-    saveEEPROM(); //it checks if the values have changed before writting so it won't wear out the EEPROM
+    //saveEEPROM(); //it checks if the values have changed before writting so it won't wear out the EEPROM
 
     //camera smoothing
     //int x = (player.x + player.getWidth()/2)/SCALE - LCDWIDTH/2;
@@ -2029,33 +2050,36 @@ void drawAll() {
 }
 
 void loadEEPROM() {
-//  if (EEPROMreadInt(0) != EEPROM_TOKEN) {
+  /*
+  if (EEPROMreadInt(0) != EEPROM_TOKEN) {
     cleanEEPROM();
     return;
-//  }
-  //load score for each map ToDo, Jonne
+  }
+
   for (int i = 0; i < NUMMAPS; i++) {
     //score[i] = EEPROMreadInt(i * 2 + EEPROM_SCORE_OFFSET);
   }
   //unlockedWeapons = EEPROM.read(EEPROM_WEAPONS_OFFSET);
-  //unlockedMaps = EEPROM.read(EEPROM_MAPS_OFFSET);
-  world.mapNumber = unlockedMaps; //select the last unlocked map by default
+  //unlockedMaps = EEPROM.read(EEPROM_MAPS_OFFSET);*/
+  csc.begin("CrateBUI",csc);
+  world.mapNumber = csc.unlockedMaps; //select the last unlocked map by default
 }
 
 void saveEEPROM() {
   //EEPROMwriteInt(0, EEPROM_TOKEN);
   //save score for each map
-  for (byte i = 0; i < NUMMAPS; i++) {
+  //for (byte i = 0; i < NUMMAPS; i++) {
   //  if (EEPROMreadInt(i * 2 + EEPROM_SCORE_OFFSET) < score[i]) {
    //   EEPROMwriteInt(i * 2 + EEPROM_SCORE_OFFSET, score[i]);
    // }
-  }
+  //}
   //if (EEPROM.read(EEPROM_WEAPONS_OFFSET) < unlockedWeapons) {
    // EEPROM.write(EEPROM_WEAPONS_OFFSET, unlockedWeapons);
   //}
  // if (EEPROM.read(EEPROM_MAPS_OFFSET) < unlockedMaps) {
   //EEPROM.write(EEPROM_MAPS_OFFSET, unlockedMaps);
  // }
+ csc.saveCookie();
 }
 
 unsigned int EEPROMreadInt(unsigned int i) {

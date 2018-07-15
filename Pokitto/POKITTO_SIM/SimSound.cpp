@@ -51,9 +51,16 @@ uint8_t activesfbuf=0, writesfbuf=0; uint16_t sfbufindex=0;
 using namespace Pokitto;
 
 void Pokitto::soundInit() {
+    soundInit(false);
+}
+
+
+void Pokitto::soundInit(uint8_t reinit) {
+    if (!reinit) {
     simulator.initSDLAudio();
     simulator.simSoundEnabled(true);
     pokPauseStream();
+    }
 }
 
 void Pokitto::pauseAudio(uint8_t v) {

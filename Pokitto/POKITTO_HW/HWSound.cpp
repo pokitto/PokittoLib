@@ -50,14 +50,7 @@
 
 Pokitto::Sound __shw;
 
-#ifdef XPERIMENTAL
-DigitalOut e4(EXT4);
-e4=0;
-#endif
-
 using namespace Pokitto;
-
-
 
 #ifndef POK_SIM
 #if POK_ENABLE_SOUND
@@ -256,15 +249,24 @@ void Pokitto::dac_write(uint8_t value) {
     #endif
 }
 
-/** SOUND INIT **/
 void Pokitto::soundInit() {
+    soundInit(false);
+}
+
+/** SOUND INIT **/
+void Pokitto::soundInit(uint8_t reinit) {
+    #ifdef XPERIMENTAL
+    mbed::DigitalOut expr4(EXT4);
+    expr4=0;
+    #endif
     #if POK_ENABLE_SOUND > 0
     uint32_t timerFreq;
     #if POK_USE_PWM
-
+    if (!reinit) {
     pwmout_init(&audiopwm,POK_AUD_PIN);
     pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
     pwmout_write(&audiopwm,0.1f);
+    }
     #endif
 
     //#if POK_GBSOUND > 0

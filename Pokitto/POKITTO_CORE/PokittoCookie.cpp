@@ -117,13 +117,15 @@ int Cookie::begin(const char* idkey, int datasize, char* ptr) {
 }
 
 bool Cookie::saveCookie() {
-    if (!_status || !_pointer) initialize(); //reinitialize if needed
-    if (!_status || !_pointer) return false; //return if initialize still failed
+    if (!_status || !_pointer) return false; //return if not initialized
     char* p = _pointer;
     _head=0;
     _block=0;
     _block=findMyNextBlock();
     for (int i=0; i<_datasize; i++) writeQueue(*p++);
+    #if POK_ENABLE_SOUND
+    Pokitto::soundInit(true); //re-init sound
+    #endif
 }
 
 bool Cookie::loadCookie() {

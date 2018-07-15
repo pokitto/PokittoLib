@@ -2219,7 +2219,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1530228992 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1531520707 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1521233474 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
@@ -2601,7 +2601,7 @@
 	"HWButtons.h"
 	"PokittoSimulator.h"
 
-1531409847 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
+1531511175 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\gbcompatibility.h
 	"binary.h"
 
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\binary.h
@@ -2859,7 +2859,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1531416907 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1531520739 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -3807,7 +3807,7 @@
 
 1519501070 c:\pokittolib_git\pokittolib_curr\examples\mode13\my_settings.h
 
-1522708887 source:c:\pokittolib_git\pokittolib_curr\examples\mode15\mode15.cpp
+1522709276 source:c:\pokittolib_git\pokittolib_curr\examples\mode15\mode15.cpp
 	"Pokitto.h"
 	"monkey16.h"
 
@@ -4010,14 +4010,15 @@
 1507797468 c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\wcharacter.h
 	<ctype.h>
 
-1529701168 source:c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\cratebuino.cpp
+1531441725 source:c:\pokittolib_git\pokittolib_curr\examples\cratebuino_gb\cratebuino.cpp
 	"Pokitto.h"
+	"PokittoCookie.h"
 	"Wstring.h"
 
 1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\main.cpp
 	"Pokitto.h"
 
-1529687558 c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\my_settings.h
+1531518542 c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\my_settings.h
 
 1414064592 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\settings.c
 
@@ -4044,8 +4045,9 @@
 1507797468 c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\wcharacter.h
 	<ctype.h>
 
-1529712581 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\101starships.cpp
+1531520800 source:c:\pokittolib_git\pokittolib_curr\examples\101starships_gb\101starships.cpp
 	"Pokitto.h"
+	"PokittoCookie.h"
 	"WString.h"
 
 1529687558 c:\pokittolib_git\pokittolib_curr\examples\lander_gb\my_settings.h
@@ -4115,4 +4117,12 @@
 
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\fonts\zxspec.cpp
 	"PokittoFonts.h"
+
+1529882564 source:c:\pokittolib_git\pokittolib_curr\examples\flappy_gb\flappy.cpp
+	"Pokitto.h"
+
+1529687558 c:\pokittolib_git\pokittolib_curr\examples\flappy_gb\my_settings.h
+
+1529686130 source:c:\pokittolib_git\pokittolib_curr\examples\flappy_gb\main.cpp
+	"Pokitto.h"
 

@@ -5,6 +5,7 @@
 //#include <EEPROM.h>
 //#include <Gamebuino.h>
 #include "Pokitto.h"
+#include "PokittoCookie.h"
 #include "WString.h"
 /* Auto-generated function declarations */
 void updateAff();
@@ -54,56 +55,56 @@ const uint16_t player_destroy[] PROGMEM = {
 
 
 const uint16_t p20[] PROGMEM = {
-  0x8241,0x8005,0x25C,0x264,0x440,0x848,0x240,0x250,0x458,0x85C,0x0000};//MÃ©lodie Win
+  0x8241,0x8005,0x25C,0x264,0x440,0x848,0x240,0x250,0x458,0x85C,0x0000};//Mélodie Win
 const uint16_t p21[] PROGMEM = {
   0x8241,0x8005,0x15C,0x5FC,0x15C,0x1FC,0x15C,0x7FC,0x140,0x5FC,0x140,0x1FC,0x140,0x7FC,0x0000};//Percu Win
 
 const uint16_t p22[] PROGMEM = {
-  0x8241,0x8005,0x28C,0x288,0x280,0x278,0x870,0x0000};//MÃ©lodie Lose
+  0x8241,0x8005,0x28C,0x288,0x280,0x278,0x870,0x0000};//Mélodie Lose
 const uint16_t p23[] PROGMEM = {
   0x8241,0x8005,0x15C,0x1FC,0x158,0x1FC,0x150,0x1FC,0x148,0x1FC,0x840,0x0000};//Percu Lose
 
 const uint16_t p00[] PROGMEM = {
-  0x8005,0x8101,0x410,0x2FC,0x210,0x2FC,0x210,0x4FC,0x20C,0x4FC,0x210,0x4FC,0x218,0x2FC,0x420,0x2FC,0x220,0x4FC,0x220,0x2FC,0x418,0x2FC,0x220,0x2FC,0x220,0x428,0x000};//MÃ©lodie Intro
+  0x8005,0x8101,0x410,0x2FC,0x210,0x2FC,0x210,0x4FC,0x20C,0x4FC,0x210,0x4FC,0x218,0x2FC,0x420,0x2FC,0x220,0x4FC,0x220,0x2FC,0x418,0x2FC,0x220,0x2FC,0x220,0x428,0x000};//Mélodie Intro
 const uint16_t p03[] PROGMEM = {
   0x8005,0x8101,0xC40,0x23C,0x240,0x63C,0x640,0x448,0xC50,0x23C,0x240,0x648,0x650,0x458,0x0000};//Percu Intro
 const uint16_t p01[] PROGMEM = {
   0x8005,0x8101,0x12C,0x5FC,0x12C,0x1FC,0x12C,0x3FC,0x140,0x3FC,0x12C,0x5FC,0x12C,0x1FC,0x12C,0x3FC,0x140,0x3FC,0x0000};//Percu 1
 const uint16_t p02[] PROGMEM = {
-  0x8005,0x8101,0xC5C,0x250,0x258,0x85C,0x870,0x0000};//MÃ©lodie 1
+  0x8005,0x8101,0xC5C,0x250,0x258,0x85C,0x870,0x0000};//Mélodie 1
 const uint16_t p05[] PROGMEM = {
   0x8005,0x8101,0x13C,0x5FC,0x13C,0x1FC,0x13C,0x3FC,0x11C,0x3FC,0x13C,0x5FC,0x13C,0x1FC,0x13C,0x3FC,0x11C,0x3FC,0x0000};//Percu 2
 const uint16_t p04[] PROGMEM = {
-  0x8005,0x8101,0x106C,0x664,0x65C,0x458,0x0000};//MÃ©lodie 2
+  0x8005,0x8101,0x106C,0x664,0x65C,0x458,0x0000};//Mélodie 2
 const uint16_t p07[] PROGMEM = {
   0x8005,0x8101,0x12C,0x5FC,0x12C,0x1FC,0x12C,0x3FC,0x140,0x3FC,0x13C,0x5FC,0x13C,0x1FC,0x13C,0x3FC,0x11C,0x3FC,0x0000};//Percu 3
 const uint16_t p06[] PROGMEM = {
-  0x8005,0x8101,0xC5C,0x258,0x264,0x86C,0x870,0x0000};//MÃ©lodie 3
+  0x8005,0x8101,0xC5C,0x258,0x264,0x86C,0x870,0x0000};//Mélodie 3
 const uint16_t p09[] PROGMEM = {
   0x8005,0x8101,0x13C,0x5FC,0x13C,0x1FC,0x13C,0x3FC,0x120,0x3FC,0x134,0x5FC,0x134,0x1FC,0x134,0x3FC,0x118,0x3FC,0x0000};//Percu 4
 const uint16_t p08[] PROGMEM = {
-  0x8005,0x8101,0x106C,0x664,0x66C,0x458,0x0000};//MÃ©lodie 4
+  0x8005,0x8101,0x106C,0x664,0x66C,0x458,0x0000};//Mélodie 4
 const uint16_t p11[] PROGMEM = {
   0x8005,0x8101,0x12C,0x5FC,0x12C,0x1FC,0x12C,0x3FC,0x140,0x3FC,0x134,0x5FC,0x134,0x1FC,0x13C,0x3FC,0x1EC,0x3FC,0x0000};//Percu 5
 const uint16_t p10[] PROGMEM = {
-  0x8005,0x8101,0xC5C,0x258,0x250,0x864,0x86C,0x0000};//MÃ©lodie 5
+  0x8005,0x8101,0xC5C,0x258,0x250,0x864,0x86C,0x0000};//Mélodie 5
 const uint16_t p13[] PROGMEM = {
   0x8005,0x8101,0x140,0x3FC,0x140,0x3FC,0x13C,0x3FC,0x13C,0x3FC,0x148,0x3FC,0x148,0x3FC,0x15C,0x3FC,0x13C,0x3FC,0x0000};//Percu 6
 const uint16_t p12[] PROGMEM = {
-  0x8005,0x8101,0x870,0x46C,0x470,0x878,0x45C,0x48C,0x0000};//MÃ©lodie 6
+  0x8005,0x8101,0x870,0x46C,0x470,0x878,0x45C,0x48C,0x0000};//Mélodie 6
 
 const uint16_t p15[] PROGMEM = {
   0x8005,0x8101,0x410,0x2FC,0x210,0x8FC,0x418,0x2FC,0x23C,0x8FC,0x0000};//Percu 2-1
 const uint16_t p14[] PROGMEM = {
-  0x8005,0x8101,0x640,0x650,0x45C,0x648,0x658,0x464,0x0000};//MÃ©lodie 2-1
+  0x8005,0x8101,0x640,0x650,0x45C,0x648,0x658,0x464,0x0000};//Mélodie 2-1
 const uint16_t p17[] PROGMEM = {
   0x8005,0x8101,0x42C,0x2FC,0x22C,0x8FC,0x434,0x2FC,0x234,0x8FC,0x0000};//Percu 2-2
 const uint16_t p16[] PROGMEM = {
-  0x8005,0x8101,0x65C,0x66C,0x478,0x664,0x66C,0x458,0x0000};//MÃ©lodie 2-2
+  0x8005,0x8101,0x65C,0x66C,0x478,0x664,0x66C,0x458,0x0000};//Mélodie 2-2
 const uint16_t p19[] PROGMEM = {
   0x8005,0x8101,0x42C,0x2FC,0x22C,0x8FC,0x440,0x2FC,0x240,0x8FC,0x0000};//Percu 2-3
 const uint16_t p18[] PROGMEM = {
-  0x8005,0x8101,0x65C,0x66C,0x478,0x66C,0x678,0x480,0x0000};//MÃ©lodie 2-3
+  0x8005,0x8101,0x65C,0x66C,0x478,0x66C,0x678,0x480,0x0000};//Mélodie 2-3
 
 
 const uint16_t* patternSet[] PROGMEM = {
@@ -244,14 +245,21 @@ byte totennemis = 101;
 boolean EndGame;
 int bossframe = 0;
 byte boss_shots1 = 0, boss_shots2 = 0, boss_shots3 = 0;
-unsigned int highscore;
+
+
+//unsigned int highscore;
 boolean score_saved;
 boolean new_highscore;
 byte rank_letter;
 
+class mycookie : public Pokitto::Cookie {
+public:
+    unsigned int highscore;
+};
 
+mycookie hscookie;
 
-//frame d'apparition, vie, image, bÃ©zier(7), tirs(4)
+//frame d'apparition, vie, image, bézier(7), tirs(4)
 const unsigned char ennemiSet[]  = {
   5,2,2,190,145,90,125,140,125,130,1,17,18,200,//Premiers
   10,2,2,190,145,90,115,100,115,130,1,18,19,200,
@@ -279,7 +287,7 @@ const unsigned char ennemiSet[]  = {
   80,2,2,200,175,125,120,165,85,90,4,15,21,40,//Vague de 3
   10,2,2,200,175,125,120,165,85,90,4,16,20,40,
   10,2,2,200,175,125,120,165,85,90,4,16,20,40,
-  70,7,1,190,170,90,130,120,115,120,6,15,21,25,//PremiÃ¨re pieuvre
+  70,7,1,190,170,90,130,120,115,120,6,15,21,25,//Première pieuvre
   70,3,0,190,145,90,103,108,98,80,2,14,16,30,//2 haut, 2 bas
   10,3,0,190,145,90,103,108,98,80,2,14,16,30,
   2,3,0,190,145,90,136,131,141,80,2,20,22,30,
@@ -362,12 +370,14 @@ const unsigned char ennemiSet[]  = {
 
 void setup()
 {
+  hscookie.begin("101Stars", hscookie); // has to go BEFORE game.begin
   gb.begin();
   initGame(0);
   gb.display.setFont(font3x5);
 }
 
 void loop(){
+  gb.display.setFont(font3x5);
   if(gb.update()){
 
 
@@ -478,6 +488,7 @@ void loop(){
           pause = 0;
           gb.sound.playOK();
           gb.display.persistence = false;
+          gb.display.setFont(font3x5);
         }
         if(gb.buttons.pressed(BTN_B)){
           gb.display.persistence = false;
@@ -485,6 +496,7 @@ void loop(){
           gb.sound.stopTrack(2);
           gb.sound.playCancel();
           initGame(0);
+          gb.display.setFont(font3x5);
         }
       }
     }
@@ -503,8 +515,9 @@ void initGame(byte retry){
 
 // TodDo jonne  highscore = EEPROM.read(0) & 0x00FF; //LSB
 //  highscore += (EEPROM.read(1) << 8) & 0xFF00; //MSB
-  if(highscore > 60000){
-    highscore = 0;
+
+  if(hscookie.highscore > 60000){
+    hscookie.highscore = 0;
   }
 
   gb.sound.changePatternSet(patternSet,1);
@@ -554,7 +567,7 @@ void initGame(byte retry){
   {
     explosions[j].on = 0;
   }
-  readennemi = 0; //Modifier pour dÃ©marrer plus tard dans le jeu
+  readennemi = 0; //Modifier pour démarrer plus tard dans le jeu
   nextennemi = pgm_read_byte(ennemiSet+VARS_ENNEMIS*readennemi);
 
   for(byte j=0;j<STARS;j++){
@@ -597,9 +610,11 @@ void displayInt(long l, byte Tx, byte Ty, byte fig){
   gb.display.cursorX = Tx;
   gb.display.cursorY = Ty;
   //gb.display.print(sl);
-  char dumbo[50];
-  sl.toCharArray(dumbo,50);
+  char dumbo[fig+1];
+  sl.toCharArray(dumbo,fig+1);
   gb.display.print(dumbo);
+  //int i=0;
+  //while (dumbo[i]>47 && dumbo[i]<58) gb.display.print((int)dumbo[i++]);
 }
 
 
@@ -696,7 +711,7 @@ void updateAff(){
 
 
   if(nbframes > 40){
-    gb.display.fillRect(16, 44, 2*(perso.supershot-10), 3);
+    if (perso.supershot>9) gb.display.fillRect(16, 44, 2*(perso.supershot-10), 3);
 
     if(score > scoreaff+50){
      scoreaff += 45;
@@ -718,7 +733,7 @@ void updateAff(){
   }
   else{
     displayText("HIGHSCORE:",1,43);
-    displayInt(highscore,60,43,6);
+    displayInt(hscookie.highscore,60,43,6);
 
 
   }
@@ -742,10 +757,11 @@ void updateEndScreen(){
 
   if(bonus_end_screen == 0 && score_saved == 0){
     score_saved = 1;
-    if(score > highscore){
-      highscore = score;
+    if(score > hscookie.highscore){
+      hscookie.highscore = score;
 //      EEPROM.write(0, highscore & 0x00FF); //LSB
 //      EEPROM.write(1, (highscore >> 8) & 0x00FF); //MSB
+      hscookie.saveCookie();
       new_highscore = 1;
     }
 
@@ -1028,7 +1044,7 @@ void updateEnnemis()
 
 
 
-        //DÃ©tection des tirs du joueur
+        //Détection des tirs du joueur
         for(int m = 0; m < MAX_TIRS; m = m+1)
         {
           if(ennemis[i].on == 1 && tirs[m].on == 1)
@@ -1079,7 +1095,7 @@ void updateEnnemis()
           tir_ang = tir_ang * 0.0174;
           tir_vx = tir_v*cos(tir_ang);
           tir_vy = tir_v*sin(tir_ang);
-          if(perso.repop < 20){ //L'ennemi ne tire que si le joueur est prÃªt
+          if(perso.repop < 20){ //L'ennemi ne tire que si le joueur est prêt
             newTirEnnemi(x,y,tir_vx,tir_vy);
             gb.sound.playPattern(enn_shot,0);
           }
@@ -1130,7 +1146,7 @@ void updateEnnemis()
 
   //Nouvel ennemi !
   while(nbframes >= nextennemi && readennemi < totennemis && perso.vies > 0){
-    //DÃ©terminer l'espace libre
+    //Déterminer l'espace libre
     byte i = 0;
     while(ennemis[i].on == 1)
     {
@@ -1379,7 +1395,7 @@ void updatePerso(){
     bt_up = gb.buttons.repeat(BTN_UP, 1);
     bt_down = gb.buttons.repeat(BTN_DOWN, 1);
   }
-  else{  //Prise en main des contrÃ´les pour la fin de partie
+  else{  //Prise en main des contrôles pour la fin de partie
     bt_right = 0;
     bt_left = 0;
     bt_up = 0;
@@ -1571,7 +1587,7 @@ void updatePerso(){
     }
 
   }
-  else { //Si le joueur vient de se faire dÃ©tuire
+  else { //Si le joueur vient de se faire détuire
     perso.supershot = 0;
     if(perso.vies > 1){
       perso.repop = 60;
@@ -1691,7 +1707,8 @@ void newTir(int vx, int vy, int diffy)
   tirs[i].y = ((int)perso.y-diffy) *10+vy;
   tirs[i].xvit = vx;
   tirs[i].yvit = vy;
-  gb.sound.playPattern(player_shot,0);
+  //gb.sound.playPattern(player_shot,0);
+  gb.sound.playOK();
 }
 
 void updateTirs()

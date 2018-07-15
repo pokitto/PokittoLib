@@ -77,6 +77,10 @@ typedef uint8_t byte;
 
 using namespace Pokitto;
 
+#ifdef PROJ_SND_DEBUG
+int __sx=0;
+#endif
+
 /** discrete hardware volume control **/
 
 uint8_t Pokitto::discrete_vol = 0;
@@ -135,7 +139,6 @@ uint8_t Sound::stepPitch[NUM_CHANNELS];
 uint8_t Sound::chanVolumes[NUM_CHANNELS];
 
 #if (POK_ENABLE_SOUND < 1)
- #undef NUM_CHANNELS
  #define NUM_CHANNELS 0
 #endif
 
@@ -753,6 +756,7 @@ void Sound::updateOutput() {
             output >>= 8;
             dac_write((uint8_t)output); //direct hardware mixing baby !
     soundbyte = output;
+
     #endif //POK_ENABLE_SOUND
     #else
     /** SIMULATOR **/
@@ -764,6 +768,7 @@ void Sound::updateOutput() {
         #endif
         soundbyte = output;//<<headPhoneLevel;
     #endif // POK_SIM
+
 #endif
 }
 
