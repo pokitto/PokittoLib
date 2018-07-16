@@ -284,6 +284,10 @@ bool Tracker::checkButtons(){
                 playPtn(); // for legacy reasons
             }
     	}
+    	if (pok.buttons.pressed(BTN_LEFT)) {track1on = !track1on; setOSC(&osc1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);}
+    	if (pok.buttons.pressed(BTN_UP)) {track2on = !track2on; setOSC(&osc2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);}
+    	if (pok.buttons.pressed(BTN_RIGHT)) {track3on = !track3on; setOSC(&osc3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);}
+    	if (pok.buttons.pressed(BTN_DOWN)) {track1on=track2on=track3on=true;}
     	if (pok.buttons.pressed(BTN_B)){
 
             // If already stopped go to travel mode
@@ -425,8 +429,11 @@ void Tracker::drawIsPlaying(){
 void Tracker::printValues(){
     uint8_t counter = 0;
     for (uint8_t i = screenMin; i <= screenMax; i++){
+        /* TRACK 1 */
+        if (track1on) {
         if ((i % 4) == 0) pok.display.setColor(3);
         else pok.display.setColor(1);
+        } else pok.display.setColor(2);
         pok.display.setCursor(0, ((fontH + 1) * (counter + 1)) + 1);
         pok.display.print(screenMin + counter); // row numbering
         pok.display.setCursor(vLines[0] + 2, ((fontH + 1) * (counter + 1)) + 1); // first col
@@ -445,6 +452,11 @@ void Tracker::printValues(){
         pok.display.print(" ");
         if (_pitch[_songPos[songPos][0]][i] == -1) pok.display.print("--");//ref number
         else pok.display.print(_pitch[_songPos[songPos][0]][i]);
+        /* TRACK 2 */
+        if (track2on) {
+        if ((i % 4) == 0) pok.display.setColor(3);
+        else pok.display.setColor(1);
+        } else pok.display.setColor(2);
         pok.display.setCursor(vLines[1] + 2, ((fontH + 1) * (counter + 1)) + 1); // second col
         if (_pitch[_songPos[songPos][1]][i] == -1) pok.display.print("---");//pitch
         else{
@@ -461,6 +473,11 @@ void Tracker::printValues(){
         pok.display.print(" ");
         if (_pitch[_songPos[songPos][1]][i] == -1) pok.display.print("--");//ref number
         else pok.display.print(_pitch[_songPos[songPos][1]][i]);
+        /* TRACK 3 */
+        if (track3on) {
+        if ((i % 4) == 0) pok.display.setColor(3);
+        else pok.display.setColor(1);
+        } else pok.display.setColor(2);
         pok.display.setCursor(vLines[2] + 2, ((fontH + 1) * (counter + 1)) + 1); // third col
         if (_pitch[_songPos[songPos][2]][i] == -1) pok.display.print("---");//pitch
         else{
@@ -493,8 +510,10 @@ void Tracker::printSettings(){
     pok.display.print(songPos, 10);
     pok.display.setCursor(s_vLines[0], (4 * fontH) + 5);
     pok.display.print("Pattrn");
+    //pok.display.print("Seqpos");
     pok.display.setCursor(s_vLines[0], (5 * fontH) + 6);
     pok.display.print((int)lastPattern, 10);
+    //pok.display.print((int)sequencepos, 10);
     pok.display.setCursor(s_vLines[0], (6 * fontH) + 7);
     pok.display.print("LoopTo");
     pok.display.setCursor(s_vLines[0], (7 * fontH) + 8);
@@ -733,7 +752,7 @@ void Tracker::saveSong(FILE* fp){
     fprintf(fp, "%d", loopTo);
     fprintf(fp, "\n");
     fprintf(fp, patchesChar);
-    fprintf(fp, "15");
+    fprintf(fp, "%d", numPatches);
     fprintf(fp, "\n");
 
     // Write Block Sequence
@@ -795,7 +814,7 @@ void Tracker::NL(){
 void Tracker::initStreams() {
     // Put stream memory pointers in place
     uint16_t blocknum;
-
+    songPos=sequencepos; //try to fix unsyncing problem
     // retarget pointers for track 1
     if(!t1Mute)
     {

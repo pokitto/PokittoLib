@@ -96,7 +96,7 @@ bool checkButtons(){
             #ifndef POK_SIM
             SDFileSystem sd(/*MOSI*/P0_9, /*MISO*/P0_8, /*SCK*/P0_6, /*CS*/P0_7, /*Mountpoint*/"sd"); //!!HV
             #endif
-            char* filePathAndName = "/sd/SavedSong.rbs";
+            char* filePathAndName = "/sd/song.rbs";
 
             FILE* fp=fopen(filePathAndName, "w+");
             if(fp) {

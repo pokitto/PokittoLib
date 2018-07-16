@@ -488,7 +488,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
 
 
 #ifdef XPERIMENTAL
-#define __ARMCC_VERSION 1
+//#define __ARMCC_VERSION 1
 #endif
 
 #ifndef __ARMCC_VERSION
@@ -512,7 +512,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
   SET_MASK_P2;
 
   uint32_t c, WRBit = 1<<12;
-  
+
   register uint32_t x asm("r2");
   register uint32_t t asm("r1");
 
