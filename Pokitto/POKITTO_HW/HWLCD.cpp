@@ -501,7 +501,6 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
   write_command(0x22); // write data to DRAM
   CLR_CS_SET_CD_RD_WR;
 
-  uint32_t x, c, t, WRBit = 1<<12;
   uint8_t *end=&scrbuf[POK_SCREENBUFFERSIZE>>1]+4;
 
   volatile uint32_t palette[32];
@@ -511,6 +510,11 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
   }
 
   SET_MASK_P2;
+
+  uint32_t c, WRBit = 1<<12;
+  
+  register uint32_t x asm("r2");
+  register uint32_t t asm("r1");
 
   asm volatile(
 
