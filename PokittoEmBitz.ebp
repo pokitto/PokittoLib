@@ -802,6 +802,8 @@
 					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
 					<Add option="-include" />
 					<Add option="mbed_config.h" />
+					<Add symbol="XPERIMENTAL" />
+					<Add symbol="_OSCT=2" />
 					<Add directory="Examples\Tracker" />
 				</Compiler>
 				<Cpp>

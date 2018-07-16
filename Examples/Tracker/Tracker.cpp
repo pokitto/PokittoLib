@@ -527,11 +527,21 @@ void Tracker::printSettings(){
 
 bool Tracker::playTracker(){
     bool changed=false;
+    songPos = sequencepos;
     if (playerpos!=oplayerpos) { //(pok.getTime() - playTime) >= _tempo){
         changed=true;
         uint8_t a = screenMaxInit;//screenMaxInit / 2;
         uint8_t b = 42;//((maxRow - 1) - (screenMaxInit / 2)) - 1;
         rowPointer=playerpos;
+
+        if (sequencepos != oseqpos) { //rowPointer >= maxRow){
+            songPos=sequencepos;
+            oseqpos = sequencepos;
+            rowPointer = 0;
+            screenMin = 0;
+            screenMax = screenMaxInit;
+            screenPointer = 0;
+        }
 
         if (rowPointer <= 10){
             /* rowPointer on rows up to 10, only cursor moves down*/
@@ -557,18 +567,12 @@ bool Tracker::playTracker(){
             //rowPointer++;
             //screenPointer++;
         }
-        if (sequencepos != oseqpos) { //rowPointer >= maxRow){
-            songPos=sequencepos;
-            rowPointer = 0;
-            screenMin = 0;
-            screenMax = screenMaxInit;
-            screenPointer = 0;
-        }
+
         //if (songPos == (lastPattern + 1)){
         //    songPos = loopTo;
         //}
         oplayerpos = playerpos; //playTime = pok.getTime();
-        oseqpos = sequencepos;
+
     }
     return changed; //return true if we need to update the screen
 }
@@ -793,7 +797,7 @@ void Tracker::initStreams() {
     uint16_t blocknum;
 
     // retarget pointers for track 1
-    //if(!t1Mute)
+    if(!t1Mute)
     {
         blocknum=_songPos[songPos][0]; //read current block number for track 1
         song.instrument_stream[0]=(uint8_t*)&_patch[blocknum][0];
@@ -801,7 +805,7 @@ void Tracker::initStreams() {
     }
 
     // retarget pointers for track 2
-    //if(!t2Mute)
+    if(!t2Mute)
     {
         blocknum=_songPos[songPos][1]; //read current block number for track 2
         song.instrument_stream[1]=(uint8_t*)&_patch[blocknum][0];
@@ -809,7 +813,7 @@ void Tracker::initStreams() {
     }
 
     // retarget pointers for track 3
-    //if(!t3Mute)
+    if(!t3Mute)
     {
         blocknum=_songPos[songPos][2]; //read current block number for track 3
         song.instrument_stream[2]=(uint8_t*)&_patch[blocknum][0];

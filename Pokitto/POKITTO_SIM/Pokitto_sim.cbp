@@ -93,6 +93,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DJONNE" />
 					<Add directory="../../Examples/Tracker" />
 				</Compiler>
 			</Target>
