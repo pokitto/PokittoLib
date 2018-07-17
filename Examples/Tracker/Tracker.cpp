@@ -2,6 +2,8 @@
 #include "Tracker.h"
 #include "Arrays.h"
 
+mycookie trCookie;
+
 void Tracker::SetColorPalette() {
 
     switch( mode ) {
@@ -633,13 +635,17 @@ int32_t Tracker::extractNextInteger(char* str) {
     return number; // send back the integer
 }
 
-// following functions are not ready and not used
 
 int Tracker::loadSong(char* songname){
-    pok.display.clear();
+    //pok.display.clear();
+    //pok.display.println("Loading song...");
     char text[80]; // for reading lines of text from the file
-    if (fileOpen(songname, FILE_MODE_READONLY)) return 1; //open failed
+    if (fileOpen(songname, FILE_MODE_READONLY)) {return 1;} //open failed
     int numinst=1; int numpat=1;
+    // file load succeeded, save loaded file name to cookie
+    for (int i=0; i<14; i++) trCookie.songname[i]=songname[i];
+    trCookie.firstsave=12345678; //not first save anymore
+    trCookie.saveCookie();
 
     // Song header
     fileReadLine(&text[0],80); // vanity text only
@@ -752,7 +758,7 @@ void Tracker::saveSong(FILE* fp){
     fprintf(fp, "%d", loopTo);
     fprintf(fp, "\n");
     fprintf(fp, patchesChar);
-    fprintf(fp, "%d", numPatches);
+    fprintf(fp, "%d", NUM_PATCHES); //always save full set of patches, ToDo hack for now
     fprintf(fp, "\n");
 
     // Write Block Sequence

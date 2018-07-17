@@ -4653,7 +4653,7 @@
 1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\collectable_sprites.h
 	<stdint.h>
 
-1531740696 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
+1531807397 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
 	"Pokitto.h"
 	"Arrays.h"
 	"Tracker.h"
@@ -4664,10 +4664,12 @@
 1528585913 c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.h
 	<stdint.h>
 
-1531667926 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
+1531807417 c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.h
 	"Pokitto.h"
+	"PokittoCookie.h"
 
-1531740720 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
+1531810023 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
+	"Tracker.h"
 	"SDFileSystem.h"
 
 1518738660 c:\pokittolib_git\pokittolib_curr\examples\helloworld\lemm.h
@@ -4675,7 +4677,7 @@
 1518981830 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.cpp
 	"Arrays.h"
 
-1531743126 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.cpp
+1531811701 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.cpp
 	"Tracker.h"
 	"Arrays.h"
 

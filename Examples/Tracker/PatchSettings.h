@@ -1,9 +1,11 @@
+#include "Tracker.h"
 
 #ifndef POK_SIM
 #include "SDFileSystem.h"
 #endif
 
 bool stopexit=true;
+char songpath[24];
 
 struct Instrument{
     char name[10];
@@ -92,20 +94,49 @@ bool checkButtons(){
             //save instrument
         //else if(settingPointer == 17)
             //load instrument
-        else if(settingPointer == 18){  // Save song
+
+        else if(settingPointer == 18){  // Save as song
             #ifndef POK_SIM
             SDFileSystem sd(/*MOSI*/P0_9, /*MISO*/P0_8, /*SCK*/P0_6, /*CS*/P0_7, /*Mountpoint*/"sd"); //!!HV
             #endif
-            char* filePathAndName = "/sd/song.rbs";
-
-            FILE* fp=fopen(filePathAndName, "w+");
+            uint8_t t=0;
+            while (1 && t<8) {if (trCookie.songname[t++]=='.') break;}
+            t--; //remove dot
+            while (t<14) trCookie.songname[t++]=0;
+            t=0;
+            while(t<2) {
+                //loop until valid filename
+                pok.keyboard(trCookie.songname, 8);
+                char c=1;
+                while (c != 0) c=trCookie.songname[t++];
+            }
+            // valid name entered, store in EEPROM cookie
+            // add .rbs extension
+            t--;
+            trCookie.songname[t++]='.';trCookie.songname[t++]='r';
+            trCookie.songname[t++]='b';trCookie.songname[t++]='s';trCookie.songname[t++] = 0;
+            trCookie.firstsave=12345678; //indicate that this cookie is now active
+            trCookie.saveCookie();
+            // copy to songpath
+            for (int i=0;i<t;i++) songpath[i]=trCookie.songname[i];
+            //char* filePathAndName = "/sd/";
+            // copy name to make way for path
+            for (int i=0; i<8+6; i++) songpath[4+8+5-i] = songpath [8+5-i];
+            // put sd path in front
+            songpath[0] = 47; songpath[1] = 's'; songpath[2] = 'd'; songpath[3] = 47;
+            //FILE* fp=fopen(filePathAndName, "w+");
+            FILE* fp=fopen(songpath, "w+");
             if(fp) {
+                //pok.display.clear();
+                //pok.display.println("Saving song, please wait...");
+                //pok.display.update();
                 tracker.saveSong(fp);
                 saveInstrInSong(fp);
                 fclose(fp);
                 changed=true;
             }
         }
+
         else if(settingPointer == 19)//load song
         {
             char* selectedFile = pok.filemenu("RBS");
@@ -187,7 +218,7 @@ void printSettings(){
 }
 
 void drawPointer(){
-    pok.display.drawBitmap(130, (settingPointer * fontH) + settingPointer, pointBitmap);
+    pok.display.drawBitmap(110, (settingPointer * (fontH+1))+1, pointBitmap);
 }
 
 void saveInstrInSong(FILE* fp){

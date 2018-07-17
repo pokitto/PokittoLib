@@ -1,7 +1,23 @@
+#ifndef TRACKER_H
+#define TRACKER_H
+
 #include "Pokitto.h"
+#include "PokittoCookie.h"
 
 extern uint8_t screenW, screenH, frameRate, fontW, fontH, screen, buttonRepeatFrame;
 extern Pokitto::Core pok;
+
+class mycookie : public Pokitto::Cookie {
+public:
+    char songname[14];
+    uint32_t firstsave;
+    mycookie() {
+        for (int i=0;i<14;i++) songname[i]=0;
+        firstsave=0; //a "checking" number
+    }
+};
+
+extern mycookie trCookie;
 
 enum class Modes {
     travel = 0,
@@ -62,3 +78,5 @@ struct Tracker{
 };
 
 extern Tracker tracker;
+
+#endif

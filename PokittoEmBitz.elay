@@ -16,7 +16,7 @@
 			<Cursor1 position="949" topLine="19" />
 		</Cursor>
 	</File>
-	<File name="Examples\101Starships_GB\WString.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Examples\101Starships_GB\WString.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1298" topLine="28" />
 		</Cursor>
@@ -126,7 +126,7 @@
 			<Cursor1 position="135" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Examples\Cratebuino_GB\Cratebuino.cpp" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Examples\Cratebuino_GB\Cratebuino.cpp" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="62924" topLine="2061" />
 		</Cursor>
@@ -501,36 +501,36 @@
 			<Cursor1 position="1381" topLine="9" />
 		</Cursor>
 	</File>
-	<File name="Examples\Tracker\main.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Examples\Tracker\main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1874" topLine="39" />
+			<Cursor1 position="825" topLine="9" />
 		</Cursor>
 	</File>
-	<File name="Examples\Tracker\My_settings.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Examples\Tracker\My_settings.h" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="854" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Examples\Tracker\PatchSettings.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Examples\Tracker\PatchSettings.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5106" topLine="91" />
+			<Cursor1 position="6616" topLine="124" />
 		</Cursor>
 	</File>
 	<File name="Examples\Tracker\Tracker.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="12588" topLine="96" />
+			<Cursor1 position="30824" topLine="500" />
 		</Cursor>
 		<Folding>
-			<Collapse line="83" />
-			<Collapse line="137" />
-			<Collapse line="203" />
-			<Collapse line="414" />
-			<Collapse line="428" />
+			<Collapse line="85" />
+			<Collapse line="139" />
+			<Collapse line="205" />
+			<Collapse line="274" />
+			<Collapse line="416" />
 		</Folding>
 	</File>
-	<File name="Examples\Tracker\Tracker.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Examples\Tracker\Tracker.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1170" topLine="15" />
+			<Cursor1 position="259" topLine="5" />
 		</Cursor>
 	</File>
 	<File name="Examples\Zuzupong\zuzupong.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -618,14 +618,14 @@
 			<Cursor1 position="1879" topLine="42" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\system_LPC11U6x.c" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\system_LPC11U6x.c" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3606" topLine="83" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68\startup_LPC11U68.cpp" open="1" top="1" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68\startup_LPC11U68.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6398" topLine="115" />
+			<Cursor1 position="6398" topLine="133" />
 		</Cursor>
 	</File>
 	<File name="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_api.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -643,7 +643,7 @@
 			<Cursor1 position="1511" topLine="13" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\pwmout_api.c" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\pwmout_api.c" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2152" topLine="55" />
 		</Cursor>
@@ -738,13 +738,12 @@
 			<Cursor1 position="253" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_CORE\PokittoCookie.cpp" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_CORE\PokittoCookie.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5503" topLine="100" />
+			<Cursor1 position="5172" topLine="84" />
 		</Cursor>
 		<Folding>
 			<Collapse line="53" />
-			<Collapse line="103" />
 			<Collapse line="234" />
 			<Collapse line="244" />
 			<Collapse line="252" />
@@ -753,14 +752,14 @@
 			<Collapse line="299" />
 		</Folding>
 	</File>
-	<File name="Pokitto\POKITTO_CORE\PokittoCookie.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_CORE\PokittoCookie.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4443" topLine="106" />
+			<Cursor1 position="3849" topLine="106" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_CORE\PokittoCore.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_CORE\PokittoCore.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2199" topLine="17" />
+			<Cursor1 position="31559" topLine="902" />
 		</Cursor>
 	</File>
 	<File name="Pokitto\POKITTO_CORE\PokittoCore.h" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -780,7 +779,7 @@
 	</File>
 	<File name="Pokitto\POKITTO_CORE\PokittoDisplay.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="24822" topLine="582" />
+			<Cursor1 position="20195" topLine="509" />
 		</Cursor>
 	</File>
 	<File name="Pokitto\POKITTO_CORE\PokittoDisplay.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -811,7 +810,7 @@
 			<Cursor1 position="2138" topLine="37" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_CORE\PokittoSound.cpp" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_CORE\PokittoSound.cpp" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="9950" topLine="270" />
 		</Cursor>
@@ -836,9 +835,9 @@
 			<Cursor1 position="2164" topLine="42" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_HW\HWLCD.cpp" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_HW\HWLCD.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="15232" topLine="483" />
+			<Cursor1 position="17483" topLine="545" />
 		</Cursor>
 		<Folding>
 			<Collapse line="773" />
@@ -856,17 +855,17 @@
 			<Cursor1 position="2027" topLine="192" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_HW\HWSound.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_HW\HWSound.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7310" topLine="240" />
+			<Cursor1 position="15109" topLine="450" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_HW\HWSound.h" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_HW\HWSound.h" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="4892" topLine="114" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_HW\iap.cpp" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_HW\iap.cpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="10458" topLine="298" />
 		</Cursor>
@@ -911,24 +910,24 @@
 			<Cursor1 position="4480" topLine="118" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_LIBS\Synth\Synth.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_LIBS\Synth\Synth.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2143" topLine="38" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_LIBS\Synth\Synth.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_LIBS\Synth\Synth.h" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2881" topLine="109" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_LIBS\Synth\Synth_helpers.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_LIBS\Synth\Synth_helpers.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1584" topLine="34" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_LIBS\Synth\Synth_mixfuncs.cpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_LIBS\Synth\Synth_mixfuncs.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3357" topLine="75" />
+			<Cursor1 position="2393" topLine="49" />
 		</Cursor>
 	</File>
 	<File name="Pokitto\POKITTO_LIBS\Synth\Synth_osc.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -936,12 +935,12 @@
 			<Cursor1 position="697" topLine="9" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\POKITTO_LIBS\Synth\Synth_songfuncs.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\POKITTO_LIBS\Synth\Synth_songfuncs.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="6973" topLine="150" />
 		</Cursor>
 	</File>
-	<File name="Pokitto\Pokitto_settings.h" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Pokitto\Pokitto_settings.h" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2646" topLine="51" />
 		</Cursor>

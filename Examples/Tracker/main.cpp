@@ -22,19 +22,25 @@ int main(){
     // this is called limiting the variable scope in C
     pok.display.persistence=true;
     #ifndef POK_SIM
-    buttonRepeatFrame=0;
+    buttonRepeatFrame=1;
     #endif // POK_SIM
+
+	trCookie.begin("PTracker",trCookie);
 	pok.begin();
 	pokInitSD();
-	tracker.loadSong("song.rbs");
+	tracker.fillArrays();
+
+	if (trCookie.firstsave == 12345678) {
+            tracker.loadSong(trCookie.songname);
+    }
 	pok.display.width = screenW;
 	pok.display.height = screenH;
 	pok.display.setFont(font5x7);
 	pok.setFrameRate(frameRate);
-	//tracker.fillArrays(); // there are 30 blocks and all block have 64 pitch and patch storage. Fill them -1
 
 	while(pok.isRunning()){
         if (screen){ //Settings mode
+            buttonRepeatFrame=3;
             if(pok.update(true)){
                 updatenow=true;
                 checkButtons();
@@ -46,6 +52,7 @@ int main(){
            }
         }
         if(!screen) { //Tracker mode
+            buttonRepeatFrame=1;
             if (tracker.play){
                 if (tracker.playTracker()) {
                     updatenow = true;
