@@ -707,7 +707,7 @@ void Display::drawPixelRaw(int16_t x,int16_t y, uint8_t col) {
 	bitptr += POK_BITFRAME; // move one screen worth of buffer forward to get to the next color bit
     } // POK_COLOURDEPTH
     #elif POK_COLORDEPTH == 4
-    uint32_t i = y*(width>>1) + (x>>1);
+    uint16_t i = y*(width>>1) + (x>>1);
     uint8_t pixel = m_scrbuf[i];    
     if (x&1) pixel = (pixel&0xF0)|(col);
     else pixel = (pixel&0x0F) | (col<<4);
