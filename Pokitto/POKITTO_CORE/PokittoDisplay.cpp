@@ -481,39 +481,71 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     // GLCD fonts are arranged LSB = topmost pixel of char, so its easy to just shift through the column
     uint16_t bitcolumn; //16 bits for 2x8 bit high characters
 
-	for (i = 0; i < numBytes; i++) {
-            bitcolumn = *bitmap++;
-            if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
-            for (j = 0; j <= h; j++) { // was j<=h
-                #if PROJ_ARDUBOY > 0
-                if (bitcolumn&0x1) {
-                    drawPixel(x + i, y + 7 - j,color);
-                } else drawPixel(x + i, y + 7 - j,bgcolor);
-                bitcolumn>>=1;
-                #else
-                if (fontSize==2) {
-                  if (bitcolumn&0x1) {
-                            drawPixel(x + (i<<1)  , y + (j<<1),color);
-                            drawPixel(x + (i<<1)+1, y + (j<<1),color);
-                            drawPixel(x + (i<<1)  , y + (j<<1)+1,color);
-                            drawPixel(x + (i<<1)+1, y + (j<<1)+1,color);
-                        } else {
-                            drawPixel(x + (i<<1)  , y + (j<<1),bgcolor);
-                            drawPixel(x + (i<<1)+1, y + (j<<1),bgcolor);
-                            drawPixel(x + (i<<1)  , y + (j<<1)+1,bgcolor);
-                            drawPixel(x + (i<<1)+1, y + (j<<1)+1,bgcolor);
-                        }
-                } else {
-                    if (bitcolumn&0x1) drawPixel(x + i, y + j,color);
-                    else drawPixel(x + i, y + j,bgcolor);
-                }
-                bitcolumn>>=1;
-                #endif // PROJ_ARDUBOY
-
-            }
+    void (*drawPixelFG)(int16_t,int16_t, uint8_t) = &Display::drawPixelNOP;
+    void (*drawPixelBG)(int16_t,int16_t, uint8_t) = &Display::drawPixelNOP;
+    if( x>=0 && y >= 0 && x+w<width && y+h<height ){
+	if( color != invisiblecolor )
+	    drawPixelFG = &Display::drawPixelRaw;
+	if( bgcolor != invisiblecolor )
+	    drawPixelBG = &Display::drawPixelRaw;
+    }else{
+	if( color != invisiblecolor )
+	    drawPixelFG = &Display::drawPixel;
+	if( bgcolor != invisiblecolor )
+	    drawPixelBG = &Display::drawPixel;	
     }
-    if (fontSize==2) return (numBytes+adjustCharStep)<<1;
+
+    void (*drawPixel[])(int16_t,int16_t, uint8_t) = {drawPixelBG, drawPixelFG};
+    uint8_t colors[] = {bgcolor, color};
+
+#if PROJ_ARDUBOY > 0
+#else
+    if( fontSize != 2 ){
+#endif
+    
+    for (i = 0; i < numBytes; i++) {
+	bitcolumn = *bitmap++;
+	if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
+	for (j = 0; j <= h; j++) { // was j<=h
+	    uint8_t c = colors[ bitcolumn & 1 ];
+		
+#if PROJ_ARDUBOY > 0
+	    drawPixel[ bitcolumn&1 ](x, y + 7 - j,c);
+#else
+	    drawPixel[ bitcolumn&1 ](x, y + j,c);
+#endif // PROJ_ARDUBOY
+	    bitcolumn>>=1;
+
+	}
+	x++;
+    }
+
     return numBytes+adjustCharStep; // for character stepping
+    
+#if PROJ_ARDUBOY > 0
+#else
+    }else{
+    
+	for (i = 0; i < numBytes; i++) {
+	    bitcolumn = *bitmap++;
+	    if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
+	    for (j = 0; j <= h; j++) { // was j<=h
+		uint8_t c = colors[ bitcolumn & 1 ];
+		
+		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1), c);
+		drawPixel[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1), c);
+		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1)+1, c);
+		drawPixel[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1)+1, c);
+		bitcolumn>>=1;
+
+	    }
+	}
+    
+	return (numBytes+adjustCharStep)<<1;
+
+    }
+#endif // PROJ_ARDUBOY
+    
 }
 
 void Display::clear() {
@@ -618,12 +650,10 @@ void Display::setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
     clipX = x; clipY = y; clipW = w; clipH = h;
 }
 
+void Display::drawPixelNOP(int16_t x,int16_t y, uint8_t col) {
+}
 
-void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
-    if (col==invisiblecolor) return; // do not draw transparent pixels
-    if ((uint16_t)x >= width || (uint16_t)y >= height) return;
-    col &= (PALETTE_SIZE-1);
-
+void Display::drawPixelRaw(int16_t x,int16_t y, uint8_t col) {
     #if POK_COLORDEPTH == 8
         m_scrbuf[x+width*y] = col;
     #endif
@@ -677,8 +707,8 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
 	bitptr += POK_BITFRAME; // move one screen worth of buffer forward to get to the next color bit
     } // POK_COLOURDEPTH
     #elif POK_COLORDEPTH == 4
-    uint16_t i = y*(width>>1) + (x>>1);
-    uint8_t pixel = m_scrbuf[i];
+    uint32_t i = y*(width>>1) + (x>>1);
+    uint8_t pixel = m_scrbuf[i];    
     if (x&1) pixel = (pixel&0xF0)|(col);
     else pixel = (pixel&0x0F) | (col<<4);
     m_scrbuf[i] = pixel;
@@ -686,75 +716,16 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
     #endif // POK_GAMEBUINO_SUPPORT
 }
 
+void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
+    if (col==invisiblecolor) return; // do not draw transparent pixels
+    if ((uint16_t)x >= width || (uint16_t)y >= height) return;
+    col &= (PALETTE_SIZE-1);
+    drawPixelRaw( x, y, col );
+}
+
 void Display::drawPixel(int16_t x,int16_t y) {
     if ((uint16_t)x >= width || (uint16_t)y >= height) return;
-
-    #if POK_COLORDEPTH == 8
-        m_scrbuf[x+width*y] = color;
-    #endif
-
-    #if POK_GAMEBUINO_SUPPORT > 0
-
-	uint8_t c = color;
-	uint8_t ct = color;
-	if(ct == INVERT){
-	 ct = !getPixel(x, y); //jonne - was c = !getP...
-	}
-
-    uint16_t bitptr=0;
-    for (uint8_t cbit=0;cbit<POK_COLORDEPTH;cbit++) {
-	c = ct & 1; // take the lowest bit of the color index number
-	if(c == 0){ //white - or actually "Clear bit"
-    #if DISPLAY_ROT == NOROT
-		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] &= ~_BV(y % 8);
-    #elif DISPLAY_ROT == ROTCCW
-		m_scrbuf[LCDHEIGHT - y - 1 + (x / 8) * LCDWIDTH_NOROT + bitptr] &= ~_BV(x % 8);
-    #elif DISPLAY_ROT == ROT180
-		m_scrbuf[LCDWIDTH - x - 1 + ((LCDHEIGHT - y - 1) / 8) * LCDWIDTH_NOROT + bitptr] &= ~_BV((LCDHEIGHT - y - 1) % 8);
-    #elif DISPLAY_ROT == ROTCW
-		m_scrbuf[y + ((LCDWIDTH - x - 1) / 8) * LCDWIDTH_NOROT + bitbtr] &= ~_BV((LCDWIDTH - x - 1) % 8);
-    #endif
-		//return; //jonne
-	} else { //black - or actually "Set bit"
-    #if DISPLAY_ROT == NOROT
-		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] |= _BV(y % 8);
-    #elif DISPLAY_ROT == ROTCCW
-		m_scrbuf[LCDHEIGHT - y - 1 + (x / 8) * LCDWIDTH_NOROT + bitptr] |= _BV(x % 8);
-    #elif DISPLAY_ROT == ROT180
-		m_scrbuf[LCDWIDTH - x - 1 + ((LCDHEIGHT - y - 1) / 8) * LCDWIDTH_NOROT + bitptr] |= _BV((LCDHEIGHT - y - 1) % 8);
-    #elif DISPLAY_ROT == ROTCW
-		m_scrbuf[y + ((LCDWIDTH - x - 1) / 8) * LCDWIDTH_NOROT + bitptr] |= _BV((LCDWIDTH - x -1) % 8);
-    #endif
-		//return; //jonne
-	}
-	ct >>=1; // shift to get next bit
-	bitptr += POK_BITFRAME; // move one screen worth of buffer forward to get to the next color bit
-    } // POK_COLOURDEPTH
-
-    #else
-
-    /** NOT Gamebuino */
-    #if POK_COLORDEPTH == 1
-        if (color) {m_scrbuf[(y >> 3) * width + x] |= (0x80 >> (y & 7)); return;}
-        m_scrbuf[(y >> 3) * width + x] &= ~(0x80 >> (y & 7));
-    #elif POK_COLORDEPTH == 2
-        uint16_t i = y*(width>>2) + (x>>2);
-        uint8_t pixel = m_scrbuf[i];
-        uint8_t column = x&0x03;
-        if (column==3) pixel = (pixel&0xFC)|(color); // bits 0-1
-        else if (column==2) pixel = (pixel&0xF3)|(color<<2); // bits 2-3
-        else if (column==1) pixel = (pixel&0xCF)|(color<<4); // bits 4-5
-        else pixel = (pixel&0x3F)|(color<<6); // bits 6-7
-        m_scrbuf[i] = pixel;
-    #elif POK_COLORDEPTH == 3
-    #elif POK_COLORDEPTH == 4
-            uint16_t i = y*(width>>1) + (x>>1);
-            uint8_t pixel = m_scrbuf[i];
-            if (x&1) pixel = (pixel&0xF0)|(color);
-            else pixel = (pixel&0x0F) | (color<<4);
-            m_scrbuf[i] = pixel;
-    #endif // POK_COLORDEPTH
-    #endif // POK_GAMEBUINO_SUPPORT
+    drawPixelRaw( x, y, color );
 }
 
 uint8_t Display::getPixel(int16_t x,int16_t y) {
