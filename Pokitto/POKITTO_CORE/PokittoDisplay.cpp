@@ -167,7 +167,7 @@ uint8_t Display::bpp = POK_COLORDEPTH;
 #elif (POK_SCREENMODE == MODE15)
     uint8_t Display::width = 220;
     uint8_t Display::height = 176;
-    uint8_t Display::screenbuffer[0x4BA0];
+    uint8_t __attribute__ ((aligned)) Display::screenbuffer[0x4BA0];
 #else
     uint8_t Display::width = 84;
     uint8_t Display::height = 48;
@@ -352,10 +352,7 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
         directcolor = COLOR_WHITE;
         invisiblecolor = COLOR_BLACK;
         directbgcolor = 0x0001; // Cannot be black as that is transparent color
-        if (POK_SCREENMODE == MODE_FAST_16COLOR )
-            directtextrotated = false;
-        else
-            directtextrotated = true;
+	directtextrotated = false;
         adjustCharStep = 0;
         setFont(fontC64);
         enableDirectPrinting(true);

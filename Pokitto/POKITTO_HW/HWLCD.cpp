@@ -2121,6 +2121,94 @@ void Pokitto::lcdRefreshMode15(uint16_t* pal, uint8_t* scrbuf){
 #else
 
 void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
+//    #define __ARMCC_VERSION
+#ifndef __ARMCC_VERSION
+    
+#define MODE15_LOOP				\
+    "ands %[tmp], %[color]" "\n"		\
+	"lsrs %[tmp], 2" "\n"			\
+	"ldr %[tmp], [%[palette], %[tmp]]" "\n" \
+	"str %[tmp], [%[LCD]]" "\n"		\
+	"str %[WRBit], [%[LCD], %[CLR]]" "\n"	\
+	"movs %[tmp], 0x0F" "\n"		\
+	"ands %[tmp], %[color]" "\n"		\
+	"str %[WRBit], [%[LCD], 124]" "\n"	\
+	"lsls %[tmp], 2" "\n"			\
+	"ldr %[tmp], [%[palette], %[tmp]]" "\n" \
+	"str %[tmp], [%[LCD]]" "\n"		\
+	"str %[WRBit], [%[LCD], %[CLR]]" "\n"	\
+	"movs %[tmp], 0xF0" "\n"		\
+	"lsrs %[color], 8" "\n"			\
+	"str %[WRBit], [%[LCD], 124]" "\n"
+
+#define MODE15_ENDLOOP					\
+    "ands %[tmp], %[color]" "\n"			\
+	"lsrs %[tmp], 2" "\n"				\
+	"ldr %[tmp], [%[palette], %[tmp]]" "\n"		\
+	"str %[tmp], [%[LCD]]" "\n"			\
+	"str %[WRBit], [%[LCD], %[CLR]]" "\n"		\
+	"movs %[tmp], 0x0F" "\n"			\
+	"ands %[tmp], %[color]" "\n"			\
+	"str %[WRBit], [%[LCD], 124]" "\n"		\
+	"lsls %[tmp], 2" "\n"				\
+	"ldr %[tmp], [%[palette], %[tmp]]" "\n"		\
+	"str %[tmp], [%[LCD]]" "\n"			\
+	"str %[WRBit], [%[LCD], %[CLR]]" "\n"		\
+	"ldm %[scrbuf]!, {%[color]}" "\n"		\
+	"movs %[tmp], 0xF0" "\n"			\
+	"str %[WRBit], [%[LCD], 124]" "\n"
+    
+  uint8_t *end=&scrbuf[POK_SCREENBUFFERSIZE]+4;
+  volatile uint32_t palette[16];
+  for( uint32_t i=0; i<16; ++i )
+      palette[i] = uint32_t(paletteptr[i]) << 3;
+
+  write_command(0x03); write_data(0x1038);
+  write_command(0x21);  // Vertical DRAM Address
+  write_data(0);
+  write_command(0x20);  // Horizontal DRAM Address
+#ifdef PROJ_SHOW_FPS_COUNTER
+  write_data(8);
+  scrbuf += 110*8;
+#else
+  write_data(0);
+#endif
+  write_command(0x22); // write data to DRAM
+  CLR_CS_SET_CD_RD_WR;
+
+
+  SET_MASK_P2;
+
+  uint32_t WRBit = 1<<12, color, tmp;
+  asm volatile(
+      ".syntax unified" "\n"
+      "ldm %[scrbuf]!, {%[color]}" "\n"      
+      "movs %[tmp], 0xF0" "\n"
+      "mode15Loop%=:" "\n"
+      MODE15_LOOP
+      MODE15_LOOP
+      MODE15_LOOP
+      MODE15_ENDLOOP      
+      "cmp %[end], %[scrbuf]" "\n"
+      "bne mode15Loop%=" "\n"
+      :
+      [tmp]"+l" (tmp),
+      [color]"+l" (color),
+      [end]"+h" (end),
+      [scrbuf]"+l" (scrbuf),
+      [WRBit]"+l" (WRBit)
+      
+      :
+      [CLR]"l" (252),
+      [LCD]"l" (0xA0002188),
+      [palette]"l" (palette)
+      
+      :
+      "cc"
+      );
+    
+#else
+    
 uint16_t x,y,xptr;
 uint16_t scanline[2][176]; // read two nibbles = pixels at a time
 uint8_t *d, yoffset=0;
@@ -2178,6 +2266,9 @@ for(x=0;x<220;x+=2)
         setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
     }
   }
+
+#endif
+
 }
 #endif //ADEKTOSMODE15
 
