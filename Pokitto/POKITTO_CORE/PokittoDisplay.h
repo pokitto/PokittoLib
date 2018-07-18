@@ -253,6 +253,11 @@ public:
     static void drawPixel(int16_t,int16_t);
     /** Draw pixel with specific color index at various bit depths */
     static void drawPixel(int16_t x,int16_t y, uint8_t col);
+    /** Draw pixel with specific color index at various bit depths with no bounds/transparency checks*/
+    static void drawPixelRaw(int16_t x,int16_t y, uint8_t col);
+    /** Placeholder that does nothing */
+    static void drawPixelNOP(int16_t x,int16_t y, uint8_t col);
+    
     /** Get pixel at various bit depths */
     static uint8_t getPixel(int16_t,int16_t);
     /** Draw line **/
