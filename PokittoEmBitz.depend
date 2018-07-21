@@ -4111,7 +4111,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1531416839 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
+1532207728 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -4156,7 +4156,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1531613584 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1532207251 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4364,9 +4364,8 @@
 	"CRC7.h"
 	"CRC16.h"
 
-1528665603 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+1531409158 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
 	"Pokitto.h"
-	"PokittoCookie.h"
 
 1521233474 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
 
@@ -4653,7 +4652,7 @@
 1517864216 c:\pokittolib_git\pokittolib_curr\examples\doon\collectable_sprites.h
 	<stdint.h>
 
-1531807397 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
+1532049295 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\main.cpp
 	"Pokitto.h"
 	"Arrays.h"
 	"Tracker.h"
@@ -4668,7 +4667,7 @@
 	"Pokitto.h"
 	"PokittoCookie.h"
 
-1531810023 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
+1532206758 c:\pokittolib_git\pokittolib_curr\examples\tracker\patchsettings.h
 	"Tracker.h"
 	"SDFileSystem.h"
 
@@ -4677,7 +4676,7 @@
 1518981830 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\arrays.cpp
 	"Arrays.h"
 
-1531811701 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.cpp
+1532205255 source:c:\pokittolib_git\pokittolib_curr\examples\tracker\tracker.cpp
 	"Tracker.h"
 	"Arrays.h"
 

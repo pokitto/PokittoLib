@@ -14,7 +14,19 @@ uint8_t screenW = 220, screenH = 176, frameRate = 30, fontW = 5, fontH = 7, scre
 Tracker tracker;
 //Patch settings mode (screen 1)
 #include "PatchSettings.h"
+
+#define CONTINUEMENULENGTH 2
+const char strYes[]  = "Load previous song";
+const char strNo[]  = "New song";
+
+const char* const continueMenu[CONTINUEMENULENGTH] = {
+  strYes,
+  strNo
+};
+
+
 //main
+
 int main(){
     bool updatenow=true; // we will replace screen updating to need-to-change instances only
     // the reason to declare it here, inside main, is to not misuse it as a global variable
@@ -29,9 +41,26 @@ int main(){
 	pok.begin();
 	pokInitSD();
 	tracker.fillArrays();
-
+    tracker.emptyPatches();
 	if (trCookie.firstsave == 12345678) {
-            tracker.loadSong(trCookie.songname);
+	        bool contimenu=true; bool loadso=false;
+            while(contimenu && pok.isRunning()){
+                if(pok.update()){
+                    switch(pok.menu(continueMenu, CONTINUEMENULENGTH)){
+                        case 0: //Yes
+                            pok.wait(100);
+                            loadso=true;
+                            contimenu=false;
+                            break;
+                        case 1: //No
+                            pok.wait(100);
+                            loadso=false;
+                            contimenu=false;
+                            break;
+                    }
+                }
+            }
+            if (loadso) tracker.loadSong(trCookie.songname);
     }
 	pok.display.width = screenW;
 	pok.display.height = screenH;

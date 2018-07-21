@@ -61,7 +61,7 @@ bool checkButtons(){
         {changeValues(100);changed=true;}
     else if(pok.buttons.repeat(BTN_LEFT, buttonRepeatFrame))
     {
-        if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer-1, 0, 14);
+        if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer-1, 0, 15);
         else if (settingPointer == 2) patch[instrPointer].wave = tracker.minMax(patch[instrPointer].wave-1, 0, 5);
 		else if (settingPointer == 3) patch[instrPointer].arpmode = tracker.minMax(patch[instrPointer].arpmode-1, 0, 15);
         else if (settingPointer == 4) patch[instrPointer].loop = tracker.minMax(patch[instrPointer].loop-1, 0, 1);
@@ -74,7 +74,7 @@ bool checkButtons(){
     }
     else if(pok.buttons.repeat(BTN_RIGHT, buttonRepeatFrame))
     {
-        if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer+1, 0, 14);
+        if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer+1, 0, 15);
         else if (settingPointer == 2) patch[instrPointer].wave = tracker.minMax(patch[instrPointer].wave+1, 0, 5);
 		else if (settingPointer == 3) patch[instrPointer].arpmode = tracker.minMax(patch[instrPointer].arpmode+1, 0, 15);
         else if (settingPointer == 4) patch[instrPointer].loop = tracker.minMax(patch[instrPointer].loop+1, 0, 1);

@@ -481,16 +481,20 @@ void Core::setVolLimit() {
     vol=170;
     sound.setMaxVol(VOLUME_SPEAKER_MAX);
     #endif
-    for (uint8_t t=0;t<=vol;t++) {
-            sound.setVolume(t);
-    }
+    //for (uint8_t t=0;t<=vol;t++) {
+    //        sound.setVolume(t);
+    //}
+	sound.setVolume(vol/4);
+	sound.setVolume(vol/2);
+	sound.setVolume(vol); //prevent "crack" by gradually increasing volume
+	discrete_vol = ((int)vol>>5); // fix "shows zero" in volume slider bug
     volbar_visible=0;
     int countd=0;
     //#ifndef POK_SIM
     //read countdown time from settings
     countd = eeprom_read_byte((uint16_t*)EESETTINGS_VOLWAIT);
     //#endif
-    if (countd==0 || countd > 10) countd=0xFFFF;
+    if (countd<=0 || countd > 10) countd=0xFFFF;
     #ifdef PRODUCTIONTESTING
     countd=2;
     #endif

@@ -1,4 +1,4 @@
-cscope 15 C:\PokittoLib_Git\PokittoLib_curr"               0002001839
+cscope 15 C:\PokittoLib_Git\PokittoLib_curr"               0002001844
 	@C:\PokittoLib_Git\PokittoLib_curr\Examples\101Starships_GB\101Starships.cpp
 
 7 
@@ -124641,7 +124641,7 @@ i
 i
 ].
 wave
- = 0;
+ = 1;
 
 42 
 ·tch
@@ -124649,7 +124649,7 @@ wave
 i
 ].
 vÞ
- = 0;
+ = 127;
 
 43 
 ·tch
@@ -124697,7 +124697,7 @@ i
 i
 ].
 ad¤
- = 0;
+ = 1;
 
 49 
 ·tch
@@ -124713,7 +124713,7 @@ i
 i
 ].
 deÿy
- = 0;
+ = 50;
 
 51 
 ·tch
@@ -129248,7 +129248,7 @@ loÝTo
 (
 å
 , "%d", 
-numP©ches
+NUM_PATCHES
 );
 
 762 

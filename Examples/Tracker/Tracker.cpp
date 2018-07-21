@@ -38,16 +38,16 @@ void Tracker::emptyPatches() {
     for (int i=0;i<16;i++) {
     char pname[10];
     for (int j=0;j<10;j++) patchnames[i][j]=0;
-    patch[i].wave = 0;
-    patch[i].vol =  0;
+    patch[i].wave = 1;
+    patch[i].vol =  127;
     patch[i].bendrate =  0;
     patch[i].pitchbend =  0;
     patch[i].maxbend =  0;
     patch[i].vibrate =  0;
     patch[i].arpmode =  0;
-    patch[i].adsr =  0;
+    patch[i].adsr =  1;
     patch[i].attack =  0;
-    patch[i].decay =  0;
+    patch[i].decay =  50;
     patch[i].sustain =  0;
     patch[i].release =  0;
     patch[i].loop =  0;
@@ -328,10 +328,17 @@ bool Tracker::checkButtons(){
 void Tracker::fillArrays(){
     for(uint8_t i = 0; i < 30; i++){
         for(uint8_t j = 0; j < 64; j++){
-            _patch[i][j] = -1;
-            _pitch[i][j] = -1;
+            _patch[i][j] = 0; //0 means inactive
+            _pitch[i][j] = -1; //255 means invalid note
         }
     }
+    lastPattern=1;
+    loopTo=0;
+    numPatches=15;
+    bpm=60;
+    track1on=true;
+    track2on=true;
+    track3on=true;
 }
 
 void Tracker::drawLines(){ // draw lines in tracker mode
