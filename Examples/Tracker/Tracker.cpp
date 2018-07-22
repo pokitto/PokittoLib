@@ -138,7 +138,7 @@ bool Tracker::checkButtons(){
     	}
     }
     else if (mode == Modes::edit){ // edit pitches and patches
-        if (pok.buttons.pressed(BTN_B)){
+        if (pok.buttons.pressed(BTN_A)){
             mode = Modes::travel;
             edit = 0;
             changed=true;
@@ -398,7 +398,7 @@ void Tracker::drawHelpBar(){
             pok.display.print(2, screenH-6,         "C: Travel mode");
     }
     if (mode == Modes::edit){
-        pok.display.print(2, screenH-6,             "               B: Travel mode");
+        pok.display.print(2, screenH-6,             "A: Travel mode");
     }
     if (mode == Modes::settings){
         pok.display.print(2, screenH-6,             "C: More settings");
@@ -562,7 +562,7 @@ bool Tracker::playTracker(){
         uint8_t b = 42;//((maxRow - 1) - (screenMaxInit / 2)) - 1;
         rowPointer=playerpos;
 
-        if (sequencepos != oseqpos) { //rowPointer >= maxRow){
+        if (sequencepos != oseqpos || rowPointer > 63) { //rowPointer >= maxRow){
             songPos=sequencepos;
             oseqpos = sequencepos;
             rowPointer = 0;
