@@ -16,17 +16,17 @@ struct Instrument{
     int8_t distort;
     int8_t normalize;
     int8_t ADSR;
-    uint8_t attack; //0-255
-    uint8_t decay; //0-255
-    uint8_t sustain; //0-255
-    uint8_t release; //0-255
-    int16_t volume; //0-300
-    int16_t pitchRate; //-1000, 1000
-    int16_t pitchMax; //-6000, 6000
+    uint16_t attack; //0-255
+    uint16_t decay; //0-255
+    uint16_t sustain; //0-255
+    uint16_t release; //0-255
+    uint16_t volume; //0-300
+    int32_t pitchRate; //-1000, 1000
+    int32_t pitchMax; //-6000, 6000
     Instrument() : wave(0), arpMode(0), loop(0), echo(0), distort(0), normalize(0), ADSR(0),
     attack(0), decay(0), sustain(0), release(0), volume(0), pitchRate(0), pitchMax(0) {}
 };
-struct Instrument instr[15];
+struct Instrument instr[16]; //one extra for safetys sake
 int8_t instrPointer = 0;
 int8_t settingPointer = 0;
 
@@ -44,6 +44,7 @@ void changeValues(int8_t i){
 
 bool checkButtons(){
     bool changed=false;
+    if (instrPointer==0) instrPointer = 1; //prevent editing patch 0
     if (pok.buttons.released(BTN_C)) {
             stopexit=false; // quick hack to stop jumping back immediately
     }
@@ -61,7 +62,7 @@ bool checkButtons(){
         {changeValues(100);changed=true;}
     else if(pok.buttons.repeat(BTN_LEFT, buttonRepeatFrame))
     {
-        if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer-1, 0, 15);
+        if (settingPointer == 0) instrPointer = tracker.minMax(instrPointer-1, 1, 15);
         else if (settingPointer == 2) patch[instrPointer].wave = tracker.minMax(patch[instrPointer].wave-1, 0, 5);
 		else if (settingPointer == 3) patch[instrPointer].arpmode = tracker.minMax(patch[instrPointer].arpmode-1, 0, 15);
         else if (settingPointer == 4) patch[instrPointer].loop = tracker.minMax(patch[instrPointer].loop-1, 0, 1);
@@ -224,40 +225,45 @@ void drawPointer(){
 void saveInstrInSong(FILE* fp){
     //for (uint8_t j = 0; j < tracker.getLP() + 1; j++){
     for (uint8_t j = 1; j <= NUM_PATCHES; j++){
-        if (tracker.patchnames[j][0] != 0) {
+        if (tracker.patchnames[j][0] == 0) {
+        //lets put in a name for the patch
+        const char _ps[]="patch";
+        strcpy(&tracker.patchnames[j][0],_ps);
+        if (j>9) {tracker.patchnames[j][5]='1'; tracker.patchnames[j][6]=(j-10)+'0';}
+        else {tracker.patchnames[j][5]='0'; tracker.patchnames[j][6]='0'+j;}
+        tracker.patchnames[j][7]=0;
+        }
             fprintf(fp, tracker.patchnames[j]);
             fprintf(fp, "\n");
             fprintf(fp, waveChar);
-            fprintf(fp, "%d\n", patch[j].wave);
+            fprintf(fp, "%d\n", (int)patch[j].wave);
             fprintf(fp, volChar);
-            fprintf(fp, "%d\n", patch[j].vol);
+            fprintf(fp, "%d\n", (int)patch[j].vol);
             fprintf(fp, pitchRateChar);
-            fprintf(fp, "%d\n", patch[j].bendrate);
+            fprintf(fp, "%d\n", (int)patch[j].bendrate);
             fprintf(fp, pitchMaxChar);
-            fprintf(fp, "%d\n", patch[j].maxbend);
+            fprintf(fp, "%d\n", (int)patch[j].maxbend);
             fprintf(fp, vibChar);
             fprintf(fp, "0\n");
             fprintf(fp, arpChar);
-            fprintf(fp, "%d\n", patch[j].arpmode);
+            fprintf(fp, "%d\n", (int)patch[j].arpmode);
             fprintf(fp, ADSRChar);
-            fprintf(fp, "%d\n", patch[j].adsr);
+            fprintf(fp, "%d\n", (int)patch[j].adsr);
             fprintf(fp, attackChar);
-            fprintf(fp, "%d\n", patch[j].attack);
+            fprintf(fp, "%d\n", (int)patch[j].attack);
             fprintf(fp, decayChar);
-            fprintf(fp, "%d\n", patch[j].decay);
+            fprintf(fp, "%d\n", (int)patch[j].decay);
             fprintf(fp, sustainChar);
-            fprintf(fp, "%d\n", patch[j].sustain);
+            fprintf(fp, "%d\n", (int)patch[j].sustain);
             fprintf(fp, releaseChar);
-            fprintf(fp, "%d\n", patch[j].release);
+            fprintf(fp, "%d\n", (int)patch[j].release);
             fprintf(fp, loopChar);
-            fprintf(fp, "%d\n", patch[j].loop);
+            fprintf(fp, "%d\n", (int)patch[j].loop);
             fprintf(fp, echoChar);
-            fprintf(fp, "%d\n", patch[j].echo);
+            fprintf(fp, "%d\n", (int)patch[j].echo);
             fprintf(fp, overdriveChar);
-            fprintf(fp, "%d\n", patch[j].overdrive);
+            fprintf(fp, "%d\n", (int)patch[j].overdrive);
             fprintf(fp, drumChar);
-            fprintf(fp, "%d\n", patch[j].kick);
-
-        }
+            fprintf(fp, "%d\n", (int)patch[j].kick);
     }
 }

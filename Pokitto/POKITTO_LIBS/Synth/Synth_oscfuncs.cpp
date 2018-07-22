@@ -71,7 +71,7 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
   if (adsr) {
     o->attack = attack;
     o->decay = decay;
-    o->sustain = sustain;
+    o->sustain = sustain<<8; //sustain needs to be multiplied by 256 also
     o->release = release;
     o->adsrphase = 1;
     if (!o->attack) o->adsrvol = o->vol; // start directly, no attack ramp
