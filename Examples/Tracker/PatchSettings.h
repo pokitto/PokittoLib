@@ -38,7 +38,7 @@ void changeValues(int8_t i){
     else if (settingPointer == 11) patch[instrPointer].sustain += i;
     else if (settingPointer == 12) patch[instrPointer].release += i;
     else if (settingPointer == 13) patch[instrPointer].bendrate = tracker.minMax(patch[instrPointer].bendrate+i, -100, 100);
-    else if (settingPointer == 14) patch[instrPointer].maxbend = tracker.minMax(patch[instrPointer].maxbend+i, -90, 190);
+    else if (settingPointer == 14) patch[instrPointer].maxbend = tracker.minMax(patch[instrPointer].maxbend+i, -99, 190);
     else if (settingPointer == 15) patch[instrPointer].vol = tracker.minMax(patch[instrPointer].vol+i, 0, 300);
 }
 

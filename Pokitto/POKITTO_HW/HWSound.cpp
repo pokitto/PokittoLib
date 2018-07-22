@@ -416,9 +416,9 @@ inline void pokSoundIRQ() {
                 updatePlayback();
         }
         /** oscillators update **/
-        osc1.count += osc1.cinc + (osc1.pitchbend >> 4); // counts to 65535 and overflows to zero WAS 8 !
-        osc2.count += osc2.cinc + (osc2.pitchbend >> 4); // counts to 65535 and overflows to zero
-        osc3.count += osc3.cinc + (osc3.pitchbend >> 4); // counts to 65535 and overflows to zero
+        osc1.count += osc1.cinc + (osc1.pitchbend); // counts to 65535 and overflows to zero WAS 8 !
+        osc2.count += osc2.cinc + (osc2.pitchbend); // counts to 65535 and overflows to zero
+        osc3.count += osc3.cinc + (osc3.pitchbend); // counts to 65535 and overflows to zero
         Marr[tick](); // call mixing function
         --tick;
 
