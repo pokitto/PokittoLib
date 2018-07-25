@@ -170,7 +170,9 @@ AFTER_VECTORS void PendSV_Handler    (void) {}
 AFTER_VECTORS void SysTick_Handler   (void) {}
 AFTER_VECTORS void IntDefaultHandler (void) {}
 
+#ifndef POKITTO_PIO_BUILD
 int __aeabi_atexit(void *object, void (*destructor)(void *), void *dso_handle) {return 0;}
+#endif
 }
 
 #include <stdlib.h>
