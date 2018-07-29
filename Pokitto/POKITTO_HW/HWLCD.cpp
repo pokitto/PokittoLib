@@ -2000,7 +2000,6 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
    CLR_CS_SET_CD_RD_WR;
    SET_MASK_P2;
 
-
    uint32_t TGL = 1<<12, CLR = 252, c, t;
 #ifndef __ARMCC_VERSION
    asm volatile(
@@ -2071,7 +2070,7 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 #else
 
    c = uint32_t(paletteptr[(*scrbuf)&255])<<3;
-   while( scrbuf != end ){
+   while( scrbuf < end-4 ){
        *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
        *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
        *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
