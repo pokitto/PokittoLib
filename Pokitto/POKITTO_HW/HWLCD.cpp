@@ -2005,8 +2005,8 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
    asm volatile(
 	 ".syntax unified"         "\n"
 	 "ldm %[scrbuf]!, {%[c]}" "\n"
-	 "mode64loop%=:"    "\n"
 	 "lsls %[t], %[c], 24" 			"\n"
+	 "mode64loop%=:"    "\n"
 	 "lsrs %[c], %[c], 8" 			"\n"
 	 "lsrs %[t], %[t], 23" 			"\n"
 	 "ldrh %[t], [%[paletteptr], %[t]]" 	"\n"
@@ -2025,7 +2025,6 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	 "str %[t], [%[LCD], 0]" 		"\n"
 	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
 	 "lsls %[t], %[c], 24" 			"\n"
-	 "lsrs %[c], %[c], 8" 			"\n"
 	 "lsrs %[t], %[t], 23" 			"\n"
 	 "str %[TGL], [%[LCD], 124]" 		"\n"
 	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
@@ -2034,6 +2033,7 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	 "str %[TGL], [%[LCD], 124]" 		"\n"
 	 "str %[t], [%[LCD], 0]" 		"\n"
 	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "lsrs %[c], %[c], 8" 			"\n"
 	 "lsls %[t], %[c], 1" 			"\n"
 	 "str %[TGL], [%[LCD], 124]" 		"\n"
 	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
@@ -2046,6 +2046,7 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 	 "ldm %[scrbuf]!, {%[c]}" "\n"
 	 "str %[TGL], [%[LCD], 124]" 		"\n"
 	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "lsls %[t], %[c], 24" 			"\n"
 	 "cmp %[scrbuf], %[end]" "\n"
 	 "str %[TGL], [%[LCD], 124]" 		"\n"
 
