@@ -1983,6 +1983,106 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
 #endif
  }
 
+
+
+ void Pokitto::lcdRefreshMode64( uint8_t * scrbuf, uint16_t* paletteptr ){
+   uint8_t *end = &scrbuf[ POK_SCREENBUFFERSIZE+4 ];
+   write_command_16(0x03); write_data_16(0x1038);
+   write_command(0x20); write_data(0);
+#ifdef PROJ_SHOW_FPS_COUNTER
+  write_data(8);
+  scrbuf += 110*8;
+#else
+  write_data(0);
+#endif
+   write_command(0x21); write_data(0);
+   write_command(0x22);
+   CLR_CS_SET_CD_RD_WR;
+   SET_MASK_P2;
+
+   uint32_t TGL = 1<<12, CLR = 252, c, t;
+#ifndef __ARMCC_VERSION
+   asm volatile(
+	 ".syntax unified"         "\n"
+	 "ldm %[scrbuf]!, {%[c]}" "\n"
+	 "lsls %[t], %[c], 24" 			"\n"
+	 "mode64loop%=:"    "\n"
+	 "lsrs %[c], %[c], 8" 			"\n"
+	 "lsrs %[t], %[t], 23" 			"\n"
+	 "ldrh %[t], [%[paletteptr], %[t]]" 	"\n"
+	 "lsls %[t], 3" 			"\n"
+	 "str %[t], [%[LCD], 0]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "lsls %[t], %[c], 24" 			"\n"
+	 "lsrs %[c], %[c], 8" 			"\n"
+	 "lsrs %[t], %[t], 23" 			"\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "ldrh %[t], [%[paletteptr], %[t]]" 	"\n"
+	 "lsls %[t], 3" 			"\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+
+	 "str %[t], [%[LCD], 0]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "lsls %[t], %[c], 24" 			"\n"
+	 "lsrs %[t], %[t], 23" 			"\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "ldrh %[t], [%[paletteptr], %[t]]" 	"\n"
+	 "lsls %[t], 3" 			"\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+	 "str %[t], [%[LCD], 0]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "lsrs %[c], %[c], 8" 			"\n"
+	 "lsls %[t], %[c], 1" 			"\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "ldrh %[t], [%[paletteptr], %[t]]" 	"\n"
+	 "lsls %[t], 3" 			"\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+
+	 "str %[t], [%[LCD], 0]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "ldm %[scrbuf]!, {%[c]}" "\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+	 "str %[TGL], [%[LCD], %[CLR]]" 	"\n"
+	 "lsls %[t], %[c], 24" 			"\n"
+	 "cmp %[scrbuf], %[end]" "\n"
+	 "str %[TGL], [%[LCD], 124]" 		"\n"
+
+	 "bne mode64loop%=" "\n"
+
+	 : // outputs
+	   [c]"+l" (c),
+	   [t]"+l" (t),
+	   [scrbuf]"+l" (scrbuf)
+
+	 : // inputs
+	   [CLR]"l" (CLR),
+	   [TGL]"l" (TGL),
+	   [LCD]"l" (0xA0002188),
+	   [paletteptr]"l" (paletteptr),
+	   [end]"h" (end)
+
+	 : // clobbers
+	   "cc"
+       );
+
+#else
+
+   c = uint32_t(paletteptr[(*scrbuf)&255])<<3;
+   while( scrbuf < end-4 ){
+       *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
+       *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
+       *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
+       *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
+   }
+   
+#endif
+ }
+
+ 
+ 
 void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y,data,xptr;
 uint16_t scanline[176]; uint16_t* scptr;

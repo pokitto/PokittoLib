@@ -46,7 +46,7 @@ Software License Agreement (BSD License)
 #include "SimLCD.h"
 #endif
 
-#ifndef PROJ_MODE13
+#if !defined(PROJ_MODE13) && !defined(PROJ_MODE64)
 #define PALSIZE 16
 #else
 #define PALSIZE 256
