@@ -164,6 +164,10 @@ uint8_t Display::bpp = POK_COLORDEPTH;
     uint8_t Display::width = 110;
     uint8_t Display::height = 88;
     uint8_t Display::screenbuffer[110*88]; // 8bit 110x88
+#elif (POK_SCREENMODE == MODE64)
+    uint8_t Display::width = 110;
+    uint8_t Display::height = 176;
+    uint8_t __attribute__ ((aligned)) Display::screenbuffer[110*176]; // 8bit 110x176
 #elif (POK_SCREENMODE == MODE15)
     uint8_t Display::width = 220;
     uint8_t Display::height = 176;
@@ -287,6 +291,10 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
     if (! useDirectDrawMode) {
 		#if POK_SCREENMODE == MODE13
 		lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
+		#endif
+
+		#if POK_SCREENMODE == MODE64
+		lcdRefreshMode64(m_scrbuf, paletteptr);
 		#endif
 
         #if POK_SCREENMODE == MODE_GAMEBOY
@@ -2411,6 +2419,10 @@ void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
     lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
 #endif
 
+#if POK_SCREENMODE == MODE64
+    lcdRefreshMode64(m_scrbuf, paletteptr);
+#endif
+    
 #if POK_SCREENMODE == MODE_GAMEBOY
     lcdRefreshModeGBC(scr, paletteptr);
 #endif
