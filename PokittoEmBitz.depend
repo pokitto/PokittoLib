@@ -3214,7 +3214,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1532219377 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1533667295 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3613,7 +3613,7 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1531409158 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
+1533667295 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
 	"mbed.h"
 	"gpio_api.h"
 	"pinmap.h"
@@ -3946,7 +3946,7 @@
 	"LPC11U6x.h"
 	"power_api.h"
 
-1531409158 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.cpp
+1533667295 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.cpp
 	"LPC11U6x.h"
 	<stdlib.h>
 
@@ -3979,7 +3979,7 @@
 	"pinmap.h"
 	"mbed_error.h"
 
-1517251474 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.c
+1533928764 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\pwmout_api.c
 	"pwmout_api.h"
 	"cmsis.h"
 	"pinmap.h"
@@ -4127,7 +4127,7 @@
 1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1532207862 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1533667295 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4147,7 +4147,7 @@
 1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.cpp
 	"PokittoLogos.h"
 
-1527021921 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
+1533667295 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalette.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4177,7 +4177,7 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1532207862 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1533667295 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 	<algorithm>
@@ -6267,4 +6267,7 @@
 
 1526805892 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\sdfilesystem\fatfilesystem\chan\sdfs_diskio.h
 	"sdfs_integer.h"
+
+1534015712 source:c:\pokittolib_git\pokittolib_curr\examples\blinky\main.cpp
+	"Pokitto.h"
 
