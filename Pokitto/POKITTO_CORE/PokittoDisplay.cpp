@@ -500,7 +500,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 	if( color != invisiblecolor )
 	    drawPixelFG = &Display::drawPixel;
 	if( bgcolor != invisiblecolor )
-	    drawPixelBG = &Display::drawPixel;	
+	    drawPixelBG = &Display::drawPixel;
     }
 
     void (*drawPixel[])(int16_t,int16_t, uint8_t) = {drawPixelBG, drawPixelFG};
@@ -510,13 +510,13 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 #else
     if( fontSize != 2 ){
 #endif
-    
+
     for (i = 0; i < numBytes; i++) {
 	bitcolumn = *bitmap++;
 	if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
 	for (j = 0; j <= h; j++) { // was j<=h
 	    uint8_t c = colors[ bitcolumn & 1 ];
-		
+
 #if PROJ_ARDUBOY > 0
 	    drawPixel[ bitcolumn&1 ](x, y + 7 - j,c);
 #else
@@ -529,17 +529,17 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     }
 
     return numBytes+adjustCharStep; // for character stepping
-    
+
 #if PROJ_ARDUBOY > 0
 #else
     }else{
-    
+
 	for (i = 0; i < numBytes; i++) {
 	    bitcolumn = *bitmap++;
 	    if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
 	    for (j = 0; j <= h; j++) { // was j<=h
 		uint8_t c = colors[ bitcolumn & 1 ];
-		
+
 		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1), c);
 		drawPixel[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1), c);
 		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1)+1, c);
@@ -548,12 +548,12 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 
 	    }
 	}
-    
+
 	return (numBytes+adjustCharStep)<<1;
 
     }
 #endif // PROJ_ARDUBOY
-    
+
 }
 
 void Display::clear() {
@@ -575,7 +575,7 @@ void Display::clear() {
         else memset((void*)m_scrbuf+POK_BITFRAME*2,0x00,j);// B
         setCursor(0,0);
         return;
-    } else {
+    } else if (bpp==4) {
         c = (c & 0x0F) | (c << 4);
     }
     uint16_t j = sizeof(screenbuffer);
@@ -716,7 +716,7 @@ void Display::drawPixelRaw(int16_t x,int16_t y, uint8_t col) {
     } // POK_COLOURDEPTH
     #elif POK_COLORDEPTH == 4
     uint16_t i = y*(width>>1) + (x>>1);
-    uint8_t pixel = m_scrbuf[i];    
+    uint8_t pixel = m_scrbuf[i];
     if (x&1) pixel = (pixel&0xF0)|(col);
     else pixel = (pixel&0x0F) | (col<<4);
     m_scrbuf[i] = pixel;
@@ -2422,7 +2422,7 @@ void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
 #if POK_SCREENMODE == MODE64
     lcdRefreshMode64(m_scrbuf, paletteptr);
 #endif
-    
+
 #if POK_SCREENMODE == MODE_GAMEBOY
     lcdRefreshModeGBC(scr, paletteptr);
 #endif

@@ -4127,7 +4127,7 @@
 1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1533667295 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1534601921 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -6270,4 +6270,10 @@
 
 1534015712 source:c:\pokittolib_git\pokittolib_curr\examples\blinky\main.cpp
 	"Pokitto.h"
+
+1535303056 source:c:\pokittolib_git\pokittolib_curr\examples\vgaout\main.cpp
+	"Pokitto.h"
+	"sct_11u6x.h"
+
+1535107916 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\sct_11u6x.h
 
