@@ -23,6 +23,21 @@ and the main loop just rolls over */
 #define CLR_B LPC_GPIO_PORT->CLR[0] = 1 << 14
 #define SET_B LPC_GPIO_PORT->SET[0] = 1 << 14
 
+#define MSET_MASK_P0 LPC_GPIO_PORT->MASK[0] = ~(0x7000); //mask P1_12 ...P1_13
+#define MCLR_MASK_P0 LPC_GPIO_PORT->MASK[0] = 0; // all on
+#define MSET_R LPC_GPIO_PORT->MPIN[0] = (0x1<<12);
+#define MSET_G LPC_GPIO_PORT->MPIN[0] = (0x2<<12);
+#define MSET_B LPC_GPIO_PORT->MPIN[0] = (0x4<<12);
+#define MSET_RG LPC_GPIO_PORT->MPIN[0] = (0x3<<12);
+#define MSET_RB LPC_GPIO_PORT->MPIN[0] = (0x5<<12);
+#define MSET_BG LPC_GPIO_PORT->MPIN[0] = (0x6<<12);
+#define MSET_RGB LPC_GPIO_PORT->MPIN[0] = (0x7<<12);
+#define MSET_NONE LPC_GPIO_PORT->MPIN[0] = (0);
+#define MSET_VALUE(x) LPC_GPIO_PORT->MPIN[0] = (uint32_t(x)<<12);
+
+#define SCANWIDTH 110 // how many pixels horizontal
+#define YSKIP   1 // skip every 2^YSKIP lines
+
 mbed::DigitalOut VSync(EXT1);
 mbed::DigitalOut R(EXT2);
 mbed::DigitalOut G(EXT3);
@@ -32,11 +47,13 @@ mbed::PwmOut HSync(EXT0);
 volatile int vsync_counter=0;
 volatile int counteract=0;
 
+Pokitto::Core game;
+
 enum VSYNC_STATES
 {
   VSYNC_LOW_ENABLED = 1, // 0
   VSYNC_BACKPORCH_STARTS = 3, // 0.064ms
-  VSYNC_BACKPORCH_ENDS_DRAWING_BEGINS = 34, // 1.084ms
+  VSYNC_BACKPORCH_ENDS_DRAWING_BEGINS = 34, // 1.084ms was 34
   VSYNC_FRONTPORCH_STARTS = 514, // 16.334ms
   VSYNC_FRONTPORCH_ENDS = 528 // //
 };
@@ -90,8 +107,8 @@ void SCT0_1_IRQHandler(void)
 
 void initHSync() {
 
-    HSync.period(0.000032f); //30.80us
-    HSync.pulsewidth(0.000028f); // 3.08us
+    HSync.period(0.000032f); //30.80us was 32f
+    HSync.pulsewidth(0.000028f); // 3.08us was 28f
 
     // halt and clear the counter
     LPC_SCT0->CTRL |= (1 << 2) | (1 << 3);
@@ -115,35 +132,66 @@ void initHSync() {
 
 }
 
+inline void makelinebuf(uint8_t* source, uint8_t* target, int w) {
+        for (int i=0; i<w; i++) {
+                *target++ = *source++;
+        }
+}
+
 int main ()
 {
+uint8_t emptyline[110];
+for (int i=0; i<110; i++) emptyline[i]=0;
+for (int x = 0;x<110*88;x++) {
+    *(game.display.getBuffer()+x) = x&0x7;
+}
 volatile int vsync_old=0;
 VSync = 1; counteract=5;
 initHSync();
 volatile int toggle=0;
+uint8_t* sb = Pokitto::Display::getBuffer();
+uint8_t* lb = sb;
 
 	while (1)
 	{
 
         if (vsync_counter == VSYNC_BACKPORCH_ENDS_DRAWING_BEGINS) {
-
+                //sb = game.display.getBuffer();
                 for (int i=0; i<480; i++) {
                         vsync_old = vsync_counter; /* store line we are on */
                         /* draw line here, this has to be faster than the HSync frequency */
                         //CLR_R;CLR_G;CLR_B;
-                        for (int j=0; j < 16; j++) SET_R;
-                        CLR_R;//CLR_G;CLR_B;
-                        for (int j=0; j < 16; j++) SET_G;
+                        MSET_MASK_P0;
+
+                        #define _PX {MSET_VALUE(*lb++);__NOP();__NOP();__NOP();__NOP();}
+                        _PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;
+                        _PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;
+                        _PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;
+                        _PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;
+                        _PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;
+                        _PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;_PX;
+
+
+
+                        //CLR_R;//CLR_G;CLR_B;
+                        //for (int j=0; j < 16; j++) MSET_G;
                         //CLR_R;
-                        CLR_G;//CLR_B;
-                        for (int j=0; j < 16; j++) SET_B;
-                        CLR_B;
+                        //CLR_G;//CLR_B;
+                        //for (int j=0; j < 16; j++) MSET_B;
+                        //CLR_B;
                         /* set color off so that it is off during hsync*/
-                        CLR_R;CLR_G;
+                        MSET_NONE;
+                        MCLR_MASK_P0;
+                        lb = sb + (((i+1)>>2)*110);
+                        //lb = emptyline;
+                        //makelinebuf(sb,lb,SCANWIDTH);
+                        //CLR_R;CLR_G;
                         /* wait for a new line trigger */
+                        //if (i==352) sb = emptyline;
                         while (vsync_counter == vsync_old) {
-                            toggle++;
+                            //toggle++;
                         };
+
 
                 }
         }
