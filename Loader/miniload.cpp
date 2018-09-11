@@ -1,3 +1,39 @@
+/**************************************************************************/
+/*!
+    @file     minibuttons.cpp
+    @author   Jonne Valola
+
+    @section LICENSE
+
+    Software License Agreement (BSD License)
+
+    Copyright (c) 2018, Jonne Valola
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+    1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holders nor the
+    names of its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ''AS IS'' AND ANY
+    EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
+    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+/**************************************************************************/
+
 #include "miniload.h"
 
 #define APP_FILES       1
@@ -28,6 +64,8 @@ DigitalIn UBtn(POK_BTN_UP_PIN);
 DigitalIn DBtn(POK_BTN_DOWN_PIN);
 DigitalIn LBtn(POK_BTN_LEFT_PIN);
 DigitalIn RBtn(POK_BTN_RIGHT_PIN);
+
+
 
 time_t oldseconds = 0;
 struct tm oldtm;
@@ -61,6 +99,38 @@ uint8_t data[256];
 bool writeEEset=false;
 
 settings EEset;
+
+void swapItems(int a, int b)
+{
+    char templist[LEFTCHARS];
+    for (int i=0; i < LEFTCHARS; i++) {
+            templist[i] = leftlist[a][i];
+            leftlist[a][i] = leftlist[b][i];
+            leftlist[b][i] = templist[i];
+    }
+    for (int i=0; i < RIGHTCHARS; i++) {
+            templist[i] = rightlist[a][i];
+            rightlist[a][i] = rightlist[b][i];
+            rightlist[b][i] = templist[i];
+    }
+}
+
+void bubbleSortFiles(int n)
+{
+   int i, j, k;
+   for (i = 0; i < n-1; i++) {
+       for (j = 0; j < n-i-1; j++) {
+           k = 0;
+           while (k<8) {
+                if (leftlist[j][k] > leftlist[j+1][k]) {
+                    swapItems(j,j+1);
+                } else if (leftlist[j][k] == leftlist[j+1][k]) k++; //go to next letter
+                else k=8; //don't swap
+            }
+        }
+    }
+}
+
 
 void readset() {
     uint8_t* p = (uint8_t*)&EEset;
@@ -394,7 +464,7 @@ void errorPopup(char* text) {
         pokPollButtons();
         printList(10*8,15*8,10, DC_GRAY,DC_WHITE);
         if (aBtn()) {
-                while (aBtn());
+                while (aBtn()) pokPollButtons();
                 tabstate=TAB_REDRAW;selecteditem=prevselected;return;
         }
     }
@@ -431,10 +501,10 @@ void loaderPopup() {
     while (1) {
         pokPollButtons();
         printList(12*8,14*8,10,DC_GRAY,DC_WHITE);
-        if (upBtn()) {while (upBtn()) {}; selecteditem=0;}
-        if (downBtn()) {while (downBtn()) {}; selecteditem=1;}
+        if (upBtn()) {while (upBtn()) {pokPollButtons();} selecteditem=0;}
+        if (downBtn()) {while (downBtn()) {pokPollButtons();} selecteditem=1;}
         if (aBtn()) {
-                while (aBtn()) {};
+                while (aBtn()) {pokPollButtons();}
                 if (selecteditem==1) {tabstate=TAB_REDRAW;selecteditem=prevselected;return;}
                 else break;
         }
@@ -446,9 +516,12 @@ void loaderPopup() {
 
 void tabFiles() {
     listlength = readFilesToList(0);
+    #ifdef BUBBLESORT
+    bubbleSortFiles(listlength);
+    #endif
     //#define STARTACCEL 20
     #define REPEATCUT 30000/50
-    #define SINGLECUT 1000/200
+    #define SINGLECUT 2000/200
     uint16_t up = 0, down = 0;
     while (1) {
     pokPollButtons();
@@ -467,7 +540,7 @@ void tabFiles() {
         break;
     case TAB_WAIT:
         if (aBtn()&&nofiles==false) {
-                while (aBtn()) {};
+                while (aBtn()) {pokPollButtons();}
                 loaderPopup();
                 listlength = readFilesToList(0);
                 tabstate = TAB_REDRAW; //if loaderPopup returns,redraw UI
@@ -506,8 +579,8 @@ void tabFiles() {
             tabstate = TAB_UPDATE;
             }
         }
-        if (leftBtn()) { selecteditem=beginitem=0; tabstate = TAB_LEFT;}
-        if (rightBtn()) { selecteditem=beginitem=0; tabstate = TAB_RIGHT;}
+        if (leftBtn()) { while(leftBtn()) pokPollButtons(); selecteditem=beginitem=0; tabstate = TAB_LEFT;}
+        if (rightBtn()) { while(rightBtn()) pokPollButtons();  selecteditem=beginitem=0; tabstate = TAB_RIGHT;}
         break;
     case TAB_LEFT:
         appstate = APP_ABOUT; selecteditem=0; return;
@@ -547,7 +620,7 @@ void tabSettings() {
         break;
     case TAB_WAIT:
         if (aBtn()) {
-                while (aBtn()) {};
+                while (aBtn()) {pokPollButtons();}
                 switch (selecteditem) {
             case 0:
                 EEset.loaderwait++; if (EEset.loaderwait>5) EEset.loaderwait=5;
@@ -584,7 +657,7 @@ void tabSettings() {
         tabstate = TAB_REDRAW;
         }
         if (bBtn()) {
-                while (bBtn()) {};
+                while (bBtn()) {pokPollButtons();}
                 switch (selecteditem) {
             case 0:
                 EEset.loaderwait--; if (EEset.loaderwait<1) EEset.loaderwait=1;
@@ -655,8 +728,8 @@ void tabSettings() {
             tabstate = TAB_UPDATE;
             }
         }
-        if (leftBtn()) { tabstate = TAB_LEFT;}
-        if (rightBtn()) { tabstate = TAB_RIGHT;}
+        if (leftBtn()) { while(leftBtn()) pokPollButtons();  tabstate = TAB_LEFT;}
+        if (rightBtn()) { while(rightBtn()) pokPollButtons();  tabstate = TAB_RIGHT;}
         break;
     case TAB_LEFT:
         appstate = APP_FILES; selecteditem=0; return;
@@ -702,8 +775,8 @@ void tabAbout() {
         tabstate=TAB_WAIT;
         break;
     case TAB_WAIT:
-        if (leftBtn()) { tabstate = TAB_LEFT;}
-        if (rightBtn()) { tabstate = TAB_RIGHT;}
+        if (leftBtn()) { while(leftBtn()) pokPollButtons(); tabstate = TAB_LEFT;}
+        if (rightBtn()) { while(rightBtn()) pokPollButtons(); tabstate = TAB_RIGHT;}
         break;
     case TAB_LEFT:
         #if SETTINGSTAB
@@ -748,6 +821,7 @@ int loadProg () {
     print("LOADING ");
     print(filename);
     set_cursor(110-(10)*4,14*8);
+    pok_directcolor=DC_WHITE;
     print("PLEASE WAIT");
     /** check SD card initialization **/
     if (pokInitSD()) {
@@ -767,7 +841,7 @@ int loadProg () {
     fileRewind();
 
     while (1) {
-        set_cursor(110-10*8,15*8);
+        set_cursor(110-10*8,17*8);
         pok_directcolor=DC_GREEN;
         if (opg != (int)counter) {
             for (int i=0;i<20;i++) {
@@ -792,7 +866,7 @@ int loadProg () {
         } else counter += 0x100;
         progress = (counter*20)/fsize;
         }
-    set_cursor(110-4*8,18*8);
+    set_cursor(110-4*8,19*8);
     print("SUCCESS !!");
     SCB->AIRCR = 0x05FA0004; //issue system reset
     return 1;
