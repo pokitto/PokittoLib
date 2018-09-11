@@ -421,8 +421,9 @@ FRESULT follow_path (    /* FR_OK(0): successful, !=0: error code */
 /* Check a sector if it is an FAT boot record                            */
 /*-----------------------------------------------------------------------*/
 
-static
-__attribute__((section(".SD_Code"))) BYTE check_fs (    /* 0:The FAT boot record, 1:Valid boot record but not an FAT, 2:Not a boot record, 3:Error */
+
+//static __attribute__((section(".SD_Code")))
+static BYTE check_fs (    /* 0:The FAT boot record, 1:Valid boot record but not an FAT, 2:Not a boot record, 3:Error */
     BYTE *buf,    /* Working buffer */
     DWORD sect    /* Sector# (lba) to check if it is an FAT boot record or not */
 ) {
@@ -455,7 +456,8 @@ __attribute__((section(".SD_Code"))) BYTE check_fs (    /* 0:The FAT boot record
 /* Mount/Unmount a Locical Drive                                         */
 /*-----------------------------------------------------------------------*/
 
-__attribute__((section(".SD_Code"))) FRESULT pf_mount (
+//__attribute__((section(".SD_Code")))
+FRESULT pf_mount (
     FATFS *fs        /* Pointer to new file system object (NULL: Unmount) */
 ) {
     BYTE fmt, buf[36];

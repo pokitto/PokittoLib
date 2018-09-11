@@ -3727,7 +3727,7 @@
 	"connect.h"
 	"PokittoDisk.h"
 
-1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\libpff\pff.cpp
+1536567992 source:c:\pokittolib_git\pokittolib_curr\pokitto\libpff\pff.cpp
 	"pff.h"
 	"diskio.h"
 
@@ -3946,7 +3946,7 @@
 	"LPC11U6x.h"
 	"power_api.h"
 
-1533667295 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.cpp
+1536586813 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\cmsis\target_nxp\target_lpc11u6x\toolchain_gcc_arm\target_lpc11u68\startup_lpc11u68.cpp
 	"LPC11U6x.h"
 	<stdlib.h>
 
@@ -4002,7 +4002,7 @@
 	"cmsis.h"
 	"mbed_interface.h"
 
-1517251474 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.c
+1536611331 source:c:\pokittolib_git\pokittolib_curr\pokitto\mbed-pokitto\targets\hal\target_nxp\target_lpc11u6x\spi_api.c
 	"mbed_assert.h"
 	<math.h>
 	"spi_api.h"
@@ -4124,7 +4124,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1526805892 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
+1536568015 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
 1534601921 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
@@ -6276,4 +6276,61 @@
 	"sct_11u6x.h"
 
 1535107916 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\sct_11u6x.h
+
+1503414865 source:c:\pokittolib_git\pokittolib_curr\loader\font8x8.cpp
+	"font8x8.h"
+
+1503414865 c:\pokittolib_git\pokittolib_curr\loader\font8x8.h
+
+1503414865 source:c:\pokittolib_git\pokittolib_curr\loader\font8x8ext.cpp
+	"font8x8ext.h"
+
+1503414865 c:\pokittolib_git\pokittolib_curr\loader\font8x8ext.h
+
+1536671164 source:c:\pokittolib_git\pokittolib_curr\loader\minibuttons.cpp
+	<mbed.h>
+	"minibuttons.h"
+
+1536669788 c:\pokittolib_git\pokittolib_curr\loader\minibuttons.h
+
+1503414865 source:c:\pokittolib_git\pokittolib_curr\loader\c64font.cpp
+	"miniload.h"
+
+1508412340 c:\pokittolib_git\pokittolib_curr\loader\miniload.h
+	<mbed.h>
+	"Pokitto_settings.h"
+	"PokittoDisk.h"
+	"miniGFX.h"
+	"minibuttons.h"
+	"iap.h"
+
+1536415951 c:\pokittolib_git\pokittolib_curr\loader\my_settings.h
+
+1503414865 c:\pokittolib_git\pokittolib_curr\loader\minigfx.h
+	"miniprint.h"
+
+1536582951 c:\pokittolib_git\pokittolib_curr\loader\miniprint.h
+	<stdint.h>
+
+1503414865 source:c:\pokittolib_git\pokittolib_curr\loader\minigfx.cpp
+	"miniGFX.h"
+	"Pokitto_settings.h"
+	"binary.h"
+
+1503414865 c:\pokittolib_git\pokittolib_curr\loader\binary.h
+
+1503414865 source:c:\pokittolib_git\pokittolib_curr\loader\minijump.cpp
+	"miniload.h"
+
+1521634316 source:c:\pokittolib_git\pokittolib_curr\loader\minilcd.cpp
+	"miniload.h"
+	<pinmap.h>
+
+1503414865 source:c:\pokittolib_git\pokittolib_curr\loader\miniprint.cpp
+	<math.h>
+	"miniGFX.h"
+	"Pokitto_settings.h"
+
+1536671489 source:c:\pokittolib_git\pokittolib_curr\loader\miniload.cpp
+	"miniload.h"
 
