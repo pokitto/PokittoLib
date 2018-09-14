@@ -790,6 +790,9 @@
 		<Unit filename="../POKITTO_CORE/PokittoLogos.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoLogos.h" />
 		<Unit filename="../POKITTO_CORE/PokittoPalette.cpp" />
+		<Unit filename="../POKITTO_CORE/PokittoPrintf.cpp">
+			<Option target="HelloWorld" />
+		</Unit>
 		<Unit filename="../POKITTO_CORE/PokittoSound.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoSound.h" />
 		<Unit filename="../POKITTO_CORE/PokittoTimer.h" />

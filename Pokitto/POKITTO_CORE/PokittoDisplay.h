@@ -257,7 +257,7 @@ public:
     static void drawPixelRaw(int16_t x,int16_t y, uint8_t col);
     /** Placeholder that does nothing */
     static void drawPixelNOP(int16_t x,int16_t y, uint8_t col);
-    
+
     /** Get pixel at various bit depths */
     static uint8_t getPixel(int16_t,int16_t);
     /** Draw line **/
@@ -387,6 +387,7 @@ public:
     static void println(double, int = 2);
     static void println(void);
 
+
     static int16_t cursorX,cursorY;
     static uint8_t fontSize;
     static int8_t adjustCharStep, adjustLineStep;
@@ -395,6 +396,9 @@ public:
     static void inc_txtline();
     static void printNumber(unsigned long, uint8_t);
     static void printFloat(double, uint8_t);
+
+    /** external small printf, source in PokittoPrintf.cpp **/
+    static int printf(const char *format, ...);
 
     /** Tiled mode functions **/
 

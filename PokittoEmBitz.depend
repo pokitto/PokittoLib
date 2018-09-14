@@ -3648,7 +3648,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
-1532207862 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
+1536912291 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -4127,7 +4127,7 @@
 1536568015 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1534601921 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1536912106 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -6333,4 +6333,7 @@
 
 1536672609 source:c:\pokittolib_git\pokittolib_curr\loader\miniload.cpp
 	"miniload.h"
+
+1536912771 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoprintf.cpp
+	"PokittoDisplay.h"
 

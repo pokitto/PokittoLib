@@ -92,8 +92,6 @@ Pokitto::Sound _pdsound;
 
 using namespace Pokitto;
 
-
-
 uint8_t* Display::m_scrbuf;
 uint8_t* Display::m_tileset;
 uint8_t* Display::m_tilebuf;
@@ -2316,6 +2314,7 @@ void Display::printFloat(double number, uint8_t digits)
   }
 }
 
+
 void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
 {
     int8_t scry;
@@ -2457,6 +2456,8 @@ void Display::setTile(uint16_t i, uint8_t t) {
     if (!m_tilebuf) return;
     m_tilebuf[i]=t;
 };
+
+
 
 // Convert an integer to a hexadecimal string
 char* itoa_hex(int num, char* dest, int destLen) {

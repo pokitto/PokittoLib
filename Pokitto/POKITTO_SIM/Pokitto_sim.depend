@@ -2203,7 +2203,7 @@
 1514730136 e:\pokittodev\pokittolib\examples\doon\creatures.h
 	<stdint.h>
 
-1531409158 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
+1536912610 source:c:\pokittolib_git\pokittolib_curr\examples\helloworld\main.cpp
 	"Pokitto.h"
 
 1517557369 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
@@ -2683,7 +2683,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
-1532207862 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
+1536912291 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -2831,7 +2831,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1534601921 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1536912106 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4165,4 +4165,7 @@
 1535657356 source:c:\git\pokittolib2\pokitto\pokitto_sim\simeeprom.cpp
 	"SimEEPROM.h"
 	<stdio.h>
+
+1536912771 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoprintf.cpp
+	"PokittoDisplay.h"
 
