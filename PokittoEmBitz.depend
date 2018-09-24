@@ -7480,7 +7480,7 @@
 1535842388 source:c:\dev\pokittolib\pokitto\pokitto_libs\usbdevice\usbdevice\usbhal_lpc11u.cpp
 	"USBHAL.h"
 
-1537775252 source:c:\dev\pokittolib\examples\ttbtinybasic\main.cpp
+1537775401 source:c:\dev\pokittolib\examples\ttbtinybasic\main.cpp
 	"Pokitto.h"
 	"USBSerial.h"
 	"ttbasic.h"
@@ -7492,4 +7492,27 @@
 1535842388 source:c:\dev\pokittolib\pokitto\pokitto_libs\usbdevice\usbserial\usbserial.cpp
 	"stdint.h"
 	"USBSerial.h"
+
+1537789730 source:c:\dev\pokittolib\examples\pppdemo\main.cpp
+	"Pokitto.h"
+	"ppp-blinky.h"
+
+1537741174 c:\dev\pokittolib\examples\pppdemo\my_settings.h
+
+1537789742 c:\dev\pokittolib\examples\pppdemo\ppp-blinky.h
+	"mbed.h"
+	"sha1.h"
+
+1537789764 c:\dev\pokittolib\examples\pppdemo\sha1.h
+	"stdint.h"
+
+1537799203 source:c:\dev\pokittolib\examples\pppdemo\ppp-blinky.cpp
+	"ppp-blinky.h"
+	"USBSerial.h"
+
+1537789764 source:c:\dev\pokittolib\examples\pppdemo\sha1.cpp
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	"sha1.h"
 
