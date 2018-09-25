@@ -3009,6 +3009,162 @@
 					<Mode after="1" />
 				</ExtraCommands>
 			</Target>
+			<Target title="TTBTinyBasic">
+				<Option output=".\build\basic.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add option="-fpermissive" />
+					<Add directory="Examples\TTBTinyBasic" />
+					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBDevice" />
+					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBSerial" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add option="-fpermissive" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\basic.hex -O binary .\build\basic.bin" />
+					<Add after=".\build\lpcrc .\build\basic.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
+			<Target title="PPPDemo">
+				<Option output=".\build\pppdemo.elf" />
+				<Option type="0" />
+				<Option create_hex="1" />
+				<Option compiler="armgcc_eb" />
+				<Device>
+					<Add option="$device=cortex-m0plus" />
+					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
+				</Device>
+				<Compiler>
+					<Add option="-fno-exceptions" />
+					<Add option="-std=gnu99" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add option="-fpermissive" />
+					<Add directory="Examples\PPPDemo" />
+					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBDevice" />
+					<Add directory="Pokitto\POKITTO_LIBS\USBDevice\USBSerial" />
+				</Compiler>
+				<Cpp>
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-std=gnu++11" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fdata-sections" />
+					<Add option="-ffunction-sections" />
+					<Add option="-Os" />
+					<Add option="-g" />
+					<Add option="-funsigned-char" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-missing-field-initializers" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fno-builtin" />
+					<Add option="-fno-delete-null-pointer-checks" />
+					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
+					<Add option="-Wvla" />
+					<Add option="-include" />
+					<Add option="mbed_config.h" />
+					<Add option="-fpermissive" />
+				</Cpp>
+				<Assembler>
+					<Add option="-Wa,--gdwarf-2" />
+				</Assembler>
+				<Linker>
+					<Add option="-eb_lib=n" />
+					<Add option="-lstdc++" />
+					<Add option="-eb_start_files" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-n" />
+					<Add library="supc++" />
+					<Add library="m" />
+					<Add library="c" />
+					<Add library="gcc" />
+					<Add library="nosys" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\pppdemo.hex -O binary .\build\pppdemo.bin" />
+					<Add after=".\build\lpcrc .\build\pppdemo.bin" />
+					<Mode before="0" />
+					<Mode after="1" />
+				</ExtraCommands>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-O3" />
@@ -3730,6 +3886,27 @@
 		<Unit filename="Examples\PolarParcel\sprites.h">
 			<Option target="PolarParcel" />
 		</Unit>
+		<Unit filename="Examples\PPPDemo\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="PPPDemo" />
+		</Unit>
+		<Unit filename="Examples\PPPDemo\My_settings.h">
+			<Option target="PPPDemo" />
+		</Unit>
+		<Unit filename="Examples\PPPDemo\ppp-blinky.cpp">
+			<Option compilerVar="CC" />
+			<Option target="PPPDemo" />
+		</Unit>
+		<Unit filename="Examples\PPPDemo\ppp-blinky.h">
+			<Option target="PPPDemo" />
+		</Unit>
+		<Unit filename="Examples\PPPDemo\sha1.cpp">
+			<Option compilerVar="CC" />
+			<Option target="PPPDemo" />
+		</Unit>
+		<Unit filename="Examples\PPPDemo\sha1.h">
+			<Option target="PPPDemo" />
+		</Unit>
 		<Unit filename="Examples\SaveHighscore\My_settings.h">
 			<Option target="SaveHighscore" />
 		</Unit>
@@ -3812,6 +3989,20 @@
 		</Unit>
 		<Unit filename="Examples\Tracker\Tracker.h">
 			<Option target="Tracker" />
+		</Unit>
+		<Unit filename="Examples\TTBTinyBasic\main.cpp">
+			<Option compilerVar="CC" />
+			<Option target="TTBTinyBasic" />
+		</Unit>
+		<Unit filename="Examples\TTBTinyBasic\My_settings.h">
+			<Option target="TTBTinyBasic" />
+		</Unit>
+		<Unit filename="Examples\TTBTinyBasic\ttbasic.cpp">
+			<Option compilerVar="CC" />
+			<Option target="TTBTinyBasic" />
+		</Unit>
+		<Unit filename="Examples\TTBTinyBasic\ttbasic.h">
+			<Option target="TTBTinyBasic" />
 		</Unit>
 		<Unit filename="Examples\UpdateAndClipRect\gfxdata.h">
 			<Option target="ClippedDrawing" />
@@ -3973,6 +4164,8 @@
 			<Option target="Armageddon" />
 			<Option target="VGAout" />
 			<Option target="LOADER" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\libpff\pff.cpp">
 			<Option compilerVar="CC" />
@@ -4015,6 +4208,8 @@
 			<Option target="Armageddon" />
 			<Option target="VGAout" />
 			<Option target="LOADER" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\libpff\pff.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\AnalogIn.h">
@@ -4057,6 +4252,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\api\AnalogOut.h">
 			<Option target="BaseTarget" />
@@ -4098,6 +4295,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\api\BusIn.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\BusInOut.h" />
@@ -4330,6 +4529,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm4.h">
 			<Option target="BaseTarget" />
@@ -4371,6 +4572,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm4_simd.h">
 			<Option target="BaseTarget" />
@@ -4412,6 +4615,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm7.h">
 			<Option target="BaseTarget" />
@@ -4453,6 +4658,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cmFunc.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cmInstr.h" />
@@ -4511,6 +4718,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\device.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_api.c">
@@ -4589,6 +4798,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\adventurer12x16.cpp">
 			<Option compilerVar="CC" />
@@ -4631,6 +4842,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\donut7x10.cpp">
 			<Option compilerVar="CC" />
@@ -4673,6 +4886,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\dragon6x8.cpp">
 			<Option compilerVar="CC" />
@@ -4715,6 +4930,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\font3x3.cpp">
 			<Option compilerVar="CC" />
@@ -4757,6 +4974,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\font3x5.cpp">
 			<Option compilerVar="CC" />
@@ -4799,6 +5018,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\font5x7.cpp">
 			<Option compilerVar="CC" />
@@ -4841,6 +5062,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\fontC64.cpp">
 			<Option compilerVar="CC" />
@@ -4883,6 +5106,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\fontC64UIGfx.cpp">
 			<Option compilerVar="CC" />
@@ -4928,6 +5153,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\karateka8x11.cpp">
 			<Option compilerVar="CC" />
@@ -4970,6 +5197,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\koubit7x7.cpp">
 			<Option compilerVar="CC" />
@@ -5012,6 +5241,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\mini4x6.cpp">
 			<Option compilerVar="CC" />
@@ -5054,6 +5285,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\runes6x8.cpp">
 			<Option compilerVar="CC" />
@@ -5096,6 +5329,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\TIC806x6.cpp">
 			<Option compilerVar="CC" />
@@ -5138,6 +5373,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\tight4x7.cpp">
 			<Option compilerVar="CC" />
@@ -5180,6 +5417,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\tiny5x7.cpp">
 			<Option compilerVar="CC" />
@@ -5222,6 +5461,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\ZXSpec.cpp">
 			<Option compilerVar="CC" />
@@ -5264,6 +5505,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\GBcompatibility.h">
 			<Option target="BaseTarget" />
@@ -5305,6 +5548,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\Localization.h">
 			<Option target="BaseTarget" />
@@ -5346,6 +5591,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\Macros_LCD.h">
 			<Option target="BaseTarget" />
@@ -5387,6 +5634,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palAction.cpp">
 			<Option compilerVar="CC" />
@@ -5429,6 +5678,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palCGA.cpp">
 			<Option compilerVar="CC" />
@@ -5471,6 +5722,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palDB16.cpp">
 			<Option compilerVar="CC" />
@@ -5513,6 +5766,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palDefault.cpp">
 			<Option compilerVar="CC" />
@@ -5555,6 +5810,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palGameboy.cpp">
 			<Option compilerVar="CC" />
@@ -5597,6 +5854,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palMagma.cpp">
 			<Option compilerVar="CC" />
@@ -5639,6 +5898,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palMono.cpp">
 			<Option compilerVar="CC" />
@@ -5681,6 +5942,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palPico.cpp">
 			<Option compilerVar="CC" />
@@ -5723,6 +5986,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palRainbow.cpp">
 			<Option compilerVar="CC" />
@@ -5765,6 +6030,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palZXSpec.cpp">
 			<Option compilerVar="CC" />
@@ -5807,6 +6074,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.cpp">
 			<Option compilerVar="CC" />
@@ -5849,6 +6118,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.h">
 			<Option target="BaseTarget" />
@@ -5890,6 +6161,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.cpp">
 			<Option compilerVar="CC" />
@@ -5932,6 +6205,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.h">
 			<Option target="BaseTarget" />
@@ -5973,6 +6248,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.cpp">
 			<Option compilerVar="CC" />
@@ -6015,6 +6292,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.h">
 			<Option target="BaseTarget" />
@@ -6056,6 +6335,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.cpp">
 			<Option compilerVar="CC" />
@@ -6098,6 +6379,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.h">
 			<Option target="BaseTarget" />
@@ -6139,6 +6422,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCookie.cpp">
 			<Option compilerVar="CC" />
@@ -6181,6 +6466,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCookie.h">
 			<Option target="BaseTarget" />
@@ -6222,6 +6509,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.cpp">
 			<Option compilerVar="CC" />
@@ -6264,6 +6553,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.h">
 			<Option target="BaseTarget" />
@@ -6305,6 +6596,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisk.cpp">
 			<Option compilerVar="CC" />
@@ -6351,6 +6644,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisplay.h">
 			<Option target="BaseTarget" />
@@ -6392,6 +6687,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoFakeavr.h">
 			<Option target="BaseTarget" />
@@ -6433,6 +6730,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoFonts.h" />
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoGlobs.h">
@@ -6475,6 +6774,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.cpp">
 			<Option compilerVar="CC" />
@@ -6517,6 +6818,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.h">
 			<Option target="BaseTarget" />
@@ -6558,6 +6861,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.cpp">
 			<Option compilerVar="CC" />
@@ -6600,6 +6905,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.h">
 			<Option target="BaseTarget" />
@@ -6641,6 +6948,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalette.cpp">
 			<Option compilerVar="CC" />
@@ -6683,6 +6992,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalettes.h">
 			<Option target="BaseTarget" />
@@ -6724,6 +7035,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoPrintf.cpp">
 			<Option compilerVar="CC" />
@@ -6769,6 +7082,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoSound.h">
 			<Option target="BaseTarget" />
@@ -6810,6 +7125,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoTimer.h">
 			<Option target="BaseTarget" />
@@ -6851,6 +7168,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\clock_11u6x.c">
 			<Option compilerVar="CC" />
@@ -6893,6 +7212,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\dma_11u6x.c">
 			<Option compilerVar="CC" />
@@ -6935,6 +7256,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\dma_11u6x.h">
 			<Option target="SynthTest" />
@@ -6996,6 +7319,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWButtons.h">
 			<Option target="BaseTarget" />
@@ -7037,6 +7362,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWLCD.cpp">
 			<Option compilerVar="CC" />
@@ -7079,6 +7406,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWLCD.h">
 			<Option target="BaseTarget" />
@@ -7120,6 +7449,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWSound.cpp">
 			<Option compilerVar="CC" />
@@ -7162,6 +7493,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWSound.h">
 			<Option target="BaseTarget" />
@@ -7203,6 +7536,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\iap.cpp">
 			<Option compilerVar="CC" />
@@ -7248,6 +7583,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.cpp">
 			<Option compilerVar="CC" />
@@ -7290,6 +7627,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.h">
 			<Option target="BaseTarget" />
@@ -7331,6 +7670,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\PokittoClock.cpp">
 			<Option compilerVar="CC" />
@@ -7373,6 +7714,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\PokittoEEPROM.h">
 			<Option target="BaseTarget" />
@@ -7414,6 +7757,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\PokittoHW.cpp">
 			<Option compilerVar="CC" />
@@ -7456,6 +7801,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\sct_11u6x.h">
 			<Option target="VGAout" />
@@ -7501,6 +7848,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.h">
 			<Option target="BaseTarget" />
@@ -7542,6 +7891,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\timer_11u6x.c">
 			<Option compilerVar="CC" />
@@ -7584,6 +7935,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\MicroPython\frozen_mpy.c">
 			<Option compilerVar="CC" />
@@ -7770,6 +8123,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.h">
 			<Option target="BaseTarget" />
@@ -7811,6 +8166,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_envfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -7853,6 +8210,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_helpers.cpp">
 			<Option compilerVar="CC" />
@@ -7895,6 +8254,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_mixfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -7937,6 +8298,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_osc.h">
 			<Option target="BaseTarget" />
@@ -7978,6 +8341,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_oscfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -8020,6 +8385,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_song.h">
 			<Option target="BaseTarget" />
@@ -8061,6 +8428,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_songfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -8103,6 +8472,8 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_wavefuncs.cpp">
 			<Option compilerVar="CC" />
@@ -8145,22 +8516,34 @@
 			<Option target="Flappy_GB" />
 			<Option target="Lander_GB" />
 			<Option target="VGAout" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDescriptor.h">
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice.cpp">
 			<Option compilerVar="CC" />
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice.h">
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDevice_Types.h">
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints.h">
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_EFM32.h">
 			<Option target="MicroPython" />
@@ -8170,6 +8553,8 @@
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_LPC11U.h">
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBEndpoints_LPC17_LPC23.h">
 			<Option target="MicroPython" />
@@ -8185,6 +8570,8 @@
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL.h">
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_EFM32.cpp">
 			<Option compilerVar="CC" />
@@ -8197,6 +8584,8 @@
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC11U.cpp">
 			<Option compilerVar="CC" />
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBHAL_LPC17.cpp">
 			<Option compilerVar="CC" />
@@ -8227,6 +8616,8 @@
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBCDC.cpp">
 			<Option compilerVar="CC" />
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBCDC.h">
 			<Option target="MicroPython" />
@@ -8234,6 +8625,8 @@
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBSerial.cpp">
 			<Option compilerVar="CC" />
 			<Option target="MicroPython" />
+			<Option target="TTBTinyBasic" />
+			<Option target="PPPDemo" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBSerial\USBSerial.h">
 			<Option target="MicroPython" />
@@ -8243,32 +8636,7 @@
 		<Extensions>
 			<code_completion />
 			<debugger>
-				<target_debugging_settings target="HelloWorld" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Bitmap" active_interface="J-link">
+				<target_debugging_settings target="Sprites" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -8368,7 +8736,657 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
-				<target_debugging_settings target="Mode15" active_interface="J-link">
+				<target_debugging_settings target="BaseTarget" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="HelloWorld" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Bitmap" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Pokittris" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="SaveHighscore" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Digger_GB" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Introduction" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Coffins" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="101Starships_GB" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Aquarium256" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="PolarParcel" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="3DBlobs" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Crabator" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Armageddon" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Cratebuino_GB" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Flappy_GB" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Lander_GB" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Chip8" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Artillery_GB" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Squiddy" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Jetpack" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Scroll2Layers" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Pakman_GB" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="VGAout" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="PPPDemo" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V634c" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="TTBTinyBasic" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V634c" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="LOADER" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -8443,7 +9461,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
-				<target_debugging_settings target="Tracker" active_interface="J-link">
+				<target_debugging_settings target="TestCrashScreen" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -8493,7 +9511,7 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
-				<target_debugging_settings target="FeelGood" active_interface="J-link">
+				<target_debugging_settings target="Mode15" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
@@ -8543,632 +9561,57 @@
 						</family_options>
 					</debug_interface>
 				</target_debugging_settings>
+				<target_debugging_settings target="FeelGood" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
+				<target_debugging_settings target="Tracker" active_interface="J-link">
+					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="All" />
+					</debug_interface>
+					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
+						<family_options family_id="NXP">
+							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
+							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
+							<option opt_id="ID_SPEED" opt_value="1000" />
+							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
+							<option opt_id="ID_RESET_TYPE" opt_value="0" />
+							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
+							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
+							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
+							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
+							<option opt_id="ID_RAM_EXEC" opt_value="0" />
+							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
+							<option opt_id="ID_NCACHE_BASE" opt_value="" />
+							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
+							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
+							<option opt_id="ID_ARM_SWI" opt_value="" />
+							<option opt_id="ID_THUMB_SWI" opt_value="" />
+						</family_options>
+					</debug_interface>
+				</target_debugging_settings>
 				<target_debugging_settings target="Mode13" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="TestCrashScreen" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Sprites" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Lander_GB" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="VGAout" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Armageddon" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Digger_GB" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Crabator" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Squiddy" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Scroll2Layers" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Artillery_GB" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Aquarium256" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="SaveHighscore" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Cratebuino_GB" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Chip8" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="3DBlobs" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Flappy_GB" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Coffins" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="PolarParcel" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Jetpack" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Pokittris" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Pakman_GB" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="101Starships_GB" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Introduction" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="LOADER" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="BaseTarget" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>

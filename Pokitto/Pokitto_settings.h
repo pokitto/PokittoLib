@@ -500,6 +500,13 @@
 #define EESETTINGS_RESERVED         4012 // 0xFAC 4bytes reserved (additional sleep configuration)
 #define EESETTINGS_WAKEUPTIME       4016 // 0xFB0 Wake-up time as 32bit value for 1Hz RTC clock
 
+/** USB SERIAL PORT **/
+
+#ifndef PROJ_VENDOR_ID
+#define POK_VENDOR_ID 0x04D8
+#define POK_PRODUCT_ID 0x000A
+#endif
+
 
 #endif // POKITTO_SETTINGS_H
 
