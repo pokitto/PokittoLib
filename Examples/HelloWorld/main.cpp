@@ -10,6 +10,7 @@ int main ()
 	{
 		if (mygame.update())
 		{
+			mygame.display.adjustLineStep = 5;
 			mygame.display.println("Hello World!");
 			/* Below is an example of printf, the ability print formatted strings */
 			/* Remove the two slashes '//' to uncomment it and see it in action */
