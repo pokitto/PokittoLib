@@ -360,6 +360,7 @@ void Cookie::writeQueue(char data) {
 int Cookie::findMyNextBlock() {
     if (!_status) return SBINVALIDBLOCK;
     for (int i=_block; i<SBMAXBLOCKS;i++) if (isMyBlock(i)) return i;
+    return SBINVALIDBLOCK;
 }
 
 
