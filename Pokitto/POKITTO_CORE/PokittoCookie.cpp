@@ -136,6 +136,7 @@ bool Cookie::loadCookie() {
     _block=0;
     _block=findMyNextBlock();
     for (int i=0; i<_datasize; i++) *p++ = readQueue();
+    return true;
 }
 
 void Cookie::deleteCookie() {
