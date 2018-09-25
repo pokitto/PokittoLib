@@ -126,6 +126,7 @@ bool Cookie::saveCookie() {
     #if POK_ENABLE_SOUND
     Pokitto::soundInit(true); //re-init sound
     #endif
+    return true;
 }
 
 bool Cookie::loadCookie() {
