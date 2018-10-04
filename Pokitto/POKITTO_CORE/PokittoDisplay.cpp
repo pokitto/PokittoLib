@@ -122,7 +122,7 @@ uint16_t Display::palette[PALETTE_SIZE];
 const unsigned char* Display::font;
 int8_t Display::adjustCharStep = 1;
 int8_t Display::adjustLineStep = 1;
-bool Display::fixedWidthFont = false;
+bool Display::fixedWidthFont = false, Display::flipFontVertical = false;
 
 /** drawing canvas **/
 //uint8_t* Display::canvas; // points to the active buffer. if null, draw direct to screen
@@ -517,16 +517,35 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 
 #if PROJ_ARDUBOY > 0
 	    drawPixel[ bitcolumn&1 ](x, y + 7 - j,c);
+#elif PROJ_SUPPORT_FONTROTATION > 0
+       // if font flipping & rotation is allowed - do not slow down old programs!
+       if (flipFontVertical) {
+           drawPixel[ bitcolumn&1 ](x, y + h - j,c);
+       } else {
+           drawPixel[ bitcolumn&1 ](x, y + j,c);
+       }
 #else
+	   // "Normal" case
 	    drawPixel[ bitcolumn&1 ](x, y + j,c);
 #endif // PROJ_ARDUBOY
 	    bitcolumn>>=1;
 
 	}
-	x++;
+#if PROJ_SUPPORT_FONTROTATION > 0
+	if (flipFontVertical) x--;
+	else x++;
+#else
+    x++;
+#endif
     }
 
-    return numBytes+adjustCharStep; // for character stepping
+#if PROJ_SUPPORT_FONTROTATION > 0
+    if (flipFontVertical) return -numBytes-adjustCharStep;
+    else return numBytes+adjustCharStep; // for character stepping
+#else
+    return numBytes+adjustCharStep;
+#endif
+
 
 #if PROJ_ARDUBOY > 0
 #else

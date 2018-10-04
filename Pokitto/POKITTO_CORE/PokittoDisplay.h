@@ -391,7 +391,7 @@ public:
     static int16_t cursorX,cursorY;
     static uint8_t fontSize;
     static int8_t adjustCharStep, adjustLineStep;
-	static bool fixedWidthFont;
+	static bool fixedWidthFont, flipFontVertical;
 
     static void inc_txtline();
     static void printNumber(unsigned long, uint8_t);

@@ -3214,7 +3214,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1533667295 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1537912191 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3648,7 +3648,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
-1536912291 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
+1538563135 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -4127,7 +4127,7 @@
 1536568015 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1536912106 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1538564781 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -6334,7 +6334,7 @@
 1536672609 source:c:\pokittolib_git\pokittolib_curr\loader\miniload.cpp
 	"miniload.h"
 
-1536912771 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoprintf.cpp
+1536914334 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoprintf.cpp
 	"PokittoDisplay.h"
 
 1537737661 source:c:\dev\pokittolib\examples\ttbtinybasic\ttbasic.cpp
@@ -7515,4 +7515,125 @@
 	<string.h>
 	<stdint.h>
 	"sha1.h"
+
+1537912191 c:\pokittolib_git\pokittolib_curr\examples\ttbtinybasic\my_settings.h
+
+1537912191 source:c:\pokittolib_git\pokittolib_curr\examples\ttbtinybasic\main.cpp
+	"Pokitto.h"
+	"USBSerial.h"
+	"ttbasic.h"
+
+1537912191 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbserial\usbserial.h
+	"USBCDC.h"
+	"Stream.h"
+	"CircBuffer.h"
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbserial\usbcdc.h
+	"USBEndpoints.h"
+	"USBDescriptor.h"
+	"USBDevice_Types.h"
+	"USBDevice.h"
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints.h
+	"USBEndpoints_LPC17_LPC23.h"
+	"USBEndpoints_LPC11U.h"
+	"USBEndpoints_KL25Z.h"
+	"USBEndpoints_STM32F4.h"
+	"USBEndpoints_RZ_A1H.h"
+	"USBEndpoints_Maxim.h"
+	"USBEndpoints_EFM32.h"
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints_lpc17_lpc23.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints_lpc11u.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints_kl25z.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints_stm32f4.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints_rz_a1h.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints_maxim.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbendpoints_efm32.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbdescriptor.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbdevice_types.h
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbdevice.h
+	"mbed.h"
+	"USBDevice_Types.h"
+	"USBHAL.h"
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbhal.h
+	"mbed.h"
+	"USBEndpoints.h"
+	"toolchain.h"
+
+1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbserial\circbuffer.h
+
+1537912191 c:\pokittolib_git\pokittolib_curr\examples\ttbtinybasic\ttbasic.h
+	"USBSerial.h"
+
+1537912191 source:c:\pokittolib_git\pokittolib_curr\examples\ttbtinybasic\ttbasic.cpp
+	"mbed.h"
+	"ttbasic.h"
+	"Pokitto.h"
+
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbdevice.cpp
+	"stdint.h"
+	"USBEndpoints.h"
+	"USBDevice.h"
+	"USBDescriptor.h"
+
+1522439286 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbdevice\usbhal_lpc11u.cpp
+	"USBHAL.h"
+
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbserial\usbcdc.cpp
+	"stdint.h"
+	"USBCDC.h"
+
+1517251473 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\usbdevice\usbserial\usbserial.cpp
+	"stdint.h"
+	"USBSerial.h"
+
+1538349357 source:c:\pokittolib_git\pokittolib_curr\examples\serial2pc\main.cpp
+	"Pokitto.h"
+	"USBSerial.h"
+
+1537912191 c:\pokittolib_git\pokittolib_curr\examples\serial2pc\my_settings.h
+
+1538501087 source:c:\pokittolib_git\pokittolib_curr\examples\joyhat\main.cpp
+	"Pokitto.h"
+
+1538499896 c:\pokittolib_git\pokittolib_curr\examples\joyhat\my_settings.h
+
+1495932781 source:c:\pokittolib_git\pokittolib_curr\examples\pokisnake\food.cpp
+	"Constants.h"
+	"Food.h"
+
+1495896903 c:\pokittolib_git\pokittolib_curr\examples\pokisnake\constants.h
+
+1495922418 c:\pokittolib_git\pokittolib_curr\examples\pokisnake\food.h
+	"pokitto.h"
+
+1538563100 c:\pokittolib_git\pokittolib_curr\examples\pokisnake\my_settings.h
+
+1538659440 source:c:\pokittolib_git\pokittolib_curr\examples\pokisnake\snake.cpp
+	"Snake.h"
+
+1495931351 c:\pokittolib_git\pokittolib_curr\examples\pokisnake\snake.h
+	"Constants.h"
+	"Food.h"
+	"pokitto.h"
+
+1538660941 source:c:\pokittolib_git\pokittolib_curr\examples\pokisnake\pokisnake.cpp
+	"Pokitto.h"
+	"Constants.h"
+	"Snake.h"
+	"JoyHat.h"
+
+1538657358 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\joyhat\joyhat.h
+	"Pokitto.h"
 
