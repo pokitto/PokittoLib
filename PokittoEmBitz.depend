@@ -4102,7 +4102,7 @@
 1525163501 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
 	"PokittoBattery.h"
 
-1525171722 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
+1539730802 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
 1531409924 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.cpp
@@ -7620,20 +7620,23 @@
 
 1538563100 c:\pokittolib_git\pokittolib_curr\examples\pokisnake\my_settings.h
 
-1538659440 source:c:\pokittolib_git\pokittolib_curr\examples\pokisnake\snake.cpp
+1539900019 source:c:\pokittolib_git\pokittolib_curr\examples\pokisnake\snake.cpp
 	"Snake.h"
 
-1495931351 c:\pokittolib_git\pokittolib_curr\examples\pokisnake\snake.h
+1539899984 c:\pokittolib_git\pokittolib_curr\examples\pokisnake\snake.h
 	"Constants.h"
 	"Food.h"
-	"pokitto.h"
+	"Pokitto.h"
+	"JoyHat.h"
 
-1538660941 source:c:\pokittolib_git\pokittolib_curr\examples\pokisnake\pokisnake.cpp
+1539899985 source:c:\pokittolib_git\pokittolib_curr\examples\pokisnake\pokisnake.cpp
 	"Pokitto.h"
 	"Constants.h"
 	"Snake.h"
-	"JoyHat.h"
 
-1538657358 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\joyhat\joyhat.h
+1539902420 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\joyhat\joyhat.h
 	"Pokitto.h"
+
+1539899864 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\joyhat\rumble.cpp
+	"JoyHat.h"
 

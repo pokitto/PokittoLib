@@ -39,22 +39,20 @@
 
 #include "Pokitto.h"
 
-DigitalOut* rumblepin;
+extern DigitalOut* rumblepin;
 
-#define _X_PIN EXT1
-#define _Y_PIN EXT2
+#define _X_PIN EXT2
+#define _Y_PIN EXT1
 
-mbed::DigitalOut _rumble(EXT0);
-mbed::DigitalIn _b1(EXT15);
-mbed::DigitalIn _b2(EXT14);
-mbed::AnalogIn _joyx(_X_PIN);
-mbed::AnalogIn _joyy(_Y_PIN);
+extern mbed::DigitalOut _rumble;
+extern mbed::DigitalIn _b1;
+extern mbed::DigitalIn _b2;
+extern mbed::AnalogIn _joyx;
+extern mbed::AnalogIn _joyy;
 
-mbed::Timeout _rTimer;
+extern mbed::Timeout _rTimer;
 
-void stoprumble() {
-    rumblepin->write(0);
-}
+extern void stoprumble();
 
 class JoyHat {
 public:
@@ -87,6 +85,7 @@ public:
     void Rumble(float t) {
         if (t==0) _rumble.write(0);
         else {
+                _rumble.write(1);
                 rumblepin = &_rumble;
                 _rTimer.attach(&stoprumble, t); //workaround for attach
         }
@@ -94,6 +93,6 @@ public:
 
 };
 
-JoyHat joyhat;
+extern JoyHat joyhat;
 
 #endif //__JOYHAT_H__

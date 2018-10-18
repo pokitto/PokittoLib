@@ -165,6 +165,9 @@ void Snake::move() {
 
     foodEaten++;
 
+    // Rumble
+    joyhat.Rumble(0.5f);
+
      // Update snake speed
     if (foodEaten % 3 == 0 && speed < 13) {
 

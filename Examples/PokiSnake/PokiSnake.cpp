@@ -24,7 +24,6 @@
 #include "Pokitto.h"
 #include "Constants.h"
 #include "Snake.h"
-#include "JoyHat.h"
 
 
 Pokitto::Core game;
@@ -213,8 +212,8 @@ int main () {
         }*/
 
         if (numplayers>1) {
-                if (joyhat.JoyY()<10 && snakes[1].direction!=SNAKEDIR_UP) snakes[1].direction=SNAKEDIR_DOWN;
-                else if (joyhat.JoyY()>80 && snakes[1].direction!=SNAKEDIR_DOWN) snakes[1].direction=SNAKEDIR_UP;
+                if (joyhat.JoyY()<10 && snakes[1].direction!=SNAKEDIR_UP) snakes[1].direction=SNAKEDIR_UP;
+                else if (joyhat.JoyY()>80 && snakes[1].direction!=SNAKEDIR_DOWN) snakes[1].direction=SNAKEDIR_DOWN;
                 else if (joyhat.JoyX()>80 && snakes[1].direction!=SNAKEDIR_RIGHT) snakes[1].direction=SNAKEDIR_LEFT;
                 else if (joyhat.JoyX()<10 && snakes[1].direction!=SNAKEDIR_LEFT) snakes[1].direction=SNAKEDIR_RIGHT;
         }

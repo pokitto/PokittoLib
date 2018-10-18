@@ -28,7 +28,8 @@
 
 #include "Constants.h"
 #include "Food.h"
-#include "pokitto.h"
+#include "Pokitto.h"
+#include "JoyHat.h"
 
 extern bool border;
 extern uint8_t numplayers;

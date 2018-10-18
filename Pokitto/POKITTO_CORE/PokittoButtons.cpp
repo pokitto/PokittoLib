@@ -126,8 +126,10 @@ bool Buttons::pressed(uint8_t button) {
  * return true if 'button' is released
  */
 bool Buttons::released(uint8_t button) {
-    if (states[button] == 0xFF)
+    if (states[button] == 0xFF) {
+        states[button] = 0; // prevent continuous released state!
         return true;
+    }
     else
         return false;
 }

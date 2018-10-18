@@ -297,6 +297,18 @@
 					<Add directory="../../Examples/Scroll2Layers" />
 				</Compiler>
 			</Target>
+			<Target title="TCLtest">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../../Plox" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -731,6 +743,39 @@
 		</Unit>
 		<Unit filename="../../Examples/Zuzupong/zuzupong.cpp">
 			<Option target="Zuzupong" />
+		</Unit>
+		<Unit filename="../../Plox/My_settings.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/Plox.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/PloxBase.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/PloxComponent.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/gfxdata.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/tcl.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/tcl_test_flow.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/tcl_test_lexer.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/tcl_test_math.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/tcl_test_subst.h">
+			<Option target="TCLtest" />
+		</Unit>
+		<Unit filename="../../Plox/tcltest.cpp">
+			<Option target="TCLtest" />
 		</Unit>
 		<Unit filename="../POKITTO_APP/PokittoApp.h" />
 		<Unit filename="../POKITTO_APP/PokittoAppObject.h" />

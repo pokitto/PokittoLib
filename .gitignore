@@ -1,4 +1,6 @@
 /obj
+/Plox
+/Plox/*.*
 *.zip
 *.usbeecomp
 *.o

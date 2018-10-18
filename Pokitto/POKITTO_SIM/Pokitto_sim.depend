@@ -2220,7 +2220,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1533667295 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1537912191 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1521233474 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
@@ -2683,7 +2683,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
-1536912291 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
+1538563135 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -2809,7 +2809,7 @@
 1525163501 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobattery.cpp
 	"PokittoBattery.h"
 
-1525171722 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
+1539730802 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
 1531409924 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittoconsole.cpp
@@ -2831,7 +2831,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1536912106 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1538564781 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4976,4 +4976,22 @@
 
 1535842388 source:c:\dev\pokittolib\pokitto\pokitto_sim\writewav.cpp
 	"WriteWav.h"
+
+1539723872 source:c:\pokittolib_git\pokittolib_curr\plox\tcltest.cpp
+	"Pokitto.h"
+	"tcl.h"
+	"Plox.h"
+
+1539723840 c:\pokittolib_git\pokittolib_curr\plox\my_settings.h
+
+1539431988 c:\pokittolib_git\pokittolib_curr\plox\tcl.h
+	"Pokitto.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1539462730 c:\pokittolib_git\pokittolib_curr\plox\plox.h
+	"PloxComponent.h"
+
+1539463225 c:\pokittolib_git\pokittolib_curr\plox\ploxcomponent.h
 
