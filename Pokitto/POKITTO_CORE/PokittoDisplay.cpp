@@ -162,6 +162,11 @@ uint8_t Display::bpp = POK_COLORDEPTH;
     uint8_t Display::width = 110;
     uint8_t Display::height = 88;
     uint8_t Display::screenbuffer[110*88]; // 8bit 110x88
+#elif (POK_SCREENMODE == MIXMODE)
+    uint8_t Display::width = 110;
+    uint8_t Display::height = 88;
+    uint8_t Display::screenbuffer[110*88]; // 8bit 110x88 or 4bit 110x176
+    uint8_t Display::scanType[88]; // scanline bit depth indicator
 #elif (POK_SCREENMODE == MODE64)
     uint8_t Display::width = 110;
     uint8_t Display::height = 176;
@@ -291,6 +296,10 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
 		lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
 		#endif
 
+		#if POK_SCREENMODE == MIXMODE
+		lcdRefreshMixMode(m_scrbuf, paletteptr, scanType);
+		#endif
+		
 		#if POK_SCREENMODE == MODE64
 		lcdRefreshMode64(m_scrbuf, paletteptr);
 		#endif

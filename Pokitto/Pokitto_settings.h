@@ -228,6 +228,8 @@
 #define BUFSIZE_MODE_12              4176 // 72 x 58
 #define MODE13                      13
 #define BUFSIZE_MODE13              9680 // 110*88
+#define MIXMODE                     32
+#define BUFSIZE_MIXMODE             9680 // 110*88
 #define MODE64                      64
 #define BUFSIZE_MODE64              19360 // 110*176
 #define MODE14                      14
@@ -291,6 +293,17 @@
     #define POK_STRETCH 0
     #define POK_FPS 30
 #endif
+
+#if PROJ_MIXMODE > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
+    #define POK_SCREENMODE MIXMODE
+    #define POK_COLORDEPTH 8
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
+
 
 #if PROJ_MODE64 > 0 || PROJ_SCREENMODE == 64
     #undef POK_SCREENMODE //get rid of warnings
@@ -379,6 +392,11 @@
     #define LCDHEIGHT 144
     #define POK_BITFRAME 2880
 #elif POK_SCREENMODE == MODE13
+    #define POK_SCREENBUFFERSIZE 110*88
+    #define LCDWIDTH 110
+    #define LCDHEIGHT 88
+    #define POK_BITFRAME 110*88
+#elif POK_SCREENMODE == MIXMODE
     #define POK_SCREENBUFFERSIZE 110*88
     #define LCDWIDTH 110
     #define LCDHEIGHT 88
