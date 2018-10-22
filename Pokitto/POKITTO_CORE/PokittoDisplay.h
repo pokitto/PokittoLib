@@ -141,12 +141,14 @@ public:
 private:
     static uint8_t* canvas;
     static uint8_t bpp;
-    static uint8_t m_colordepth;
 public:
+    static uint8_t m_colordepth; // public to be used elsewhere
+    static uint8_t subMode; // for mixed mode switching
     static uint8_t palOffset;
     static uint8_t width;
     static uint8_t height;
     static uint8_t screenbuffer[];
+    static uint8_t scanType[]; // for mixed screen mode
 
     // PROPERTIES
     static void setColorDepth(uint8_t);

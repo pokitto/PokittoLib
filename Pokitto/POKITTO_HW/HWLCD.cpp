@@ -2372,6 +2372,121 @@ for(x=0;x<220;x+=2)
 }
 #endif //ADEKTOSMODE15
 
+void Pokitto::lcdRefreshMixMode(const uint8_t * screenBuffer, const uint16_t * palettePointer, const uint8_t * scanType)
+{
+	write_command(0x03);
+	write_data(0x1038);
+
+	// Horizontal DRAM Address
+	write_command(0x20);
+	write_data(0);
+
+	// Vertical DRAM Address
+	write_command(0x21);
+	write_data(0);
+
+	// write data to DRAM
+	write_command(0x22);
+	CLR_CS_SET_CD_RD_WR;
+	SET_MASK_P2;
+
+	uint32_t scanline[220];
+
+	// point to beginning of line in data
+	const uint8_t * d = screenBuffer;
+	for(uint32_t y = 0; y < 176; ++y)
+	{
+		// find colours in one scanline
+		uint8_t scanTypeIndex = y >> 1;
+		uint8_t lineIndex = 0;
+		switch(scanType[scanTypeIndex])
+		{
+			case 0:
+			{
+				// point to beginning of line in data
+				d = &screenBuffer[110 * scanTypeIndex];
+				for(uint8_t x = 0; x < (220 / 2); ++x)
+				{
+					uint32_t color = static_cast<uint32_t>(palettePointer[*d]) << 3;
+					++d;
+					scanline[lineIndex] = color;
+					++lineIndex;
+					scanline[lineIndex] = color;
+					++lineIndex;
+				}
+				break;
+			}
+			case 1:
+			{
+				for(uint8_t x = 0; x < (220 / 4); ++x)
+				{
+					uint8_t t = *d;
+					++d;
+
+					uint32_t color1 = static_cast<uint32_t>(palettePointer[256 + (t >> 4)]) << 3;
+					scanline[lineIndex] = color1;
+					++lineIndex;
+					scanline[lineIndex] = color1;
+					++lineIndex;
+
+					uint32_t color2 = static_cast<uint32_t>(palettePointer[256 + (t & 0xF)]) << 3;
+					scanline[lineIndex] = color2;
+					++lineIndex;
+					scanline[lineIndex] = color2;
+					++lineIndex;
+				}
+				break;
+			}
+			case 2:
+			{
+				for(uint8_t x = 0; x < (220 / 4); ++x)
+				{
+					uint8_t t = *d;
+					++d;
+
+					scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 6) & 0x03)]) << 3;
+					++lineIndex;
+
+					scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 4) & 0x03)]) << 3;
+					++lineIndex;
+
+					scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 2) & 0x03)]) << 3;
+					++lineIndex;
+
+					scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 0) & 0x03)]) << 3;
+					++lineIndex;
+				}
+				break;
+			}
+		}
+
+        uint32_t color = scanline[0];
+        #define WRITE_SCANLINE *LCD = color; TGL_WR_OP(color = scanline[++i]);
+
+		volatile uint32_t * LCD = reinterpret_cast< volatile uint32_t * >(0xA0002188);
+		for (uint8_t i = 0; i < 220;)
+		{
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+			WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+		}
+
+		#undef WRITE_SCANLINE
+	}
+
+	CLR_MASK_P2;
+}
+
+
 void Pokitto::blitWord(uint16_t c) {
     setup_data_16(c);CLR_WR;SET_WR;
 }
