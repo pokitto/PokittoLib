@@ -1512,7 +1512,8 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     else if (m_colordepth==4) {
 
     /** 4bpp fast version */
-	int16_t scrx,scry,xclip,xjump,scrxjump;
+	int16_t scrx,scry,xjump,scrxjump;
+	int16_t xclip;
     xclip=xjump=scrxjump=0;
     /** y clipping */
     if (y<0) { h+=y; bitmap -= y*(w>>1); y=0;}
@@ -1549,8 +1550,9 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                         uint8_t sourcepixel = *bitmap;
                         if ((sourcepixel&0x0F) != invisiblecolor) {
                             sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
-                            targetpixel |= sourcepixel;
+                            volatile uint8_t targetpixel = *scrptr;// & 0x0F;
+                            targetpixel &= 0xF; //clear upper nibble
+                            targetpixel |= sourcepixel; //now OR it
                             *scrptr = targetpixel;
                         }
                         //scrptr++;
@@ -1560,9 +1562,11 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
                 bitmap += xjump; // needed if x<0 clipping occurs
             } else { /** ODD pixel starting line **/
+                uint8_t sourcepixel;
+                uint8_t targetpixel;
                 for (scrx = x; scrx < w+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
+                    sourcepixel = *bitmap;
+                    targetpixel = *scrptr;
                     // store higher nibble of source pixel in lower nibble of target
                     if((sourcepixel>>4)!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel >> 4 );
                     *scrptr = targetpixel;
@@ -1572,6 +1576,12 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                     if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
                     *scrptr = targetpixel;
                     bitmap++;
+                }
+                if (xclip) {
+                    // last line, store higher nibble of last source pixel in lower nibble of last address
+                    sourcepixel = *bitmap >> 4;
+                    if(sourcepixel!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | sourcepixel;
+                    *scrptr = targetpixel;
                 }
                 bitmap+=xjump;
             }
