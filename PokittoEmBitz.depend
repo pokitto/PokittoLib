@@ -3214,7 +3214,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1537912191 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1540257209 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515445398 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3613,7 +3613,7 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1533667295 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
+1540257209 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.h
 	"mbed.h"
 	"gpio_api.h"
 	"pinmap.h"
@@ -3648,7 +3648,7 @@
 1517251473 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
-1538563135 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
+1540257209 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -4127,7 +4127,7 @@
 1536568015 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
-1540256949 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
+1540257209 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4177,7 +4177,7 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1533667295 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
+1540257209 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 	<algorithm>
@@ -7654,4 +7654,16 @@
 
 1540251688 c:\pokittolib_git\pokittolib_curr\examples\bugfind\tiles.h
 	<stdint.h>
+
+1540257209 source:c:\pokittolib_git\pokittolib_curr\examples\mixmode\mixmode.cpp
+	"Pokitto.h"
+	"bitmaps.h"
+	"HWSound.h"
+	"drawing.h"
+
+1540257209 c:\pokittolib_git\pokittolib_curr\examples\mixmode\my_settings.h
+
+1540257209 c:\pokittolib_git\pokittolib_curr\examples\mixmode\bitmaps.h
+
+1540257209 c:\pokittolib_git\pokittolib_curr\examples\mixmode\drawing.h
 
