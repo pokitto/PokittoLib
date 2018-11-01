@@ -1343,6 +1343,10 @@ void Core::setFrameRate(uint8_t fps) {
 	sound.prescaler = __avrmax(1, sound.prescaler);
 }
 
+uint8_t Core::getFrameRate() {
+	return 1000 / timePerFrame;
+}
+
 void Core::pickRandomSeed(){
         initRandom();
 }
