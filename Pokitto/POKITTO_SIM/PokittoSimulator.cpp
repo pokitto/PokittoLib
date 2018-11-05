@@ -165,7 +165,11 @@ void Simulator::initSDLGfx() {
     #endif // POK_USE_CONSOLE
     buttons_state = buttons_held = buttons_released = 0;
 
+    #ifndef SIM_PORTRAIT
     SrcR.x = 0; SrcR.y = 0; SrcR.w = SIMW; SrcR.h = SIMH;
+    #else
+    SrcR.x = 0; SrcR.y = 0; SrcR.w = SIMH; SrcR.h = SIMW;
+    #endif
 
     #if SIM_FULLSCREEN
     DestR.x = 0; DestR.y = 0; DestR.w = 1280; DestR.h = 800;
@@ -175,7 +179,11 @@ void Simulator::initSDLGfx() {
     DestR.w = (int)(400.0f*0.54f); DestR.h = (int)(533.0f*0.08f);
     DestR.w = SIMW; DestR.h = SIMH;
     #else
+    #ifndef SIM_PORTRAIT
     DestR.x = 0; DestR.y = 0; DestR.w = SIMW*2; DestR.h = SIMH*2;SrcR.w = SIMW*2; SrcR.h = SIMH*2;
+    #else
+    DestR.x = 0; DestR.y = 0; DestR.w = SIMH*2; DestR.h = SIMW*2;SrcR.w = SIMH*2; SrcR.h = SIMW*2;
+    #endif // SIM_PORTRAIT
     #endif // SIM_SHOWDEVICE
     #endif // SIM_FULLSCREEN
 
@@ -207,8 +215,13 @@ void Simulator::initSDLGfx() {
     ww = 2.2f*SIMW;
     wh = 3.6f*SIMH;
     #else
+    #ifndef SIM_PORTRAIT
     ww = SIMW*2;
     wh = SIMH*2;
+    #else
+    wh = SIMW*2;
+    ww = SIMH*2;
+    #endif // SIM_PORTRAIT
     #endif // SIM_SHOWDEVICE
     sdlSimWin = SDL_CreateWindow("Pokitto simulator", 100, 100, ww, wh, SDL_WINDOW_SHOWN);
     #else
@@ -233,10 +246,17 @@ void Simulator::initSDLGfx() {
     }
 
     /* create the hardware-accelerated SDL texture, that will be used to draw the simulated screen */
+    #ifndef SIM_PORTRAIT
     sdlTex = SDL_CreateTexture(sdlRen,
                                SDL_PIXELFORMAT_ABGR8888,
                                SDL_TEXTUREACCESS_STREAMING,
                                SIMW, SIMH);
+    #else
+    sdlTex = SDL_CreateTexture(sdlRen,
+                               SDL_PIXELFORMAT_ABGR8888,
+                               SDL_TEXTUREACCESS_STREAMING,
+                               SIMH, SIMW);
+    #endif
 
 
     dramptr = gfxbuf; // point simulated DRAM pointer to beginning of memory
@@ -283,6 +303,7 @@ void Simulator::refreshDisplay() {
     uint16_t p=0;
     //convert simulated dram buffer to a pixel texture
     uint32_t q=0;
+    #ifndef SIM_PORTRAIT
     for (uint16_t x=0; x < SIMW; x++) {
         for (uint16_t y=0; y < SIMH; y++, p++) {
             q = x*4 + y * SIMW *4;
@@ -300,9 +321,43 @@ void Simulator::refreshDisplay() {
             lcdpixels[q+3] = 255;
             }
     }
-
     /* update the SDL hardware texture with the pixels */
     SDL_UpdateTexture(sdlTex, NULL, lcdpixels, SIMW * sizeof (Uint32));
+    #else
+    for (uint16_t x=0; x < SIMW; x++) {
+        for (uint16_t y=0; y < SIMH; y++, p++) {
+            //q = x*4 + y * SIMW *4;
+            // buffer is in normal landscape orientation
+            // so rotation is done mathematically
+            // top left is mapped to bottom left
+            //(W-x)*H-(H-y)
+            q = ((SIMW-x)*SIMH*4 - 4*(SIMH - y));
+            uint16_t R,G,B;
+            uint16_t c;
+            c = gfxbuf[p];
+            B = ((c & 0x1F) * 255)>>5;
+            c >>= 5;
+            G = ((c & 0x3F) * 255)>>6;
+            c >>= 6;
+            R = (c*255)>>5;
+
+            lcdpixels[q] = R;
+            lcdpixels[q+1] = G;
+            lcdpixels[q+2] = B;
+            lcdpixels[q+3] = 255;
+
+            //lcdpixels[q] = 255;//R;
+            //lcdpixels[q+1] = 0;//G;
+            //lcdpixels[q+2] = 0;//B;
+            //lcdpixels[q+3] = 255;
+            //q+=4;
+            }
+    }
+    /* update the SDL hardware texture with the pixels */
+    SDL_UpdateTexture(sdlTex, NULL, lcdpixels, SIMH * sizeof (Uint32));
+    #endif
+
+
     //SDL_SetTextureAlphaMod(sdlTex, LCD_OPAQUENESS + random(FLICKER_AMOUNT));
     //SDL_SetTextureBlendMode(sdlTex, SDL_BLENDMODE_BLEND);
 
@@ -322,7 +377,11 @@ void Simulator::refreshDisplay() {
         #if SIM_SHOWDEVICE >0
             SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, ww, wh, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
         #else
+            #ifndef SIM_PORTRAIT
             SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMW*2, SIMH*2, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+            #else
+            SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMH*2, SIMW*2, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+            #endif // SIM_PORTRAIT
         #endif // SIM_SHOWDEVICE
     #endif // SCREENCAPTURE
 
