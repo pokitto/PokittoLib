@@ -122,6 +122,7 @@ extern OSC patch[];
 extern BLOCK block[]; // array of blocks
 
 #define MAX_ARPMODE 16
+#define MAX_WAVETYPES 6
 
 extern int8_t arptable[][5];
 

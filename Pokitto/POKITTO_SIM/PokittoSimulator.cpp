@@ -165,7 +165,7 @@ void Simulator::initSDLGfx() {
     #endif // POK_USE_CONSOLE
     buttons_state = buttons_held = buttons_released = 0;
 
-    #ifndef SIM_PORTRAIT
+    #if SIM_PORTRAIT != 1
     SrcR.x = 0; SrcR.y = 0; SrcR.w = SIMW; SrcR.h = SIMH;
     #else
     SrcR.x = 0; SrcR.y = 0; SrcR.w = SIMH; SrcR.h = SIMW;
@@ -179,7 +179,7 @@ void Simulator::initSDLGfx() {
     DestR.w = (int)(400.0f*0.54f); DestR.h = (int)(533.0f*0.08f);
     DestR.w = SIMW; DestR.h = SIMH;
     #else
-    #ifndef SIM_PORTRAIT
+    #if SIM_PORTRAIT != 1
     DestR.x = 0; DestR.y = 0; DestR.w = SIMW*2; DestR.h = SIMH*2;SrcR.w = SIMW*2; SrcR.h = SIMH*2;
     #else
     DestR.x = 0; DestR.y = 0; DestR.w = SIMH*2; DestR.h = SIMW*2;SrcR.w = SIMH*2; SrcR.h = SIMW*2;
@@ -215,7 +215,7 @@ void Simulator::initSDLGfx() {
     ww = 2.2f*SIMW;
     wh = 3.6f*SIMH;
     #else
-    #ifndef SIM_PORTRAIT
+    #if SIM_PORTRAIT != 1
     ww = SIMW*2;
     wh = SIMH*2;
     #else
@@ -246,7 +246,7 @@ void Simulator::initSDLGfx() {
     }
 
     /* create the hardware-accelerated SDL texture, that will be used to draw the simulated screen */
-    #ifndef SIM_PORTRAIT
+    #if SIM_PORTRAIT != 1
     sdlTex = SDL_CreateTexture(sdlRen,
                                SDL_PIXELFORMAT_ABGR8888,
                                SDL_TEXTUREACCESS_STREAMING,
@@ -303,7 +303,7 @@ void Simulator::refreshDisplay() {
     uint16_t p=0;
     //convert simulated dram buffer to a pixel texture
     uint32_t q=0;
-    #ifndef SIM_PORTRAIT
+    #if SIM_PORTRAIT != 1
     for (uint16_t x=0; x < SIMW; x++) {
         for (uint16_t y=0; y < SIMH; y++, p++) {
             q = x*4 + y * SIMW *4;
@@ -377,7 +377,7 @@ void Simulator::refreshDisplay() {
         #if SIM_SHOWDEVICE >0
             SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, ww, wh, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
         #else
-            #ifndef SIM_PORTRAIT
+            #if SIM_PORTRAIT != 1
             SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMW*2, SIMH*2, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
             #else
             SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMH*2, SIMW*2, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);

@@ -113,6 +113,9 @@ public:
     static void volumeUp();
     static void volumeDown();
 
+    // Synth using samples support
+    static void loadSampleToOsc(uint8_t os, uint8_t* sampdata, uint32_t sampsize);
+
 	// Original functions
 	static void updateStream();
     static void playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav,uint8_t arpmode);

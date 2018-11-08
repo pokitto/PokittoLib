@@ -853,7 +853,7 @@ uint8_t Sound::getVolume(uint8_t channel) {
 
 void Sound::playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav,uint8_t arpmode)
 {
-    if (wav>5) wav=0;
+    if (wav>MAX_WAVETYPES) wav=0;
     if (arpmode>MAX_ARPMODE) arpmode=MAX_ARPMODE;
     if (os==1) setOSC(&osc1,1,wav,1,0,0,frq,amp,0,0,0,0,0,0,arpmode,0,0);
     else if (os==2) setOSC(&osc2,1,wav,1,0,0,frq,amp,0,0,0,0,0,0,arpmode,0,0);
@@ -954,4 +954,14 @@ uint32_t Sound::getMusicStreamElapsedMilliSec() {
     return streamcounter/(POK_AUD_FREQ/1000);
     #endif
     return 0;
+}
+
+void Sound::loadSampleToOsc(uint8_t os, uint8_t* data, uint32_t datasize) {
+    OSC* o;
+    if (os==3) o = &osc3;
+    else if (os==2) o = &osc2;
+    else o = &osc1;
+    o->sample = data;
+    o->samplelength = datasize;
+    o->samplepos = 0;
 }

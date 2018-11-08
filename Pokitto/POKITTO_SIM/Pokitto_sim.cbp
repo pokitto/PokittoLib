@@ -702,6 +702,9 @@
 		<Unit filename="../../Examples/SynthTest/SynthTest.cpp">
 			<Option target="SynthTest" />
 		</Unit>
+		<Unit filename="../../Examples/SynthTest/bing16k.h">
+			<Option target="SynthTest" />
+		</Unit>
 		<Unit filename="../../Examples/Tracker/Arrays.cpp">
 			<Option target="Tracker" />
 		</Unit>
