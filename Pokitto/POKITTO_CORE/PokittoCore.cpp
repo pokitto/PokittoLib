@@ -617,12 +617,22 @@ void Core::begin() {
 	buttons.update();
 	battery.begin();
 	display.begin();
+
+	char logoFlag = eeprom_read_byte((uint16_t*)EESETTINGS_SKIPINTRO);
+	if( logoFlag&2 ){ // toggle flag set, change value for next boot
+	    eeprom_write_byte((uint16_t*)EESETTINGS_SKIPINTRO, !(logoFlag&1));
+	}
+	logoFlag &= 1;
+	
 	#if POK_DISPLAYLOGO
         #if PROJ_DEVELOPER_MODE != 1
-        showLogo();
+	if( logoFlag == 0 ){	
+	    showLogo();
+	}
         #endif // PROJ_DEVELOPER_MODE
 	#endif // POK_DISPLAYLOGO
 
+	
 	display.enableDirectPrinting(true);
     display.directbgcolor = COLOR_BLACK;
     display.clearLCD();
@@ -631,7 +641,6 @@ void Core::begin() {
     display.enableDirectPrinting(true);
     display.directbgcolor = COLOR_BLACK;
     display.directcolor = COLOR_GREEN;
-    display.clearLCD();
     display.setFont(fntC64UIGfx);
     display.adjustCharStep=0;
     display.adjustLineStep=1;
@@ -641,7 +650,9 @@ void Core::begin() {
 
     #ifndef DISABLE_LOADER
     #if PROJ_DEVELOPER_MODE != 1
-    askLoader();
+	if( logoFlag == 0 ){
+	    askLoader();
+	}
     #endif // PROJ_DEVELOPER_MODE
     #endif
 
@@ -649,18 +660,22 @@ void Core::begin() {
 	sound.setMaxVol(VOLUME_SPEAKER_MAX);
 	sound.setVolume(VOLUME_SPEAKER_MAX);
 	#else
-	//showWarning();
-	setVolLimit();
-	display.clear();
-	display.update();
+	if( logoFlag == 0 ){
+	    //showWarning();
+	    setVolLimit();
+	    display.clear();
+	    display.update();
 
-	while(buttons.states[BTN_A])
-    {
-        buttons.update();
-    }
+	    while(buttons.states[BTN_A])
+	    {
+		buttons.update();
+	    }
+	}else{
+	    sound.setVolume(sound.getVolume());//make sure we're at set volume before continue
+	}
 
-	//sound.setVolume(sound.getVolume());//make sure we're at set volume before continue
 	#endif
+	
 	display.enableDirectPrinting(false);
 	display.adjustCharStep=1;
 	display.adjustLineStep=1;
@@ -670,7 +685,7 @@ void Core::begin() {
 	display.setFont(font5x7);
 	#else
 	display.setFont(fontC64);
-    #endif
+    	#endif
 	#if POK_ENABLE_SOUND > 0
         sound.begin();
 
