@@ -3196,10 +3196,10 @@
 1515192330 c:\pokittolibcompare\pokittolib\examples\updateandcliprect\gfxdata.h
 	<stdint.h>
 
-1541715399 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
+1541715971 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
 	"Pokitto.h"
 	"Synth.h"
-	"beat8k.h"
+	"beat11k.h"
 
 1517553769 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto.h
 	"Pokitto_settings.h"
@@ -4258,7 +4258,7 @@
 	"Tracker.h"
 	"FileIO.h"
 
-1541713805 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
+1541850962 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
 	"Synth.h"
 
 1517497215 c:\pokittolib_git\pokittolib_curr\examples\waveplayer\my_settings.h

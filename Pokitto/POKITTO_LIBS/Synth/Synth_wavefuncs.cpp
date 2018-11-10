@@ -100,7 +100,10 @@ void sample(OSC* o) {
     if (sample==NULL) o->output = 0;
     else {
           o->samplepos+=o->samplestep;
-          if ((o->samplepos>>8) > o->samplelength ) o->samplepos = 0;
+          if ((o->samplepos>>8) > o->samplelength ) {
+                o->samplepos = 0;
+                if (o->loop == 0) o->duration=0;
+          }
           o->output = *(o->sample + (o->samplepos>>8))<<8;
     }
 }
