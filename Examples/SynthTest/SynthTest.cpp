@@ -1,5 +1,6 @@
 #include "Pokitto.h"
 #include "Synth.h"
+#include "beat11k.h"
 
 Pokitto::Core game;
 Pokitto::Display disp;
@@ -11,7 +12,7 @@ DigitalOut enable(EXT4);
 
 int tonefreq=46;
 uint8_t amplitude = 255;//127;
-uint8_t wavetype = 1, arpmode=1;
+uint8_t wavetype = 6, arpmode=3;
 uint32_t changed = 1;
 char notestr[6];
 uint8_t sbindx=0,sbx=0,prevy=0;
@@ -33,8 +34,11 @@ int main()
     linecenter *=2;
     linecenter += 0;
     snd.ampEnable(1);
+    //snd.loadSampleToOsc(1,(uint8_t*)b1943,sizeof(b1943));
+    snd.loadSampleToOsc(1,(uint8_t*)beat11k,sizeof(beat11k));
+    snd.loadSampleToOsc(2,(uint8_t*)beat11k,sizeof(beat11k));
     snd.playTone(1,tonefreq,amplitude,wavetype,arpmode);
-    //snd.playTone(1,100,255,0);
+    // snd.playTone(1,100,255,0);
     // want to have 2 oscillators 1 octave apart ?
     snd.playTone(2,tonefreq+12,amplitude,wavetype,arpmode);
 
@@ -59,6 +63,8 @@ int main()
         disp.println(" Noise");break;
     case 5:
         disp.println(" SqNois");break;
+    case 6:
+        disp.println(" Sample");break;
     }
     disp.print("Vol:");
     #ifndef POK_SIM
@@ -85,7 +91,7 @@ int main()
             if(btn.leftBtn() && (tonefreq > 0)) { tonefreq --; changed = DEBOU; }
             if(btn.rightBtn() &&  (tonefreq < 88)) { tonefreq ++; changed = DEBOU; }
             if(btn.released(BTN_A) && wavetype > 0 ) { wavetype--; changed = DEBOU*10;}
-            if(btn.released(BTN_B) && wavetype < 5 ) { wavetype++; changed = DEBOU*10;}
+            if(btn.released(BTN_B) && wavetype < MAX_WAVETYPES ) { wavetype++; changed = DEBOU*10;}
             if (snd.getVolume() != oldvol) changed=DEBOU;
 
             if (changed) {
@@ -114,6 +120,8 @@ int main()
                         disp.println(" Noise");break;
                     case 5:
                         disp.println(" SqNois");break;
+                    case 6:
+                        disp.println(" Sample");break;
                     }
                     disp.print("Vol:");
                     #ifndef POK_SIM

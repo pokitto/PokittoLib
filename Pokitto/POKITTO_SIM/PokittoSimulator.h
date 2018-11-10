@@ -59,6 +59,7 @@
 #define SOUNDCAPTURE    0       // nonzero = continuous capture of sound stream to disk
 #define USE_JOYSTICK    0       // check for presence & use a game controller (analog stick is not supported yet)
 #define MAKE_GIF        0       // nonzero = make a gif using ImageMagick Convert
+#define SIM_PORTRAIT    0       // turn display to portrait mode
 
 /** INTERNAL SETTINGS, DO NOT CHANGE UNLESS YOU UNDERSTAND WHAT YOU'RE DOING **/
 //#if SCREENCAPTURE > 1

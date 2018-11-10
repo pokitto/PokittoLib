@@ -228,6 +228,10 @@
 #define BUFSIZE_MODE_12              4176 // 72 x 58
 #define MODE13                      13
 #define BUFSIZE_MODE13              9680 // 110*88
+#define MIXMODE                     32
+#define BUFSIZE_MIXMODE             9680 // 110*88
+#define MODE64                      64
+#define BUFSIZE_MODE64              19360 // 110*176
 #define MODE14                      14
 #define BUFSIZE_MODE14              14520
 #define MODE15                      15
@@ -285,6 +289,27 @@
     #undef POK_COLORDEPTH
     #undef POK_FPS
     #define POK_SCREENMODE MODE13
+    #define POK_COLORDEPTH 8
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
+
+#if PROJ_MIXMODE > 0
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
+    #define POK_SCREENMODE MIXMODE
+    #define POK_COLORDEPTH 8
+    #define POK_STRETCH 0
+    #define POK_FPS 30
+#endif
+
+
+#if PROJ_MODE64 > 0 || PROJ_SCREENMODE == 64
+    #undef POK_SCREENMODE //get rid of warnings
+    #undef POK_COLORDEPTH
+    #undef POK_FPS
+    #define POK_SCREENMODE MODE64
     #define POK_COLORDEPTH 8
     #define POK_STRETCH 0
     #define POK_FPS 30
@@ -371,6 +396,16 @@
     #define LCDWIDTH 110
     #define LCDHEIGHT 88
     #define POK_BITFRAME 110*88
+#elif POK_SCREENMODE == MIXMODE
+    #define POK_SCREENBUFFERSIZE 110*88
+    #define LCDWIDTH 110
+    #define LCDHEIGHT 88
+    #define POK_BITFRAME 110*88
+#elif POK_SCREENMODE == MODE64
+    #define POK_SCREENBUFFERSIZE 110*176
+    #define LCDWIDTH 110
+    #define LCDHEIGHT 176
+    #define POK_BITFRAME 110*176
 #elif POK_SCREENMODE == MODE14
     #define POK_SCREENBUFFERSIZE 14520
     #define LCDWIDTH 220
@@ -482,6 +517,13 @@
 #define EESETTINGS_RTCALARMMODE     4011 // 0xFAB RTC alarm mode (0=disabled, 1=enabled, 3 = enabled with sound)
 #define EESETTINGS_RESERVED         4012 // 0xFAC 4bytes reserved (additional sleep configuration)
 #define EESETTINGS_WAKEUPTIME       4016 // 0xFB0 Wake-up time as 32bit value for 1Hz RTC clock
+
+/** USB SERIAL PORT **/
+
+#ifndef PROJ_VENDOR_ID
+#define POK_VENDOR_ID 0x04D8
+#define POK_PRODUCT_ID 0x000A
+#endif
 
 
 #endif // POKITTO_SETTINGS_H

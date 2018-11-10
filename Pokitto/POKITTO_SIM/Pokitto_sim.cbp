@@ -270,6 +270,33 @@
 					<Add directory="../../Examples/Lander_GB" />
 				</Compiler>
 			</Target>
+			<Target title="Minesweeper_AB">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="../../Examples/Minesweeper/Minesweeper" />
+					<Add directory="../POKITTO_XTERNALS/Arduino" />
+					<Add directory="../POKITTO_XTERNALS/Arduboy2/src" />
+				</Compiler>
+			</Target>
+			<Target title="Scroll2Layers">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../../Examples/Scroll2Layers" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -498,6 +525,126 @@
 		<Unit filename="../../Examples/Lander_GB/main.cpp">
 			<Option target="Lander_GB" />
 		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/ConfirmationMenu.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Credits.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/CreditsState.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/CreditsState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Game.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Game.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameContext.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameContext.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStateMachine.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStateType.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStats.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStatus.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameplayState.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameplayState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Grid.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Images.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Languages.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Minesweeper.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/My_settings.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Point2.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/SaveCheckState.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/SaveCheckState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/SaveSystem.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Settings.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/SplashscreenState.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/SplashscreenState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Stack.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/StatsState.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/StatsState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/ThemesState.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/ThemesState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Tile.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Tile.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/TileGridRenderer.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/TileGridRenderer.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/TileRenderingSettings.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/TitlescreenState.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/TitlescreenState.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../../Examples/Minesweeper/Minesweeper/Utils.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
 		<Unit filename="../../Examples/Mode13/My_settings.h">
 			<Option target="Mode13" />
 		</Unit>
@@ -534,6 +681,12 @@
 		<Unit filename="../../Examples/SaveHighscore/savehi.cpp">
 			<Option target="SaveHighscore" />
 		</Unit>
+		<Unit filename="../../Examples/Scroll2Layers/My_settings.h">
+			<Option target="Scroll2Layers" />
+		</Unit>
+		<Unit filename="../../Examples/Scroll2Layers/main.cpp">
+			<Option target="Scroll2Layers" />
+		</Unit>
 		<Unit filename="../../Examples/Sprites/My_settings.h">
 			<Option target="Sprites" />
 		</Unit>
@@ -547,6 +700,9 @@
 			<Option target="SynthTest" />
 		</Unit>
 		<Unit filename="../../Examples/SynthTest/SynthTest.cpp">
+			<Option target="SynthTest" />
+		</Unit>
+		<Unit filename="../../Examples/SynthTest/bing16k.h">
 			<Option target="SynthTest" />
 		</Unit>
 		<Unit filename="../../Examples/Tracker/Arrays.cpp">
@@ -637,6 +793,9 @@
 		<Unit filename="../POKITTO_CORE/PokittoLogos.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoLogos.h" />
 		<Unit filename="../POKITTO_CORE/PokittoPalette.cpp" />
+		<Unit filename="../POKITTO_CORE/PokittoPrintf.cpp">
+			<Option target="HelloWorld" />
+		</Unit>
 		<Unit filename="../POKITTO_CORE/PokittoSound.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoSound.h" />
 		<Unit filename="../POKITTO_CORE/PokittoTimer.h" />
@@ -757,6 +916,62 @@
 		<Unit filename="../POKITTO_LIBS/Synth/Synth_song.h" />
 		<Unit filename="../POKITTO_LIBS/Synth/Synth_songfuncs.cpp" />
 		<Unit filename="../POKITTO_LIBS/Synth/Synth_wavefuncs.cpp" />
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Arduboy2.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Arduboy2.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Arduboy2Audio.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Arduboy2Audio.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Arduboy2Core.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Arduboy2Core.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Sprites.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Sprites.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/ab_logo.c">
+			<Option compilerVar="CC" />
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/glcdfont.c">
+			<Option compilerVar="CC" />
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/Arduino.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/Print.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/Print.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/Printable.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/WCharacter.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/WString.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/delay.cpp">
+			<Option target="Minesweeper_AB" />
+		</Unit>
+		<Unit filename="../POKITTO_XTERNALS/Arduino/pins_arduino.h">
+			<Option target="Minesweeper_AB" />
+		</Unit>
 		<Unit filename="../Pokitto.h" />
 		<Unit filename="../Pokitto_settings.h">
 			<Option weight="0" />

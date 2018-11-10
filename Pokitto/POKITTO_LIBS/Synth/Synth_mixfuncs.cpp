@@ -48,12 +48,12 @@ void mix1(){
     // Track 1
     if (osc1.on) {
     Farr[osc1.wave](&osc1);
-    #if PROJ_ARDUBOY > 0
+    //#if PROJ_ARDUBOY > 0
     if (osc1.duration) {
         /**this is special for osc1 and is only used to emulate arduino Tone(); */
         osc1.duration--;
     } else osc1.on = 0;
-    #endif
+    //#endif
 
     #ifdef POK_SIM
     soundbyte = (((osc1.output>>8) * (osc1.adsrvol >>8 )) >> 8) >> osc1.echodiv; // To output, shift back to 8-bit
@@ -76,6 +76,10 @@ void mix2(){
     // Track 2
     if (osc2.on) {
     Farr[osc2.wave](&osc2);
+    if (osc2.duration) {
+        osc2.duration--;
+    } else osc2.on = 0;
+
     #ifdef POK_SIM
     soundbyte = (((osc2.output>>8) * (osc2.adsrvol >>8 )) >> 8) >> osc2.echodiv;
     if (osc2.overdrive) soundbyte *= OVERDRIVE;
@@ -97,6 +101,9 @@ void mix3(){
     // Track 3
     if (osc3.on) {
     Farr[osc3.wave](&osc3);
+    if (osc3.duration) {
+        osc3.duration--;
+    } else osc3.on = 0;
     #ifdef POK_SIM
     soundbyte = (((osc3.output>>8) * (osc3.adsrvol >>8 )) >> 8) >> osc3.echodiv;
     if (osc3.overdrive) soundbyte *= OVERDRIVE;

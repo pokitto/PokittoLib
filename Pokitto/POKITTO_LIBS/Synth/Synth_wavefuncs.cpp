@@ -42,7 +42,7 @@ void waveoff(OSC* o); void sqwave(OSC* o); void sawwave(OSC* o); void triwave(OS
 void noADSR(OSC* o); void attackFunc(OSC* o); void decayFunc(OSC* o); void releaseFunc(OSC* o);
 void mix1(); void mix2(); void mix3(); void updateEnvelopes();
 
-waveFunction Farr []  = {waveoff, sqwave, sawwave, triwave, noise, tonenoise};
+waveFunction Farr []  = {waveoff, sqwave, sawwave, triwave, noise, tonenoise, sample};
 envFunction Earr [] = {noADSR, attackFunc, decayFunc, releaseFunc};
 mixFunction Marr [] = {updateEnvelopes,mix3,mix2,mix1}; // counts down
 mixFunction HWMarr [] = {updateEnvelopes,mix3,mix2,mix1}; // counts down
@@ -97,13 +97,11 @@ void tonenoise(OSC* o){
 }
 
 void sample(OSC* o) {
-
-    /*if (o->samplepos > o->samplelength ) o->samplepos = 0;
-
-    if (o->count > o->wcycle) {
-        o->count=0;
-        if (o->output) o->output = 0;
-        //else o->output = o->output=pgm_read_byte((uint32_t)(sfxBike) + o->inccount);
-    }*/
+    if (sample==NULL) o->output = 0;
+    else {
+          o->samplepos+=o->samplestep;
+          if ((o->samplepos>>8) > o->samplelength ) o->samplepos = 0;
+          o->output = *(o->sample + (o->samplepos>>8))<<8;
+    }
 }
 

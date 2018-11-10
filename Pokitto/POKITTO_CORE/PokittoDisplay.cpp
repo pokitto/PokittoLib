@@ -92,8 +92,6 @@ Pokitto::Sound _pdsound;
 
 using namespace Pokitto;
 
-
-
 uint8_t* Display::m_scrbuf;
 uint8_t* Display::m_tileset;
 uint8_t* Display::m_tilebuf;
@@ -124,7 +122,7 @@ uint16_t Display::palette[PALETTE_SIZE];
 const unsigned char* Display::font;
 int8_t Display::adjustCharStep = 1;
 int8_t Display::adjustLineStep = 1;
-bool Display::fixedWidthFont = false;
+bool Display::fixedWidthFont = false, Display::flipFontVertical = false;
 
 /** drawing canvas **/
 //uint8_t* Display::canvas; // points to the active buffer. if null, draw direct to screen
@@ -164,6 +162,15 @@ uint8_t Display::bpp = POK_COLORDEPTH;
     uint8_t Display::width = 110;
     uint8_t Display::height = 88;
     uint8_t Display::screenbuffer[110*88]; // 8bit 110x88
+#elif (POK_SCREENMODE == MIXMODE)
+    uint8_t Display::width = 110;
+    uint8_t Display::height = 88;
+    uint8_t Display::screenbuffer[110*88]; // 8bit 110x88 or 4bit 110x176
+    uint8_t Display::scanType[88]; // scanline bit depth indicator
+#elif (POK_SCREENMODE == MODE64)
+    uint8_t Display::width = 110;
+    uint8_t Display::height = 176;
+    uint8_t __attribute__ ((aligned)) Display::screenbuffer[110*176]; // 8bit 110x176
 #elif (POK_SCREENMODE == MODE15)
     uint8_t Display::width = 220;
     uint8_t Display::height = 176;
@@ -287,6 +294,14 @@ void Display::update(bool useDirectDrawMode, uint8_t updRectX, uint8_t updRectY,
     if (! useDirectDrawMode) {
 		#if POK_SCREENMODE == MODE13
 		lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
+		#endif
+
+		#if POK_SCREENMODE == MIXMODE
+		lcdRefreshMixMode(m_scrbuf, paletteptr, scanType);
+		#endif
+
+		#if POK_SCREENMODE == MODE64
+		lcdRefreshMode64(m_scrbuf, paletteptr);
 		#endif
 
         #if POK_SCREENMODE == MODE_GAMEBOY
@@ -494,7 +509,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 	if( color != invisiblecolor )
 	    drawPixelFG = &Display::drawPixel;
 	if( bgcolor != invisiblecolor )
-	    drawPixelBG = &Display::drawPixel;	
+	    drawPixelBG = &Display::drawPixel;
     }
 
     void (*drawPixel[])(int16_t,int16_t, uint8_t) = {drawPixelBG, drawPixelFG};
@@ -504,36 +519,55 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 #else
     if( fontSize != 2 ){
 #endif
-    
+
     for (i = 0; i < numBytes; i++) {
 	bitcolumn = *bitmap++;
 	if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
 	for (j = 0; j <= h; j++) { // was j<=h
 	    uint8_t c = colors[ bitcolumn & 1 ];
-		
+
 #if PROJ_ARDUBOY > 0
 	    drawPixel[ bitcolumn&1 ](x, y + 7 - j,c);
+#elif PROJ_SUPPORT_FONTROTATION > 0
+       // if font flipping & rotation is allowed - do not slow down old programs!
+       if (flipFontVertical) {
+           drawPixel[ bitcolumn&1 ](x, y + h - j,c);
+       } else {
+           drawPixel[ bitcolumn&1 ](x, y + j,c);
+       }
 #else
+	   // "Normal" case
 	    drawPixel[ bitcolumn&1 ](x, y + j,c);
 #endif // PROJ_ARDUBOY
 	    bitcolumn>>=1;
 
 	}
-	x++;
+#if PROJ_SUPPORT_FONTROTATION > 0
+	if (flipFontVertical) x--;
+	else x++;
+#else
+    x++;
+#endif
     }
 
-    return numBytes+adjustCharStep; // for character stepping
-    
+#if PROJ_SUPPORT_FONTROTATION > 0
+    if (flipFontVertical) return -numBytes-adjustCharStep;
+    else return numBytes+adjustCharStep; // for character stepping
+#else
+    return numBytes+adjustCharStep;
+#endif
+
+
 #if PROJ_ARDUBOY > 0
 #else
     }else{
-    
+
 	for (i = 0; i < numBytes; i++) {
 	    bitcolumn = *bitmap++;
 	    if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
 	    for (j = 0; j <= h; j++) { // was j<=h
 		uint8_t c = colors[ bitcolumn & 1 ];
-		
+
 		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1), c);
 		drawPixel[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1), c);
 		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1)+1, c);
@@ -542,12 +576,12 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 
 	    }
 	}
-    
+
 	return (numBytes+adjustCharStep)<<1;
 
     }
 #endif // PROJ_ARDUBOY
-    
+
 }
 
 void Display::clear() {
@@ -569,7 +603,7 @@ void Display::clear() {
         else memset((void*)m_scrbuf+POK_BITFRAME*2,0x00,j);// B
         setCursor(0,0);
         return;
-    } else {
+    } else if (bpp==4) {
         c = (c & 0x0F) | (c << 4);
     }
     uint16_t j = sizeof(screenbuffer);
@@ -710,7 +744,7 @@ void Display::drawPixelRaw(int16_t x,int16_t y, uint8_t col) {
     } // POK_COLOURDEPTH
     #elif POK_COLORDEPTH == 4
     uint16_t i = y*(width>>1) + (x>>1);
-    uint8_t pixel = m_scrbuf[i];    
+    uint8_t pixel = m_scrbuf[i];
     if (x&1) pixel = (pixel&0xF0)|(col);
     else pixel = (pixel&0x0F) | (col<<4);
     m_scrbuf[i] = pixel;
@@ -1489,7 +1523,8 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     else if (m_colordepth==4) {
 
     /** 4bpp fast version */
-	int16_t scrx,scry,xclip,xjump,scrxjump;
+	int16_t scrx,scry,xjump,scrxjump;
+	int16_t xclip;
     xclip=xjump=scrxjump=0;
     /** y clipping */
     if (y<0) { h+=y; bitmap -= y*(w>>1); y=0;}
@@ -1526,8 +1561,9 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                         uint8_t sourcepixel = *bitmap;
                         if ((sourcepixel&0x0F) != invisiblecolor) {
                             sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
-                            targetpixel |= sourcepixel;
+                            volatile uint8_t targetpixel = *scrptr;// & 0x0F;
+                            targetpixel &= 0xF; //clear upper nibble
+                            targetpixel |= sourcepixel; //now OR it
                             *scrptr = targetpixel;
                         }
                         //scrptr++;
@@ -1537,9 +1573,11 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
                 bitmap += xjump; // needed if x<0 clipping occurs
             } else { /** ODD pixel starting line **/
+                uint8_t sourcepixel;
+                uint8_t targetpixel;
                 for (scrx = x; scrx < w+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
+                    sourcepixel = *bitmap;
+                    targetpixel = *scrptr;
                     // store higher nibble of source pixel in lower nibble of target
                     if((sourcepixel>>4)!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel >> 4 );
                     *scrptr = targetpixel;
@@ -1549,6 +1587,12 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                     if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
                     *scrptr = targetpixel;
                     bitmap++;
+                }
+                if (xclip) {
+                    // last line, store higher nibble of last source pixel in lower nibble of last address
+                    sourcepixel = *bitmap >> 4;
+                    if(sourcepixel!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | sourcepixel;
+                    *scrptr = targetpixel;
                 }
                 bitmap+=xjump;
             }
@@ -2310,6 +2354,7 @@ void Display::printFloat(double number, uint8_t digits)
   }
 }
 
+
 void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
 {
     int8_t scry;
@@ -2413,6 +2458,14 @@ void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
     lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
 #endif
 
+#if POK_SCREENMODE == MIXMODE
+    lcdRefreshMixMode(m_scrbuf, paletteptr, scanType);
+#endif
+
+#if POK_SCREENMODE == MODE64
+    lcdRefreshMode64(m_scrbuf, paletteptr);
+#endif
+
 #if POK_SCREENMODE == MODE_GAMEBOY
     lcdRefreshModeGBC(scr, paletteptr);
 #endif
@@ -2447,6 +2500,8 @@ void Display::setTile(uint16_t i, uint8_t t) {
     if (!m_tilebuf) return;
     m_tilebuf[i]=t;
 };
+
+
 
 // Convert an integer to a hexadecimal string
 char* itoa_hex(int num, char* dest, int destLen) {

@@ -56,14 +56,16 @@ const char *get_filename_ext(const char *filename) {
     return dot + 1;
 }
 
-__attribute__((section(".SD_Code"))) void initSDGPIO() {
+//__attribute__((section(".SD_Code")))
+void initSDGPIO() {
     LPC_GPIO_PORT->DIR[SD_MOSI_PORT] |= (1  << SD_MOSI_PIN );
     LPC_GPIO_PORT->DIR[SD_MISO_PORT] |= (1  << SD_MISO_PIN );
     LPC_GPIO_PORT->DIR[SD_SCK_PORT]  |= (1  << SD_SCK_PIN );
     LPC_GPIO_PORT->DIR[SD_CS_PORT]   |= (1  << SD_CS_PIN );
 }
 
-__attribute__((section(".SD_Code"))) int pokInitSD() {
+//__attribute__((section(".SD_Code")))
+int pokInitSD() {
     initSDGPIO();
     res = PFFS::disk_initialize();
     //res = disk_initialize(0);

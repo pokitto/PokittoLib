@@ -1,0 +1,13 @@
+Hello
+
+The ARM GCC binaries that are used in compilation in EmBitz are in
+
+Settings -> Tools -> Toolchain executables
+
+The default directory for the executables is
+
+${EMBITZ}\share\em_armgcc\bin
+
+Just change that to another directory to use another version of ARM GCC
+
+Jonne

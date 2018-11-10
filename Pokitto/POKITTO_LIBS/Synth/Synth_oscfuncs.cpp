@@ -44,6 +44,7 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
             int16_t maxbend=0, int16_t bendrate=0, uint8_t arpmode = 0, uint8_t overdrive=0, uint8_t kick=0){
   //Serial.println("SetOsc "); osc1
   o->on = on;
+  o->duration = -1; //max this out for the time being
   o->overdrive = overdrive;
   o->kick = kick;
   o->wave = wave;
@@ -66,6 +67,7 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
   o->tonic = notenumber; // save tonic for arpeggio use
   if (wave == 2) o->cinc >>= 1; // correct pitch for saw wave
   if (wave == 4) o->cinc <<= 1; // enable higher pitch for pure noise
+  if (wave == 6) o->samplestep = (o->cinc/(cincs[37]>>8));
   o->vol = volume << 8;//volume;
 
   if (adsr) {
