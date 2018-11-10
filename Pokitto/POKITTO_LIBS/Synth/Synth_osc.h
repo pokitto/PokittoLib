@@ -66,6 +66,8 @@ struct OSC {
   uint32_t samplestep;
   uint32_t samplelength;
   uint8_t* sample;
+  //uint32_t samplebendcount;
+  //uint32_t samplebendtick;
 
 };
 

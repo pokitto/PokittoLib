@@ -150,7 +150,17 @@ void updateEnvelopes(){
     else {
             bendtick = !bendtick;
             if (osc1.on) Earr[osc1.adsrphase](&osc1);
-            if (bendtick) osc1.pitchbend += osc1.bendrate; //slow bend to every second beat
+            if (bendtick) {
+                    osc1.pitchbend += osc1.bendrate; //slow bend to every second beat
+                    /*if (osc1.wave == 6 && osc1.bendrate) {
+                        if (osc1.samplebendtick > osc1.samplebendcount) {
+                            if (osc1.bendrate>0) osc1.samplestep++;
+                            else if (osc1.bendrate<0) osc1.samplestep--;
+                            osc1.samplebendtick=0;
+                        } else osc1.samplebendtick++;
+
+                    }*/
+            }
             if (osc1.bendrate > 0 && osc1.pitchbend > osc1.maxbend) {
                     osc1.pitchbend = osc1.maxbend;
                     osc1.bendrate = 0; // STOP BENDING !

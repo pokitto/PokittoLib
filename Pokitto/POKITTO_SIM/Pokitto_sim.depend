@@ -2729,7 +2729,7 @@
 	"Synth_osc.h"
 	"Synth_song.h"
 
-1541713193 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_osc.h
+1541885750 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_osc.h
 	"Pokitto.h"
 
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_song.h
@@ -2907,11 +2907,11 @@
 	"Synth.h"
 	"Pokitto_settings.h"
 
-1541537654 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
+1541885722 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
 	"PokittoGlobs.h"
 	"Synth.h"
 
-1541713730 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
+1541885732 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_oscfuncs.cpp
 	"Synth.h"
 
 1531735745 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_songfuncs.cpp
@@ -5002,7 +5002,7 @@
 
 1541712819 c:\pokittolib_git\pokittolib_curr\examples\synthtest\beat11k.h
 
-1541851179 source:c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\sfxeditor.cpp
+1541882663 source:c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\sfxeditor.cpp
 	"Pokitto.h"
 	"Synth.h"
 	"beat11k.h"

@@ -91,6 +91,8 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
   if (bendrate != 0) {
         o->bendrate = (int32_t)bendrate*(o->cinc/10000); // test value
         o->maxbend = (int32_t)maxbend*(o->cinc/100);
+        //o->samplebendcount = o->maxbend>>24;
+        //o->samplebendtick = 0;
   } else {
         o->bendrate = 0;
         o->maxbend = 0;
