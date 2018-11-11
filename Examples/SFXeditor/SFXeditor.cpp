@@ -315,6 +315,39 @@ int main()
                     normaltxt(); if (menupos==M_SAVE) highlighttxt();
                     disp.println((int)save);
 
+                    // The actual command
+                    #define SCX 120
+                    #define SCY 16
+                    disp.setCursor(SCX,SCY);
+                    disp.color=3;
+                    disp.setFont(fontTiny);
+                    disp.print("To make this sound:");
+                    disp.setCursor(SCX,SCY+8);
+                    disp.color=2;
+                    disp.print("setOSC(");
+                    disp.color=1;
+                    disp.print("&osc1"); disp.color=2;
+                    disp.print(","); disp.color=1;
+                    disp.print("1"); disp.color=2;
+                    disp.print(","); disp.color=1;
+                    disp.print(int(sfx.inst.wave));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.loop));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.echo));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.adsr));disp.color=2;disp.print(",");disp.color=1;
+                    disp.setCursor(SCX,SCY+16);
+                    disp.print(int(sfx.notenumber));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.vol));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.attack));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.decay));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.sustain));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.release));disp.color=2;disp.print(",");disp.color=1;
+                    disp.setCursor(SCX,SCY+24);
+                    disp.print(int(sfx.inst.maxbend));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.bendrate));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.arpmode));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.overdrive));disp.color=2;disp.print(",");disp.color=1;
+                    disp.print(int(sfx.inst.kick));disp.color=2;disp.print(");");disp.color=1;
+
                     // Master sfx.inst.vol
                     //greentxt();
                     //disp.print("System vol: ");

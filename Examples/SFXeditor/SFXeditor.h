@@ -17,7 +17,7 @@ public:
         inst.wave=0;
         inst.loop=0;
         inst.echo=0;
-        inst.adsr=1;
+        inst.adsr=0;
         inst.attack=0;
         inst.decay=0;
         inst.sustain=0;
