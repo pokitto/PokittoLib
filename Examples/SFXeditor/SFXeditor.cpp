@@ -59,6 +59,7 @@ int main()
     enable=0;
     #endif // POK_SIM
     sfx.begin("BSFXedit",sfx);
+    if (sfx.firstsave==0 || sfx.inst.wave > MAX_WAVETYPES) sfx.init();
     game.begin();
     disp.persistence = true;
     disp.bgcolor=0;
@@ -136,12 +137,12 @@ int main()
                 if(btn.rightBtn() && (sfx.inst.release < 255 - mult)) { sfx.inst.release+=mult; changed = DEBOU; }
                 break;
             case M_MAXBEND:
-                if(btn.leftBtn() && (sfx.inst.maxbend >= -200+mult)) { sfx.inst.maxbend-=mult; changed = DEBOU; }
-                if(btn.rightBtn() && (sfx.inst.maxbend < 200 - mult)) { sfx.inst.maxbend+=mult; changed = DEBOU; }
+                if(btn.leftBtn() && (sfx.inst.maxbend >= -2000+mult)) { sfx.inst.maxbend-=mult; changed = DEBOU; }
+                if(btn.rightBtn() && (sfx.inst.maxbend < 2000 - mult)) { sfx.inst.maxbend+=mult; changed = DEBOU; }
                 break;
             case M_BENDRATE:
-                if(btn.leftBtn() && (sfx.inst.bendrate >= -300 + mult)) { sfx.inst.bendrate-=mult; changed = DEBOU; }
-                if(btn.rightBtn() && (sfx.inst.bendrate < 300 - mult)) { sfx.inst.bendrate+=mult; changed = DEBOU; }
+                if(btn.leftBtn() && (sfx.inst.bendrate >= -3000 + mult)) { sfx.inst.bendrate-=mult; changed = DEBOU; }
+                if(btn.rightBtn() && (sfx.inst.bendrate < 3000 - mult)) { sfx.inst.bendrate+=mult; changed = DEBOU; }
                 break;
             case M_ARPMODE:
                 if(btn.leftBtn() && (sfx.inst.arpmode > 0)) { sfx.inst.arpmode--; changed = DEBOU; }
@@ -347,7 +348,13 @@ int main()
                     disp.print(int(sfx.inst.arpmode));disp.color=2;disp.print(",");disp.color=1;
                     disp.print(int(sfx.inst.overdrive));disp.color=2;disp.print(",");disp.color=1;
                     disp.print(int(sfx.inst.kick));disp.color=2;disp.print(");");disp.color=1;
-
+                    disp.setCursor(SCX,SCY+96);
+                    disp.color=3;
+                    disp.print("To go faster:");
+                    disp.setCursor(SCX,SCY+96+8);
+                    disp.print("+A btn = x10");
+                    disp.setCursor(SCX,SCY+96+16);
+                    disp.print("+B btn = x100");
                     // Master sfx.inst.vol
                     //greentxt();
                     //disp.print("System vol: ");
@@ -375,10 +382,11 @@ int main()
         } else changed--;
 
         disp.color=0;
-        disp.drawColumn(sbx,152,disp.height);
+        disp.drawColumn(sbx,152-8,disp.height);
         disp.color=1;
         uint8_t tindex = sbindx*2;
         int16_t y = linecenter + (((int)128-(soundbuf[tindex]))>>2);
+        if (y<152-8) y = 152-8;
         disp.drawLine(sbx-1,prevy,sbx,y);
         game.update();
         disp.color=0;
