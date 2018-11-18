@@ -1,0 +1,287 @@
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h|63|warning: "_CODE_PAGE" redefined|
+Pokitto\libpff\pff.h|43|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|328|warning: "LD_WORD" redefined|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\libpff\pff.h|239|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|329|warning: "LD_DWORD" redefined|
+Pokitto\libpff\pff.h|240|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|330|warning: "ST_WORD" redefined|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\libpff\pff.h|241|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|331|warning: "ST_DWORD" redefined|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h|63|warning: "_CODE_PAGE" redefined|
+Pokitto\libpff\pff.h|43|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|328|warning: "LD_WORD" redefined|
+Pokitto\libpff\pff.h|239|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h|63|warning: "_CODE_PAGE" redefined|
+Pokitto\libpff\pff.h|43|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|328|warning: "LD_WORD" redefined|
+Pokitto\libpff\pff.h|239|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|329|warning: "LD_DWORD" redefined|
+Pokitto\libpff\pff.h|240|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|330|warning: "ST_WORD" redefined|
+Pokitto\libpff\pff.h|241|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|331|warning: "ST_DWORD" redefined|
+Pokitto\libpff\pff.h|242|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Examples\Abbayedesmorts\main.cpp|15|warning: unused variable 'stateinit' [-Wunused-variable]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|329|warning: "LD_DWORD" redefined|
+Pokitto\libpff\pff.h|240|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|330|warning: "ST_WORD" redefined|
+Pokitto\libpff\pff.h|241|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|331|warning: "ST_DWORD" redefined|
+Pokitto\libpff\pff.h|242|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Examples\Abbayedesmorts\jean.cpp|544|warning: array subscript is above array bounds [-Warray-bounds]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Examples\Abbayedesmorts\sdlpok.cpp|12|warning: unused variable 'offsetty' [-Wunused-variable]|
+Examples\Abbayedesmorts\sdlpok.cpp|13|warning: unused variable 'destoffsetx' [-Wunused-variable]|
+Examples\Abbayedesmorts\sdlpok.cpp|14|warning: unused variable 'destoffsety' [-Wunused-variable]|
+Examples\Abbayedesmorts\sdlpok.cpp|15|warning: unused variable 'destoffset' [-Wunused-variable]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h|63|warning: "_CODE_PAGE" redefined|
+Pokitto\libpff\pff.h|43|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|328|warning: "LD_WORD" redefined|
+Pokitto\libpff\pff.h|239|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|329|warning: "LD_DWORD" redefined|
+Pokitto\libpff\pff.h|240|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|330|warning: "ST_WORD" redefined|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\libpff\pff.h|241|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|331|warning: "ST_DWORD" redefined|
+Pokitto\libpff\pff.h|242|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Examples\Abbayedesmorts\sdsave.cpp|9|warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]|
+Examples\Abbayedesmorts\sdsave.cpp|10|warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]|
+Examples\Abbayedesmorts\sdsave.cpp|11|warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]|
+Examples\Abbayedesmorts\sdsave.cpp|64|warning: format '%d' expects argument of type 'int*', but argument 3 has type 'uint16_t* {aka short unsigned int*}' [-Wformat=]|
+Examples\Abbayedesmorts\sdsave.cpp|49|warning: unused variable 'data' [-Wunused-variable]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\libpff\mmc.cpp|224|warning: variable 'dud' set but not used [-Wunused-but-set-variable]|
+Pokitto\libpff\pff.h|242|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Examples\Abbayedesmorts\enemies.cpp|677|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|677|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|971|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|971|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|980|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|980|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|988|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|988|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|1005|warning: array subscript is above array bounds [-Warray-bounds]|
+Examples\Abbayedesmorts\enemies.cpp|1005|warning: array subscript is above array bounds [-Warray-bounds]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h|63|warning: "_CODE_PAGE" redefined|
+Pokitto\libpff\pff.h|43|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|328|warning: "LD_WORD" redefined|
+Pokitto\libpff\pff.h|239|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|329|warning: "LD_DWORD" redefined|
+Pokitto\libpff\pff.h|240|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|330|warning: "ST_WORD" redefined|
+Pokitto\libpff\pff.h|241|note: this is the location of the previous definition|
+Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h|331|warning: "ST_DWORD" redefined|
+Pokitto\libpff\pff.h|242|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_CORE\PokittoCookie.cpp|129|warning: control reaches end of non-void function [-Wreturn-type]|
+Pokitto\POKITTO_CORE\PokittoCookie.cpp|138|warning: control reaches end of non-void function [-Wreturn-type]|
+Pokitto\POKITTO_CORE\PokittoCookie.cpp|361|warning: control reaches end of non-void function [-Wreturn-type]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_CORE\PokittoCore.cpp|183|warning: variable 'opg' set but not used [-Wunused-but-set-variable]|
+Pokitto\POKITTO_CORE\PokittoCore.cpp|279|warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]|
+Pokitto\POKITTO_CORE\PokittoCore.cpp|274|warning: unused variable 'bootversion' [-Wunused-variable]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|514|warning: narrowing conversion of 'Pokitto::Display::bgcolor' from 'uint16_t {aka short unsigned int}' to 'uint8_t {aka unsigned char}' inside { } [-Wnarrowing]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|514|warning: narrowing conversion of 'Pokitto::Display::color' from 'uint16_t {aka short unsigned int}' to 'uint8_t {aka unsigned char}' inside { } [-Wnarrowing]|
+Pokitto\Pokitto_settings.h|335|warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|598|note: in expansion of macro 'POK_BITFRAME'|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|81|warning: converting to non-pointer type 'char' from NULL [-Wconversion-null]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|154|warning: NULL used in arithmetic [-Wpointer-arith]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|164|warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|183|warning: NULL used in arithmetic [-Wpointer-arith]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|190|warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|231|warning: unused variable 'err' [-Wunused-variable]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|258|warning: comparison between signed and unsigned integer expressions [-Wsign-compare]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|258|warning: suggest explicit braces to avoid ambiguous 'else' [-Wparentheses]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|291|warning: NULL used in arithmetic [-Wpointer-arith]|
+Pokitto\POKITTO_CORE\PokittoDisk.cpp|297|warning: converting to non-pointer type 'char' from NULL [-Wconversion-null]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\Pokitto_settings.h|335|warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|599|note: in expansion of macro 'POK_BITFRAME'|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|600|warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|601|warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|1497|warning: variable 'bitNum' set but not used [-Wunused-but-set-variable]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|1607|warning: variable 'xclip' set but not used [-Wunused-but-set-variable]|
+Pokitto\POKITTO_CORE\PokittoSound.cpp|142|warning: "NUM_CHANNELS" redefined|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_CORE\PokittoDisplay.cpp|1592|warning: 'targetpixel' may be used uninitialized in this function [-Wmaybe-uninitialized]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_CORE\GBcompatibility.h|58|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\clock_11u6x.h|38|warning: "bool" redefined|
+c:\program files (x86)\embitz\1.11\share\em_armgcc\lib\gcc\arm-none-eabi\5.4.1\include\stdbool.h|33|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\HWLCD.cpp|2087|warning: unused variable 'data' [-Wunused-variable]|
+Pokitto\POKITTO_HW\lpc_defs.h|15|warning: "LPC_PMU_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1180|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|16|warning: "LPC_IOCON_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1183|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\iap.cpp|33|warning: unused variable 'writecount' [-Wunused-variable]|
+Pokitto\POKITTO_HW\iap.cpp|36|warning: unused variable 'page' [-Wunused-variable]|
+Pokitto\POKITTO_HW\iap.cpp|131|warning: 'teahupoo' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\lpc_defs.h|18|warning: "LPC_GPIO_PORT_BASE" redefined|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1197|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|22|warning: "LPC_USART0_BASE" redefined|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1171|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|23|warning: "LPC_USART1_BASE" redefined|
+Pokitto\POKITTO_HW\clock_11u6x.h|38|warning: "bool" redefined|
+Pokitto\POKITTO_HW\timer_11u6x.h|43|note: this is the location of the previous definition|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1189|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|24|warning: "LPC_USART2_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1190|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|25|warning: "LPC_USART3_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1191|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|26|warning: "LPC_USART4_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1185|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|27|warning: "LPC_I2C0_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1169|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|28|warning: "LPC_I2C1_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1177|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|29|warning: "LPC_SSP0_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1182|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|30|warning: "LPC_SSP1_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1186|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|32|warning: "LPC_ADC_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1176|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|33|warning: "LPC_SCT0_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1195|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|34|warning: "LPC_SCT1_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1196|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|39|warning: "LPC_RTC_BASE" redefined|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1178|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|40|warning: "LPC_WWDT_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1170|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\lpc_defs.h|41|warning: "LPC_DMA_BASE" redefined|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1194|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\lpc_defs.h|42|warning: "LPC_CRC_BASE" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1193|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|121|warning: "LPC_DMA" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1230|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|209|warning: "LPC_SCT0" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1231|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\lpc_defs.h|210|warning: "LPC_SCT1" redefined|
+Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\LPC11U6x.h|1232|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\clock_11u6x.h|38|warning: "bool" redefined|
+Pokitto\POKITTO_HW\timer_11u6x.h|43|note: this is the location of the previous definition|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|42|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|91|warning: type qualifiers ignored on function return type [-Wignored-qualifiers]|
+Pokitto\POKITTO_HW\PokittoEEPROM.h|144|warning: 'EEPROM' defined but not used [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+Pokitto\POKITTO_HW\HWLCD.cpp|2087|warning: unused variable 'xptr' [-Wunused-variable]|
+Pokitto\POKITTO_HW\HWLCD.cpp|575|warning: 'c' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|1182|warning: 'byte' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|1182|warning: 'c' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|1182|warning: 'x' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|1182|warning: 'y' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|1946|warning: 'c' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|1946|warning: 't' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|1946|warning: 'x' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|2069|warning: 'c' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|2069|warning: 't' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|2308|warning: 'tmp' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|2308|warning: 'color' is used uninitialized in this function [-Wuninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|894|warning: 'sprh' may be used uninitialized in this function [-Wmaybe-uninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|881|warning: 'sprw' may be used uninitialized in this function [-Wmaybe-uninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|40|warning: 'sprOldY' may be used uninitialized in this function [-Wmaybe-uninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|834|note: 'sprOldY' was declared here|
+Pokitto\POKITTO_HW\HWLCD.cpp|834|warning: 'sprOldX' may be used uninitialized in this function [-Wmaybe-uninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|40|warning: 'spry' may be used uninitialized in this function [-Wmaybe-uninitialized]|
+Pokitto\POKITTO_HW\HWLCD.cpp|834|note: 'spry' was declared here|
+Pokitto\POKITTO_HW\HWLCD.cpp|834|warning: 'sprx' may be used uninitialized in this function [-Wmaybe-uninitialized]|
+Pokitto\POKITTO_HW\HWLCD.h|165|warning: 'void Pokitto::setup_gpio()' defined but not used [-Wunused-function]|
+.\build\abbaye.map|1|Program size (bytes):  131740|
+||Data size    (bytes):     244|
+||BSS size     (bytes):   21632|
+||             ----------------|
+||Total size   (bytes):  153616   (R/W Memory: 21876)|
+|||
+||=== Build finished: 0 errors, 224 warnings (0 minutes, 34 seconds) ===|
+

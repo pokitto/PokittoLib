@@ -26,13 +26,13 @@ int main () {
     mygame.display.persistence = true;
 
     mygame.display.println("Testing...");
-
+    /*
     while (mygame.isRunning()) {
         if (mygame.update()) {
             mygame.update();
             break;
          }
-    }
+    }*/
 
     // *** Test SDFileSystem
 

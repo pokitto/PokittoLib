@@ -440,6 +440,9 @@
 #endif
 
 /** AUDIO **/
+
+#define POK_ALT_MIXING 1 // NEW! alternative more accurate mixing, uses more CPU
+
 #define POK_AUD_PIN P2_19
 #define POK_AUD_PWM_US 15 //31 //Default value 31
 #ifndef PROJ_AUD_FREQ

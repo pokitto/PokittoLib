@@ -855,6 +855,9 @@ void Sound::playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav,uint8_t arpmo
 {
     if (wav>MAX_WAVETYPES) wav=0;
     if (arpmode>MAX_ARPMODE) arpmode=MAX_ARPMODE;
+    if (frq>58) {
+        volatile uint32_t jumpu = frq;
+    }
     if (os==1) setOSC(&osc1,1,wav,1,0,0,frq,amp,0,0,0,0,0,0,arpmode,0,0);
     else if (os==2) setOSC(&osc2,1,wav,1,0,0,frq,amp,0,0,0,0,0,0,arpmode,0,0);
     else if (os==3) setOSC(&osc3,1,wav,1,0,0,frq,amp,0,0,0,0,0,0,arpmode,0,0);

@@ -695,6 +695,9 @@
 		<Unit filename="../../Examples/SFXeditor/SFXeditor.cpp">
 			<Option target="SFXeditor" />
 		</Unit>
+		<Unit filename="../../Examples/SFXeditor/SFXeditor.h">
+			<Option target="SFXeditor" />
+		</Unit>
 		<Unit filename="../../Examples/SaveHighscore/My_settings.h">
 			<Option target="SaveHighscore" />
 		</Unit>

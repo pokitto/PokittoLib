@@ -2220,7 +2220,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1540253609 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1542582442 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1521233474 c:\pokittolib_git\pokittolib_curr\examples\helloworld\my_settings.h
@@ -2259,7 +2259,7 @@
 
 1517247873 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\mbed_sim\gpio_object.h
 
-1541856490 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
+1542582040 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\pokittosimulator.h
 	<stdint.h>
 	<SDL2/SDL.h>
 	"Pokitto_settings.h"
@@ -2725,7 +2725,7 @@
 1518114367 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\fileio\fileio.h
 	<stdint.h>
 
-1541612608 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
+1542582360 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
 	"Synth_osc.h"
 	"Synth_song.h"
 
@@ -2860,7 +2860,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1541613130 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1542575639 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -2974,9 +2974,9 @@
 	"PokittoSimulator.h"
 	<algorithm>
 
-1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
+1542575316 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
 
-1531615186 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
+1542582474 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\simsound.cpp
 	"SimSound.h"
 	"PokittoSimulator.h"
 	"PokittoGlobs.h"
@@ -2986,7 +2986,7 @@
 1517247873 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_sim\writewav.cpp
 	"WriteWav.h"
 
-1541715971 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
+1542575409 source:c:\pokittolib_git\pokittolib_curr\examples\synthtest\synthtest.cpp
 	"Pokitto.h"
 	"Synth.h"
 	"beat11k.h"
@@ -5002,17 +5002,17 @@
 
 1541712819 c:\pokittolib_git\pokittolib_curr\examples\synthtest\beat11k.h
 
-1541891471 source:c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\sfxeditor.cpp
+1541898425 source:c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\sfxeditor.cpp
 	"Pokitto.h"
 	"Synth.h"
 	"beat11k.h"
 	"SFXeditor.h"
 
-1541796890 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\my_settings.h
+1542574951 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\my_settings.h
 
 1541712819 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\beat11k.h
 
-1541891484 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\sfxeditor.h
+1541899415 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\sfxeditor.h
 	"PokittoCookie.h"
 	"Synth.h"
 

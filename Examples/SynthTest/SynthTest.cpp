@@ -12,7 +12,7 @@ DigitalOut enable(EXT4);
 
 int tonefreq=46;
 uint8_t amplitude = 255;//127;
-uint8_t wavetype = 6, arpmode=3;
+uint8_t wavetype = 1, arpmode=0;
 uint32_t changed = 1;
 char notestr[6];
 uint8_t sbindx=0,sbx=0,prevy=0;
@@ -40,7 +40,7 @@ int main()
     snd.playTone(1,tonefreq,amplitude,wavetype,arpmode);
     // snd.playTone(1,100,255,0);
     // want to have 2 oscillators 1 octave apart ?
-    snd.playTone(2,tonefreq+12,amplitude,wavetype,arpmode);
+    //snd.playTone(2,tonefreq+12,amplitude,wavetype,arpmode);
 
     disp.clear();
     disp.print("Frq:");
@@ -132,7 +132,7 @@ int main()
                     snd.playTone(1,tonefreq,amplitude,wavetype,arpmode);
                     oldvol = (int) snd.getVolume();
                     // want to have 2 oscillators 1 octave apart ?
-                    snd.playTone(2,tonefreq+12,amplitude,wavetype,arpmode);
+                    //snd.playTone(2,tonefreq+12,amplitude,wavetype,arpmode);
             }
         } else changed--;
         disp.color=0;
