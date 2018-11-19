@@ -123,7 +123,11 @@ void mix3(){
 
 void updateEnvelopes(){
     //calculate volume envelopes, I do this to save cpu power
+    #if POK_ALT_MIXING > 0
     if (arptick) --arptick;
+    #else
+    if (arptick) --arptick;
+    #endif
     else {
             if (osc1.arpmode && osc1.on) {
                 osc1.cinc = cincs[osc1.tonic+arptable[osc1.arpmode][osc1.arpstep]];
@@ -146,7 +150,11 @@ void updateEnvelopes(){
 
     }
 
+    #if POK_ALT_MIXING > 0
     if (voltick) --voltick;
+    #else
+    if (voltick) --voltick;
+    #endif
     else {
             bendtick = !bendtick;
             if (osc1.on) Earr[osc1.adsrphase](&osc1);

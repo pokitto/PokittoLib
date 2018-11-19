@@ -3215,7 +3215,7 @@
 	"Synth.h"
 	"HWSound.h"
 
-1540253609 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
+1542582442 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_settings.h
 	"My_settings.h"
 
 1515441798 c:\pokittolib_git\pokittolib_curr\examples\synthtest\my_settings.h
@@ -3699,7 +3699,7 @@
 	"Pokitto_settings.h"
 	<stdint.h>
 
-1541612608 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
+1542582360 c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth.h
 	"Synth_osc.h"
 	"Synth_song.h"
 
@@ -4157,7 +4157,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1541613130 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
+1542575639 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4183,7 +4183,7 @@
 	"Pokitto_settings.h"
 	<algorithm>
 
-1532261771 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
+1542583689 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -4245,7 +4245,7 @@
 	"Synth.h"
 	"Pokitto_settings.h"
 
-1541885722 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
+1542584135 source:c:\pokittolib_git\pokittolib_curr\pokitto\pokitto_libs\synth\synth_mixfuncs.cpp
 	"PokittoGlobs.h"
 	"Synth.h"
 
@@ -7683,7 +7683,7 @@
 	"beat11k.h"
 	"SFXeditor.h"
 
-1541796890 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\my_settings.h
+1542574951 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\my_settings.h
 
 1541712819 c:\pokittolib_git\pokittolib_curr\examples\sfxeditor\beat11k.h
 

@@ -144,16 +144,17 @@ void pokSoundIRQ() {
         osc1.count += osc1.cinc + (osc1.pitchbend); // counts to 65535 and overflows to zero WAS 8 !
         osc2.count += osc2.cinc + (osc2.pitchbend); // counts to 65535 and overflows to zero
         osc3.count += osc3.cinc + (osc3.pitchbend); // counts to 65535 and overflows to zero
-        #if POK_ALT_MIXING > 0
+        #if POK_ALT_MIXING > 0 // heaviest cpu load, recalculate envelopes on each cycle
         uint32_t o = 0;
         Marr[3]();
         Marr[2]();
         Marr[1]();
+        if (tick==0) Marr[0]();
         Marr[0]();
         #else
         Marr[tick](); // call mixing function
-        --tick;
         #endif // ALT_MIXING
+        --tick;
 
         /** mixing oscillator output **/
         #ifdef POK_SIM

@@ -3613,104 +3613,6 @@
 					<Mode after="1" />
 				</ExtraCommands>
 			</Target>
-			<Target title="Abbaye">
-				<Option output=".\build\abbaye.elf" />
-				<Option type="0" />
-				<Option create_hex="1" />
-				<Option compiler="armgcc_eb" />
-				<Device>
-					<Add option="$device=cortex-m0plus" />
-					<Add option="$lscript=Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld" />
-				</Device>
-				<Compiler>
-					<Add option="-fno-exceptions" />
-					<Add option="-std=gnu99" />
-					<Add option="-Wextra" />
-					<Add option="-Wall" />
-					<Add option="-fomit-frame-pointer" />
-					<Add option="-fdata-sections" />
-					<Add option="-ffunction-sections" />
-					<Add option="-Os" />
-					<Add option="-g" />
-					<Add option="-funsigned-char" />
-					<Add option="-Wno-unused-parameter" />
-					<Add option="-Wno-missing-field-initializers" />
-					<Add option="-fmessage-length=0" />
-					<Add option="-fno-builtin" />
-					<Add option="-fno-delete-null-pointer-checks" />
-					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
-					<Add option="-include" />
-					<Add option="mbed_config.h" />
-					<Add symbol="_OSCT=2" />
-					<Add directory="Examples\Abbayedesmorts" />
-					<Add directory="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN" />
-					<Add directory="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem" />
-					<Add directory="Pokitto\POKITTO_LIBS\SDFileSystem" />
-					<Add directory="." />
-					<Add directory="Pokitto" />
-					<Add directory="Pokitto\POKITTO_CORE" />
-					<Add directory="Pokitto\POKITTO_CORE\FONTS" />
-					<Add directory="Pokitto\POKITTO_CORE\PALETTES" />
-					<Add directory="Pokitto\POKITTO_HW" />
-					<Add directory="Pokitto\POKITTO_LIBS" />
-					<Add directory="Pokitto\POKITTO_LIBS\Synth" />
-					<Add directory="Pokitto\mbed-pokitto" />
-					<Add directory="Pokitto\mbed-pokitto\api" />
-					<Add directory="Pokitto\mbed-pokitto\common" />
-					<Add directory="Pokitto\mbed-pokitto\hal" />
-					<Add directory="Pokitto\mbed-pokitto\targets" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TARGET_NXP\TARGET_LPC11U6X\TOOLCHAIN_GCC_ARM\TARGET_LPC11U68" />
-					<Add directory="Pokitto\mbed-pokitto\targets\cmsis\TOOLCHAIN_GCC" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal" />
-					<Add directory="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP" />
-				</Compiler>
-				<Cpp>
-					<Add option="-fno-exceptions" />
-					<Add option="-fno-rtti" />
-					<Add option="-std=gnu++11" />
-					<Add option="-Wextra" />
-					<Add option="-Wall" />
-					<Add option="-fomit-frame-pointer" />
-					<Add option="-fdata-sections" />
-					<Add option="-ffunction-sections" />
-					<Add option="-Os" />
-					<Add option="-g" />
-					<Add option="-funsigned-char" />
-					<Add option="-Wno-unused-parameter" />
-					<Add option="-Wno-missing-field-initializers" />
-					<Add option="-fmessage-length=0" />
-					<Add option="-fno-builtin" />
-					<Add option="-fno-delete-null-pointer-checks" />
-					<Add option="-DMBED_RTOS_SINGLE_THREAD" />
-					<Add option="-Wvla" />
-					<Add option="-include" />
-					<Add option="mbed_config.h" />
-				</Cpp>
-				<Assembler>
-					<Add option="-Wa,--gdwarf-2" />
-				</Assembler>
-				<Linker>
-					<Add option="-eb_lib=n" />
-					<Add option="-lstdc++" />
-					<Add option="-eb_start_files" />
-					<Add option="-Wl,--gc-sections" />
-					<Add option="-Wl,-n" />
-					<Add library="supc++" />
-					<Add library="m" />
-					<Add library="c" />
-					<Add library="gcc" />
-					<Add library="nosys" />
-				</Linker>
-				<ExtraCommands>
-					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\abbaye.hex -O binary .\build\abbaye.bin" />
-					<Add after=".\build\lpcrc .\build\abbaye.bin" />
-					<Mode before="0" />
-					<Mode after="1" />
-				</ExtraCommands>
-			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-O3" />
@@ -3802,87 +3704,6 @@
 		<Unit filename="Examples\3Dblobs\3Dblobs.cpp">
 			<Option compilerVar="CC" />
 			<Option target="3DBlobs" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\drawing.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\drawing.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\ending.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\enemies.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\enemies.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\game.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\game.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\gameover.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\gameover.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\history.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\history.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\jean.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\jean.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\loading.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\main.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\main.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\My_settings.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\sdlpok.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\sdlpok.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\sdsave.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\sdsave.h">
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\startscreen.cpp">
-			<Option compilerVar="CC" />
-			<Option target="Abbaye" />
-		</Unit>
-		<Unit filename="Examples\Abbayedesmorts\structs.h">
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Examples\Aquarium256\bitmaps.h">
 			<Option target="Aquarium256" />
@@ -4883,7 +4704,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\libpff\pff.cpp">
 			<Option compilerVar="CC" />
@@ -4934,7 +4754,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\libpff\pff.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\AnalogIn.h">
@@ -4985,7 +4804,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\api\AnalogOut.h">
 			<Option target="BaseTarget" />
@@ -5035,7 +4853,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\api\BusIn.h" />
 		<Unit filename="Pokitto\mbed-pokitto\api\BusInOut.h" />
@@ -5276,7 +5093,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm4.h">
 			<Option target="BaseTarget" />
@@ -5326,7 +5142,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm4_simd.h">
 			<Option target="BaseTarget" />
@@ -5376,7 +5191,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cm7.h">
 			<Option target="BaseTarget" />
@@ -5426,7 +5240,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cmFunc.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\cmsis\core_cmInstr.h" />
@@ -5493,7 +5306,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\device.h" />
 		<Unit filename="Pokitto\mbed-pokitto\targets\hal\TARGET_NXP\TARGET_LPC11U6X\gpio_api.c">
@@ -5580,7 +5392,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\adventurer12x16.cpp">
 			<Option compilerVar="CC" />
@@ -5631,7 +5442,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\donut7x10.cpp">
 			<Option compilerVar="CC" />
@@ -5682,7 +5492,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\dragon6x8.cpp">
 			<Option compilerVar="CC" />
@@ -5733,7 +5542,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\font3x3.cpp">
 			<Option compilerVar="CC" />
@@ -5784,7 +5592,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\font3x5.cpp">
 			<Option compilerVar="CC" />
@@ -5835,7 +5642,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\font5x7.cpp">
 			<Option compilerVar="CC" />
@@ -5886,7 +5692,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\fontC64.cpp">
 			<Option compilerVar="CC" />
@@ -5937,7 +5742,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\fontC64UIGfx.cpp">
 			<Option compilerVar="CC" />
@@ -5991,7 +5795,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\karateka8x11.cpp">
 			<Option compilerVar="CC" />
@@ -6042,7 +5845,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\koubit7x7.cpp">
 			<Option compilerVar="CC" />
@@ -6093,7 +5895,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\mini4x6.cpp">
 			<Option compilerVar="CC" />
@@ -6144,7 +5945,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\runes6x8.cpp">
 			<Option compilerVar="CC" />
@@ -6195,7 +5995,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\TIC806x6.cpp">
 			<Option compilerVar="CC" />
@@ -6246,7 +6045,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\tight4x7.cpp">
 			<Option compilerVar="CC" />
@@ -6297,7 +6095,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\tiny5x7.cpp">
 			<Option compilerVar="CC" />
@@ -6348,7 +6145,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\FONTS\ZXSpec.cpp">
 			<Option compilerVar="CC" />
@@ -6399,7 +6195,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\GBcompatibility.h">
 			<Option target="BaseTarget" />
@@ -6449,7 +6244,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\Localization.h">
 			<Option target="BaseTarget" />
@@ -6499,7 +6293,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\Macros_LCD.h">
 			<Option target="BaseTarget" />
@@ -6549,7 +6342,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palAction.cpp">
 			<Option compilerVar="CC" />
@@ -6600,7 +6392,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palCGA.cpp">
 			<Option compilerVar="CC" />
@@ -6651,7 +6442,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palDB16.cpp">
 			<Option compilerVar="CC" />
@@ -6702,7 +6492,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palDefault.cpp">
 			<Option compilerVar="CC" />
@@ -6753,7 +6542,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palGameboy.cpp">
 			<Option compilerVar="CC" />
@@ -6804,7 +6592,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palMagma.cpp">
 			<Option compilerVar="CC" />
@@ -6855,7 +6642,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palMono.cpp">
 			<Option compilerVar="CC" />
@@ -6906,7 +6692,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palPico.cpp">
 			<Option compilerVar="CC" />
@@ -6957,7 +6742,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palRainbow.cpp">
 			<Option compilerVar="CC" />
@@ -7008,7 +6792,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PALETTES\palZXSpec.cpp">
 			<Option compilerVar="CC" />
@@ -7059,7 +6842,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.cpp">
 			<Option compilerVar="CC" />
@@ -7110,7 +6892,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBacklight.h">
 			<Option target="BaseTarget" />
@@ -7160,7 +6941,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.cpp">
 			<Option compilerVar="CC" />
@@ -7211,7 +6991,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoBattery.h">
 			<Option target="BaseTarget" />
@@ -7261,7 +7040,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.cpp">
 			<Option compilerVar="CC" />
@@ -7312,7 +7090,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoButtons.h">
 			<Option target="BaseTarget" />
@@ -7362,7 +7139,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.cpp">
 			<Option compilerVar="CC" />
@@ -7413,7 +7189,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoConsole.h">
 			<Option target="BaseTarget" />
@@ -7463,7 +7238,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCookie.cpp">
 			<Option compilerVar="CC" />
@@ -7514,7 +7288,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCookie.h">
 			<Option target="BaseTarget" />
@@ -7564,7 +7337,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.cpp">
 			<Option compilerVar="CC" />
@@ -7615,7 +7387,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoCore.h">
 			<Option target="BaseTarget" />
@@ -7665,7 +7436,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisk.cpp">
 			<Option compilerVar="CC" />
@@ -7720,7 +7490,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoDisplay.h">
 			<Option target="BaseTarget" />
@@ -7770,7 +7539,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoFakeavr.h">
 			<Option target="BaseTarget" />
@@ -7820,7 +7588,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoFonts.h" />
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoGlobs.h">
@@ -7871,7 +7638,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.cpp">
 			<Option compilerVar="CC" />
@@ -7922,7 +7688,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoItoa.h">
 			<Option target="BaseTarget" />
@@ -7972,7 +7737,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.cpp">
 			<Option compilerVar="CC" />
@@ -8023,7 +7787,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoLogos.h">
 			<Option target="BaseTarget" />
@@ -8073,7 +7836,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalette.cpp">
 			<Option compilerVar="CC" />
@@ -8124,7 +7886,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoPalettes.h">
 			<Option target="BaseTarget" />
@@ -8174,7 +7935,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoPrintf.cpp">
 			<Option compilerVar="CC" />
@@ -8228,7 +7988,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoSound.h">
 			<Option target="BaseTarget" />
@@ -8278,7 +8037,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_CORE\PokittoTimer.h">
 			<Option target="BaseTarget" />
@@ -8328,7 +8086,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\clock_11u6x.c">
 			<Option compilerVar="CC" />
@@ -8379,7 +8136,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\dma_11u6x.c">
 			<Option compilerVar="CC" />
@@ -8430,7 +8186,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\dma_11u6x.h">
 			<Option target="SynthTest" />
@@ -8501,7 +8256,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWButtons.h">
 			<Option target="BaseTarget" />
@@ -8551,7 +8305,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWLCD.cpp">
 			<Option compilerVar="CC" />
@@ -8602,7 +8355,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWLCD.h">
 			<Option target="BaseTarget" />
@@ -8652,7 +8404,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWSound.cpp">
 			<Option compilerVar="CC" />
@@ -8703,7 +8454,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\HWSound.h">
 			<Option target="BaseTarget" />
@@ -8753,7 +8503,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\iap.cpp">
 			<Option compilerVar="CC" />
@@ -8807,7 +8556,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.cpp">
 			<Option compilerVar="CC" />
@@ -8858,7 +8606,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\Pokitto_extport.h">
 			<Option target="BaseTarget" />
@@ -8908,7 +8655,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\PokittoClock.cpp">
 			<Option compilerVar="CC" />
@@ -8959,7 +8705,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\PokittoEEPROM.h">
 			<Option target="BaseTarget" />
@@ -9009,7 +8754,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\PokittoHW.cpp">
 			<Option compilerVar="CC" />
@@ -9060,7 +8804,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\sct_11u6x.h">
 			<Option target="VGAout" />
@@ -9114,7 +8857,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\SoftwareI2C.h">
 			<Option target="BaseTarget" />
@@ -9164,7 +8906,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_HW\timer_11u6x.c">
 			<Option compilerVar="CC" />
@@ -9215,7 +8956,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\JoyHat\JoyHat.cpp">
 			<Option compilerVar="CC" />
@@ -9260,135 +9000,113 @@
 			<Option target="WavePlayer" />
 			<Option target="Tracker" />
 			<Option target="SDCardIO" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC16.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC7.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\CRC7.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ccsbcs.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\diskio.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\diskio.h">
 			<Option target="WavePlayer" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ff.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\ffconf.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\integer.h">
 			<Option target="WavePlayer" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\sdfs_diskio.h">
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\ChaN\sdfs_integer.h">
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATDirHandle.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATDirHandle.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileHandle.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileHandle.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileSystem.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\FATFileSystem.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\FATFileSystem\MemFileSystem.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\SDFileSystem.cpp">
 			<Option compilerVar="CC" />
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\SDFileSystem\SDFileSystem.h">
 			<Option target="WavePlayer" />
 			<Option target="SDCardIO" />
 			<Option target="Tracker" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.cpp">
 			<Option compilerVar="CC" />
@@ -9439,7 +9157,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth.h">
 			<Option target="BaseTarget" />
@@ -9489,7 +9206,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_envfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -9540,7 +9256,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_helpers.cpp">
 			<Option compilerVar="CC" />
@@ -9591,7 +9306,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_mixfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -9642,7 +9356,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_osc.h">
 			<Option target="BaseTarget" />
@@ -9692,7 +9405,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_oscfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -9743,7 +9455,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_song.h">
 			<Option target="BaseTarget" />
@@ -9793,7 +9504,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_songfuncs.cpp">
 			<Option compilerVar="CC" />
@@ -9844,7 +9554,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\Synth\Synth_wavefuncs.cpp">
 			<Option compilerVar="CC" />
@@ -9895,7 +9604,6 @@
 			<Option target="MixMode" />
 			<Option target="TrafficLights" />
 			<Option target="SFXeditor" />
-			<Option target="Abbaye" />
 		</Unit>
 		<Unit filename="Pokitto\POKITTO_LIBS\USBDevice\USBDevice\USBDescriptor.h">
 			<Option target="MicroPython" />
@@ -10269,31 +9977,6 @@
 					</debug_interface>
 				</target_debugging_settings>
 				<target_debugging_settings target="TrafficLights" active_interface="J-link">
-					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="All" />
-					</debug_interface>
-					<debug_interface interface_id="J-link" ip_address="localhost" ip_port="2331" path="C:\Program Files (x86)\SEGGER\JLink_V600d" executable="JLinkGDBServer.exe" description="LPC11U6x.svd" dont_start_server="false" backoff_time="2000" options="0" reg_filter="0" active_family="NXP" gdb_before_conn="" gdb_after_conn="">
-						<family_options family_id="NXP">
-							<option opt_id="ID_DEVICE" opt_value="LPC11U37/501" />
-							<option opt_id="ID_JTAG_SWD" opt_value="swd" />
-							<option opt_id="ID_SPEED" opt_value="1000" />
-							<option opt_id="ID_AUTO_SPEED" opt_value="1" />
-							<option opt_id="ID_RESET_TYPE" opt_value="0" />
-							<option opt_id="ID_VECTOR_START" opt_value="0x00000000" />
-							<option opt_id="ID_LOAD_PROGRAM" opt_value="1" />
-							<option opt_id="ID_FLASH_DOWNLOAD" opt_value="1" />
-							<option opt_id="ID_FLASH_BREAK" opt_value="1" />
-							<option opt_id="ID_RAM_EXEC" opt_value="0" />
-							<option opt_id="ID_NCACHE_CHECK" opt_value="0" />
-							<option opt_id="ID_NCACHE_BASE" opt_value="" />
-							<option opt_id="ID_NCACHE_LENGTH" opt_value="" />
-							<option opt_id="ID_SEMIHOST_CHECK" opt_value="0" />
-							<option opt_id="ID_ARM_SWI" opt_value="" />
-							<option opt_id="ID_THUMB_SWI" opt_value="" />
-						</family_options>
-					</debug_interface>
-				</target_debugging_settings>
-				<target_debugging_settings target="Abbaye" active_interface="J-link">
 					<debug_interface interface_id="Generic" ip_address="" ip_port="" path="" executable="" description="LPC11U6x.svd" dont_start_server="false" backoff_time="" options="0" reg_filter="0" active_family="All" gdb_before_conn="" gdb_after_conn="">
 						<family_options family_id="All" />
 					</debug_interface>
