@@ -1,0 +1,74 @@
+#include "Pokitto.h"
+#include "Synth.h"
+
+Pokitto::Core game;
+Pokitto::Display disp;
+Pokitto::Sound snd;
+Pokitto::Buttons btn;
+
+// Fanfare 1
+// The array item consists of the note number and the instrument number, e.g. {29,1}. The instrument number 0
+// means no instrument, so the previous note is still playing.
+const uint8_t Fanfare[][2] =
+{
+    {29, 1},{255, 0},  // A short note
+    {31, 1},{255, 0},
+    {32, 1},{255, 0},
+    {33, 1},{255, 0},{255, 0},{255, 0}, // a long note
+    {35, 1},{255, 0},
+    {33, 1},{255, 0},{255, 0},{255, 0},
+    {255, 2}  // Pause until the next note.
+};
+
+int main()
+{
+    game.begin();
+
+    // *** Initialize the music player
+
+    // Reset the song data. This contains most of the important song data like
+    // - the block sequence,
+    // - the current note and instrument streams (arrays)
+    // - the current position in the block sequence, and
+    // - the song end and loop block indices.
+    emptySong();
+
+    // Initialize all the blocks. Each block can contain 64 notes and instrument indices.
+    emptyBlocks();
+
+    // Only one simultaneous sound
+    track1on = true; track2on = false; track3on = false;
+
+    // Make some instruments to test with.
+    makeSampleInstruments();
+
+    // Enable the internal audio amplifier.
+    snd.ampEnable(1);
+
+    // Change the tempo.
+    uint32_t tempo = 45;
+    samplespertick = (float)((60.0f/(float)tempo)*POK_AUD_FREQ)/16;
+
+    // SEt the instrument 2 to be silent. That can be used as pause.
+    patch[2].wave = WOFF;
+
+    // Start playing!
+    playing = true;
+
+    // Store the fanfare to the block 0.
+    int32_t blockNum = 0;
+    int32_t songLen = sizeof(Fanfare) / sizeof(Fanfare[0]);
+    for(int32_t i=0; i<songLen && i<PATTERNLENGTH;i++)
+    {
+        block[blockNum].notenumber[i] = Fanfare[i][0];
+        block[blockNum].instrument[i] = Fanfare[i][1];
+    }
+
+    while (game.isRunning())
+    {
+        if (game.update())
+            disp.print("Playing music...");
+
+    }
+    return 0;
+}
