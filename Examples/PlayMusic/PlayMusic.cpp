@@ -11,12 +11,12 @@ Pokitto::Buttons btn;
 // means no instrument, so the previous note is still playing.
 const uint8_t Fanfare[][2] =
 {
-    {29, 1},{255, 0},  // A short note
-    {31, 1},{255, 0},
-    {32, 1},{255, 0},
-    {33, 1},{255, 0},{255, 0},{255, 0}, // a long note
-    {35, 1},{255, 0},
-    {33, 1},{255, 0},{255, 0},{255, 0},
+    {39, 1},{255, 0},  // A short note
+    {41, 1},{255, 0},
+    {42, 1},{255, 0},
+    {43, 1},{255, 0},{255, 0},{255, 0}, // a long note
+    {45, 1},{255, 0},
+    {43, 1},{255, 0},{255, 0},{255, 0},
     {255, 2}  // Pause until the next note.
 };
 
