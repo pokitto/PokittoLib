@@ -225,6 +225,7 @@ public:
     static void keyboard(char* text, uint8_t length);
     static void popup(const char* text, uint8_t duration);
     static void setFrameRate(uint8_t fps);
+    static uint8_t getFrameRate();	
 	static void pickRandomSeed();
 
 	static uint8_t getCpuLoad();
