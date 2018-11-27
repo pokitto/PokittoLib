@@ -520,6 +520,7 @@
 #define EESETTINGS_RTCALARMMODE     4011 // 0xFAB RTC alarm mode (0=disabled, 1=enabled, 3 = enabled with sound)
 #define EESETTINGS_RESERVED         4012 // 0xFAC 4bytes reserved (additional sleep configuration)
 #define EESETTINGS_WAKEUPTIME       4016 // 0xFB0 Wake-up time as 32bit value for 1Hz RTC clock
+#define EESETTINGS_SKIPINTRO	    4020 // 0xFB4 Show Logo (0-Yes, 1-No, 2-Yes then switch to 0, 3-No, then switch to 1)
 
 /** USB SERIAL PORT **/
 
