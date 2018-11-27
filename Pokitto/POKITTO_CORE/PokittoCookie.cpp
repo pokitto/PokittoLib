@@ -126,6 +126,7 @@ bool Cookie::saveCookie() {
     #if POK_ENABLE_SOUND
     Pokitto::soundInit(true); //re-init sound
     #endif
+    return true;
 }
 
 bool Cookie::loadCookie() {
@@ -135,6 +136,7 @@ bool Cookie::loadCookie() {
     _block=0;
     _block=findMyNextBlock();
     for (int i=0; i<_datasize; i++) *p++ = readQueue();
+    return true;
 }
 
 void Cookie::deleteCookie() {
@@ -358,6 +360,7 @@ void Cookie::writeQueue(char data) {
 int Cookie::findMyNextBlock() {
     if (!_status) return SBINVALIDBLOCK;
     for (int i=_block; i<SBMAXBLOCKS;i++) if (isMyBlock(i)) return i;
+    return SBINVALIDBLOCK;
 }
 
 
