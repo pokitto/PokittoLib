@@ -1,5 +1,5 @@
-#include "Pokitto.h"
-#include "Synth.h"
+#include <Pokitto.h>
+#include <Synth.h>
 
 using Pokitto::Core;
 using Pokitto::Display;
