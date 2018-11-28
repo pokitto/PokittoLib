@@ -1,10 +1,9 @@
 #include "Pokitto.h"
 #include "Synth.h"
 
-Pokitto::Core game;
-Pokitto::Display disp;
-Pokitto::Sound snd;
-Pokitto::Buttons btn;
+using Pokitto::Core;
+using Pokitto::Display;
+using Pokitto::Sound;
 
 // Fanfare 1
 // The array item consists of the note number and the instrument number, e.g. {29,1}. The instrument number 0
@@ -22,7 +21,7 @@ const uint8_t Fanfare[][2] =
 
 int main()
 {
-    game.begin();
+    Core::begin();
 
     // *** Initialize the music player
 
@@ -43,7 +42,7 @@ int main()
     makeSampleInstruments();
 
     // Enable the internal audio amplifier.
-    snd.ampEnable(1);
+    Sound::ampEnable(1);
 
     // Change the tempo.
     uint32_t tempo = 45;
@@ -64,10 +63,10 @@ int main()
         block[blockNum].instrument[i] = Fanfare[i][1];
     }
 
-    while (game.isRunning())
+    while (Core::isRunning())
     {
-        if (game.update())
-            disp.print("Playing music...");
+        if (Core::update())
+            Display::print("Playing music...");
 
     }
     return 0;
