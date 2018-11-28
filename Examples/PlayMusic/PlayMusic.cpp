@@ -5,10 +5,16 @@ using Pokitto::Core;
 using Pokitto::Display;
 using Pokitto::Sound;
 
+struct SoundData
+{
+    uint8_t noteNumber;
+    uint8_t instrumentNumber;
+};
+
 // Fanfare 1
 // The array item consists of the note number and the instrument number, e.g. {29,1}. The instrument number 0
 // means no instrument, so the previous note is still playing.
-const uint8_t Fanfare[][2] =
+const SoundData Fanfare[] =
 {
     {39, 1},{255, 0},  // A short note
     {41, 1},{255, 0},
@@ -59,15 +65,14 @@ int main()
     int32_t songLen = sizeof(Fanfare) / sizeof(Fanfare[0]);
     for(int32_t i=0; i<songLen && i<PATTERNLENGTH;i++)
     {
-        block[blockNum].notenumber[i] = Fanfare[i][0];
-        block[blockNum].instrument[i] = Fanfare[i][1];
+        block[blockNum].notenumber[i] = Fanfare[i].noteNumber;
+        block[blockNum].instrument[i] = Fanfare[i].instrumentNumber;
     }
 
     while (Core::isRunning())
     {
         if (Core::update())
             Display::print("Playing music...");
-
     }
     return 0;
 }
