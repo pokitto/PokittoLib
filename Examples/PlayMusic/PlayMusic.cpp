@@ -12,17 +12,20 @@ struct SoundData
 };
 
 // Fanfare 1
-// The array item consists of the note number and the instrument number, e.g. {29,1}. The instrument number 0
-// means no instrument, so the previous note is still playing.
+// The array item consists of the note number and the instrument number, e.g. {29, 1}.
+// The instrument number 0 means no instrument, so the previous note is still playing.
 const SoundData Fanfare[] =
 {
-    {39, 1},{255, 0},  // A short note
+    // A short note
+    {39, 1},{255, 0},
     {41, 1},{255, 0},
     {42, 1},{255, 0},
-    {43, 1},{255, 0},{255, 0},{255, 0}, // a long note
+    // a long note
+    {43, 1},{255, 0},{255, 0},{255, 0},
     {45, 1},{255, 0},
     {43, 1},{255, 0},{255, 0},{255, 0},
-    {255, 2}  // Pause until the next note.
+    // Pause until the next note.
+    {255, 2}
 };
 
 int main()
@@ -42,7 +45,9 @@ int main()
     emptyBlocks();
 
     // Only one simultaneous sound
-    track1on = true; track2on = false; track3on = false;
+    track1on = true;
+    track2on = false;
+    track3on = false;
 
     // Make some instruments to test with.
     makeSampleInstruments();
@@ -52,21 +57,23 @@ int main()
 
     // Change the tempo.
     uint32_t tempo = 45;
-    samplespertick = (float)((60.0f/(float)tempo)*POK_AUD_FREQ)/16;
 
-    // SEt the instrument 2 to be silent. That can be used as pause.
+    // Samples per tick, calculated as a float and then truncated
+    samplespertick = static_cast<uint16_t>(((60.0f / tempo) * POK_AUD_FREQ) / 16.0f);
+
+    // Set the instrument 2 to be silent. That can be used as pause.
     patch[2].wave = WOFF;
 
     // Start playing!
     playing = true;
 
     // Store the fanfare to the block 0.
-    int32_t blockNum = 0;
-    int32_t songLen = sizeof(Fanfare) / sizeof(Fanfare[0]);
-    for(int32_t i=0; i<songLen && i<PATTERNLENGTH;i++)
+    size_t blockIndex = 0;
+    size_t songLen = sizeof(Fanfare) / sizeof(Fanfare[0]);
+    for(size_t i = 0; ((i < songLen) && (i < PATTERNLENGTH)); ++i)
     {
-        block[blockNum].notenumber[i] = Fanfare[i].noteNumber;
-        block[blockNum].instrument[i] = Fanfare[i].instrumentNumber;
+        block[blockIndex].notenumber[i] = Fanfare[i].noteNumber;
+        block[blockIndex].instrument[i] = Fanfare[i].instrumentNumber;
     }
 
     while (Core::isRunning())
