@@ -68,6 +68,11 @@
 
 #ifndef POK_SIM
 #include "HWSound.h"
+
+#ifdef PROJ_SDFS_STREAMING
+#include "SDFSDisk.h"
+#endif
+
 #else
 #include "SimSound.h"
 #include "PokittoSimulator.h"
@@ -89,6 +94,9 @@ uint8_t const Pokitto::discrete_vol_hw_levels[8]   {0,27,64,96,36,117,127,127};
 uint8_t const Pokitto::discrete_vol_multipliers[8] {0,127,127,127,192,192,255,255};
 
 Pokitto::Core _soundc;
+
+const uint8_t *Sound::sfxDataPtr = 0;
+const uint8_t *Sound::sfxEndPtr = 0;
 
 uint8_t Sound::prescaler;
 uint16_t Sound::globalVolume;
@@ -915,12 +923,16 @@ void Sound::pauseMusicStream() {
 int Sound::playMusicStream(char* filename, uint8_t options)
 {
     #if POK_STREAMING_MUSIC
+
         uint8_t result;
         result = pokInitSD();
         if (!isThisFileOpen(filename)) {
             fileClose(); // close any open files
             result = fileOpen(filename,FILE_MODE_READONLY | FILE_MODE_BINARY);
-        }
+        }else{
+	    fileRewind();
+	    result = 0;
+	}
 
         if (result) {
                 currentPtr = 0; // mark that no stream is available

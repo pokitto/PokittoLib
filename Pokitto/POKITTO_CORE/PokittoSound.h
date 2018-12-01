@@ -104,6 +104,13 @@ private:
     static uint16_t volumeMax;
 
 public:
+    static const uint8_t *sfxDataPtr;
+    static const uint8_t *sfxEndPtr;
+    static void playSFX( const uint8_t *sfx, uint32_t length ){
+	sfxDataPtr = sfx;
+	sfxEndPtr = sfx + length;
+    };
+    
 	static void begin();
 
 	// Headphonemode

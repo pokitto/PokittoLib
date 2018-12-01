@@ -92,6 +92,15 @@
     #define POK_ENABLE_SYNTH PROJ_ENABLE_SYNTH
 #endif // PROJ_ENABLE_SYNTH
 
+#define HIGH_RAM_OFF 0 // SRAM1/SRAM2 are at the default setting
+#define HIGH_RAM_ON  1 // SRAM1/SRAM2 are enabled and free for use
+#define HIGH_RAM_MUSIC 2 // SRAM1/SRAM2 are enabled and used by music
+
+#ifndef PROJ_HIGH_RAM
+#define POK_HIGH_RAM HIGH_RAM_OFF
+#else
+#define POK_HIGH_RAM PROJ_HIGH_RAM
+#endif
 
 /** CONSOLE **/
 #define POK_USE_CONSOLE 0 //if debugging console is available or not
