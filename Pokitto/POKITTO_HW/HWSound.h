@@ -40,9 +40,13 @@
 #include "Pokitto_settings.h"
 
 #define SPEAKER 3
-#define BUFFER_SIZE 512*4 //*8 //*8 // 512 // was 512 (works really well with crabator) was 256
-
-#define SBUFSIZE 512*4
+#if POK_HIGH_RAM == HIGH_RAM_MUSIC
+	#define BUFFER_SIZE 256*4
+	#define SBUFSIZE 256*4
+#else
+	#define BUFFER_SIZE 512*4 //*8 //*8 // 512 // was 512 (works really well with crabator) was 256
+	#define SBUFSIZE 512*4
+#endif
 
 #if POK_BOARDREV == 1
  /** 2-layer board rev 1.3 **/
@@ -149,7 +153,11 @@ extern void pokSoundIRQ();
 extern void pokSoundBufferedIRQ();
 
 #if POK_STREAMING_MUSIC > 0
+#if POK_HIGH_RAM == HIGH_RAM_MUSIC
+    extern unsigned char *buffers[];
+#else
     extern unsigned char buffers[][BUFFER_SIZE];
+#endif
     extern volatile int currentBuffer, oldBuffer;
     extern volatile int bufindex, vol;
     extern volatile unsigned char * currentPtr;

@@ -20,6 +20,8 @@
 #include "CRC7.h"
 #include "CRC16.h"
 
+FileHandle *sdfsdisk_fileptr;
+
 SDFileSystem::SDFileSystem(PinName mosi, PinName miso, PinName sclk, PinName cs, const char* name, PinName cd, SwitchType cdtype, int hz) : FATFileSystem(name), m_Spi(mosi, miso, sclk), m_Cs(cs, 1), m_Cd(cd), m_FREQ(hz)
 {
     //Initialize the member variables

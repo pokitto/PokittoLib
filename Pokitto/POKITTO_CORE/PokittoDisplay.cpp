@@ -496,9 +496,11 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     // GLCD fonts are arranged LSB = topmost pixel of char, so its easy to just shift through the column
     uint16_t bitcolumn; //16 bits for 2x8 bit high characters
 
+    if( fontSize != 2 ) fontSize = 1;
+
     void (*drawPixelFG)(int16_t,int16_t, uint8_t) = &Display::drawPixelNOP;
     void (*drawPixelBG)(int16_t,int16_t, uint8_t) = &Display::drawPixelNOP;
-    if( x>=0 && y >= 0 && x+w<width && y+h<height ){
+    if( x>=0 && y >= 0 && x+w*fontSize<width && y+(h+1)*fontSize<height ){
 	if( color != invisiblecolor )
 	    drawPixelFG = &Display::drawPixelRaw;
 	if( bgcolor != invisiblecolor )

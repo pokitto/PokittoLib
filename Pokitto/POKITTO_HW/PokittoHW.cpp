@@ -53,6 +53,10 @@ void Core::initRandom() {
 }
 
 void Core::initGPIO() {
+    #if PROJ_HIGH_RAM > 0
+    LPC_SYSCON->SYSAHBCLKCTRL |= 1<<26;
+    #endif
+
     /** control lines **/
     LPC_GPIO_PORT->DIR[LCD_CD_PORT] |= (1  << LCD_CD_PIN );
     LPC_GPIO_PORT->DIR[LCD_WR_PORT] |= (1  << LCD_WR_PIN );
