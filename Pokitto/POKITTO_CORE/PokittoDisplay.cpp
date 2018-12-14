@@ -1606,17 +1606,15 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     /** 4bpp fast version */
 
     if (m_colordepth==8) {
-	int16_t scrx,scry,xclip,xjump,scrxjump;
-    xclip=xjump=scrxjump=0;
+    int16_t scrx,scry,scrxjump;
+    int16_t xjump=0;
     /** y clipping */
     if (y<0) { h+=y; bitmap -= y*w; y=0;}
     else if (y+h>height) { h -=(y-height);}
     /** x clipping */
-    if (x<0) { xclip=x; w+=x; xjump = (-x); bitmap += xjump; x=0;}
+    if (x<0) { w+=x; xjump = (-x); bitmap += xjump; x=0;}
     else if (x+w>width) {
-            xclip = x;
-            scrxjump = x;
-            xjump=(x+w-width)+scrxjump;
+            xjump=(x+w-width);
             w = width-x;}
 
     uint8_t* scrptr = m_scrbuf + (y*width + x);
@@ -1630,8 +1628,8 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                     bitmap++;
                     scrptr++;
                 }
-            bitmap += xjump; // needed if x<0 clipping occurs
-        scrptr = scrptr + (width - w)+scrxjump;
+            bitmap += xjump; // needed if horizontal clipping occurs
+            scrptr = scrptr + (width - w);
     }
     return;
     }
@@ -1795,11 +1793,8 @@ void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
     } // end for scry
 }
 
-void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
+void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap)
 {
-    int16_t w = *bitmap;
-	int16_t h = *(bitmap + 1);
-    bitmap = bitmap + 2; //add an offset to the pointer to start after the width and height
     /** visibility check */
     if (y<-h || y>height) return; //invisible
     if (x<-w || x>width) return;  //invisible
@@ -1918,6 +1913,11 @@ void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
             // increment the y jump in the scrptr
             scrptr = scrptr + ((width - w)>>1)+scrxjump;
     }
+}
+
+void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
+{
+    drawBitmapDataXFlipped(x, y, bitmap[0], bitmap[1], bitmap + 2);
 }
 
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t rotation, uint8_t flip) {
