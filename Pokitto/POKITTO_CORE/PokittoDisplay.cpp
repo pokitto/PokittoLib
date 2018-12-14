@@ -1793,11 +1793,8 @@ void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
     } // end for scry
 }
 
-void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
+void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap)
 {
-    int16_t w = *bitmap;
-	int16_t h = *(bitmap + 1);
-    bitmap = bitmap + 2; //add an offset to the pointer to start after the width and height
     /** visibility check */
     if (y<-h || y>height) return; //invisible
     if (x<-w || x>width) return;  //invisible
@@ -1916,6 +1913,11 @@ void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
             // increment the y jump in the scrptr
             scrptr = scrptr + ((width - w)>>1)+scrxjump;
     }
+}
+
+void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
+{
+    drawBitmapDataXFlipped(x, y, bitmap[0], bitmap[1], bitmap + 2);
 }
 
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t rotation, uint8_t flip) {

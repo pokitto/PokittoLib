@@ -314,6 +314,8 @@ public:
     static void drawRleBitmap(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw animated bitmap frame */
     static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t frame);
+    /** Draw bitmap data flipped on x-axis*/
+    static void drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
     /** Draw bitmap flipped on x-axis*/
     static void drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw bitmap with options */
