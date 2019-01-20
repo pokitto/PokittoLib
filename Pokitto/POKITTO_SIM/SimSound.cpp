@@ -145,7 +145,6 @@ void pokSoundIRQ() {
         osc2.count += osc2.cinc + (osc2.pitchbend); // counts to 65535 and overflows to zero
         osc3.count += osc3.cinc + (osc3.pitchbend); // counts to 65535 and overflows to zero
         #if POK_ALT_MIXING > 0 // heaviest cpu load, recalculate envelopes on each cycle
-        uint32_t o = 0;
         Marr[3]();
         Marr[2]();
         Marr[1]();
@@ -203,7 +202,7 @@ void pokSoundIRQ() {
     /** SIMULATOR **/
         #if POK_STREAMING_MUSIC
             //if (streamstep) {
-                uint16_t o = output + streambyte;
+                uint32_t o = output + streambyte;
                 output = o/2;
             //}
         #endif // STREAMING

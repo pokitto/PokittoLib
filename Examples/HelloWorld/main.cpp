@@ -18,4 +18,5 @@ int main ()
 			//mygame.display.printf("\nA random\nnumber:%d",random(100));
 		}
 	}
+	return 1;
 }

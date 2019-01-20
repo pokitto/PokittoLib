@@ -597,10 +597,10 @@ void Display::clear() {
         uint16_t j = POK_BITFRAME;
         if (bgcolor & 0x1) memset((void*)m_scrbuf,0xFF,j);// R
         else memset((void*)m_scrbuf,0x00,j);// R
-        if ((bgcolor>>1) & 0x1) memset((void*)m_scrbuf+POK_BITFRAME,0xFF,j);// G
-        else memset((void*)m_scrbuf+POK_BITFRAME,0x00,j);// G
-        if ((bgcolor>>2) & 0x1) memset((void*)m_scrbuf+POK_BITFRAME*2,0xFF,j);// B
-        else memset((void*)m_scrbuf+POK_BITFRAME*2,0x00,j);// B
+        if ((bgcolor>>1) & 0x1) memset((char*)m_scrbuf+POK_BITFRAME,0xFF,j);// G
+        else memset((char*)m_scrbuf+POK_BITFRAME,0x00,j);// G
+        if ((bgcolor>>2) & 0x1) memset((char*)m_scrbuf+POK_BITFRAME*2,0xFF,j);// B
+        else memset((char*)m_scrbuf+POK_BITFRAME*2,0x00,j);// B
         setCursor(0,0);
         return;
     } else if (bpp==4) {
@@ -1496,11 +1496,11 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
 
     /** 3 bpp mode */
     else if (m_colordepth==3) {
-        int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
+        int16_t i, j, byteNum, byteWidth = (w + 7) >> 3;
         int16_t bitFrame = w * h / 8;
         for (i = 0; i < w; i++) {
         byteNum = i / 8;
-        bitNum = i % 8;
+        //bitNum = i % 8;
 
         uint8_t bitcount=0;
         for (j = 0; j <= h/8; j++) {
@@ -1606,7 +1606,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     /** 4bpp fast version */
 
     if (m_colordepth==8) {
-    int16_t scrx,scry,scrxjump;
+    int16_t scrx,scry;//,scrxjump;
     int16_t xjump=0;
     /** y clipping */
     if (y<0) { h+=y; bitmap -= y*w; y=0;}
@@ -1948,7 +1948,7 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
     /** 8 bpp mode */
     else if (m_colordepth==8)
     {
-        int16_t scrx,scry,scrxjump;
+        int16_t scrx,scry;//,scrxjump;
         int16_t xjump=0;
         /** y clipping */
         if (y<0)

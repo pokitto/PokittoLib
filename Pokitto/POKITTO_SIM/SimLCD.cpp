@@ -125,7 +125,7 @@ inline void Pokitto::toggle_data(){
 }
 
 void Pokitto::lcdRefreshGB(uint8_t * scrbuf, uint16_t* paletteptr) {
-uint16_t x,y,data,xptr;
+uint16_t x,y,xptr;
 uint16_t scanline[48];
 uint8_t *d, yoffset=0;
 //lcdClear();
@@ -333,7 +333,7 @@ for(x=0;x<84;x++)
 */
 void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr) {
 
-    uint16_t x,y,xptr;
+    uint16_t x,y;
     uint16_t scanline[4][176]; // read 4 half-nibbles = 4 pixels at a time
     uint8_t *d, yoffset=0;
 
@@ -355,7 +355,6 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
     xptr = 8;
     setDRAMptr(8, 0);
     #else
-    xptr = 0;
     setDRAMptr(0, 0);
     #endif
 
@@ -363,7 +362,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
         d = scrbuf+(x>>2);// point to beginning of line in data
 
         /** find colours in one scanline **/
-        uint8_t s=0;
+
         d += (updRectY * 220/4);
         for (y=updRectY; y<updRectY+updRectH; y++) {
             uint8_t tdata = *d;
@@ -977,7 +976,7 @@ for(x=0;x<220;x+=2)
 
 
 void Pokitto::lcdRefreshAB(uint8_t * scrbuf, uint16_t* paletteptr) {
-uint16_t x,y,data,xptr;
+uint16_t x,y,xptr;
 uint16_t scanline[64];
 uint8_t *d, yoffset=0;
 //lcdClear();
@@ -1151,9 +1150,9 @@ for(x=0;x<128;x++)
 
 
 void Pokitto::lcdRefreshT1(uint8_t* tilebuf, uint8_t* tilecolorbuf, uint8_t* tileset, uint16_t* paletteptr) {
-uint16_t x,y,data,xptr;
+uint16_t xptr;
 uint16_t scanline[176];
-uint8_t yoffset=0, tilebyte, tileindex, tilex=0, tiley=0,xcount;
+uint8_t yoffset=0, tilebyte, tileindex, tilex=0, tiley=0, xcount;
 
 if (!tileset) return;
 
@@ -1408,7 +1407,7 @@ for(x=0;x<110;x+=2)
 }
 
 void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
-uint16_t x,y,data,xptr;
+uint16_t x,y,xptr;
 uint16_t scanline[176];
 uint8_t *d, yoffset=0;
 xptr = 0; //was 26

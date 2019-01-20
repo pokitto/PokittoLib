@@ -48,7 +48,7 @@ int main () {
     pokInitSD();
     gb.sound.playMusicStream("intro44.snd");
     int16_t x,y,x_lpupil,x_rpupil,y_pupil, squint=1;
-    uint8_t mouth=0,eyes=1,blink=0,blinkcount=0, eyecount=0;
+    uint8_t mouth=0,eyes=1,blink=0,blinkcount=0;
     uint16_t grincounter=0, grinout=GRINOUT;
     bool blockmouth=false;
     bool talking=false;
@@ -64,7 +64,7 @@ int main () {
     gb.sound.playMusicStream();
     while (gb.isRunning()) {
 
-        #ifdef POK_SIM]
+        #ifdef POK_SIM
         sbtemp = (uint8_t)(soundbyte * 3);
         #else
         sbtemp = (uint8_t)soundbyte;
@@ -183,7 +183,7 @@ int main () {
         if (random(0xfff)>TALKPROBABILITY) {
                 uint8_t oldmouth = mouth;
                 mouth = random(3)+1;
-                if (oldmouth=mouth) mouth++;
+                if (oldmouth==mouth) mouth++;
                 if (mouth==5) mouth = 1;
         }
         } else {

@@ -145,7 +145,7 @@ struct EEPROMClass{
     }
 };
 
-static EEPROMClass EEPROM;
+//static EEPROMClass EEPROM;
 
 
 #endif // SIMEEPROM_h
