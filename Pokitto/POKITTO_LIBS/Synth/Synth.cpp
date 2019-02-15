@@ -56,8 +56,8 @@ uint8_t tick=3; // loops between 3 channels. Tick 3 is used to calculate volume 
 
 SONG song;
 OSC osc1,osc2,osc3;
-OSC patch[15];
-BLOCK block[30]; //30 blocks maximum
+OSC patch[MAXPATCHES];
+BLOCK block[MAXBLOCKS];
 
 
 

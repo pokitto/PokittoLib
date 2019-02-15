@@ -51,8 +51,8 @@ uint8_t cc = 0;
 
 streamsFunction streamCallbackPtr;
 
-
 #if POK_ENABLE_SOUND > 0
+
 void updatePlaybackSD(uint8_t row) {
     // samplespertick determines how long the oscillators are active before they are recalculated (i.e. the next tick
     uint8_t i=0;
@@ -252,7 +252,6 @@ void readChunkFromSD(uint8_t* buffer) {
         fileReadBytes(buffer, CHUNKSIZE);
     }
 }
-#endif
 
 void registerStreamsCallback(streamsFunction ptr) {
     streamCallbackPtr = ptr;

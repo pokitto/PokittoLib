@@ -83,12 +83,12 @@ void emptyFname() {
 
 /** PUBLIC FUNCTIONS **/
 
-char* getFirstDirEntry() {
+char* getFirstDirEntry(char* path) {
     res=0;
     if (!diropened) {
             pokInitSD();
     }
-    res = pf_opendir(&dir,"");
+    res = pf_opendir(&dir,path);
     emptyFname();
     res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
     if (res) return 0;
@@ -108,6 +108,10 @@ char* getFirstDirEntry() {
         if (res==0 && dir.index==0) break;
     }
     return 0;
+}
+
+char* getFirstDirEntry() {
+    return getFirstDirEntry("");
 }
 
 char* getNextDirEntry() {
@@ -164,12 +168,12 @@ char* getNextFile() {
     return getNextFile("");
 }
 
-char* getFirstFile(char* ext) {
+char* getFirstFile(char* ext, char* path) {
     res=0;
     if (!diropened) {
             pokInitSD();
     }
-    res = pf_opendir(&dir,"");
+    res = pf_opendir(&dir,path);
     emptyFname();
     res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
     if (res) return 0;
@@ -184,6 +188,10 @@ char* getFirstFile(char* ext) {
         if (res==0 && dir.index==0) break;
     }
     return 0;
+}
+
+char* getFirstFile(char* ext) {
+    return getFirstFile(ext, "");
 }
 
 char* getFirstFile() {
