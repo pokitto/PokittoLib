@@ -85,6 +85,9 @@ uint8_t Pokitto::HWvolume=0;
 uint16_t soundbufindex;
 uint8_t* soundbufptr;
 
+sampletype Pokitto::snd[4]; // up to 4 sounds at once?
+
+
 bool volpotError=false; //test for broken MCP4018
 
 uint16_t soundbyte;
@@ -351,9 +354,49 @@ void pokPlayStream() {
 
 
 
+uint8_t mixSound()
+{
+    int temp = 0;
+    signed int ss[4];
+    for(int s=0; s<4; s++){
+        int currentPos = (snd[s].soundPoint*snd[s].speed)>>8;
+        ss[s] = snd[s].currentSound[currentPos] -128;
+        ss[s] *= snd[s].volume;
+        ss[s] = ss[s]>>8;
+        ss[s] *= snd[s].playSample; // will be 1 or 0, if not playing, will silence
+        snd[s].soundPoint++;
+        if( currentPos >= snd[s].currentSoundSize){
+            if(snd[s].repeat){
+                snd[s].soundPoint=0;
+            }else{
+                snd[s].playSample=0;
+                snd[s].soundPoint=0;
+            }
+        }
+     }
+    temp = (ss[0] + ss[1] + ss[2] + ss[3])/4;
+    return temp +128;
+}
+
+
 inline void pokSoundBufferedIRQ() {
+
+#if POK_AUD_TRACKER
+           uint32_t output = mixSound();
+#else
            uint32_t output = soundbuf[soundbufindex+=Pokitto::streamon];
-           if (soundbufindex==SBUFSIZE) soundbufindex=0;
+#endif
+
+           if (soundbufindex==SBUFSIZE){
+                soundbufindex=0;
+/*
+                for(int t=0; t<=SBUFSIZE;){
+                    uint8_t sample = mixSound();
+                    soundbuf[t++] = sample;
+                }
+*/
+           }
+
            //if (p==sizeof(beat_11025_raw)) p=0;
            //soundbuf[soundbufindex++] = output;
            //uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float

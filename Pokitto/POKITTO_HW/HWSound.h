@@ -142,6 +142,19 @@ extern void pokAmpEnable(uint8_t);
 extern Ticker audio;
 
 extern void update_SDAudioStream();
+
+typedef struct{
+    bool playSample;
+    int soundPoint;
+    const uint8_t *currentSound;
+    uint32_t currentSoundSize;
+    int volume;
+    int speed;
+    int repeat;
+}sampletype;
+
+extern sampletype snd[4]; // up to 4 sounds at once?
+
 }
 
 
