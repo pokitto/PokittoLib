@@ -302,6 +302,11 @@ void Pok_Wait(uint32_t dur_ms) {
 #endif // POK_SIM
 }
 
+uint32_t Pok_Time_us()
+{
+    return Core::getTime();
+}
+
 
 struct tm * localtime_cpp(const time_t * timer)
 {
