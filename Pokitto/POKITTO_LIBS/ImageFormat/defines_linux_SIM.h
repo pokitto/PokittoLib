@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include "helpers.h"
 
 #define _MAX_DRIVE	3
 #define _MAX_DIR	256

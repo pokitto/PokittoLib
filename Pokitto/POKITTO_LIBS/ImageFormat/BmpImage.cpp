@@ -34,11 +34,9 @@
 */
 /**************************************************************************/
 
-#if POKITTO_USE_WIN_SIMULATOR
+#ifdef WIN32 // these types are not standard, only exist in windows
 #include "defines_win_SIM.h"
-#endif
-
-#if PROJ_LINUX
+#else
 #include "defines_linux_SIM.h"
 #endif
 
@@ -81,7 +79,7 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
         fileOpen(filepath, FILE_MODE_READONLY | FILE_MODE_BINARY);
     }
     else
-        return -1;  // Already open, not good.
+        return (-1);  // Already open, not good.
 
     if (fileOK() && fileReadBytes((uint8_t*)&bf, sizeof(bf)) == sizeof(bf) ) {
         bytes_read += sizeof(bf);
@@ -90,13 +88,13 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
 	{
 		POK_TRACE("Error reading BMP header\n");
 		fileClose();
-		return(-1);
+		return(-2);
 	}
 
     if (fileReadBytes((uint8_t*)&bmi,sizeof(bmi.bmiHeader)) != sizeof(bmi.bmiHeader)) {
 		POK_TRACE("Error reading BMP info\n");
 		fileClose();
-		return(-1);
+		return(-3);
 	}
     bytes_read += sizeof(bmi.bmiHeader);
 
@@ -106,7 +104,7 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
         POK_TRACE("Bitmap file has an unrecognized format (4D42 id missing from beginning).\n");
         POK_TRACE("BMP2POK accepts .BMP files that have an indexed (1,-bit, 4-bit or 8-bit) color palette.\n");
         fileClose();
-        return(-1);
+        return(-4);
     }
     if (bmi.bmiHeader.biBitCount != POK_COLORDEPTH ) {
         POK_TRACE("ERROR!\nThe image color depth should be the same as screen color depth!\n");
@@ -116,32 +114,32 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
         POK_TRACE("1-bit images need to have width that is divisible by 32!\n");
         POK_TRACE("Adjust size of source image.\n");
         fileClose();
-        return(-1);
+        return(-5);
     }
 	if (bmi.bmiHeader.biWidth%4) {
         POK_TRACE("Width is not divisible by 4\n");
         fileClose();
-        return(-1);
+        return(-6);
 	}
 	if (bmi.bmiHeader.biWidth%8 && bmi.bmiHeader.biBitCount==4) {
         if (bmi.bmiHeader.biWidth%4) {
             POK_TRACE("ERROR!\n4-bit source images have to have a width that is divisible by 4\n");
             fileClose();
-            return(-1);
+            return(-7);
         }
 	}
     if (bmi.bmiHeader.biBitCount != 8 && bmi.bmiHeader.biBitCount != 4 && bmi.bmiHeader.biBitCount != 1)
     {
         POK_TRACE("Only 8bpp, 4bpp & 1bpp BMP files are supported\n");
         fileClose();
-        return(-1);
+        return(-8);
     }
     if (bmi.bmiHeader.biCompression != 0 &&
         !(bmi.bmiHeader.biCompression == BI_RLE4 && bmi.bmiHeader.biBitCount == 4))
     {
         POK_TRACE("Only RLE compression for bitmaps with 4 bpp is supported\n");
         fileClose();
-        return(-1);
+        return(-9);
     }
 
     /* If the height is negative the bmp image is in the correct way.
@@ -158,14 +156,23 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
     bmi.bmiHeader.biClrUsed = c;
 
     /* Allocate memory for the output parameter */
-    if (numcol>bmi.bmiHeader.biClrUsed) numcol = bmi.bmiHeader.biClrUsed;
     *palette_out = (uint16_t*) malloc(numcol*2);
   	if (*palette_out == NULL)
 	{
 		POK_TRACE("Error allocating temporary palette buffer.\n");
 		free(*palette_out);
-		return(-1);
+		return(-11);
 	}
+    memset((char*)(*palette_out), 0, numcol*2);
+    //  	if (numcol!=bmi.bmiHeader.biClrUsed)
+    //	{
+    //		POK_TRACE("The palette size do not mach to the color mode.\n");
+    //		free(*palette_out);
+    //		return(-10);
+    //	}
+
+    // Set numcol.
+    if (numcol>bmi.bmiHeader.biClrUsed) numcol = bmi.bmiHeader.biClrUsed;
 
     /* seek to the beginning of the color table - because of gimp */
     fileSeekAbsolute(bf.bfOffBits-c*4); //gfx data star minus color table
@@ -201,7 +208,7 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
     {
         POK_TRACE("Error allocating temporary data buffer, is image too big?\n");
         free(*palette_out);
-        return(-1);
+        return(-12);
     }
 
     /* Store image size to the pokitto bitmap header */
@@ -228,7 +235,7 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
                     POK_TRACE("Error allocating temporary data buffer, is image too big?\n");
                     free(old_bitmap);
                     free(*palette_out);
-                    return(-1);
+                    return(-13);
                 }
 
                 /* Copy data */
@@ -281,7 +288,7 @@ int openImageFileFromSD(char* filepath, uint16_t **palette_out, uint8_t **bitmap
                     fileClose();
                     free(*bitmap_out);
                     free(*palette_out);
-                    return(-1);
+                    return(-14);
                 }
 
                 /* Copy a byte from the file to the bitmap */

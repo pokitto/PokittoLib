@@ -1,6 +1,8 @@
 #ifndef __libfixmath_fix16_h__
 #define __libfixmath_fix16_h__
 
+#include "Pokitto_settings.h"
+
 /** OPTIONS **/
 #define FIXMATH_SIN_LUT
 

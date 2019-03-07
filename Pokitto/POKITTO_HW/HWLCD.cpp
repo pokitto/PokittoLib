@@ -1096,6 +1096,11 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
   CLR_CS_SET_CD_RD_WR;
   SET_MASK_P2;
 
+  #ifdef PROJ_SHOW_FPS_COUNTER
+  setDRAMptr(0, 8);
+  y=4;
+  #endif
+
   asm volatile(
 	 ".syntax unified"         "\n"
 
@@ -1884,6 +1889,11 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
    uint32_t x, y=0, c, t;
 
 #ifndef __ARMCC_VERSION
+   #ifdef PROJ_SHOW_FPS_COUNTER
+   setDRAMptr(0, 8);
+   y=4;
+   #endif
+
    asm volatile(
 	 ".syntax unified"         "\n"
 
