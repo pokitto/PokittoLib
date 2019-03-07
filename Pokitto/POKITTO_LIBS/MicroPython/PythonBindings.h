@@ -100,6 +100,7 @@ EXTERNC void Pok_Sound_Play();
 EXTERNC void Pok_Sound_Pause();
 
 EXTERNC void Pok_Wait(uint32_t dur_ms);
+EXTERNC uint32_t Pok_Time_us();
 
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
 EXTERNC time_t time_cpp(time_t* timer);
