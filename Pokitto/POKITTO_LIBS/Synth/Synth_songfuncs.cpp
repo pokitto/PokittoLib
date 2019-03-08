@@ -253,6 +253,8 @@ void readChunkFromSD(uint8_t* buffer) {
     }
 }
 
+#endif // POK_ENABLE_SD
+
 void registerStreamsCallback(streamsFunction ptr) {
     streamCallbackPtr = ptr;
 }
