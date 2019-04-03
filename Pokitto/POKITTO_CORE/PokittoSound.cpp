@@ -97,6 +97,8 @@ Pokitto::Core _soundc;
 
 const uint8_t *Sound::sfxDataPtr = 0;
 const uint8_t *Sound::sfxEndPtr = 0;
+bool Sound::sfxIs4bitSamples = false;
+uint8_t Sound::sfxBytePos = 0;
 
 uint8_t Sound::prescaler;
 uint16_t Sound::globalVolume;
