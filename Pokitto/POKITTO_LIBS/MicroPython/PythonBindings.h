@@ -69,6 +69,7 @@ EXTERNC bool Pok_addToRingBuffer(uint8_t type, uint8_t key);
 EXTERNC bool Pok_readAndRemoveFromRingBuffer(EventRingBufferItem* itemOut);
 
 // Display
+EXTERNC void Pok_Display_init( bool mustClearScreen );
 EXTERNC uint8_t Pok_Display_getNumberOfColors();
 EXTERNC uint16_t Pok_Display_getWidth();
 EXTERNC uint16_t Pok_Display_getHeight();
@@ -92,16 +93,30 @@ EXTERNC bool Pok_Core_buttons_released(uint8_t button);
 
 // Sound functions
 EXTERNC void Pok_Sound_Reset();
+EXTERNC void Pok_Sound_PlayMusicFromSD(char* filePath);
 EXTERNC uint8_t Pok_Sound_GetCurrentBufferIndex();
 EXTERNC uint32_t Pok_Sound_GetCurrentBufferPos();
 EXTERNC uint32_t Pok_Sound_GetBufferSize();
 EXTERNC void Pok_Sound_FillBuffer(void* buf, uint16_t len, uint8_t soundBufferIndex, uint16_t soundBufferPos);
 EXTERNC void Pok_Sound_Play();
 EXTERNC void Pok_Sound_Pause();
+EXTERNC void Pok_Sound_playSFX(void* sfxdata, uint32_t length, bool is4bitSample);
 
+// Time related functions.
 EXTERNC void Pok_Wait(uint32_t dur_ms);
-EXTERNC uint32_t Pok_Time_us();
+EXTERNC uint32_t Pok_Time_ms();
 
+// Tilemap functions.
+EXTERNC void* Pok_ConstructMap();
+EXTERNC void Pok_DestroyMap( void* _this );
+EXTERNC void Pok_SetMap( void* _this, size_t width, size_t height, const uint8_t *map );
+EXTERNC void Pok_DrawMap( void* _this, int32_t x, int32_t y );
+EXTERNC void Pok_SetTile( void* _this, uint8_t index, uint8_t width, uint8_t height, const uint8_t *data);
+EXTERNC uint8_t Pok_GetTileId( void* _this, int32_t x, int32_t y, uint8_t tileSize );
+EXTERNC void Pok_GetTileIds( void* _this, int32_t tlx, int32_t tly, int32_t brx, int32_t bry, uint8_t tileSize,
+                        /*OUT*/ uint8_t* tileIdTl, uint8_t* tileIdTr, uint8_t* tileIdBl, uint8_t* tileIdBr );
+
+// For compatibility in linking
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
 EXTERNC time_t time_cpp(time_t* timer);
 
