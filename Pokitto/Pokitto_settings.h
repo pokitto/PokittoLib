@@ -340,7 +340,11 @@
     #define POK_SCREENMODE MODE15
     #define POK_COLORDEPTH 4
     #define POK_STRETCH 0
-    #define POK_FPS 30
+    #ifdef PROJ_FPS
+        #define POK_FPS PROJ_FPS
+    #else
+        #define POK_FPS 200
+    #endif
     #define POK_BITFRAME 4840
 #endif
 /* DEFINE SCREENMODE AS THE MAXIMUM SCREEN SIZE NEEDED BY YOUR APP ... SEE SIZES LISTED ABOVE */

@@ -398,11 +398,19 @@ inline void pokSoundIRQ() {
         #else
         streamstep = 1;
         #endif // POK_STREAMFREQ_HALVE
-        streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
+        #ifndef PROJ_SDFS_STREAMING
+        	//streamon=1; // force enable stream
+        #else
+            streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
+        #endif
         if (streamstep) {
             output = (*currentPtr++);
 	    if( Pokitto::Sound::sfxDataPtr != Pokitto::Sound::sfxEndPtr ){
-		int32_t s = (int32_t(output) + int32_t(*Pokitto::Sound::sfxDataPtr++)) - 128;
+		#ifndef PROJ_SDFS_STREAMING
+        	int32_t s = int32_t(*Pokitto::Sound::sfxDataPtr++);
+        #else
+            int32_t s = (int32_t(output) + int32_t(*Pokitto::Sound::sfxDataPtr++)) - 128;
+		#endif
 		if( s < 0 ) s = 0;
 		else if( s > 255 ) s = 255;
 		output = s;
