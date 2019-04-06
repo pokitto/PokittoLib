@@ -100,6 +100,8 @@ bool volpotError=false; //test for broken MCP4018
 
 uint16_t soundbyte;
 
+sampletype Pokitto::snd[4]; // up to 4 sounds at once?
+
 
 #if POK_USE_DAC > 0
 #if POK_BOARDREV == 1
@@ -360,10 +362,42 @@ void pokPlayStream() {
     streamon=1;
 }
 
+uint8_t mixSound()
+{
+    int temp = 0;
+    signed int ss[4];
+    for(int s=0; s<4; s++){
+        snd[s].soundPoint++;
+
+        int currentPos = (snd[s].soundPoint*snd[s].speed)>>8;
+
+        if( currentPos >= snd[s].currentSoundSize){
+            if(snd[s].repeat){
+                snd[s].soundPoint = snd[s].repeat;
+            }else{
+                snd[s].playSample=0;
+                snd[s].soundPoint=0;
+            }
+        }
+
+        ss[s] = snd[s].currentSound[currentPos] -128;
+        ss[s] *= snd[s].volume;
+        ss[s] = ss[s]>>8;
+        ss[s] *= snd[s].playSample; // will be 1 or 0, if not playing, will silence
+
+     }
+    temp = (ss[0] + ss[1] + ss[2] + ss[3])/4;
+    return temp +128;
+}
 
 
 inline void pokSoundBufferedIRQ() {
+
+#if POK_AUD_TRACKER
+           uint32_t output = mixSound();
+#else
            uint32_t output = soundbuf[soundbufindex+=Pokitto::streamon];
+#endif
            if (soundbufindex==SBUFSIZE) soundbufindex=0;
            //if (p==sizeof(beat_11025_raw)) p=0;
            //soundbuf[soundbufindex++] = output;
