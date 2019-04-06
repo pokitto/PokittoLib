@@ -43,6 +43,7 @@
 					<Add option="-g" />
 					<Add option="-DPOK_SIM" />
 					<Add directory="../POKITTO_LIBS/MicroPython" />
+					<Add directory="../POKITTO_LIBS/Tilemap" />
 				</Compiler>
 				<Linker>
 					<Add library="../POKITTO_LIBS/MicroPython/libmicropython_win.a" />
@@ -984,6 +985,9 @@
 		<Unit filename="../POKITTO_LIBS/Synth/Synth_song.h" />
 		<Unit filename="../POKITTO_LIBS/Synth/Synth_songfuncs.cpp" />
 		<Unit filename="../POKITTO_LIBS/Synth/Synth_wavefuncs.cpp" />
+		<Unit filename="../POKITTO_LIBS/Tilemap/Tilemap.cpp">
+			<Option target="MicroPython" />
+		</Unit>
 		<Unit filename="../POKITTO_XTERNALS/Arduboy2/src/Arduboy2.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
