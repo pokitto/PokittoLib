@@ -1,9 +1,13 @@
+print('test 1')
+
 import upygame as pygame
 import framebuf
 import urandom as random
 import example_data as spritedata
 import sprite
 import gc
+
+print('test 2')
 
 pygame.display.init()
 pygame.display.set_palette_16bit([
@@ -12,6 +16,15 @@ pygame.display.set_palette_16bit([
 ]);
 
 screen = pygame.display.set_mode() # full screen
+
+print('test 3')
+# Initialize sound
+g_sound = pygame.mixer.Sound()
+print('test 4')
+
+g_sound.play_from_sd("intro44.snd")
+print('test 5')
+g_sound.play()
 
 print('display ready')
 
@@ -117,6 +130,8 @@ while True:
     if hit != None:
         frogittoGob.rect.x = 50
         frogittoGob.rect.y = 70
+        g_sound.play_sfx(spritedata.sound1, len(spritedata.sound1), True)
+
 
     eventtype = pygame.event.poll()
     if eventtype != pygame.NOEVENT:
@@ -129,6 +144,13 @@ while True:
                 vy = -1
             if eventtype.key == pygame.K_DOWN:
                 vy = 1
+            if eventtype.key == pygame.BUT_A:
+                g_sound.play_from_sd("intro44.snd")
+                g_sound.play()
+            if eventtype.key == pygame.BUT_B:
+                g_sound.play_from_sd("scary.snd")
+                g_sound.play()
+
         if eventtype.type == pygame.KEYUP:
             if eventtype.key == pygame.K_RIGHT:
                 vx = 0

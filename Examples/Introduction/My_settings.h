@@ -19,4 +19,9 @@
 #define PROJ_AUD_FREQ 44100
 #define PRODUCTIONTESTING 1
 
+#ifndef POK_SIM
+#define PROJ_HIGH_RAM HIGH_RAM_MUSIC
+#endif
+
+
 #endif

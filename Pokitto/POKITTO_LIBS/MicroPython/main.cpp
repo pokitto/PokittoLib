@@ -57,7 +57,14 @@ extern "C" int PythonMain(int argc, char **argv);
 
 int main () {
 
+    //pokInitSD();
+    //Pok_Sound_Reset();
+
     game.begin();
+
+    //game.sound.playMusicStream("intro44.snd");
+    //game.sound.playMusicStream();
+    //game.sound.ampEnable(true);
 
     game.display.persistence = 0;
 
