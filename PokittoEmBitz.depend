@@ -7852,29 +7852,30 @@
 	"io.h"
 	"SDFileSystem.h"
 
-1553351930 source:d:\dev\official\pokittolib\examples\celeste\celeste\balloon.cpp
+1554560214 source:d:\dev\official\pokittolib\examples\celeste\celeste\balloon.cpp
 	"balloon.h"
 	"player.h"
 
-1553351928 d:\dev\official\pokittolib\examples\celeste\celeste\balloon.h
+1553355528 d:\dev\official\pokittolib\examples\celeste\celeste\balloon.h
 	"object.h"
 
-1553351820 d:\dev\official\pokittolib\examples\celeste\celeste\object.h
+1553355420 d:\dev\official\pokittolib\examples\celeste\celeste\object.h
 	"constants.h"
 
-1553365606 d:\dev\official\pokittolib\examples\celeste\celeste\constants.h
+1553434453 d:\dev\official\pokittolib\examples\celeste\celeste\constants.h
 	"pico8.h"
 
-1553366433 d:\dev\official\pokittolib\examples\celeste\celeste\pico8.h
+1554566550 d:\dev\official\pokittolib\examples\celeste\celeste\pico8.h
 	"platform_PicoBoy.h"
 	"../platform_Pokitto.h"
 
-1553351226 d:\dev\official\pokittolib\examples\celeste\celeste\platform_picoboy.h
+1553354826 d:\dev\official\pokittolib\examples\celeste\celeste\platform_picoboy.h
 	<PicoBoy.h>
 	<stdint.h>
 
-1553378386 d:\dev\official\pokittolib\examples\celeste\platform_pokitto.h
+1554566294 d:\dev\official\pokittolib\examples\celeste\platform_pokitto.h
 	"Pokitto.h"
+	<cmath>
 
 1553112607 d:\dev\official\pokittolib\pokitto\pokitto.h
 	"Pokitto_settings.h"
@@ -7893,7 +7894,7 @@
 1553384659 d:\dev\official\pokittolib\pokitto\pokitto_settings.h
 	"My_settings.h"
 
-1553380625 d:\dev\official\pokittolib\examples\celeste\my_settings.h
+1554576331 d:\dev\official\pokittolib\examples\celeste\my_settings.h
 
 1553112606 d:\dev\official\pokittolib\pokitto\pokitto_core\pokittocore.h
 	<stdint.h>
@@ -8383,75 +8384,75 @@
 
 1553112607 d:\dev\official\pokittolib\pokitto\pokitto_libs\synth\synth_song.h
 
-1553351228 d:\dev\official\pokittolib\examples\celeste\celeste\player.h
+1553354828 d:\dev\official\pokittolib\examples\celeste\celeste\player.h
 	"object.h"
 	"hair.h"
 
-1553351220 d:\dev\official\pokittolib\examples\celeste\celeste\hair.h
+1553354820 d:\dev\official\pokittolib\examples\celeste\celeste\hair.h
 
-1553351886 source:d:\dev\official\pokittolib\examples\celeste\celeste\bigchest.cpp
+1554560843 source:d:\dev\official\pokittolib\examples\celeste\celeste\bigchest.cpp
 	"bigchest.h"
 	"orb.h"
 
-1553351884 d:\dev\official\pokittolib\examples\celeste\celeste\bigchest.h
+1553355484 d:\dev\official\pokittolib\examples\celeste\celeste\bigchest.h
 	"object.h"
 
-1553351224 d:\dev\official\pokittolib\examples\celeste\celeste\orb.h
+1553354824 d:\dev\official\pokittolib\examples\celeste\celeste\orb.h
 	"object.h"
 
-1553351216 source:d:\dev\official\pokittolib\examples\celeste\celeste\chest.cpp
+1554560843 source:d:\dev\official\pokittolib\examples\celeste\celeste\chest.cpp
 	"chest.h"
 	"fruit.h"
 
-1553351216 d:\dev\official\pokittolib\examples\celeste\celeste\chest.h
+1553354816 d:\dev\official\pokittolib\examples\celeste\celeste\chest.h
 	"object.h"
 
-1553351220 d:\dev\official\pokittolib\examples\celeste\celeste\fruit.h
+1553354820 d:\dev\official\pokittolib\examples\celeste\celeste\fruit.h
 	"object.h"
 
-1553351216 source:d:\dev\official\pokittolib\examples\celeste\celeste\fakewall.cpp
+1554560543 source:d:\dev\official\pokittolib\examples\celeste\celeste\fakewall.cpp
 	"fakewall.h"
 	"constants.h"
 	"player.h"
 	"fruit.h"
 
-1553351216 d:\dev\official\pokittolib\examples\celeste\celeste\fakewall.h
+1553354816 d:\dev\official\pokittolib\examples\celeste\celeste\fakewall.h
 	"object.h"
 
-1553351218 source:d:\dev\official\pokittolib\examples\celeste\celeste\fallfloor.cpp
+1554560369 source:d:\dev\official\pokittolib\examples\celeste\celeste\fallfloor.cpp
 	"fallfloor.h"
 	"spring.h"
 
-1553351218 d:\dev\official\pokittolib\examples\celeste\celeste\fallfloor.h
+1553354818 d:\dev\official\pokittolib\examples\celeste\celeste\fallfloor.h
 	"object.h"
 
-1553351214 d:\dev\official\pokittolib\examples\celeste\celeste\spring.h
+1553354814 d:\dev\official\pokittolib\examples\celeste\celeste\spring.h
 	"object.h"
 
-1553351218 source:d:\dev\official\pokittolib\examples\celeste\celeste\flag.cpp
+1554560881 source:d:\dev\official\pokittolib\examples\celeste\celeste\flag.cpp
 	"flag.h"
 	"player.h"
 
-1553351218 d:\dev\official\pokittolib\examples\celeste\celeste\flag.h
+1553354818 d:\dev\official\pokittolib\examples\celeste\celeste\flag.h
 	"object.h"
 
-1553351218 source:d:\dev\official\pokittolib\examples\celeste\celeste\flyfruit.cpp
+1554560479 source:d:\dev\official\pokittolib\examples\celeste\celeste\flyfruit.cpp
 	"flyfruit.h"
 	"player.h"
 	"lifeup.h"
 
-1553351218 d:\dev\official\pokittolib\examples\celeste\celeste\flyfruit.h
+1553354818 d:\dev\official\pokittolib\examples\celeste\celeste\flyfruit.h
 	"object.h"
 
-1553351222 d:\dev\official\pokittolib\examples\celeste\celeste\lifeup.h
+1553354822 d:\dev\official\pokittolib\examples\celeste\celeste\lifeup.h
 	"object.h"
 
-1553351220 source:d:\dev\official\pokittolib\examples\celeste\celeste\fruit.cpp
+1554560369 source:d:\dev\official\pokittolib\examples\celeste\celeste\fruit.cpp
 	"fruit.h"
 	"player.h"
 	"lifeup.h"
 
-1553365629 source:d:\dev\official\pokittolib\examples\celeste\celeste\game.cpp
+1554568433 source:d:\dev\official\pokittolib\examples\celeste\celeste\game.cpp
 	"game.h"
 	"fakewall.h"
 	"playerspawn.h"
@@ -8470,75 +8471,76 @@
 	"flag.h"
 	"Tiles.h"
 
-1553352552 d:\dev\official\pokittolib\examples\celeste\celeste\game.h
+1553434119 d:\dev\official\pokittolib\examples\celeste\celeste\game.h
 	"constants.h"
 	"playerspawn.h"
 
-1553351976 d:\dev\official\pokittolib\examples\celeste\celeste\playerspawn.h
+1553355576 d:\dev\official\pokittolib\examples\celeste\celeste\playerspawn.h
 	"object.h"
 	"hair.h"
 
-1553351214 d:\dev\official\pokittolib\examples\celeste\celeste\roomtitle.h
+1553354814 d:\dev\official\pokittolib\examples\celeste\celeste\roomtitle.h
 	"object.h"
 
-1553351226 d:\dev\official\pokittolib\examples\celeste\celeste\platform.h
+1553354826 d:\dev\official\pokittolib\examples\celeste\celeste\platform.h
 	"object.h"
 
-1553351222 d:\dev\official\pokittolib\examples\celeste\celeste\key.h
+1553354822 d:\dev\official\pokittolib\examples\celeste\celeste\key.h
 	"object.h"
 
-1553352350 d:\dev\official\pokittolib\examples\celeste\celeste\message.h
+1553355950 d:\dev\official\pokittolib\examples\celeste\celeste\message.h
 	"object.h"
 
-1553351214 d:\dev\official\pokittolib\examples\celeste\celeste\tiles.h
+1553435302 d:\dev\official\pokittolib\examples\celeste\celeste\tiles.h
 	<stdint.h>
 
-1553364828 source:d:\dev\official\pokittolib\examples\celeste\celeste\hair.cpp
+1553368428 source:d:\dev\official\pokittolib\examples\celeste\celeste\hair.cpp
 	"hair.h"
 	"object.h"
 
-1553351222 source:d:\dev\official\pokittolib\examples\celeste\celeste\key.cpp
+1554560597 source:d:\dev\official\pokittolib\examples\celeste\celeste\key.cpp
 	"key.h"
 
-1553351222 source:d:\dev\official\pokittolib\examples\celeste\celeste\lifeup.cpp
+1553354822 source:d:\dev\official\pokittolib\examples\celeste\celeste\lifeup.cpp
 	"lifeup.h"
 
-1553352342 source:d:\dev\official\pokittolib\examples\celeste\celeste\message.cpp
+1554560843 source:d:\dev\official\pokittolib\examples\celeste\celeste\message.cpp
 	"message.h"
 	"player.h"
 
-1553351224 source:d:\dev\official\pokittolib\examples\celeste\celeste\orb.cpp
+1554560843 source:d:\dev\official\pokittolib\examples\celeste\celeste\orb.cpp
 	"orb.h"
 	"player.h"
 
-1553365677 source:d:\dev\official\pokittolib\examples\celeste\celeste\pico8.cpp
+1554566762 source:d:\dev\official\pokittolib\examples\celeste\celeste\pico8.cpp
 	"pico8.h"
 	"Tiles.h"
 	"Map.h"
+	"Sfx.h"
 
-1553351222 d:\dev\official\pokittolib\examples\celeste\celeste\map.h
+1553423602 d:\dev\official\pokittolib\examples\celeste\celeste\map.h
 	<stdint.h>
 
-1553378299 source:d:\dev\official\pokittolib\examples\celeste\celeste\object.cpp
+1553430163 source:d:\dev\official\pokittolib\examples\celeste\celeste\object.cpp
 	"object.h"
 
-1553351226 source:d:\dev\official\pokittolib\examples\celeste\celeste\platform.cpp
+1553430157 source:d:\dev\official\pokittolib\examples\celeste\celeste\platform.cpp
 	"platform.h"
 
-1553364665 source:d:\dev\official\pokittolib\examples\celeste\celeste\playerspawn.cpp
+1554560101 source:d:\dev\official\pokittolib\examples\celeste\celeste\playerspawn.cpp
 	"playerspawn.h"
 	"player.h"
 
-1553351212 source:d:\dev\official\pokittolib\examples\celeste\celeste\roomtitle.cpp
+1553354812 source:d:\dev\official\pokittolib\examples\celeste\celeste\roomtitle.cpp
 	"roomtitle.h"
 	"constants.h"
 
-1553351214 source:d:\dev\official\pokittolib\examples\celeste\celeste\spring.cpp
+1554560140 source:d:\dev\official\pokittolib\examples\celeste\celeste\spring.cpp
 	"spring.h"
 	"player.h"
 	"fallfloor.h"
 
-1553366684 source:d:\dev\official\pokittolib\examples\celeste\main.cpp
+1554566692 source:d:\dev\official\pokittolib\examples\celeste\main.cpp
 	"Celeste/game.h"
 
 1553112607 source:d:\dev\official\pokittolib\pokitto\libpff\mmc.cpp
@@ -9037,7 +9039,7 @@
 	"Pokitto_settings.h"
 	<algorithm>
 
-1554461927 source:d:\dev\official\pokittolib\pokitto\pokitto_hw\hwsound.cpp
+1554577016 source:d:\dev\official\pokittolib\pokitto\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -9115,11 +9117,17 @@
 1553112607 source:d:\dev\official\pokittolib\pokitto\pokitto_libs\synth\synth_wavefuncs.cpp
 	"Synth.h"
 
-1553378326 source:d:\dev\official\pokittolib\examples\celeste\celeste\player.cpp
+1554561403 source:d:\dev\official\pokittolib\examples\celeste\celeste\player.cpp
 	"player.h"
 
 1554464608 source:d:\dev\official\pokittolib\examples\playsfx\main.cpp
 	"Pokitto.h"
 
 1554464608 d:\dev\official\pokittolib\examples\playsfx\my_settings.h
+
+1554561393 d:\dev\official\pokittolib\examples\celeste\celeste\sfx.h
+	<stdint.h>
+
+1553433707 source:d:\dev\official\pokittolib\examples\celeste\pico8.c
+	<stdint.h>
 
