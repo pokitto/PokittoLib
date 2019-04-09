@@ -401,9 +401,10 @@ inline void pokSoundIRQ() {
         streamstep = 1;
         #endif // POK_STREAMFREQ_HALVE
         #ifndef PROJ_SDFS_STREAMING
-            //streamon=1; // force enable stream
+        	streamon=1; // force enable stream
+        #else
+            streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
         #endif
-        streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
         if (streamstep) {
             output = (*currentPtr++);
 
@@ -441,7 +442,6 @@ inline void pokSoundIRQ() {
                 streambyte = 0; // duty cycle
                 output = 0;
             }
-
             if (currentPtr >= endPtr)
             {
             currentBuffer++;

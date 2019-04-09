@@ -11,4 +11,5 @@
 *.layout
 *.map
 *.elay
+/Examples/Celeste
 
