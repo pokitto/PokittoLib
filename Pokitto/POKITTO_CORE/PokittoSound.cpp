@@ -258,24 +258,11 @@ uint16_t Sound::getMaxVol() {
 void Sound::updateStream() {
      #if POK_STREAMING_MUSIC
     if (oldBuffer != currentBuffer) {
-
-        #if POK_HIGH_RAM == HIGH_RAM_MUSIC
-
-        if (currentBuffer==0) fileReadBytes(buffers[3],BUFFER_SIZE);
-        else if (currentBuffer==1) fileReadBytes(buffers[0],BUFFER_SIZE);
-        else if (currentBuffer==2) fileReadBytes(buffers[1],BUFFER_SIZE);
-        else fileReadBytes(buffers[2],BUFFER_SIZE);
-
-        #else
-
         if (currentBuffer==0) fileReadBytes(&buffers[3][0],BUFFER_SIZE);
         else if (currentBuffer==1) fileReadBytes(&buffers[0][0],BUFFER_SIZE);
         else if (currentBuffer==2) fileReadBytes(&buffers[1][0],BUFFER_SIZE);
         else fileReadBytes(&buffers[2][0],BUFFER_SIZE);
-
-        #endif
-
-       oldBuffer = currentBuffer;
+        oldBuffer = currentBuffer;
         streamcounter += BUFFER_SIZE;
     }
 
@@ -957,22 +944,10 @@ int Sound::playMusicStream(char* filename, uint8_t options)
                 return 0; // opening music file failed
         }
 
-        #if POK_HIGH_RAM == HIGH_RAM_MUSIC
-
-        fileReadBytes(buffers[0],BUFFER_SIZE);
-        fileReadBytes(buffers[1],BUFFER_SIZE);
-        fileReadBytes(buffers[2],BUFFER_SIZE);
-        fileReadBytes(buffers[3],BUFFER_SIZE);
-
-        #else
-
         fileReadBytes(&buffers[0][0],BUFFER_SIZE);
         fileReadBytes(&buffers[1][0],BUFFER_SIZE);
         fileReadBytes(&buffers[2][0],BUFFER_SIZE);
         fileReadBytes(&buffers[3][0],BUFFER_SIZE);
-
-        #endif
-
         currentBuffer = 0;
         currentPtr = buffers[currentBuffer];
         endPtr = currentPtr + BUFFER_SIZE;

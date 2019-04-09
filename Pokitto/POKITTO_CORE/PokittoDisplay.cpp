@@ -1596,6 +1596,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
                 if (xclip) {
                     // last line, store higher nibble of last source pixel in lower nibble of last address
+                    targetpixel = *scrptr;
                     sourcepixel = *bitmap >> 4;
                     if(sourcepixel!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | sourcepixel;
                     *scrptr = targetpixel;
@@ -1609,7 +1610,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     return;
     }
 
-    /** 4bpp fast version */
+    /** 8bpp fast version */
 
     if (m_colordepth==8) {
     int16_t scrx,scry;//,scrxjump;
@@ -1850,6 +1851,7 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
     else if (m_colordepth==4)
     {
         /** 4bpp fast version */
+        int16_t orgw = w;
         int16_t scrx,scry,xclip,xjump,scrxjump;
         xclip=xjump=scrxjump=0;
         /** y clipping */
@@ -1870,7 +1872,7 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
             xclip=(x&1)<<1;
             w+=x;
             xjump = ((-x)>>1);
-            //bitmap += xjump; // do not clip left edge of source, as bitmap is inverted !
+            bitmap -= xjump;
             x=0;
         }
         else if (x+w>width)
@@ -1886,18 +1888,16 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
         /** ONLY 4-bit mode for time being **/
         for (scry = y; scry < y+h; scry+=1)
         {
-            //    for (scry = y; scry < y+2; scry+=1) {
             if (scry>=height) return;
             if ((x&1)==0)   /** EVEN pixel starting line, very simple, just copypaste **/
             {
-                //for (scrx = w+x-xclip-1; scrx >= x; scrx-=2) {
                 for (scrx = x; scrx < w+x-xclip; scrx+=2)
                 {
                     uint8_t sourcepixel = *(bitmap);
                     if (xclip)
                     {
-                        sourcepixel <<=4;
-                        sourcepixel |= ((*(bitmap-1))>>4);//inverted!
+                        sourcepixel >>=4;
+                        sourcepixel |= ((*(bitmap-1))<<4); // inverted nibbles
                     }
                     uint8_t targetpixel = *scrptr;
                     // NIBBLES ARE INVERTED BECAUSE PICTURE IS FLIPPED !!!
@@ -1907,26 +1907,23 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
                     bitmap--;
                     scrptr++;
                 }
-                bitmap += w; // w*2 >> 1 because inverted and because 2 pixels per byte!!
                 if (xclip)
                 {
                     if (w&1)
                     {
                         /**last pixel is odd pixel due to clipping & odd width*/
                         uint8_t sourcepixel = *bitmap;
-                        if ((sourcepixel&0x0F) != invisiblecolor)
+                        if ((sourcepixel>>4) != invisiblecolor)
                         {
-                            sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
+                            sourcepixel &= 0xf0;
+                            uint8_t targetpixel = *scrptr & 0x0F;
                             targetpixel |= sourcepixel;
                             *scrptr = targetpixel;
                         }
-                        //scrptr++;
+                        scrptr++;
                     }
-                    bitmap++;
-                    scrptr++;
                 }
-                bitmap += xjump; // needed if x<0 clipping occurs
+                bitmap += (w>>1) + (orgw>>1); // Go the the last (visible) pixel of the next line
             }
             else     /** ODD pixel starting line **/
             {
@@ -1944,11 +1941,27 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
                     *scrptr = targetpixel;
                     bitmap--;
                 }
-                bitmap += w; // w*2 >> 1 because inverted and because 2 pixels per byte!!
-                bitmap+=xjump;
+
+                if (xclip)
+                {
+                    if (w&1)
+                    {
+                        /**last pixel is odd pixel due to clipping & odd width*/
+                        uint8_t sourcepixel = *bitmap;
+                        if((sourcepixel&0x0F)!=invisiblecolor)
+                        {
+                            //sourcepixel <<=4;
+                            uint8_t targetpixel = *scrptr;// & 0x0F;
+                            targetpixel = (targetpixel & 0xF0) | (sourcepixel & 0x0F );
+                            *scrptr = targetpixel;
+                        }
+                        scrptr++;
+                   }
+                }
+                bitmap += (w>>1) + (orgw>>1); // Go the the last (visible) pixel of the next line
             }
             // increment the y jump in the scrptr
-            scrptr = scrptr + ((width - w)>>1)+scrxjump;
+            scrptr = scrptr + ((width - w)>>1);
         }
     }
     /** 8 bpp mode */
@@ -2002,15 +2015,130 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
     }
 }
 
+// Note: currently for 4 bpp only
+void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap) {
+
+    /** visibility check */
+    if (y<-h || y>height) return; //invisible
+    if (x<-w || x>width) return;  //invisible
+
+    /** 4bpp fast version */
+    if (m_colordepth==4) {
+
+        /** 4bpp fast version */
+        int16_t orgw = w;
+        int16_t scrx,scry,xjump,scrxjump;
+        int16_t xclip;
+        bitmap += (h-1)*(w>>1); // Start the bitmap from the last line
+        xclip=xjump=scrxjump=0;
+        /** y clipping */
+        if (y<0) {
+            h+=y; bitmap += y*(w>>1); y=0;
+        }
+        else if (y+h>height) {
+            h -=(y-height);
+        }
+
+        /** x clipping */
+        if (x<0) {
+            xclip=(x&1)<<1; w+=x; xjump = ((-x)>>1); bitmap += xjump; x=0;
+        }
+        else if (x+w>width) {
+            xclip = (x&1)<<1;
+            scrxjump = x&1;
+            xjump=((x+w-width)>>1)+scrxjump;
+            w = width-x;
+        }
+
+        xjump -= orgw; // Jump one line up more: 2*(orgw>>1)
+
+        uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
+        /** ONLY 4-bit mode for time being **/
+        for (scry = y; scry < y+h; scry+=1) {
+            if (scry>=height) return;
+            if ((x&1)==0) { /** EVEN pixel starting line **/
+                for (scrx = x; scrx < w+x-xclip; scrx+=2) {
+                    uint8_t sourcepixel = *bitmap;
+                    if (xclip) {
+                            sourcepixel <<=4;
+                            sourcepixel |= ((*(bitmap+1))>>4);
+                    }
+                    uint8_t targetpixel = *scrptr;
+                    if ((sourcepixel>>4) != invisiblecolor ) targetpixel = (targetpixel&0x0F) | (sourcepixel & 0xF0);
+                    if ((sourcepixel&0x0F) != invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel & 0x0F);
+                    *scrptr = targetpixel;
+                    bitmap++;
+                    scrptr++;
+                }
+                if (xclip){
+                    if (w&1) {
+                        /**last pixel is odd pixel due to clipping & odd width*/
+                        uint8_t sourcepixel = *bitmap;
+                        if ((sourcepixel&0x0F) != invisiblecolor) {
+                            sourcepixel <<=4;
+                            volatile uint8_t targetpixel = *scrptr;// & 0x0F;
+                            targetpixel &= 0xF; //clear upper nibble
+                            targetpixel |= sourcepixel; //now OR it
+                            *scrptr = targetpixel;
+                        }
+                        //scrptr++;
+                    }
+                    bitmap++;
+                    scrptr++;
+                }
+                bitmap += xjump; // needed if x<0 clipping occurs
+            } else { /** ODD pixel starting line **/
+                uint8_t sourcepixel;
+                uint8_t targetpixel;
+                for (scrx = x; scrx < w+x-xclip; scrx+=2) {
+                    sourcepixel = *bitmap;
+                    targetpixel = *scrptr;
+                    // store higher nibble of source pixel in lower nibble of target
+                    if((sourcepixel>>4)!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel >> 4 );
+                    *scrptr = targetpixel;
+                    scrptr++;
+                    targetpixel = *scrptr;
+                    // store lower nibble of source pixel in higher nibble of target
+                    if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
+                    *scrptr = targetpixel;
+                    bitmap++;
+                }
+                if (xclip) {
+                    // last line, store higher nibble of last source pixel in lower nibble of last address
+                    targetpixel = *scrptr;
+                    sourcepixel = *bitmap >> 4;
+                    if(sourcepixel!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | sourcepixel;
+                    *scrptr = targetpixel;
+                }
+                bitmap+=xjump;
+            }
+            // increment the y jump in the scrptr
+            scrptr = scrptr + ((width - w)>>1)+scrxjump;
+        }
+
+        return;
+    }
+}
+
+
 void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
 {
     drawBitmapDataXFlipped(x, y, bitmap[0], bitmap[1], bitmap + 2);
 }
 
+void Display::drawBitmapYFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
+{
+    drawBitmapDataYFlipped(x, y, bitmap[0], bitmap[1], bitmap + 2);
+}
+
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t rotation, uint8_t flip) {
 #if PROJ_GAMEBUINO == 0
-    if (!flip) drawBitmap(x,y,bitmap);
-    else drawBitmapXFlipped(x,y,bitmap);
+    if (!flip)
+        drawBitmap(x,y,bitmap);
+    else if(flip == FLIPH)
+        drawBitmapXFlipped(x,y,bitmap);
+    else if(flip == FLIPV)
+        drawBitmapYFlipped(x,y,bitmap);
 #else
 	if((rotation == NOROT) && (flip == NOFLIP)){
 		drawBitmap(x,y,bitmap); //use the faster algorithm

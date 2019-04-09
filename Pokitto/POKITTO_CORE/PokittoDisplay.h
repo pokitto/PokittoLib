@@ -316,8 +316,12 @@ public:
     static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t frame);
     /** Draw bitmap data flipped on x-axis*/
     static void drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
+    /** Draw bitmap data flipped on y-axis*/
+    static void drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
     /** Draw bitmap flipped on x-axis*/
     static void drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap);
+    /** Draw bitmap flipped on y-axis*/
+    static void drawBitmapYFlipped(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw bitmap with options */
     static void drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t rotation, uint8_t flip);
     /** Get pointer to the screen buffer - GB compatibility */
