@@ -239,6 +239,7 @@ void Pokitto::dac_write(uint8_t value) {
     LPC_GPIO_PORT->MPIN[2] = val<<(20-4); // write bits to port
     CLR_MASK_DAC_HI;
     #else
+    CLR_MASK_P2;
     if (value & 1) SET_DAC0 else CLR_DAC0;
     value >>= 1;
     if (value & 1) SET_DAC1 else CLR_DAC1;
@@ -254,6 +255,7 @@ void Pokitto::dac_write(uint8_t value) {
     if (value & 1) SET_DAC6 else CLR_DAC6;
     value >>= 1;
     if (value & 1) SET_DAC7 else CLR_DAC7;
+    SET_MASK_P2;
     #endif //MASKED_DAC
     //CLR_MASK_DAC;
     #endif // BOARDREV
@@ -405,16 +407,29 @@ inline void pokSoundIRQ() {
         #endif
         if (streamstep) {
             output = (*currentPtr++);
+
+            // If exists, mix the sound effect to the output.
             if( Pokitto::Sound::sfxDataPtr != Pokitto::Sound::sfxEndPtr ){
-            #ifndef PROJ_SDFS_STREAMING
-                int32_t s = int32_t(*Pokitto::Sound::sfxDataPtr++);
-            #else
-            int32_t s = (int32_t(output) + int32_t(*Pokitto::Sound::sfxDataPtr++)) - 128;
-            #endif
-		if( s < 0 ) s = 0;
-		else if( s > 255 ) s = 255;
-		output = s;
-	    }
+                uint8_t sfxSample = 0;
+                if( Pokitto::Sound::sfxIs4bitSamples ) {
+                    if(Pokitto::Sound::sfxBytePos++ == 0) {
+                        sfxSample = (*Pokitto::Sound::sfxDataPtr) & 0xf0;  // 4-bit sample is in the high nibble
+                    }
+                    else
+                    {
+                        sfxSample = (*Pokitto::Sound::sfxDataPtr++) << 4;  // 4-bit sample is in the low nibble
+                        Pokitto::Sound::sfxBytePos = 0;
+                    }
+                }
+                else {
+                    sfxSample = (*Pokitto::Sound::sfxDataPtr++);  // 8-bit sample
+                }
+                int32_t s = (int32_t(output) + int32_t(sfxSample)) - 128;
+                if( s < 0 ) s = 0;
+                else if( s > 255 ) s = 255;
+                output = s;
+            }
+
             if(streamvol && streamon) {
                 output >>= 3-streamvol;
                 streambyte = output;
@@ -422,6 +437,7 @@ inline void pokSoundIRQ() {
                 streambyte = 0; // duty cycle
                 output = 0;
             }
+
             if (currentPtr >= endPtr)
             {
             currentBuffer++;
@@ -504,7 +520,7 @@ inline void pokSoundIRQ() {
                     uint32_t t_on = (uint32_t)((((obj->pwm->MATCHREL0)*op)>>8)); //cut out float
                     obj->pwm->MATCHREL1 = t_on;
                 #endif
-            #else // POK_STREAMING_MUSIC
+            #else // ! POK_STREAM_TO_DAC
                 op = output;
                 op *= discrete_vol_multipliers[discrete_vol];
                 op >>= 8;

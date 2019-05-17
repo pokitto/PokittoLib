@@ -352,7 +352,6 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
 
 
     #ifdef PROJ_SHOW_FPS_COUNTER
-    xptr = 8;
     setDRAMptr(8, 0);
     #else
     setDRAMptr(0, 0);
