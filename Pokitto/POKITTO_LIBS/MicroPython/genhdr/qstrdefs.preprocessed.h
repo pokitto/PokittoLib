@@ -846,6 +846,10 @@ Q(SystemExit)
 
 Q(SystemExit)
 
+Q(Tilemap)
+
+Q(Tilemap)
+
 Q(TypeError)
 
 Q(TypeError)
@@ -877,6 +881,8 @@ Q(__class__)
 Q(__class__)
 
 Q(__contains__)
+
+Q(__del__)
 
 Q(__delitem__)
 
@@ -931,6 +937,8 @@ Q(__main__)
 Q(__main__)
 
 Q(__module__)
+
+Q(__name__)
 
 Q(__name__)
 
@@ -1140,6 +1148,8 @@ Q(display)
 
 Q(divmod)
 
+Q(draw)
+
 Q(draw_text)
 
 Q(enable)
@@ -1217,6 +1227,10 @@ Q(get_current_soundbuffer_pos)
 Q(get_rect)
 
 Q(get_soundbuffer_size)
+
+Q(get_tile_id)
+
+Q(get_tile_ids)
 
 Q(getattr)
 
@@ -1398,6 +1412,10 @@ Q(pixel)
 
 Q(play)
 
+Q(play_from_sd)
+
+Q(play_sfx)
+
 Q(poll)
 
 Q(pop)
@@ -1466,6 +1484,8 @@ Q(set_palette)
 
 Q(set_palette_16bit)
 
+Q(set_tile)
+
 Q(setattr)
 
 Q(setdefault)
@@ -1516,7 +1536,11 @@ Q(throw)
 
 Q(throw)
 
-Q(time_us)
+Q(tilemap)
+
+Q(tilemap)
+
+Q(time_ms)
 
 Q(to_bytes)
 

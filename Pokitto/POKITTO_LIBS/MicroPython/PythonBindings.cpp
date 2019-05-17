@@ -36,6 +36,7 @@
 
 #include "PokittoCore.h"
 #include "PokittoDisplay.h"
+#include "Tilemap.hpp"
 #include "PythonBindings.h"
 #include "time.h"
 
@@ -115,6 +116,11 @@ bool Pok_readAndRemoveFromRingBuffer(EventRingBufferItem* itemOut){
     return true;
 }
 
+void Pok_Display_init( bool mustClearScreen )
+{
+    Display::persistence = !mustClearScreen;
+}
+
 uint8_t Pok_Display_getNumberOfColors() {
 
     return Display::getNumberOfColors();
@@ -179,12 +185,14 @@ void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
 }
 
 // Draw the screen surface immediately to the display. Do not care about fps limits. Do not run event loops etc.
-void Pok_Display_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
+void Pok_Display_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h)
+{
     Display::update(useDirectMode, x, y, w, h);
 }
 
 // Run the event loops, audio loops etc. Draws the screen when the fps limit is reached and returns true.
-bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
+bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h )
+{
 
     bool ret = Core::update(useDirectMode, x, y, w, h);
     //printf("update, %d ms\n", Core::getTime()-s);
@@ -219,6 +227,19 @@ void Pok_Sound_Reset() {
 
     #if POK_STREAMING_MUSIC > 0
 
+    // Init buffers to an empty value: 128.
+    #if POK_HIGH_RAM == HIGH_RAM_MUSIC
+    memset(buffers[0], 128, BUFFER_SIZE);
+    memset(buffers[1], 128, BUFFER_SIZE);
+    memset(buffers[2], 128, BUFFER_SIZE);
+    memset(buffers[3], 128, BUFFER_SIZE);
+    #else
+    memset(&(buffers[0]), 128, BUFFER_SIZE);
+    memset(&(buffers[1]), 128, BUFFER_SIZE);
+    memset(&(buffers[2]), 128, BUFFER_SIZE);
+    memset(&(buffers[3]), 128, BUFFER_SIZE);
+    #endif
+
     // Set global variables
     currentBuffer = 0;
     currentPtr = buffers[currentBuffer];
@@ -226,7 +247,7 @@ void Pok_Sound_Reset() {
 
     //pokPlayStream(); // activate stream
     //Sound::ampEnable(true);
-    Sound::playMusicStream();
+    //Pokitto::Sound::playMusicStream();
 
     /*
     //!!HV
@@ -238,6 +259,12 @@ void Pok_Sound_Reset() {
         }
     }
     */
+    #endif
+}
+
+void Pok_Sound_PlayMusicFromSD(char* filePath) {
+    #if POK_STREAMING_MUSIC > 0
+    Pokitto::Sound::playMusicStream(filePath);
     #endif
 }
 
@@ -283,14 +310,30 @@ void Pok_Sound_FillBuffer(void* buf, uint16_t len, uint8_t soundBufferIndex, uin
 
 void Pok_Sound_Play() {
     #if POK_STREAMING_MUSIC > 0
-    streamvol = 3;
+    //streamvol = 3;
+    Pokitto::Sound::playMusicStream();
     #endif
 }
 
-
 void Pok_Sound_Pause() {
     #if POK_STREAMING_MUSIC > 0
-    streamvol = 0;
+    //streamvol = 0;
+    Pokitto::Sound::pauseMusicStream();
+   #endif
+}
+
+void Pok_Sound_playSFX(void *sfxdata, uint32_t length, bool is4bitSample) {
+    #if POK_STREAMING_MUSIC > 0
+    if(is4bitSample)
+        Pokitto::Sound::playSFX4bit( (const uint8_t*)sfxdata, length );
+    else
+        Pokitto::Sound::playSFX( (const uint8_t*)sfxdata, length );
+    #endif
+}
+
+void Pok_Sound_playSFX(const uint8_t *sfxdata, uint32_t length) {
+    #if POK_STREAMING_MUSIC > 0
+    Pokitto::Sound::playSFX( sfxdata, length );
     #endif
 }
 
@@ -302,11 +345,57 @@ void Pok_Wait(uint32_t dur_ms) {
 #endif // POK_SIM
 }
 
-uint32_t Pok_Time_us()
+uint32_t Pok_Time_ms()
 {
     return Core::getTime();
 }
 
+// Tilemap functions.
+
+void* Pok_ConstructMap()
+{
+    return new Tilemap();
+}
+
+void Pok_DestroyMap( void* _this )
+{
+    delete(((Tilemap*)_this));
+}
+
+void Pok_SetMap( void* _this, size_t width, size_t height, const uint8_t *map )
+{
+    if( _this == NULL ) return;
+   ((Tilemap*)_this)->set( width, height, map );
+}
+
+void Pok_DrawMap( void* _this, int32_t x, int32_t y )
+{
+    if( _this == NULL ) return;
+    ((Tilemap*)_this)->draw( x, y );
+}
+
+void Pok_SetTile( void* _this, uint8_t index, uint8_t width, uint8_t height, const uint8_t *data)
+{
+    if( _this == NULL ) return;
+    index &= 0xf; // Limit between 0 and 15.
+    ((Tilemap*)_this)->tiles[index].set( width, height, data );
+}
+
+uint8_t Pok_GetTileId( void* _this, int32_t x, int32_t y, uint8_t tileSize ) {
+    if( _this == NULL ) return 0;
+    uint8_t id = ((Tilemap*)_this)->GetTileId( x, y, tileSize );
+    return id;
+}
+
+void Pok_GetTileIds( void* _this, int32_t tlx, int32_t tly, int32_t brx, int32_t bry,uint8_t tileSize,
+                        /*OUT*/ uint8_t* tileIdTl, uint8_t* tileIdTr, uint8_t* tileIdBl, uint8_t* tileIdBr ) {
+    if( _this == NULL ) return;
+    ((Tilemap*)_this)->GetTileIds( tlx, tly, brx, bry, tileSize,
+                    /*OUT*/ *tileIdTl, *tileIdTr, *tileIdBl, *tileIdBr );
+ }
+
+
+// For compatibility in linking
 
 struct tm * localtime_cpp(const time_t * timer)
 {

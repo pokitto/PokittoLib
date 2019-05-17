@@ -106,11 +106,21 @@ private:
 public:
     static const uint8_t *sfxDataPtr;
     static const uint8_t *sfxEndPtr;
+    static uint8_t sfxBytePos;
+    static bool sfxIs4bitSamples;
     static void playSFX( const uint8_t *sfx, uint32_t length ){
-	sfxDataPtr = sfx;
-	sfxEndPtr = sfx + length;
+        sfxIs4bitSamples = false;
+        sfxDataPtr = sfx;
+        sfxEndPtr = sfx + length;
+        sfxBytePos = 0;
     };
-    
+    static void playSFX4bit( const uint8_t *sfx, uint32_t length ){
+        sfxIs4bitSamples = true;
+        sfxDataPtr = sfx;
+        sfxEndPtr = sfx + length;
+        sfxBytePos = 0;
+    };
+
 	static void begin();
 
 	// Headphonemode
