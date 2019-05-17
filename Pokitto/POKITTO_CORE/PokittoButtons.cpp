@@ -56,6 +56,9 @@ void Buttons::update() {
     #if POK_USE_CONSOLE
     if (console.conscounter) return;
     #endif // POK_USE_CONSOLE
+    #ifdef PROJ_BUTTONS_POLLING_ONLY
+    pollButtons();
+    #endif
     #ifndef POK_SIM
         /** HARDWARE CODE **/
     for (uint8_t thisButton = 0; thisButton < NUM_BTN; thisButton++) {
@@ -199,7 +202,11 @@ uint8_t Buttons::aBtn() {
     #ifdef POK_SIM
     return simulator.aBtn();
     #else
+    #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_A];
+    #else
+    return Pokitto::Core::aBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -208,7 +215,11 @@ uint8_t Buttons::bBtn() {
     #ifdef POK_SIM
     return simulator.bBtn();
     #else
+    #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_B];
+    #else
+    return Pokitto::Core::bBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -217,7 +228,11 @@ uint8_t Buttons::cBtn() {
     #ifdef POK_SIM
     c = simulator.cBtn();
     #else
+    #ifndef PROJ_BUTTONS_POLLING_ONLY
     c = Pokitto::heldStates[BTN_C];
+    #else
+    return Pokitto::Core::cBtn();
+    #endif
     #endif // POK_SIM
     return c;
 }
@@ -226,7 +241,11 @@ uint8_t Buttons::leftBtn() {
     #ifdef POK_SIM
     return simulator.leftBtn();
     #else
+    #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_LEFT];
+    #else
+    return Pokitto::Core::leftBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -234,7 +253,11 @@ uint8_t Buttons::rightBtn() {
     #ifdef POK_SIM
     return simulator.rightBtn();
     #else
+    #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_RIGHT];
+    #else
+    return Pokitto::Core::rightBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -242,7 +265,11 @@ uint8_t Buttons::upBtn() {
     #ifdef POK_SIM
     return simulator.upBtn();
     #else
+    #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_UP];
+    #else
+    return Pokitto::Core::upBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -250,7 +277,11 @@ uint8_t Buttons::downBtn() {
     #ifdef POK_SIM
     return simulator.downBtn();
     #else
+    #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_DOWN];
+    #else
+    return Pokitto::Core::downBtn();
+    #endif
     #endif // POK_SIM
 }
 

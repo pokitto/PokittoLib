@@ -2087,12 +2087,12 @@ for(x=0, xcount=0 ;x<LCDWIDTH;x++,xcount++)  // loop through vertical columns
        *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
        *LCD = c; TGL_WR_OP(scrbuf++);TGL_WR_OP( c = uint32_t(paletteptr[(*scrbuf)&255])<<3 );
    }
-   
+
 #endif
  }
 
- 
- 
+
+
 void Pokitto::lcdRefreshMode14(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y,data,xptr;
 uint16_t scanline[176]; uint16_t* scptr;
@@ -2233,7 +2233,7 @@ void Pokitto::lcdRefreshMode15(uint16_t* pal, uint8_t* scrbuf){
 void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
 //    #define __ARMCC_VERSION
 #ifndef __ARMCC_VERSION
-    
+
 #define MODE15_LOOP				\
     "ands %[tmp], %[color]" "\n"		\
 	"lsrs %[tmp], 2" "\n"			\
@@ -2267,7 +2267,7 @@ void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
 	"ldm %[scrbuf]!, {%[color]}" "\n"		\
 	"movs %[tmp], 0xF0" "\n"			\
 	"str %[WRBit], [%[LCD], 124]" "\n"
-    
+
   uint8_t *end=&scrbuf[POK_SCREENBUFFERSIZE]+4;
   volatile uint32_t palette[16];
   for( uint32_t i=0; i<16; ++i )
@@ -2292,13 +2292,13 @@ void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
   uint32_t WRBit = 1<<12, color, tmp;
   asm volatile(
       ".syntax unified" "\n"
-      "ldm %[scrbuf]!, {%[color]}" "\n"      
+      "ldm %[scrbuf]!, {%[color]}" "\n"
       "movs %[tmp], 0xF0" "\n"
       "mode15Loop%=:" "\n"
       MODE15_LOOP
       MODE15_LOOP
       MODE15_LOOP
-      MODE15_ENDLOOP      
+      MODE15_ENDLOOP
       "cmp %[end], %[scrbuf]" "\n"
       "bne mode15Loop%=" "\n"
       :
@@ -2307,18 +2307,18 @@ void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
       [end]"+h" (end),
       [scrbuf]"+l" (scrbuf),
       [WRBit]"+l" (WRBit)
-      
+
       :
       [CLR]"l" (252),
       [LCD]"l" (0xA0002188),
       [palette]"l" (palette)
-      
+
       :
       "cc"
       );
-    
+
 #else
-    
+
 uint16_t x,y,xptr;
 uint16_t scanline[2][176]; // read two nibbles = pixels at a time
 uint8_t *d, yoffset=0;
