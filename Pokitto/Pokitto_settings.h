@@ -464,6 +464,10 @@
     #define POK_AUD_FREQ PROJ_AUD_FREQ
 #endif
 
+#if PROJ_AUD_TRACKER > 0
+    #define POK_AUD_TRACKER 1
+#endif
+
 
 #define POK_USE_EXT 0 // if extension port is in use or not
 
