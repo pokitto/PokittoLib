@@ -1087,7 +1087,14 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
 
   write_command(0x03); write_data(0x1038);
   write_command(0x20);  // Horizontal DRAM Address
+
+  #ifdef PROJ_SHOW_FPS_COUNTER
+  y=4;
+  write_data(8);
+  #else
   write_data(0);  // 0
+  #endif
+
   write_command(0x21);  // Vertical DRAM Address
 
 #ifndef __ARMCC_VERSION
@@ -1095,11 +1102,6 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
   write_command(0x22); // write data to DRAM
   CLR_CS_SET_CD_RD_WR;
   SET_MASK_P2;
-
-  #ifdef PROJ_SHOW_FPS_COUNTER
-  setDRAMptr(0, 8);
-  y=4;
-  #endif
 
   asm volatile(
 	 ".syntax unified"         "\n"
@@ -1113,43 +1115,43 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
 	 "mode2InnerLoopA:"
 
 
-	 "	ldrb %[byte], [%[scrbuf],0]"   "\n"
-	 "	lsrs %[c], %[byte], 4"    "\n"
+	 "	ldrb %[byte], [%[scrbuf],0]"   "\n" // Load the byte from the 4-bit screen buffer
+	 "	lsrs %[c], %[byte], 4"    "\n"      // c = byte >> 4 // Get the higher nibble
 
 	 "	movs %[t], 15" "\n"
-	 "	ands %[byte], %[t]"    "\n"
+	 "	ands %[byte], %[t]"    "\n"         // byte = byte & 0xF // Get the lower nibble
 
-	 "	lsls %[c], 1"             "\n"
-	 "	ldrh %[t], [%[paletteptr], %[c]]"      "\n"
-	 "	lsls %[t], %[t], 3"       "\n"
-	 "	str %[t], [%[LCD], 0]"    "\n"
-	 "	mov %[c], r11" "\n"
-	 "	str %[c], [%[LCD], 124]"  "\n"
-	 "	stm %[scanline]!, {%[t]}" "\n"
+	 "	lsls %[c], 1"             "\n"      // c = c << 1
+	 "	ldrh %[t], [%[paletteptr], %[c]]"      "\n"  // t = paletteptr[c] // Load the actual color value from the palette
+	 "	lsls %[t], %[t], 3"       "\n"      // t = t << 3
+	 "	str %[t], [%[LCD], 0]"    "\n"      // LCD + 0 = t  // Copy color to LCD
+	 "	mov %[c], r11" "\n"                 // c = 4096
+	 "	str %[c], [%[LCD], 124]"  "\n"      // CLR
+	 "	stm %[scanline]!, {%[t]}" "\n"      // scanline = t // Store pixel to scanline
 	 "	movs %[t], 252"   "\n"
-	 "	str %[c], [%[LCD], %[t]]" "\n"
-	 "	str %[c], [%[LCD], 124]"  "\n"
-	 "	lsls %[byte], %[byte], 1"             "\n"
-	 "	str %[c], [%[LCD], %[t]]" "\n"
+	 "	str %[c], [%[LCD], %[t]]" "\n"      // SET
+	 "	str %[c], [%[LCD], 124]"  "\n"      // CLR
+	 "	lsls %[byte], %[byte], 1"             "\n"  // byte = byte << 1
+	 "	str %[c], [%[LCD], %[t]]" "\n"      // SET
 
-	 "	ldrh %[t], [%[paletteptr], %[byte]]"      "\n"
+	 "	ldrh %[t], [%[paletteptr], %[byte]]"      "\n"  // t = paletteptr[byte] // Load the actual color value from the palette
 	 "	lsls %[t], %[t], 3"       "\n"
-	 "	str %[t], [%[LCD], 0]"    "\n"
-	 "	mov %[c], r11" "\n"
-	 "	str %[c], [%[LCD], 124]"  "\n"
-	 "	stm %[scanline]!, {%[t]}" "\n"
+	 "	str %[t], [%[LCD], 0]"    "\n"      // LCD + 0 = t  // Copy color to LCD
+	 "	mov %[c], r11" "\n"                 // c = 4096
+	 "	str %[c], [%[LCD], 124]"  "\n"      // CLR
+	 "	stm %[scanline]!, {%[t]}" "\n"      // scanline = t // Store pixel to scanline
 	 "	movs %[t], 252"   "\n"
-	 "	str %[c], [%[LCD], %[t]]" "\n"
-	 "	str %[c], [%[LCD], 124]"  "\n"
-	 "	adds %[scrbuf], %[scrbuf], 1" "\n"
-	 "	str %[c], [%[LCD], %[t]]" "\n"
+	 "	str %[c], [%[LCD], %[t]]" "\n"      // SET
+	 "	str %[c], [%[LCD], 124]"  "\n"      // CLR
+	 "	adds %[scrbuf], %[scrbuf], 1" "\n"  // scrbuf += 1 // Points to the next byte in the 4-bit screen buffer
+	 "	str %[c], [%[LCD], %[t]]" "\n"      // SET
 
-	 "	subs %[x], 2"          "\n"
+	 "	subs %[x], 2"          "\n"         // x -= 2
 	 "	bne mode2InnerLoopA"  "\n"
 
-	 "mov %[scanline], r10"    "\n"
-	 "movs %[x], 110"          "\n"
-	 "mov %[t], r11"           "\n"
+	 "mov %[scanline], r10"    "\n"         // scanline points to start of it.
+	 "movs %[x], 110"          "\n"         // x = 110
+	 "mov %[t], r11"           "\n"         // t = 4096
 	 "mode2InnerLoopB:"
 	 MODE2_INNER_LOOP_B
 	 MODE2_INNER_LOOP_B
@@ -1196,7 +1198,6 @@ void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr ) {
 uint8_t* d = scrbuf;// point to beginning of line in data
 
   #ifdef PROJ_SHOW_FPS_COUNTER
-  setDRAMptr(0, 8);
   wait_us(200); // Add wait to compensate skipping of 8 lines. Makes FPS counter to show the correct value.
   for(y=4;y<88;y++)
   #else
@@ -1204,7 +1205,7 @@ uint8_t* d = scrbuf;// point to beginning of line in data
   #endif
   {
 
-
+    // Write the horizontal line to the scanline, and write the scanline to LCD.
     uint8_t s=0;
     for(x=0;x<110;x+=2)
     {
@@ -1216,6 +1217,7 @@ uint8_t* d = scrbuf;// point to beginning of line in data
       scanline[s]=*LCD=color;TGL_WR_OP(s++);TGL_WR;
     }
 
+    // Write a duplicate scanline to the next horizontal line in LCD.
     s=0;
     for (s=0;s<110;) {
       *LCD = (scanline[s]);TGL_WR_OP(s++);TGL_WR;

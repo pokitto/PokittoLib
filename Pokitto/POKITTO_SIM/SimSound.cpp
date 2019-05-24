@@ -113,10 +113,13 @@ void pokSoundIRQ() {
         #endif // POK_STREAMFREQ_HALVE
         streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
         if (streamstep) {
-            uint8_t output = (*currentPtr++);
+            // Get byte from the stream buffer
+            output = (*currentPtr++);
 
             // If exists, mix the sound effect to the output.
             if( Pokitto::Sound::sfxDataPtr != Pokitto::Sound::sfxEndPtr ){
+
+                // Get sfx byte
                 uint8_t sfxSample = 0;
                 if( Pokitto::Sound::sfxIs4bitSamples ) {
                     if(Pokitto::Sound::sfxBytePos++ == 0) {
@@ -124,19 +127,29 @@ void pokSoundIRQ() {
                     }
                     else
                     {
-                        sfxSample = (*Pokitto::Sound::sfxDataPtr++) << 4;  // 4-bit sample is in the low nibble
+                        sfxSample = *Pokitto::Sound::sfxDataPtr << 4;  // 4-bit sample is in the low nibble
+                        Pokitto::Sound::sfxDataPtr++;
                         Pokitto::Sound::sfxBytePos = 0;
                     }
                 }
                 else {
                     sfxSample = (*Pokitto::Sound::sfxDataPtr++);  // 8-bit sample
                 }
+
+                #ifdef PROJ_DISABLE_MIXING_SFX_WITH_SD_STREAMING
+                int32_t s = int32_t(sfxSample) - 1;
+                #else
                 int32_t s = (int32_t(output) + int32_t(sfxSample)) - 128;
+                #endif
+
                 if( s < 0 ) s = 0;
                 else if( s > 255 ) s = 255;
+
+                // streaming and sfx result
                 output = s;
             }
 
+            // // streaming and sfx result
             if(streamvol) {
                 output >>= 3-streamvol;
                 streambyte = output;
@@ -188,6 +201,8 @@ void pokSoundIRQ() {
         op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
         op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>9;// >> 2 osc1.vol Marr;
         #endif //POK_SIM
+
+        // Synth output
         output = (uint8_t) op;
 
     #endif // POK_ENABLE_SYNTH

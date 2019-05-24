@@ -44,6 +44,7 @@
 #endif
 
 #include "PythonBindings.h"
+#include "PokittoFonts.h"
 
 #ifdef POK_SIM
 #define PYTHON_SOURCE_FILE_PATH "..\\..\\..\\POKITTO_LIBS\\MicroPython\\src_py\\"
