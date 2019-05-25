@@ -79,6 +79,29 @@
     //#define NUM_CHANNELS 2
 #endif
 
+#ifdef PROJ_ENABLE_SFX
+	#ifndef PROJ_ENABLE_SOUND
+		#define PROJ_ENABLE_SOUND 1
+	#endif
+
+	#ifndef PROJ_STREAMING_MUSIC
+		#define PROJ_STREAMING_MUSIC 1
+	#endif
+
+	#ifndef PROJ_ENABLE_SD_MUSIC
+		#define PROJ_DISABLE_SD_STREAMING 1
+	#endif
+#endif
+
+#ifdef PROJ_ENABLE_SD_MUSIC
+	#ifndef PROJ_ENABLE_SOUND
+		#define PROJ_ENABLE_SOUND 1
+	#endif
+
+	#ifndef PROJ_STREAMING_MUSIC
+		#define PROJ_STREAMING_MUSIC 1
+	#endif
+#endif
 
 #ifndef PROJ_STREAMING_MUSIC
         #define POK_STREAMING_MUSIC 0 // Define true to stream music from SD
