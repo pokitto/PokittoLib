@@ -436,7 +436,12 @@ inline void pokSoundIRQ() {
         #endif // POK_STREAMFREQ_HALVE
         streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
         if (streamstep) {
+
+            #ifdef PROJ_DISABLE_SD_STREAMING
+            output = 0;
+            #else
             output = (*currentPtr++);
+            #endif
 
             // If exists, mix the sound effect to the output.
             if( Pokitto::Sound::sfxDataPtr != Pokitto::Sound::sfxEndPtr ){
@@ -455,15 +460,14 @@ inline void pokSoundIRQ() {
                     sfxSample = (*Pokitto::Sound::sfxDataPtr++);  // 8-bit sample
                 }
 
-                #ifdef PROJ_DISABLE_MIXING_SFX_WITH_SD_STREAMING
-                int32_t s = int32_t(sfxSample) - 1;
+                #ifdef PROJ_DISABLE_SD_STREAMING
+                output = int32_t(sfxSample);
                 #else
                 int32_t s = (int32_t(output) + int32_t(sfxSample)) - 128;
-                #endif
-
                 if( s < 0 ) s = 0;
                 else if( s > 255 ) s = 255;
                 output = s;
+                #endif
             }
 
             if(streamvol && streamon) {
@@ -473,13 +477,15 @@ inline void pokSoundIRQ() {
                 streambyte = 0; // duty cycle
                 output = 0;
             }
-            if (currentPtr >= endPtr)
-            {
-            currentBuffer++;
-            if (currentBuffer==4) currentBuffer=0;
-            currentPtr = buffers[currentBuffer];
-            endPtr = currentPtr + BUFFER_SIZE;
+
+            #ifndef PROJ_DISABLE_SD_STREAMING
+            if (currentPtr >= endPtr) {
+                currentBuffer++;
+                if (currentBuffer==4) currentBuffer=0;
+                currentPtr = buffers[currentBuffer];
+                endPtr = currentPtr + BUFFER_SIZE;
             }
+            #endif
         }
     #endif // POK_STREAMING_MUSIC
 
