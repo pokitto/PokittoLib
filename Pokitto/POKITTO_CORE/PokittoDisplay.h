@@ -312,8 +312,53 @@ public:
     static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw RLE bitmap */
     static void drawRleBitmap(int16_t x, int16_t y, const uint8_t* bitmap);
-    /** Draw animated bitmap frame */
-    static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t frame);
+
+	/// \brief
+	/// Draws a single frame of a multi-frame bitmap
+	/// \param x The x coordinate to draw the bitmap frame at
+	/// \param y The y coordinate to draw the bitmap frame at
+	/// \param bitmap The multi-frame bitmap whose frame is to be drawn
+	/// \param frameIndex The index of the frame to be drawn
+	/// \details
+	/// A multi-frame bitmap is expected to be in a particular format.
+	/// The 0th byte of the bitmap should be the width of the bitmap's frames.
+	/// The 1st byte of the bitmap should be the height of the bitmap's frames.
+	/// The remaining bytes should consist of the frames of the multi-frame bitmap,
+	/// stored one after another without any kind of separator or terminator.
+	///
+	/// Example bitmap:
+	/// \code{.cpp}
+	/// #pragma once
+	/// 
+	/// #include <cstdint>
+	/// 
+	/// // An example bitmap, in 4bpp mode
+	/// const std::uint8_t exampleBitmap[] =
+	/// {
+	/// 	// Width, Height
+	/// 	8, 8,
+	/// 	// Frame 0
+	/// 	0x11, 0x11, 0x11, 0x11,
+	/// 	0x10, 0x00, 0x00, 0x01,
+	/// 	0x10, 0x00, 0x00, 0x01,
+	/// 	0x10, 0x00, 0x00, 0x01,
+	/// 	0x10, 0x00, 0x00, 0x01,
+	/// 	0x10, 0x00, 0x00, 0x01,
+	/// 	0x10, 0x00, 0x00, 0x01,
+	/// 	0x11, 0x11, 0x11, 0x11,
+	/// 	// Frame 1
+	/// 	0x22, 0x22, 0x22, 0x22,
+	/// 	0x20, 0x00, 0x00, 0x02,
+	/// 	0x20, 0x00, 0x00, 0x02,
+	/// 	0x20, 0x00, 0x00, 0x02,
+	/// 	0x20, 0x00, 0x00, 0x02,
+	/// 	0x20, 0x00, 0x00, 0x02,
+	/// 	0x20, 0x00, 0x00, 0x02,
+	/// 	0x22, 0x22, 0x22, 0x22,
+	/// };
+	/// \endcode
+	static void drawBitmap(int16_t x, int16_t y, const uint8_t * bitmap, uint8_t frameIndex);
+
     /** Draw bitmap data flipped on x-axis*/
     static void drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
     /** Draw bitmap data flipped on y-axis*/
