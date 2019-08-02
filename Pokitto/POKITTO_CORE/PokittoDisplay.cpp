@@ -1308,119 +1308,28 @@ void Display::drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_
 }
 
 
-void Display::drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t frame)
+void Display::drawBitmap(int16_t x, int16_t y, const uint8_t * bitmap, uint8_t frameIndex)
 {
-    int16_t w = *bitmap;
-	int16_t h = *(bitmap + 1);
-	uint8_t framew = *(bitmap+2);
-    bitmap = bitmap + 3; //add an offset to the pointer to start after the width and height
-    /** visibility check */
-    if (y<-h || y>height) return; //invisible
-    if (x<-framew || x>width) return;  //invisible
-    /** 1 bpp mode */
-    if (m_colordepth<2) {
-    int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 8;
-        bitNum = i % 8;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            if (source & (0x80 >> bitNum)) {
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
+	using std::size_t;
+	
+	#if defined(__cpp_constexpr)
+	#define CONSTEXPR constexpr
+	#else
+	#define CONSTEXPR const
+	#endif
+	
+	CONSTEXPR size_t widthIndex = 0;
+	CONSTEXPR size_t heightIndex = 1;
+	CONSTEXPR size_t dataIndex = 2;
+	CONSTEXPR size_t bitsPerByte = 8;
+	
+	#undef CONSTEXPR
 
-    return;
-    }
-    /** 2 bpp mode */
-    if (m_colordepth<4) {
-    int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 4;
-        bitNum = (i % 4)<<1;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            uint8_t output = (source & (0xC0 >> bitNum));
-            output >>= (6-bitNum);
-            if (output != invisiblecolor) {
-                setColor(output);
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
+	const size_t width = bitmap[widthIndex];
+	const size_t height = bitmap[heightIndex];
+	const size_t frameSize = ((width * height) / (bitsPerByte / Display::m_colordepth));
 
-    return;
-    }
-    /** 4bpp fast version */
-	int16_t scrx,scry,xclip,xjump,scrxjump;
-    xclip=xjump=scrxjump=0;
-    bitmap += (framew*frame)>>1;
-    /** y clipping */
-    if (y<0) { h+=y; bitmap -= y*(w>>1); y=0;}
-    else if (y+h>height) { h -=(y-height);}
-    /** x clipping */
-    xjump = (w-framew)>>1;
-    if (x<0) { xclip=(x&1)<<1; framew+=x; xjump = ((-x)>>1); bitmap += xjump; x=0;}
-    else if (x+framew>width) {
-            xclip = (x&1)<<1;
-            scrxjump = x&1;
-            xjump=((x+framew-width)>>1)+scrxjump;
-            framew = width-x;}
-
-    uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
-    /** ONLY 4-bit mode for time being **/
-    for (scry = y; scry < y+h; scry+=1) {
-            if (scry>=height) return;
-            if ((x&1)==0) { /** EVEN pixel starting line, very simple, just copypaste **/
-                for (scrx = x; scrx < framew+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    if (xclip) {
-                            sourcepixel <<=4;
-                            sourcepixel |= ((*(bitmap+1))>>4);
-                    }
-                    uint8_t targetpixel = *scrptr;
-                    if ((sourcepixel>>4) != invisiblecolor ) targetpixel = (targetpixel&0x0F) | (sourcepixel & 0xF0);
-                    if ((sourcepixel&0x0F) != invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel & 0x0F);
-                    *scrptr = targetpixel;
-                    bitmap++;
-                    scrptr++;
-                }
-                if (xclip){
-                    if (framew&1) {
-                        /**last pixel is odd pixel due to clipping & odd width*/
-                        uint8_t sourcepixel = *bitmap;
-                        if ((sourcepixel&0x0F) != invisiblecolor) {
-                            sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
-                            targetpixel |= sourcepixel;
-                            *scrptr = targetpixel;
-                        }
-                        //scrptr++;
-                    }
-                    bitmap++;
-                    scrptr++;
-                }
-                bitmap += xjump; // needed if x<0 clipping occurs
-            } else { /** ODD pixel starting line **/
-                for (scrx = x; scrx < framew+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
-                    // store higher nibble of source pixel in lower nibble of target
-                    if((sourcepixel>>4)!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel >> 4 );
-                    *scrptr = targetpixel;
-                    scrptr++;
-                    targetpixel = *scrptr;
-                    // store lower nibble of source pixel in higher nibble of target
-                    if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
-                    *scrptr = targetpixel;
-                    bitmap++;
-                }
-                bitmap+=xjump;
-            }
-            // increment the y jump in the scrptr
-            scrptr = scrptr + ((width - framew)>>1)+scrxjump;
-    }
+	Display::drawBitmapData(x, y, width, height, &bitmap[dataIndex + (frameIndex * frameSize)]);
 }
 
 
