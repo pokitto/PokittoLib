@@ -72,6 +72,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <cstddef>
 #ifdef DISABLEAVRMIN
 #include <algorithm>
 using std::min;
@@ -1311,18 +1312,18 @@ void Display::drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t * bitmap, uint8_t frameIndex)
 {
 	using std::size_t;
-	
+
 	#if defined(__cpp_constexpr)
 	#define CONSTEXPR constexpr
 	#else
 	#define CONSTEXPR const
 	#endif
-	
+
 	CONSTEXPR size_t widthIndex = 0;
 	CONSTEXPR size_t heightIndex = 1;
 	CONSTEXPR size_t dataIndex = 2;
 	CONSTEXPR size_t bitsPerByte = 8;
-	
+
 	#undef CONSTEXPR
 
 	const size_t width = bitmap[widthIndex];
