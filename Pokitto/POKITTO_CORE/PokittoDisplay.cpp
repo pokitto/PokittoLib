@@ -650,7 +650,7 @@ void Display::fillScreen(uint16_t c) {
         c = c & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
-    } else {
+    } else if (bpp==4){
         c = (c & 0x0F) | (c << 4);
     }
     memset((void*)m_scrbuf,c,sizeof(screenbuffer));
