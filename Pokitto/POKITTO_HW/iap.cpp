@@ -301,7 +301,7 @@ __attribute__((section(".IAP_Code"))) void writeEEPROM( uint16_t* eeAddress, uin
 	__disable_irq();
   	iap_entry(command, result);
   	__enable_irq();
-	LPC_CT32B0->TCR = 0;
+//	LPC_CT32B0->TCR = 0; fix audio stop
 #else
     __disable_irq();
 	iap_entry(command, result);
