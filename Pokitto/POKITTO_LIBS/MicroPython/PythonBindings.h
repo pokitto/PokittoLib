@@ -124,6 +124,12 @@ EXTERNC uint8_t Pok_GetTileId( void* _this, int32_t x, int32_t y, uint8_t tileSi
 EXTERNC void Pok_GetTileIds( void* _this, int32_t tlx, int32_t tly, int32_t brx, int32_t bry, uint8_t tileSize,
                         /*OUT*/ uint8_t* tileIdTl, uint8_t* tileIdTr, uint8_t* tileIdBl, uint8_t* tileIdBr );
 
+//*** EEPROM reading and writing ***
+EXTERNC void* Pok_CreateCookie(char* name, uint8_t* cookieBufPtr, uint32_t cookieBufLen);
+EXTERNC void Pok_DeleteCookie(void* mycookiePtr );
+EXTERNC void Pok_LoadCookie(void* mycookiePtr);
+EXTERNC void Pok_SaveCookie(void* mycookiePtr);
+
 // For compatibility in linking
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
 EXTERNC time_t time_cpp(time_t* timer);

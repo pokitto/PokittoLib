@@ -38,7 +38,6 @@
 #include <cstdarg>
 
 #ifndef POK_SIM
-#include "USBSerial.h"
 
 #ifdef USE_SEGGER_SERIAL_PRINT
 // Note that to be able to use TeraTerm with Segger J-Link, Tera Term must be configured
@@ -55,6 +54,8 @@
 #include "PythonBindings.h"
 
 #if USE_USB_SERIAL_PRINT
+
+#include "USBSerial.h"
 
 USBSerial pc;
 

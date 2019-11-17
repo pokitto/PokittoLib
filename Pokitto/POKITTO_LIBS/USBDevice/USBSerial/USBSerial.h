@@ -19,6 +19,10 @@
 #ifndef USBSERIAL_H
 #define USBSERIAL_H
 
+#if POK_HIGH_RAM != HIGH_RAM_OFF
+#error "Cannot use the USB serial if the high ram is already in use!"
+#endif
+
 #include "USBCDC.h"
 #include "Stream.h"
 #include "CircBuffer.h"

@@ -84,8 +84,8 @@ public:
     /** begin - Register your Cookie with a 8-byte key to begin using it
      *
      *  @param 8-byte key string
-     *  @param size of cookie data in bytes
-     *  @param pointer to beginning of cookie data in memory
+     *  @param size of cookie class instance in bytes
+     *  @param pointer to beginning of cookie class instance in memory
      *
      *  @returns
      *       0 on success (free blocks available),
@@ -97,7 +97,7 @@ public:
     /** begin - Register your Cookie with a 8-byte key to begin using it
      *
      *  @param 8-byte key string
-     *  @param reference to cookie data object in memory
+     *  @param reference to cookie class instance in memory
      *
      *  @returns
      *       0 on success (free blocks available),
@@ -107,6 +107,18 @@ public:
      int begin(const char * key, T & object) {
        return begin(key, sizeof(T), reinterpret_cast<char *>(&object));
      }
+
+    /** begin - Register your Cookie with a 8-byte key to begin using it
+     *
+     *  @param 8-byte key string
+     *  @param size of bare cookie data in bytes
+     *  @param pointer to beginning of bare cookie data in memory
+     *
+     *  @returns
+     *       0 on success (free blocks available),
+     *   non-0 on failure (no more free keys/blocks)
+     */
+     int beginWithData(const char*, int, char*);
 
     /** initialize - create cookie structure. Can be called many times
      *  @returns

@@ -37,6 +37,7 @@
 #include "PokittoCore.h"
 #include "PokittoDisplay.h"
 #include "Tilemap.hpp"
+#include "PokittoCookie.h"
 #include "PythonBindings.h"
 #include "time.h"
 
@@ -440,6 +441,33 @@ void Pok_GetTileIds( void* _this, int32_t tlx, int32_t tly, int32_t brx, int32_t
                     /*OUT*/ *tileIdTl, *tileIdTr, *tileIdBl, *tileIdBr );
  }
 
+//*** EEPROM reading and writing ***
+
+void* Pok_CreateCookie(char* name, uint8_t* cookieBufPtr, uint32_t cookieBufLen)
+{
+    Pokitto::Cookie* mycookiePtr = new Pokitto::Cookie;
+    
+    //initialize cookie
+    if(mycookiePtr )mycookiePtr->beginWithData(name, cookieBufLen, (char*)cookieBufPtr); 
+
+    return (void*)mycookiePtr;
+}
+
+void Pok_DeleteCookie(void* mycookiePtr )
+{
+    delete((Pokitto::Cookie*)mycookiePtr);
+}
+
+void Pok_LoadCookie(void* mycookiePtr)
+{
+    ((Pokitto::Cookie*)mycookiePtr)->loadCookie();
+}
+
+void Pok_SaveCookie(void* mycookiePtr)
+{
+    // Save cookie if this is the best time
+    ((Pokitto::Cookie*)mycookiePtr)->saveCookie();
+}
 
 // For compatibility in linking
 

@@ -656,6 +656,10 @@ Q(BaseException)
 
 Q(BaseException)
 
+Q(Cookie)
+
+Q(Cookie)
+
 Q(EOFError)
 
 Q(EOFError)
@@ -881,6 +885,8 @@ Q(__class__)
 Q(__class__)
 
 Q(__contains__)
+
+Q(__del__)
 
 Q(__del__)
 
@@ -1350,6 +1356,8 @@ Q(little)
 
 Q(little)
 
+Q(load)
+
 Q(locals)
 
 Q(lower)
@@ -1370,15 +1378,9 @@ Q(mem8)
 
 Q(mem_alloc)
 
-Q(mem_current)
-
 Q(mem_free)
 
 Q(mem_info)
-
-Q(mem_peak)
-
-Q(mem_total)
 
 Q(micropython)
 
@@ -1475,6 +1477,8 @@ Q(round)
 Q(rsplit)
 
 Q(rstrip)
+
+Q(save)
 
 Q(scroll)
 
