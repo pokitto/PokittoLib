@@ -37,7 +37,9 @@
 #include "Pokitto.h"
 
 #ifndef POK_SIM
+#if USE_USB_SERIAL_PRINT
 #include "USBSerial.h"
+#endif
 #ifdef USE_SEGGER_SERIAL_PRINT
 #include "SEGGER_RTT.h"
 #endif

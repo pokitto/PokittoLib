@@ -102,9 +102,17 @@ int Cookie::initialize() {
 }
 
 int Cookie::begin(const char* idkey, int datasize, char* ptr) {
+    beginWithData(
+            idkey,
+            datasize-HARDCODEDOFFSET,  // warning! hardcoded! sizeof(this). Do not include the data of the parent Cookie instance
+            ptr + HARDCODEDOFFSET);    // warning! hardcoded! sizeof(this). Point to the beginning of the inherited instance
+    return 0; //success
+}
+
+int Cookie::beginWithData(const char* idkey, int datasize, char* ptr) {
     _status=false;
-    _datasize=datasize-HARDCODEDOFFSET;// warning! hardcoded! sizeof(this); //do not include the data of the parent Cookie instance
-    _pointer = ptr + HARDCODEDOFFSET;// warning! hardcoded! sizeof(this); //point to the beginning of the inherited instance
+    _datasize=datasize; //
+    _pointer = ptr; //
     char _idkey[8];
     // make _idkey exactly 8 readable characters long
     for (int t = 0 ; t < 8 ; t++) _idkey[t]=' ';
