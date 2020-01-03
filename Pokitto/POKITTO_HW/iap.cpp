@@ -118,7 +118,7 @@ int CopyPageToFlash (uint32_t address, uint8_t* data) {
 }
 
 __attribute__((section(".IAP_Code"))) int HelloFromIAP() {
-    static uint32_t array_data[WRITECOUNT];
+    uint32_t array_data[WRITECOUNT];
     int i;
     /* Initialize the array data to be written to FLASH */
 	for (i = 0; i < WRITECOUNT; i++) {
@@ -221,7 +221,7 @@ void IAPstacksave()
 
 
 char iaptest() {
-    static uint32_t array_data[WRITECOUNT];
+    uint32_t array_data[WRITECOUNT];
     int i;
     /* Initialize the array data to be written to FLASH */
 	for (i = 0; i < WRITECOUNT; i++) {
