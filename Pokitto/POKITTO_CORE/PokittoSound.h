@@ -110,7 +110,7 @@ public:
     static bool sfxIs4bitSamples;
     static void playSFX( const uint8_t *sfx, uint32_t length ){
         #if POK_STREAMING_MUSIC > 0
-        streamon=1; // force enable stream
+        //streamon=1; // force enable stream
         sfxIs4bitSamples = false;
         sfxDataPtr = sfx;
         sfxEndPtr = sfx + length;
@@ -119,7 +119,7 @@ public:
     };
     static void playSFX4bit( const uint8_t *sfx, uint32_t length ){
         #if POK_STREAMING_MUSIC > 0
-        streamon=1; // force enable stream
+        //streamon=1; // force enable stream
         sfxIs4bitSamples = true;
         sfxDataPtr = sfx;
         sfxEndPtr = sfx + length;
