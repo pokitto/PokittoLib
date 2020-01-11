@@ -2236,25 +2236,16 @@ void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
 //    #define __ARMCC_VERSION
 #ifndef __ARMCC_VERSION
 
-#if PROJ_PERSISTENCE == 1
-#define LDM_COLOR "ldm %[scrbuf]!, {%[color]}" "\n"
-#define STM_COLOR
-#else
-#define LDM_COLOR "ldm %[scrbuf], {%[color]}" "\n"
-#define STM_COLOR                               \
-    "mov %[tmp], %[clear]" "\n"                 \
-    "stm %[scrbuf]!, {%[tmp]}" "\n"
-#endif
-
 #define MODE15_LOOP				\
     "ands %[tmp], %[color]" "\n"		\
 	"lsrs %[tmp], 2" "\n"			\
 	"ldr %[tmp], [%[palette], %[tmp]]" "\n" \
 	"str %[tmp], [%[LCD]]" "\n"		\
 	"str %[WRBit], [%[LCD], %[CLR]]" "\n"	\
-	"lsls %[tmp], %[color], 28" "\n"	\
+	"movs %[tmp], 0x0F" "\n"		\
+	"ands %[tmp], %[color]" "\n"		\
 	"str %[WRBit], [%[LCD], 124]" "\n"	\
-	"lsrs %[tmp], 26" "\n"			\
+	"lsls %[tmp], 2" "\n"			\
 	"ldr %[tmp], [%[palette], %[tmp]]" "\n" \
 	"str %[tmp], [%[LCD]]" "\n"		\
 	"str %[WRBit], [%[LCD], %[CLR]]" "\n"	\
@@ -2268,17 +2259,18 @@ void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
 	"ldr %[tmp], [%[palette], %[tmp]]" "\n"		\
 	"str %[tmp], [%[LCD]]" "\n"			\
 	"str %[WRBit], [%[LCD], %[CLR]]" "\n"		\
-	"lsls %[tmp], %[color], 28" "\n"                \
+	"movs %[tmp], 0x0F" "\n"			\
+	"ands %[tmp], %[color]" "\n"			\
 	"str %[WRBit], [%[LCD], 124]" "\n"		\
-	"lsrs %[tmp], 26" "\n"                          \
+	"lsls %[tmp], 2" "\n"				\
 	"ldr %[tmp], [%[palette], %[tmp]]" "\n"		\
 	"str %[tmp], [%[LCD]]" "\n"			\
 	"str %[WRBit], [%[LCD], %[CLR]]" "\n"		\
-        LDM_COLOR                                       \
+	"ldm %[scrbuf]!, {%[color]}" "\n"		\
 	"movs %[tmp], 0xF0" "\n"			\
 	"str %[WRBit], [%[LCD], 124]" "\n"
 
-  uint8_t *end=&scrbuf[POK_SCREENBUFFERSIZE];
+  uint8_t *end=&scrbuf[POK_SCREENBUFFERSIZE]+4;
   volatile uint32_t palette[16];
   for( uint32_t i=0; i<16; ++i )
       palette[i] = uint32_t(paletteptr[i]) << 3;
@@ -2296,20 +2288,15 @@ void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
   write_command(0x22); // write data to DRAM
   CLR_CS_SET_CD_RD_WR;
 
-  uint32_t clear = bgcolor;
-  clear |= clear << 16;
-  clear |= clear << 8;
-  clear |= clear << 4;
 
   SET_MASK_P2;
 
   uint32_t WRBit = 1<<12, color, tmp;
   asm volatile(
       ".syntax unified" "\n"
-      LDM_COLOR
-      "mode15Loop%=:" "\n"
-      STM_COLOR
+      "ldm %[scrbuf]!, {%[color]}" "\n"
       "movs %[tmp], 0xF0" "\n"
+      "mode15Loop%=:" "\n"
       MODE15_LOOP
       MODE15_LOOP
       MODE15_LOOP
@@ -2326,8 +2313,7 @@ void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
       :
       [CLR]"l" (252),
       [LCD]"l" (0xA0002188),
-      [palette]"l" (palette),
-      [clear]"h"(clear)
+      [palette]"l" (palette)
 
       :
       "cc"
