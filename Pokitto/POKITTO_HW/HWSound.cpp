@@ -414,69 +414,49 @@ inline void pokSoundBufferedIRQ() {
 
 inline void pokSoundIRQ() {
     #if POK_ENABLE_SOUND > 0
-    //#define TICKY 0xFFFF //160
-    //#define INCY 409
-    uint32_t output=0;uint32_t op;
-    //streamon=1;
-    //if (test==TICKY) test=0;
-    //if (test<(TICKY/2)) { tpin=1; pwmout_write(&audiopwm,(float)0/(float)255);}//dac_write(0);}
-    //else {tpin=0; pwmout_write(&audiopwm,(float)255/(float)255);}//dac_write(64);}
-    //test+=INCY;
-    //return;
+
+    uint32_t output=127;
+    uint32_t op;
+
     #ifndef POK_SIM
         #if POK_USE_PWM
         pwmout_t* obj = &audiopwm;
         #endif
     #endif
+
     #if POK_STREAMING_MUSIC > 0
+        // streaming enabled
         #if POK_STREAMFREQ_HALVE
         streamstep = 1-streamstep;
         #else
         streamstep = 1;
         #endif // POK_STREAMFREQ_HALVE
-        streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
-        if (streamstep) {
 
-            #ifdef PROJ_DISABLE_SD_STREAMING
-            output = 0;
-            #else
-            output = (*currentPtr++);
-            #endif
-
-            // If exists, mix the sound effect to the output.
-            if( Pokitto::Sound::sfxDataPtr != Pokitto::Sound::sfxEndPtr ){
-                uint8_t sfxSample = 0;
+        // SFX sample
+        uint8_t sfxSample = 127;
+        // If flash-based sample exists, get the sample
+        if( Pokitto::Sound::sfxDataPtr != Pokitto::Sound::sfxEndPtr ){
                 if( Pokitto::Sound::sfxIs4bitSamples ) {
+                    // 4 bit sample
                     if(Pokitto::Sound::sfxBytePos++ == 0) {
                         sfxSample = (*Pokitto::Sound::sfxDataPtr) & 0xf0;  // 4-bit sample is in the high nibble
                     }
-                    else
-                    {
+                    else {
                         sfxSample = (*Pokitto::Sound::sfxDataPtr++) << 4;  // 4-bit sample is in the low nibble
                         Pokitto::Sound::sfxBytePos = 0;
                     }
                 }
                 else {
+                    // 8 bit sample
                     sfxSample = (*Pokitto::Sound::sfxDataPtr++);  // 8-bit sample
                 }
+        }
 
-                #ifdef PROJ_DISABLE_SD_STREAMING
-                output = int32_t(sfxSample);
-                #else
-                int32_t s = (int32_t(output) + int32_t(sfxSample)) - 128;
-                if( s < 0 ) s = 0;
-                else if( s > 255 ) s = 255;
-                output = s;
-                #endif
-            }
-
-            if(streamvol && streamon) {
-                output >>= 3-streamvol;
-                streambyte = output;
-            } else {
-                streambyte = 0; // duty cycle
-                output = 0;
-            }
+        // SD stream sample
+        streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
+        if (streamstep) {
+            // stream is ON and if it is half-stepped, thats also cool
+            output = (*currentPtr++);
 
             #ifndef PROJ_DISABLE_SD_STREAMING
             if (currentPtr >= endPtr) {
@@ -487,6 +467,33 @@ inline void pokSoundIRQ() {
             }
             #endif
         }
+
+        // Mix the samples
+        #ifdef PROJ_DISABLE_SD_STREAMING
+            // Only SFX
+            output = int32_t(sfxSample); // just the sample
+        #else
+            // SFX and SD
+            int32_t s;
+            if (streamon) {
+                // SD stream active
+                s = (int32_t(output) + int32_t(sfxSample)) - 128;
+            } else {
+                s = int32_t(sfxSample); // just the sample
+            }
+            if( s < 0 ) s = 0;
+            else if( s > 255 ) s = 255;
+            output = s;
+        #endif
+
+        // sound adjust
+        if(streamvol) {
+            output >>= 3-streamvol;
+            streambyte = output;
+            } else {
+                streambyte = 0; // duty cycle
+                output = 0;
+            }
     #endif // POK_STREAMING_MUSIC
 
     /** DO ADDITIONAL SOUND PROCESSING (NOT STREAM) OF SOUND HERE **/
