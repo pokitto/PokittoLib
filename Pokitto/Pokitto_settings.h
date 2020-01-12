@@ -495,7 +495,11 @@
 #define POK_USE_EXT 0 // if extension port is in use or not
 
 #define POK_STREAMFREQ_HALVE  0  // if true, stream update freq is half audio freq
-#define POK_STREAM_LOOP 1 //master switch
+#ifdef PROJ_STREAM_LOOP
+#define POK_STREAM_LOOP PROJ_STREAM_LOOP //master switch
+#else
+#define POK_STREAM_LOOP 1 //loop by default
+#endif
 
 #ifndef PROJ_USE_DAC
     #define POK_USE_DAC 1 // is DAC in use in this project
