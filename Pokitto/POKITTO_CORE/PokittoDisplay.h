@@ -125,7 +125,12 @@ const uint16_t def565palette[16] = {
     0x2d7f,0x83b3,0xfbb5,0xfe75
 };
 
-#define PALETTE_SIZE 256
+#if ((POK_SCREENMODE==MODE_FAST_16COLOR) || (POK_SCREENMODE==MODE15) || (POK_SCREENMODE==MODE_HI_16COLOR))
+    #define PALETTE_SIZE 16
+#else
+    #define PALETTE_SIZE 256
+#endif
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -478,8 +483,12 @@ private:
     static uint8_t* m_tilebuf;
     /** Pointer to tilecolorbuffer */
     static uint8_t* m_tilecolorbuf;
+
     /** Sprites */
+#if (POK_SCREENMODE == MODE_HI_4COLOR)
     static SpriteInfo m_sprites[SPRITE_COUNT];  // Does not own sprite bitmaps
+#endif
+
 };
 
 }
