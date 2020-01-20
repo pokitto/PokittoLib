@@ -100,7 +100,11 @@ uint8_t* Display::m_tilebuf;
 uint8_t* Display::m_tilecolorbuf;
 uint8_t Display::m_mode, Display::m_colordepth;
 uint8_t Display::palOffset;
-SpriteInfo Display::m_sprites[SPRITE_COUNT];
+
+#if (POK_SCREENMODE == MODE_HI_4COLOR)
+    SpriteInfo Display::m_sprites[SPRITE_COUNT];
+#endif
+
 uint8_t Display::fontSize=1;
 int16_t Display::cursorX,Display::cursorY;
 uint16_t Display::m_w,Display::m_h;
@@ -216,7 +220,10 @@ Display::Display() {
 
     // Reset sprites
     m_tilecolorbuf = NULL;
-    for (uint8_t s = 0; s < SPRITE_COUNT; s++) m_sprites[s].bitmapData = NULL;
+#if (POK_SCREENMODE == MODE_HI_4COLOR)
+    for (uint8_t s = 0; s < SPRITE_COUNT; s++)
+        m_sprites[s].bitmapData = NULL;
+#endif
 }
 
 uint16_t Display::getWidth() {
@@ -2504,6 +2511,8 @@ void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
             }
 }
 
+#if (POK_SCREENMODE == MODE_HI_4COLOR)
+
 /**
  * Setup or disable the sprite. Note that enabled sprites must always have subsequent indices, starting from the index zero.
  * You cannot have gaps in indices of enabled sprites.
@@ -2561,6 +2570,8 @@ void Display::setSpritePos(uint8_t index, int16_t x, int16_t y) {
     m_sprites[index].x = x;
     m_sprites[index].y = y;
 }
+
+#endif
 
 void Display::lcdRefresh(unsigned char* scr, bool useDirectDrawMode) {
 
