@@ -168,6 +168,8 @@ public:
   static void initClock();
   /** Get value of time elapsed during program in milliseconds */
   static uint32_t getTime();
+  /** Get value of time elapsed during program in microseconds */
+  static uint32_t getTime_us();
   /** Wait for n milliseconds */
   static void wait(uint16_t);
   /** FPS */
