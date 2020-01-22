@@ -95,10 +95,14 @@ Pokitto::Sound _pdsound;
 using namespace Pokitto;
 
 uint8_t* Display::m_scrbuf;
+
+#if (POK_SCREENMODE == MODE_TILED_1BIT)
 uint8_t* Display::m_tileset;
 uint8_t* Display::m_tilebuf;
 uint8_t* Display::m_tilecolorbuf;
-uint8_t Display::m_mode, Display::m_colordepth;
+#endif
+
+uint8_t Display::m_mode;
 uint8_t Display::palOffset;
 
 #if (POK_SCREENMODE == MODE_HI_4COLOR)
@@ -107,7 +111,7 @@ uint8_t Display::palOffset;
 
 uint8_t Display::fontSize=1;
 int16_t Display::cursorX,Display::cursorY;
-uint16_t Display::m_w,Display::m_h;
+uint8_t Display::m_w,Display::m_h;
 uint8_t Display::fontWidth, Display::fontHeight;
 bool Display::textWrap=true;
 
@@ -118,10 +122,13 @@ uint16_t Display::invisiblecolor = 17;
 uint16_t Display::directcolor=0xFFFF;
 uint16_t Display::directbgcolor=0x0;
 bool Display::directtextrotated=false;
+
+ #if (POK_COLORDEPTH==2)
 int16_t Display::clipX = 0;
 int16_t Display::clipY = 0;
 int16_t Display::clipW = LCDWIDTH;
 int16_t Display::clipH = LCDHEIGHT;
+#endif
 
 uint16_t* Display::paletteptr;
 uint16_t Display::palette[PALETTE_SIZE];
@@ -134,7 +141,7 @@ bool Display::fixedWidthFont = false, Display::flipFontVertical = false;
 //uint8_t* Display::canvas; // points to the active buffer. if null, draw direct to screen
 
 /** screenbuffer **/
-uint8_t Display::bpp = POK_COLORDEPTH;
+uint8_t Display::m_colordepth = POK_COLORDEPTH;
 #ifndef POK_TILEDMODE
 #if (POK_SCREENMODE == MODE_HI_MONOCHROME)
     uint8_t Display::width = POK_LCD_W;
@@ -219,7 +226,10 @@ Display::Display() {
     #endif // POK_GAMEBUINO_SUPPORT
 
     // Reset sprites
+#if POK_SCREENMODE == MODE_TILED_1BIT
     m_tilecolorbuf = NULL;
+#endif
+
 #if (POK_SCREENMODE == MODE_HI_4COLOR)
     for (uint8_t s = 0; s < SPRITE_COUNT; s++)
         m_sprites[s].bitmapData = NULL;
@@ -597,12 +607,12 @@ void Display::clear() {
 
     uint8_t c=0;
     c = bgcolor & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
-    if (bpp==1 && bgcolor) c=0xFF; // bgcolor !=0, set all pixels
-    else if (bpp==2) {
+    if (m_colordepth==1 && bgcolor) c=0xFF; // bgcolor !=0, set all pixels
+    else if (m_colordepth==2) {
         c = bgcolor & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
-    } else if (bpp==3){
+    } else if (m_colordepth==3){
         uint16_t j = POK_BITFRAME;
         if (bgcolor & 0x1) memset((void*)m_scrbuf,0xFF,j);// R
         else memset((void*)m_scrbuf,0x00,j);// R
@@ -612,7 +622,7 @@ void Display::clear() {
         else memset((char*)m_scrbuf+POK_BITFRAME*2,0x00,j);// B
         setCursor(0,0);
         return;
-    } else if (bpp==4) {
+    } else if (m_colordepth==4) {
         c = (c & 0x0F) | (c << 4);
     }
     uint16_t j = sizeof(screenbuffer);
@@ -626,19 +636,19 @@ void Display::scroll(int16_t pixelrows) {
     uint16_t index = 0, index2=0,oc;
     if (pixelrows==0) return;
     if (pixelrows >= height) pixelrows=height-1;
-    if (bpp == 4) index2 = pixelrows*width/2;
-    else if (bpp == 2) index2 = pixelrows*width/4;
+    if (m_colordepth == 4) index2 = pixelrows*width/2;
+    else if (m_colordepth == 2) index2 = pixelrows*width/4;
     else return;
     oc = color;
     color = bgcolor;
     if (pixelrows>0) {
     for (uint16_t y=0;y<height-pixelrows;y++) {
-            for (uint16_t x=0;x<(width/8)*bpp;x++) screenbuffer[index++]=screenbuffer[index2++];
+            for (uint16_t x=0;x<(width/8)*m_colordepth;x++) screenbuffer[index++]=screenbuffer[index2++];
     }
     fillRect(0,cursorY,width,height);
     } else {
     for (uint16_t y=pixelrows;y<height;y++) {
-            for (uint16_t x=0;x<(width*bpp)/8;x++) screenbuffer[index2++]=screenbuffer[index++];
+            for (uint16_t x=0;x<(width*m_colordepth)/8;x++) screenbuffer[index2++]=screenbuffer[index++];
     }
     fillRect(0,0,width,pixelrows);
     }
@@ -647,12 +657,12 @@ void Display::scroll(int16_t pixelrows) {
 
 void Display::fillScreen(uint16_t c) {
     c = c & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
-    if (bpp==1 && c) c=0xFF; // set all pixels
-    else if (bpp==2) {
+    if (m_colordepth==1 && c) c=0xFF; // set all pixels
+    else if (m_colordepth==2) {
         c = c & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
-    } else if (bpp==4){
+    } else if (m_colordepth==4){
         c = (c & 0x0F) | (c << 4);
     }
     memset((void*)m_scrbuf,c,sizeof(screenbuffer));
@@ -691,9 +701,11 @@ uint16_t Display::getInvisibleColor() {
     return invisiblecolor;
 }
 
+#if (POK_COLORDEPTH==2)
 void Display::setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
     clipX = x; clipY = y; clipW = w; clipH = h;
 }
+#endif
 
 void Display::drawPixelNOP(int16_t x,int16_t y, uint8_t col) {
 }
@@ -1366,6 +1378,7 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     }
     /** 2 bpp mode */
     else if (m_colordepth==2) {
+    #if (POK_COLORDEPTH == 2)
         if(clipH > 0) {
 
             // Clip
@@ -1393,7 +1406,9 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
                 }
             }
         }
-        else {
+        else
+    #endif
+        {
             int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
             for (i = 0; i < w; i++) {
                 byteNum = i / 4;
@@ -2619,6 +2634,7 @@ void Display::setFrameBufferTo(uint8_t* sb) {
     m_scrbuf = sb;
 };
 
+#if (POK_SCREENMODE == MODE_TILED_1BIT)
 void Display::setTileBufferTo(uint8_t* tb) {
     m_tilebuf = tb;
 };
@@ -2631,7 +2647,7 @@ void Display::setTile(uint16_t i, uint8_t t) {
     if (!m_tilebuf) return;
     m_tilebuf[i]=t;
 };
-
+#endif
 
 
 // Convert an integer to a hexadecimal string

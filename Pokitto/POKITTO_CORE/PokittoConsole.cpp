@@ -34,10 +34,13 @@
 */
 /**************************************************************************/
 
+
 #include "PokittoGlobs.h"
 #include "PokittoConsole.h"
 #include "PokittoFonts.h"
 #include "PokittoDisplay.h"
+
+#if (POK_USE_CONSOLE > 0)
 
 Pokitto::Console pConsole;
 
@@ -308,6 +311,6 @@ void Console::Draw() {
 }
 
 
-
+#endif
 
 

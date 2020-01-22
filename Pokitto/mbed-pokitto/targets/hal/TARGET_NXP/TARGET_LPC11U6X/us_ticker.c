@@ -20,7 +20,7 @@
 #define US_TICKER_TIMER          ((LPC_CT32B0_Type *)LPC_CT32B1_BASE)
 #define US_TICKER_TIMER_IRQn     CT32B1_IRQn
 
-int us_ticker_inited = 0;
+uint8_t us_ticker_inited = 0;
 
 void us_ticker_init(void) {
     if (us_ticker_inited) return;

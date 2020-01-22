@@ -41,7 +41,13 @@
 #include "Pokitto_settings.h"
 #include "PokittoDisk.h"
 #include "PokittoGlobs.h"
+
+#if (POK_ENABLE_SYNTH == 1)
 #include "Synth.h"
+#endif
+
+#include "PokittoSound.h"
+
 #include "timer_11u6x.h"
 #include "clock_11u6x.h"
 #include "HWLCD.h"
@@ -53,7 +59,7 @@ Pokitto::Sound __shw;
 using namespace Pokitto;
 
 #ifndef POK_SIM
-#if POK_ENABLE_SOUND
+#if POK_USE_PWM
 pwmout_t* obj = &audiopwm;
 #endif
 #endif
@@ -82,8 +88,11 @@ unsigned char *buffers[4] = {
 #endif
 
 #if POK_ENABLE_SOUND > 0
+
+#if POK_USE_PWM
 	pwmout_t Pokitto::audiopwm; // this way (instead of PwmOut class) pwm doesn't start screaming until it is initialized !
     //Ticker Pokitto::audio;
+#endif
 
 using namespace Pokitto;
 
@@ -115,18 +124,21 @@ sampletype Pokitto::snd[4]; // up to 4 sounds at once?
  DigitalOut dac6(P1_15);
  DigitalOut dac7(P1_8);
 #else
- /** 4-layer board rev 2.1 **/
+
+/*
+ // 4-layer board rev 2.1 
  DigitalOut dac0(P1_28);
  DigitalOut dac1(P1_29);
  DigitalOut dac2(P1_30);
  DigitalOut dac3(P1_31);
- /* has daniel made a mistake ?*/
+ // has daniel made a mistake
  DigitalOut dac4(P2_20);
  DigitalOut dac5(P2_21);
  DigitalOut dac6(P2_22);
  DigitalOut dac7(P2_23);
 
  DigitalOut amp(P1_17);
+ */
 
 #endif // POK_BOARDREV
 #endif // POK_USE_DAC
@@ -192,12 +204,14 @@ void Pokitto::changeHWvolume(int8_t v) {
 }
 
  uint8_t Pokitto::ampIsOn() {
-    return amp;
+    return (LPC_GPIO_PORT->PIN[1]& (1 << 17));
  }
 
  void Pokitto::ampEnable(uint8_t v) {
-    if (v>1) v=1; // limit against funny values
-    amp=v;
+    if(v)
+        LPC_GPIO_PORT->SET[1] = (1 << 17);
+    else
+        LPC_GPIO_PORT->CLR[1] = (1 << 17);
  }
 #endif // POK_BOARDREV == 2
 
@@ -241,6 +255,7 @@ void Pokitto::dac_write(uint8_t value) {
     LPC_GPIO_PORT->MPIN[2] = val<<(20-4); // write bits to port
     CLR_MASK_DAC_HI;
     #else
+/*
     CLR_MASK_P2;
     if (value & 1) SET_DAC0 else CLR_DAC0;
     value >>= 1;
@@ -258,6 +273,18 @@ void Pokitto::dac_write(uint8_t value) {
     value >>= 1;
     if (value & 1) SET_DAC7 else CLR_DAC7;
     SET_MASK_P2;
+*/
+    //from minilib by FManga
+    volatile unsigned char *P1 = (volatile unsigned char *) 0xA0000020;
+    volatile unsigned char *P2 = (volatile unsigned char *) 0xA0000040;
+    P1[28] = value&1; value >>= 1;
+    P1[29] = value&1; value >>= 1;
+    P1[30] = value&1; value >>= 1;
+    P1[31] = value&1; value >>= 1;
+    P2[20] = value&1; value >>= 1;
+    P2[21] = value&1; value >>= 1;
+    P2[22] = value&1; value >>= 1;
+    P2[23] = value;
     #endif //MASKED_DAC
     //CLR_MASK_DAC;
     #endif // BOARDREV
@@ -335,6 +362,22 @@ void Pokitto::soundInit(uint8_t reinit) {
 
     #if POK_ENABLE_SYNTH
         emptyOscillators();
+    #endif
+
+    #if POK_USE_DAC && POK_BOARDREV == 2
+    // configure dac as output
+    volatile unsigned int *PIO1 = (volatile unsigned int *) 0x40044060;
+    volatile unsigned int *PIO2 = (volatile unsigned int *) 0x400440F0;
+    volatile unsigned int *DIR1 = (volatile unsigned int *) 0xA0002004;
+    volatile unsigned int *DIR2 = (volatile unsigned int *) 0xA0002008;
+    PIO1[28] = PIO1[29] = PIO1[30] = PIO1[31] = 1<<7;
+    PIO2[20] = PIO2[21] = PIO2[22] = PIO2[23] = 1<<7;
+    *DIR1 |= (1<<28) | (1<<29) | (1<<30) | (1<<31);
+    *DIR2 |= (1<<20) | (1<<21) | (1<<22) | (1<<23);
+
+    // init amp
+    LPC_GPIO_PORT->DIR[1] |= (1 << 17);
+    LPC_GPIO_PORT->SET[1] = (1 << 17);
     #endif
 
 
