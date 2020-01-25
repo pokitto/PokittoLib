@@ -948,13 +948,8 @@ int Sound::playMusicStream(char* filename, uint8_t options)
 
         uint8_t result;
         result = pokInitSD();
-        if (!isThisFileOpen(filename)) {
-            fileClose(); // close any open files
-            result = fileOpen(filename,FILE_MODE_READONLY | FILE_MODE_BINARY);
-        }else{
-	    fileRewind();
-	    result = 0;
-	}
+        fileClose(); // close any open files
+        result = fileOpen(filename,FILE_MODE_READONLY | FILE_MODE_BINARY);
 
         if (result) {
                 currentPtr = 0; // mark that no stream is available
