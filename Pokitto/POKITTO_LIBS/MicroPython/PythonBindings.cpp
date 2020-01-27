@@ -220,10 +220,12 @@ void POK_game_display_setPalette(uint16_t* paletteArray, int16_t len) {
 }
 
 void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
+#if (POK_SCREENMODE == MODE_HI_4COLOR)
     if(h == 0)
         Display::setClipRect(0, 0, LCDWIDTH, LCDHEIGHT);  // Remove clip rect
     else
         Display::setClipRect(x, y, w, h);  // Set clip rect
+#endif
 }
 
 // Draw the screen surface immediately to the display. Do not care about fps limits. Do not run event loops etc.
