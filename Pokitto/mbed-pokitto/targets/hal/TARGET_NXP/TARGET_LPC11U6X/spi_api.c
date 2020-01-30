@@ -139,7 +139,7 @@ void spi_frequency(spi_t *obj, int hz) {
 
         // calculate the divider
         #ifndef MINILOADHIGH
-        int divider = floor(((float)prescale_hz / (float)hz) + 0.5f);
+        uint32_t divider = ((prescale_hz + (prescale_hz >> 1)) / hz);
         #else
         //avoid using float to minimize binary size
         uint32_t divider = 1;

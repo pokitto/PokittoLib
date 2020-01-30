@@ -28,7 +28,7 @@ struct fs_fs_t {
 
 inline bool fs_pokInitSD(){
     if( !FATFileSystem::_ffs[0] )
-	new SDFileSystem(P0_9, P0_8, P0_6, P0_7, "streaming", NC, SDFileSystem::SWITCH_NONE, 25000000 );
+	new SDFileSystem(P0_9, P0_8, P0_6, P0_7, "sd", NC, SDFileSystem::SWITCH_NONE, 24000000 );
     return true;
 }
 

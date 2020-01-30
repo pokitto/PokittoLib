@@ -165,9 +165,9 @@ public:
 
 private:
   /** Backlight PWM pointer */
-  #ifndef POK_SIM
-  static pwmout_t backlightpwm;
-  #endif
+  //#ifndef POK_SIM
+  //static pwmout_t backlightpwm;
+  //#endif
 
   // TIMEKEEPING
 public:

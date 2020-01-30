@@ -531,7 +531,7 @@
 
 
 #define POK_BACKLIGHT_PIN P2_2
-#define POK_BACKLIGHT_INITIALVALUE 0.3f
+#define POK_BACKLIGHT_INITIALVALUE 30 // 30%
 
 #define POK_BATTERY_PIN1 P0_22 // read battery level through these pins
 #define POK_BATTERY_PIN2 P0_23

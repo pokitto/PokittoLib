@@ -53,9 +53,9 @@ using namespace Pokitto;
 
 uint16_t prevdata=0; // if data does not change, do not adjust LCD bus lines
 
-#if POK_BOARDREV == 2
-    pwmout_t backlightpwm;
-#endif
+//#if POK_BOARDREV == 2
+//    pwmout_t backlightpwm;
+//#endif
 
 volatile uint32_t *LCD = reinterpret_cast< volatile uint32_t * >(0xA0002188);
 
@@ -168,15 +168,39 @@ void Pokitto::setDRAMpoint(uint8_t xptr, uint8_t yoffset)
 
 void Pokitto::initBacklight() {
     #if POK_BOARDREV == 2
-    pwmout_init(&backlightpwm,POK_BACKLIGHT_PIN);
-    pwmout_period_us(&backlightpwm,5);
-    pwmout_write(&backlightpwm,POK_BACKLIGHT_INITIALVALUE);
+    //pwmout_init(&backlightpwm,POK_BACKLIGHT_PIN);
+    //pwmout_period_us(&backlightpwm,5);
+    //pwmout_write(&backlightpwm,POK_BACKLIGHT_INITIALVALUE);
+
+    LPC_SYSCON->SYSAHBCLKCTRL |= (1<<31);
+    LPC_SYSCON->PRESETCTRL |=  (1 << (0 + 9));
+    LPC_IOCON->PIO2_2 = (LPC_IOCON->PIO2_2 & ~(0x3FF)) | 0x3;     //set up pin for PWM use
+    LPC_SCT0->CONFIG |= ((0x3 << 17) | 0x01);
+    LPC_SCT0->CTRL |= (1 << 2) | (1 << 3);
+
+    LPC_SCT0->OUT1_SET = (1 << 0); // event 0
+    LPC_SCT0->OUT1_CLR = (1 << 1); // event 1
+    LPC_SCT0->EV0_CTRL  = (1 << 12);
+    LPC_SCT0->EV0_STATE = 0xFFFFFFFF;
+    LPC_SCT0->EV1_CTRL  = (1 << 12) | (1 << 0);
+    LPC_SCT0->EV1_STATE = 0xFFFFFFFF;
+
+    setBacklight(POK_BACKLIGHT_INITIALVALUE);
     #endif
 }
 
-void Pokitto::setBacklight(float value) {
-    if (value>0.999f) value = 0.999f;
-    pwmout_write(&backlightpwm,value);
+void Pokitto::setBacklight(uint8_t value) {
+    //if (value>0.999f) value = 0.999f;
+    //pwmout_write(&backlightpwm,value);
+
+    if (value>100)
+        value = 100;
+
+    LPC_SCT0->MATCHREL0 = 20000;
+    LPC_SCT0->MATCHREL1 = (LPC_SCT0->MATCHREL0 * value)/100; 
+
+    LPC_SCT0->CTRL &= ~(1 << 2);
+
 }
 
 void Pokitto::lcdInit() {
