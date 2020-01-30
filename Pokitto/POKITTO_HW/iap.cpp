@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <iap.h>
 #include "LPC11U6x.h"
-#include "PokittoDisk.h"
+//#include "PokittoDisk.h"
 
 #define TICKRATE_HZ (10)	/* 10 ticks per second */
 /* SystemTick Counter */
@@ -117,6 +117,8 @@ int CopyPageToFlash (uint32_t address, uint8_t* data) {
     return 0; /*succesful write*/
 
 }
+
+#if 0
 
 __attribute__((section(".IAP_Code"))) int HelloFromIAP() {
 	IAP iap_entry = (IAP) IAP_LOCATION;
@@ -283,7 +285,7 @@ char iaptest() {
 	return 0;
 
 }
-
+#endif
 
 //1) EEprom Write
 //
@@ -389,7 +391,7 @@ uint8_t eeprom_read_byte(uint16_t* index) {
 void eeprom_write_byte(uint16_t* index , uint8_t val) {
     writeEEPROM(index,&val,1);
 }
-
+#if 0
 /*****************************************************************************
  * $Id$
  *
@@ -741,3 +743,4 @@ __attribute__((section(".IAP_Code"))) uint32_t u32IAP_ErasePage(uint32_t u32Star
 /*****************************************************************************
  **                            End Of File
  *****************************************************************************/
+#endif

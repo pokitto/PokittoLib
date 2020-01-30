@@ -48,11 +48,28 @@
 
 #include "PokittoSound.h"
 
-#include "timer_11u6x.h"
-#include "clock_11u6x.h"
-#include "HWLCD.h"
 //#include "beat_11025.h"
 
+
+/* Resets the timer terminal and prescale counts to 0 */
+void Sound_TIMER_Reset()
+{
+	uint32_t reg;
+
+	/* Disable timer, set terminal count to non-0 */
+	reg = LPC_CT32B0->TCR;
+	LPC_CT32B0->TCR = 0;
+	LPC_CT32B0->TC = 1;
+
+	/* Reset timer counter */
+	LPC_CT32B0->TCR = (1 << 1);
+
+	/* Wait for terminal count to clear */
+	while (LPC_CT32B0->TC != 0) {}
+
+	/* Restore timer state */
+	LPC_CT32B0->TCR = reg;
+}
 
 Pokitto::Sound __shw;
 
@@ -156,8 +173,8 @@ uint8_t pixx=0, pixy=0;
 
 extern "C" void TIMER32_0_IRQHandler(void)
 {
-	if (Chip_TIMER_MatchPending(LPC_TIMER32_0, 1)) {
-		Chip_TIMER_ClearMatch(LPC_TIMER32_0, 1);
+	if ((LPC_CT32B0->IR & (1 << 1)) != 0) {
+        LPC_CT32B0->IR = (1 << 1);
 		//pokSoundBufferedIRQ();
 		#if POK_GBSOUND > 0
     	/** GAMEBUINO SOUND **/
@@ -305,9 +322,9 @@ void Pokitto::soundInit(uint8_t reinit) {
     uint32_t timerFreq;
     #if POK_USE_PWM
     if (!reinit) {
-    pwmout_init(&audiopwm,POK_AUD_PIN);
-    pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
-    pwmout_write(&audiopwm,0.1f);
+        pwmout_init(&audiopwm,POK_AUD_PIN);
+        pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
+        pwmout_write(&audiopwm,0.1f);
     }
     #endif
 
@@ -317,26 +334,28 @@ void Pokitto::soundInit(uint8_t reinit) {
     //#else
     /** NOT GAMEBUINO SOUND **/
     //audio.attach_us(&pokSoundBufferedIRQ, 1000000/(POK_AUD_FREQ>>0));
+
      /* Initialize 32-bit timer 0 clock */
-	Chip_TIMER_Init(LPC_TIMER32_0);
+    LPC_SYSCON->SYSAHBCLKCTRL |= (1 << 9);
 
     /* Timer rate is system clock rate */
-	timerFreq = Chip_Clock_GetSystemClockRate();
+	timerFreq = SystemCoreClock;
 
 	/* Timer setup for match and interrupt at TICKRATE_HZ */
-	Chip_TIMER_Reset(LPC_TIMER32_0);
+    Sound_TIMER_Reset();
 
 	/* Enable both timers to generate interrupts when time matches */
-	Chip_TIMER_MatchEnableInt(LPC_TIMER32_0, 1);
+    LPC_CT32B0->MCR |= (1 << ((1) * 3));
 
     /* Setup 32-bit timer's duration (32-bit match time) */
-	Chip_TIMER_SetMatch(LPC_TIMER32_0, 1, (timerFreq / POK_AUD_FREQ));
+    LPC_CT32B0->MR1 = (timerFreq / POK_AUD_FREQ);
 
 	/* Setup both timers to restart when match occurs */
-	Chip_TIMER_ResetOnMatchEnable(LPC_TIMER32_0, 1);
+
+    LPC_CT32B0->MCR |= (1 << ((1 * 3) + 1));
 
 	/* Start both timers */
-	Chip_TIMER_Enable(LPC_TIMER32_0);
+	LPC_CT32B0->TCR |= (1 << 0);
 
 	/* Clear both timers of any pending interrupts */
     #define TIMER_32_0_IRQn 18

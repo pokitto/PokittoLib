@@ -318,6 +318,7 @@
 
 
 #if PROJ_SCREENMODE == 1
+    #undef POK_SCREENMODE //get rid of warnings
     #define POK_SCREENMODE MODE_HI_4COLOR
     #undef POK_COLORDEPTH
     #define POK_COLORDEPTH 2
