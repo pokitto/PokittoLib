@@ -23,16 +23,14 @@
 
 #include "Pokitto.h"
 
-typedef uint8_t byte;
-
 struct OSC {
-  byte on;
-  byte wave;
-  byte loop;
-  byte echo;
-  byte echodiv;
-  byte adsr;
-  byte tonic;
+  uint8_t on;
+  uint8_t wave;
+  uint8_t loop;
+  uint8_t echo;
+  uint8_t echodiv;
+  uint8_t adsr;
+  uint8_t tonic;
 
   //uint16_t count;
   uint32_t count;

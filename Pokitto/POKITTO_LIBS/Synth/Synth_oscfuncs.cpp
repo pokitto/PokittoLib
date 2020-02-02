@@ -38,7 +38,7 @@
 
 /** OSCILLATOR FUNCTIONS **/
 
-void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0,
+void setOSC(OSC* o,uint8_t on=1, uint8_t wave=1, uint8_t loop=0, uint8_t echo=0, uint8_t adsr=0,
             uint8_t notenumber=25, uint16_t volume=127,
             uint16_t attack=0, uint16_t decay=0, uint16_t sustain=0, uint16_t release=0,
             int16_t maxbend=0, int16_t bendrate=0, uint8_t arpmode = 0, uint8_t overdrive=0, uint8_t kick=0){
@@ -99,7 +99,7 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
   }
 }
 
-void setOSC(OSC* o,byte on, byte wave, uint16_t frq, uint8_t volume, uint32_t duration){
+void setOSC(OSC* o,uint8_t on, uint8_t wave, uint16_t frq, uint8_t volume, uint32_t duration){
   o->on = on;
   o->overdrive = 0;
   o->kick = 0;
