@@ -146,12 +146,12 @@ extern uint16_t xorshift16();
 
 extern uint16_t noiseval;
 
-extern void setOSC(OSC*,byte, byte, byte, byte, byte,
+extern void setOSC(OSC*, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t,
             uint8_t, uint16_t,
             uint16_t, uint16_t, uint16_t, uint16_t,
             int16_t, int16_t, uint8_t, uint8_t, uint8_t);
 
-extern void setOSC(OSC*,byte,byte,uint16_t, uint8_t, uint32_t);
+extern void setOSC(OSC*,uint8_t,uint8_t,uint16_t, uint8_t, uint32_t);
 
 extern void waveoff(OSC*);
 #endif // SYNTH_H
