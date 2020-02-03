@@ -23,7 +23,7 @@ class Tilemap {
             (x + tile.width >= 0) &&
             (y + tile.height >= 0)
             ){
-            #if POK_SCREENMODE != MODE_FAST_16COLOR && POK_SCREENMODE != MODE15
+            #if POK_COLORDEPTH != 4
             Pokitto::Display::drawBitmapData(
             x, y,
             tile.width, tile.height,
