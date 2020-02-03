@@ -23,7 +23,7 @@ class Tilemap {
             (x + tile.width >= 0) &&
             (y + tile.height >= 0)
             ){
-            #if POK_SCREENMODE != MODE_FAST_16COLOR
+            #if POK_COLORDEPTH != 4
             Pokitto::Display::drawBitmapData(
             x, y,
             tile.width, tile.height,
@@ -79,8 +79,11 @@ public:
         for( uint32_t ty = 0; ty<height; ty++ ){
             cx = x;
 
-            // Note: Each 8-bit map item contains 2 tiles.
             uint32_t h = 0;
+
+            #if MAX_TILE_COUNT == 16
+
+            // Note: Each 8-bit map item contains 2 tiles.
             for( uint32_t tx = 0; tx<width; tx += 2 ){
                 uint32_t id = map[ (ty*width + tx)>>1 ];
 
@@ -92,12 +95,28 @@ public:
                     break;
             }
 
-            cy += h;
+            #elif MAX_TILE_COUNT == 256
+
+            // Note: Each 8-bit map item contains 1 tile.
+            for( uint32_t tx = 0; tx<width; tx += 1 ){
+                uint32_t id = map[ ty*width + tx ];
+                if( cx < Pokitto::Display::width )
+                    h = blit( id, /*OUT*/cx, cy );
+
+                if( cx >= Pokitto::Display::width )
+                    break;
+            }
+
+            #else
+                #error "Invalid MAX_TILE_COUNT value"
+            #endif
+
+             cy += h;
 
         }
     }
 
-    // Get the tile under the given x and y
+    // Get the tile under the given x and y world coordinates.
     uint8_t GetTileId( std::int32_t x, std::int32_t y, uint8_t tileSize ) {
 
         // Get tile x and y
@@ -121,11 +140,21 @@ public:
             return 0;
 
         // Get the tile id.
+        #if MAX_TILE_COUNT == 16
+
         uint8_t id = map[ (ty*width + tx)>>1 ];
         if(tx&1)
             id &= 0xF;
         else
             id >>= 4;
+
+        #elif MAX_TILE_COUNT == 256
+
+        uint8_t id = map[ ty*width + tx ];
+
+        #else
+            #error "Invalid MAX_TILE_COUNT value"
+        #endif
 
         return id;
     }

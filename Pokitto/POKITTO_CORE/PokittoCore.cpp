@@ -1197,8 +1197,8 @@ if (display.color>3) display.color=1;
 			display.textWrap = false;
 			uint16_t fc,bc;
 			fc = display.color;
-            bc = display.bgcolor;
-			for (byte i = 0; i < length; i++) {
+                        bc = display.bgcolor;
+			for (uint8_t i = 0; i < length; i++) {
 				display.cursorY = currentY + rowh * i;
 				if (i == activeItem){
 					display.cursorX = 3;
@@ -1269,7 +1269,7 @@ void Core::keyboard(char* text, uint8_t length) {
 			//type character
 			if (buttons.pressed(BTN_A)) {
 				if (activeChar < (length-1)) {
-					byte thisChar = activeX + KEYBOARD_W * activeY;
+					int thisChar = activeX + KEYBOARD_W * activeY;
 					if((thisChar == 0)||(thisChar == 10)||(thisChar == 13)) //avoid line feed and carriage return
 					continue;
 					text[activeChar] = thisChar;

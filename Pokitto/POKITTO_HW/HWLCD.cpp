@@ -53,9 +53,13 @@ using namespace Pokitto;
 
 uint16_t prevdata=0; // if data does not change, do not adjust LCD bus lines
 
-//#if POK_BOARDREV == 2
-//    pwmout_t backlightpwm;
-//#endif
+
+#ifndef POK_EXT0_PWM_ENABLE
+#if POK_BOARDREV == 2
+    pwmout_t backlightpwm;
+#endif
+#endif
+
 
 volatile uint32_t *LCD = reinterpret_cast< volatile uint32_t * >(0xA0002188);
 
@@ -189,7 +193,13 @@ void Pokitto::initBacklight() {
     LPC_GPIO_PORT->DIR[2] |= (1  << 2 );
     LPC_GPIO_PORT->SET[2] = 1 << 2; // full background light, smaller file size
     #endif
+    #else
+    pin_function(P2_2,0);//set pin function back to 0
+    LPC_GPIO_PORT->DIR[2] |= (1  << 2 );
+    LPC_GPIO_PORT->SET[2] = 1 << 2; // full background light, smaller file size
+    #endif
 }
+
 
 void Pokitto::setBacklight(uint8_t value) {
     #ifndef POK_EXT0_PWM_ENABLE
