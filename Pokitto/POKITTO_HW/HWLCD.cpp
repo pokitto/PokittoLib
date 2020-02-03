@@ -167,11 +167,8 @@ void Pokitto::setDRAMpoint(uint8_t xptr, uint8_t yoffset)
 }
 
 void Pokitto::initBacklight() {
+    #ifndef POK_EXT0_PWM_ENABLE
     #if POK_BOARDREV == 2
-    //pwmout_init(&backlightpwm,POK_BACKLIGHT_PIN);
-    //pwmout_period_us(&backlightpwm,5);
-    //pwmout_write(&backlightpwm,POK_BACKLIGHT_INITIALVALUE);
-
     LPC_SYSCON->SYSAHBCLKCTRL |= (1<<31);
     LPC_SYSCON->PRESETCTRL |=  (1 << (0 + 9));
     LPC_IOCON->PIO2_2 = (LPC_IOCON->PIO2_2 & ~(0x3FF)) | 0x3;     //set up pin for PWM use
@@ -187,12 +184,15 @@ void Pokitto::initBacklight() {
 
     setBacklight(POK_BACKLIGHT_INITIALVALUE);
     #endif
+    #else
+    pin_function(P2_2,0);//set pin function back to 0
+    LPC_GPIO_PORT->DIR[2] |= (1  << 2 );
+    LPC_GPIO_PORT->SET[2] = 1 << 2; // full background light, smaller file size
+    #endif
 }
 
 void Pokitto::setBacklight(uint8_t value) {
-    //if (value>0.999f) value = 0.999f;
-    //pwmout_write(&backlightpwm,value);
-
+    #ifndef POK_EXT0_PWM_ENABLE
     if (value>100)
         value = 100;
 
@@ -200,7 +200,7 @@ void Pokitto::setBacklight(uint8_t value) {
     LPC_SCT0->MATCHREL1 = (LPC_SCT0->MATCHREL0 * value)/100; 
 
     LPC_SCT0->CTRL &= ~(1 << 2);
-
+    #endif
 }
 
 void Pokitto::lcdInit() {
