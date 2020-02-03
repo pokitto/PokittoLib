@@ -103,7 +103,9 @@ void pokPlayStream() {
 
 void pokSoundIRQ() {
     #ifndef POK_SIM
+    #if POK_USE_PWM
     pwmout_t* obj = &audiopwm;
+    #endif
     #endif
     #if POK_STREAMING_MUSIC > 0
         #if POK_STREAMFREQ_HALVE

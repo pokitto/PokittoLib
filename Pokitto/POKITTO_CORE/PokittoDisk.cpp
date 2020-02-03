@@ -45,7 +45,9 @@ bool diropened=false;
 #define FILESIZE 0x1BFBCD
 
 uint8_t filemode = FILE_MODE_UNINITIALIZED;
-char currentfile[15]; // holds current file's name
+
+#define CURRENT_FILE_SIZE 15
+char currentfile[CURRENT_FILE_SIZE]; // holds current file's name
 
 SPI device(CONNECT_MOSI,CONNECT_MISO,CONNECT_SCK);
 //DigitalOut mmccs(CONNECT_CS);
@@ -220,8 +222,14 @@ uint8_t fileOpen(char* buffer, char fmode) {
     filemode = fmode;
     err = PFFS::pf_open(buffer);
     if (err==0) {
-            strcpy(currentfile,(const char*)buffer);
-            return 0; // 0 means all clear
+        uint8_t i=0;
+        while(buffer[i] && i < CURRENT_FILE_SIZE-1 )
+        {
+            currentfile[i]=buffer[i];
+            i++;
+        }
+        currentfile[i]=0;
+        return 0; // 0 means all clear
     }
     // file open failed
     filemode = FILE_MODE_FAILED;
@@ -230,7 +238,7 @@ uint8_t fileOpen(char* buffer, char fmode) {
 
 void fileClose() {
     filemode = FILE_MODE_UNINITIALIZED;
-    for (uint8_t i=0; i<15; i++) currentfile[i]=0;
+    for (uint8_t i=0; i<CURRENT_FILE_SIZE; i++) currentfile[i]=0;
 }
 
 char fileGetChar() {

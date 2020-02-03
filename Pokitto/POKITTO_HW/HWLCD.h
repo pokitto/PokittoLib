@@ -62,7 +62,7 @@ struct SpriteInfo {
 extern void setDRAMpoint(uint8_t, uint8_t);
 extern void pumpDRAMdata(uint16_t*, uint16_t);
 extern void initBacklight();
-extern void setBacklight(float);
+extern void setBacklight(uint8_t);
 extern void lcdFillSurface(uint16_t);
 extern void lcdPixel(int16_t x, int16_t y, uint16_t c);
 extern void setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);

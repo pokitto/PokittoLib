@@ -45,7 +45,7 @@ uint16_t Battery::thresholds[NUM_LVL];
 uint8_t  Battery::nextUpdate;
 
 #ifndef POK_SIM
-AnalogIn BatLevelPin(P0_23);
+AnalogIn Battery::BatLevelPin(P0_23);
 #endif
 
 void Battery::begin() {

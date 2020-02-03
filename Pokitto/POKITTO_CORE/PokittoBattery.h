@@ -55,6 +55,10 @@ public:
     static uint16_t voltage;
     static uint16_t thresholds[NUM_LVL];
     static uint8_t  nextUpdate;
+private:
+#ifndef POK_SIM
+    static AnalogIn BatLevelPin;
+#endif
 };
 }
 

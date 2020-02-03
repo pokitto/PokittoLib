@@ -35,7 +35,11 @@ Software License Agreement (BSD License)
 /**************************************************************************/
 
 #include "PokittoCore.h"
+
+#if POK_USE_CONSOLE > 0
 #include "PokittoConsole.h"
+#endif
+
 #include "Pokitto_settings.h"
 #include <SDL2/SDL.h>
 

@@ -7,7 +7,7 @@ namespace PFFS {
 #define CONNECT_MISO    P0_8 //p6
 #define CONNECT_SCK     P0_6 //p7
 #define CONNECT_CS      P0_7 //p13
-#define SPI_FREQ        20000000 // was 400000
+#define SPI_FREQ        24000000 // was 400000
 
 } // namespace PFFS
 

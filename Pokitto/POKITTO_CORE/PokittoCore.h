@@ -56,8 +56,12 @@
 #include "PokittoPalettes.h"
 #include "PokittoDisplay.h"
 #include "PokittoButtons.h"
+
+#if (PROJ_GAMEBUINO > 0)
 #include "PokittoBattery.h"
 #include "PokittoBacklight.h"
+#endif
+
 #include "PokittoSound.h"
 #include "PokittoFakeavr.h"
 
@@ -109,13 +113,16 @@ public:
   /** Create a Core runtime instance
   */
   Core();
-
+#if (PROJ_GAMEBUINO > 0)
   /** Backlight component of the Core runtime */
   static Backlight backlight;
+#endif
   /** Buttons component of the Core runtime */
   static Buttons buttons;
+#if (PROJ_GAMEBUINO > 0)
   /** Battery component of the Core runtime */
   static Battery battery;
+#endif
   /** Sound component of the Core runtime */
   static Sound sound;
   /** Display component of the Core runtime */
@@ -158,9 +165,9 @@ public:
 
 private:
   /** Backlight PWM pointer */
-  #ifndef POK_SIM
-  static pwmout_t backlightpwm;
-  #endif
+  //#ifndef POK_SIM
+  //static pwmout_t backlightpwm;
+  //#endif
 
   // TIMEKEEPING
 public:
@@ -222,8 +229,8 @@ public:
 public:
     static void readSettings();
     static void titleScreen(const char* name, const uint8_t *logo);
-	static void titleScreen(const char* name);
-	static void titleScreen(const uint8_t* logo);
+    static void titleScreen(const char* name);
+	  static void titleScreen(const uint8_t* logo);
     static void titleScreen();
     static bool update(bool useDirectMode=false, uint8_t updRectX=0, uint8_t updRectY=0, uint8_t updRectW=LCDWIDTH, uint8_t updRectH=LCDHEIGHT);
     static uint32_t frameCount;
@@ -234,13 +241,13 @@ public:
     static void popup(const char* text, uint8_t duration);
     static void setFrameRate(uint8_t fps);
     static uint8_t getFrameRate();	
-	static void pickRandomSeed();
+	  static void pickRandomSeed();
 
-	static uint8_t getCpuLoad();
+	  static uint8_t getCpuLoad();
     static uint16_t getFreeRam();
 
     static bool collidePointRect(int16_t x1, int16_t y1 ,int16_t x2 ,int16_t y2, int16_t w, int16_t h);
-	static bool collideRectRect(int16_t x1, int16_t y1, int16_t w1, int16_t h1 ,int16_t x2 ,int16_t y2, int16_t w2, int16_t h2);
+	  static bool collideRectRect(int16_t x1, int16_t y1, int16_t w1, int16_t h1 ,int16_t x2 ,int16_t y2, int16_t w2, int16_t h2);
     static bool collideBitmapBitmap(int16_t x1, int16_t y1, const uint8_t* b1, int16_t x2, int16_t y2, const uint8_t* b2);
 
 private:
