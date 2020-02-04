@@ -48,6 +48,7 @@ public:
         const uint8_t *data;
         std::uint8_t width;
         std::uint8_t height;
+        // For use with image data that does not contain the image dimensions
         void set( uint8_t width, uint8_t height, const uint8_t *data ){
             this->data = data;
             this->height = height;
@@ -71,6 +72,24 @@ public:
         this->map = map;
     }
 
+    // For use with image data that does contain the image dimensions
+    void setTile(uint8_t index, const uint8_t *data ){
+        Tile tile;
+        tile.data = &data[2];
+        tile.height = data[1];
+        tile.width = data[0];
+        this->tiles[index] = tile;
+    }
+
+    // For use with image data that does not contain the image dimensions
+    void setTile(uint8_t index, uint8_t width, uint8_t height, const uint8_t *data ){
+        Tile tile;
+        tile.data = data;
+        tile.height = height;
+        tile.width = width;
+        this->tiles[index] = tile;
+    }
+    
     void draw( std::int32_t x, std::int32_t y ){
 
         if( !map ) return;
@@ -95,7 +114,7 @@ public:
                     break;
             }
 
-            #elif MAX_TILE_COUNT == 256
+            #elif MAX_TILE_COUNT > 16 && MAX_TILE_COUNT <= 256
 
             // Note: Each 8-bit map item contains 1 tile.
             for( uint32_t tx = 0; tx<width; tx += 1 ){
@@ -148,7 +167,7 @@ public:
         else
             id >>= 4;
 
-        #elif MAX_TILE_COUNT == 256
+        #elif MAX_TILE_COUNT > 16 && MAX_TILE_COUNT <= 256
 
         uint8_t id = map[ ty*width + tx ];
 
