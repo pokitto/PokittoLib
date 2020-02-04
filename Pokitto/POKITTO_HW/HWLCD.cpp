@@ -172,32 +172,28 @@ void Pokitto::setDRAMpoint(uint8_t xptr, uint8_t yoffset)
 
 void Pokitto::initBacklight() {
     #ifndef POK_EXT0_PWM_ENABLE
-    #if POK_BOARDREV == 2
-    LPC_SYSCON->SYSAHBCLKCTRL |= (1<<31);
-    LPC_SYSCON->PRESETCTRL |=  (1 << (0 + 9));
-    LPC_IOCON->PIO2_2 = (LPC_IOCON->PIO2_2 & ~(0x3FF)) | 0x3;     //set up pin for PWM use
-    LPC_SCT0->CONFIG |= ((0x3 << 17) | 0x01);
-    LPC_SCT0->CTRL |= (1 << 2) | (1 << 3);
+        #if POK_BOARDREV == 2
+        LPC_SYSCON->SYSAHBCLKCTRL |= (1<<31);
+        LPC_SYSCON->PRESETCTRL |=  (1 << (0 + 9));
+        LPC_IOCON->PIO2_2 = (LPC_IOCON->PIO2_2 & ~(0x3FF)) | 0x3;     //set up pin for PWM use
+        LPC_SCT0->CONFIG |= ((0x3 << 17) | 0x01);
+        LPC_SCT0->CTRL |= (1 << 2) | (1 << 3);
 
-    LPC_SCT0->OUT1_SET = (1 << 0); // event 0
-    LPC_SCT0->OUT1_CLR = (1 << 1); // event 1
-    LPC_SCT0->EV0_CTRL  = (1 << 12);
-    LPC_SCT0->EV0_STATE = 0xFFFFFFFF;
-    LPC_SCT0->EV1_CTRL  = (1 << 12) | (1 << 0);
-    LPC_SCT0->EV1_STATE = 0xFFFFFFFF;
+        LPC_SCT0->OUT1_SET = (1 << 0); // event 0
+        LPC_SCT0->OUT1_CLR = (1 << 1); // event 1
+        LPC_SCT0->EV0_CTRL  = (1 << 12);
+        LPC_SCT0->EV0_STATE = 0xFFFFFFFF;
+        LPC_SCT0->EV1_CTRL  = (1 << 12) | (1 << 0);
+        LPC_SCT0->EV1_STATE = 0xFFFFFFFF;
 
-    setBacklight(POK_BACKLIGHT_INITIALVALUE);
-    #endif
+        setBacklight(POK_BACKLIGHT_INITIALVALUE);
+        #endif
     #else
     pin_function(P2_2,0);//set pin function back to 0
     LPC_GPIO_PORT->DIR[2] |= (1  << 2 );
     LPC_GPIO_PORT->SET[2] = 1 << 2; // full background light, smaller file size
     #endif
-    #else
-    pin_function(P2_2,0);//set pin function back to 0
-    LPC_GPIO_PORT->DIR[2] |= (1  << 2 );
-    LPC_GPIO_PORT->SET[2] = 1 << 2; // full background light, smaller file size
-    #endif
+
 }
 
 
