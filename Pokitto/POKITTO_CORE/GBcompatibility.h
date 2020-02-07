@@ -2,7 +2,7 @@
 #define GBCOMPATIBILITY_H
 
 /*
- * (C) Copyright 2014 Aurélien Rodot. All rights reserved.
+ * (C) Copyright 2014 Aurï¿½lien Rodot. All rights reserved.
  *
  * This file is part of the Gamebuino Library (http://gamebuino.com)
  *
@@ -57,7 +57,11 @@
 
 #define NUM_CHANNELS 3 //number of sound channels, between 0 and 4
 #define DISPLAY_ROT NOROT //set to NOROT, ROTCCW, ROT180 or ROTCW. Can be used to play in portrait mode.
+
+#if (PROJ_GAMEBUINO > 0)
 #define ENABLE_GUI 1 //enable menu, keyboard, pop-up, volume adjust functions
+#endif
+
 #define ENABLE_BITMAPS 1 //will replace bitmaps with rectangles if disabled
 #define ENABLE_GRAYSCALE 1 //allows the use of the GRAY color
 #define EXTENDED_NOTE_RANGE 0 //allows the use of notes above A 5... please avoid that they sound really bad
