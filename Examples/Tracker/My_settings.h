@@ -23,6 +23,8 @@
 //#define PROJ_SHOW_FPS_COUNTER
 //#define PROJ_DEVELOPER_MODE 1
 
+#define ENABLE_GUI
+
 #define TRACKER_EXAMPLE
 
 #endif

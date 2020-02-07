@@ -234,11 +234,13 @@ public:
     static void titleScreen();
     static bool update(bool useDirectMode=false, uint8_t updRectX=0, uint8_t updRectY=0, uint8_t updRectW=LCDWIDTH, uint8_t updRectH=LCDHEIGHT);
     static uint32_t frameCount;
+#if (ENABLE_GUI > 0)
     static int8_t menu(const char* const* items, uint8_t length);
     static char* filemenu(char*);
     static char* filemenu();
     static void keyboard(char* text, uint8_t length);
     static void popup(const char* text, uint8_t duration);
+#endif
     static void setFrameRate(uint8_t fps);
     static uint8_t getFrameRate();	
 	  static void pickRandomSeed();

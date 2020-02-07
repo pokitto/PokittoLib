@@ -1019,7 +1019,9 @@ display.cursorX = ox;
 display.cursorY = oy;
 #endif
 }
+#endif //(PROJ_GAMEBUINO > 0)
 
+#if (ENABLE_GUI > 0)
 
 char* Core::filemenu(char *ext) {
     uint8_t oldPersistence = display.persistence;
@@ -1052,10 +1054,14 @@ char* Core::filemenu(char *ext) {
 			if (buttons.pressed(BTN_A) || buttons.pressed(BTN_B) || buttons.pressed(BTN_C)) {
 				exit = true; //time to exit menu !
 				if (buttons.pressed(BTN_A)) {
+                    #if (POK_GBSOUND > 0)
 					sound.playOK();
+                    #endif
 				} else {
 				    *selectedfile = 0;
+                    #if (POK_GBSOUND > 0)
 					sound.playCancel();
+                    #endif
 				}
 				updated = true; // update screen
 			}
@@ -1063,13 +1069,17 @@ char* Core::filemenu(char *ext) {
 				if (buttons.repeat(BTN_DOWN,4)) {
                     if( ++activeItem >= numOfItemsFound ) activeItem = numOfItemsFound - 1;
 					if( activeItem >= currentTopItem + itemsPerScreen) currentTopItem += itemsPerScreen; // next page
+                    #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
                     updated = true; // update screen
 				}
 				if (buttons.repeat(BTN_UP,4)) {
 				    if( --activeItem < 0 ) activeItem = 0;
  					if( activeItem < currentTopItem) currentTopItem -= itemsPerScreen;  // previous page
+                     #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
                     updated = true; // update screen
 				}
 
@@ -1167,19 +1177,27 @@ if (display.color>3) display.color=1;
 				targetY = - display.fontHeight * length - 2; //send the menu out of the screen
 				if (buttons.pressed(BTN_A)) {
 					answer = activeItem;
+                    #if (POK_GBSOUND > 0)
 					sound.playOK();
+                    #endif
 				} else {
+                    #if (POK_GBSOUND > 0)
 					sound.playCancel();
+                    #endif
 				}
 			}
 			if (exit == false) {
 				if (buttons.repeat(BTN_DOWN,4)) {
 					activeItem++;
+                    #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
 				}
 				if (buttons.repeat(BTN_UP,4)) {
 					activeItem--;
+                    #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
 				}
 				//don't go out of the menu
 				if (activeItem == length) activeItem = 0;
@@ -1241,19 +1259,27 @@ void Core::keyboard(char* text, uint8_t length) {
 			//move the character selector
 			if (buttons.repeat(BTN_DOWN, 4)) {
 				activeY++;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			if (buttons.repeat(BTN_UP, 4)) {
 				activeY--;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			if (buttons.repeat(BTN_RIGHT, 4)) {
 				activeX++;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			if (buttons.repeat(BTN_LEFT, 4)) {
 				activeX--;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			//don't go out of the keyboard
 			if (activeX == KEYBOARD_W) activeX = 0;
@@ -1276,14 +1302,18 @@ void Core::keyboard(char* text, uint8_t length) {
 					text[activeChar+1] = '\0';
 				}
 				activeChar++;
+                #if (POK_GBSOUND > 0)
 				sound.playOK();
+                #endif
 				if (activeChar > length)
 				activeChar = length;
 			}
 			//erase character
 			if (buttons.pressed(BTN_B)) {
 				activeChar--;
+                #if (POK_GBSOUND > 0)
 				sound.playCancel();
+                #endif
 				if (activeChar >= 0)
 				text[activeChar] = 0;
 				else
@@ -1291,7 +1321,9 @@ void Core::keyboard(char* text, uint8_t length) {
 			}
 			//leave menu
 			if (buttons.pressed(BTN_C)) {
+                #if (POK_GBSOUND > 0)
 				sound.playOK();
+                #endif
 				while (1) {
 					if (update()) {
 						//display.setCursor(0,0);
@@ -1299,11 +1331,15 @@ void Core::keyboard(char* text, uint8_t length) {
 						display.print(text);
 						display.println(("\n\n\n\x15:okay \x16:edit"));
 						if(buttons.pressed(BTN_A)){
+                            #if (POK_GBSOUND > 0)
 							sound.playOK();
+                            #endif
 							return;
 						}
 						if(buttons.pressed(BTN_B)){
+                            #if (POK_GBSOUND > 0)
 							sound.playCancel();
+                            #endif
 							break;
 						}
 					}
@@ -1379,7 +1415,7 @@ void Core::updatePopup(){
 	}
 #endif
 }
-#endif //#if (PROJ_GAMEBUINO > 0)
+#endif //(ENABLE_GUI > 0)
 
 void Core::setFrameRate(uint8_t fps) {
 	timePerFrame = 1000 / fps;

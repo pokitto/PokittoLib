@@ -196,7 +196,11 @@
     #define POK_STRETCH 1
     #define PICOPALETTE 0
     #define POK_COLORDEPTH 4
+    #define ENABLE_GUI 1
 #else
+    #ifndef ENABLE_GUI
+        #define ENABLE_GUI 0
+    #endif
     #if PROJ_ARDUBOY > 0
         #define POK_ARDUBOY_SUPPORT PROJ_ARDUBOY // Define true to support Arduboy library calls
         #define PROJ_SCREENMODE MODE_ARDUBOY_16COLOR
