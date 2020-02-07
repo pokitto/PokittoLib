@@ -185,6 +185,7 @@ void Pokitto::initBacklight() {
         LPC_SCT0->EV0_STATE = 0xFFFFFFFF;
         LPC_SCT0->EV1_CTRL  = (1 << 12) | (1 << 0);
         LPC_SCT0->EV1_STATE = 0xFFFFFFFF;
+        LPC_SCT0->MATCHREL0 = 20000;
 
         setBacklight(POK_BACKLIGHT_INITIALVALUE);
         #endif
@@ -202,9 +203,7 @@ void Pokitto::setBacklight(uint8_t value) {
     if (value>100)
         value = 100;
 
-    LPC_SCT0->MATCHREL0 = 20000;
     LPC_SCT0->MATCHREL1 = (LPC_SCT0->MATCHREL0 * value)/100; 
-
     LPC_SCT0->CTRL &= ~(1 << 2);
     #endif
 }

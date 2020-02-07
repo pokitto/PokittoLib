@@ -325,6 +325,7 @@ void Pokitto::soundInit(uint8_t reinit) {
         pwmout_init(&audiopwm,POK_AUD_PIN);
         pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
         pwmout_write(&audiopwm,0.1f);
+        setBacklight(POK_BACKLIGHT_INITIALVALUE);
     }
     #endif
 
