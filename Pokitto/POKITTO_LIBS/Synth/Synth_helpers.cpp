@@ -55,7 +55,7 @@ uint16_t xorshift16(void) {
 }
 
 
-int8_t arptable[MAX_ARPMODE][5] = {
+const int8_t arptable[MAX_ARPMODE][5] = {
 {0,0,0,0,0}, // Off
 {0,4,7,4,0}, // Major tonic, 3rd, 5th
 {0,3,7,3,0}, // Minor tonic, 3rd, 5th
@@ -69,7 +69,7 @@ int8_t arptable[MAX_ARPMODE][5] = {
 
 #if (POK_AUD_FREQ==8000)
 
-uint32_t cincs[] ={
+const uint32_t cincs[] ={
 16573205	,	  // 0 - NOTE_B0
 17555679	,	  // 1 - NOTE_C1
 18602577	,	  // 2 - NOTE_CS1
@@ -163,7 +163,7 @@ uint32_t cincs[] ={
 
 #elif (POK_AUD_FREQ==11025)
 
-uint32_t cincs[] ={
+const uint32_t cincs[] ={
 12025908	,	  // 0 - NOTE_B0
 12738815	,	  // 1 - NOTE_C1
 13498469	,	  // 2 - NOTE_CS1
@@ -257,7 +257,7 @@ uint32_t cincs[] ={
 
 #elif (POK_AUD_FREQ==16000)
 
-uint32_t cincs[] ={
+const uint32_t cincs[] ={
 8286603	,	  // 0 - NOTE_B0
 8777839	,	  // 1 - NOTE_C1
 9301289	,	  // 2 - NOTE_CS1
@@ -351,7 +351,7 @@ uint32_t cincs[] ={
 
 #elif (POK_AUD_FREQ==22050)
 
-uint32_t cincs[] ={
+const uint32_t cincs[] ={
 6012954	,	  // 0 - NOTE_B0
 6369407	,	  // 1 - NOTE_C1
 6749234	,	  // 2 - NOTE_CS1
@@ -446,7 +446,7 @@ uint32_t cincs[] ={
 
 #elif (POK_AUD_FREQ==32000)
 
-uint32_t cincs[] ={
+const uint32_t cincs[] ={
 4143301	,	  // 0 - NOTE_B0
 4388920	,	  // 1 - NOTE_C1
 4650644	,	  // 2 - NOTE_CS1
@@ -541,7 +541,7 @@ uint32_t cincs[] ={
 
 #elif (POK_AUD_FREQ==44100)
 
-uint32_t cincs[] ={
+const uint32_t cincs[] ={
 3006477	,	  // 0 - NOTE_B0
 3184704	,	  // 1 - NOTE_C1
 3374617	,	  // 2 - NOTE_CS1
