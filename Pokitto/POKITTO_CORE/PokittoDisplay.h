@@ -119,10 +119,10 @@ enum defcolors {
 
 const uint16_t def565palette[16] = {
     //kind of like pico8 palette
-    0,0x194a,0x792a,0x42a,
-    0xaa86,0x5aa9,0xc618,0xff9d,
-    0xf809,0xfd00,0xff84,0x72a,
-    0x2d7f,0x83b3,0xfbb5,0xfe75
+    0x0000, 0x194a, 0x792a, 0x042a,
+    0xaa86, 0x5aa9, 0xc618, 0xff9d,
+    0xf809, 0xfd00, 0xff84, 0x072a,
+    0x2d7f, 0x83b3, 0xfbb5, 0xfe75
 };
 
 #if ((POK_SCREENMODE==MODE_FAST_16COLOR) || (POK_SCREENMODE==MODE15) || (POK_SCREENMODE==MODE_HI_16COLOR))
@@ -144,16 +144,20 @@ public:
 
     // PROPERTIES
 private:
-    static uint8_t* canvas;
-    static uint8_t bpp;
+    //static uint8_t* canvas;
+    //static uint8_t bpp;
 public:
     static uint8_t m_colordepth; // public to be used elsewhere
+#if (POK_SCREENMODE == MIXMODE)
     static uint8_t subMode; // for mixed mode switching
+#endif
     static uint8_t palOffset;
     static uint8_t width;
     static uint8_t height;
     static uint8_t screenbuffer[];
+#if (POK_SCREENMODE == MIXMODE)
     static uint8_t scanType[]; // for mixed screen mode
+#endif
 
     // PROPERTIES
     static void setColorDepth(uint8_t);
@@ -180,11 +184,13 @@ public:
     static uint16_t directbgcolor;
     /** Direct text rotated */
     static bool directtextrotated;
+    #if (POK_COLORDEPTH == 2)
     /** clip rect on screen**/
     static int16_t clipX;
     static int16_t clipY;
     static int16_t clipW;
     static int16_t clipH;
+    #endif
     /** set color with a command */
     static void setColor(uint8_t);
     /** set color and bgcolor with a command */
@@ -197,8 +203,11 @@ public:
     static uint8_t getBgColor();
     /** get invisible color */
     static uint16_t getInvisibleColor();
+
+    #if (POK_COLORDEPTH == 2)
     /** set clip rect on screen**/
     static void setClipRect(int16_t x, int16_t y, int16_t w, int16_t h);
+    #endif
 
     /** Initialize display */
     static void begin();
@@ -458,6 +467,7 @@ public:
     /** external small printf, source in PokittoPrintf.cpp **/
     static int printf(const char *format, ...);
 
+#if (POK_SCREENMODE == MODE_TILED_1BIT)
     /** Tiled mode functions **/
 
     static void loadTileset(const uint8_t*);
@@ -469,20 +479,23 @@ public:
     static void setTile(uint16_t,uint8_t);
     static uint8_t getTile(uint16_t);
     static uint8_t getTile(uint8_t,uint8_t);
-
+#endif
 
 
 private:
     static uint8_t m_mode;
-    static uint16_t m_w,m_h; // store these for faster access when switching printing modes
+    static uint8_t m_w,m_h; // store these for faster access when switching printing modes
     /** Pointer to screen buffer */
     static uint8_t* m_scrbuf;
+
+#if (POK_SCREENMODE == MODE_TILED_1BIT)
     /** Pointer to tileset */
     static uint8_t* m_tileset;
     /** Pointer to tilebuffer */
     static uint8_t* m_tilebuf;
     /** Pointer to tilecolorbuffer */
     static uint8_t* m_tilecolorbuf;
+#endif
 
     /** Sprites */
 #if (POK_SCREENMODE == MODE_HI_4COLOR)

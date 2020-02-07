@@ -152,6 +152,11 @@ public:
     static uint32_t getMusicStreamElapsedSec();
     static uint32_t getMusicStreamElapsedMilliSec();
 
+	static uint16_t globalVolume;
+	static void setVolume(int16_t volume);
+	static uint16_t getVolume();
+
+#if (POK_GBSOUND > 0)
 	// GB compatibility functions
 	static void playTrack(const uint16_t* track, uint8_t channel);
 	static void updateTrack(uint8_t channel);
@@ -182,8 +187,7 @@ public:
 
 	static void setMasterVolume(uint8_t);
 	static uint8_t GetMasterVolume();
-	static void setVolume(int16_t volume);
-	static uint16_t getVolume();
+
 	static void setVolume(int8_t volume, uint8_t channel);
 	static uint8_t getVolume(uint8_t channel);
 
@@ -195,8 +199,9 @@ public:
 
 	static void setChannelHalfPeriod(uint8_t channel, uint8_t halfPeriod);
 
+
 	static void generateOutput(); //!\\ DO NOT USE
-	static uint16_t globalVolume;
+
 
 
 #if (NUM_CHANNELS > 0)
@@ -241,6 +246,9 @@ public:
 
 	static uint8_t chanVolumes[NUM_CHANNELS];
 #endif
+
+#endif // Gamebuino sound
+
 	static void updateOutput();
 };
 

@@ -309,7 +309,7 @@ int directDrawImageFileFromSD(int16_t sx, int16_t sy, char* filepath) {
     return(directDrawImageFileFromSD(0, 0, 0/* full width */, 0/* full height */, sx, sy, filepath));
 }
 
-int directDrawImageFileFromSD(uint16_t ix, uint16_t iy, uint16_t iw, uint16_t ih, int16_t sx, int16_t sy, char* filepath) {
+int directDrawImageFileFromSD(uint16_t ix, uint16_t iy, uint16_t iw, uint16_t ih, int sx, int sy, char* filepath) {
 
     BITMAPFILEHEADER bf;
     BITMAPINFO bmi;

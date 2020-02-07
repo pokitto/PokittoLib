@@ -4,7 +4,9 @@
 #include "SDFileSystem.h"
 
 // declared in PokittoDisk.cpp
-extern char currentfile[15]; // holds current file's name
+
+#define CURRENT_FILE_SIZE 15
+extern char currentfile[CURRENT_FILE_SIZE]; // holds current file's name
 
 // declared in SDFileSystem.cpp
 extern FileHandle *sdfsdisk_fileptr;
@@ -26,7 +28,7 @@ struct fs_fs_t {
 
 inline bool fs_pokInitSD(){
     if( !FATFileSystem::_ffs[0] )
-	new SDFileSystem(P0_9, P0_8, P0_6, P0_7, "streaming", NC, SDFileSystem::SWITCH_NONE, 25000000 );
+	new SDFileSystem(P0_9, P0_8, P0_6, P0_7, "sd", NC, SDFileSystem::SWITCH_NONE, 24000000 );
     return true;
 }
 
@@ -55,7 +57,14 @@ inline uint8_t fs_fileOpen(const char *buffer, char fmode){
     if( !sdfsdisk_fileptr )
 	return 1;
 
-    strcpy(currentfile,buffer);
+    uint8_t i=0;
+    while(buffer[i] && i < CURRENT_FILE_SIZE-1 )
+    {
+        currentfile[i]=buffer[i];
+        i++;
+    }
+    currentfile[i]=0;
+
     fs.fsize = sdfsdisk_fileptr->flen();
     return 0;
 }

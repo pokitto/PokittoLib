@@ -182,11 +182,11 @@ void pwmout_period_us(pwmout_t* obj, int us) {
     LPC_SCT0_Type* pwm = obj->pwm;
     uint32_t t_off = pwm->MATCHREL0 + 1;
     uint32_t t_on  = pwm->MATCHREL1 + 1;
-    float v = (float)t_on/(float)t_off;
+    
     //obj->pwm->MATCHREL0 = (uint32_t)us;
     //obj->pwm->MATCHREL1 = (uint32_t)((float)us * (float)v);
-    uint32_t period_ticks = (uint32_t)(((uint64_t)SystemCoreClock * (uint64_t)us) / (uint64_t)1000000);
-    uint32_t pulsewidth_ticks = period_ticks * v;
+    uint32_t period_ticks = (SystemCoreClock / 1000000) * us;
+    uint32_t pulsewidth_ticks = (period_ticks * t_on) / t_off;
     pwm->MATCHREL0 = period_ticks - 1;
     if (pulsewidth_ticks > 0) {
         pwm->MATCHREL1 = pulsewidth_ticks - 1;

@@ -139,7 +139,10 @@ extern int setHWvolume(uint8_t);
 extern uint8_t getHWvolume();
 extern void changeHWvolume(int8_t);
 
+#if POK_USE_PWM
 extern pwmout_t audiopwm;
+#endif
+
 extern uint8_t pokAmpIsOn();
 extern void pokAmpEnable(uint8_t);
 

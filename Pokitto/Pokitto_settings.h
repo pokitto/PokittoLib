@@ -316,6 +316,17 @@
 #endif
 #endif // POK_TILEDMODE
 
+
+#if PROJ_SCREENMODE == 1
+    #undef POK_SCREENMODE //get rid of warnings
+    #define POK_SCREENMODE MODE_HI_4COLOR
+    #undef POK_COLORDEPTH
+    #define POK_COLORDEPTH 2
+    #define LCDWIDTH POK_LCD_W
+    #define LCDHEIGHT POK_LCD_H
+#endif
+
+
 #if PROJ_MODE13 > 0 || PROJ_SCREENMODE == 13
     #undef POK_SCREENMODE //get rid of warnings
     #undef POK_COLORDEPTH
@@ -520,7 +531,7 @@
 
 
 #define POK_BACKLIGHT_PIN P2_2
-#define POK_BACKLIGHT_INITIALVALUE 0.3f
+#define POK_BACKLIGHT_INITIALVALUE 30 // 30%
 
 #define POK_BATTERY_PIN1 P0_22 // read battery level through these pins
 #define POK_BATTERY_PIN2 P0_23

@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <iap.h>
 #include "LPC11U6x.h"
-#include "PokittoDisk.h"
+//#include "PokittoDisk.h"
 
 #define TICKRATE_HZ (10)	/* 10 ticks per second */
 /* SystemTick Counter */
@@ -21,15 +21,16 @@ static volatile uint32_t sysTick;
 #define IAP_ERSSECTOR_CMD 52
 #define IAP_REPID_CMD 54
 
-/* IAP command variables */
-static unsigned int command[5], result[4];
 
 /* IAP entry function */
 typedef int (*IAP)(unsigned int[], unsigned int[]);
-IAP iap_entry = (IAP) IAP_LOCATION;
+
 
 int CopyPageToFlash (uint32_t address, uint8_t* data) {
     IAP iap_call = (IAP) IAP_LOCATION;
+	/* IAP command variables */
+	unsigned int command[5], result[4];
+
     uint32_t writecount=0;
 	__disable_irq();
 
@@ -117,7 +118,13 @@ int CopyPageToFlash (uint32_t address, uint8_t* data) {
 
 }
 
+#if 0
+
 __attribute__((section(".IAP_Code"))) int HelloFromIAP() {
+	IAP iap_entry = (IAP) IAP_LOCATION;
+	/* IAP command variables */
+	unsigned int command[5], result[4];
+
     uint32_t array_data[WRITECOUNT];
     int i;
     /* Initialize the array data to be written to FLASH */
@@ -221,6 +228,10 @@ void IAPstacksave()
 
 
 char iaptest() {
+	IAP iap_entry = (IAP) IAP_LOCATION;
+	/* IAP command variables */
+	unsigned int command[5], result[4];
+
     uint32_t array_data[WRITECOUNT];
     int i;
     /* Initialize the array data to be written to FLASH */
@@ -274,7 +285,7 @@ char iaptest() {
 	return 0;
 
 }
-
+#endif
 
 //1) EEprom Write
 //
@@ -287,6 +298,7 @@ char iaptest() {
 //Return Code CMD_SUCCESS | SRC_ADDR_NOT_MAPPED | DST_ADDR_NOT_MAPPED
 __attribute__((section(".IAP_Code"))) void writeEEPROM( uint16_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount )
 {
+	IAP iap_entry = (IAP) IAP_LOCATION;
 	unsigned int command[5], result[4];
 
 	command[0] = 61;
@@ -325,6 +337,7 @@ __attribute__((section(".IAP_Code"))) void writeEEPROM( uint16_t* eeAddress, uin
 //Return Code CMD_SUCCESS | SRC_ADDR_NOT_MAPPED | DST_ADDR_NOT_MAPPED
 __attribute__((section(".IAP_Code"))) void readEEPROM( uint16_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount )
 {
+	IAP iap_entry = (IAP) IAP_LOCATION;
 	unsigned int command[5], result[4];
 
 	command[0] = 62;
@@ -347,6 +360,8 @@ __attribute__((section(".IAP_Code"))) void readEEPROM( uint16_t* eeAddress, uint
 
 __attribute__((section(".IAP_Code"))) void IAPreadPartId( uint8_t* eeAddress, uint8_t* buffAddress, uint32_t byteCount )
 {
+	IAP iap_entry = (IAP) IAP_LOCATION;
+
 	unsigned int command[5], result[4];
 
 	command[0] = 62;
@@ -376,7 +391,7 @@ uint8_t eeprom_read_byte(uint16_t* index) {
 void eeprom_write_byte(uint16_t* index , uint8_t val) {
     writeEEPROM(index,&val,1);
 }
-
+#if 0
 /*****************************************************************************
  * $Id$
  *
@@ -728,3 +743,4 @@ __attribute__((section(".IAP_Code"))) uint32_t u32IAP_ErasePage(uint32_t u32Star
 /*****************************************************************************
  **                            End Of File
  *****************************************************************************/
+#endif

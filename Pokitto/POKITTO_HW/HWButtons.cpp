@@ -53,6 +53,7 @@ InterruptIn DBtn(POK_BTN_DOWN_PIN);
 InterruptIn LBtn(POK_BTN_LEFT_PIN);
 InterruptIn RBtn(POK_BTN_RIGHT_PIN);
 #else
+/*
 DigitalIn ABtn(POK_BTN_A_PIN);
 DigitalIn BBtn(POK_BTN_B_PIN);
 DigitalIn CBtn(POK_BTN_C_PIN);
@@ -60,6 +61,17 @@ DigitalIn UBtn(POK_BTN_UP_PIN);
 DigitalIn DBtn(POK_BTN_DOWN_PIN);
 DigitalIn LBtn(POK_BTN_LEFT_PIN);
 DigitalIn RBtn(POK_BTN_RIGHT_PIN);
+*/
+
+//from minilib by FManga
+inline bool ABtn(){ return *((volatile char*)(0xA0000000 + 1*0x20 + 9)); }
+inline bool BBtn(){ return *((volatile char*)(0xA0000000 + 1*0x20 + 4)); }
+inline bool CBtn(){ return *((volatile char*)(0xA0000000 + 1*0x20 + 10)); }
+inline bool UBtn(){ return *((volatile char*)(0xA0000000 + 1*0x20 + 13)); }
+inline bool DBtn(){ return *((volatile char*)(0xA0000000 + 1*0x20 + 3)); }
+inline bool LBtn(){ return *((volatile char*)(0xA0000000 + 1*0x20 + 25)); }
+inline bool RBtn(){ return *((volatile char*)(0xA0000000 + 1*0x20 + 7)); }
+
 #endif
 
 
@@ -207,6 +219,19 @@ void Pokitto::initButtons() {
   NVIC_SetVector((IRQn_Type)(PIN_INT4_IRQn), (uint32_t)&PIN_INT4_IRQHandler);
   NVIC_SetVector((IRQn_Type)(PIN_INT5_IRQn), (uint32_t)&PIN_INT5_IRQHandler);
   NVIC_SetVector((IRQn_Type)(PIN_INT6_IRQn), (uint32_t)&PIN_INT6_IRQHandler);
+
+  #else
+  
+  //init buttons
+  using Reg = volatile unsigned int *;
+  
+  *Reg(0x40044084) = 0x88;
+  *Reg(0x40044070) = 0x88;
+  *Reg(0x40044088) = 0x88;
+  *Reg(0x40044094) = 0x88;
+  *Reg(0x4004406c) = 0x88;
+  *Reg(0x400440c4) = 0x88;
+  *Reg(0x4004407c) = 0x88;
   #endif
 }
 
@@ -215,7 +240,7 @@ uint8_t Pokitto::Core::aBtn() {
     #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_A];
     #else
-    Pokitto::heldStates[BTN_A]=ABtn.read();
+    Pokitto::heldStates[BTN_A]=ABtn();
     return Pokitto::heldStates[BTN_A];
     #endif
 
@@ -226,7 +251,7 @@ uint8_t Pokitto::Core::bBtn() {
     #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_B];
     #else
-    Pokitto::heldStates[BTN_B]=BBtn.read();
+    Pokitto::heldStates[BTN_B]=BBtn();
     return Pokitto::heldStates[BTN_B];
     #endif
 }
@@ -236,7 +261,7 @@ uint8_t Pokitto::Core::cBtn() {
     #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_C];
     #else
-    Pokitto::heldStates[BTN_C]=CBtn.read();
+    Pokitto::heldStates[BTN_C]=CBtn();
     return Pokitto::heldStates[BTN_C];
     #endif
 }
@@ -246,7 +271,7 @@ uint8_t Pokitto::Core::upBtn() {
     #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_UP];
     #else
-    Pokitto::heldStates[BTN_UP]=UBtn.read();
+    Pokitto::heldStates[BTN_UP]=UBtn();
     return Pokitto::heldStates[BTN_UP];
     #endif
 }
@@ -255,7 +280,7 @@ uint8_t Pokitto::Core::downBtn() {
     #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_DOWN];
     #else
-    Pokitto::heldStates[BTN_DOWN]=DBtn.read();
+    Pokitto::heldStates[BTN_DOWN]=DBtn();
     return Pokitto::heldStates[BTN_DOWN];
     #endif
 }
@@ -265,7 +290,7 @@ uint8_t Pokitto::Core::leftBtn() {
     #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_LEFT];
     #else
-    Pokitto::heldStates[BTN_LEFT]=LBtn.read();
+    Pokitto::heldStates[BTN_LEFT]=LBtn();
     return Pokitto::heldStates[BTN_LEFT];
     #endif
 }
@@ -274,7 +299,7 @@ uint8_t Pokitto::Core::rightBtn() {
     #ifndef PROJ_BUTTONS_POLLING_ONLY
     return Pokitto::heldStates[BTN_RIGHT];
     #else
-    Pokitto::heldStates[BTN_RIGHT]=RBtn.read();
+    Pokitto::heldStates[BTN_RIGHT]=RBtn();
     return Pokitto::heldStates[BTN_RIGHT];
     #endif
 }
