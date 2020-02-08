@@ -268,7 +268,9 @@ void Core::jumpToLoader() {
     //display.setFont(font5x7);
     //display.adjustCharStep=1;
     //display.adjustLineStep=2;
+	#ifndef POK_SIM
     NVIC_DisableIRQ(IRQn_Type::CT32B0_IRQn); // Stop sound interrupt
+	#endif
     display.fontSize=1;
     display.directbgcolor=COLOR_BLACK;
     display.directcolor=COLOR_GREEN;
