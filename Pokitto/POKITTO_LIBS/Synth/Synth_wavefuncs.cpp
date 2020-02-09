@@ -50,7 +50,7 @@ mixFunction HWMarr [] = {updateEnvelopes,mix3,mix2,mix1}; // counts down
 /** SOUND FUNCTIONS **/
 
 void waveoff(OSC* o){
-  o->output = 0;
+  o->output = 0x8000;
 }
 
 void sqwave(OSC* o){
@@ -97,7 +97,7 @@ void tonenoise(OSC* o){
 }
 
 void sample(OSC* o) {
-    if (sample==NULL) o->output = 0;
+    if (o->sample==NULL) o->output = 0x8000;
     else {
           o->samplepos+=o->samplestep;
           if ((o->samplepos>>8) > o->samplelength ) {
