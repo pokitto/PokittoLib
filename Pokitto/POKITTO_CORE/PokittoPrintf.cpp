@@ -45,11 +45,11 @@ static void printchar(char **str, int c)
 
 static int prints(char **out, const char *string, int width, int pad)
 {
-	register int pc = 0, padchar = ' ';
+	int pc = 0, padchar = ' ';
 
 	if (width > 0) {
-		register int len = 0;
-		register const char *ptr;
+		int len = 0;
+		const char *ptr;
 		for (ptr = string; *ptr; ++ptr) ++len;
 		if (len >= width) width = 0;
 		else width -= len;
@@ -79,9 +79,9 @@ static int prints(char **out, const char *string, int width, int pad)
 static int printi(char **out, int i, int b, int sg, int width, int pad, int letbase)
 {
 	char print_buf[PRINT_BUF_LEN];
-	register char *s;
-	register int t, neg = 0, pc = 0;
-	register unsigned int u = i;
+	char *s;
+	int t, neg = 0, pc = 0;
+	unsigned int u = i;
 
 	if (i == 0) {
 		print_buf[0] = '0';
@@ -121,9 +121,9 @@ static int printi(char **out, int i, int b, int sg, int width, int pad, int letb
 
 static int _ext_print(char **out, int *varg)
 {
-	register int width, pad;
-	register int pc = 0;
-	register char *format = (char *)(*varg++);
+	int width, pad;
+	int pc = 0;
+	char *format = (char *)(*varg++);
 	char scr[2];
 
 	for (; *format != 0; ++format) {
@@ -145,7 +145,7 @@ static int _ext_print(char **out, int *varg)
 				width += *format - '0';
 			}
 			if( *format == 's' ) {
-				register char *s = *((char **)varg++);
+				char *s = *((char **)varg++);
 				pc += prints (out, s?s:"(null)", width, pad);
 				continue;
 			}
@@ -187,13 +187,13 @@ static int _ext_print(char **out, int *varg)
 
 int _ext_printf(const char *format, ...)
 {
-	register int *varg = (int *)(&format);
+	int *varg = (int *)(&format);
 	return _ext_print(0, varg);
 }
 
 int _ext_sprintf(char *out, const char *format, ...)
 {
-	register int *varg = (int *)(&format);
+	int *varg = (int *)(&format);
 	return _ext_print(&out, varg);
 }
 
@@ -204,7 +204,7 @@ int _ext_sprintf(char *out, const char *format, ...)
  */
 
 int Pokitto::Display::printf(const char *format, ...) {
-    register int *varg = (int *)(&format);
+    int *varg = (int *)(&format);
 	return _ext_print(0, varg);
 };
 

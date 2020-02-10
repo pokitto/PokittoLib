@@ -971,7 +971,7 @@ bool Core::update(bool useDirectMode, uint8_t updRectX, uint8_t updRectY, uint8_
 			updatePopup();
 			displayBattery();
         #endif
-            display.update(useDirectMode, updRectX, updRectY, updRectW, updRectH); //send the buffer to the screen
+            display.update(useDirectMode); //send the buffer to the screen
 
             frameEndMicros = 1; //jonne
 

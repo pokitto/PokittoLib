@@ -1,16 +1,74 @@
 #pragma once
 
+#include "Pokitto.h"
+#include <cstdint>
+
 #ifndef MAX_TILE_COUNT
 #define MAX_TILE_COUNT 16
 #endif
 
-#include "Pokitto.h"
+class BaseTilemap {
+public:
+#if PROJ_SCREENMODE == TASMODE
+    using Tile = const uint8_t *;
+#else
+    struct Tile {
+        const uint8_t *data = nullptr;
+        std::uint8_t width;
+        std::uint8_t height;
+        // For use with image data that does not contain the image dimensions
+        void set( uint8_t width, uint8_t height, const uint8_t *data ){
+            this->data = data;
+            this->height = height;
+            this->width = width;
+        }
+    };
+#endif
 
-#include <cstdint>
+    Tile tiles[ MAX_TILE_COUNT ];
+
+    const uint8_t *map;
+    std::size_t width;
+    std::size_t height;
+
+    BaseTilemap(){
+        map = nullptr;
+        for( std::uint32_t i=0; i<MAX_TILE_COUNT; ++i )
+            tiles[i] = {};
+    }
+
+    void set( size_t width, size_t height, const uint8_t *map ){
+        this->width = width;
+        this->height = height;
+        this->map = map;
+    }
+};
+
+#if PROJ_SCREENMODE == TASMODE
+
+class Tilemap : public BaseTilemap {
+public:
+
+    // For use with image data that does contain the image dimensions
+    void setTile(uint8_t index, const uint8_t *data ){
+        this->tiles[index] = &data[2];
+    }
+
+    // For use with image data that does not contain the image dimensions
+    void setTile(uint8_t index, uint8_t width, uint8_t height, const uint8_t *data ){
+        this->tiles[index] = data;
+    }
+
+    void draw( std::int32_t x, std::int32_t y ){
+        if( !map ) return;
+    }
+};
+
+#else
 
 void SDL_RenderCopySolid( const uint8_t *data, uint32_t width, uint32_t height, int32_t x, int32_t y );
 
-class Tilemap {
+class Tilemap : public BaseTilemap {
 
     int32_t blit( uint32_t id, int32_t /*OUT*/&x, int32_t y ){
         Tile &tile = tiles[id];
@@ -23,19 +81,19 @@ class Tilemap {
             (x + tile.width >= 0) &&
             (y + tile.height >= 0)
             ){
-            #if POK_COLORDEPTH != 4
-            Pokitto::Display::drawBitmapData(
-            x, y,
-            tile.width, tile.height,
-            tile.data
-            );
-            #else
-            SDL_RenderCopySolid(
-            tile.data,
-            tile.width, tile.height,
-            x, y
-            );
-            #endif
+            if( POK_COLORDEPTH != 4 ){
+                Pokitto::Display::drawBitmapData(
+                    x, y,
+                    tile.width, tile.height,
+                    tile.data
+                    );
+            } else {
+                SDL_RenderCopySolid(
+                    tile.data,
+                    tile.width, tile.height,
+                    x, y
+                    );
+            }
         }
 
         x += tile.width;
@@ -43,34 +101,6 @@ class Tilemap {
     }
 
 public:
-
-    struct Tile {
-        const uint8_t *data;
-        std::uint8_t width;
-        std::uint8_t height;
-        // For use with image data that does not contain the image dimensions
-        void set( uint8_t width, uint8_t height, const uint8_t *data ){
-            this->data = data;
-            this->height = height;
-            this->width = width;
-        }
-    } tiles[ MAX_TILE_COUNT ];
-
-    const uint8_t *map;
-    std::size_t width;
-    std::size_t height;
-
-    Tilemap(){
-        map = nullptr;
-        for( std::uint32_t i=0; i<MAX_TILE_COUNT; ++i )
-            tiles[i].data = 0;
-    }
-
-    void set( size_t width, size_t height, const uint8_t *map ){
-        this->width = width;
-        this->height = height;
-        this->map = map;
-    }
 
     // For use with image data that does contain the image dimensions
     void setTile(uint8_t index, const uint8_t *data ){
@@ -188,3 +218,5 @@ public:
         tileIdBr = GetTileId( brx, bry, tileSize );
     }
 };
+
+#endif

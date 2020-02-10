@@ -66,6 +66,7 @@ SECTIONS
         
         *(.text*)
         *(.rodata .rodata.*)
+        *(__global_locale)
         . = ALIGN(4);
         
         /* C++ constructors etc */

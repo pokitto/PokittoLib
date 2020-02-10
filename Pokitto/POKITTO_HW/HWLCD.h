@@ -46,19 +46,25 @@
 
 extern volatile uint32_t *LCD;
 
+extern "C" {
+    void flushLine(const uint16_t *palette, const uint8_t *line);
+    void pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+    void pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+    void pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+    void updateMode1(const volatile uint32_t *palette, const uint8_t *buffer );
+    void updateMode1Clear(const volatile uint32_t *palette, const uint8_t *buffer, int clearColor );
+    void updateMode2(const uint16_t *palette, const uint8_t *buffer );
+    void updateMode2Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
+    void updateMode13(const uint16_t *palette, const uint8_t *buffer, int offset );
+    void updateMode13Clear(const uint16_t *palette, const uint8_t *buffer, int offset, int clearColor );
+    void updateMode15(const uint32_t *palette, const uint8_t *buffer );
+    void updateMode15Clear(const uint32_t *palette, const uint8_t *buffer, int clear );
+    void updateMode64(const uint16_t *palette, const uint8_t *buffer );
+    void updateMode64Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
+}
+
 namespace Pokitto {
-
-struct SpriteInfo {
-    const uint8_t* bitmapData;
-    int16_t x;
-    int16_t y;
-    int16_t oldx;
-    int16_t oldy;
-    uint8_t w;
-    uint8_t h;
-    uint16_t palette[4];
-};
-
+extern void lcdPrepareRefresh();
 extern void setDRAMpoint(uint8_t, uint8_t);
 extern void pumpDRAMdata(uint16_t*, uint16_t);
 extern void initBacklight();
@@ -72,23 +78,14 @@ extern void lcdInit();
 extern void lcdSleep();
 extern void lcdWakeUp();
 extern void lcdRefresh(uint8_t *, uint16_t*);
-extern void lcdRefreshAB(uint8_t *, uint16_t*);
-extern void lcdRefreshMode14(uint8_t *, uint16_t*);
-extern void lcdRefreshGB(uint8_t *, uint16_t*);
-extern void lcdRefreshMode1(uint8_t* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr);
-extern void lcdRefreshMode1Spr(uint8_t * scrbuf, uint8_t screenx, uint8_t screeny, uint8_t screenw, uint8_t screenh, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool drawSpritesOnly);
-extern void lcdRefreshMode2(uint8_t *, uint16_t*);
-extern void lcdRefreshMode3(uint8_t *, uint16_t*);
-extern void lcdRefreshModeGBC(uint8_t *, uint16_t*);
-extern void lcdRefreshMode13(uint8_t *, uint16_t*, uint8_t);
+extern void lcdRefreshMode1(const uint8_t* scrbuf, const uint16_t* paletteptr);
+extern void lcdRefreshMode2(const uint8_t *, const uint16_t*);
+extern void lcdRefreshMode13(const uint8_t *, const uint16_t*, uint8_t);
 extern void lcdRefreshMixMode(const uint8_t *, const uint16_t*, const uint8_t*);
-extern void lcdRefreshMode64(uint8_t *, uint16_t*);
+extern void lcdRefreshMode64(const uint8_t*, const uint16_t*);
+extern void lcdRefreshMode15(const uint8_t*, const uint16_t*);
+extern void lcdRefreshTASMode(uint8_t*, const uint16_t*);
 
-extern void lcdRefreshMode15(uint16_t*, uint8_t*);
-
-
-/** Update LCD from 1-bit tile mode */
-extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
 extern void lcdClear();
 extern void lcdFill(uint16_t);
 /** Blit one word of data*/
