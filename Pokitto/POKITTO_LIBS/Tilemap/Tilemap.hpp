@@ -51,7 +51,7 @@ public:
 
     // For use with image data that does contain the image dimensions
     void setTile(uint8_t index, const uint8_t *data ){
-        this->tiles[index] = &data[2];
+        this->tiles[index] = data + 2;
     }
 
     // For use with image data that does not contain the image dimensions
@@ -60,7 +60,105 @@ public:
     }
 
     void draw( std::int32_t x, std::int32_t y ){
+        using PD = Pokitto::Display;
         if( !map ) return;
+        std::int32_t tileX = x / std::int32_t(POK_TILE_W);
+        std::int32_t tileY = y / std::int32_t(POK_TILE_H);
+        std::int32_t maxX = POK_LCD_W / POK_TILE_W + 2;
+        std::int32_t maxY = POK_LCD_H / POK_TILE_H + 2;
+
+        if(x < 0){
+            x = x % POK_TILE_W;
+            if(x) tileX--;
+        } else {
+            x -= tileX * POK_TILE_W;
+        }
+
+        if(y < 0){
+            y = y % POK_TILE_H;
+            if(y) tileY--;
+        } else {
+            y -= tileY * POK_TILE_H;
+        }
+
+        PD::shiftTilemap(x, y);
+
+#if MAX_TILE_COUNT == 16
+        std::int32_t i = tileY * (width>>1);
+#else
+        std::int32_t i = tileY * width + tileX;
+#endif
+
+        for(y = 0; y < maxY; ++y){
+            for(x = 0; x < maxX; ++x){
+                std::int32_t tile = 0;
+                auto tx = tileX + x;
+
+                if( tx >= 0 && tx < width &&
+                    (y+tileY) >= 0 && (y+tileY) < height ){
+
+#if MAX_TILE_COUNT == 16
+                    tile = (tx&1)
+                        ? map[i+(tx>>1)]&0x0F
+                        : map[i+(tx>>1)]>>4;
+#else
+                    tile = map[i+x];
+#endif
+                }
+
+                PD::drawTile(x, y, tiles[tile]);
+            }
+            
+#if MAX_TILE_COUNT == 16
+            i += width>>1;
+#else
+            i += width;
+#endif
+        }
+    }
+
+    // Get the tile under the given x and y world coordinates.
+    std::uint8_t GetTileId( std::int32_t x, std::int32_t y, std::uint8_t=0 ) {
+
+        // Get tile x and y
+        std::uint32_t tx = x / POK_TILE_W;
+        std::uint32_t ty = y / POK_TILE_H;
+
+        // Check x and y for out of bounds.
+        if( tx >= width || ty >= height )
+            return 0;
+
+        // Get the tile id.
+        #if MAX_TILE_COUNT == 16
+
+        uint8_t id = map[ (ty*width + tx)>>1 ];
+        if(tx&1)
+            id &= 0xF;
+        else
+            id >>= 4;
+
+        #elif MAX_TILE_COUNT > 16 && MAX_TILE_COUNT <= 256
+
+        uint8_t id = map[ ty*width + tx ];
+
+        #else
+            #error "Invalid MAX_TILE_COUNT value"
+        #endif
+
+        return id;
+    }
+
+    // Get the tiles at the rect corners.
+    void GetTileIds( std::int32_t tlx, std::int32_t tly,
+                     std::int32_t brx, std::int32_t bry,
+                     uint8_t,
+                     /*OUT*/ uint8_t& tileIdTl, uint8_t& tileIdTr,
+                     uint8_t& tileIdBl, uint8_t& tileIdBr ){
+
+        tileIdTl = GetTileId( tlx, tly );
+        tileIdTr = GetTileId( brx, tly );
+        tileIdBl = GetTileId( tlx, bry );
+        tileIdBr = GetTileId( brx, bry );
     }
 };
 

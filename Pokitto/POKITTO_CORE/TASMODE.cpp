@@ -24,14 +24,19 @@ uint32_t spriteBufferPos = 0;
 
 using Tilemap = uint8_t const * const *;
 constexpr uint32_t tileW = POK_TILE_W;
-constexpr uint32_t tileH = POK_TILE_W;
-constexpr uint32_t mapW = POK_LCD_W / tileW + 1;
-constexpr uint32_t mapH = POK_LCD_H / tileH + 1;
+constexpr uint32_t tileH = POK_TILE_H;
+constexpr uint32_t mapW = POK_LCD_W / tileW + 2;
+constexpr uint32_t mapH = POK_LCD_H / tileH + 2;
 const uint8_t *tilemap[mapH * mapW];
 uint32_t cameraX;
 uint32_t cameraY;
 
 void Display::shiftTilemap(int x, int y){
+    if(x<0) x = 0;
+    if(x>=tileW) x=tileW-1;
+    if(y<0) y = 0;
+    if(y>=tileH) y=tileH-1;
+    
     cameraX = x % tileW;
     cameraY = y % tileH;
 }
@@ -181,11 +186,10 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
         }
     }
 
-    Tilemap  tileWindow = tilemap - 1;
-    uint32_t tileY = tileH;
-    uint32_t tileX;
+    Tilemap  tileWindow = tilemap;
+    uint32_t tileY = tileH - cameraY;
+    uint32_t tileX = cameraX;
     uint32_t tileIndex = cameraY * tileW;
-    uint32_t tilesToDraw = (220 / tileW) + 1;
     
     for(uint32_t y=0; y<176; ++y, tileIndex += tileW){
         if(!tileY--){
@@ -193,8 +197,8 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
             tileY = tileH - 1;
             tileWindow += mapW;
         }
-        tileX = tileW - cameraX;
 
+        tileX = cameraX;
         uint32_t tile = 0;
         for(uint32_t i=0; i<220;){
             auto tileData = tileWindow[tile] + tileX + tileIndex;

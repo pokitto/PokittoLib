@@ -199,10 +199,10 @@ inline constexpr uint32_t POK_LCD_H = 176;
     #ifndef PROJ_MAX_SPRITES
         #define PROJ_MAX_SPRITES 100
     #endif
-    #ifndef PROJ_TILEWIDTH
+    #ifndef PROJ_TILE_W
         #define PROJ_TILE_W 16
     #endif // PROJ_TILEWIDTH
-    #ifndef PROJ_TILEHEIGHT
+    #ifndef PROJ_TILE_H
         #define PROJ_TILE_H 16
     #endif // PROJ_TILEHEIGHT
     inline constexpr uint32_t POK_TILE_W = PROJ_TILE_W;
