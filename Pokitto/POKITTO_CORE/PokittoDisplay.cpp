@@ -77,6 +77,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <algorithm>
 using std::min;
 using std::max;
+#else // DISABLEAVRMIN
+#define max(a,b) ((a)>(b)?(a):(b))
+#define min(a,b) ((a)<(b)?(a):(b))
 #endif // DISABLEAVRMIN
 
 #ifndef POK_SIM

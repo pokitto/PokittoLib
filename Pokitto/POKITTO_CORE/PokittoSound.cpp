@@ -78,6 +78,7 @@
 #else
 #include "SimSound.h"
 #include "PokittoSimulator.h"
+#include "FileIO.h"
 #endif
 
 typedef uint8_t byte;
