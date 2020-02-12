@@ -135,11 +135,11 @@ extern BLOCK block[]; // array of blocks
 #define MAX_ARPMODE 16
 #define MAX_WAVETYPES 6
 
-extern int8_t arptable[][5];
+extern const int8_t arptable[][5];
 
 extern uint16_t freqs[];
 //extern uint16_t cincs[];
-extern uint32_t cincs[];
+extern const uint32_t cincs[];
 
 extern uint8_t xorshift8();
 extern uint16_t xorshift16();
