@@ -198,16 +198,9 @@ void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, boo
 }
 
 void Pok_Display_setSprite(uint8_t index, int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, uint8_t *buffer, uint16_t* palette16x16bit, bool doResetDirtyRect) {
-#if (POK_SCREENMODE == MODE_HI_4COLOR)
-    Display::invisiblecolor = (uint8_t)invisiblecol_;
-    Display::setSprite(index, buffer, palette16x16bit, x, y, w, h, doResetDirtyRect );
-#endif
 }
 
 void Pok_Display_setSpritePos(uint8_t index, int16_t x, int16_t y) {
-#if (POK_SCREENMODE == MODE_HI_4COLOR)
-    Display::setSpritePos(index, x, y);
-#endif
 }
 
 uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b) {
@@ -220,25 +213,19 @@ void POK_game_display_setPalette(uint16_t* paletteArray, int16_t len) {
 }
 
 void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
-#if (POK_SCREENMODE == MODE_HI_4COLOR)
-    if(h == 0)
-        Display::setClipRect(0, 0, LCDWIDTH, LCDHEIGHT);  // Remove clip rect
-    else
-        Display::setClipRect(x, y, w, h);  // Set clip rect
-#endif
 }
 
 // Draw the screen surface immediately to the display. Do not care about fps limits. Do not run event loops etc.
 void Pok_Display_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h)
 {
-    Display::update(useDirectMode, x, y, w, h);
+    Display::update(useDirectMode);
 }
 
 // Run the event loops, audio loops etc. Draws the screen when the fps limit is reached and returns true.
 bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h )
 {
 
-    bool ret = Core::update(useDirectMode, x, y, w, h);
+    bool ret = Core::update(useDirectMode);
     //printf("update, %d ms\n", Core::getTime()-s);
     return ret;
 }

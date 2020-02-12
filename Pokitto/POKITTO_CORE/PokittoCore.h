@@ -65,13 +65,6 @@
 #include "PokittoSound.h"
 #include "PokittoFakeavr.h"
 
-#if ((POK_SCREENMODE==MODE_FAST_16COLOR) || (POK_SCREENMODE==MODE15) || (POK_SCREENMODE==MODE_HI_16COLOR))
-    #define PALETTE_SIZE 16
-#else
-    #define PALETTE_SIZE 256
-#endif
-
-
 #define PI 3.141592741f
 
 // For GB compatibility

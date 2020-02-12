@@ -46,43 +46,43 @@ Software License Agreement (BSD License)
 #include "SimLCD.h"
 #endif
 
-#if PROJ_SCREENMODE != 13 && PROJ_SCREENMODE != 64 && !defined(PROJ_MODE13) && !defined(PROJ_MODE64)
-#define PALSIZE 16
-#else
-#define PALSIZE 256
-#endif
-
 using namespace Pokitto;
 
 
 void Display::loadRGBPalette(const unsigned char* p) {
-    for (int i=0;i<PALSIZE;i++) palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
+    for (int i=0;i<PALETTE_SIZE;i++)
+        palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
     paletteptr = palette;
 }
 
 void Display::load565Palette(const uint16_t* p) {
-    for (int i=0;i<PALSIZE;i++) palette[i] = p[i];
+    for (int i=0;i<PALETTE_SIZE;i++)
+        palette[i] = p[i];
     paletteptr = palette;
 }
 
 void Display::rotatePalette(int8_t step) {
-    uint16_t tpal[PALSIZE];
+    uint16_t tpal[PALETTE_SIZE];
     if (step == 0) return;
     step = 0-step;
     if (step>0) {
-        for (int i=step;i<PALSIZE;i++) tpal[i]=palette[i-step]; // palette revolves up, new color 1 becomes old color 0
-        for (int i=0; i < step; i++) tpal[i]=palette[PALSIZE-step+i]; // overflow topmost values to bottom of new palette
+        for (int i=step;i<PALETTE_SIZE;i++)
+            tpal[i]=palette[i-step]; // palette revolves up, new color 1 becomes old color 0
+        for (int i=0; i < step; i++)
+            tpal[i]=palette[PALETTE_SIZE-step+i]; // overflow topmost values to bottom of new palette
     } else {
-        for (int i=0;i<PALSIZE+step;i++)
+        for (int i=0;i<PALETTE_SIZE+step;i++)
         {
             tpal[i]=palette[i-step];
             }// palette revolves down, new color 0 becomes old color 1
         for (int i=0;i<-step; i++) {
-                tpal[PALSIZE+step+i]=palette[i];
+                tpal[PALETTE_SIZE+step+i]=palette[i];
         }
         // overflow bottom values to top of new palette
     }
-    for (int i=0; i<PALSIZE;i++) palette[i] = tpal[i];
+
+    for (int i=0; i<PALETTE_SIZE;i++)
+        palette[i] = tpal[i];
 }
 
 uint16_t Display::RGBto565(uint8_t R,uint8_t G,uint8_t B) {
