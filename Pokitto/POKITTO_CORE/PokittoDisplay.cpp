@@ -2234,7 +2234,9 @@ void Display::lcdRefresh(const unsigned char* scr, bool useDirectDrawMode) {
     if (useDirectDrawMode)
         return;
 #if PROJ_SCREENMODE != MODE_NOBUFFER
+    #ifndef POK_SIM
     lcdPrepareRefresh();
+    #endif
 #endif
 #if PROJ_SCREENMODE == TASMODE
     lcdRefreshTASMode(const_cast<uint8_t*>(scr), paletteptr);
@@ -2261,7 +2263,7 @@ void Display::lcdRefresh(const unsigned char* scr, bool useDirectDrawMode) {
 #endif
 
 #if PROJ_SCREENMODE == MODE_FAST_16COLOR
-    lcdRefreshMode2(scr, paletteptr);
+    lcdRefreshMode2((uint8_t*)scr, paletteptr);
 #endif
 
 }

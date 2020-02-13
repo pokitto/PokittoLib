@@ -348,8 +348,8 @@
 		<Linker>
 			<Add option="-Wl,-Map=main.map" />
 			<Add library="mingw32" />
-			<Add library="SDLmain" />
-			<Add library="SDL.dll" />
+			<Add library="SDL2main" />
+			<Add library="SDL2.dll" />
 			<Add library="user32" />
 			<Add library="gdi32" />
 			<Add library="winmm" />

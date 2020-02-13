@@ -24,7 +24,11 @@ uint8_t eeprom_read_byte(uint16_t* index) {
 		}
 
     char val;
+    #ifndef POK_SIM
     fseek(eeprom_file, (long int)index, SEEK_SET);
+    #else
+    fseek(eeprom_file, *((long int*) &index), SEEK_SET);
+    #endif
     val=fgetc(eeprom_file);
     fclose(eeprom_file);
     return val;
@@ -38,7 +42,11 @@ void eeprom_write_byte(uint16_t* index , uint8_t val) {
         printf("Could not open/create EEP.ROM file.");
         return;
     }
+    #ifndef POK_SIM
     fseek(eeprom_file, (long int) index, SEEK_SET);
+    #else
+    fseek(eeprom_file, *((long int*) &index), SEEK_SET);
+    #endif
     fputc(val,eeprom_file);
     fseek(eeprom_file, (long int) 0xFFF, SEEK_SET);
     fputc(0xFF,eeprom_file); //prevent truncation of 4kB file
