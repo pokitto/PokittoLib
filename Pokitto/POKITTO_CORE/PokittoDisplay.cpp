@@ -783,9 +783,10 @@ void Display::map1BitColumn(int16_t x, int16_t sy, int16_t ey, const uint8_t* bi
     }
 };
 
-void Display::drawColumn(int16_t x, int16_t sy, int16_t ey){
-    if ((uint16_t)sy>=height && (uint16_t)ey>=height) return; //completely out of bounds
-    if ((uint16_t)x>=width) return; //completely out of bounds
+#if PROJ_SCREENMODE != TASMODE
+void Display::drawColumn(int x, int sy, int ey){
+    if (static_cast<uint32_t>(sy)>=height && static_cast<uint32_t>(ey)>=height) return; //completely out of bounds
+    if (static_cast<uint32_t>(x)>=width) return; //completely out of bounds
     if (sy>ey) {
             int y=sy;
             sy=ey;
@@ -796,9 +797,9 @@ void Display::drawColumn(int16_t x, int16_t sy, int16_t ey){
     }
 }
 
-void Display::drawRow(int16_t x0, int16_t x1, int16_t y){
-    if ((uint16_t)x0>=width && (uint16_t)x1>=width) return; //completely out of bounds
-    if ((uint16_t)y>=height) return; //completely out of bounds
+void Display::drawRow(int x0, int x1, int y){
+    if (static_cast<uint32_t>(x0)>=width && static_cast<uint32_t>(x1)>=width) return; //completely out of bounds
+    if (static_cast<uint32_t>(y)>=height) return; //completely out of bounds
 
     if (x0>x1) {
             int x=x0;
@@ -809,6 +810,7 @@ void Display::drawRow(int16_t x0, int16_t x1, int16_t y){
         drawPixel(x,y);
     }
 }
+#endif
 
 void Display::drawFastVLine(int16_t x, int16_t y, int16_t h){
     if (h<0) {y += h; h = -h;}
@@ -820,14 +822,15 @@ void Display::drawFastHLine(int16_t x, int16_t y, int16_t w){
     drawRow(x,x+w-1,y);
 }
 
-void Display::drawRectangle(int16_t x0, int16_t y0, int16_t w, int16_t h) {
+#if PROJ_SCREENMODE != TASMODE
+void Display::drawRectangle(int x0, int y0, int w, int h) {
     drawColumn(x0,y0,y0+h);
     drawColumn(x0+w,y0,y0+h);
     drawRow(x0,x0+w,y0);
     drawRow(x0,x0+w,y0+h);
 }
 
-void Display::fillRectangle(int16_t x0,int16_t y0, int16_t w, int16_t h){
+void Display::fillRectangle(int x0,int y0, int w, int h){
     int16_t x,y,x1,y1;
     x1=x0+w;y1=y0+h;
     if ((x0<0 && x1<0) || (x0>=width && x1 >=width)) return; //completely out of bounds
@@ -840,6 +843,7 @@ void Display::fillRectangle(int16_t x0,int16_t y0, int16_t w, int16_t h){
     if (y<0) y=0;
     for (;x<x1;x++) drawColumn(x,y,y1);
 }
+#endif
 
 void Display::fillRect(int16_t x, int16_t y, int16_t w, int16_t h) {
     fillRectangle(x,y,w,h);
@@ -1110,7 +1114,7 @@ void Display::drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_
             scrptr = scrptr + ((width - w)>>1);
     }
 }
-
+#endif
 
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t * bitmap, uint8_t frameIndex)
 {
@@ -1126,7 +1130,6 @@ void Display::drawBitmap(int16_t x, int16_t y, const uint8_t * bitmap, uint8_t f
 	Display::drawBitmapData(x, y, width, height, &bitmap[dataIndex + (frameIndex * frameSize)]);
 }
 
-
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap)
 {
     int16_t w = *bitmap;
@@ -1136,6 +1139,7 @@ void Display::drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap)
     drawBitmapData(x, y, w, h, bitmap);
 }
 
+#if PROJ_SCREENMODE != TASMODE
 void Display::drawBitmapData2BPP(int x, int y, int w, int h, const uint8_t* bitmap){
     int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
     for (i = 0; i < w; i++) {
@@ -1275,6 +1279,7 @@ void Display::drawBitmapData8BPP(int x, int y, int w, int h, const uint8_t* bitm
         scrptr = scrptr + (width - w);
     }
 }
+#endif
 
 void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap) {
     /** visibility check */
@@ -1284,6 +1289,8 @@ void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const u
     if (m_colordepth==4) drawBitmapData4BPP(x, y, w, h, bitmap);
     if (m_colordepth==8) drawBitmapData8BPP(x, y, w, h, bitmap);
 }
+
+#if PROJ_SCREENMODE != TASMODE
 
 void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
 {

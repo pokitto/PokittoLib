@@ -249,19 +249,19 @@ public:
     /** Clip line with screen boundaries, returns 0 if whole line is out of bounds */
     static uint8_t clipLine(int16_t*, int16_t*, int16_t*, int16_t*);
     /** Draw a column real fast */
-    static void drawColumn(int16_t, int16_t, int16_t);
+    static void drawColumn(int, int, int);
     /** Map a 1-bit column real fast */
     static void map1BitColumn(int16_t, int16_t, int16_t, const uint8_t*, uint16_t);
     /** Draw a row real fast */
-    static void drawRow(int16_t, int16_t, int16_t);
+    static void drawRow(int, int, int);
     /** Legacy drawColumn name, for compatibility - macros are not OK because of scope problems */
     static void drawFastVLine(int16_t, int16_t, int16_t);
     /** Legacy drawRow name, for compatibility - macros are not OK because of scope problems */
     static void drawFastHLine(int16_t, int16_t, int16_t);
     /** Draw rectangle (edges only) */
-    static void drawRectangle(int16_t,int16_t,int16_t,int16_t);
+    static void drawRectangle(int,int,int,int);
     /** Fill rectangle */
-    static void fillRectangle(int16_t,int16_t,int16_t,int16_t);
+    static void fillRectangle(int,int,int,int);
     /** GB compatibility fillRect */
     static void fillRect(int16_t x, int16_t y, int16_t w, int16_t h);
     /** GB compatibility drawRect */
@@ -292,7 +292,8 @@ public:
     /** Draw sprite in Tiles-And-Sprites mode */
     static void drawSprite(int x, int y, const uint8_t *data, bool flipped=0, bool mirrored=0, uint8_t recolor=0);
     static void shiftTilemap(int x, int y);
-    #else
+    #endif
+
     /** Draw monochromatic bitmap. Used in font rendering */
     static void drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t index);
     /** Draw bitmap data*/
@@ -362,7 +363,6 @@ public:
     static uint8_t* getBuffer();
     /** Optimized functions for drawing bit columns - used in raytracing */
     static void draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap);
-    #endif
     /** Get pixel in a monochromatic bitmap - GB compatibility */
     static uint8_t getBitmapPixel(const uint8_t*, uint16_t, uint16_t);
 
