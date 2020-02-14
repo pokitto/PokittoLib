@@ -357,6 +357,7 @@ int Display::directChar(int16_t x, int16_t y, uint16_t index){
     return (numBytes+adjustCharStep)*fontSize; // for character stepping
 }
 
+#if PROJ_SCREENMODE != TASMODE
 int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     const uint8_t* bitmap = font;
     uint8_t w = *bitmap;
@@ -459,6 +460,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 #endif // PROJ_ARDUBOY
 
 }
+#endif
 
 void Display::clear() {
 

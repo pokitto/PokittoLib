@@ -232,6 +232,81 @@ void Display::fillRectangle(int x, int y, int w, int h) {
     addSprite(Sprite{x, y, nullptr, f, h, Display::color, w});
 }
 
+int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
+    const uint8_t* bitmap = font;
+    uint8_t w = *bitmap;
+    uint8_t h = *(bitmap + 1);
+
+    uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16)));
+
+    // add an offset to the pointer (fonts !)
+    bitmap = bitmap + 4 + index * (w * hbytes + 1);
+    uint32_t numBytes = *bitmap++; //first byte of char is the width in bytes
+
+    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+        return numBytes + adjustCharStep;
+
+    draw_t f;
+    if( fontSize != 2 ){
+        fontSize = 1;
+        f = [](uint8_t *line, Sprite &s, int y){
+                int h = s.height - s.y;
+                auto bitmap = static_cast<const uint8_t *>(s.data);
+                int x = s.x;
+                uint8_t fg = s.b3;
+                uint8_t bg = s.b2;
+                int numBytes = s.b1;
+                if( s.b1 + x > 220 )
+                    numBytes = 220 - x;
+
+                uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;                   
+                for (int i = 0; i < numBytes; i++) {
+                    uint32_t bitcolumn = *bitmap++;
+                    if (hbytes)
+                        bitcolumn |= (*bitmap++)<<8;
+                    uint8_t c = bitcolumn & (1<<y) ? bg : fg;
+                    if( c != Display::invisiblecolor )
+                        line[x+i] = c;
+                }
+            };
+    } else {
+        f = [](uint8_t *line, Sprite &s, int y){
+                int h = (s.height - s.y)>>1;
+                y >>= 1;
+                auto bitmap = static_cast<const uint8_t *>(s.data);
+                int x = s.x;
+                uint8_t fg = s.b3;
+                uint8_t bg = s.b2;
+                int numBytes = s.b1;
+                if( (s.b1<<1) + x > 220 )
+                    numBytes = (220 - x) >> 1;
+
+                uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;
+
+                for (int i = 0; i < numBytes; i++) {
+                    uint32_t bitcolumn = *bitmap++;
+                    if (hbytes)
+                        bitcolumn |= (*bitmap++)<<8;
+                    uint8_t c = bitcolumn & (1<<y) ? bg : fg;
+                    if( c != Display::invisiblecolor ){
+                        line[x+(i<<1)] = c;
+                        line[x+(i<<1)+1] = c;
+                    }
+                }
+            };
+        h *= 2;
+    }
+
+    addSprite(Sprite{
+            x, y,
+            bitmap, f,
+            h, numBytes,
+            Display::color, Display::bgcolor
+        });
+
+    return numBytes*fontSize+adjustCharStep;
+}
+
 void Display::drawBitmapData2BPP(int x, int y, int w, int h, const uint8_t* bitmap){
     if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
         return;
@@ -313,7 +388,18 @@ void drawSprites(int y, uint8_t *line, int max){
     if(!max) return;
     for(uint32_t i=0; i<spriteBufferPos; ++i){
         auto& s = spriteBuffer[i];
-        if( s.y > y || s.height <= y ) continue;
+        if( s.y > y ) continue;
+        if( s.height <= y ){
+            /* makes no difference? * /
+            for(uint32_t j=i+1; j<spriteBufferPos; ++j){
+                spriteBuffer[j-1] = spriteBuffer[j];
+            }
+            --i;
+            --spriteBufferPos;
+            /* */
+            continue;
+        }
+
         s.draw(line, s, y - s.y);
         if(!--max) break;
     }
