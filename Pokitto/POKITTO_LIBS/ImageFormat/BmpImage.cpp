@@ -34,6 +34,8 @@
 */
 /**************************************************************************/
 
+#include <algorithm>
+
 #ifdef WIN32 // these types are not standard, only exist in windows
 #include "defines_win_SIM.h"
 #else
@@ -401,11 +403,11 @@ int directDrawImageFileFromSD(uint16_t ix, uint16_t iy, uint16_t iw, uint16_t ih
 
     /** Clip image to screen dimensions */
 
-    int16_t clipX1OnScreen = max( 0, sx);
-    int16_t clipX2OnScreen = min( pokdisp.getWidth()-1, sx+iw-1);
+    int16_t clipX1OnScreen = std::max( 0, sx);
+    int16_t clipX2OnScreen = std::min( pokdisp.getWidth()-1, sx+iw-1);
     int16_t clipWidthOnScreen = clipX2OnScreen-clipX1OnScreen+1;
-    int16_t clipY1OnScreen = max( 0, sy);
-    int16_t clipY2OnScreen = min( pokdisp.getHeight()-1, sy+ih-1);
+    int16_t clipY1OnScreen = std::max( 0, sy);
+    int16_t clipY2OnScreen = std::min( pokdisp.getHeight()-1, sy+ih-1);
     int16_t clipHeightOnScreen = clipY2OnScreen-clipY1OnScreen+1;
 
     uint16_t skipImagePixelsAtLineStart = ix+(clipX1OnScreen-sx);

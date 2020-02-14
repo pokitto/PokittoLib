@@ -73,7 +73,7 @@ static inline void setup_data_16(uint16_t data)
   @brief  Write a command to the lcd, 16-bit bus
 */
 /**************************************************************************/
-inline void write_command_16(uint16_t data)
+void write_command_16(uint16_t data)
 {
     CLR_CS; // select lcd
     CLR_CD; // clear CD = command
@@ -89,7 +89,7 @@ inline void write_command_16(uint16_t data)
   @brief  Write data to the lcd, 16-bit bus
 */
 /**************************************************************************/
-inline void write_data_16(uint16_t data)
+void write_data_16(uint16_t data)
 {
     CLR_CS;
     SET_CD;

@@ -269,6 +269,7 @@ inline constexpr uint32_t BUFSIZE_HI_4COLOR = ((POK_LCD_H+1)*POK_LCD_W)*POK_COLO
 inline constexpr uint32_t BUFSIZE_FAST_16COLOR = (((POK_LCD_H/2)+1)*POK_LCD_W/2)*POK_COLORDEPTH/8;
 inline constexpr uint32_t BUFSIZE_MODE13 = 110*88;
 inline constexpr uint32_t BUFSIZE_MODE15 = 0x4BA0;
+inline constexpr uint32_t BUFSIZE_MODE64 = 220*88;
 inline constexpr uint32_t BUFSIZE_MIXMODE = 110*88;
 
 #ifndef PROJ_SCREENBUFFERSIZE
