@@ -335,6 +335,75 @@ void Display::drawBitmapData2BPP(int x, int y, int w, int h, const uint8_t* bitm
     addSprite(Sprite{x, y, bitmap, f, h, 0, w});
 }
 
+void Display::drawBitmapDataXFlipped2BPP(int x, int y, int w, int h, const uint8_t* bitmap){
+}
+
+void Display::drawBitmapDataXFlipped8BPP(int x, int y, int w, int h, const uint8_t* bitmap){
+    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0) return;
+    addSprite(Sprite{x, y, bitmap, blitMirror, h, 0, w});
+}
+
+void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap) {
+    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+        return;
+
+    draw_t f = [](uint8_t *line, Sprite &s, int y){
+                   auto h = s.height - s.y;
+                   auto w = s.b2;
+                   auto src = static_cast<const uint8_t*>(s.data) + (h - 1 - y) * (w>>1);
+                   int sx = 0;
+                   if(s.x < 0){
+                       sx = -s.x;
+                       w += s.x;
+                   }else if(s.x > 0){
+                       line += s.x;
+                   }
+                   if(s.x + w >= 220){
+                       w = 220 - s.x;
+                   }
+                   while(w--){
+                       auto b = (sx&1)?
+                           src[sx>>1]&0xF:
+                           src[sx>>1]>>4;
+                       if(b) *line = b;
+                       line++;
+                       sx++;
+                   }
+               };
+
+    addSprite(Sprite{x, y, bitmap, f, h, 0, w});
+}
+
+void Display::drawBitmapDataXFlipped4BPP(int x, int y, int w, int h, const uint8_t* bitmap){
+    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+        return;
+
+    draw_t f = [](uint8_t *line, Sprite &s, int y){
+                   auto w = s.b2;
+                   auto src = static_cast<const uint8_t*>(s.data) + y * (w>>1) + (w>>1);
+                   if(s.x < 0){
+                       w += s.x;
+                   }else if(s.x > 0){
+                       line += s.x;
+                   }
+                   if(s.x + w >= 220){
+                       src -= (220 - (s.x + w)) >> 1;
+                       w = 220 - s.x;
+                   }
+                   int sx = -1;
+                   while(w--){
+                       auto b = (sx&1)?
+                           src[sx>>1]&0xF:
+                           src[sx>>1]>>4;
+                       if(b) *line = b;
+                       line++;
+                       sx--;
+                   }
+               };
+
+    addSprite(Sprite{x, y, bitmap, f, h, 0, w});
+}
+
 void Display::drawBitmapData4BPP(int x, int y, int w, int h, const uint8_t* bitmap){
     if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
         return;
