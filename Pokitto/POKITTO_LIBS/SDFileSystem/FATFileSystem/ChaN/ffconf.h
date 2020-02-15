@@ -7,28 +7,43 @@
 /
 /----------------------------------------------------------------------------*/
 #ifndef _FFCONF
+#ifdef _FFCONF
+#undef _FFCONF
+#endif
 #define _FFCONF 4004    /* Revision ID */
 
 namespace SDFS
 {
+#ifdef FFS_DBG
+#undef FFS_DBG
+#endif
  #define FFS_DBG     0
 
 /*---------------------------------------------------------------------------/
 / Functions and Buffer Configurations
 /----------------------------------------------------------------------------*/
 
+#ifdef _FS_TINY
+#undef _FS_TINY
+#endif
 #define _FS_TINY        0   /* 0:Normal or 1:Tiny */
 /* When _FS_TINY is set to 1, FatFs uses the sector buffer in the file system
 /  object instead of the sector buffer in the individual file object for file
 /  data transfer. This reduces memory consumption 512 bytes each file object. */
 
 
+#ifdef _FS_READONLY
+#undef _FS_READONLY
+#endif
 #define _FS_READONLY    0   /* 0:Read/Write or 1:Read only */
 /* Setting _FS_READONLY to 1 defines read only configuration. This removes
 /  writing functions, f_write, f_sync, f_unlink, f_mkdir, f_chmod, f_rename,
 /  f_truncate and useless f_getfree. */
 
 
+#ifdef _FS_MINIMIZE
+#undef _FS_MINIMIZE
+#endif
 #define _FS_MINIMIZE    0   /* 0 to 3 */
 /* The _FS_MINIMIZE option defines minimization level to remove some functions.
 /
@@ -39,18 +54,30 @@ namespace SDFS
 /   3: f_lseek is removed in addition to 2. */
 
 
+#ifdef _USE_STRFUNC
+#undef _USE_STRFUNC
+#endif
 #define _USE_STRFUNC    0   /* 0:Disable or 1-2:Enable */
 /* To enable string functions, set _USE_STRFUNC to 1 or 2. */
 
 
+#ifdef _USE_MKFS
+#undef _USE_MKFS
+#endif
 #define _USE_MKFS       1   /* 0:Disable or 1:Enable */
 /* To enable f_mkfs function, set _USE_MKFS to 1 and set _FS_READONLY to 0 */
 
 
+#ifdef _USE_FORWARD
+#undef _USE_FORWARD
+#endif
 #define _USE_FORWARD    0   /* 0:Disable or 1:Enable */
 /* To enable f_forward function, set _USE_FORWARD to 1 and set _FS_TINY to 1. */
 
 
+#ifdef _USE_FASTSEEK
+#undef _USE_FASTSEEK
+#endif
 #define _USE_FASTSEEK   0   /* 0:Disable or 1:Enable */
 /* To enable fast seek feature, set _USE_FASTSEEK to 1. */
 
@@ -60,6 +87,9 @@ namespace SDFS
 / Locale and Namespace Configurations
 /----------------------------------------------------------------------------*/
 
+#ifdef _CODE_PAGE
+#undef _CODE_PAGE
+#endif
 #define _CODE_PAGE  858
 /* The _CODE_PAGE specifies the OEM code page to be used on the target system.
 /  Incorrect setting of the code page can cause a file open failure.
@@ -93,7 +123,13 @@ namespace SDFS
 */
 
 
+#ifdef _USE_LFN
+#undef _USE_LFN
+#endif
 #define _USE_LFN    1       /* 0 to 3 */
+#ifdef _MAX_LFN
+#undef _MAX_LFN
+#endif
 #define _MAX_LFN    255     /* Maximum LFN length to handle (12 to 255) */
 /* The _USE_LFN option switches the LFN support.
 /
@@ -108,11 +144,17 @@ namespace SDFS
 /  ff_memalloc() and ff_memfree() must be added to the project. */
 
 
+#ifdef _LFN_UNICODE
+#undef _LFN_UNICODE
+#endif
 #define _LFN_UNICODE    0   /* 0:ANSI/OEM or 1:Unicode */
 /* To switch the character code set on FatFs API to Unicode,
 /  enable LFN feature and set _LFN_UNICODE to 1. */
 
 
+#ifdef _FS_RPATH
+#undef _FS_RPATH
+#endif
 #define _FS_RPATH       0   /* 0 to 2 */
 /* The _FS_RPATH option configures relative path feature.
 /
@@ -128,10 +170,16 @@ namespace SDFS
 / Physical Drive Configurations
 /----------------------------------------------------------------------------*/
 
+#ifdef _VOLUMES
+#undef _VOLUMES
+#endif
 #define _VOLUMES    1
 /* Number of volumes (logical drives) to be used. */
 
 
+#ifdef _MAX_SS
+#undef _MAX_SS
+#endif
 #define _MAX_SS     512     /* 512, 1024, 2048 or 4096 */
 /* Maximum sector size to be handled.
 /  Always set 512 for memory card and hard disk but a larger value may be
@@ -140,12 +188,18 @@ namespace SDFS
 /  and GET_SECTOR_SIZE command must be implememted to the disk_ioctl function. */
 
 
+#ifdef _MULTI_PARTITION
+#undef _MULTI_PARTITION
+#endif
 #define _MULTI_PARTITION    0   /* 0:Single partition, 1/2:Enable multiple partition */
 /* When set to 0, each volume is bound to the same physical drive number and
 / it can mount only first primaly partition. When it is set to 1, each volume
 / is tied to the partitions listed in VolToPart[]. */
 
 
+#ifdef _USE_ERASE
+#undef _USE_ERASE
+#endif
 #define _USE_ERASE  0   /* 0:Disable or 1:Enable */
 /* To enable sector erase feature, set _USE_ERASE to 1. CTRL_ERASE_SECTOR command
 /  should be added to the disk_ioctl functio. */
@@ -156,6 +210,9 @@ namespace SDFS
 / System Configurations
 /----------------------------------------------------------------------------*/
 
+#ifdef _WORD_ACCESS
+#undef _WORD_ACCESS
+#endif
 #define _WORD_ACCESS    0   /* 0 or 1 */
 /* Set 0 first and it is always compatible with all platforms. The _WORD_ACCESS
 /  option defines which access method is used to the word data on the FAT volume.
@@ -173,8 +230,17 @@ namespace SDFS
 /* A header file that defines sync object types on the O/S, such as
 /  windows.h, ucos_ii.h and semphr.h, must be included prior to ff.h. */
 
+#ifdef _FS_REENTRANT
+#undef _FS_REENTRANT
+#endif
 #define _FS_REENTRANT   0       /* 0:Disable or 1:Enable */
+#ifdef _FS_TIMEOUT
+#undef _FS_TIMEOUT
+#endif
 #define _FS_TIMEOUT     1000    /* Timeout period in unit of time ticks */
+#ifdef _SYNC_t
+#undef _SYNC_t
+#endif
 #define _SYNC_t         HANDLE  /* O/S dependent type of sync object. e.g. HANDLE, OS_EVENT*, ID and etc.. */
 
 /* The _FS_REENTRANT option switches the reentrancy (thread safe) of the FatFs module.
@@ -185,11 +251,20 @@ namespace SDFS
 /      function must be added to the project. */
 
 
+#ifdef _FS_LOCK
+#undef _FS_LOCK
+#endif
 #define _FS_LOCK    0   /* 0:Disable or >=1:Enable */
 /* To enable file lock control feature, set _FS_LOCK to 1 or greater.
    The value defines how many files can be opened simultaneously. */
 
+#ifdef FLUSH_ON_NEW_CLUSTER
+#undef FLUSH_ON_NEW_CLUSTER
+#endif
 #define FLUSH_ON_NEW_CLUSTER    0   /* Sync the file on every new cluster */
+#ifdef FLUSH_ON_NEW_SECTOR
+#undef FLUSH_ON_NEW_SECTOR
+#endif
 #define FLUSH_ON_NEW_SECTOR     1   /* Sync the file on every new sector */
 /* Only one of these two defines needs to be set to 1. If both are set to 0
    the file is only sync when closed.
