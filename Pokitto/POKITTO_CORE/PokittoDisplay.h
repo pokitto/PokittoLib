@@ -289,6 +289,8 @@ public:
     #if PROJ_SCREENMODE == TASMODE
     /** Draw tile in Tiles-and-Sprites mode. X&Y are in tile-space, not pixels. */
     static void drawTile(uint32_t x, uint32_t y, const uint8_t *data);
+    /** Draw a solid-color tile in Tiles-and-Sprites mode. X&Y are in tile-space, not pixels. */
+    static void drawColorTile(uint32_t x, uint32_t y, uint8_t color);
     /** Draw sprite in Tiles-And-Sprites mode */
     static void drawSprite(int x, int y, const uint8_t *data, bool flipped=0, bool mirrored=0, uint8_t recolor=0);
     static void shiftTilemap(int x, int y);

@@ -139,6 +139,17 @@ const uint8_t *tilemap[mapH * mapW];
 uint32_t cameraX;
 uint32_t cameraY;
 
+void pixelCopySolid4BPP(uint8_t *line, const uint8_t *src, uint32_t w, uint32_t sx){
+    while(w--){
+        auto b = (sx&1)?
+            src[sx>>1]&0xF:
+            src[sx>>1]>>4;
+        if(b) *line = b;
+        line++;
+        sx++;
+    }
+}
+
 void Display::shiftTilemap(int x, int y){
     if(x<0) x = 0;
     if(x>=tileW) x=tileW-1;
@@ -439,6 +450,14 @@ void Display::drawBitmapData8BPP(int x, int y, int w, int h, const uint8_t* bitm
     addSprite(Sprite{x, y, bitmap, blit, h, 0, w});
 }
 
+void Display::drawColorTile(uint32_t x, uint32_t y, uint8_t color){
+    if(x >= mapW || y >= mapH)
+        return;
+    uint32_t color32 = color;
+    tilemap[y*mapW + x] = reinterpret_cast<const uint8_t*>(color32);
+}
+
+
 void Display::drawTile(uint32_t x, uint32_t y, const uint8_t *data){
     if(x >= mapW || y >= mapH)
         return;
@@ -502,13 +521,24 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
         tileX = cameraX;
         uint32_t tile = 0;
         for(uint32_t i=0; i<220;){
-            auto tileData = tileWindow[tile] + tileX + tileIndex;
             int iter = std::min(tileW - tileX, 220 - i);
+
+            auto tileColor = reinterpret_cast<uintptr_t>(tileWindow[tile]);
+            if( tileColor < 256 ){
+                while(iter--){
+                    line[i++] = tileColor;
+                }
+            }else if(Display::m_colordepth == 8){
+                auto tileData = tileWindow[tile] + tileX + tileIndex;
+                pixelCopySolid(line+i, tileData, iter);
+                i += iter;
+            }else if(Display::m_colordepth == 4){
+                auto tileData = tileWindow[tile] + (tileIndex>>1);
+                pixelCopySolid4BPP(line+i, tileData, iter, tileX);
+                i += iter;
+            }
             /* */
-            pixelCopySolid(line+i, tileData, iter);
-            i += iter;
             /*/
-            while(iter--){
                 line[i++] = *tileData++;
             }
             /* */

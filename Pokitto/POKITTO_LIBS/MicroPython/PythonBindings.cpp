@@ -418,7 +418,7 @@ void Pok_SetTile( void* _this, uint8_t index, uint8_t width, uint8_t height, con
 {
     if( _this == NULL ) return;
     index &= 0xf; // Limit between 0 and 15.
-    ((Tilemap*)_this)->tiles[index].set( width, height, data );
+    ((Tilemap*)_this)->setTile(index, width, height, data );
 }
 
 uint8_t Pok_GetTileId( void* _this, int32_t x, int32_t y, uint8_t tileSize ) {
