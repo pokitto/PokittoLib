@@ -357,6 +357,7 @@ int Display::directChar(int16_t x, int16_t y, uint16_t index){
     return (numBytes+adjustCharStep)*fontSize; // for character stepping
 }
 
+#if PROJ_SCREENMODE != TASMODE
 int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     const uint8_t* bitmap = font;
     uint8_t w = *bitmap;
@@ -459,6 +460,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 #endif // PROJ_ARDUBOY
 
 }
+#endif
 
 void Display::clear() {
 
@@ -1629,6 +1631,7 @@ void Display::drawBitmapDataXFlipped8BPP(int x, int y, int w, int h, const uint8
         scrptr = scrptr + (width + w);
     }
 }
+#endif
 
 void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap)
 {
@@ -1643,6 +1646,7 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
     
 }
 
+#if PROJ_SCREENMODE != TASMODE
 // Note: currently for 4 bpp only
 void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap) {
 
@@ -1747,6 +1751,7 @@ void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
         return;
     }
 }
+#endif
 
 
 void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
@@ -1827,7 +1832,6 @@ uint8_t* Display::getBuffer() {
     return m_scrbuf;
 }
 
-#endif
 uint8_t Display::getBitmapPixel(const uint8_t* bitmap, uint16_t x, uint16_t y) {
     uint16_t w = *bitmap;
     uint8_t sourcebyte = bitmap[2+(y * ((w+7)>>3))+ (x>>3)];

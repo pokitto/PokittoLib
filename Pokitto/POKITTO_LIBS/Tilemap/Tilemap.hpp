@@ -49,6 +49,11 @@ public:
 class Tilemap : public BaseTilemap {
 public:
 
+    void setColorTile(uint8_t index, uint8_t color){
+        uint32_t color32 = color;
+        this->tiles[index] = reinterpret_cast<const uint8_t*>(color32);
+    }
+
     // For use with image data that does contain the image dimensions
     void setTile(uint8_t index, const uint8_t *data ){
         this->tiles[index] = data + 2;

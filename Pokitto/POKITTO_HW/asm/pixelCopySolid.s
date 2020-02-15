@@ -5,7 +5,7 @@
 .syntax unified
 .global pixelCopySolid
 .type   pixelCopySolid,%function
-# void pixelCopySolid(uint8_t* dest, uint8_t* src, int count)
+# void pixelCopySolid(uint8_t* dest, uint8_t* src, int count, int recolor)
 .func pixelCopySolid
 DEST .req r0
 SRC .req r1

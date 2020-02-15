@@ -39,11 +39,23 @@ typedef struct {
     BYTE pt;    /* Partition: 0:Auto detect, 1-4:Forced partition) */
 } PARTITION;
 extern PARTITION VolToPart[];   /* Volume - Partition resolution table */
+#ifdef LD2PD
+#undef LD2PD
+#endif
 #define LD2PD(vol) (VolToPart[vol].pd)  /* Get physical drive number */
+#ifdef LD2PT
+#undef LD2PT
+#endif
 #define LD2PT(vol) (VolToPart[vol].pt)  /* Get partition index */
 
 #else                           /* Single partition configuration */
+#ifdef LD2PD
+#undef LD2PD
+#endif
 #define LD2PD(vol) (BYTE)(vol)  /* Each logical drive is bound to the same physical drive number */
+#ifdef LD2PT
+#undef LD2PT
+#endif
 #define LD2PT(vol) 0            /* Always mounts the 1st partition or in SFD */
 
 #endif
@@ -58,14 +70,26 @@ extern PARTITION VolToPart[];   /* Volume - Partition resolution table */
 #endif
 #ifndef _INC_TCHAR
 typedef WCHAR TCHAR;
+#ifdef _T
+#undef _T
+#endif
 #define _T(x) L ## x
+#ifdef _TEXT
+#undef _TEXT
+#endif
 #define _TEXT(x) L ## x
 #endif
 
 #else                       /* ANSI/OEM string */
 #ifndef _INC_TCHAR
 typedef char TCHAR;
+#ifdef _T
+#undef _T
+#endif
 #define _T(x) x
+#ifdef _TEXT
+#undef _TEXT
+#endif
 #define _TEXT(x) x
 #endif
 
@@ -231,12 +255,27 @@ int f_puts (const TCHAR*, FIL*);                    /* Put a string to the file 
 int f_printf (FIL*, const TCHAR*, ...);             /* Put a formatted string to the file */
 TCHAR* f_gets (TCHAR*, int, FIL*);                  /* Get a string from the file */
 
+#ifdef f_eof
+#undef f_eof
+#endif
 #define f_eof(fp) (((fp)->fptr == (fp)->fsize) ? 1 : 0)
+#ifdef f_error
+#undef f_error
+#endif
 #define f_error(fp) (((fp)->flag & FA__ERROR) ? 1 : 0)
+#ifdef f_tell
+#undef f_tell
+#endif
 #define f_tell(fp) ((fp)->fptr)
+#ifdef f_size
+#undef f_size
+#endif
 #define f_size(fp) ((fp)->fsize)
 
 #ifndef EOF
+#ifdef EOF
+#undef EOF
+#endif
 #define EOF (-1)
 #endif
 
@@ -278,40 +317,103 @@ int ff_del_syncobj (_SYNC_t);       /* Delete a sync object */
 
 /* File access control and file status flags (FIL.flag) */
 
+#ifdef FA_READ
+#undef FA_READ
+#endif
 #define FA_READ             0x01
+#ifdef FA_OPEN_EXISTING
+#undef FA_OPEN_EXISTING
+#endif
 #define FA_OPEN_EXISTING    0x00
+#ifdef FA__ERROR
+#undef FA__ERROR
+#endif
 #define FA__ERROR           0x80
 
 #if !_FS_READONLY
+#ifdef FA_WRITE
+#undef FA_WRITE
+#endif
 #define FA_WRITE            0x02
+#ifdef FA_CREATE_NEW
+#undef FA_CREATE_NEW
+#endif
 #define FA_CREATE_NEW       0x04
+#ifdef FA_CREATE_ALWAYS
+#undef FA_CREATE_ALWAYS
+#endif
 #define FA_CREATE_ALWAYS    0x08
+#ifdef FA_OPEN_ALWAYS
+#undef FA_OPEN_ALWAYS
+#endif
 #define FA_OPEN_ALWAYS      0x10
+#ifdef FA__WRITTEN
+#undef FA__WRITTEN
+#endif
 #define FA__WRITTEN         0x20
+#ifdef FA__DIRTY
+#undef FA__DIRTY
+#endif
 #define FA__DIRTY           0x40
 #endif
 
 
 /* FAT sub type (FATFS.fs_type) */
 
+#ifdef FS_FAT12
+#undef FS_FAT12
+#endif
 #define FS_FAT12    1
+#ifdef FS_FAT16
+#undef FS_FAT16
+#endif
 #define FS_FAT16    2
+#ifdef FS_FAT32
+#undef FS_FAT32
+#endif
 #define FS_FAT32    3
 
 
 /* File attribute bits for directory entry */
 
+#ifdef AM_RDO
+#undef AM_RDO
+#endif
 #define AM_RDO  0x01    /* Read only */
+#ifdef AM_HID
+#undef AM_HID
+#endif
 #define AM_HID  0x02    /* Hidden */
+#ifdef AM_SYS
+#undef AM_SYS
+#endif
 #define AM_SYS  0x04    /* System */
+#ifdef AM_VOL
+#undef AM_VOL
+#endif
 #define AM_VOL  0x08    /* Volume label */
+#ifdef AM_LFN
+#undef AM_LFN
+#endif
 #define AM_LFN  0x0F    /* LFN entry */
+#ifdef AM_DIR
+#undef AM_DIR
+#endif
 #define AM_DIR  0x10    /* Directory */
+#ifdef AM_ARC
+#undef AM_ARC
+#endif
 #define AM_ARC  0x20    /* Archive */
+#ifdef AM_MASK
+#undef AM_MASK
+#endif
 #define AM_MASK 0x3F    /* Mask of defined bits */
 
 
 /* Fast seek feature */
+#ifdef CREATE_LINKMAP
+#undef CREATE_LINKMAP
+#endif
 #define CREATE_LINKMAP  0xFFFFFFFF
 
 
@@ -320,14 +422,38 @@ int ff_del_syncobj (_SYNC_t);       /* Delete a sync object */
 /* Multi-byte word access macros  */
 
 #if _WORD_ACCESS == 1   /* Enable word access to the FAT structure */
+#ifdef LD_WORD
+#undef LD_WORD
+#endif
 #define LD_WORD(ptr)        (WORD)(*(WORD*)(BYTE*)(ptr))
+#ifdef LD_DWORD
+#undef LD_DWORD
+#endif
 #define LD_DWORD(ptr)       (DWORD)(*(DWORD*)(BYTE*)(ptr))
+#ifdef ST_WORD
+#undef ST_WORD
+#endif
 #define ST_WORD(ptr,val)    *(WORD*)(BYTE*)(ptr)=(WORD)(val)
+#ifdef ST_DWORD
+#undef ST_DWORD
+#endif
 #define ST_DWORD(ptr,val)   *(DWORD*)(BYTE*)(ptr)=(DWORD)(val)
 #else                   /* Use byte-by-byte access to the FAT structure */
+#ifdef LD_WORD
+#undef LD_WORD
+#endif
 #define LD_WORD(ptr)        (WORD)(((WORD)*((BYTE*)(ptr)+1)<<8)|(WORD)*(BYTE*)(ptr))
+#ifdef LD_DWORD
+#undef LD_DWORD
+#endif
 #define LD_DWORD(ptr)       (DWORD)(((DWORD)*((BYTE*)(ptr)+3)<<24)|((DWORD)*((BYTE*)(ptr)+2)<<16)|((WORD)*((BYTE*)(ptr)+1)<<8)|*(BYTE*)(ptr))
+#ifdef ST_WORD
+#undef ST_WORD
+#endif
 #define ST_WORD(ptr,val)    *(BYTE*)(ptr)=(BYTE)(val); *((BYTE*)(ptr)+1)=(BYTE)((WORD)(val)>>8)
+#ifdef ST_DWORD
+#undef ST_DWORD
+#endif
 #define ST_DWORD(ptr,val)   *(BYTE*)(ptr)=(BYTE)(val); *((BYTE*)(ptr)+1)=(BYTE)((WORD)(val)>>8); *((BYTE*)(ptr)+2)=(BYTE)((DWORD)(val)>>16); *((BYTE*)(ptr)+3)=(BYTE)((DWORD)(val)>>24)
 #endif
 
