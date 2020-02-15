@@ -12,7 +12,7 @@ struct Sprite {
     int16_t x, y;
     const void *data;
     draw_t draw;
-    uint8_t height;
+    uint8_t maxY;
     uint8_t b1, b2, b3;
 };
 
@@ -126,7 +126,12 @@ uint32_t spriteBufferPos = 0;
 void addSprite(const Sprite& s){
     if(spriteBufferPos >= PROJ_MAX_SPRITES) spriteBufferPos = 0;
     spriteBuffer[spriteBufferPos] = s;
-    spriteBuffer[spriteBufferPos].height += s.y;
+    auto& sb = spriteBuffer[spriteBufferPos];
+    int32_t maxY = sb.maxY;
+    maxY += sb.y;
+    if(maxY < 0) return;
+    if(maxY > 176) maxY = 176;
+    sb.maxY = maxY;
     spriteBufferPos++;
 }
 
@@ -261,7 +266,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     if( fontSize != 2 ){
         fontSize = 1;
         f = [](uint8_t *line, Sprite &s, int y){
-                int h = s.height - s.y;
+                int h = s.maxY - s.y;
                 auto bitmap = static_cast<const uint8_t *>(s.data);
                 int x = s.x;
                 uint8_t fg = s.b3;
@@ -282,7 +287,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
             };
     } else {
         f = [](uint8_t *line, Sprite &s, int y){
-                int h = (s.height - s.y)>>1;
+                int h = (s.maxY - s.y)>>1;
                 y >>= 1;
                 auto bitmap = static_cast<const uint8_t *>(s.data);
                 int x = s.x;
@@ -359,7 +364,7 @@ void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
         return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
-                   auto h = s.height - s.y;
+                   auto h = s.maxY - s.y;
                    auto w = s.b2;
                    auto src = static_cast<const uint8_t*>(s.data) + (h - 1 - y) * (w>>1);
                    int sx = 0;
@@ -472,12 +477,14 @@ void Display::drawSprite(int x, int y, const uint8_t *data, bool flipped, bool m
     addSprite(Sprite{x, y, data+2, mode, data[1], recolor, data[0]});
 }
 
-void drawSprites(int y, uint8_t *line, int max){
+void drawSprites(int16_t y, uint8_t *line, int max){
     if(!max) return;
     for(uint32_t i=0; i<spriteBufferPos; ++i){
         auto& s = spriteBuffer[i];
         if( s.y > y ) continue;
-        if( s.height <= y ){
+
+        int smaxY = s.maxY;
+        if( smaxY <= y ){
             /* makes no difference? * /
             for(uint32_t j=i+1; j<spriteBufferPos; ++j){
                 spriteBuffer[j-1] = spriteBuffer[j];
@@ -501,7 +508,7 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
 
     for(uint32_t i=0; i<spriteBufferPos; ++i){
         auto& s = spriteBuffer[i];
-        for(int y=s.y; y<s.height; ++y){
+        for(int y=std::max(0, static_cast<int>(s.y)), my=std::min(176, static_cast<int>(s.maxY)); y<my; ++y){
             spritesPerLine[y]++;
         }
     }
@@ -537,11 +544,6 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
                 pixelCopySolid4BPP(line+i, tileData, iter, tileX);
                 i += iter;
             }
-            /* */
-            /*/
-                line[i++] = *tileData++;
-            }
-            /* */
             tileX = 0;
             tile++;
         }
