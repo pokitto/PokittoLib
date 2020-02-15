@@ -5,8 +5,8 @@
 *.usbeecomp
 *.o
 *.i
-*.s
 *.d
+*.bak
 *.mpg
 *.layout
 *.map
