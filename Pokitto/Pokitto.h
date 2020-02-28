@@ -2,7 +2,10 @@
 /*!
     @file     Pokitto.h
     @author   Jonne Valola
-
+    \brief
+    Pokitto.h is an "umbrella" header that allows building PokittoLib to both hardware and to PokittoSim (Windows & other PC targets)
+    The real PokittoLib classes are laid out in PokittoCore.h
+    
     @section LICENSE
 
     Software License Agreement (BSD License)
@@ -40,8 +43,10 @@
 #include "Pokitto_settings.h"
 #include "PokittoCore.h"
 
-//typedef void (*funcptr)(PokittoApp&);
-
+/** 
+If POK_SIM is defined (it is in the project settings of the PokittoSimulator PC target project)
+the functions are taken from PokittoSimulator. Otherwise use hardware versions. 
+*/
 #ifndef POK_SIM
     #include "mbed.h"
     #include "HWLCD.h"
@@ -50,17 +55,27 @@
     #include "PokittoEEPROM.h"
 #else
     #include "PokittoSimulator.h"
-#endif // if not POK_SIM
+#endif 
 
-
+/** 
+File handling is something that is completely different in a PC target and a Pokitto hardware target.
+If POK_ENABLE_SD is defined as 1, an SD card is simulated in the simulator (FileIO.h) or enabled in hardware (PokittoDisk.h)
+*/
 #if POK_ENABLE_SD > 0
     #ifndef POK_SIM
         #include "PokittoDisk.h"
     #else
         #include "FileIO.h"
-    #endif // if not POK_SIM
-    //#include "ImageFormat.h"
-#endif // if SD ENABLED
+    #endif 
+    //#include "ImageFormat.h" // ToDo - there was some issue here. ImageFormat was used in Hanski's RLE image packing
+#endif 
+
+/** 
+If POK_ENABLE_SOUND is defined as 1 the sound interrupt and sound buffers are included. 
+Usually defined in My_settings.h for your project.
+If POK_ENABLE_SYNTH is defined as 1 a very specific sound synth is added to the project. 
+Not many use it, because ther is a lack of tracker and other support.
+*/
 
 #if POK_ENABLE_SOUND > 0
     #if POK_ENABLE_SYNTH > 0
@@ -71,16 +86,8 @@
     extern uint8_t* soundbufptr;
     #ifndef POK_SIM
         #include "HWSound.h"
-    #endif // if not POK_SIM
-#endif // if POK_ENABLE_SOUND
-
-/*extern void dac_write(uint8_t);
-extern void ext_write(uint32_t);
-extern uint16_t pokGetBattP1();
-extern uint16_t pokGetBattP2();
-extern void pokInitRandom();
-extern void pokSoundIRQ();
-*/
+    #endif 
+#endif 
 
 #endif //__POKITTO_H__
 
