@@ -29,8 +29,8 @@
  * this code.
  */
 
-//#include "chip.h"
-//#include "lpc_defs.h"
+#include <stdbool.h>
+
 #include "timer_11u6x.h"
 #include "clock_11u6x.h"
 

@@ -41,10 +41,6 @@
 #define EXTERN extern
 #define INLINE inline
 
-#ifndef bool
-#define bool uint8_t
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif

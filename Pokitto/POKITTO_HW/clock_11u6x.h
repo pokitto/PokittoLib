@@ -36,10 +36,6 @@
 #define STATIC static
 #define INLINE inline
 
-#ifndef bool
-#define bool unsigned char
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
