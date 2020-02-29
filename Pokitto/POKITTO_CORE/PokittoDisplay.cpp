@@ -112,18 +112,11 @@ const unsigned char* Display::font;
 int8_t Display::adjustCharStep = 1;
 int8_t Display::adjustLineStep = 1;
 bool Display::fixedWidthFont = false, Display::flipFontVertical = false;
-
-/** screenbuffer **/
 uint8_t Display::m_colordepth = PROJ_COLORDEPTH;
 uint8_t Display::width = LCDWIDTH;
 uint8_t Display::height = LCDHEIGHT;
 
 uint8_t __attribute__((section (".bss"))) __attribute__ ((aligned)) Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
-
-// RLE decoding
-#define RLE_ESC_EOL 0
-#define RLE_ESC_EOB 1
-#define RLE_ESC_OFFSET 2
 
 Display::Display() {
     m_scrbuf = screenbuffer;
