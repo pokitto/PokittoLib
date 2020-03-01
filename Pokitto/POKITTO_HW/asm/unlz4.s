@@ -28,7 +28,7 @@ Block Format:
 unlz4:
 	ldrb r2, [CData0]             /* get length of compressed data */
 	ldrb Tmp3, [CData0, #1]
-	lsls r2, #8
+	lsls Tmp3, #8
 	adds r2, Tmp3
 	adds CData0, #2            /* advance source pointer */
         
