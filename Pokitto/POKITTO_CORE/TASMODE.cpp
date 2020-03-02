@@ -2,7 +2,13 @@
 
 #if PROJ_SCREENMODE == TASMODE
 
+#include "HWLCD.h"
+
+
 using namespace Pokitto;
+
+void write_command_16(uint16_t data);
+void write_data_16(uint16_t data);
 
 struct Sprite;
 
@@ -517,13 +523,35 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
     uint32_t tileY = tileH - cameraY;
     uint32_t tileX = cameraX;
     uint32_t tileIndex = cameraY * tileW;
-    
+
+    auto mask = Display::TASMask;
+    bool disabled = mask & 1;
+    uint32_t maskY = 8;
+
     for(uint32_t y=0; y<176; ++y, tileIndex += tileW){
         if(!tileY--){
             tileIndex = 0;
             tileY = tileH - 1;
             tileWindow += mapW;
         }
+
+        if(!maskY--){
+            maskY = 8;
+            mask >>= 1;
+            if( !(mask & 1) && disabled ){
+                write_command(0x20);  // Horizontal DRAM Address
+                write_data(y);
+                write_command(0x21);  // Vertical DRAM Address
+                write_data(0);  // 0
+                write_command(0x22); // write data to DRAM
+                CLR_CS_SET_CD_RD_WR;
+                SET_MASK_P2;
+            }
+            disabled = mask & 1;
+        }
+
+        if(disabled)
+            continue;
 
         tileX = cameraX;
         uint32_t tile = 0;

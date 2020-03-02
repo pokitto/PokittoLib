@@ -179,6 +179,8 @@ inline constexpr uint32_t POK_LCD_H = 176;
         #define PROJ_SCREENMODE TASMODE
     #elif defined(PROJ_MODE13) && PROJ_MODE13 > 0
         #define PROJ_SCREENMODE MODE13
+    #elif defined(PROJ_MODE15) && PROJ_MODE15 > 0
+        #define PROJ_SCREENMODE MODE15
     #elif defined(PROJ_MIXMODE) && PROJ_MIXMODE > 0
         #define PROJ_SCREENMODE MIXMODE
     #elif defined(PROJ_MODE64) && PROJ_MODE64 > 0

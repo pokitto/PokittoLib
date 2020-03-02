@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #include "clock_11u6x.h"
 
 

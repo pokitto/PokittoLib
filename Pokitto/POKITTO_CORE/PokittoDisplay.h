@@ -287,6 +287,9 @@ public:
 
     // BITMAPS !
     #if PROJ_SCREENMODE == TASMODE
+    static void setTASRowMask(uint32_t mask){
+        TASMask = ~mask;
+    }
     /** Draw tile in Tiles-and-Sprites mode. X&Y are in tile-space, not pixels. */
     static void drawTile(uint32_t x, uint32_t y, const uint8_t *data);
     /** Draw a solid-color tile in Tiles-and-Sprites mode. X&Y are in tile-space, not pixels. */
@@ -436,9 +439,12 @@ public:
     /** external small printf, source in PokittoPrintf.cpp **/
     static int printf(const char *format, ...);
 
-#if (POK_SCREENMODE == MIXMODE)
+#if (PROJ_SCREENMODE == MIXMODE)
     static uint8_t subMode; // for mixed mode switching
     static uint8_t scanType[]; // for mixed screen mode
+#endif
+#if PROJ_SCREENMODE == TASMODE
+    static inline uint32_t TASMask = 0; // enable all rows
 #endif
 
 private:
