@@ -61,11 +61,11 @@ static void initSPI(){
     LPC_SYSCON->PRESETCTRL |= 1 << 0;
 
     LPC_IOCON->PIO0_9 = (LPC_IOCON->PIO0_9 & ~(0x7)) | 0x1;   
-    LPC_IOCON->PIO0_8  = (LPC_IOCON->PIO0_8 & ~(0x7)) | 0x1;
+    LPC_IOCON->PIO0_8 = (LPC_IOCON->PIO0_8 & ~(0x7)) | 0x1;
     LPC_IOCON->PIO0_6 = (LPC_IOCON->PIO0_6 & ~(0x7)) | 0x2; 
 
-    LPC_SSP0->CR0 |= 0x07; 
-    LPC_SSP0->CPSR =2; // 25MHz
+    LPC_SSP0->CR0 |= 0x07;
+    LPC_SSP0->CPSR = 2; // 25MHz
     LPC_SSP0->CR1 |= (1 << 1); //enable SPI0
 }
 
@@ -244,10 +244,14 @@ bool readData(char* buffer, int length)
     //Check if a valid start block token was received
     if (token != 0xFE)
         return false;
-/*
-    for (int i = 0; i < length; i++)
-        buffer[i] = m_Spiwrite(0xFF);
-*/
+/* * /
+    for (int i = 0; i < length; i++){
+        while( !(pSPI[12] & (1<<1)) ); // wait until writeable
+        pSPI[8] = 0xFF; // write
+        while( !(pSPI[12] & (1<<2)) ); // wait until readable
+        buffer[i] = pSPI[8]; // read
+    }
+/* */
     //Check if large frames are enabled or not
     //if (m_LargeFrames) {
 /* 
@@ -263,12 +267,14 @@ bool readData(char* buffer, int length)
             buffer[i + 1] = dataWord;
         }
     */
-
+/* */
     while( !(pSPI[12] & (1<<1)) ); // wait until writeable
     volatile void *SPI = pSPI;
     int tmp=0;
     asm volatile(
         ".syntax unified" "\n"
+        "adds %[buffer], %[remain]" "\n"
+        "rsbs %[remain], 0" "\n"
         "next%=:" "\n"
 
         "strb %[clock], [ %[SPI], 8 ]" "\n"
@@ -280,13 +286,8 @@ bool readData(char* buffer, int length)
 
         "ldrb %[tmp], [ %[SPI], 8 ]" "\n"
 
-        "strb %[tmp], [ %[buffer], 0 ]" "\n"
-        //"lsrs %[tmp], 8" "\n"
-        //"strb %[tmp], [ %[buffer], 0 ]" "\n"
-
-        "adds %[buffer], 1" "\n"
-
-        "subs %[remain], 1" "\n"
+        "strb %[tmp], [ %[buffer], %[remain] ]" "\n"
+        "adds %[remain], 1" "\n"
         "bne next%=" "\n"
         : // outputs
         [tmp]"+l"(tmp),
@@ -298,7 +299,7 @@ bool readData(char* buffer, int length)
         : // clobbers
         "cc"
         );
-
+/* */
         //Read the CRC16 checksum for the data block
         crc = (m_Spiwrite(0xFF) << 8);
         crc |= m_Spiwrite(0xFF);
@@ -758,6 +759,13 @@ DSTATUS disk_initialize (
     //The card is now initialized
     m_Status &= ~STA_NOINIT;
 
+    LPC_SSP0->CR1 &= ~(1 << 1); //disable SPI0
+    LPC_SSP0->CR0 &= ~(0xFFFF << 8);
+    #if _OSCT == 2
+    LPC_SSP0->CR0 |= 1 << 8;
+    #endif
+    LPC_SSP0->CPSR = 2;
+    LPC_SSP0->CR1 |= (1 << 1); //enable SPI0
     //Return the disk status
     return m_Status;
 }

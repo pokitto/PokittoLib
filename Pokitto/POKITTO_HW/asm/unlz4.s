@@ -49,8 +49,9 @@ getToken:
         movs CData0, CopySrc               /* update source pointer */
 
 getOffset:
-        cmp  CData0, EndCData
-        bge  done
+        subs  Tmp3, EndCData, CData0
+        cmp  Tmp3, 1
+        ble  done
         ldrb Tmp3, [CData0, #0]          /* get match offset's low byte */
         subs CopySrc, DestData1, Tmp3            /* subtract from destination; this will become the match position */
         ldrb Tmp3, [CData0, #1]          /* get match offset's high byte */

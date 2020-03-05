@@ -528,8 +528,8 @@ static WCHAR LfnBuf[_MAX_LFN+1];
 /* String functions                                                      */
 /*-----------------------------------------------------------------------*/
 
-/* Copy memory to memory */
-static
+/* Copy memory to memory * /
+static 
 void mem_cpy (void* dst, const void* src, UINT cnt) {
     BYTE *d = (BYTE*)dst;
     const BYTE *s = (const BYTE*)src;
@@ -544,8 +544,41 @@ void mem_cpy (void* dst, const void* src, UINT cnt) {
     while (cnt--)
         *d++ = *s++;
 }
+/* */
 
-/* Fill memory */
+static
+void __attribute__((naked)) mem_cpy (void *dst, const void *src, UINT len) {
+    asm volatile (
+        ".syntax unified" "\n"
+        "adds r0, r2" "\n"
+        "adds r1, r2" "\n"
+
+        // check if word-aligned
+        "movs r3, r0" "\n"
+        "orrs r3, r1" "\n"
+        "orrs r3, r2" "\n"
+        "lsls r3, 30" "\n"
+        "beq 2f" "\n"
+
+        // not aligned, do byte copy
+        "rsbs r2, 0" "\n"
+        "1: ldrb r3, [r1, r2]" "\n"
+        "strb r3, [r0, r2]" "\n"
+        "adds r2, 1" "\n"
+        "bne 1b" "\n"
+        "bx lr" "\n"
+
+        // aligned, do word copy
+        "2: rsbs r2, 0" "\n"
+        "1: ldr r3, [r1, r2]" "\n"
+        "str r3, [r0, r2]" "\n"
+        "adds r2, 4" "\n"
+        "bne 1b" "\n"
+        "bx lr" "\n"
+        );
+}
+
+/* Fill memory * /
 static
 void mem_set (void* dst, int val, UINT cnt) {
     BYTE *d = (BYTE*)dst;
@@ -553,7 +586,22 @@ void mem_set (void* dst, int val, UINT cnt) {
     while (cnt--)
         *d++ = (BYTE)val;
 }
+/* */
 
+static
+void __attribute__((naked)) mem_set (void* dst, int val, UINT cnt) {
+    asm volatile (
+        ".syntax unified" "\n"
+        "rsbs r2, 0" "\n"
+        "beq 2f" "\n"
+        "subs r0, r2" "\n"
+        "1: strb r1, [r0, r2]" "\n"
+        "adds r2, 1" "\n"
+        "bne 1b" "\n"
+        "2: bx lr" "\n"
+        );
+}
+    
 /* Compare memory to memory */
 static
 int mem_cmp (const void* dst, const void* src, UINT cnt) {
