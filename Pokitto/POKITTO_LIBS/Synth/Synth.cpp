@@ -37,7 +37,6 @@
 #include "Pokitto.h"
 #include "Synth.h"
 #include "stdint.h"
-#include "My_settings.h"
 
 /** COMMON TO BOTH HW AND SIMULATED SOUND **/
 
