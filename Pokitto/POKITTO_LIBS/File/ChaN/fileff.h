@@ -100,12 +100,15 @@ typedef struct {
     BYTE    drv;            /* Physical drive number */
     BYTE    csize;          /* Sectors per cluster (1,2,4...128) */
     BYTE    n_fats;         /* Number of FAT copies (1,2) */
+
     BYTE    wflag;          /* win[] dirty flag (1:must be written back) */
     BYTE    fsi_flag;       /* fsinfo dirty flag (1:must be written back) */
     WORD    id;             /* File system mount ID */
+
     WORD    n_rootdir;      /* Number of root directory entries (FAT12/16) */
 #if _MAX_SS != 512
     WORD    ssize;          /* Bytes per sector (512, 1024, 2048 or 4096) */
+
 #endif
 #if _FS_REENTRANT
     _SYNC_t sobj;           /* Identifier of sync object */
@@ -124,7 +127,7 @@ typedef struct {
     DWORD   dirbase;        /* Root directory start sector (FAT32:Cluster#) */
     DWORD   database;       /* Data start sector */
     DWORD   winsect;        /* Current sector appearing in the win[] */
-    BYTE    win[_MAX_SS];   /* Disk access window for Directory, FAT (and Data on tiny cfg) */
+    __attribute__((aligned)) BYTE    win[_MAX_SS];   /* Disk access window for Directory, FAT (and Data on tiny cfg) */
 } FATFS;
 
 
