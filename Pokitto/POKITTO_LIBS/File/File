@@ -56,6 +56,10 @@ public:
     uint32_t size(){
         return handle.fsize;
     }
+
+    uint32_t tell(){
+        return f_tell(&handle);
+    }
     
     void seek(uint32_t offset){
         f_lseek(&handle, offset);

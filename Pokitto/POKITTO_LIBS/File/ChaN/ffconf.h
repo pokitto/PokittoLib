@@ -126,11 +126,11 @@ namespace YAPFS
 #ifdef _USE_LFN
 #undef _USE_LFN
 #endif
-#define _USE_LFN    1       /* 0 to 3 */
+#define _USE_LFN    2       /* 0 to 3 */
 #ifdef _MAX_LFN
 #undef _MAX_LFN
 #endif
-#define _MAX_LFN    255     /* Maximum LFN length to handle (12 to 255) */
+#define _MAX_LFN    126     /* Maximum LFN length to handle (12 to 255) */
 /* The _USE_LFN option switches the LFN support.
 /
 /   0: Disable LFN feature. _MAX_LFN and _LFN_UNICODE have no effect.

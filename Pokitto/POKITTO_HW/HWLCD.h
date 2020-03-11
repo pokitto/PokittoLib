@@ -48,6 +48,7 @@ extern volatile uint32_t *LCD;
 
 extern "C" {
     void flushLine(const uint16_t *palette, const uint8_t *line);
+    void flushLine2X(const uint16_t *palette, const uint8_t *line);
     void pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
     void pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
     void pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);

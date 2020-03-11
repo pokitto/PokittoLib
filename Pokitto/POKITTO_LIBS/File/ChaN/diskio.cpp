@@ -61,13 +61,27 @@ static void initSPI(){
     LPC_SYSCON->PRESETCTRL |= 1 << 0;
 
     LPC_IOCON->PIO0_9 = (LPC_IOCON->PIO0_9 & ~(0x7)) | 0x1;   
-    LPC_IOCON->PIO0_8  = (LPC_IOCON->PIO0_8 & ~(0x7)) | 0x1;
+    LPC_IOCON->PIO0_8 = (LPC_IOCON->PIO0_8 & ~(0x7)) | 0x1;
     LPC_IOCON->PIO0_6 = (LPC_IOCON->PIO0_6 & ~(0x7)) | 0x2; 
 
-    LPC_SSP0->CR0 |= 0x07; 
-    LPC_SSP0->CPSR =2; // 25MHz
+    LPC_SSP0->CR0 |= 0x07;
+    LPC_SSP0->CPSR = 2; // 25MHz
     LPC_SSP0->CR1 |= (1 << 1); //enable SPI0
 }
+
+    static inline void m_Spidisable(){
+        LPC_SSP0->CR1 &= ~(1 << 1); //disable SPI0
+    }
+
+    static inline void m_Spienable(){
+        LPC_SSP0->CR1 |= (1 << 1); //enable SPI0
+    }
+
+    static inline void m_SpiSetBits(int bits){
+        m_Spidisable();
+        LPC_SSP0->CR0 = (LPC_SSP0->CR0 & ~0xF) | (bits - 1);
+        m_Spienable();
+    }
 
 static inline int m_Spiread16( ){
   while( !(pSPI16[6] & (1<<1)) ); // wait until writeable
@@ -231,7 +245,7 @@ inline char commandTransaction(char cmd, unsigned int arg, unsigned int* resp = 
     return token;
 }
 
-bool readData(char* buffer, int length)
+bool readData(volatile char* buffer, int length)
 {
     char token;
     unsigned short crc;
@@ -244,69 +258,105 @@ bool readData(char* buffer, int length)
     //Check if a valid start block token was received
     if (token != 0xFE)
         return false;
-/*
-    for (int i = 0; i < length; i++)
-        buffer[i] = m_Spiwrite(0xFF);
-*/
-    //Check if large frames are enabled or not
-    //if (m_LargeFrames) {
-/* 
-    //Switch to 16-bit frames for better performance
-        m_Spi.format(16, 0);
 
-	
-        //Read the data block into the buffer
-        unsigned short dataWord;
-        for (int i = 0; i < length; i += 2) {
-	    dataWord = m_Spiread16(); // read
-            buffer[i] = dataWord >> 8;
-            buffer[i + 1] = dataWord;
-        }
-    */
+    /* * /
+    for (int i = 0; i < length; i++){
+        while( !(pSPI[12] & (1<<1)) ); // wait until writeable
+        pSPI[8] = 0xFF; // write
+        while( !(pSPI[12] & (1<<2)) ); // wait until readable
+        buffer[i] = pSPI[8]; // read
+    }
+    return true;
+    /*/
+    m_SpiSetBits(16);
 
     while( !(pSPI[12] & (1<<1)) ); // wait until writeable
+
     volatile void *SPI = pSPI;
     int tmp=0;
-    asm volatile(
+    if( reinterpret_cast<uintptr_t>(buffer)&1 ){
+        asm volatile(
         ".syntax unified" "\n"
+        "strh %[clock], [ %[SPI], 8 ]" "\n"
+
         "next%=:" "\n"
 
-        "strb %[clock], [ %[SPI], 8 ]" "\n"
-
-        "readable%=:" "\n"
+        "1:" "\n"
         "ldrh %[tmp], [ %[SPI], 12 ]" "\n"
         "lsls %[tmp], 29" "\n"
-        "bpl readable%=" "\n"
+        "bpl 1b" "\n"
 
-        "ldrb %[tmp], [ %[SPI], 8 ]" "\n"
+        "ldrh %[tmp], [ %[SPI], 8 ]" "\n"
+        "strh %[clock], [ %[SPI], 8 ]" "\n"
 
+        "strb %[tmp], [ %[buffer], 1 ]" "\n"
+        "lsrs %[tmp], 8" "\n"
         "strb %[tmp], [ %[buffer], 0 ]" "\n"
-        //"lsrs %[tmp], 8" "\n"
-        //"strb %[tmp], [ %[buffer], 0 ]" "\n"
-
-        "adds %[buffer], 1" "\n"
-
-        "subs %[remain], 1" "\n"
+        "adds %[buffer], 2" "\n"
+        "subs %[remain], 2" "\n"
         "bne next%=" "\n"
+
+        // data ended, read CRC
+        "1:" "\n"
+        "ldrh %[tmp], [ %[SPI], 12 ]" "\n"
+        "lsls %[tmp], 29" "\n"
+        "bpl 1b" "\n"
+        "ldrh %[tmp], [ %[SPI], 8 ]" "\n"
+
         : // outputs
         [tmp]"+l"(tmp),
         [remain]"+l"(length),
         [buffer]"+l"(buffer)
         : // inputs
         [SPI]"l"(SPI),
-        [clock]"l"(0xFF)
+        [clock]"l"(0xFFFF)
         : // clobbers
-        "cc"
+          "cc", "memory"
         );
+    } else {
+        asm volatile(
+        ".syntax unified" "\n"
+        "adds %[buffer], %[remain]" "\n"
+        "rsbs %[remain], 0" "\n"
+        "strh %[clock], [ %[SPI], 8 ]" "\n"
 
-        //Read the CRC16 checksum for the data block
-        crc = (m_Spiwrite(0xFF) << 8);
-        crc |= m_Spiwrite(0xFF);
-    //}
+        "next%=:" "\n"
 
-    //Return the validity of the CRC16 checksum (if enabled)
+        "1:" "\n"
+        "ldrh %[tmp], [ %[SPI], 12 ]" "\n"
+        "lsls %[tmp], 29" "\n"
+        "bpl 1b" "\n"
+
+        "ldrh %[tmp], [ %[SPI], 8 ]" "\n"
+        "strh %[clock], [ %[SPI], 8 ]" "\n"
+
+        "rev16 %[tmp], %[tmp]" "\n"
+        "strh %[tmp], [ %[buffer], %[remain] ]" "\n"
+        "adds %[remain], 2" "\n"
+        "bne next%=" "\n"
+
+        // data ended, read CRC
+        "1:" "\n"
+        "ldrh %[tmp], [ %[SPI], 12 ]" "\n"
+        "lsls %[tmp], 29" "\n"
+        "bpl 1b" "\n"
+        "ldrh %[tmp], [ %[SPI], 8 ]" "\n"
+
+        : // outputs
+        [tmp]"+l"(tmp),
+        [remain]"+l"(length),
+        [buffer]"+l"(buffer)
+        : // inputs
+        [SPI]"l"(SPI),
+        [clock]"l"(0xFFFF)
+        : // clobbers
+          "cc", "memory"
+        );
+    }
+
+    m_SpiSetBits(8);
     return true;
-   
+/* */
 }
 
 char writeData(const char* buffer, char token)
@@ -685,14 +735,6 @@ DSTATUS disk_initialize (
                 m_CardType = CARD_SDHC;
             else
                 m_CardType = CARD_SD;
-
-            //Increase the SPI frequency to full speed (up to 25MHz for SDCv2)
-            //if (m_FREQ > 25000000)
-                //m_Spi.frequency(25000000);
-            //    my_spi_frequency(400000);
-            //else
-                //m_Spi.frequency(m_FREQ);
-            //    my_spi_frequency(m_FREQ);
         } else {
             //Initialization failed
             m_CardType = CARD_UNKNOWN;
@@ -758,6 +800,13 @@ DSTATUS disk_initialize (
     //The card is now initialized
     m_Status &= ~STA_NOINIT;
 
+    m_Spidisable();
+    LPC_SSP0->CR0 &= ~(0xFFFF << 8);
+    #if _OSCT == 2
+    LPC_SSP0->CR0 |= 1 << 8;
+    #endif
+    LPC_SSP0->CPSR = 2;
+    m_Spienable();
     //Return the disk status
     return m_Status;
 }

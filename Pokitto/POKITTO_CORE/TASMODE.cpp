@@ -4,7 +4,6 @@
 
 #include "HWLCD.h"
 
-
 using namespace Pokitto;
 
 void write_command_16(uint16_t data);
@@ -13,6 +12,16 @@ void write_data_16(uint16_t data);
 struct Sprite;
 
 using draw_t = void (*)(uint8_t *line, Sprite &sprite, int y);
+using Tilemap = uint8_t const * const *;
+static constexpr int screenWidth = PROJ_LCDWIDTH;
+static constexpr int screenHeight = PROJ_LCDHEIGHT;
+constexpr uint32_t tileW = POK_TILE_W;
+constexpr uint32_t tileH = POK_TILE_H;
+constexpr uint32_t mapW = screenWidth / tileW + 2;
+constexpr uint32_t mapH = screenHeight / tileH + 2;
+const uint8_t *tilemap[mapH * mapW];
+uint32_t cameraX;
+uint32_t cameraY;
 
 struct Sprite { 
     int16_t x, y;
@@ -32,8 +41,8 @@ void blit(uint8_t *line, Sprite &s, int y){
     }else if(s.x > 0){
         line += s.x;
     }
-    if(s.x + w >= 220){
-        w = 220 - s.x;
+    if(s.x + w >= screenWidth){
+        w = screenWidth - s.x;
     }
     /* */
     pixelCopy(line, src, w, s.b1);
@@ -57,9 +66,9 @@ void blitMirror(uint8_t *line, Sprite &s, int y){
     }else if(s.x > 0){
         line += s.x;
     }
-    if(s.x + w >= 220){
-        src -= 220 - (s.x + w);
-        w = 220 - s.x;
+    if(s.x + w >= screenWidth){
+        src -= screenWidth - (s.x + w);
+        w = screenWidth - s.x;
     }
     /* */
     pixelCopyMirror(line, src - w + 1, w, s.b1);
@@ -85,8 +94,8 @@ void blitFlip(uint8_t *line, Sprite &s, int y){
     }else if(s.x > 0){
         line += s.x;
     }
-    if(s.x + w >= 220){
-        w = 220 - s.x;
+    if(s.x + w >= screenWidth){
+        w = screenWidth - s.x;
     }
     pixelCopy(line, src, w, s.b1);
     /*
@@ -110,9 +119,9 @@ void blitFlipMirror(uint8_t *line, Sprite &s, int y){
     }else if(s.x > 0){
         line += s.x;
     }
-    if(s.x + w >= 220){
-        src -= 220 - (s.x + w);
-        w = 220 - s.x;
+    if(s.x + w >= screenWidth){
+        src -= screenWidth - (s.x + w);
+        w = screenWidth - s.x;
     }
     /* */
     pixelCopyMirror(line, src - w + 1, w, s.b1);
@@ -136,19 +145,10 @@ void addSprite(const Sprite& s){
     int32_t maxY = sb.maxY;
     maxY += sb.y;
     if(maxY < 0) return;
-    if(maxY > 176) maxY = 176;
+    if(maxY > screenHeight) maxY = screenHeight;
     sb.maxY = maxY;
     spriteBufferPos++;
 }
-
-using Tilemap = uint8_t const * const *;
-constexpr uint32_t tileW = POK_TILE_W;
-constexpr uint32_t tileH = POK_TILE_H;
-constexpr uint32_t mapW = POK_LCD_W / tileW + 2;
-constexpr uint32_t mapH = POK_LCD_H / tileH + 2;
-const uint8_t *tilemap[mapH * mapW];
-uint32_t cameraX;
-uint32_t cameraY;
 
 void pixelCopySolid4BPP(uint8_t *line, const uint8_t *src, uint32_t w, uint32_t sx){
     while(w--){
@@ -172,9 +172,9 @@ void Display::shiftTilemap(int x, int y){
 }
 
 void Display::drawColumn(int x, int sy, int ey){
-    if(x < 0 || x >= 220) return;
+    if(x < 0 || x >= screenWidth) return;
     if(sy < 0) sy = 0;
-    if(ey > 176) ey = 176;
+    if(ey > screenHeight) ey = screenHeight;
     if(ey <= sy) return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
@@ -184,9 +184,9 @@ void Display::drawColumn(int x, int sy, int ey){
 }
 
 void Display::drawRow(int sx, int ex, int y){
-    if(y < 0 || y >= 176) return;
+    if(y < 0 || y >= screenHeight) return;
     if(sx < 0) sx = 0;
-    if(ex > 220) ex = 220;
+    if(ex > screenWidth) ex = screenWidth;
     if(ex <= sx) return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
@@ -201,7 +201,7 @@ void Display::drawRow(int sx, int ex, int y){
 }
 
 void Display::drawRectangle(int x, int y, int w, int h) {
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
         return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
@@ -215,8 +215,8 @@ void Display::drawRectangle(int x, int y, int w, int h) {
                        line += s.x;
                        line[0] = c;
                    }
-                   if(s.x + w >= 220){
-                       w = 220 - s.x;
+                   if(s.x + w >= screenWidth){
+                       w = screenWidth - s.x;
                    }else{
                        line[w-1] = c;
                    }
@@ -231,7 +231,7 @@ void Display::drawRectangle(int x, int y, int w, int h) {
 }
 
 void Display::fillRectangle(int x, int y, int w, int h) {
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
         return;
     draw_t f = [](uint8_t *line, Sprite &s, int y){
                    auto c = s.b1;
@@ -243,8 +243,8 @@ void Display::fillRectangle(int x, int y, int w, int h) {
                    }else if(s.x > 0){
                        line += s.x;
                    }
-                   if(s.x + w >= 220){
-                       w = 220 - s.x;
+                   if(s.x + w >= screenWidth){
+                       w = screenWidth - s.x;
                    }
                    while(w--){
                        *line++ = c;
@@ -265,7 +265,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     bitmap = bitmap + 4 + index * (w * hbytes + 1);
     uint32_t numBytes = *bitmap++; //first byte of char is the width in bytes
 
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
         return numBytes + adjustCharStep;
 
     draw_t f;
@@ -278,8 +278,8 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
                 uint8_t fg = s.b3;
                 uint8_t bg = s.b2;
                 int numBytes = s.b1;
-                if( s.b1 + x > 220 )
-                    numBytes = 220 - x;
+                if( s.b1 + x > screenWidth )
+                    numBytes = screenWidth - x;
 
                 uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;                   
                 for (int i = 0; i < numBytes; i++) {
@@ -300,8 +300,8 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
                 uint8_t fg = s.b3;
                 uint8_t bg = s.b2;
                 int numBytes = s.b1;
-                if( (s.b1<<1) + x > 220 )
-                    numBytes = (220 - x) >> 1;
+                if( (s.b1<<1) + x > screenWidth )
+                    numBytes = (screenWidth - x) >> 1;
 
                 uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;
 
@@ -330,7 +330,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 }
 
 void Display::drawBitmapData2BPP(int x, int y, int w, int h, const uint8_t* bitmap){
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
         return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
@@ -343,8 +343,8 @@ void Display::drawBitmapData2BPP(int x, int y, int w, int h, const uint8_t* bitm
                    }else if(s.x > 0){
                        line += s.x;
                    }
-                   if(s.x + w >= 220){
-                       w = 220 - s.x;
+                   if(s.x + w >= screenWidth){
+                       w = screenWidth - s.x;
                    }
                    while(w--){
                        auto b = (src[sx>>2] >> ((sx&3)<<1)) & 0x3;
@@ -361,12 +361,12 @@ void Display::drawBitmapDataXFlipped2BPP(int x, int y, int w, int h, const uint8
 }
 
 void Display::drawBitmapDataXFlipped8BPP(int x, int y, int w, int h, const uint8_t* bitmap){
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0) return;
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0) return;
     addSprite(Sprite{x, y, bitmap, blitMirror, h, 0, w});
 }
 
 void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap) {
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
         return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
@@ -380,8 +380,8 @@ void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
                    }else if(s.x > 0){
                        line += s.x;
                    }
-                   if(s.x + w >= 220){
-                       w = 220 - s.x;
+                   if(s.x + w >= screenWidth){
+                       w = screenWidth - s.x;
                    }
                    while(w--){
                        auto b = (sx&1)?
@@ -397,7 +397,7 @@ void Display::drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
 }
 
 void Display::drawBitmapDataXFlipped4BPP(int x, int y, int w, int h, const uint8_t* bitmap){
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
         return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
@@ -408,9 +408,9 @@ void Display::drawBitmapDataXFlipped4BPP(int x, int y, int w, int h, const uint8
                    }else if(s.x > 0){
                        line += s.x;
                    }
-                   if(s.x + w >= 220){
-                       src -= (220 - (s.x + w)) >> 1;
-                       w = 220 - s.x;
+                   if(s.x + w >= screenWidth){
+                       src -= (screenWidth - (s.x + w)) >> 1;
+                       w = screenWidth - s.x;
                    }
                    int sx = -1;
                    while(w--){
@@ -427,7 +427,7 @@ void Display::drawBitmapDataXFlipped4BPP(int x, int y, int w, int h, const uint8
 }
 
 void Display::drawBitmapData4BPP(int x, int y, int w, int h, const uint8_t* bitmap){
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0)
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
         return;
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
@@ -440,8 +440,8 @@ void Display::drawBitmapData4BPP(int x, int y, int w, int h, const uint8_t* bitm
                    }else if(s.x > 0){
                        line += s.x;
                    }
-                   if(s.x + w >= 220){
-                       w = 220 - s.x;
+                   if(s.x + w >= screenWidth){
+                       w = screenWidth - s.x;
                    }
                    while(w--){
                        auto b = (sx&1)?
@@ -457,7 +457,7 @@ void Display::drawBitmapData4BPP(int x, int y, int w, int h, const uint8_t* bitm
 }
 
 void Display::drawBitmapData8BPP(int x, int y, int w, int h, const uint8_t* bitmap) {
-    if(y >= 176 || y + h < 0 || x >= 220 || x + w < 0) return;
+    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0) return;
     addSprite(Sprite{x, y, bitmap, blit, h, 0, w});
 }
 
@@ -476,7 +476,7 @@ void Display::drawTile(uint32_t x, uint32_t y, const uint8_t *data){
 }
 
 void Display::drawSprite(int x, int y, const uint8_t *data, bool flipped, bool mirrored, uint8_t recolor){
-    if(y >= 176 || y + data[1] < 0 || x >= 220 || x + data[0] < 0) return;
+    if(y >= screenHeight || y + data[1] < 0 || x >= screenWidth || x + data[0] < 0) return;
     auto mode = flipped ?
         (mirrored ? blitFlipMirror : blitFlip):
         (mirrored ? blitMirror     : blit);
@@ -509,12 +509,12 @@ void drawSprites(int16_t y, uint8_t *line, int max){
 namespace Pokitto {
 
 void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
-    uint8_t spritesPerLine[176];
-    for(int y=0; y<176; ++y) spritesPerLine[y] = 0;
+    uint8_t spritesPerLine[screenHeight];
+    for(int y=0; y<screenHeight; ++y) spritesPerLine[y] = 0;
 
     for(uint32_t i=0; i<spriteBufferPos; ++i){
         auto& s = spriteBuffer[i];
-        for(int y=std::max(0, static_cast<int>(s.y)), my=std::min(176, static_cast<int>(s.maxY)); y<my; ++y){
+        for(int y=std::max(0, static_cast<int>(s.y)), my=std::min(screenHeight, static_cast<int>(s.maxY)); y<my; ++y){
             spritesPerLine[y]++;
         }
     }
@@ -528,7 +528,7 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
     bool disabled = mask & 1;
     uint32_t maskY = 8;
 
-    for(uint32_t y=0; y<176; ++y, tileIndex += tileW){
+    for(uint32_t y=0; y<screenHeight; ++y, tileIndex += tileW){
         if(!tileY--){
             tileIndex = 0;
             tileY = tileH - 1;
@@ -555,8 +555,8 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
 
         tileX = cameraX;
         uint32_t tile = 0;
-        for(uint32_t i=0; i<220;){
-            int iter = std::min(tileW - tileX, 220 - i);
+        for(uint32_t i=0; i<screenWidth;){
+            int iter = std::min(tileW - tileX, screenWidth - i);
 
             auto tileColor = reinterpret_cast<uintptr_t>(tileWindow[tile]);
             if( tileColor < 256 ){
@@ -577,7 +577,18 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
         }
 
         drawSprites(y, line, spritesPerLine[y]);
-        flushLine(palette, line);
+        if(screenWidth == 220){
+            flushLine(palette, line);
+        }else if(screenWidth == 110){
+            flushLine2X(palette, line);
+        }
+        if(screenHeight == 88){
+            if(screenWidth == 220){
+                flushLine(palette, line);
+            }else if(screenWidth == 110){
+                flushLine2X(palette, line);
+            }
+        }
     }
 
     spriteBufferPos = 0;

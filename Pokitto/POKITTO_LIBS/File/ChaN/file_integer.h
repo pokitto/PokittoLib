@@ -2,9 +2,7 @@
 /* Integer type definitions for FatFs module */
 /*-------------------------------------------*/
 
-#ifndef _SDFS_INTEGER
-#define _SDFS_INTEGER
-
+#pragma once
 #ifdef _WIN32    /* FatFs development platform */
 
 #include <windows.h>
@@ -39,4 +37,3 @@ typedef unsigned long   DWORD;
 
 #endif
 
-#endif
