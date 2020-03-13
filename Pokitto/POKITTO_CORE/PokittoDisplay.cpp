@@ -300,7 +300,20 @@ void Display::directBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t 
             }
         }
     }
-
+    else if (depth == 8) {
+        for (j = 0; j < h; j+=1) {
+            for (i = 0; i < w; i++) {
+                uint16_t col = paletteptr[*bitmap];
+                if (scale==2) {
+                        directPixel(x + (i<<1), y + (j<<1),col);
+                        directPixel(x + (i<<1) + 1, y + (j<<1),col);
+                        directPixel(x + (i<<1) + 1, y + (j<<1) + 1,col);
+                        directPixel(x + (i<<1), y + (j<<1) + 1,col);
+                } else directPixel(x + i, y + j,col);
+                bitmap++;
+            }
+        }
+    }
 }
 
 int Display::directChar(int16_t x, int16_t y, uint16_t index){

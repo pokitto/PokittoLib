@@ -122,8 +122,6 @@ static inline void mem_set(void* dst, std::uint8_t val, std::size_t count){
 #error Wrong include file (ff.h).
 #endif
 
-#include <Memory>
-
 /* Definitions on sector size */
 #if _MAX_SS != 512 && _MAX_SS != 1024 && _MAX_SS != 2048 && _MAX_SS != 4096
 #error Wrong sector size.

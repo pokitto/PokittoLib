@@ -456,7 +456,7 @@ public:
 #endif
 
 private:
-    void printFPS();
+    static void printFPS();
     static uint8_t m_mode;
     static uint8_t m_w,m_h; // store these for faster access when switching printing modes
     /** Pointer to screen buffer */
