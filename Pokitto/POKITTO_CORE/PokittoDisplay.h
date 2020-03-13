@@ -129,6 +129,10 @@ const uint16_t def565palette[16] = {
 #include <stdlib.h>
 #include <string.h>
 
+#if PROJ_SCREENMODE == TASMODE
+#include "TASMODE.h"
+#endif
+
 namespace Pokitto {
 
 class Display {
@@ -287,6 +291,10 @@ public:
 
     // BITMAPS !
     #if PROJ_SCREENMODE == TASMODE
+    static inline TAS::LineFiller lineFillers[] = {
+        PROJ_LINE_FILLERS
+    };
+
     static void setTASRowMask(uint32_t mask){
         TASMask = ~mask;
     }

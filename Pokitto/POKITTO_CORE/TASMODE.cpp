@@ -2,6 +2,7 @@
 
 #if PROJ_SCREENMODE == TASMODE
 
+#include <MemOps>
 #include "HWLCD.h"
 
 using namespace Pokitto;
@@ -506,35 +507,110 @@ void drawSprites(int16_t y, uint8_t *line, int max){
     }
 }
 
-namespace Pokitto {
-
-void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
-    uint8_t spritesPerLine[screenHeight];
-    for(int y=0; y<screenHeight; ++y) spritesPerLine[y] = 0;
-
-    for(uint32_t i=0; i<spriteBufferPos; ++i){
-        auto& s = spriteBuffer[i];
-        for(int y=std::max(0, static_cast<int>(s.y)), my=std::min(screenHeight, static_cast<int>(s.maxY)); y<my; ++y){
-            spritesPerLine[y]++;
-        }
+namespace TAS {
+    void DitherFiller(std::uint8_t* line, std::uint32_t y, bool skip){
+        if(skip)
+            return;
+        MemOps::set(line + (y&1), Display::bgcolor, (screenWidth>>1) - (y&1), 2);
     }
+}
 
-    Tilemap  tileWindow = tilemap;
-    uint32_t tileY = tileH - cameraY;
-    uint32_t tileX = cameraX;
-    uint32_t tileIndex = cameraY * tileW;
+namespace TAS {
+    void ColorFiller(std::uint8_t* line, std::uint32_t y, bool skip){
+        if(skip)
+            return;
+        MemOps::set(line, Display::bgcolor, screenWidth);
+    }
+}
 
-    auto mask = Display::TASMask;
-    bool disabled = mask & 1;
-    uint32_t maskY = 8;
+namespace TAS {
+    uint8_t spritesPerLine[screenHeight];
+    void SpriteFiller(std::uint8_t* line, std::uint32_t y, bool skip){
+        if(y == 0){
+            for(int i=0; i<screenHeight; ++i)
+                spritesPerLine[i] = 0;
 
-    for(uint32_t y=0; y<screenHeight; ++y, tileIndex += tileW){
+            for(uint32_t i=0; i<spriteBufferPos; ++i){
+                auto& s = spriteBuffer[i];
+                for(int y=std::max(0, static_cast<int>(s.y)), my=std::min(screenHeight, static_cast<int>(s.maxY)); y<my; ++y){
+                    spritesPerLine[y]++;
+                }
+            }
+        }
+
+        if(!skip)
+            drawSprites(y, line, spritesPerLine[y]);
+
+        if(y == screenHeight-1)
+            spriteBufferPos = 0;
+    }
+}
+
+namespace TAS {
+    static Tilemap  tileWindow;
+    static uint32_t tileY;
+    static uint32_t tileIndex;
+
+    void BGTileFiller(std::uint8_t* line, std::uint32_t y, bool skip){
+        if(y == 0){
+            tileWindow = tilemap;
+            tileY = tileH - cameraY;
+            tileIndex = cameraY * tileW;
+        }
+
         if(!tileY--){
             tileIndex = 0;
             tileY = tileH - 1;
             tileWindow += mapW;
         }
 
+        if(skip)
+            return;
+
+        uint32_t tileX = cameraX;
+        uint32_t tile = 0;
+        if (Display::m_colordepth == 8) {
+            for(uint32_t i=0; i<screenWidth;){
+                int iter = std::min(tileW - tileX, screenWidth - i);
+                auto tileColor = reinterpret_cast<uintptr_t>(tileWindow[tile]);
+                if( tileColor < 256 ){
+                    MemOps::set(line+i, tileColor, iter);
+                }else{
+                    auto tileData = tileWindow[tile] + tileX + tileIndex;
+                    pixelCopySolid(line+i, tileData, iter);
+                }
+                i += iter;
+                tileX = 0;
+                tile++;
+            }
+        }else if(Display::m_colordepth == 4){
+            for(uint32_t i=0; i<screenWidth;){
+                int iter = std::min(tileW - tileX, screenWidth - i);
+                auto tileColor = reinterpret_cast<uintptr_t>(tileWindow[tile]);
+                if( tileColor < 256 ){
+                    MemOps::set(line+i, tileColor, iter);
+                }else{
+                    auto tileData = tileWindow[tile] + (tileIndex>>1);
+                    pixelCopySolid4BPP(line+i, tileData, iter, tileX);
+                }
+                i += iter;
+                tileX = 0;
+                tile++;
+            }
+        }
+
+        tileIndex += tileW;
+    }
+}
+
+namespace Pokitto {
+
+void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
+    auto mask = Display::TASMask;
+    bool disabled = mask & 1;
+    uint32_t maskY = 8;
+
+    for(uint32_t y=0; y<screenHeight; ++y ){
         if(!maskY--){
             maskY = 8;
             mask >>= 1;
@@ -550,38 +626,19 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
             disabled = mask & 1;
         }
 
+        for( int i=0; i<sizeof(Display::lineFillers)/sizeof(TAS::LineFiller); ++i ){
+            Display::lineFillers[i]( line, y, disabled );
+        }
+
         if(disabled)
             continue;
 
-        tileX = cameraX;
-        uint32_t tile = 0;
-        for(uint32_t i=0; i<screenWidth;){
-            int iter = std::min(tileW - tileX, screenWidth - i);
-
-            auto tileColor = reinterpret_cast<uintptr_t>(tileWindow[tile]);
-            if( tileColor < 256 ){
-                while(iter--){
-                    line[i++] = tileColor;
-                }
-            }else if(Display::m_colordepth == 8){
-                auto tileData = tileWindow[tile] + tileX + tileIndex;
-                pixelCopySolid(line+i, tileData, iter);
-                i += iter;
-            }else if(Display::m_colordepth == 4){
-                auto tileData = tileWindow[tile] + (tileIndex>>1);
-                pixelCopySolid4BPP(line+i, tileData, iter, tileX);
-                i += iter;
-            }
-            tileX = 0;
-            tile++;
-        }
-
-        drawSprites(y, line, spritesPerLine[y]);
         if(screenWidth == 220){
             flushLine(palette, line);
         }else if(screenWidth == 110){
             flushLine2X(palette, line);
         }
+
         if(screenHeight == 88){
             if(screenWidth == 220){
                 flushLine(palette, line);
@@ -590,8 +647,6 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
             }
         }
     }
-
-    spriteBufferPos = 0;
 }
 
 }
