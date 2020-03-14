@@ -67,6 +67,8 @@ public:
     void draw( std::int32_t x, std::int32_t y ){
         using PD = Pokitto::Display;
         if( !map ) return;
+        x = -x;
+        y = -y;
         std::int32_t tileX = x / std::int32_t(POK_TILE_W);
         std::int32_t tileY = y / std::int32_t(POK_TILE_H);
         std::int32_t maxX = POK_LCD_W / POK_TILE_W + 2;
