@@ -49,7 +49,8 @@ flushLine:
         lsls TMP, 3
         str TMP, [LCD]
         str WRBIT, [LCD, CLR]
-        lsrs COLOR, 7
+        lsrs COLOR, 8
+        lsls COLOR, 1
         ldrh TMP, [PALETTE, COLOR]
         str WRBIT, [LCD, 124]
     
