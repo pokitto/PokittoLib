@@ -41,7 +41,11 @@
 
 #define SPEAKER 3
 #if POK_HIGH_RAM == HIGH_RAM_MUSIC
-	#define BUFFER_SIZE 256*4
+        #ifdef PROJ_BUFFER_SIZE
+                #define BUFFER_SIZE PROJ_BUFFER_SIZE
+        #else
+                #define BUFFER_SIZE 256*4
+        #endif
 	#define SBUFSIZE 256*4
 #else
 	#define BUFFER_SIZE 512*4 //*8 //*8 // 512 // was 512 (works really well with crabator) was 256

@@ -7,6 +7,12 @@
 
 void initYAPFS();
 
+struct FileInfo : public YAPFS::FILINFO {
+    const char *name() const {
+        return lfsize ? lfname : fname;
+    }
+};
+
 class File {
     YAPFS::FIL handle;
 public:
@@ -26,7 +32,7 @@ public:
     ~File(){
         close();
     }
-    
+
     void close(){
         if(handle.fs){
             f_close(&handle);
@@ -36,6 +42,12 @@ public:
     
     operator bool(){
         return handle.fs;
+    }
+
+    static FileInfo stat(const char *name) {
+        FileInfo info;
+        error = f_stat(name, &info);
+        return info;
     }
 
     File& openRO(const char *name) {
@@ -118,3 +130,40 @@ public:
     }
 };
 
+class Directory {
+    YAPFS::FATFS_DIR handle;
+    FileInfo fileInfo;
+
+public:
+    Directory(){
+        handle.fs = nullptr;
+        initYAPFS();
+    }
+
+    Directory(const Directory&) = delete;
+
+    operator bool(){
+        return handle.fs;
+    }
+
+    Directory &open(const char *path){
+        File::error = f_opendir(&handle, path);
+        return *this;
+    }
+
+    FileInfo *read() {
+        fileInfo.fname[0] = 0;
+        fileInfo.lfsize = 0;
+        File::error = f_readdir(&handle, &fileInfo);
+        return File::error != YAPFS::FR_OK || fileInfo.fname[0] == 0 ? nullptr : &fileInfo;
+    }
+
+    template <typename Callback>
+    FileInfo *read(Callback filter) {
+        FileInfo *ret;
+        do{
+            ret = read();
+        }while(ret && !filter(fileInfo));
+        return ret;
+    }
+};

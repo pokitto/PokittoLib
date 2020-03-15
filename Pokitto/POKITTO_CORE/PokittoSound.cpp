@@ -75,6 +75,10 @@
 #include "SDFSDisk.h"
 #endif
 
+#ifdef PROJ_FILE_STREAMING
+#include "FileDisk.h"
+#endif
+
 #else
 #include "SimSound.h"
 #include "PokittoSimulator.h"
