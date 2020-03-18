@@ -46,6 +46,9 @@ updateMode2:
     ldr T, =0
     mov Y, T
     
+    mov C, WRBIT
+    movs T, 252
+    str C, [LCD, T]
     
     mode2OuterLoop:
 
