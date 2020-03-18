@@ -44,7 +44,7 @@ Pokitto::Display _bd;
 
 using namespace mbed;
 
-#ifndef PROJ_BUTTONS_POLLING_ONLY
+#if PROJ_BUTTONS_POLLING == 0
 InterruptIn ABtn(POK_BTN_A_PIN);
 InterruptIn BBtn(POK_BTN_B_PIN);
 InterruptIn CBtn(POK_BTN_C_PIN);
@@ -111,7 +111,7 @@ void LPressed() {
     }
 void LReleased() { Pokitto::heldStates[BTN_LEFT] = 0; }
 
-#ifndef PROJ_BUTTONS_POLLING_ONLY
+#if PROJ_BUTTONS_POLLING == 0
 static inline void ClearPinInt(LPC_PIN_INT_T *pPININT, uint32_t pins)
 {
 	pPININT->IST = pins;
@@ -197,7 +197,7 @@ void PIN_INT6_IRQHandler(void)
 
 
 void Pokitto::initButtons() {
-  #ifndef PROJ_BUTTONS_POLLING_ONLY
+  #if PROJ_BUTTONS_POLLING == 0
   ABtn.fall(&AReleased);
   ABtn.rise(&APressed);
   BBtn.fall(&BReleased);
@@ -237,7 +237,7 @@ void Pokitto::initButtons() {
 
 uint8_t Pokitto::Core::aBtn() {
 
-    #ifndef PROJ_BUTTONS_POLLING_ONLY
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_A];
     #else
     Pokitto::heldStates[BTN_A]=ABtn();
@@ -248,7 +248,7 @@ uint8_t Pokitto::Core::aBtn() {
 
 uint8_t Pokitto::Core::bBtn() {
 
-    #ifndef PROJ_BUTTONS_POLLING_ONLY
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_B];
     #else
     Pokitto::heldStates[BTN_B]=BBtn();
@@ -258,7 +258,7 @@ uint8_t Pokitto::Core::bBtn() {
 
 uint8_t Pokitto::Core::cBtn() {
 
-    #ifndef PROJ_BUTTONS_POLLING_ONLY
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_C];
     #else
     Pokitto::heldStates[BTN_C]=CBtn();
@@ -268,7 +268,7 @@ uint8_t Pokitto::Core::cBtn() {
 
 uint8_t Pokitto::Core::upBtn() {
 
-    #ifndef PROJ_BUTTONS_POLLING_ONLY
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_UP];
     #else
     Pokitto::heldStates[BTN_UP]=UBtn();
@@ -277,7 +277,7 @@ uint8_t Pokitto::Core::upBtn() {
 }
 uint8_t Pokitto::Core::downBtn() {
 
-    #ifndef PROJ_BUTTONS_POLLING_ONLY
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_DOWN];
     #else
     Pokitto::heldStates[BTN_DOWN]=DBtn();
@@ -287,7 +287,7 @@ uint8_t Pokitto::Core::downBtn() {
 
 uint8_t Pokitto::Core::leftBtn() {
 
-    #ifndef PROJ_BUTTONS_POLLING_ONLY
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_LEFT];
     #else
     Pokitto::heldStates[BTN_LEFT]=LBtn();
@@ -296,7 +296,7 @@ uint8_t Pokitto::Core::leftBtn() {
 }
 uint8_t Pokitto::Core::rightBtn() {
 
-    #ifndef PROJ_BUTTONS_POLLING_ONLY
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_RIGHT];
     #else
     Pokitto::heldStates[BTN_RIGHT]=RBtn();
