@@ -1,2 +1,0 @@
-#define PROJ_HIRES 0
-#define PROJ_ENABLE_SOUND 0

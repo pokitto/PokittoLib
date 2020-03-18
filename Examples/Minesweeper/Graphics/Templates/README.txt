@@ -1,1 +1,0 @@
-These templates are here for people who want to make their own designs and to illustrate how the 'halving' is done.
