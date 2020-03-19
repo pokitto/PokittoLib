@@ -57,6 +57,10 @@
 #define POK_ENABLE_SD 1 // Define true to include SD library
 #define POK_LOADER_COUNTDOWN 3 //how many seconds waiting for C press for loader
 
+#if !defined(PROJ_BUTTONS_POLLING)
+    #define PROJ_BUTTONS_POLLING 1
+#endif
+
 #ifndef PROJ_ENABLE_SOUND
     #define POK_ENABLE_SOUND 1
 #else
