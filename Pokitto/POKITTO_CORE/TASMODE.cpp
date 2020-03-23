@@ -507,6 +507,22 @@ void drawSprites(int16_t y, uint8_t *line, int max){
     }
 }
 
+// STUBS - To-Do: implement these?
+void Display::drawPixel(int16_t,int16_t){}
+void Display::drawPixel(int16_t x,int16_t y, uint8_t col){}
+void Display::drawPixelRaw(int16_t x,int16_t y, uint8_t col){}
+void Display::drawPixelNOP(int16_t x,int16_t y, uint8_t col){}
+uint8_t Display::getPixel(int16_t,int16_t){ return 0; }
+void Display::drawLine(int16_t,int16_t,int16_t,int16_t){}
+void Display::drawCircle(int16_t x0, int16_t y0, int16_t r){}
+void Display::drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername){}
+void Display::fillCircle(int16_t x0, int16_t y0, int16_t r){}
+void Display::fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername, int16_t delta){}
+void Display::drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2){}
+void Display::fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2){}
+void Display::drawRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius){}
+void Display::fillRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius){}
+
 namespace TAS {
     void DitherFiller(std::uint8_t* line, std::uint32_t y, bool skip){
         if(skip)
