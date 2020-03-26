@@ -87,7 +87,7 @@ void blitFlip(uint8_t *line, Sprite &s, int y){
     auto data = static_cast<const uint8_t*>(s.data);
 
     int w = s.b2;
-    int h = data[1];
+    int h = s.maxY - s.y;
     const uint8_t *src = data + (h - 1 - y) * w;
     if(s.x < 0){
         src -= s.x;
@@ -113,7 +113,7 @@ void blitFlipMirror(uint8_t *line, Sprite &s, int y){
     auto data = static_cast<const uint8_t*>(s.data);
 
     int w = s.b2;
-    int h = data[1];
+    int h = s.maxY - s.y;
     const uint8_t *src = data + (h - 1 - y) * w + w - 1;
     if(s.x < 0){
         w += s.x;
@@ -519,7 +519,6 @@ void Display::drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t corne
 void Display::fillCircle(int16_t x0, int16_t y0, int16_t r){}
 void Display::fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername, int16_t delta){}
 void Display::drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2){}
-void Display::fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2){}
 void Display::drawRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius){}
 void Display::fillRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius){}
 
