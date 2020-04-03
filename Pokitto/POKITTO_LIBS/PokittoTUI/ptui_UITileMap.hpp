@@ -1,9 +1,9 @@
 #ifndef POKITTOTUI_PTUI_UITILEMAP_HPP
 #   define POKITTOTUI_PTUI_UITILEMAP_HPP
 
-#   include <ptui_TileMap.hpp>
-#   include <ptui_StandardUITilesetDefinition.hpp>
-#   include <ptui_Symbol.hpp>
+#   include "ptui_TileMap.hpp"
+#   include "ptui_StandardUITilesetDefinition.hpp"
+#   include "ptui_Symbol.hpp"
 
 
 namespace ptui
@@ -178,7 +178,6 @@ namespace ptui
         
         // Changes the cursor's bounding box.
         // - Cursor's position will be updated to fit inside.
-        // - Negative boxes
         void setCursorBoundingBox(int cursorFirstColumn, int cursorFirstRow, int cursorLastColumn, int cursorLastRow) noexcept
         {
             _cursorFirstColumn = cursorFirstColumn;

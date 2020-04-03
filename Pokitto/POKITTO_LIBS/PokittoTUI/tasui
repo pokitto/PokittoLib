@@ -1,0 +1,18 @@
+#ifndef POKITTOTUI_TASUI
+#	define POKITTOTUI_TASUI
+
+#	include <Pokitto.h>
+#	include "ptui_Symbol.hpp"
+
+
+namespace tasui
+{
+	// A namespace that configures and provides the TASUI API.
+	
+	using Symbol = ptui::Symbol;
+}
+
+#	include "tasui_UI.hpp"
+
+
+#endif // POKITTOTUI_TASUI

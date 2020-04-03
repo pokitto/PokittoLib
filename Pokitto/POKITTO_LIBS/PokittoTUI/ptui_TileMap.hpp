@@ -139,6 +139,12 @@ namespace ptui
         {
             _tilesetImage = tilesetImage;
         }
+		
+		// Returns the current Tileset Image.
+		const TilesetPixel* tilesetImage() const noexcept
+		{
+			return _tilesetImage;
+		}
         
         
     public: // Tiles Access.
@@ -441,6 +447,6 @@ namespace ptui
 }
 
 
-#   include <ptui_TileMap.Rendering.hpp>
+#   include "ptui_TileMap.Rendering.hpp"
 
 #endif // POKITTOTUI_PTUI_TILEMAP_HPP
