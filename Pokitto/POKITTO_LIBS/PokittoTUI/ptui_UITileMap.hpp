@@ -3,10 +3,11 @@
 
 #   include <ptui_TileMap.hpp>
 #   include <ptui_StandardUITilesetDefinition.hpp>
+#   include <ptui_Symbol.hpp>
 
 
 namespace ptui
-{    
+{
     // An extension of BaseTileMap revolving around a UI TileSet.
     // - TilesetDefinition is used to know where to get the relevant tiles in the underlying Tileset.
     // Provides the following services:
@@ -85,12 +86,38 @@ namespace ptui
             }
         }
         
-        // Draws a checkbox at `column`, `row` with the given checked state.
-        // - Doesn't change the delta.
-        void drawCheckbox(int column, int row, bool checked) noexcept
+        // Returns the tile index for the given symbol.
+        int indexForSymbol(Symbol symbol) noexcept
         {
-            this->setTile(column, row, checked ? TilesetDefinition::checkboxChecked : TilesetDefinition::checkboxUnchecked);
+			switch (symbol)
+			{
+			case Symbol::empty:
+				return 0;
+			case Symbol::left:
+				return TilesetDefinition::leftArrow;
+			case Symbol::right:
+				return TilesetDefinition::rightArrow;
+			case Symbol::up:
+				return TilesetDefinition::upArrow;
+			case Symbol::down:
+				return TilesetDefinition::downArrow;
+			case Symbol::checked:
+				return TilesetDefinition::checkboxChecked;
+			case Symbol::unchecked:
+				return TilesetDefinition::checkboxUnchecked;
+			case Symbol::space:
+				return TilesetDefinition::asciiSpace;
+			}
+			return 0;
         }
+		
+        // Draws the given symbol at`column`, `row`.
+        // - Doesn't change the delta.
+        void drawSymbol(int column, int row, Symbol symbol) noexcept
+        {
+            this->setTile(column, row, indexForSymbol(symbol));
+        }
+		
         
         // Draws a Box.
         // - `firstColumn`, `firstRow`, `lastColumn` and `lastRow` will not be clamped, but clipped instead.
@@ -143,6 +170,12 @@ namespace ptui
                 _cursorDelta = delta;
         }
         
+        // Returns the delta applied for each printed tile.
+        Delta cursorDelta() const noexcept
+        {
+            return (tilesWithDeltasP ? _cursorDelta : 0);
+        }
+        
         // Changes the cursor's bounding box.
         // - Cursor's position will be updated to fit inside.
         // - Negative boxes
@@ -184,7 +217,7 @@ namespace ptui
                     // Autoscroll.
                     this->shift(_cursorFirstColumn, _cursorFirstRow, _cursorLastColumn, _cursorLastRow,
                           0, -1);
-                    this->fillRectTilesAndDeltas(_cursorFirstColumn, _cursorLastRow, _cursorLastColumn, _cursorLastRow, TilesetDefinition::boxMiddle, tilesWithDeltasP ? _cursorDelta : 0);
+                    this->fillRectTilesAndDeltas(_cursorFirstColumn, _cursorLastRow, _cursorLastColumn, _cursorLastRow, TilesetDefinition::boxMiddle, cursorDelta());
                     _cursorRow = _cursorLastRow;
                 }
             }
@@ -206,7 +239,7 @@ namespace ptui
                     if (c == ' ')
                         return ;
                 }
-                this->setTileAndDelta(_cursorColumn, _cursorRow, c - ' ' + TilesetDefinition::asciiSpace, tilesWithDeltasP ? _cursorDelta : 0);
+                this->setTileAndDelta(_cursorColumn, _cursorRow, c - ' ' + TilesetDefinition::asciiSpace, cursorDelta());
                 _cursorColumn++;
             }
         }
@@ -281,6 +314,16 @@ namespace ptui
                         printChar(*text);
                 }
             }
+        }
+		
+        // Prints the given symbol.
+        // - Delta is set to the cursor's delta.
+        void printSymbol(Symbol symbol) noexcept
+        {
+			if (_cursorColumn > _cursorLastColumn)
+				printChar('\n');
+			this->setTileAndDelta(_cursorColumn, _cursorRow, indexForSymbol(symbol), cursorDelta());
+			_cursorColumn++;
         }
         
         

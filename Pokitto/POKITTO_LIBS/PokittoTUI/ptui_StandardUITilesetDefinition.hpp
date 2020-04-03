@@ -35,6 +35,11 @@ namespace ptui
         static constexpr auto boxMiddle = asciiSpace;
         
         static constexpr auto tabColumns = 4;
+		
+        static constexpr auto rightArrow = 1;
+        static constexpr auto leftArrow = 2;
+        static constexpr auto upArrow = 3;
+        static constexpr auto downArrow = 4;
     };
 }
 
