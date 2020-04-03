@@ -230,8 +230,10 @@ inline constexpr uint32_t POK_LCD_H = 176;
     #endif
     #if !defined(PROJ_LINE_FILLERS)
         #define PROJ_LINE_FILLERS       \
-                TAS::BGTileFiller,      \
-                TAS::SpriteFiller
+                    TAS::BGTileFiller,  \
+                    TAS::SpriteFiller,  \
+                    TAS::NOPFiller,     \
+                    TAS::NOPFiller
     #endif
     inline constexpr uint32_t POK_TILE_W = PROJ_TILE_W;
     inline constexpr uint32_t POK_TILE_H = PROJ_TILE_H;
@@ -388,9 +390,7 @@ inline constexpr uint32_t PALETTE_SIZE = PROJ_PALETTE_SIZE;
 
 /** ALLOW PWMOUT TO EXT0 (SOLVE CONFLICT WITH BACKLIGHT **/
 
-#ifdef PROJ_EXT0_PWM_ENABLE
 #define POK_EXT0_PWM_ENABLE 1
-#endif
 
 /** LOADER UPDATE MECHANISM **/
 #define POK_ENABLE_LOADER_UPDATES 1 //1=check for new loader versions on SD and update if new found
