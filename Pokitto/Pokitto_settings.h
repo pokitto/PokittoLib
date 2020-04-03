@@ -230,8 +230,10 @@ inline constexpr uint32_t POK_LCD_H = 176;
     #endif
     #if !defined(PROJ_LINE_FILLERS)
         #define PROJ_LINE_FILLERS       \
-                TAS::BGTileFiller,      \
-                TAS::SpriteFiller
+                    TAS::BGTileFiller,  \
+                    TAS::SpriteFiller,  \
+                    TAS::NOPFiller,     \
+                    TAS::NOPFiller
     #endif
     inline constexpr uint32_t POK_TILE_W = PROJ_TILE_W;
     inline constexpr uint32_t POK_TILE_H = PROJ_TILE_H;

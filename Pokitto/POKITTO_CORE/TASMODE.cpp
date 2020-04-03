@@ -625,6 +625,16 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
     bool disabled = mask & 1;
     uint32_t maskY = 8;
 
+    constexpr int lineFillerCount = sizeof(Display::lineFillers) / sizeof(Display::lineFillers[0]);
+    int fillerCount = 0;
+    TAS::LineFiller fillers[lineFillerCount];
+    for(int i=0; i<lineFillerCount; i++){
+        auto filler = Display::lineFillers[i];
+        if(!filler || filler == TAS::NOPFiller)
+            continue;
+        fillers[fillerCount++] = filler;
+    }
+
     for(uint32_t y=0; y<screenHeight; ++y ){
         if(!maskY--){
             maskY = 8;
@@ -641,8 +651,8 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
             disabled = mask & 1;
         }
 
-        for( int i=0; i<sizeof(Display::lineFillers)/sizeof(TAS::LineFiller); ++i ){
-            Display::lineFillers[i]( line, y, disabled );
+        for( int i=0; i<fillerCount; ++i ){
+            fillers[i]( line, y, disabled );
         }
 
         if(disabled)
