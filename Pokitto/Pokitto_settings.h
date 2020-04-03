@@ -388,9 +388,7 @@ inline constexpr uint32_t PALETTE_SIZE = PROJ_PALETTE_SIZE;
 
 /** ALLOW PWMOUT TO EXT0 (SOLVE CONFLICT WITH BACKLIGHT **/
 
-#ifdef PROJ_EXT0_PWM_ENABLE
 #define POK_EXT0_PWM_ENABLE 1
-#endif
 
 /** LOADER UPDATE MECHANISM **/
 #define POK_ENABLE_LOADER_UPDATES 1 //1=check for new loader versions on SD and update if new found

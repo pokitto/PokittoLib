@@ -64,11 +64,11 @@ void blitMirror(uint8_t *line, Sprite &s, int y){
     const uint8_t *src = data + y * w + w - 1;
     if(s.x < 0){
         w += s.x;
+        src += s.x;
     }else if(s.x > 0){
         line += s.x;
     }
     if(s.x + w >= screenWidth){
-        src -= screenWidth - (s.x + w);
         w = screenWidth - s.x;
     }
     /* */
@@ -117,11 +117,11 @@ void blitFlipMirror(uint8_t *line, Sprite &s, int y){
     const uint8_t *src = data + (h - 1 - y) * w + w - 1;
     if(s.x < 0){
         w += s.x;
+        src += s.x;
     }else if(s.x > 0){
         line += s.x;
     }
     if(s.x + w >= screenWidth){
-        src -= screenWidth - (s.x + w);
         w = screenWidth - s.x;
     }
     /* */

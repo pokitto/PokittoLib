@@ -83,7 +83,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 extern "C" void CheckStack();
 extern char _ebss[];  // In map file
-extern void _vStackTop(void);
+extern "C" {
+    extern void _vStackTop(void);
+}
 
 using core = Pokitto::Core;
 using _pdsound = Pokitto::Sound;
@@ -1162,7 +1164,7 @@ void CheckStack() {
         const int infoStringLen = 8+1+8;
         static char infoString[infoStringLen+1];
         memset(infoString,0,infoStringLen+1);
-        const int stackSize = reinterpret_cast<uintptr_t>(_vStackTop) - reinterpret_cast<uintptr_t>(&currStackTop);
+        const int stackSize = reinterpret_cast<uintptr_t>(&_vStackTop) - reinterpret_cast<uintptr_t>(&currStackTop);
         const int tmpStrLen = 8;
         static char tmpStr[tmpStrLen+1];
         memset(tmpStr,0,tmpStrLen+1);

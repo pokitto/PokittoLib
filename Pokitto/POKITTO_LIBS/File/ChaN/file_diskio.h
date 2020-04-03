@@ -2,10 +2,9 @@
 //  Low level disk interface modlue include file
 //-----------------------------------------------------------------------
 
-#ifndef _SDFS_DISKIO
+#ifndef _FILE_DISKIO
 
-
-#include "sdfs_integer.h"
+#include "file_integer.h"
 
 namespace YAPFS
 {
@@ -78,5 +77,5 @@ DRESULT disk_ioctl (BYTE, BYTE, void*);
 
 } // namespace YAPFS
 
-#define _SDFS_DISKIO
+#define _FILE_DISKIO
 #endif
