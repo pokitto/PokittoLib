@@ -13,8 +13,6 @@ namespace tasui
 	{
 		using PDisplay = Pokitto::Display;
 		
-		if (uiTileMap.tilesetImage() == nullptr)
-			return ;
 		for (auto& lineFiller: PDisplay::lineFillers)
 			if (lineFiller == &UI::LineFiller)
 				lineFiller = TAS::NOPFiller;
@@ -34,10 +32,7 @@ namespace tasui
 			{
 				PDisplay::lineFillers[1] = TAS::SpriteFiller;
 				if (availableLineFillersCount > 2)
-				{
-					if (uiTileMap.tilesetImage() != nullptr)
 						PDisplay::lineFillers[2] = UI::LineFiller;
-				}
 			}
 		}
 	}
@@ -54,8 +49,7 @@ namespace tasui
 			PDisplay::lineFillers[0] = TAS::BGTileFiller;
 			if (availableLineFillersCount > 1)
 			{
-				if (uiTileMap.tilesetImage() != nullptr)
-					PDisplay::lineFillers[1] = UI::LineFiller;
+				PDisplay::lineFillers[1] = UI::LineFiller;
 				if (availableLineFillersCount > 2)
 					PDisplay::lineFillers[2] = TAS::SpriteFiller;
 			}
@@ -66,8 +60,6 @@ namespace tasui
 	{
 		using PDisplay = Pokitto::Display;
 		
-		if (uiTileMap.tilesetImage() == nullptr)
-			return ;
 		hide();
 		
 		int lastOperatingLineFillerI = availableLineFillersCount;
@@ -87,8 +79,6 @@ namespace tasui
 	void UI::setTilesetImage(const std::uint8_t* tilesetImage) noexcept
 	{
 		uiTileMap.setTilesetImage(tilesetImage);
-		if (tilesetImage == nullptr)
-			hide();
 	}
 		
 	
