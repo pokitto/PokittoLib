@@ -1,0 +1,16 @@
+#ifndef POKITTOTUI_PTUI
+#	define POKITTOTUI_PTUI
+
+
+namespace ptui
+{
+	// A namespace gathering two TileMaps in the form of classes, made with love for the Pokitto.
+	// - TileMap is the base TileMap class, highly configurable on its features.
+	// - UITileMap is a UI-centric TileMap.
+}
+
+#	include "ptui_TileMap.hpp"
+#	include "ptui_UITileMap.hpp"
+
+
+#endif // POKITTOTUI_PTUI
