@@ -636,8 +636,8 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
     }
 
     for(uint32_t y=0; y<screenHeight; ++y ){
-        if(!maskY--){
-            maskY = 8;
+        if(!--maskY){
+            maskY = 9;
             mask >>= 1;
             if( !(mask & 1) && disabled ){
                 write_command(0x20);  // Horizontal DRAM Address
