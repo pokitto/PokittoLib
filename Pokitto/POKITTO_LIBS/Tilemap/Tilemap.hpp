@@ -115,7 +115,7 @@ public:
 #endif
                     PD::drawTile(x, y, tiles[tile]);
                 } else if(fillOutOfBounds > -1) {
-                    PD::drawTile(x, y, tiles[0]);
+                    PD::drawTile(x, y, tiles[fillOutOfBounds]);
                 }
 
             }
