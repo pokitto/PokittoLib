@@ -328,7 +328,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-std=gnu++11" />
+			<Add option="-std=gnu++17" />
 			<Add option="-fsigned-char" />
 			<Add option="-DPOK_SIM" />
 			<Add directory="SDL2/include" />
@@ -857,6 +857,7 @@
 		<Unit filename="../POKITTO_CORE/PokittoDisplay.h" />
 		<Unit filename="../POKITTO_CORE/PokittoFakeavr.h" />
 		<Unit filename="../POKITTO_CORE/PokittoFonts.h" />
+		<Unit filename="../POKITTO_CORE/PokittoFramebuffer.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoItoa.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoItoa.h" />
 		<Unit filename="../POKITTO_CORE/PokittoLogos.cpp" />
@@ -1086,9 +1087,6 @@
 		<Unit filename="pok_device.png" />
 		<Unit filename="tinydir/tinydir.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
