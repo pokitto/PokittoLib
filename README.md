@@ -7,9 +7,10 @@ Can be used with:
 - Code::Blocks to create a Windows target (and Linux pending)
 - EmBitz to create a Pokitto hardware binary https://www.embitz.org/
 
-## Building with Femto
+## Building for Pokitto hardware with Femto
 
 * get FemtoIDE release from https://github.com/felipemanga/FemtoIDE/releases , it includes PokittoLib
+* FemtoIDE also has a Pokitto emulator - you can see your code running directly on your computer, no Pokitto device needed
 
 ## Building with Code::Blocks (for Windows target 64-bit)
 
@@ -19,5 +20,12 @@ Can be used with:
 * get codeblocks-20.03mingw-setup.exe from http://www.codeblocks.org/downloads/26
 * install CodeBlocks, run it
 * open Pokitto_sim.cbp from \PokittoLib\Pokitto\POKITTO_SIM
+
+## Building for Pokitto hardware with EmBitz
+
+* get EmBitz from https://www.embitz.org/
+* update the GCC included with EmBitz by copying 
+
+
 
 
