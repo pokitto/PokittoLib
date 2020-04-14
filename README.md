@@ -24,7 +24,12 @@ Can be used with:
 ## Building for Pokitto hardware with EmBitz
 
 * get EmBitz from https://www.embitz.org/
-* update the GCC included with EmBitz by copying 
+* update the GCC included with EmBitz by copying a newer, C++17 compatible version of GCC on top
+  - you can copy the gcc folders from FemtoIDE, which is in the folder \femto\IDE-windows-v0.2.0\windows\arm
+  - first make a BACKUP copy of the old \EmBitz\1.11\share\em_armgcc folder
+  - replace folders in \EmBitz\1.11\share\em_armgcc folder with the folders in \femto\IDE-windows-v0.2.0\windows\arm
+  - now replace arm-none-eabi-objcopy.exe in em_armgcc/bin with the older one from the BACKUP/bin folder ... this is because there is an unfixed issue with arm-none-eabi-objcopy.exe in new GCC releases
+* open EmBitz and open PokittoEmBitz.ebp under the PokittoLib directory
 
 
 
