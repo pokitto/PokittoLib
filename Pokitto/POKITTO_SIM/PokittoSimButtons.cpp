@@ -155,17 +155,22 @@ void Simulator::pollButtons() {
                 if (downBtn()) pokConsoleAddMessage(MSOURCE_BTND,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state &=~ (1<<DOWNBIT); break;
-            case SDLK_z:
+            case SDLK_a:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (aBtn())  pokConsoleAddMessage(MSOURCE_BTNA,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state &=~ (1<<ABIT); break;
-            case SDLK_x:
+            case SDLK_s:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (bBtn()) pokConsoleAddMessage(MSOURCE_BTNB,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state &=~ (1<<BBIT); break;
             case SDLK_c:
+                #if POK_CONSOLE_LOG_BUTTONS
+                if (cBtn()) pokConsoleAddMessage(MSOURCE_BTNC,MSG_UP);
+                #endif // POK_CONSOLE_LOG_BUTTONS
+                buttons_state &=~ (1<<CBIT); break;
+            case SDLK_d:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (cBtn()) pokConsoleAddMessage(MSOURCE_BTNC,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS

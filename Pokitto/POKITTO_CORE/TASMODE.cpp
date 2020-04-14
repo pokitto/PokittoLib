@@ -3,7 +3,11 @@
 #if PROJ_SCREENMODE == TASMODE
 
 #include <MemOps>
+#ifndef POK_SIM
 #include "HWLCD.h"
+#else
+#include "../POKITTO_SIM/SimLCD.h"
+#endif // POK_SIM
 
 using namespace Pokitto;
 
@@ -24,7 +28,7 @@ const uint8_t *tilemap[mapH * mapW];
 uint32_t cameraX;
 uint32_t cameraY;
 
-struct Sprite { 
+struct Sprite {
     int16_t x, y;
     const void *data;
     draw_t draw;
@@ -167,7 +171,7 @@ void Display::shiftTilemap(int x, int y){
     if(x>=tileW) x=tileW-1;
     if(y<0) y = 0;
     if(y>=tileH) y=tileH-1;
-    
+
     cameraX = x % tileW;
     cameraY = y % tileH;
 }
@@ -180,7 +184,7 @@ void Display::drawColumn(int x, int sy, int ey){
 
     draw_t f = [](uint8_t *line, Sprite &s, int y){
                    line[s.x] = s.b1;
-               };    
+               };
     addSprite(Sprite{x, sy, nullptr, f, ey - sy, Display::color});
 }
 
@@ -197,7 +201,7 @@ void Display::drawRow(int sx, int ex, int y){
                    while(w--){
                        *line++ = c;
                    }
-               };    
+               };
     addSprite(Sprite{sx, y, nullptr, f, 1, Display::color, ex - sx});
 }
 
@@ -282,7 +286,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
                 if( s.b1 + x > screenWidth )
                     numBytes = screenWidth - x;
 
-                uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;                   
+                uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;
                 for (int i = 0; i < numBytes; i++) {
                     uint32_t bitcolumn = *bitmap++;
                     if (hbytes)
@@ -636,10 +640,14 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
     }
 
     for(uint32_t y=0; y<screenHeight; ++y ){
+        #ifdef POK_SIM
+        Pokitto::setDRAMptr(0,y); //needs to be called explicitly for pokitto_sim (no real controller!)
+        #endif // POK_SIM
         if(!maskY--){
             maskY = 8;
             mask >>= 1;
             if( !(mask & 1) && disabled ){
+                #ifndef POK_SIM
                 write_command(0x20);  // Horizontal DRAM Address
                 write_data(y);
                 write_command(0x21);  // Vertical DRAM Address
@@ -647,6 +655,9 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
                 write_command(0x22); // write data to DRAM
                 CLR_CS_SET_CD_RD_WR;
                 SET_MASK_P2;
+                #else
+                Pokitto::setDRAMptr(0,y);
+                #endif // POK_SIM
             }
             disabled = mask & 1;
         }
@@ -673,7 +684,6 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
         }
     }
 }
-
 }
 
 #endif

@@ -5953,7 +5953,7 @@
 
 1586706100 c:\pokittolib_latest\pokittolib\examples\helloworld\my_settings.h
 
-1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittocore.h
+1586857835 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittocore.h
 	<stdint.h>
 	<math.h>
 	"pwmout_api.h"
@@ -6028,7 +6028,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1581804249 c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_main.h
+1586710585 c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\sdl2\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -6342,7 +6342,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1581804249 c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\simlcd.h
+1586862403 c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\simlcd.h
 	<stdint.h>
 
 1581804249 c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\simeeprom.h
@@ -6367,7 +6367,7 @@
 
 1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\binary.h
 
-1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittoglobs.h
+1586716821 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittoglobs.h
 	<stdint.h>
 	"SimLCD.h"
 	"SimSound.h"
@@ -6595,7 +6595,7 @@
 	"Pokitto_settings.h"
 	<stdint.h>
 
-1581804248 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittocore.cpp
+1586857913 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittocore.cpp
 	"Pokitto_settings.h"
 	"PokittoCore.h"
 	"PokittoConsole.h"
@@ -6608,7 +6608,7 @@
 1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1586705055 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittodisplay.cpp
+1586858147 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittodisplay.cpp
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -6725,7 +6725,7 @@
 	"Pokitto_settings.h"
 	<SDL2/SDL.h>
 
-1581804249 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\pokittosimbuttons.cpp
+1586850311 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\pokittosimbuttons.cpp
 	"PokittoSimulator.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -6739,7 +6739,7 @@
 	"PokittoSimulator.h"
 	<time.h>
 
-1581804249 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\pokittosimulator.cpp
+1586836935 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\pokittosimulator.cpp
 	"PokittoSimulator.h"
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -6763,7 +6763,7 @@
 	"SimEEPROM.h"
 	<stdio.h>
 
-1581804249 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\simlcd.cpp
+1586853822 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\simlcd.cpp
 	"SimLCD.h"
 	"PokittoSimulator.h"
 	<algorithm>
@@ -6776,11 +6776,262 @@
 	<stdint.h>
 	"../POKITTO_CORE/SoundCommonImp.h"
 
-1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\soundcommonimp.h
+1586854014 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\soundcommonimp.h
 
 1581804249 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\writewav.cpp
 	"WriteWav.h"
 
 1586705055 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\pokittoframebuffer.cpp
 	"PokittoDisplay.h"
+
+1585953803 c:\pokittolib_latest\examples\p-type\my_settings.h
+
+1585872950 source:c:\pokittolib_latest\examples\p-type\entities\bullet.cpp
+	<global.h>
+
+1585943765 c:\pokittolib_latest\examples\p-type\global.h
+	<Pokitto.h>
+	"entities/Entity.h"
+	"states/State.h"
+
+1585901812 c:\pokittolib_latest\examples\p-type\entities\entity.h
+	<sprites.h>
+
+1585851076 c:\pokittolib_latest\examples\p-type\sprites.h
+
+1585853921 c:\pokittolib_latest\examples\p-type\states\state.h
+	<StateMachine.h>
+	"StateIntro.h"
+	"StateGame.h"
+	"StateGameOver.h"
+
+1585780290 c:\pokittolib_latest\examples\p-type\statemachine.h
+	<variant>
+
+1585866821 c:\pokittolib_latest\examples\p-type\states\stateintro.h
+	<Tilemap.hpp>
+
+1586705055 c:\pokittolib_latest\pokittolib\pokitto\pokitto_libs\tilemap\tilemap.hpp
+	"Pokitto.h"
+	<cstdint>
+
+1585916471 c:\pokittolib_latest\examples\p-type\states\stategame.h
+	<Tilemap.hpp>
+	"entities/Player.h"
+	"entities/Bullet.h"
+	"entities/Enemy.h"
+
+1585916504 c:\pokittolib_latest\examples\p-type\entities\player.h
+
+1585872538 c:\pokittolib_latest\examples\p-type\entities\bullet.h
+
+1585956131 c:\pokittolib_latest\examples\p-type\entities\enemy.h
+
+1585870739 c:\pokittolib_latest\examples\p-type\states\stategameover.h
+	<Tilemap.hpp>
+
+1585956165 source:c:\pokittolib_latest\examples\p-type\entities\enemy.cpp
+	"global.h"
+	"sfx/Boop.h"
+
+1585956689 c:\pokittolib_latest\examples\p-type\sfx\boop.h
+
+1585956339 source:c:\pokittolib_latest\examples\p-type\entities\player.cpp
+	<global.h>
+	<algorithm>
+
+1585953704 source:c:\pokittolib_latest\examples\p-type\main.cpp
+	"global.h"
+	<miloslav.h>
+
+1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\palettes\miloslav.h
+
+1585851076 source:c:\pokittolib_latest\examples\p-type\sprites.cpp
+
+1585919233 source:c:\pokittolib_latest\examples\p-type\states\stategame.cpp
+	<global.h>
+	<maps.h>
+
+1585914705 c:\pokittolib_latest\examples\p-type\maps.h
+
+1585912492 source:c:\pokittolib_latest\examples\p-type\states\stategameover.cpp
+	<Pokitto.h>
+	"global.h"
+	"images/gameover.h"
+
+1586334974 c:\pokittolib_latest\examples\p-type\images\gameover.h
+
+1585956464 source:c:\pokittolib_latest\examples\p-type\states\stateintro.cpp
+	<Pokitto.h>
+	"global.h"
+	"sfx/Boop.h"
+
+1586834725 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_core\tasmode.cpp
+	"Pokitto.h"
+	<MemOps>
+	"HWLCD.h"
+	"../POKITTO_SIM/SimLCD.h"
+
+1586833357 c:\pokittolib_latest\pokittolib\pokitto\pokitto_sim\memops
+	<cstdint>
+	<iostream>
+	<cstring>
+
+1586706100 source:c:\pokittolib_latest\examples\helloworld\main.cpp
+	"Pokitto.h"
+
+1586706100 c:\pokittolib_latest\examples\helloworld\my_settings.h
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\animation.cpp
+	"Pokitto.h"
+	"Animation.h"
+
+1586706100 c:\pokittolib_latest\examples\introduction\my_settings.h
+
+1586706100 c:\pokittolib_latest\examples\introduction\animation.h
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_cheeks.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_dreamy.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_eyepupil.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_flat.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_grin.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_halfpupil.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_heart.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_lefteye.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_lids_closed.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_lids_halfeyes.c
+	<stdint.h>
+	"Animation.h"
+
+1586706100 source:c:\pokittolib_latest\examples\introduction\m_lids_smug.c
+	<stdint.h>
+	"Animation.h"
+
+1586706101 source:c:\pokittolib_latest\examples\introduction\m_oh.c
+	<stdint.h>
+	"Animation.h"
+
+1586706101 source:c:\pokittolib_latest\examples\introduction\m_professoreyes.c
+	<stdint.h>
+	"Animation.h"
+
+1586706101 source:c:\pokittolib_latest\examples\introduction\m_righteye.c
+	<stdint.h>
+	"Animation.h"
+
+1586706101 source:c:\pokittolib_latest\examples\introduction\m_smile.c
+	<stdint.h>
+	"Animation.h"
+
+1586706101 source:c:\pokittolib_latest\examples\introduction\m_smile_open.c
+	<stdint.h>
+	"Animation.h"
+
+1586706101 source:c:\pokittolib_latest\examples\introduction\m_squint.c
+	<stdint.h>
+	"Animation.h"
+
+1586706101 source:c:\pokittolib_latest\examples\introduction\m_tongue.c
+	<stdint.h>
+	"Animation.h"
+
+1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_libs\micropython\my_settings.h
+
+1581804248 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_libs\micropython\main.cpp
+	"Pokitto.h"
+	"USBSerial.h"
+	"SEGGER_RTT.h"
+	"PythonBindings.h"
+	"PokittoFonts.h"
+
+1581804248 c:\pokittolib_latest\pokittolib\pokitto\pokitto_libs\micropython\pythonbindings.h
+
+1581804248 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_libs\micropython\pythonbindings.cpp
+	"PokittoCore.h"
+	"PokittoDisplay.h"
+	"Tilemap.hpp"
+	"PokittoCookie.h"
+	"PythonBindings.h"
+	"time.h"
+
+1581804249 source:c:\pokittolib_latest\pokittolib\pokitto\pokitto_libs\tilemap\tilemap.cpp
+	<cstdint>
+	<Pokitto.h>
+	"Tilemap.hpp"
+
+1586706100 source:c:\pokittolib_latest\examples\bitmap\bitmap.cpp
+	"Pokitto.h"
+	"pokitto_icon.h"
+
+1586706100 c:\pokittolib_latest\examples\bitmap\my_settings.h
+
+1586706100 c:\pokittolib_latest\examples\bitmap\pokitto_icon.h
+	<stdint.h>
+
+1586706101 source:c:\pokittolib_latest\examples\tracker\arrays.cpp
+	"Arrays.h"
+
+1586706101 c:\pokittolib_latest\examples\tracker\arrays.h
+	<stdint.h>
+
+1586706101 c:\pokittolib_latest\examples\tracker\my_settings.h
+
+1586706101 source:c:\pokittolib_latest\examples\tracker\main.cpp
+	"Pokitto.h"
+	"Arrays.h"
+	"Tracker.h"
+	"PatchSettings.h"
+
+1586706101 c:\pokittolib_latest\examples\tracker\tracker.h
+	"Pokitto.h"
+	"PokittoCookie.h"
+
+1586706101 c:\pokittolib_latest\examples\tracker\patchsettings.h
+	"Tracker.h"
+	"SDFileSystem.h"
+
+1586706101 source:c:\pokittolib_latest\examples\tracker\tracker.cpp
+	"Tracker.h"
+	"Arrays.h"
+
+1586706101 source:c:\pokittolib_latest\examples\mode15\mode15.cpp
+	"Pokitto.h"
+	"monkey16.h"
+
+1586706101 c:\pokittolib_latest\examples\mode15\my_settings.h
+
+1586706101 c:\pokittolib_latest\examples\mode15\monkey16.h
+	<stdint.h>
+
+1586706100 source:c:\pokittolib_latest\examples\digger_gb\main.cpp
+	"Pokitto.h"
+
+1586863099 c:\pokittolib_latest\examples\digger_gb\my_settings.h
 

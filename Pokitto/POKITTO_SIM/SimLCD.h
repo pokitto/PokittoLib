@@ -75,9 +75,9 @@ extern void lcdTile(int16_t x0, int16_t y0, int16_t width, int16_t height, uint1
 /** Directly fill a rectangle (x0,y0,x1,y1) in a position (no buffering) */
 extern void lcdRectangle(int16_t,int16_t,int16_t,int16_t,uint16_t);
 /** Update LCD from native Mode 1 */
-extern void lcdRefreshMode1(uint8_t* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr);
+extern void lcdRefreshMode1(const unsigned char* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr);
 /** Update LCD from native Mode 1 with sprites */
-extern void lcdRefreshMode1Spr(uint8_t* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool drawSpritesOnly);
+extern void lcdRefreshMode1Spr(const unsigned char* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr, Pokitto::SpriteInfo* sprites, bool drawSpritesOnly);
 /** Update LCD from native Mode 2 */
 extern void lcdRefreshMode2(uint8_t*, uint16_t*);
 /** Update LCD from native Mode 3 */
@@ -89,15 +89,37 @@ extern void lcdRefreshAB(uint8_t*, uint16_t*);
 /** Update LCD from Mode 14 */
 extern void lcdRefreshMode14(uint8_t*, uint16_t*);
 /** Update LCD from Mode 15 */
-extern void lcdRefreshMode15(uint16_t*, uint8_t*);
+extern void lcdRefreshMode15(const unsigned char*, uint16_t*);
 /** Update LCD from Lamenes mode */
 extern void lcdRefreshModeLamenes(uint8_t*, uint16_t*);
 /** Update LCD from Gameboy mode*/
 extern void lcdRefreshModeGBC(uint8_t* , uint16_t*);
 /** Update LCD from mode13 (110x88x256) mode*/
-extern void lcdRefreshMode13(uint8_t *, uint16_t*, uint8_t);
+extern void lcdRefreshMode13(const unsigned char*, uint16_t*, uint8_t);
 /** Update LCD from 1-bit tile mode */
 extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
+/** Update LCD from TAS tile mode */
+extern void lcdRefreshTASMode(uint8_t*, const uint16_t*);
+
+
+
+// C versions of Fmangas assembler hardware commands
+
+extern void flushLine(const uint16_t *palette, const uint8_t *line);
+void flushLine2X(const uint16_t *palette, const uint8_t *line);
+void pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+void pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+void pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+void updateMode1(const volatile uint32_t *palette, const uint8_t *buffer );
+void updateMode1Clear(const volatile uint32_t *palette, const uint8_t *buffer, int clearColor );
+void updateMode2(const uint16_t *palette, const uint8_t *buffer );
+void updateMode2Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
+void updateMode13(const uint16_t *palette, const uint8_t *buffer, int offset );
+void updateMode13Clear(const uint16_t *palette, const uint8_t *buffer, int offset, int clearColor );
+void updateMode15(const uint32_t *palette, const uint8_t *buffer );
+void updateMode15Clear(const uint32_t *palette, const uint8_t *buffer, int clear );
+void updateMode64(const uint16_t *palette, const uint8_t *buffer );
+void updateMode64Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
 
 }
 

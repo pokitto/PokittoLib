@@ -76,11 +76,13 @@ extern uint16_t soundbyte;
 #if POK_STREAMING_MUSIC
     #define SPEAKER 3
    // #define BUFFER_SIZE 512 //5120 // was 256
+#ifndef POK_SIM
 #if POK_HIGH_RAM == HIGH_RAM_MUSIC
     extern unsigned char *buffers[];
 #else
     extern unsigned char buffers[][BUFFER_SIZE];
 #endif
+#endif // POK_SIM
     extern volatile int currentBuffer, oldBuffer;
     extern volatile int bufindex, vol;
     extern volatile unsigned char * currentPtr;
