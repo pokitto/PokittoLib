@@ -406,7 +406,12 @@ void Core::askLoader() {
             countd--;
         }
         if (cBtn()) {while (cBtn()) buttons.pollButtons();jumpToLoader();countd=0;}
-        if (aBtn()) {while (aBtn()) buttons.pollButtons();countd=0;}
+        if (aBtn()) {
+                while (aBtn()) {
+                        buttons.pollButtons();
+                }
+                        countd=0;
+                }
         if (bBtn()) {while (bBtn()) buttons.pollButtons();countd=0;}
     }
     display.fontSize=1;
@@ -638,16 +643,16 @@ void Core::begin() {
 	    eeprom_write_byte((uint16_t*)EESETTINGS_SKIPINTRO, !(logoFlag&1));
 	}
 	logoFlag &= 1;
-	
+
 	#if POK_DISPLAYLOGO
         #if PROJ_DEVELOPER_MODE != 1
-	if( logoFlag == 0 ){	
+	if( logoFlag == 0 ){
 	    showLogo();
 	}
         #endif // PROJ_DEVELOPER_MODE
 	#endif // POK_DISPLAYLOGO
 
-	
+
 	display.enableDirectPrinting(true);
     display.directbgcolor = COLOR_BLACK;
     display.clearLCD();
@@ -690,7 +695,7 @@ void Core::begin() {
 	}
 
 	#endif
-	
+
 	display.enableDirectPrinting(false);
 	display.adjustCharStep=1;
 	display.adjustLineStep=1;
@@ -1023,7 +1028,7 @@ display.cursorY = oy;
 }
 #endif //(PROJ_GAMEBUINO > 0)
 
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 
 char* Core::filemenu(char *ext) {
     uint8_t oldPersistence = display.persistence;
@@ -1165,7 +1170,7 @@ char* Core::filemenu() {
 
 int8_t Core::menu(const char* const* items, uint8_t length) {
 if (display.color>3) display.color=1;
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 	display.persistence = false;
 	int8_t activeItem = 0;
 	int16_t currentY = display.height;
@@ -1241,7 +1246,7 @@ if (display.color>3) display.color=1;
 }
 
 void Core::keyboard(char* text, uint8_t length) {
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 	display.persistence = false;
 	//memset(text, 0, length); //clear the text
 	text[length-1] = '\0';
@@ -1392,14 +1397,14 @@ void Core::keyboard(char* text, uint8_t length) {
 }
 
 void Core::popup(const char* text, uint8_t duration){
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 	popupText = text;
 	popupTimeLeft = duration+12;
 #endif
 }
 
 void Core::updatePopup(){
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 	if (popupTimeLeft){
 		uint8_t yOffset = 0;
 		if(popupTimeLeft<12){

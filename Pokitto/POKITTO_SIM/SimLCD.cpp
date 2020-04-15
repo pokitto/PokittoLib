@@ -71,7 +71,6 @@ void Pokitto::lcdPixel(int16_t x, int16_t y, uint16_t c) {
     simulator.directSDLPixel(x,y,c);
 }
 
-
 void Pokitto::setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2) {
 	//ToDo Sim versions for these
 	/*write_command(0x37); write_data(x1);
@@ -105,13 +104,11 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
 }
 
 inline void Pokitto::setDRAMptr(uint16_t x, uint16_t y) {
-    simulator.dramptr = simulator.gfxbuf + (x*SIMH) + y;
+    //simulator.dramptr = simulator.gfxbuf + (x*SIMH) + y;
+    simulator.dramptr = simulator.gfxbuf + x + (y*SIMW); //tolandscape
 }
 
 inline void Pokitto::setup_data_16(uint16_t data){
-    //if (data != 0xFFFF && data !=0) {
-    //    simulator.aBtn();
-    //}
     simulator.datalines = data;
 }
 
@@ -331,10 +328,10 @@ for(x=0;x<84;x++)
  * @param updRectH The update rect.
  * @param paletteptr The screen palette.
 */
-void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr) {
+void Pokitto::lcdRefreshMode1(const unsigned char* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr) {
 
     uint16_t x,y;
-    uint16_t scanline[4][176]; // read 4 half-nibbles = 4 pixels at a time
+    uint16_t scanline[220];
     uint8_t *d, yoffset=0;
 
     // If not the full screen is updated, check the validity of the update rect.
@@ -352,18 +349,19 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
 
 
     #ifdef PROJ_SHOW_FPS_COUNTER
-    setDRAMptr(8, 0);
+    setDRAMptr(0, 8);
     #else
     setDRAMptr(0, 0);
     #endif
 
-    for (x=updRectX; x<updRectX+updRectW; x+=4) {
-        d = scrbuf+(x>>2);// point to beginning of line in data
+    for (y=updRectY; y<updRectY+updRectH; y++) {
+        d = (uint8_t*)scrbuf+y*(LCDWIDTH/4);// point to beginning of line in data
 
         /** find colours in one scanline **/
 
-        d += (updRectY * 220/4);
-        for (y=updRectY; y<updRectY+updRectH; y++) {
+        d += (updRectX/4);
+        int s =0;
+        for (x=updRectX; x<updRectX+updRectW; x+=4) {
             uint8_t tdata = *d;
             uint8_t t4 = tdata & 0x03; tdata >>= 2;// lowest half-nibble
             uint8_t t3 = tdata & 0x03; tdata >>= 2;// second lowest half-nibble
@@ -371,69 +369,27 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
             uint8_t t = tdata & 0x03;// highest half-nibble
 
             /** put nibble values in the scanlines **/
-            scanline[0][y] = paletteptr[t];
-            scanline[1][y] = paletteptr[t2];
-            scanline[2][y] = paletteptr[t3];
-            scanline[3][y] = paletteptr[t4];
+            scanline[s++] = paletteptr[t];
+            scanline[s++] = paletteptr[t2];
+            scanline[s++] = paletteptr[t3];
+            scanline[s++] = paletteptr[t4];
 
-            d += 220/4; // jump to read byte directly below in screenbuffer
+            d++; // jump to next byte
         }
 
         #ifdef PROJ_SHOW_FPS_COUNTER
-        if (x>=8 ) {
+        if (y>=8 ) {
         #else
         {
 
         #endif
 
-            // Draw 8 vertical pixels at a time for performance reasons
-            setDRAMptr(x, updRectY);
-            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            }
-            setDRAMptr(x+1, updRectY);
-            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            }
-            setDRAMptr(x+2, updRectY);
-            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            }
-            setDRAMptr(x+3, updRectY);
-            for (uint8_t s=updRectY; s<updRectY+updRectH;) {
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-            }
+        setDRAMptr(updRectX, y);
+        for (uint8_t s=updRectX; s<updRectX+updRectW;) {
+            setup_data_16(scanline[s++]);CLR_WR;SET_WR;
+        }
         }
     }
-
     #ifdef POK_SIM
     simulator.refreshDisplay();
     #endif
@@ -524,7 +480,7 @@ void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint8_t updRectX, uint8_t updRec
  * @param drawSpritesOnly True, if only sprites are drawn. False, if both sprites and the screen buffer are drawn.
 */
 void Pokitto::lcdRefreshMode1Spr(
-    uint8_t * scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr,
+    const unsigned char* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, uint16_t* paletteptr,
     SpriteInfo* sprites, bool drawSpritesOnly) {
 
     // In direct mode draw only sprites and their dirty rects. Return now if there are no sprites
@@ -532,7 +488,7 @@ void Pokitto::lcdRefreshMode1Spr(
         return;
 
     uint16_t x,y;
-    uint16_t scanline[4][176]; // read 4 half-nibbles (= 4 pixels) at a time
+    uint16_t scanline[220]; // read 4 half-nibbles (= 4 pixels) at a time
     const uint8_t transparentColor = 0;  // fixed palette index 0 for transparency
 
     // If not the full screen is updated, check the validity of the update rect.
@@ -561,11 +517,9 @@ void Pokitto::lcdRefreshMode1Spr(
     if (!drawSpritesOnly) setDRAMptr(0, 0);
     #endif
 
-    //*** GO THROUGH EACH VERTICAL GROUP OF 4 SCANLINES.***
+    for (y=0; y<LCDHEIGHT; y++) {
 
-    for (x=0; x<LCDWIDTH; x+=4) {
-
-        uint8_t *screenBufScanlineAddr = scrbuf + (x>>2);// point to beginning of line in data
+        uint8_t *screenBufScanlineAddr = (uint8_t*) scrbuf + (y*LCDWIDTH/4);// point to beginning of line in data
 
         /*Prepare scanline start address for sprites that are visible in this vertical scanline. Sprite width cannot exceed the screen width*/
         uint8_t *sprScanlineAddr[SPRITE_COUNT];  // Sprite start address for the scanline
@@ -573,8 +527,8 @@ void Pokitto::lcdRefreshMode1Spr(
         const uint8_t BITSHIFT_MODE_MIDDLE_BYTE = 0;
         const uint8_t BITSHIFT_MODE_FIRST_BYTE = 1;
         const uint8_t BITSHIFT_MODE_LAST_BYTE = 2;
-        uint8_t scanlineMinY = 255; // Init to uninitialized value. Do not draw by default.
-        uint8_t scanlineMaxY = 0; // Init to uninitialized value. Do not draw by default.
+        uint8_t scanlineMinX = 255; // Init to uninitialized value. Do not draw by default.
+        uint8_t scanlineMaxX = 0; // Init to uninitialized value. Do not draw by default.
 
         //*** CALCULATE DIRTY RECTS AND RESOLVE WHICH SPRITES BELONG TO THIS SCANLINE GROUP ***
 
@@ -638,21 +592,21 @@ void Pokitto::lcdRefreshMode1Spr(
                     // *** COMBINE DIRTY RECTS FOR THIS SCANLINE GROUP ***
 
                     // Dirty rect
-                    int16_t sprDirtyYMin = min(spry, sprOldY);
-                    sprDirtyYMin = max(sprDirtyYMin, (int16_t)0);
-                    int16_t sprDirtyYMax = max(spry, sprOldY);
+                    int16_t sprDirtyXMin = min(sprx, sprOldX);
+                    sprDirtyXMin = max(sprDirtyXMin, (int16_t)0);
+                    int16_t sprDirtyXMax = max(sprx, sprOldX);
                     if (isCurrentSpriteOutOfScreen)
-                        sprDirtyYMax = sprOldY;
+                        sprDirtyXMax = sprOldX;
                     if (isOldSpriteOutOfScreen)
-                        sprDirtyYMax = spry;
-                    int16_t sprDirtyYMaxEnd = sprDirtyYMax + sprh - 1;
-                    sprDirtyYMaxEnd = min(sprDirtyYMaxEnd, (int16_t)(LCDHEIGHT - 1));  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
+                        sprDirtyXMax = sprx;
+                    int16_t sprDirtyXMaxEnd = sprDirtyXMax + sprw - 1;
+                    sprDirtyXMaxEnd = min(sprDirtyXMaxEnd, (int16_t)(LCDWIDTH - 1));  // Should use LCDHEIGHT instead of screenH? Same with other screen* ?
 
                     // Get the scanline min and max y values for drawing
-                    if (sprDirtyYMin < scanlineMinY)
-                        scanlineMinY = sprDirtyYMin;
-                    if (sprDirtyYMaxEnd > scanlineMaxY)
-                        scanlineMaxY = sprDirtyYMaxEnd;
+                    if (sprDirtyXMin < scanlineMinX)
+                        scanlineMinX = sprDirtyXMin;
+                    if (sprDirtyXMaxEnd > scanlineMaxX)
+                        scanlineMaxX = sprDirtyXMaxEnd;
 
                    // *** PREPARE SPRITE FOR DRAWING ***
 
@@ -689,30 +643,30 @@ void Pokitto::lcdRefreshMode1Spr(
 
         // *** ADJUST THE SCANLINE GROUP HEIGHT ***
 
-        // The height must dividable by 8. That is needed because later we copy 8 pixels at a time to the LCD.
-        if (scanlineMaxY - scanlineMinY + 1 > 0) {
-            uint8_t scanlineH = scanlineMaxY - scanlineMinY + 1;
-            uint8_t addW = 8 - (scanlineH & 0x7);
+        // The width must dividable by 8. That is needed because later we copy 8 pixels at a time to the LCD.
+        if (scanlineMaxX - scanlineMinX + 1 > 0) {
+            uint8_t scanlineW = scanlineMaxX - scanlineMinX + 1;
+            uint8_t addW = 8 - (scanlineW & 0x7);
 
             // if height is not dividable by 8, make it be.
             if (addW != 0) {
-                if (scanlineMinY > addW )
-                    scanlineMinY -= addW;
-                else if( scanlineMaxY + addW < updRectY+updRectH)
-                    scanlineMaxY += addW;
+                if (scanlineMinX > addW )
+                    scanlineMinX -= addW;
+                else if( scanlineMaxX + addW < updRectX+updRectW)
+                    scanlineMaxX += addW;
                 else {
                     // Draw full height scanline
-                    scanlineMinY = updRectY;
-                    scanlineMaxY = updRectY+updRectH-1;
+                    scanlineMinX = updRectX;
+                    scanlineMaxX = updRectX+updRectW-1;
                 }
             }
         }
 
         // *** COMBINE THE SCANLINE GROUP OF THE SCREEN BUFFER AND ALL SPRITES ***
 
-        // Find colours in this group of 4 scanlines
-        screenBufScanlineAddr += (scanlineMinY * 220/4);
-        for (y=scanlineMinY; y<=scanlineMaxY; y++)
+        screenBufScanlineAddr += scanlineMinX;
+        int s =0;
+        for (x=scanlineMinX; x<=scanlineMaxX; x+=4)
         {
             // get the screen buffer data first
             uint8_t tdata = *screenBufScanlineAddr;
@@ -743,12 +697,12 @@ void Pokitto::lcdRefreshMode1Spr(
             }
 
             // put the result nibble values in the scanline
-            scanline[0][y] = p;
-            scanline[1][y] = p2;
-            scanline[2][y] = p3;
-            scanline[3][y] = p4;
+            scanline[s++] = p;
+            scanline[s++] = p2;
+            scanline[s++] = p3;
+            scanline[s++] = p4;
 
-            screenBufScanlineAddr += 220>>2; // jump to read byte directly below in screenbuffer
+            screenBufScanlineAddr++; // jump to read next byte in screenbuffer
         }
 
         // *** DRAW THE SCANLINE GROUP TO LCD
@@ -756,56 +710,11 @@ void Pokitto::lcdRefreshMode1Spr(
 #ifdef PROJ_SHOW_FPS_COUNTER
         if (x>=8 && scanlineMaxY - scanlineMinY +1 > 0) {
 #else
-        if (scanlineMaxY - scanlineMinY +1 > 0) {
+        if (scanlineMaxX - scanlineMinX +1 > 0) {
 #endif
-            // Draw 8 vertical pixels at a time for performance reasons
-
-            setDRAMptr(x, scanlineMinY);
-            for (uint8_t s=scanlineMinY;s<=scanlineMaxY;) {
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-            }
-
-            setDRAMptr(x+1, scanlineMinY);
-            for (uint8_t s=scanlineMinY;s<=scanlineMaxY;) {
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-            }
-
-            setDRAMptr(x+2, scanlineMinY);
-            for (uint8_t s=scanlineMinY;s<=scanlineMaxY;) {
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[2][s++]);CLR_WR;SET_WR;
-            }
-
-            setDRAMptr(x+3, scanlineMinY);
-            for (uint8_t s=scanlineMinY;s<=scanlineMaxY;) {
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
-                setup_data_16(scanline[3][s++]);CLR_WR;SET_WR;
+            setDRAMptr(scanlineMinX, y);
+            for (uint8_t t=scanlineMinX;t<=scanlineMaxX;) {
+                setup_data_16(scanline[t++]);CLR_WR;SET_WR;
             }
         }
     }
@@ -825,85 +734,45 @@ void Pokitto::lcdRefreshMode1Spr(
 
 void Pokitto::lcdRefreshMode2(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y,xptr;
-uint16_t scanline[2][88]; // read two nibbles = pixels at a time
+uint16_t scanline[110]; // one horizontal line on "lcd", each pixel drawn twice
 uint8_t *d, yoffset=0;
 
 xptr = 0;
-setDRAMptr(xptr,yoffset);
 
 
-for(x=0;x<110;x+=2)
+for(y=0;y<88;y++)
   {
-    d = scrbuf+(x>>1);// point to beginning of line in data
+    d = scrbuf+(y*55); // point to beginning of line in source data
+
     /** find colours in one scanline **/
     uint8_t s=0;
-    for(y=0;y<88;y++)
+    for(x=0;x<110;x+=2) // 55 loops as 2 pixels are packed into one byte
     {
-    uint8_t t = *d >> 4; // higher nibble
-    uint8_t t2 = *d & 0xF; // lower nibble
+    uint8_t t = *d >> 4; // higher nibble of source byte
+    uint8_t t2 = *d & 0xF; // lower nibble of source byte
     /** higher nibble = left pixel in pixel pair **/
-    scanline[0][s] = paletteptr[t];
-    scanline[1][s++] = paletteptr[t2];
-    /** testing only **/
-    //scanline[0][s] = 0xFFFF*(s&1);
-    //scanline[1][s] = 0xFFFF*(!(s&1));
-    //s++;
-    /** until here **/
-    d+=110/2; // jump to read byte directly below in screenbuffer
+    scanline[s++] = paletteptr[t]; // pixel n as RGB565 color
+    scanline[s++] = paletteptr[t2]; // pixel n+1 as RGB565 color
+    d++; // next source byte
     }
-    s=0;
     /** draw scanlines **/
-    /** leftmost scanline twice**/
 
     #ifdef PROJ_SHOW_FPS_COUNTER
     if (x<4) continue;
     setDRAMptr(x<<1, 0);
     #endif
 
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    /** draw scanline twice**/
+    setDRAMptr(xptr,y*2); // point to beginning of dram in lcd
+    for (s=0;s<110;) {
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR; // pixel n twice to lcd
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR; // pixel n+1 twice to lcd
+    }
+    for (s=0;s<110;) {
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR; // pixel n twice to lcd
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR; // pixel n+1 twice to lcd
     }
 
-    for (s=0;s<88;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-    /** rightmost scanline twice**/
-    //setDRAMptr(xptr++,yoffset);
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
-
-    for (s=0;s<88;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-    }
   }
     simulator.refreshDisplay();
 }
@@ -1341,108 +1210,102 @@ for(x=0;x<160;x+=4)
 }
 
 
-void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
+void Pokitto::lcdRefreshMode13(const unsigned char* scrbuf, uint16_t* paletteptr, uint8_t offset){
 uint16_t x,y;
 uint16_t scanline[110];
 uint8_t *d;
 
 setDRAMptr(0,0);
 
-for(x=0;x<110;x++)
+for(y=0;y<88;y++)
  {
-    d = scrbuf+x;// point to beginning of line in data
+    d = (uint8_t*)scrbuf+y*110;// point to beginning of line in data
     uint8_t s=0;
-    for(y=0;y<88;y++)
+    for(x=0;x<110;x++)
     {
         uint8_t t = *d;
         scanline[s++] = paletteptr[(t+offset)&255];
-        d+=110; // jump to read byte directly below in screenbuffer
+        d++; // jump to next source byte
     }
     s=0;
-    for (s=0;s<88;) {
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    // draw scanline twice
+    for (s=0;s<110;) {
         setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
     }
-    for (s=0;s<88;) {
+    for (s=0;s<110;) {
         setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
-  }
-
+    }
  }
 }
 
 
-void Pokitto::lcdRefreshMode15(uint16_t* paletteptr, uint8_t* scrbuf){
+void Pokitto::lcdRefreshMode15(const unsigned char* scrbuf, uint16_t* paletteptr){
 uint16_t x,y,xptr;
-uint16_t scanline[2][176]; // read two nibbles = pixels at a time
+uint16_t scanline[220]; // read two nibbles = pixels at a time
 uint8_t *d, yoffset=0;
 
 xptr = 0;
 setDRAMptr(xptr,yoffset);
 
-for(x=0;x<220;x+=2)
+for(y=0;y<176;y++)
   {
-    d = scrbuf+(x>>1);// point to beginning of line in data
+    d = (uint8_t*)scrbuf+(y*110);// point to beginning of line in data
     /** find colours in one scanline **/
     uint8_t s=0;
-    for(y=0;y<176;y++)
+    for(x=0;x<220;x+=2)
     {
     uint8_t t = *d >> 4; // higher nibble
     uint8_t t2 = *d & 0xF; // lower nibble
     /** higher nibble = left pixel in pixel pair **/
-    scanline[0][s] = paletteptr[t];
-    scanline[1][s++] = paletteptr[t2];
+    scanline[s++] = paletteptr[t];
+    scanline[s++] = paletteptr[t2];
     /** testing only **/
     //scanline[0][s] = 0xFFFF*(s&1);
     //scanline[1][s] = 0xFFFF*(!(s&1));
     //s++;
     /** until here **/
-    d+=220/2; // jump to read byte directly below in screenbuffer
+    d++; // jump to read next source byte
     }
     s=0;
     /** draw scanlines **/
-    /** leftmost scanline twice**/
 
     #ifdef PROJ_SHOW_FPS_COUNTER
-    if (x<4) continue;
-    setDRAMptr(x<<1, 0);
+    if (y<4) continue;
+    setDRAMptr(0, y);
     #endif
 
-    for (s=0;s<176;) {
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[0][s++]);CLR_WR;SET_WR;
-    }
-
-    /** rightmost scanline twice**/
-    //setDRAMptr(xptr++,yoffset);
-    for (s=0;s<176;) {
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
-        setup_data_16(scanline[1][s++]);CLR_WR;SET_WR;
+    for (s=0;s<220;) {
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;
     }
   }
     simulator.refreshDisplay();
+}
+
+
+void Pokitto::pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
+    while (count--) {
+        if (*src !=0 ) *dest = *src + recolor;
+        src++; dest++; //to next pixel
+    }
+}
+
+void Pokitto::pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
+    src += count;
+    while (count--) {
+        if (*src !=0 ) *dest = *src + recolor;
+        src--; dest++; //to next pixel
+    }
+}
+
+void Pokitto::pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
+    while (count--) {
+        *dest = *src + recolor;
+        src++; dest++; //to next pixel
+    }
+}
+
+void Pokitto::flushLine(const uint16_t *palette, const uint8_t *line){
+  for(int i=0; i<220; ++i){
+    Pokitto::blitWord(palette[line[i]]);
+  }
 }
