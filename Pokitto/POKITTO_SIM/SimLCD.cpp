@@ -1309,3 +1309,12 @@ void Pokitto::flushLine(const uint16_t *palette, const uint8_t *line){
     Pokitto::blitWord(palette[line[i]]);
   }
 }
+
+void Pokitto::flushLine2X(const uint16_t *palette, const uint8_t *line){
+
+  // Blit lowres screen 2x zoomed
+  for(int i=0; i<110; ++i){
+    Pokitto::blitWord(palette[line[i]]);
+    Pokitto::blitWord(palette[line[i]]);
+  }
+}
