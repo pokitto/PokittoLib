@@ -450,7 +450,7 @@ namespace ptui
         const TilesetPixel* _tilesetImage = nullptr;
         Tiles _tiles = {};
         
-        Color _colorLUT[256];
+        Color _colorLUT[clutSizeP];
     };
 }
 
