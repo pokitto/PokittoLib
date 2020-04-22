@@ -41,6 +41,16 @@
 #include "PythonBindings.h"
 #include "time.h"
 
+#ifdef TASUI
+// Include for the TASUI API.
+#include <tasui>
+
+// Include for the Tileset.
+#include <puits_UltimateUtopia.h>
+#include <ptui_StandardUITilesetDefinition.hpp>
+using PUI=Pokitto::UI;
+#endif
+
 using namespace Pokitto;
 
 #if MICROPY_ENABLE_GC==1  // This means micropython is used
@@ -195,12 +205,6 @@ void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, boo
         Display::drawBitmapDataYFlipped(x, y, w, h, buffer );
     else
         Display::drawBitmapData(x, y, w, h, buffer );
-}
-
-void Pok_Display_setSprite(uint8_t index, int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, uint8_t *buffer, uint16_t* palette16x16bit, bool doResetDirtyRect) {
-}
-
-void Pok_Display_setSpritePos(uint8_t index, int16_t x, int16_t y) {
 }
 
 uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b) {
@@ -439,9 +443,9 @@ void Pok_GetTileIds( void* _this, int32_t tlx, int32_t tly, int32_t brx, int32_t
 void* Pok_CreateCookie(char* name, uint8_t* cookieBufPtr, uint32_t cookieBufLen)
 {
     Pokitto::Cookie* mycookiePtr = new Pokitto::Cookie;
-    
+
     //initialize cookie
-    if(mycookiePtr )mycookiePtr->beginWithData(name, cookieBufLen, (char*)cookieBufPtr); 
+    if(mycookiePtr )mycookiePtr->beginWithData(name, cookieBufLen, (char*)cookieBufPtr);
 
     return (void*)mycookiePtr;
 }
@@ -460,6 +464,64 @@ void Pok_SaveCookie(void* mycookiePtr)
 {
     // Save cookie if this is the best time
     ((Pokitto::Cookie*)mycookiePtr)->saveCookie();
+}
+
+// *** TAS UI
+
+void Pok_TasUI_setCursor(int32_t col, int32_t row)
+{
+    #ifdef TASUI
+    PUI::setCursor(col, row);
+    #endif
+}
+
+void Pok_TasUI_printString(char* text)
+{
+    #ifdef TASUI
+    PUI::printString(text);
+    #endif
+}
+
+void Pok_TasUI_printInteger(int32_t number)
+{
+    #ifdef TASUI
+    PUI::printInteger(number);
+    #endif
+}
+
+void Pok_TasUI_setTile(int32_t col, int32_t row, int32_t id)
+{
+    #ifdef TASUI
+    PUI::setTile(col, row, id);
+    #endif
+}
+
+void Pok_TasUI_clear()
+{
+    #ifdef TASUI
+    PUI::clear();
+    #endif
+}
+
+void Pok_TasUI_fillRectTiles(int32_t col1, int32_t row1, int32_t col2, int32_t row2, int32_t id)
+{
+    #ifdef TASUI
+    PUI::fillRectTiles(col1, row1, col2, row2, id);
+    #endif
+}
+
+void Pok_TasUI_drawBox(int32_t col1, int32_t row1, int32_t col2, int32_t row2)
+{
+    #ifdef TASUI
+    PUI::drawBox(col1, row1, col2, row2);
+    #endif
+}
+
+ void Pok_TasUI_drawGauge(int32_t col1, int32_t col2, int32_t row, int32_t current, int32_t maxValue )
+{
+    #ifdef TASUI
+    PUI::drawGauge(col1, col2, row, current, maxValue);
+    #endif
 }
 
 // For compatibility in linking
