@@ -304,8 +304,10 @@ void Simulator::refreshDisplay() {
     //convert simulated dram buffer to a pixel texture
     uint32_t q=0;
     #if SIM_PORTRAIT != 1
-    for (uint16_t x=0; x < SIMW; x++) {
-        for (uint16_t y=0; y < SIMH; y++, p++) {
+    //for (uint16_t x=0; x < SIMW; x++) {
+    //    for (uint16_t y=0; y < SIMH; y++, p++) {
+    for (uint16_t y=0; y < SIMH; y++) { //tolandscape
+        for (uint16_t x=0; x < SIMW; x++, p++) {
             q = x*4 + y * SIMW *4;
             uint16_t R,G,B;
             uint16_t c;
@@ -431,11 +433,13 @@ void Simulator::refreshDisplay() {
     mutex=0;
 }
 
+
 void Simulator::directSDLPixel(int16_t x, int16_t y, uint16_t color) {
 	if ((x < 0) || (x >= POK_LCD_W) || (y < 0) || (y >= POK_LCD_H))
 	return;
     //uint16_t rgbColor = palette[color];
-    uint16_t p = (x*POK_LCD_H) + y;
+    //uint16_t p = (x*POK_LCD_H) + y;
+    uint16_t p = x + (y*POK_LCD_W); //tolandscape
     gfxbuf[p]=color;
 }
 

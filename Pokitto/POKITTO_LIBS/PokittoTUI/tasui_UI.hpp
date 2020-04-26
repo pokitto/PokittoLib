@@ -20,6 +20,7 @@ namespace tasui
 		using Color = std::uint8_t;
 		using Tile = std::uint8_t;
 		using Delta = std::uint8_t;
+		using Symbol = ptui::Symbol;
 		static constexpr int tileWidth = TASUI_TILE_WIDTH;
 		static constexpr int tileHeight = TASUI_TILE_HEIGHT;
 		static constexpr int mapColumns = TASUI_COLUMNS;
@@ -122,6 +123,9 @@ namespace tasui
         // - That is, when `color` is encountered in the Tileset, `newColor` will be returned instead.
         // - Using `0` as `newColor` will make the color transparent (if transparency is enabled)!
         static void mapColor(Color color, Color newColor) noexcept;
+		
+		// Returns the mapped colors.
+		static Color mappedColor(Color color) noexcept;
         
         // Resets the mapping to a default x => x setting.
         static void resetCLUT() noexcept;
@@ -160,6 +164,12 @@ namespace tasui
         // Sets where to draw the next character.
         // - Clamped to the Cursor Bounding Box.
         static void setCursor(int cursorColumn, int cursorRow) noexcept;
+		
+		// Returns the cursor's column number.
+		static int cursorColumn() noexcept;
+		// Returns the cursor's row number.
+		static int cursorRow() noexcept;
+		
         
         // Sets the delta to apply for each printed tile after this call.
         // This usually change the color, depending on the main palette and the CLUT (if enabled).

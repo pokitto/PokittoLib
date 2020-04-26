@@ -161,6 +161,17 @@ namespace ptui
             _cursorColumn = std::max<int>(_cursorFirstColumn, std::min<int>(cursorColumn, _cursorLastColumn));
             _cursorRow = std::max<int>(_cursorFirstRow, std::min<int>(cursorRow, _cursorLastRow));
         }
+		
+		// Returns the current cursor's column number.
+		int cursorColumn() const noexcept
+		{
+			return _cursorColumn;
+		}
+		// Returns the current cursor's row number.
+		int cursorRow() const noexcept
+		{
+			return _cursorRow;
+		}
         
         // Sets the delta to apply for each printed tile after this call.
         // This usually change the color, depending on the main palette and the CLUT (if enabled).

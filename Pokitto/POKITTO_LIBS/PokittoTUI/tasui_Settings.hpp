@@ -25,15 +25,13 @@
 #			error TASUI requires TASMODE or TASMODELOW
 #		endif
 
-// Tile size is not overridable (yet).
-#		ifdef TASUI_TILE_WIDTH
-#			error TASUI_TILE_WIDTH cannot be defined.
+// This means a different tileset will have to be provided. Please keep that in mind!
+#		ifndef TASUI_TILE_WIDTH
+#			define TASUI_TILE_WIDTH 6
 #		endif // TASUI_TILE_WIDTH
-#		define TASUI_TILE_WIDTH 6
-#		ifdef TASUI_TILE_HEIGHT
-#			error TASUI_TILE_HEIGHT cannot be defined.
+#		ifndef TASUI_TILE_HEIGHT
+#			define TASUI_TILE_HEIGHT 6
 #		endif // TASUI_TILE_HEIGHT
-#		define TASUI_TILE_HEIGHT 6
 
 
 #		ifndef TASUI_COLUMNS

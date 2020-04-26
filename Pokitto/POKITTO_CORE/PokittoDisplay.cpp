@@ -118,7 +118,11 @@ uint8_t Display::m_colordepth = PROJ_COLORDEPTH;
 uint8_t Display::width = LCDWIDTH;
 uint8_t Display::height = LCDHEIGHT;
 
+#ifndef POK_SIM
 uint8_t __attribute__((section (".bss"))) __attribute__ ((aligned)) Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
+#else
+uint8_t Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
+#endif // POK_SIM
 
 Display::Display() {
     m_scrbuf = screenbuffer;
@@ -200,7 +204,7 @@ void Display::setCursor(int16_t x,int16_t y) {
  * @param updRectH The update rect.
  */
 void Display::update(bool useDirectDrawMode) {
-    
+
     if (!useDirectDrawMode)
         lcdRefresh(m_scrbuf, useDirectDrawMode);
 
@@ -573,7 +577,7 @@ void Display::drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap)
     int16_t w = *bitmap;
     int16_t h = *(bitmap + 1);
     //add an offset to the pointer to start after the width and height
-    bitmap = bitmap + 2; 
+    bitmap = bitmap + 2;
     drawBitmapData(x, y, w, h, bitmap);
 }
 
@@ -596,7 +600,7 @@ void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h,
     else if (m_colordepth==4) drawBitmapDataXFlipped4BPP(x, y, w, h, bitmap);
     /** 8 bpp mode */
     else if (m_colordepth==8) drawBitmapDataXFlipped8BPP(x, y, w, h, bitmap);
-    
+
 }
 
 void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
@@ -1054,10 +1058,13 @@ void Display::lcdRefresh(const unsigned char* scr, bool useDirectDrawMode) {
 #endif
 #if PROJ_SCREENMODE == TASMODE
     lcdRefreshTASMode(const_cast<uint8_t*>(scr), paletteptr);
+    #ifdef POK_SIM
+    simulator.refreshDisplay();
+    #endif
 #endif
 
 #if PROJ_SCREENMODE == MODE_HI_4COLOR
-    lcdRefreshMode1(scr, paletteptr);
+    lcdRefreshMode1(scr, 0, 0, 220, 176, paletteptr);
 #endif
 
 #if PROJ_SCREENMODE == MODE13

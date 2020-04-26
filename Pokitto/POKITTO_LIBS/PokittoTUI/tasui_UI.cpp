@@ -178,6 +178,10 @@ namespace tasui
 	{
 		uiTileMap.mapColor(color, newColor);
 	}
+	UI::Color UI::mappedColor(Color color) noexcept
+	{
+		return uiTileMap.mappedColor(color);
+	}
 	
 	void UI::resetCLUT() noexcept
 	{
@@ -213,6 +217,16 @@ namespace tasui
 	void UI::setCursor(int cursorColumn, int cursorRow) noexcept
 	{
 		uiTileMap.setCursor(cursorColumn, cursorRow);
+	}
+		
+	int UI::cursorColumn() noexcept
+	{
+		return uiTileMap.cursorColumn();
+	}
+	
+	int UI::cursorRow() noexcept
+	{
+		return uiTileMap.cursorRow();
 	}
 	
 	void UI::setCursorDelta(Delta delta) noexcept

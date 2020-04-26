@@ -17,7 +17,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/HelloWorld" />
+					<Add directory="../../../Examples/HelloWorld" />
 				</Compiler>
 			</Target>
 			<Target title="Introduction">
@@ -29,7 +29,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Introduction" />
+					<Add directory="../../../Examples/Introduction" />
 				</Compiler>
 			</Target>
 			<Target title="MicroPython">
@@ -58,7 +58,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Bitmap" />
+					<Add directory="../../../Examples/Bitmap" />
 				</Compiler>
 			</Target>
 			<Target title="SynthTest">
@@ -71,7 +71,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/SynthTest" />
+					<Add directory="../../../Examples/SynthTest" />
 				</Compiler>
 			</Target>
 			<Target title="Sprites">
@@ -83,7 +83,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Sprites" />
+					<Add directory="../../../Examples/Sprites" />
 				</Compiler>
 			</Target>
 			<Target title="Tracker">
@@ -96,7 +96,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/Tracker" />
+					<Add directory="../../../Examples/Tracker" />
 				</Compiler>
 			</Target>
 			<Target title="Mode13">
@@ -108,7 +108,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Mode13" />
+					<Add directory="../../../Examples/Mode13" />
 				</Compiler>
 			</Target>
 			<Target title="Mode15">
@@ -120,7 +120,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Mode15" />
+					<Add directory="../../../Examples/Mode15" />
 				</Compiler>
 			</Target>
 			<Target title="Zuzupong">
@@ -132,19 +132,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Zuzupong" />
-				</Compiler>
-			</Target>
-			<Target title="SDCardFileIO">
-				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin/Debug" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
-				<Compiler>
-					<Add option="-g" />
-					<Add directory="../../Examples/HelloWorld" />
+					<Add directory="../../../Examples/Zuzupong" />
 				</Compiler>
 			</Target>
 			<Target title="SaveHighscore">
@@ -157,7 +145,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/SaveHighscore" />
+					<Add directory="../../../Examples/SaveHighscore" />
 				</Compiler>
 			</Target>
 			<Target title="Jetpack">
@@ -169,7 +157,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Jetpack" />
+					<Add directory="../../../Examples/Jetpack" />
 				</Compiler>
 			</Target>
 			<Target title="Armageddon">
@@ -181,7 +169,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Armageddon" />
+					<Add directory="../../../Examples/Armageddon" />
 				</Compiler>
 			</Target>
 			<Target title="Digger_GB">
@@ -193,7 +181,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Digger_GB" />
+					<Add directory="../../../Examples/Digger_GB" />
 				</Compiler>
 			</Target>
 			<Target title="Artillery_GB">
@@ -205,7 +193,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Artillery_GB" />
+					<Add directory="../../../Examples/Artillery_GB" />
 				</Compiler>
 			</Target>
 			<Target title="Pakman_GB">
@@ -217,7 +205,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Pakman_GB" />
+					<Add directory="../../../Examples/Pakman_GB" />
 				</Compiler>
 			</Target>
 			<Target title="Cratebuino_GB">
@@ -230,7 +218,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DOLDINCLUSIVERANDOM" />
-					<Add directory="../../Examples/Cratebuino_GB" />
+					<Add directory="../../../Examples/Cratebuino_GB" />
 				</Compiler>
 			</Target>
 			<Target title="101Starships_GB">
@@ -243,7 +231,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/101Starships_GB" />
+					<Add directory="../../../Examples/101Starships_GB" />
 				</Compiler>
 			</Target>
 			<Target title="Flappy_GB">
@@ -256,7 +244,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/Flappy_GB" />
+					<Add directory="../../../Examples/Flappy_GB" />
 				</Compiler>
 			</Target>
 			<Target title="Lander_GB">
@@ -269,7 +257,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/Lander_GB" />
+					<Add directory="../../../Examples/Lander_GB" />
 				</Compiler>
 			</Target>
 			<Target title="Minesweeper_AB">
@@ -282,7 +270,7 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
-					<Add directory="../../Examples/Minesweeper/Minesweeper" />
+					<Add directory="../../../Examples/Minesweeper/Minesweeper" />
 					<Add directory="../POKITTO_XTERNALS/Arduino" />
 					<Add directory="../POKITTO_XTERNALS/Arduboy2/src" />
 				</Compiler>
@@ -296,7 +284,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../Examples/Scroll2Layers" />
+					<Add directory="../../../Examples/Scroll2Layers" />
 				</Compiler>
 			</Target>
 			<Target title="SFXeditor">
@@ -309,7 +297,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/SFXeditor" />
+					<Add directory="../../../Examples/SFXeditor" />
 				</Compiler>
 			</Target>
 			<Target title="PlayMusic">
@@ -322,13 +310,33 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DJONNE" />
-					<Add directory="../../Examples/PlayMusic" />
+					<Add directory="../../../Examples/PlayMusic" />
+				</Compiler>
+			</Target>
+			<Target title="P-Type (TAS example)">
+				<Option output="bin/Debug/Pokitto_sim" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../../../Examples/P-Type" />
+					<Add directory="../../../Examples/P-Type/entities" />
+					<Add directory="../../../Examples/P-Type/images" />
+					<Add directory="../../../Examples/P-Type/maps" />
+					<Add directory="../../../Examples/P-Type/music" />
+					<Add directory="../../../Examples/P-Type/scripts" />
+					<Add directory="../../../Examples/P-Type/sfx" />
+					<Add directory="../../../Examples/P-Type/sprites" />
+					<Add directory="../../../Examples/P-Type/states" />
 				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-std=gnu++11" />
+			<Add option="-std=gnu++17" />
 			<Add option="-fsigned-char" />
 			<Add option="-DPOK_SIM" />
 			<Add directory="SDL2/include" />
@@ -344,6 +352,8 @@
 			<Add directory="../POKITTO_CORE/FONTS" />
 			<Add directory="tinydir" />
 			<Add directory="../POKITTO_LIBS/ImageFormat" />
+			<Add directory="../POKITTO_LIBS/Tilemap" />
+			<Add directory="../POKITTO_CORE/PALETTES" />
 		</Compiler>
 		<Linker>
 			<Add option="-Wl,-Map=main.map" />
@@ -356,441 +366,522 @@
 			<Add library="dxguid" />
 			<Add directory="SDL2/lib" />
 		</Linker>
-		<Unit filename="../../Examples/101Starships_GB/101Starships.cpp">
+		<Unit filename="../../../Examples/101Starships_GB/101Starships.cpp">
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/101Starships_GB/Arduino.h">
+		<Unit filename="../../../Examples/101Starships_GB/Arduino.h">
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/101Starships_GB/My_settings.h">
+		<Unit filename="../../../Examples/101Starships_GB/My_settings.h">
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/101Starships_GB/WCharacter.h">
+		<Unit filename="../../../Examples/101Starships_GB/WCharacter.h">
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/101Starships_GB/WString.cpp">
+		<Unit filename="../../../Examples/101Starships_GB/WString.cpp">
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/101Starships_GB/WString.h">
+		<Unit filename="../../../Examples/101Starships_GB/WString.h">
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/101Starships_GB/main.cpp">
+		<Unit filename="../../../Examples/101Starships_GB/main.cpp">
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/101Starships_GB/settings.c">
+		<Unit filename="../../../Examples/101Starships_GB/settings.c">
 			<Option compilerVar="CC" />
 			<Option target="101Starships_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Armageddon/My_settings.h">
+		<Unit filename="../../../Examples/Armageddon/My_settings.h">
 			<Option target="Armageddon" />
 		</Unit>
-		<Unit filename="../../Examples/Armageddon/ageddon.cpp">
+		<Unit filename="../../../Examples/Armageddon/ageddon.cpp">
 			<Option target="Armageddon" />
 		</Unit>
-		<Unit filename="../../Examples/Artillery_GB/Artillery.cpp">
+		<Unit filename="../../../Examples/Artillery_GB/Artillery.cpp">
 			<Option target="Artillery_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Artillery_GB/My_settings.h">
+		<Unit filename="../../../Examples/Artillery_GB/My_settings.h">
 			<Option target="Artillery_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Artillery_GB/main.cpp">
+		<Unit filename="../../../Examples/Artillery_GB/main.cpp">
 			<Option target="Artillery_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Bitmap/My_settings.h">
+		<Unit filename="../../../Examples/Bitmap/My_settings.h">
 			<Option target="Bitmap" />
 		</Unit>
-		<Unit filename="../../Examples/Bitmap/bitmap.cpp">
+		<Unit filename="../../../Examples/Bitmap/bitmap.cpp">
 			<Option target="Bitmap" />
 		</Unit>
-		<Unit filename="../../Examples/Bitmap/pokitto_icon.h">
+		<Unit filename="../../../Examples/Bitmap/pokitto_icon.h">
 			<Option target="Bitmap" />
 		</Unit>
-		<Unit filename="../../Examples/Cratebuino_GB/Cratebuino.cpp">
+		<Unit filename="../../../Examples/Cratebuino_GB/Cratebuino.cpp">
 			<Option target="Cratebuino_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Cratebuino_GB/My_settings.h">
+		<Unit filename="../../../Examples/Cratebuino_GB/My_settings.h">
 			<Option target="Cratebuino_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Cratebuino_GB/WString.cpp">
+		<Unit filename="../../../Examples/Cratebuino_GB/WString.cpp">
 			<Option target="Cratebuino_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Cratebuino_GB/main.cpp">
+		<Unit filename="../../../Examples/Cratebuino_GB/main.cpp">
 			<Option target="Cratebuino_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Digger_GB/Defines.h">
+		<Unit filename="../../../Examples/Digger_GB/Defines.h">
 			<Option target="Digger_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Digger_GB/Digger.cpp">
+		<Unit filename="../../../Examples/Digger_GB/Digger.cpp">
 			<Option target="Digger_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Digger_GB/Level.h">
+		<Unit filename="../../../Examples/Digger_GB/Level.h">
 			<Option target="Digger_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Digger_GB/My_settings.h">
+		<Unit filename="../../../Examples/Digger_GB/My_settings.h">
 			<Option target="Digger_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Digger_GB/README.md">
+		<Unit filename="../../../Examples/Digger_GB/README.md">
 			<Option target="Digger_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Digger_GB/main.cpp">
+		<Unit filename="../../../Examples/Digger_GB/main.cpp">
 			<Option target="Digger_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Digger_GB/sprites.h">
+		<Unit filename="../../../Examples/Digger_GB/sprites.h">
 			<Option target="Digger_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Flappy_GB/Flappy.cpp">
+		<Unit filename="../../../Examples/Flappy_GB/Flappy.cpp">
 			<Option target="Flappy_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Flappy_GB/My_settings.h">
+		<Unit filename="../../../Examples/Flappy_GB/My_settings.h">
 			<Option target="Flappy_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Flappy_GB/main.cpp">
+		<Unit filename="../../../Examples/Flappy_GB/main.cpp">
 			<Option target="Flappy_GB" />
 		</Unit>
-		<Unit filename="../../Examples/HelloWorld/My_settings.h">
-			<Option target="SDCardFileIO" />
+		<Unit filename="../../../Examples/HelloWorld/My_settings.h">
 			<Option target="HelloWorld" />
 		</Unit>
-		<Unit filename="../../Examples/HelloWorld/main.cpp">
+		<Unit filename="../../../Examples/HelloWorld/main.cpp">
 			<Option target="HelloWorld" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/Animation.cpp">
+		<Unit filename="../../../Examples/Introduction/Animation.cpp">
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/Animation.h">
+		<Unit filename="../../../Examples/Introduction/Animation.h">
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/My_settings.h">
+		<Unit filename="../../../Examples/Introduction/My_settings.h">
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_cheeks.c">
+		<Unit filename="../../../Examples/Introduction/m_cheeks.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_dreamy.c">
+		<Unit filename="../../../Examples/Introduction/m_dreamy.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_eyepupil.c">
+		<Unit filename="../../../Examples/Introduction/m_eyepupil.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_flat.c">
+		<Unit filename="../../../Examples/Introduction/m_flat.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_grin.c">
+		<Unit filename="../../../Examples/Introduction/m_grin.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_halfpupil.c">
+		<Unit filename="../../../Examples/Introduction/m_halfpupil.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_heart.c">
+		<Unit filename="../../../Examples/Introduction/m_heart.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_lefteye.c">
+		<Unit filename="../../../Examples/Introduction/m_lefteye.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_lids_closed.c">
+		<Unit filename="../../../Examples/Introduction/m_lids_closed.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_lids_halfeyes.c">
+		<Unit filename="../../../Examples/Introduction/m_lids_halfeyes.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_lids_smug.c">
+		<Unit filename="../../../Examples/Introduction/m_lids_smug.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_oh.c">
+		<Unit filename="../../../Examples/Introduction/m_oh.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_professoreyes.c">
+		<Unit filename="../../../Examples/Introduction/m_professoreyes.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_righteye.c">
+		<Unit filename="../../../Examples/Introduction/m_righteye.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_smile.c">
+		<Unit filename="../../../Examples/Introduction/m_smile.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_smile_open.c">
+		<Unit filename="../../../Examples/Introduction/m_smile_open.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_squint.c">
+		<Unit filename="../../../Examples/Introduction/m_squint.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Introduction/m_tongue.c">
+		<Unit filename="../../../Examples/Introduction/m_tongue.c">
 			<Option compilerVar="CC" />
 			<Option target="Introduction" />
 		</Unit>
-		<Unit filename="../../Examples/Jetpack/My_settings.h">
+		<Unit filename="../../../Examples/Jetpack/My_settings.h">
 			<Option target="Jetpack" />
 		</Unit>
-		<Unit filename="../../Examples/Jetpack/jet.cpp">
+		<Unit filename="../../../Examples/Jetpack/jet.cpp">
 			<Option target="Jetpack" />
 		</Unit>
-		<Unit filename="../../Examples/Lander_GB/My_settings.h">
+		<Unit filename="../../../Examples/Lander_GB/My_settings.h">
 			<Option target="Lander_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Lander_GB/WString.cpp">
+		<Unit filename="../../../Examples/Lander_GB/WString.cpp">
 			<Option target="Lander_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Lander_GB/lander.cpp">
+		<Unit filename="../../../Examples/Lander_GB/lander.cpp">
 			<Option target="Lander_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Lander_GB/main.cpp">
+		<Unit filename="../../../Examples/Lander_GB/main.cpp">
 			<Option target="Lander_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/ConfirmationMenu.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/ConfirmationMenu.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Credits.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Credits.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/CreditsState.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/CreditsState.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/CreditsState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/CreditsState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Game.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Game.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Game.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Game.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameContext.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameContext.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameContext.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameContext.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStateMachine.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameStateMachine.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStateType.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameStateType.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStats.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameStats.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameStatus.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameStatus.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameplayState.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameplayState.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/GameplayState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/GameplayState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Grid.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Grid.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Images.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Images.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Languages.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Languages.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Minesweeper.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Minesweeper.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/My_settings.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/My_settings.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Point2.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Point2.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/SaveCheckState.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/SaveCheckState.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/SaveCheckState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/SaveCheckState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/SaveSystem.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/SaveSystem.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Settings.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Settings.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/SplashscreenState.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/SplashscreenState.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/SplashscreenState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/SplashscreenState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Stack.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Stack.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/StatsState.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/StatsState.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/StatsState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/StatsState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/ThemesState.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/ThemesState.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/ThemesState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/ThemesState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Tile.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Tile.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Tile.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Tile.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/TileGridRenderer.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/TileGridRenderer.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/TileGridRenderer.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/TileGridRenderer.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/TileRenderingSettings.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/TileRenderingSettings.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/TitlescreenState.cpp">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/TitlescreenState.cpp">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/TitlescreenState.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/TitlescreenState.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Minesweeper/Minesweeper/Utils.h">
+		<Unit filename="../../../Examples/Minesweeper/Minesweeper/Utils.h">
 			<Option target="Minesweeper_AB" />
 		</Unit>
-		<Unit filename="../../Examples/Mode13/My_settings.h">
+		<Unit filename="../../../Examples/Mode13/My_settings.h">
 			<Option target="Mode13" />
 		</Unit>
-		<Unit filename="../../Examples/Mode13/mode13.cpp">
+		<Unit filename="../../../Examples/Mode13/mode13.cpp">
 			<Option target="Mode13" />
 		</Unit>
-		<Unit filename="../../Examples/Mode15/Mode15.cpp">
+		<Unit filename="../../../Examples/Mode15/Mode15.cpp">
 			<Option target="Mode15" />
 		</Unit>
-		<Unit filename="../../Examples/Mode15/My_settings.h">
+		<Unit filename="../../../Examples/Mode15/My_settings.h">
 			<Option target="Mode15" />
 		</Unit>
-		<Unit filename="../../Examples/Mode15/monkey16.h">
+		<Unit filename="../../../Examples/Mode15/monkey16.h">
 			<Option target="Mode15" />
 		</Unit>
-		<Unit filename="../../Examples/Mode15/pokitto_icon.h">
+		<Unit filename="../../../Examples/Mode15/pokitto_icon.h">
 			<Option target="Mode15" />
 		</Unit>
-		<Unit filename="../../Examples/Pakman_GB/My_settings.h">
+		<Unit filename="../../../Examples/P-Type/My_settings.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/StateMachine.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/entities/Bullet.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/entities/Bullet.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/entities/Enemy.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/entities/Enemy.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/entities/Entity.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/entities/Player.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/entities/Player.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/global.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/images/gameover.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/main.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/maps.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/maps/UI-sheet.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/maps/calciumtrice.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sfx/Boop.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites/Dude.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites/bulletSprite.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites/enemySprite.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites/heads.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites/ships.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/sprites/start.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/states/State.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/states/StateGame.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/states/StateGame.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/states/StateGameOver.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/states/StateGameOver.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/states/StateIntro.cpp">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/P-Type/states/StateIntro.h">
+			<Option target="P-Type (TAS example)" />
+		</Unit>
+		<Unit filename="../../../Examples/Pakman_GB/My_settings.h">
 			<Option target="Pakman_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Pakman_GB/PAK_MAN.cpp">
+		<Unit filename="../../../Examples/Pakman_GB/PAK_MAN.cpp">
 			<Option target="Pakman_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Pakman_GB/font6x8AJ4.h">
+		<Unit filename="../../../Examples/Pakman_GB/font6x8AJ4.h">
 			<Option target="Pakman_GB" />
 		</Unit>
-		<Unit filename="../../Examples/Pakman_GB/main.cpp">
+		<Unit filename="../../../Examples/Pakman_GB/main.cpp">
 			<Option target="Pakman_GB" />
 		</Unit>
-		<Unit filename="../../Examples/PlayMusic/My_settings.h">
+		<Unit filename="../../../Examples/PlayMusic/My_settings.h">
 			<Option target="PlayMusic" />
 		</Unit>
-		<Unit filename="../../Examples/PlayMusic/PlayMusic.cpp">
+		<Unit filename="../../../Examples/PlayMusic/PlayMusic.cpp">
 			<Option target="PlayMusic" />
 		</Unit>
-		<Unit filename="../../Examples/SFXeditor/My_settings.h">
+		<Unit filename="../../../Examples/SFXeditor/My_settings.h">
 			<Option target="SFXeditor" />
 		</Unit>
-		<Unit filename="../../Examples/SFXeditor/SFXeditor.cpp">
+		<Unit filename="../../../Examples/SFXeditor/SFXeditor.cpp">
 			<Option target="SFXeditor" />
 		</Unit>
-		<Unit filename="../../Examples/SFXeditor/SFXeditor.h">
+		<Unit filename="../../../Examples/SFXeditor/SFXeditor.h">
 			<Option target="SFXeditor" />
 		</Unit>
-		<Unit filename="../../Examples/SaveHighscore/My_settings.h">
+		<Unit filename="../../../Examples/SaveHighscore/My_settings.h">
 			<Option target="SaveHighscore" />
 		</Unit>
-		<Unit filename="../../Examples/SaveHighscore/savehi.cpp">
+		<Unit filename="../../../Examples/SaveHighscore/savehi.cpp">
 			<Option target="SaveHighscore" />
 		</Unit>
-		<Unit filename="../../Examples/Scroll2Layers/My_settings.h">
+		<Unit filename="../../../Examples/Scroll2Layers/My_settings.h">
 			<Option target="Scroll2Layers" />
 		</Unit>
-		<Unit filename="../../Examples/Scroll2Layers/main.cpp">
+		<Unit filename="../../../Examples/Scroll2Layers/main.cpp">
 			<Option target="Scroll2Layers" />
 		</Unit>
-		<Unit filename="../../Examples/Sprites/My_settings.h">
+		<Unit filename="../../../Examples/Sprites/My_settings.h">
 			<Option target="Sprites" />
 		</Unit>
-		<Unit filename="../../Examples/Sprites/gfxdata.h">
+		<Unit filename="../../../Examples/Sprites/gfxdata.h">
 			<Option target="Sprites" />
 		</Unit>
-		<Unit filename="../../Examples/Sprites/main.cpp">
+		<Unit filename="../../../Examples/Sprites/main.cpp">
 			<Option target="Sprites" />
 		</Unit>
-		<Unit filename="../../Examples/SynthTest/My_settings.h">
+		<Unit filename="../../../Examples/SynthTest/My_settings.h">
 			<Option target="SynthTest" />
 			<Option target="SFXeditor" />
 		</Unit>
-		<Unit filename="../../Examples/SynthTest/SynthTest.cpp">
+		<Unit filename="../../../Examples/SynthTest/SynthTest.cpp">
 			<Option target="SynthTest" />
 		</Unit>
-		<Unit filename="../../Examples/SynthTest/bing16k.h">
+		<Unit filename="../../../Examples/SynthTest/bing16k.h">
 			<Option target="SynthTest" />
 			<Option target="SFXeditor" />
 		</Unit>
-		<Unit filename="../../Examples/Tracker/Arrays.cpp">
+		<Unit filename="../../../Examples/Tracker/Arrays.cpp">
 			<Option target="Tracker" />
 		</Unit>
-		<Unit filename="../../Examples/Tracker/Arrays.h">
+		<Unit filename="../../../Examples/Tracker/Arrays.h">
 			<Option target="Tracker" />
 		</Unit>
-		<Unit filename="../../Examples/Tracker/My_settings.h">
+		<Unit filename="../../../Examples/Tracker/My_settings.h">
 			<Option target="Tracker" />
 		</Unit>
-		<Unit filename="../../Examples/Tracker/PatchSettings.h">
+		<Unit filename="../../../Examples/Tracker/PatchSettings.h">
 			<Option target="Tracker" />
 		</Unit>
-		<Unit filename="../../Examples/Tracker/Tracker.cpp">
+		<Unit filename="../../../Examples/Tracker/Tracker.cpp">
 			<Option target="Tracker" />
 		</Unit>
-		<Unit filename="../../Examples/Tracker/Tracker.h">
+		<Unit filename="../../../Examples/Tracker/Tracker.h">
 			<Option target="Tracker" />
 		</Unit>
-		<Unit filename="../../Examples/Tracker/main.cpp">
+		<Unit filename="../../../Examples/Tracker/main.cpp">
 			<Option target="Tracker" />
 		</Unit>
-		<Unit filename="../../Examples/Zuzupong/My_settings.h">
+		<Unit filename="../../../Examples/Zuzupong/My_settings.h">
 			<Option target="Zuzupong" />
 		</Unit>
-		<Unit filename="../../Examples/Zuzupong/textures.h">
+		<Unit filename="../../../Examples/Zuzupong/textures.h">
 			<Option target="Zuzupong" />
 		</Unit>
-		<Unit filename="../../Examples/Zuzupong/zuzupong.cpp">
+		<Unit filename="../../../Examples/Zuzupong/zuzupong.cpp">
 			<Option target="Zuzupong" />
 		</Unit>
-		<Unit filename="../POKITTO_APP/PokittoApp.h" />
-		<Unit filename="../POKITTO_APP/PokittoAppObject.h" />
-		<Unit filename="../POKITTO_APP/PokittoCollisionEvent.h" />
-		<Unit filename="../POKITTO_APP/PokittoError.h" />
-		<Unit filename="../POKITTO_APP/PokittoEvent.h" />
-		<Unit filename="../POKITTO_APP/PokittoKeyEvent.h" />
-		<Unit filename="../POKITTO_APP/PokittoListener.h" />
-		<Unit filename="../POKITTO_APP/PokittoMessage.h" />
-		<Unit filename="../POKITTO_APP/PokittoScene.h" />
-		<Unit filename="../POKITTO_APP/PokittoSceneObject.h" />
-		<Unit filename="../POKITTO_APP/PokittoState.h" />
 		<Unit filename="../POKITTO_CORE/FONTS/ZXSpec.cpp" />
 		<Unit filename="../POKITTO_CORE/FONTS/adventurer12x16.cpp" />
 		<Unit filename="../POKITTO_CORE/FONTS/donut7x10.cpp" />
@@ -833,7 +924,6 @@
 			<Option target="Mode13" />
 			<Option target="Mode15" />
 			<Option target="Zuzupong" />
-			<Option target="SDCardFileIO" />
 			<Option target="SaveHighscore" />
 			<Option target="Jetpack" />
 			<Option target="Armageddon" />
@@ -857,6 +947,7 @@
 		<Unit filename="../POKITTO_CORE/PokittoDisplay.h" />
 		<Unit filename="../POKITTO_CORE/PokittoFakeavr.h" />
 		<Unit filename="../POKITTO_CORE/PokittoFonts.h" />
+		<Unit filename="../POKITTO_CORE/PokittoFramebuffer.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoItoa.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoItoa.h" />
 		<Unit filename="../POKITTO_CORE/PokittoLogos.cpp" />
@@ -864,10 +955,13 @@
 		<Unit filename="../POKITTO_CORE/PokittoPalette.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoPrintf.cpp">
 			<Option target="HelloWorld" />
+			<Option target="P-Type (TAS example)" />
 		</Unit>
 		<Unit filename="../POKITTO_CORE/PokittoSound.cpp" />
 		<Unit filename="../POKITTO_CORE/PokittoSound.h" />
 		<Unit filename="../POKITTO_CORE/PokittoTimer.h" />
+		<Unit filename="../POKITTO_CORE/TASMODE.cpp" />
+		<Unit filename="../POKITTO_CORE/TASMODE.h" />
 		<Unit filename="../POKITTO_LIBS/FileIO/FileIO.h" />
 		<Unit filename="../POKITTO_LIBS/FileIO/FileIO_SIM.cpp" />
 		<Unit filename="../POKITTO_LIBS/FixMath/fix16.c">
@@ -1086,9 +1180,6 @@
 		<Unit filename="pok_device.png" />
 		<Unit filename="tinydir/tinydir.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

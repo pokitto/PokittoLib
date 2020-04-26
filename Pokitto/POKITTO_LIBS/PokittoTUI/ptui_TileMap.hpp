@@ -317,6 +317,14 @@ namespace ptui
                 return ;
             _colorLUT[color] = newColor;
         }
+		
+		// Returns the mapped color.
+		Color mappedColor(Color color) const noexcept
+		{
+            if (color >= clutSizeP)
+                return color;
+            return _colorLUT[color];
+		}
         
         // Resets the mapping to a default x => x setting.
         void resetCLUT() noexcept
@@ -442,7 +450,7 @@ namespace ptui
         const TilesetPixel* _tilesetImage = nullptr;
         Tiles _tiles = {};
         
-        Color _colorLUT[256];
+        Color _colorLUT[clutSizeP];
     };
 }
 

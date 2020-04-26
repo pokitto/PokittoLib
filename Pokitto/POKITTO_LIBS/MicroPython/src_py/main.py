@@ -3,7 +3,7 @@ print('test 1')
 import upygame as pygame
 import framebuf
 import urandom as random
-import example_data as spritedata
+import data as spritedata
 import sprite
 import gc
 

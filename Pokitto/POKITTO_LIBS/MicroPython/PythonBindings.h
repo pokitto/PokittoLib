@@ -53,7 +53,12 @@
 #define BTN_C       6
 
 // Main function in uPy library
+#if defined(POKITTO_USE_WIN_SIMULATOR) ||defined(POK_SIM)
 EXTERNC int PythonMain(int argc, char **argv);
+#else
+EXTERNC int PyInSkyMain(unsigned int heapSize, char *heapMem);
+#endif
+
 
 // Pokitto simulator API for uPython.
 
@@ -83,8 +88,6 @@ EXTERNC void Pok_Display_fillRectangle(int16_t x, int16_t y, int16_t w, int16_t 
 EXTERNC void Pok_Display_drawCircle(int16_t x0, int16_t y0, int16_t r);
 EXTERNC void Pok_Display_fillCircle(int16_t x0, int16_t y0, int16_t r);
 EXTERNC void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, bool flipH, bool flipV, int16_t invisiblecol_, const uint8_t *buffer);
-EXTERNC void Pok_Display_setSprite(uint8_t index, int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, uint8_t *buffer, uint16_t* palette16x16bit, bool doResetDirtyRect);
-EXTERNC void Pok_Display_setSpritePos(uint8_t index, int16_t x, int16_t y);
 EXTERNC void Pok_Display_write(const uint8_t *buffer, uint8_t size);
 EXTERNC void Pok_Display_print(uint8_t x, uint8_t y, const char str[], uint8_t color);
 EXTERNC uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b);
@@ -129,6 +132,16 @@ EXTERNC void* Pok_CreateCookie(char* name, uint8_t* cookieBufPtr, uint32_t cooki
 EXTERNC void Pok_DeleteCookie(void* mycookiePtr );
 EXTERNC void Pok_LoadCookie(void* mycookiePtr);
 EXTERNC void Pok_SaveCookie(void* mycookiePtr);
+
+// *** TAS UI ***
+EXTERNC void Pok_TasUI_setCursor(int32_t col, int32_t row);
+EXTERNC void Pok_TasUI_printString(char* text);
+EXTERNC void Pok_TasUI_printInteger(int32_t number);
+EXTERNC void Pok_TasUI_setTile(int32_t col, int32_t row, int32_t id);
+EXTERNC void Pok_TasUI_clear();
+EXTERNC void Pok_TasUI_fillRectTiles(int32_t col1, int32_t row1, int32_t col2, int32_t row2, int32_t id);
+EXTERNC void Pok_TasUI_drawBox(int32_t col1, int32_t row1, int32_t col2, int32_t row2);
+EXTERNC void Pok_TasUI_drawGauge(int32_t col1, int32_t col2, int32_t row, int32_t current, int32_t maxValue );
 
 // For compatibility in linking
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
