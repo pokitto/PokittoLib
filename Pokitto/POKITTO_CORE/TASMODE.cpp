@@ -642,7 +642,7 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
     for(uint32_t y=0; y<screenHeight; ++y ){
         #ifdef POK_SIM
 
-        #ifdef TASMODELOW
+        #if PROJ_LCDHEIGHT == 88 // Low Res
         Pokitto::setDRAMptr(0,y*2); //needs to be called explicitly for pokitto_sim (no real controller!)
         #else
         Pokitto::setDRAMptr(0,y); //needs to be called explicitly for pokitto_sim (no real controller!)
@@ -663,7 +663,7 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
                 SET_MASK_P2;
                 #else
 
-                #ifdef TASMODELOW
+                #if PROJ_LCDHEIGHT == 88 // Low Res
                 Pokitto::setDRAMptr(0,y*2); //needs to be called explicitly for pokitto_sim (no real controller!)
                 #else
                 Pokitto::setDRAMptr(0,y); //needs to be called explicitly for pokitto_sim (no real controller!)
