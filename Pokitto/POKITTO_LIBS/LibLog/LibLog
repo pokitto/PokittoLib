@@ -45,7 +45,7 @@ inline void LOGNUMD(unsigned int n){
 }
 
 template <typename Integer,
-          enable_if_t<std::is_integral_v<Integer>, int> = 0
+          std::enable_if_t<std::is_integral_v<Integer>, int> = 0
           >
 inline void LOG(Integer number){
     if (std::is_signed_v<Integer> && number < 0){
@@ -87,14 +87,14 @@ inline void LOGD( bool b ){
 }
 
 template <typename Enum,
-          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          std::enable_if_t<std::is_enum_v<Enum>, int> = 0
           >
 inline void LOG(Enum e){
     LOG(static_cast<unsigned int>(e));
 }
 
 template <typename Enum,
-          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          std::enable_if_t<std::is_enum_v<Enum>, int> = 0
           >
 inline void LOGD(Enum e){
 #ifndef RELEASE
@@ -191,7 +191,7 @@ inline void LOGNUMD(unsigned int n){
 }
 
 template <typename Integer,
-          enable_if_t<std::is_integral_v<Integer>, int> = 0
+          std::enable_if_t<std::is_integral_v<Integer>, int> = 0
           >
 inline void LOG(Integer number){
     if (std::is_signed_v<Integer> && number < 0){
@@ -234,14 +234,14 @@ inline void LOGD( bool b ){
 }
 
 template <typename Enum,
-          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          std::enable_if_t<std::is_enum_v<Enum>, int> = 0
           >
 inline void LOG(Enum e){
     LOG(static_cast<unsigned int>(e));
 }
 
 template <typename Enum,
-          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          std::enable_if_t<std::is_enum_v<Enum>, int> = 0
           >
 inline void LOGD(Enum e){
 #ifndef RELEASE

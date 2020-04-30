@@ -18,13 +18,12 @@ public:
 
     File(){
         handle = nullptr;
-        initYAPFS();
     }
 
     File(const File&) = delete;
 
     File(File&& other) : handle(other.handle) {
-        other.handle.fs = nullptr;
+        other.handle = nullptr;
     }
 
     ~File(){
@@ -71,7 +70,7 @@ public:
         fgetpos(handle, &pos);
         fseek(handle, 0, SEEK_END);
         auto len = ftell(handle);
-        fsetpos(handle, pos);
+        fsetpos(handle, &pos);
 
         return len;
     }
