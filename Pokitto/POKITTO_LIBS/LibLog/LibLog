@@ -1,0 +1,290 @@
+#pragma once
+
+#ifdef POK_SIM
+
+
+inline void LOG( char c ){
+    putchar(c);
+}
+
+inline void LOGD( char c ){
+#ifndef RELEASE
+    LOG(c);
+#endif
+}
+
+inline void LOG( const char *str ){
+    puts(str);
+}
+
+inline void LOGD( const char *str ){
+#ifndef RELEASE
+    LOG(str);
+#endif
+}
+
+inline void LOGNUM(unsigned int number){
+    if(number == 0){
+        LOG('0');
+        return;
+    }
+    char tmp[15];
+    char *cursor = tmp + sizeof(tmp);
+    *--cursor = 0;
+    while(number && cursor > tmp){
+        *--cursor = '0' + (number % 10);
+        number /= 10;
+    }
+    LOG(cursor);
+}
+
+inline void LOGNUMD(unsigned int n){
+#ifndef RELEASE
+    LOGNUM(n);
+#endif
+}
+
+template <typename Integer,
+          enable_if_t<std::is_integral_v<Integer>, int> = 0
+          >
+inline void LOG(Integer number){
+    if (std::is_signed_v<Integer> && number < 0){
+        LOG('-');
+        number = -number;
+    }
+    LOGNUM(static_cast<unsigned int>(number));
+}
+
+template <typename Integer,
+          std::enable_if_t<std::is_integral_v<Integer>, int> = 0
+          >
+inline void LOGD(Integer number){
+#ifndef RELEASE
+    LOG(number);
+#endif
+}
+
+template <typename Pointer,
+          std::enable_if_t<std::is_pointer_v<Pointer>, int> = 0
+          >
+inline void LOG(Pointer ptr){
+    auto v = reinterpret_cast<std::uintptr_t>(ptr);
+    const char digits[] = "0123456789ABCDEF";
+    for(int i=0; i<8; ++i){
+        putchar(digits[v >> (32 - 4)]);
+        v <<= 4;
+    }
+}
+
+inline void LOG( bool b ){
+    LOG(b ? "true" : "false");
+}
+
+inline void LOGD( bool b ){
+#ifndef RELEASE
+    LOG(b);
+#endif
+}
+
+template <typename Enum,
+          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          >
+inline void LOG(Enum e){
+    LOG(static_cast<unsigned int>(e));
+}
+
+template <typename Enum,
+          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          >
+inline void LOGD(Enum e){
+#ifndef RELEASE
+    LOG(e);
+#endif
+}
+
+template <
+    typename Arg,
+    typename ... Args,
+    std::enable_if_t<sizeof...(Args), int> = 0
+    >
+void LOG(const Arg& arg, const Args& ... args){
+    LOG(arg);
+    LOG(args...);
+}
+
+template <
+    typename Arg,
+    typename ... Args,
+    std::enable_if_t<sizeof...(Args), int> = 0
+    >
+void LOGD(const Arg& arg, const Args& ... args){
+#ifndef RELEASE
+    LOG(arg);
+    LOG(args...);
+#endif
+}
+
+#ifndef RELEASE
+#define BREAKPOINT
+
+#define LOG1(...)               \
+    {                           \
+        static bool _f_=false;  \
+        if(!_f_){               \
+            _f_=true;           \
+            LOG(__VA_ARGS__);   \
+        }                       \
+    }
+#else
+#define BREAKPOINT
+#define LOG1(...) {}
+#endif
+
+
+
+#else
+
+inline volatile char * const usart = (char*) 0x40008000;
+
+inline void LOG( char c ){
+    usart[0xC] = 3;
+    usart[0] = c;
+}
+
+inline void LOGD( char c ){
+#ifndef RELEASE
+    LOG(c);
+#endif
+}
+
+inline void LOG( const char *str ){
+    usart[0xC] = 3;
+    while( *str )
+        usart[0] = *str++;
+}
+
+inline void LOGD( const char *str ){
+#ifndef RELEASE
+    LOG(str);
+#endif
+}
+
+inline void LOGNUM(unsigned int number){
+    if(number == 0){
+        LOG('0');
+        return;
+    }
+    char tmp[15];
+    char *cursor = tmp + sizeof(tmp);
+    *--cursor = 0;
+    while(number && cursor > tmp){
+        *--cursor = '0' + (number % 10);
+        number /= 10;
+    }
+    LOG(cursor);
+}
+
+inline void LOGNUMD(unsigned int n){
+#ifndef RELEASE
+    LOGNUM(n);
+#endif
+}
+
+template <typename Integer,
+          enable_if_t<std::is_integral_v<Integer>, int> = 0
+          >
+inline void LOG(Integer number){
+    if (std::is_signed_v<Integer> && number < 0){
+        LOG('-');
+        number = -number;
+    }
+    LOGNUM(static_cast<unsigned int>(number));
+}
+
+template <typename Integer,
+          std::enable_if_t<std::is_integral_v<Integer>, int> = 0
+          >
+inline void LOGD(Integer number){
+#ifndef RELEASE
+    LOG(number);
+#endif
+}
+
+template <typename Pointer,
+          std::enable_if_t<std::is_pointer_v<Pointer>, int> = 0
+          >
+inline void LOG(Pointer ptr){
+    auto v = reinterpret_cast<std::uintptr_t>(ptr);
+    usart[0xC] = 3;
+    const char digits[] = "0123456789ABCDEF";
+    for(int i=0; i<8; ++i){
+        usart[0] = digits[v >> (32 - 4)];
+        v <<= 4;
+    }
+}
+
+inline void LOG( bool b ){
+    LOG(b ? "true" : "false");
+}
+
+inline void LOGD( bool b ){
+#ifndef RELEASE
+    LOG(b);
+#endif
+}
+
+template <typename Enum,
+          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          >
+inline void LOG(Enum e){
+    LOG(static_cast<unsigned int>(e));
+}
+
+template <typename Enum,
+          enable_if_t<std::is_enum_v<Enum>, int> = 0
+          >
+inline void LOGD(Enum e){
+#ifndef RELEASE
+    LOG(e);
+#endif
+}
+
+template <
+    typename Arg,
+    typename ... Args,
+    std::enable_if_t<sizeof...(Args), int> = 0
+    >
+void LOG(const Arg& arg, const Args& ... args){
+    LOG(arg);
+    LOG(args...);
+}
+
+template <
+    typename Arg,
+    typename ... Args,
+    std::enable_if_t<sizeof...(Args), int> = 0
+    >
+void LOGD(const Arg& arg, const Args& ... args){
+#ifndef RELEASE
+    LOG(arg);
+    LOG(args...);
+#endif
+}
+
+#ifndef RELEASE
+#define BREAKPOINT __asm__ volatile ("bkpt #1")
+
+#define LOG1(...)               \
+    {                           \
+        static bool _f_=false;  \
+        if(!_f_){               \
+            _f_=true;           \
+            LOG(__VA_ARGS__);   \
+        }                       \
+    }
+#else
+#define BREAKPOINT
+#define LOG1(...) {}
+#endif
+
+#endif

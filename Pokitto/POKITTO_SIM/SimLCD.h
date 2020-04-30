@@ -99,7 +99,7 @@ extern void lcdRefreshMode13(const unsigned char*, uint16_t*, uint8_t);
 /** Update LCD from 1-bit tile mode */
 extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
 /** Update LCD from TAS tile mode */
-extern void lcdRefreshTASMode(uint8_t*, const uint16_t*);
+extern void lcdRefreshTASMode(const uint16_t*);
 
 
 

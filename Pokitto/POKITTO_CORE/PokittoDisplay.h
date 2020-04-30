@@ -143,7 +143,9 @@ public:
     static uint8_t palOffset;
     static uint8_t width;
     static uint8_t height;
+    #if PROJ_SCREENMODE != TASMODE
     static uint8_t screenbuffer[];
+    #endif
 
     // PROPERTIES
     static void setColorDepth(uint8_t);
@@ -304,6 +306,7 @@ public:
     static void drawColorTile(uint32_t x, uint32_t y, uint8_t color);
     /** Draw sprite in Tiles-And-Sprites mode */
     static void drawSprite(int x, int y, const uint8_t *data, bool flipped=0, bool mirrored=0, uint8_t recolor=0);
+    static void drawSpriteBitmap(int x, int y, int width, int height, const uint8_t *data, bool flipped=0, bool mirrored=0, uint8_t recolor=0);
     static void shiftTilemap(int x, int y);
     #endif
 

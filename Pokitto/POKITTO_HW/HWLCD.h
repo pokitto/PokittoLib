@@ -49,6 +49,7 @@ extern volatile uint32_t *LCD;
 extern "C" {
     void flushLine(const uint16_t *palette, const uint8_t *line);
     void flushLine2X(const uint16_t *palette, const uint8_t *line);
+    void pixelExpand(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor, int32_t stride);
     void pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
     void pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
     void pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
@@ -85,7 +86,7 @@ extern void lcdRefreshMode13(const uint8_t *, const uint16_t*, uint8_t);
 extern void lcdRefreshMixMode(const uint8_t *, const uint16_t*, const uint8_t*);
 extern void lcdRefreshMode64(const uint8_t*, const uint16_t*);
 extern void lcdRefreshMode15(const uint8_t*, const uint16_t*);
-extern void lcdRefreshTASMode(uint8_t*, const uint16_t*);
+extern void lcdRefreshTASMode(const uint16_t*);
 
 extern void lcdClear();
 extern void lcdFill(uint16_t);

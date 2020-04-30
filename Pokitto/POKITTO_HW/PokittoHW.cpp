@@ -47,12 +47,14 @@ void Core::quit() {
 }
 
 void Core::initRandom() {
+#if (PROJ_NOSTDRAND == 0)
     time_t seconds = time(NULL);
 #if (PROJ_GAMEBUINO > 0)
     Pokitto::Battery::update();
     srand((unsigned int) (Pokitto::Battery::level + (seconds)));
 #else
     srand((unsigned int)seconds);
+#endif
 #endif
 }
 

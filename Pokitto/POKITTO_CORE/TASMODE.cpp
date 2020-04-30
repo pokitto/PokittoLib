@@ -36,6 +36,41 @@ struct Sprite {
     uint8_t b1, b2, b3;
 };
 
+void blit1BPP(uint8_t *line, Sprite &s, int y){
+    auto data = static_cast<const uint8_t*>(s.data);
+    int w = s.b2;
+    const uint8_t *src = data + (y * w >> 3);
+    if(s.x < 0){
+        src -= s.x >> 3;
+        w += s.x;
+    }else if(s.x > 0){
+        line += s.x;
+    }
+    if(s.x + w >= screenWidth+8){
+        w = (screenWidth+8) - s.x;
+    }
+
+    if(w&7) w += 8;
+    w >>= 3;
+#ifndef POK_SIM
+    pixelExpand(line, src, w, s.b1, 8);
+#else
+    auto recolor = s.b1;
+    while(w--){
+        unsigned int b = *src++;
+        if(b&1) line[7] = recolor; b >>= 1;
+        if(b&1) line[6] = recolor; b >>= 1;
+        if(b&1) line[5] = recolor; b >>= 1;
+        if(b&1) line[4] = recolor; b >>= 1;
+        if(b&1) line[3] = recolor; b >>= 1;
+        if(b&1) line[2] = recolor; b >>= 1;
+        if(b&1) line[1] = recolor; b >>= 1;
+        if(b&1) line[0] = recolor;
+        line += 8;
+    }
+#endif
+}
+
 void blit(uint8_t *line, Sprite &s, int y){
     auto data = static_cast<const uint8_t*>(s.data);
     int w = s.b2;
@@ -59,6 +94,42 @@ void blit(uint8_t *line, Sprite &s, int y){
         src++;
     }
     /* */
+}
+
+
+void blitMirror1BPP(uint8_t *line, Sprite &s, int y){
+    auto data = static_cast<const uint8_t*>(s.data);
+    int w = s.b2;
+    const uint8_t *src = data + (y * w >> 3);
+    if(s.x < 0){
+        src -= s.x >> 3;
+        w += s.x;
+    }else if(s.x > 0){
+        line += s.x;
+    }
+    if(s.x + w >= screenWidth+8){
+        w = (screenWidth+8) - s.x;
+    }
+
+    line += w - 8;
+    w >>= 3;
+#ifndef POK_SIM
+    pixelExpand(line, src, w, s.b1, -8);
+#else
+    auto recolor = s.b1;
+    while(w--){
+        unsigned int b = *src++;
+        if(b&1) line[0] = recolor; b >>= 1;
+        if(b&1) line[1] = recolor; b >>= 1;
+        if(b&1) line[2] = recolor; b >>= 1;
+        if(b&1) line[3] = recolor; b >>= 1;
+        if(b&1) line[4] = recolor; b >>= 1;
+        if(b&1) line[5] = recolor; b >>= 1;
+        if(b&1) line[6] = recolor; b >>= 1;
+        if(b&1) line[7] = recolor;
+        line -= 8;
+    }
+#endif
 }
 
 void blitMirror(uint8_t *line, Sprite &s, int y){
@@ -87,6 +158,44 @@ void blitMirror(uint8_t *line, Sprite &s, int y){
     /* */
 }
 
+
+void blitFlip1BPP(uint8_t *line, Sprite &s, int y){
+    auto data = static_cast<const uint8_t*>(s.data);
+    int w = s.b2;
+    int h = s.maxY - s.y;
+
+    const uint8_t *src = data + ((h - 1 - y) * w >> 3);
+    if(s.x < 0){
+        src -= s.x >> 3;
+        w += s.x;
+    }else if(s.x > 0){
+        line += s.x;
+    }
+    if(s.x + w >= screenWidth+8){
+        w = (screenWidth+8) - s.x;
+    }
+
+    if(w&7) w += 8;
+    w >>= 3;
+#ifndef POK_SIM
+    pixelExpand(line, src, w, s.b1, 8);
+#else
+    auto recolor = s.b1;
+    while(w--){
+        unsigned int b = *src++;
+        if(b&1) line[7] = recolor; b >>= 1;
+        if(b&1) line[6] = recolor; b >>= 1;
+        if(b&1) line[5] = recolor; b >>= 1;
+        if(b&1) line[4] = recolor; b >>= 1;
+        if(b&1) line[3] = recolor; b >>= 1;
+        if(b&1) line[2] = recolor; b >>= 1;
+        if(b&1) line[1] = recolor; b >>= 1;
+        if(b&1) line[0] = recolor;
+        line += 8;
+    }
+#endif
+}
+
 void blitFlip(uint8_t *line, Sprite &s, int y){
     auto data = static_cast<const uint8_t*>(s.data);
 
@@ -111,6 +220,42 @@ void blitFlip(uint8_t *line, Sprite &s, int y){
         src++;
     }
     */
+}
+
+void blitFlipMirror1BPP(uint8_t *line, Sprite &s, int y){
+    auto data = static_cast<const uint8_t*>(s.data);
+    int w = s.b2;
+    int h = s.maxY - s.y;
+    const uint8_t *src = data + ((h - 1 - y) * w >> 3);
+    if(s.x < 0){
+        src -= s.x >> 3;
+        w += s.x;
+    }else if(s.x > 0){
+        line += s.x;
+    }
+    if(s.x + w >= screenWidth+8){
+        w = (screenWidth+8) - s.x;
+    }
+
+    line += w - 8;
+    w >>= 3;
+#ifndef POK_SIM
+    pixelExpand(line, src, w, s.b1, -8);
+#else
+    auto recolor = s.b1;
+    while(w--){
+        unsigned int b = *src++;
+        if(b&1) line[0] = recolor; b >>= 1;
+        if(b&1) line[1] = recolor; b >>= 1;
+        if(b&1) line[2] = recolor; b >>= 1;
+        if(b&1) line[3] = recolor; b >>= 1;
+        if(b&1) line[4] = recolor; b >>= 1;
+        if(b&1) line[5] = recolor; b >>= 1;
+        if(b&1) line[6] = recolor; b >>= 1;
+        if(b&1) line[7] = recolor;
+        line -= 8;
+    }
+#endif
 }
 
 void blitFlipMirror(uint8_t *line, Sprite &s, int y){
@@ -481,11 +626,24 @@ void Display::drawTile(uint32_t x, uint32_t y, const uint8_t *data){
 }
 
 void Display::drawSprite(int x, int y, const uint8_t *data, bool flipped, bool mirrored, uint8_t recolor){
-    if(y >= screenHeight || y + data[1] < 0 || x >= screenWidth || x + data[0] < 0) return;
-    auto mode = flipped ?
-        (mirrored ? blitFlipMirror : blitFlip):
-        (mirrored ? blitMirror     : blit);
-    addSprite(Sprite{x, y, data+2, mode, data[1], recolor, data[0]});
+    drawSpriteBitmap(x, y, data[0], data[1], data + 2, flipped, mirrored, recolor);
+}
+
+void Display::drawSpriteBitmap(int x, int y, int width, int height, const uint8_t *data, bool flipped, bool mirrored, uint8_t recolor){
+    if(y >= screenHeight || y + height < 0 || x >= screenWidth || x + width < 0) return;
+    draw_t mode;
+
+    if(Display::m_colordepth == 1){
+        mode = flipped ?
+         (mirrored ? blitFlipMirror1BPP : blitFlip1BPP):
+         (mirrored ? blitMirror1BPP : blit1BPP);
+    }else{
+        mode = flipped ?
+            (mirrored ? blitFlipMirror : blitFlip):
+            (mirrored ? blitMirror     : blit);
+    }
+
+    addSprite(Sprite{x, y, data, mode, height, recolor, width});
 }
 
 void drawSprites(int16_t y, uint8_t *line, int max){
@@ -624,7 +782,9 @@ namespace TAS {
 
 namespace Pokitto {
 
-void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
+void lcdRefreshTASMode(const uint16_t* palette){
+    uint8_t lineBuffer[screenWidth + 16];
+    uint8_t *line = lineBuffer + 8;
     auto mask = Display::TASMask;
     bool disabled = mask & 1;
     uint32_t maskY = 8;
@@ -649,8 +809,8 @@ void lcdRefreshTASMode(uint8_t *line, const uint16_t* palette){
         #endif
 
         #endif // POK_SIM
-        if(!maskY--){
-            maskY = 8;
+        if(!--maskY){
+            maskY = 9;
             mask >>= 1;
             if( !(mask & 1) && disabled ){
                 #ifndef POK_SIM

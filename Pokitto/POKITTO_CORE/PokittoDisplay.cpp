@@ -118,14 +118,18 @@ uint8_t Display::m_colordepth = PROJ_COLORDEPTH;
 uint8_t Display::width = LCDWIDTH;
 uint8_t Display::height = LCDHEIGHT;
 
+#ifndef TASMODE
 #ifndef POK_SIM
 uint8_t __attribute__((section (".bss"))) __attribute__ ((aligned)) Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
 #else
 uint8_t Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
 #endif // POK_SIM
+#endif // TASMODE
 
 Display::Display() {
+#ifndef TASMODE
     m_scrbuf = screenbuffer;
+#endif
     setDefaultPalette();
     m_mode = 1; // direct printing on by default
     m_w = POK_LCD_W;
@@ -371,7 +375,7 @@ int Display::directChar(int16_t x, int16_t y, uint16_t index){
 
 
 void Display::clear() {
-
+#ifndef TASMODE
     uint8_t c=0;
     c = bgcolor & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
     if (m_colordepth==1 && bgcolor) {
@@ -386,7 +390,7 @@ void Display::clear() {
 
     memset((void*)m_scrbuf, c, POK_SCREENBUFFERSIZE);
     setCursor(0,0);
-
+#endif
 }
 
 void Display::scroll(int16_t pixelrows) {
@@ -400,12 +404,14 @@ void Display::scroll(int16_t pixelrows) {
     color = bgcolor;
     if (pixelrows>0) {
         for (uint16_t y=0;y<height-pixelrows;y++) {
-            for (uint16_t x=0;x<(width/8)*m_colordepth;x++) screenbuffer[index++]=screenbuffer[index2++];
+            for (uint16_t x=0;x<(width/8)*m_colordepth;x++)
+                m_scrbuf[index++]=m_scrbuf[index2++];
         }
         fillRect(0,cursorY,width,height);
     } else {
         for (uint16_t y=pixelrows;y<height;y++) {
-            for (uint16_t x=0;x<(width*m_colordepth)/8;x++) screenbuffer[index2++]=screenbuffer[index++];
+            for (uint16_t x=0;x<(width*m_colordepth)/8;x++)
+                m_scrbuf[index2++]=m_scrbuf[index++];
         }
         fillRect(0,0,width,pixelrows);
     }
@@ -413,6 +419,7 @@ void Display::scroll(int16_t pixelrows) {
 }
 
 void Display::fillScreen(uint16_t c) {
+    #ifndef TASMODE
     c = c & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
     if (m_colordepth==1 && c) c=0xFF; // set all pixels
     else if (m_colordepth==2) {
@@ -423,6 +430,7 @@ void Display::fillScreen(uint16_t c) {
         c = (c & 0x0F) | (c << 4);
     }
     memset((void*)m_scrbuf, c, POK_SCREENBUFFERSIZE);
+    #endif
 }
 
 void Display::setDefaultPalette() {
@@ -1057,7 +1065,7 @@ void Display::lcdRefresh(const unsigned char* scr, bool useDirectDrawMode) {
     lcdPrepareRefresh();
 #endif
 #if PROJ_SCREENMODE == TASMODE
-    lcdRefreshTASMode(const_cast<uint8_t*>(scr), paletteptr);
+    lcdRefreshTASMode(paletteptr);
     #ifdef POK_SIM
     simulator.refreshDisplay();
     #endif

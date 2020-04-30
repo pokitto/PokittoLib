@@ -12,7 +12,7 @@ class JoypadController {
 public:
 	JoypadController(); //: m_is_connected(false), m_gamepad(0), m_instance_id(-1), m_haptic(0) {}
 
-	processEvent(const SDL_Event& event);
+	int processEvent(const SDL_Event& event);
 //private:
 	SDL_GameController *m_gamepad;
 	SDL_Haptic *m_haptic;
