@@ -41,12 +41,6 @@ public:
         return handle;
     }
 
-    static FileInfo stat(const char *name) {
-        FileInfo info;
-        // error = fstat(name, &info);
-        return info;
-    }
-
     File& openRO(const char *name) {
         close();
         handle = fopen(name, "rb");

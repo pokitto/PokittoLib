@@ -265,7 +265,8 @@ void fileWriteBytes(uint8_t * b, uint16_t n) {
 }
 
 uint16_t fileReadBytes(uint8_t * b, uint16_t n) {
-    return fread(b, 1, n, fp);
+    if(fp)
+        return fread(b, 1, n, fp);
 }
 
 void fileSeekAbsolute(long n) {
@@ -277,7 +278,8 @@ void fileSeekRelative(long n) {
 }
 
 void fileRewind() {
-    fseek(fp, 0, SEEK_SET);
+    if(fp)
+        fseek(fp, 0, SEEK_SET);
 }
 
 void fileEnd() {

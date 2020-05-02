@@ -118,31 +118,13 @@ uint8_t Display::m_colordepth = PROJ_COLORDEPTH;
 uint8_t Display::width = LCDWIDTH;
 uint8_t Display::height = LCDHEIGHT;
 
-#ifndef TASMODE
+#if PROJ_SCREENMODE != TASMODE
 #ifndef POK_SIM
 uint8_t __attribute__((section (".bss"))) __attribute__ ((aligned)) Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
 #else
 uint8_t Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
 #endif // POK_SIM
 #endif // TASMODE
-
-Display::Display() {
-#ifndef TASMODE
-    m_scrbuf = screenbuffer;
-#endif
-    setDefaultPalette();
-    m_mode = 1; // direct printing on by default
-    m_w = POK_LCD_W;
-    m_h = POK_LCD_H;
-    setFont(DEFAULT_FONT);
-    invisiblecolor=17;
-    bgcolor=0;
-    if (PROJ_COLORDEPTH) m_colordepth = PROJ_COLORDEPTH;
-    else m_colordepth = 4;
-    #if POK_GAMEBUINO_SUPPORT
-    setColorDepth(1);
-    #endif // POK_GAMEBUINO_SUPPORT
-}
 
 uint16_t Display::getWidth() {
     return width;
@@ -188,6 +170,21 @@ void Display::directRectangle(int16_t x, int16_t y,int16_t x2, int16_t y2, uint1
 }
 
 void Display::begin() {
+#if PROJ_SCREENMODE != TASMODE
+    m_scrbuf = screenbuffer;
+#endif
+    setDefaultPalette();
+    m_mode = 1; // direct printing on by default
+    m_w = POK_LCD_W;
+    m_h = POK_LCD_H;
+    setFont(DEFAULT_FONT);
+    invisiblecolor=17;
+    bgcolor=0;
+    if (PROJ_COLORDEPTH) m_colordepth = PROJ_COLORDEPTH;
+    else m_colordepth = 4;
+#if POK_GAMEBUINO_SUPPORT
+    setColorDepth(1);
+#endif // POK_GAMEBUINO_SUPPORT
     lcdInit();
 }
 
@@ -375,7 +372,7 @@ int Display::directChar(int16_t x, int16_t y, uint16_t index){
 
 
 void Display::clear() {
-#ifndef TASMODE
+#if PROJ_SCREENMODE != TASMODE
     uint8_t c=0;
     c = bgcolor & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
     if (m_colordepth==1 && bgcolor) {
@@ -419,7 +416,7 @@ void Display::scroll(int16_t pixelrows) {
 }
 
 void Display::fillScreen(uint16_t c) {
-    #ifndef TASMODE
+    #if PROJ_SCREENMODE != TASMODE
     c = c & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
     if (m_colordepth==1 && c) c=0xFF; // set all pixels
     else if (m_colordepth==2) {

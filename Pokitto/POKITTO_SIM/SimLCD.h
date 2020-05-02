@@ -57,7 +57,7 @@ extern void lcdInit();
 /** Clear display hardware */
 extern void lcdClear();
 /** Set DRAM pointer */
-extern inline void setDRAMptr(uint16_t,uint16_t);
+void setDRAMptr(uint16_t,uint16_t);
 /** Setup display datalines */
 extern inline void setup_data_16(uint16_t);
 /** Blit one word of data*/

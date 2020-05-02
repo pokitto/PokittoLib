@@ -137,8 +137,6 @@ namespace Pokitto {
 
 class Display {
 public:
-    Display();
-
     static uint8_t m_colordepth;
     static uint8_t palOffset;
     static uint8_t width;

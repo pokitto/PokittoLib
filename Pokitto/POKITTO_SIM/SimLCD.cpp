@@ -103,7 +103,7 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
     simulator.directSDLRectangle(x0,y0,x1,y1,c);
 }
 
-inline void Pokitto::setDRAMptr(uint16_t x, uint16_t y) {
+void Pokitto::setDRAMptr(uint16_t x, uint16_t y) {
     //simulator.dramptr = simulator.gfxbuf + (x*SIMH) + y;
     simulator.dramptr = simulator.gfxbuf + x + (y*SIMW); //tolandscape
 }

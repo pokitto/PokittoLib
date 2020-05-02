@@ -84,7 +84,7 @@ public:
     static uint8_t cReleased();
 
     // GB compatibility functions
-	static void begin();
+    static void begin(){}
     static void update();
     static bool pressed(uint8_t button);
     static bool released(uint8_t button);

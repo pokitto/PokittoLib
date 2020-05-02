@@ -103,9 +103,6 @@ namespace Pokitto {
 class Core
 {
 public:
-  /** Create a Core runtime instance
-  */
-  Core();
 #if (PROJ_GAMEBUINO > 0)
   /** Backlight component of the Core runtime */
   static Backlight backlight;
@@ -257,7 +254,6 @@ private:
     static uint16_t frameDurationMicros;
     static uint32_t frameStartMicros, frameEndMicros;
     static uint8_t startMenuTimer;
-    static int updateLoader(uint32_t,uint32_t);
     static uint32_t fps_refreshtime;
     static uint32_t fps_frameCount;
 

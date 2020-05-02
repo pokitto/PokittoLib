@@ -1,3 +1,5 @@
+void pokitto_jumpToLoader(bool wasInit);
+
 extern "C" {
 
 #include "LPC11U6x.h"
@@ -154,9 +156,14 @@ AFTER_VECTORS void ResetISR(void) {
     }
 
     SystemInit();
+    *((volatile unsigned int*)(0x40044088)) = 0x88;
+    *((volatile unsigned int*)(0x40044094)) = 0x88;
+
     if (software_init_hook)
         software_init_hook();
-    else {
+    else if(*((volatile char*)(0xA0000000 + 1*0x20 + 10))){
+        pokitto_jumpToLoader(false);
+    } else {
         __libc_init_array();
         main();
     }

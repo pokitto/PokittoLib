@@ -45,13 +45,6 @@ uint8_t Buttons::buttons_held;
 uint8_t Buttons::buttons_released; // from LSB up,down,left,right,a,b,c
 uint16_t Buttons::cHWLongPress = CHWLONGPRESSTIMEOUT;
 
-
-void Buttons::begin() {
-    #ifndef POK_SIM
-    Pokitto::initButtons();
-    #endif // POK_SIM
-}
-
 void Buttons::update() {
     #if POK_USE_CONSOLE
     if (console.conscounter) return;

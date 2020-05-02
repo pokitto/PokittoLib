@@ -82,6 +82,12 @@ public:
     uint32_t read( void *ptr, uint32_t count ){
         if(!*this) return 0;
 
+        if( ((volatile uint32_t *) 0xE000ED00)[0] != 1947 ){
+            YAPFS::UINT n = 0;
+            error = f_read(&handle, ptr, count, &n);
+            return n;
+        }
+
         uint32_t total = 0;
 
         while(count){
@@ -106,6 +112,12 @@ public:
     uint32_t write( const void *ptr, uint32_t count ){
         if(!*this) return 0;
         uint32_t total = 0;
+
+        if( ((volatile uint32_t *) 0xE000ED00)[0] != 1947 ){
+            YAPFS::UINT n = 0;
+            error = f_write(&handle, ptr, count, &n);
+            return n;
+        }
 
         while(count){
             YAPFS::UINT n;
