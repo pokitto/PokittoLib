@@ -157,6 +157,10 @@ __attribute__ ((weak)) int main(){
     }
 }
 
+int SDL_main(){
+    return main();
+}
+
 bool Core::run_state; // this definition needed
 
 /** Components */
