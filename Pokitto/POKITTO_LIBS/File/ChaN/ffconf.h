@@ -64,7 +64,11 @@ namespace YAPFS
 #ifdef _USE_MKFS
 #undef _USE_MKFS
 #endif
+#ifdef PROJ_USEMKFS
 #define _USE_MKFS       1   /* 0:Disable or 1:Enable */
+#else
+#define _USE_MKFS       0
+#endif
 /* To enable f_mkfs function, set _USE_MKFS to 1 and set _FS_READONLY to 0 */
 
 
@@ -78,7 +82,11 @@ namespace YAPFS
 #ifdef _USE_FASTSEEK
 #undef _USE_FASTSEEK
 #endif
+#ifdef PROJ_FASTSEEK
+#define _USE_FASTSEEK   1
+#else
 #define _USE_FASTSEEK   0   /* 0:Disable or 1:Enable */
+#endif
 /* To enable fast seek feature, set _USE_FASTSEEK to 1. */
 
 

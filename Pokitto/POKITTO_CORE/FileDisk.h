@@ -16,6 +16,11 @@ inline File streamFile;
 #define fileClose ffs_fileClose
 #define fileRewind ffs_fileRewind
 #define isThisFileOpen ffs_isThisFileOpen
+#define getFileLength ffs_getFileLength
+
+inline struct {
+    uint32_t fsize;
+} fs;
 
 inline bool ffs_pokInitSD(){
     return true;
@@ -48,6 +53,10 @@ inline uint8_t ffs_fileOpen(const char *buffer, char fmode){
 
     fs.fsize = streamFile.size();
     return 0;
+}
+
+inline uint32_t ffs_getFileLength(){
+    return streamFile.size();
 }
 
 inline uint16_t ffs_fileReadBytes(uint8_t * b, uint16_t n) {

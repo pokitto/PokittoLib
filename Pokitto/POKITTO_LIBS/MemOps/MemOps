@@ -9,6 +9,9 @@ public:
     static void NAKED copy(void *to, const void *from, std::size_t length) {
     __asm__ volatile (
         ".syntax unified" "\n"
+        "cmp r2, 0" "\n"
+        "beq 3f" "\n"
+
         "adds r0, r2" "\n"
         "adds r1, r2" "\n"
 
@@ -33,7 +36,7 @@ public:
         "str r3, [r0, r2]" "\n"
         "adds r2, 4" "\n"
         "bne 1b" "\n"
-        "bx lr" "\n"
+        "3: bx lr" "\n"
         );
     }
 

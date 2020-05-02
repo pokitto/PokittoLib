@@ -80,9 +80,15 @@
 #endif
 
 #else
+
 #include "SimSound.h"
 #include "PokittoSimulator.h"
+
+#if defined(PROJ_FILE_STREAMING)
+#include "FileDisk.h"
+#else
 #include "FileIO.h"
+#endif
 #endif
 
 typedef uint8_t byte;

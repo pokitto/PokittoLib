@@ -2,6 +2,7 @@
 #include <Pokitto.h>
 #include "Tilemap.hpp"
 
+#ifndef TASMODE
 void SDL_RenderCopySolid( const uint8_t *data, uint32_t width, uint32_t height, int32_t x, int32_t y )
 {
     struct rect {
@@ -84,3 +85,4 @@ void SDL_RenderCopySolid( const uint8_t *data, uint32_t width, uint32_t height, 
     }
 
 }
+#endif
