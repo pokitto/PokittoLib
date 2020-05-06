@@ -39,7 +39,10 @@
 
 #include <stdint.h>
 #include <SDL2/SDL.h>
-
+#ifdef main
+#undef main
+#define main POKITTO_SDL_main
+#endif
 #include "Pokitto_settings.h"
 #include "SimLCD.h"
 #include "SimEEPROM.h"
