@@ -66,14 +66,14 @@ namespace ptui
     class TileMap
     {
         static_assert(lineWidthP > tileWidthP);
-        
+
     public: // Types & Constants.
         using Tile = std::uint8_t;
         using Delta = std::uint8_t;
         using Color = std::uint8_t;
         using TilesetPixel = std::uint8_t;
         using BufferPixel = std::uint8_t;
-        
+
         static constexpr auto columns = columnsP;
         static constexpr auto rows = rowsP;
         static constexpr auto tileWidth = tileWidthP;
@@ -83,15 +83,15 @@ namespace ptui
         static constexpr auto height = rows * tileHeightP;
         static constexpr auto lineWidth = lineWidthP;
         static constexpr bool clutIsEnabled = clutSizeP > 0;
-        
-        
+
+
     public: // Constructors.
         TileMap() noexcept
         {
             resetCLUT();
         }
-        
-        
+
+
     public: // Configurations.
         // Changes the origin to the top-left of the display, in pixel units.
         // - 0, 0 means the top-left pixel of the map will be the same than the top-left pixel of the display.
@@ -110,18 +110,18 @@ namespace ptui
             {
                 _indexStart = 0;
                 _indexEnd = std::min<int>(lineWidth, _indexStart + offsetX + width);
-                _tileXStart = -offsetX / tileWidth;
-                _tileSubXStart = -offsetX - _tileXStart * tileWidth;
+                _tileXStart = -offsetX / static_cast<int>(tileWidth);
+                _tileSubXStart = -offsetX - _tileXStart * static_cast<int>(tileWidth);
             }
             if (offsetY >= 0)
             {
-                _tileYStart = -offsetY / static_cast<int>(tileWidth);
-                _tileSubYStart = -offsetY - _tileYStart * tileWidth;
+                _tileYStart = -(offsetY + static_cast<int>(tileWidth) - 1) / static_cast<int>(tileWidth);
+                _tileSubYStart = -offsetY - _tileYStart * static_cast<int>(tileWidth);
             }
             else
             {
-                _tileYStart = -offsetY / tileWidth;
-                _tileSubYStart = -offsetY - _tileYStart * tileWidth;
+                _tileYStart = -offsetY / static_cast<int>(tileWidth);
+                _tileSubYStart = -offsetY - _tileYStart * static_cast<int>(tileWidth);
             }
         }
         auto offsetX() const noexcept
@@ -132,21 +132,21 @@ namespace ptui
         {
             return _offsetY;
         }
-        
+
         // Must be called before use!
         // - `tilesetImage` is a vertical-layout 8BPP tileset where each tile is `tileWidth` * `tileHeight` pixels. No size header.
         void setTilesetImage(const TilesetPixel* tilesetImage) noexcept
         {
             _tilesetImage = tilesetImage;
         }
-		
+
 		// Returns the current Tileset Image.
 		const TilesetPixel* tilesetImage() const noexcept
 		{
 			return _tilesetImage;
 		}
-        
-        
+
+
     public: // Tiles Access.
         // Changes a given tile in this map.
         // - Safe - If `column` or `row` are outside the map, nothing will happen.
@@ -155,7 +155,7 @@ namespace ptui
             if (areCoordsValid(column, row))
                 _tiles[_tileIndex(column, row)] = tile;
         }
-        
+
         // Changes the targeted tile's delta.
         // - Safe - If `column` or `row` are outside the map, nothing will happen.
         void setDelta(int column, int row, Delta delta) noexcept
@@ -165,7 +165,7 @@ namespace ptui
             if (areCoordsValid(column, row))
                 _tiles[_tileIndex(column, row) + deltaIndexOffset] = delta;
         }
-        
+
         // Changes the targeted tile and its delta.
         // - Safe - If `column` or `row` are outside the map, nothing will happen.
         void setTileAndDelta(int column, int row, Tile tile, Delta delta) noexcept
@@ -173,13 +173,13 @@ namespace ptui
             if (areCoordsValid(column, row))
             {
                 auto tileIndex = _tileIndex(column, row);
-                
+
                 _tiles[tileIndex] = tile;
                 if (enableTilesWithDeltasP)
                     _tiles[tileIndex + deltaIndexOffset] = delta;
             }
         }
-        
+
         // Returns a given tile in this map.
         // - Safe - If `column` or `row` are outside the map, `outsideTile` is returned.
         Tile getTile(int column, int row, Tile outsideTile = 0) const noexcept
@@ -188,7 +188,7 @@ namespace ptui
                 return _tiles[_tileIndex(column, row)];
             return outsideTile;
         }
-        
+
         // Returns the Delta for a given Tile.
         // - Safe - If `column` or `row` are outside the map, `outsideDelta` is returned.
         Delta getDelta(int column, int row, Delta outsideDelta = 0) const noexcept
@@ -199,17 +199,17 @@ namespace ptui
                 return _tiles[_tileIndex(column, row) + deltaIndexOffset];
             return outsideDelta;
         }
-        
-    
+
+
     public: // Mass Tiles Access.
-    
+
         // Clears out the whole tilemap, tiles and deltas, .
         void clear(Tile tile = 0, Delta delta = 0) noexcept
         {
             clearTiles(tile);
             clearDeltas(delta);
         }
-    
+
         // Sets the whole map with `tile`.
         void clearTiles(Tile tile) noexcept
         {
@@ -222,7 +222,7 @@ namespace ptui
                 return ;
             std::fill(_tiles.begin() + deltaIndexOffset, _tiles.end(), delta);
         }
-        
+
         // Same than above, on a defined area.
         // - `firstColumn`, `firstRow`, `lastColumn` and `lastRow` will be clamped.
         // - `lastColumn` and `lastRow` are included.
@@ -232,7 +232,7 @@ namespace ptui
             fillRectTilesUnsafe(clampColumn(firstColumn), clampRow(firstRow), clampColumn(lastColumn), clampRow(lastRow),
                                 tile);
         }
-        
+
         // Same than above, but for the tile deltas.
         void fillRectDeltas(int firstColumn, int firstRow, int lastColumn, int lastRow, Delta delta) noexcept
         {
@@ -241,7 +241,7 @@ namespace ptui
             fillRectDeltasUnsafe(clampColumn(firstColumn), clampRow(firstRow), clampColumn(lastColumn), clampRow(lastRow),
                                  delta);
         }
-        
+
         // Both fillRectTiles and fillRectDeltas.
         void fillRectTilesAndDeltas(int firstColumn, int firstRow, int lastColumn, int lastRow, Tile tile, Delta delta) noexcept
         {
@@ -254,7 +254,7 @@ namespace ptui
             fillRectDeltasUnsafe(firstColumn, firstRow, lastColumn, lastRow,
                                  delta);
         }
-        
+
         // Shift the whole map by `shiftedColumns` columns and `shiftedRows` rows.
         // - "Introduced" Tiles will be *left as is*.
         // - If Deltas are supported, they're shifted as well.
@@ -263,7 +263,7 @@ namespace ptui
             shiftUnsafe(0, 0, columns - 1, rows - 1,
                         shiftedColumns, shiftedRows);
         }
-        
+
         // Same than above, on a given area.
         // - `firstColumn`, `firstRow`, `lastColumn` and `lastRow` will be clamped.
         // - `lastColumn` and `lastRow` are included.
@@ -274,8 +274,8 @@ namespace ptui
             shiftUnsafe(clampColumn(firstColumn), clampRow(firstRow), clampColumn(lastColumn), clampRow(lastRow),
                         shiftedColumns, shiftedRows);
         }
-        
-        
+
+
     public: // Rendering.
         // Renders a single line.
         // - If `transparentZeroColor` is true, any color resolved (that is, after offset and lookup) to 0 will leave the current color in place.
@@ -286,8 +286,8 @@ namespace ptui
         //   - Will produce a compilation error if this instance doesn't support Tile Color Offset.
         template<bool transparentZeroColor, bool colorLookUp, bool colorOffset>
         void renderIntoLineBuffer(BufferPixel* lineBuffer, int y, bool skip) noexcept;
-        
-        
+
+
     public: // Coords manipulation.
         // Updates the given grid coordinates so they're clamped inside the box (e.g. negative will be zero'd).
         template<typename CoordsType = int>
@@ -305,8 +305,8 @@ namespace ptui
         {
             return (column >= 0) && (column < columns) && (row >= 0) && (row < rows);
         }
-        
-        
+
+
     public: // CLUT.
         // Remaps a color to a new one.
         // - That is, when `color` is encountered in the Tileset, `newColor` will be returned instead.
@@ -317,7 +317,7 @@ namespace ptui
                 return ;
             _colorLUT[color] = newColor;
         }
-		
+
 		// Returns the mapped color.
 		Color mappedColor(Color color) const noexcept
 		{
@@ -325,21 +325,21 @@ namespace ptui
                 return color;
             return _colorLUT[color];
 		}
-        
+
         // Resets the mapping to a default x => x setting.
         void resetCLUT() noexcept
         {
             if (!clutIsEnabled)
                 return ;
-                
+
             Color color = 0;
-            
+
             // Fills the default color lookup table with the same colors.
             for (auto& mappedColor: _colorLUT)
                 mappedColor = color++;
         }
-        
-        
+
+
     protected: // Unsafe implementations.
         // `fillRectTiles`, but columns & rows are considered valid within the grid.
         void fillRectTilesUnsafe(int firstColumn, int firstRow, int lastColumn, int lastRow, Tile tile) noexcept
@@ -349,7 +349,7 @@ namespace ptui
                 for (int column = firstColumn; column <= lastColumn; column++)
                     setTile(column, row, tile);
         }
-        
+
         // `fillRectDeltas`, but columns & rows are considered valid within the grid.
         void fillRectDeltasUnsafe(int firstColumn, int firstRow, int lastColumn, int lastRow, Delta delta) noexcept
         {
@@ -360,7 +360,7 @@ namespace ptui
                 for (int column = firstColumn; column <= lastColumn; column++)
                     setDelta(column, row, delta);
         }
-        
+
         // `shift`, but columns & rows are considered valid within the grid.
         void shiftUnsafe(int firstColumn, int firstRow, int lastColumn, int lastRow,
                          int shiftedColumns, int shiftedRows) noexcept
@@ -371,7 +371,7 @@ namespace ptui
             int shiftFirstRow;
             int shiftEndRow;
             int shiftRowIncrement;
-            
+
             if (shiftedColumns < 0)
             {
                 // We start from the first column.
@@ -407,49 +407,49 @@ namespace ptui
                 {
                     auto sourceIndex = _tileIndex(column - shiftedColumns, row - shiftedRows);
                     auto destIndex = _tileIndex(column, row);
-                    
+
                     _tiles[destIndex] = _tiles[sourceIndex];
                     if (enableTilesWithDeltasP)
                         _tiles[destIndex + deltaIndexOffset] = _tiles[sourceIndex + deltaIndexOffset];
                 }
             }
         }
-    
+
     private:
         // All the tiles, optionally with their Delta.
         static constexpr auto tilesSize = columns * rows;
         static constexpr auto deltasSize = enableTilesWithDeltasP ? (columns * rows) : 0;
         using Tiles = std::array<Tile, tilesSize + deltasSize>;
-        
+
         static constexpr auto deltaIndexOffset = tilesSize;
-    
+
         static constexpr auto _tileIndex(short tileX, short tileY) noexcept
         {
             return tileX + tileY * columns;
         }
-    
+
         short _offsetX = 0;
         short _offsetY = 0;
-    
+
         // Changes only when an offset is introduced.
         short _indexStart = 0;
         short _indexEnd = std::min(lineWidth, 0 + width);
-        
+
         // The y coordinate within the current tile.
         short _tileSubY = 0;
         short _tileY = 0;
-        
+
         short _tileXStart = 0;
         short _tileSubXStart = 0;
         short _tileYStart = 0;
         short _tileSubYStart = 0;
-        
+
         // Derived from _tilesetImage
         const TilesetPixel* _tileImageRowBase = nullptr;
 
         const TilesetPixel* _tilesetImage = nullptr;
         Tiles _tiles = {};
-        
+
         Color _colorLUT[clutSizeP];
     };
 }
