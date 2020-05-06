@@ -1317,14 +1317,14 @@ for(y=0;y<176;y++)
 }
 
 
-void Pokitto::pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
+void pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
     while (count--) {
         if (*src !=0 ) *dest = *src + recolor;
         src++; dest++; //to next pixel
     }
 }
 
-void Pokitto::pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
+void pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
     src += count;
     while (count--) {
         if (*src !=0 ) *dest = *src + recolor;
@@ -1332,20 +1332,20 @@ void Pokitto::pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count,
     }
 }
 
-void Pokitto::pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
+void pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
     while (count--) {
         *dest = *src + recolor;
         src++; dest++; //to next pixel
     }
 }
 
-void Pokitto::flushLine(const uint16_t *palette, const uint8_t *line){
+void flushLine(const uint16_t *palette, const uint8_t *line){
   for(int i=0; i<220; ++i){
     Pokitto::blitWord(palette[line[i]]);
   }
 }
 
-void Pokitto::flushLine2X(const uint16_t *palette, const uint8_t *line){
+void flushLine2X(const uint16_t *palette, const uint8_t *line){
 
   // Blit lowres screen 2x zoomed
   for(int i=0; i<110; ++i){
