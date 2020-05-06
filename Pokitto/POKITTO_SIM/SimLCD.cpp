@@ -121,6 +121,41 @@ inline void Pokitto::toggle_data(){
     simulator.dramptr++;
 }
 
+/**************************************************************************/
+/*!
+  @brief  Pump data to the lcd, 16-bit bus, public function
+*/
+/**************************************************************************/
+void Pokitto::pumpDRAMdata(uint16_t* data,uint16_t counter)
+{
+    while (counter--) {
+        setup_data_16(*data++);
+        CLR_WR;SET_WR;
+    }
+}
+
+/**************************************************************************/
+/*!
+  @brief  Point to a (x,y) location in the LCD DRAM, public function
+*/
+/**************************************************************************/
+void Pokitto::setDRAMpoint(uint8_t xptr, uint8_t yoffset)
+{
+    setDRAMptr(0,0);
+    CLR_WR;SET_WR;
+}
+
+/**************************************************************************/
+/*!
+  @brief  Get the LCD ready for a buffered-mode refresh
+*/
+/**************************************************************************/
+void Pokitto::lcdPrepareRefresh() {
+    setDRAMptr(0,0);
+}
+
+
+
 void Pokitto::lcdRefreshGB(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y,xptr;
 uint16_t scanline[48];

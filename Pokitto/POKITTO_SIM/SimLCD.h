@@ -52,6 +52,12 @@ struct SpriteInfo {
     uint16_t palette[4];
 };
 
+/** Simulate LCD commad to jump to dram at 0,0 */
+extern void lcdPrepareRefresh();
+/** Simulate LCD commad to jump to dram at x,y */
+extern void setDRAMpoint(uint8_t, uint8_t);
+/** Simulate pumping data to dram */
+extern void pumpDRAMdata(uint16_t*, uint16_t);
 /** Initialize display hardware */
 extern void lcdInit();
 /** Clear display hardware */
