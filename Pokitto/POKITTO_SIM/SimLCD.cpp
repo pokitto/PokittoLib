@@ -1325,7 +1325,7 @@ void pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recol
 }
 
 void pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor) {
-    src += count;
+    src += count - 1;
     while (count--) {
         if (*src !=0 ) *dest = *src + recolor;
         src--; dest++; //to next pixel
