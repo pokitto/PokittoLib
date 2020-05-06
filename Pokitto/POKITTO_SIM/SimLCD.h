@@ -103,6 +103,7 @@ extern void lcdRefreshTASMode(const uint16_t*);
 
 
 
+}
 // C versions of Fmangas assembler hardware commands
 
 extern void flushLine(const uint16_t *palette, const uint8_t *line);
@@ -121,7 +122,7 @@ void updateMode15Clear(const uint32_t *palette, const uint8_t *buffer, int clear
 void updateMode64(const uint16_t *palette, const uint8_t *buffer );
 void updateMode64Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
 
-}
+
 
 // Basic Color definitions
 #define	COLOR_BLACK                         (uint16_t)(0x0000)
