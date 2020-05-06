@@ -185,6 +185,9 @@ void Simulator::pollButtons() {
     }
     buttons_held = buttons_state & buttons_state_old; // only if both 1, end result is 1
     buttons_released = ~buttons_state & buttons_state_old; // if now zero, then 1 AND previous 1 = 1
+    Pokitto::Buttons::buttons_state = buttons_state;
+    Pokitto::Buttons::buttons_held = buttons_held;
+    Pokitto::Buttons::buttons_released = buttons_released;
 }
 
 uint8_t Simulator::upHeld() { if (buttons_held & (1<<UPBIT)) return 1; return 0;}
