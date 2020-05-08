@@ -1,6 +1,8 @@
 #ifndef POKITTOTUI_PTUI_UITILEMAP_HPP
 #   define POKITTOTUI_PTUI_UITILEMAP_HPP
 
+#   include <Pokitto.h>
+
 #   include "ptui_TileMap.hpp"
 #   include "ptui_StandardUITilesetDefinition.hpp"
 #   include "ptui_Symbol.hpp"
@@ -39,7 +41,7 @@ namespace ptui
         // - If the gauge is reversed or if `max` is negative, nothing happens.
         // - The drawing will be clipped as needed.
         // - Doesn't change the delta.
-        void drawGauge(int firstColumn, int lastColumn, int row,
+        OPT_SMALL void drawGauge(int firstColumn, int lastColumn, int row,
                        int current, int max) noexcept
         {
             constexpr auto gaugeLeftCapacity = TilesetDefinition::gaugeLeftFull - TilesetDefinition::gaugeLeftEmpty;
@@ -125,7 +127,7 @@ namespace ptui
         // - Empty or negative boxes won't be drawn.
         // - Due to the limitation of tileset, 1-column and 1-row boxes will be rendered as Spaces.
         // - Doesn't change the delta.
-        void drawBox(int firstColumn, int firstRow, int lastColumn, int lastRow) noexcept
+        OPT_SMALL void drawBox(int firstColumn, int firstRow, int lastColumn, int lastRow) noexcept
         {
             if ((firstColumn > lastColumn) || (firstRow > firstRow))
                 return ;
@@ -215,61 +217,50 @@ namespace ptui
         // - If printing such a char would go above the last column, then a newline is generated before.
         //   - If `c` was a space, it won't be printed and transformed instead into the said newline.
         // - Note: This is not suitable for setting a tile to a given value. Use `set()` instead.
-        void printChar(char c) noexcept
+        OPT_SMALL void printChar(char c) noexcept
         {
             if (c == '\n')
-            {
-                // Newlines gets the cursor back to the first column, and to the next row.
-                _cursorColumn = _cursorFirstColumn;
-                _cursorRow++;
-                if (_cursorRow > _cursorLastRow)
-                {
-                    // Autoscroll.
-                    this->shift(_cursorFirstColumn, _cursorFirstRow, _cursorLastColumn, _cursorLastRow,
-                          0, -1);
-                    this->fillRectTilesAndDeltas(_cursorFirstColumn, _cursorLastRow, _cursorLastColumn, _cursorLastRow, TilesetDefinition::boxMiddle, cursorDelta());
-                    _cursorRow = _cursorLastRow;
-                }
-            }
+				_printNewline();
             else if (c == '\t')
             {
                 int nextColumn = _cursorFirstColumn + ((_cursorColumn - _cursorFirstColumn) / TilesetDefinition::tabColumns + 1) * TilesetDefinition::tabColumns;
                 
                 if (nextColumn > _cursorLastColumn)
-                    printChar('\n');
+					_printNewline();
                 else while (_cursorColumn < nextColumn)
-                    printChar(' ');
+					_printSpace();
             }
-            else if (c >= ' ')
-            {
-                if (_cursorColumn > _cursorLastColumn)
-                {
-                    printChar('\n');
-                    // Spaces are transformed into the generated newline.
-                    if (c == ' ')
-                        return ;
-                }
-                this->setTileAndDelta(_cursorColumn, _cursorRow, c - ' ' + TilesetDefinition::asciiSpace, cursorDelta());
-                _cursorColumn++;
-            }
+            else if (c == ' ')
+				_printSpace();
+            else if (c > ' ')
+				printTile(c);
         }
+		
+		// Prints a tile without interpreting it.
+		OPT_SMALL void printTile(std::uint8_t tile) noexcept
+		{
+			if (_cursorColumn > _cursorLastColumn)
+				_printNewline();
+			this->setTileAndDelta(_cursorColumn, _cursorRow, tile, cursorDelta());
+			_cursorColumn++;
+		}
         
         // Prints a string.
-        void printString(const char* string) noexcept
+        OPT_SMALL void printString(const char* string) noexcept
         {
             for (auto charP = string; *charP != 0; charP++)
                 printChar(*charP);
         }
         
         // Prints a string, but truncated up to limit.
-        void printString(const char* string, int limit) noexcept
+        OPT_SMALL void printString(const char* string, int limit) noexcept
         {
             for (auto charP = string; (*charP != 0) && (limit > 0); charP++, limit--)
                 printChar(*charP);
         }
         
         // Prints a number with the given radix.
-        void printInteger(int number, int padding = 0, char paddingChar = ' ', int radix = 10) noexcept
+        OPT_SMALL void printInteger(int number, int padding = 0, char paddingChar = ' ', int radix = 10) noexcept
         {
             padding--;
             if (std::abs(number) >= radix)
@@ -296,13 +287,13 @@ namespace ptui
         }
         
         // Similar to printString, but it'll try to preserve "words" (a subchain of characters comprised of anything but whitespaces and control characters) together and generate newlines early before.
-        void printText(const char* text) noexcept
+        OPT_SMALL void printText(const char* text) noexcept
         {
             printText(text, std::numeric_limits<int>::max());
         }
         
         // Same than above, but only a limited number of characters are printed out of `text`.
-        void printText(const char* text, int limit) noexcept
+        OPT_SMALL void printText(const char* text, int limit) noexcept
         {
             while ((*text != 0) && (limit > 0))
             {
@@ -328,7 +319,7 @@ namespace ptui
 		
         // Prints the given symbol.
         // - Delta is set to the cursor's delta.
-        void printSymbol(Symbol symbol) noexcept
+        OPT_SMALL void printSymbol(Symbol symbol) noexcept
         {
 			if (_cursorColumn > _cursorLastColumn)
 				printChar('\n');
@@ -351,6 +342,45 @@ namespace ptui
         // TODO: There might be a way to remove this field when `tilesWithDeltasP` is `false`, but I'm not sure how.
         // Cursor "color".
         Delta _cursorDelta = 0;
+		
+		
+	private:
+		OPT_SMALL void _printNewline() noexcept
+		{
+			// Newlines gets the cursor back to the first column, and to the next row.
+			_cursorColumn = _cursorFirstColumn;
+			_cursorRow++;
+			if (_cursorRow > _cursorLastRow)
+			{
+				// Autoscroll.
+				this->shift(_cursorFirstColumn, _cursorFirstRow, _cursorLastColumn, _cursorLastRow,
+					  0, -1);
+				this->fillRectTilesAndDeltas(_cursorFirstColumn, _cursorLastRow, _cursorLastColumn, _cursorLastRow, TilesetDefinition::boxMiddle, cursorDelta());
+				_cursorRow = _cursorLastRow;
+			}
+		}
+		
+		OPT_SMALL void _printTab() noexcept
+		{
+			int nextColumn = _cursorFirstColumn + ((_cursorColumn - _cursorFirstColumn) / TilesetDefinition::tabColumns + 1) * TilesetDefinition::tabColumns;
+			
+			if (nextColumn > _cursorLastColumn)
+				_printNewline();
+			else while (_cursorColumn < nextColumn)
+				_printSpace();
+		}
+		
+		OPT_SMALL void _printSpace() noexcept
+		{
+			if (_cursorColumn > _cursorLastColumn)
+			{
+				_printNewline();
+				// Spaces are transformed into the generated newline.
+				return ;
+			}
+			this->setTileAndDelta(_cursorColumn, _cursorRow, TilesetDefinition::asciiSpace, cursorDelta());
+			_cursorColumn++;
+		}
     };
 }
 
