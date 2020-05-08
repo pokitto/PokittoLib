@@ -52,6 +52,12 @@ struct SpriteInfo {
     uint16_t palette[4];
 };
 
+/** Simulate LCD commad to jump to dram at 0,0 */
+extern void lcdPrepareRefresh();
+/** Simulate LCD commad to jump to dram at x,y */
+extern void setDRAMpoint(uint8_t, uint8_t);
+/** Simulate pumping data to dram */
+extern void pumpDRAMdata(uint16_t*, uint16_t);
 /** Initialize display hardware */
 extern void lcdInit();
 /** Clear display hardware */
@@ -103,6 +109,7 @@ extern void lcdRefreshTASMode(const uint16_t*);
 
 
 
+}
 // C versions of Fmangas assembler hardware commands
 
 extern void flushLine(const uint16_t *palette, const uint8_t *line);
@@ -121,7 +128,7 @@ void updateMode15Clear(const uint32_t *palette, const uint8_t *buffer, int clear
 void updateMode64(const uint16_t *palette, const uint8_t *buffer );
 void updateMode64Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
 
-}
+
 
 // Basic Color definitions
 #define	COLOR_BLACK                         (uint16_t)(0x0000)

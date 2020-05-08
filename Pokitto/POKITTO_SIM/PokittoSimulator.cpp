@@ -238,12 +238,22 @@ void Simulator::initSDLGfx() {
     }
 
     sdlRen = SDL_CreateRenderer(sdlSimWin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    
     if (sdlRen == nullptr){
-        SDL_DestroyWindow(sdlSimWin);
         std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return;
+        std::cout << "Trying without hardware acceleration." << std::endl;
+        sdlRen = SDL_CreateRenderer(sdlSimWin, -1, SDL_RENDERER_SOFTWARE);
+        if (sdlRen == nullptr)
+        {
+            std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+            SDL_DestroyWindow(sdlSimWin);
+            SDL_Quit();
+            return;
+        }
+        else
+            std::cout << "Successfully created software renderer." << std::endl;
     }
+
 
     /* create the hardware-accelerated SDL texture, that will be used to draw the simulated screen */
     #if SIM_PORTRAIT != 1
