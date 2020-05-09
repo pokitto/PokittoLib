@@ -103,6 +103,7 @@ namespace Pokitto {
 class Core
 {
 public:
+  static void (*updateHook)(bool);
 #if (PROJ_GAMEBUINO > 0)
   /** Backlight component of the Core runtime */
   static Backlight backlight;
