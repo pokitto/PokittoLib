@@ -43,11 +43,15 @@
     #include "SimLCD.h"
     #include "SimSound.h"
     #include "PokittoSimulator.h"
+    #define OPT_SMALL
+    #define OPT_FAST
 #else
     #include "mbed.h"
     #include "HWLCD.h"
     #include "HWSound.h"
-#endif // POK_SIM
+    #define OPT_SMALL __attribute__((optimize("-Os")))
+    #define OPT_FAST __attribute__((optimize("-O3")))
+#endif // POK_SIM 
 
 extern int random(int);
 extern int random(int,int);
