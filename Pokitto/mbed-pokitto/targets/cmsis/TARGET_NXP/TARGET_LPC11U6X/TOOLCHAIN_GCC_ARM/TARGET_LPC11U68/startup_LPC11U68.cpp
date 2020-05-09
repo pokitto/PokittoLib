@@ -156,6 +156,7 @@ AFTER_VECTORS void ResetISR(void) {
     }
 
     SystemInit();
+    *((volatile unsigned int*) 0x40048080) |= (1<<16) | (1<<6) | (1<<30) | (1<<19) | (3<<26) | (1<<12);
     *((volatile unsigned int*)(0x40044088)) = 0x88;
     *((volatile unsigned int*)(0x40044094)) = 0x88;
 
