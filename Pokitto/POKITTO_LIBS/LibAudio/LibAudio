@@ -1,0 +1,49 @@
+#pragma once
+
+namespace Audio {
+
+    using u64 = unsigned long long;
+    using u32 = unsigned int;
+    using s32 = signed int;
+    using u16 = unsigned short;
+    using s16 = signed short;
+    using u8 = unsigned char;
+    using s8 = signed char;
+    using Source = void (*)(u8*, void*);
+
+    extern "C" {
+        inline volatile u32 audio_playHead;
+        inline volatile u8 audio_state[2];
+        inline u8 audio_buffer[1024];
+    }
+
+    namespace internal {
+
+        struct Channel {
+            Source source;
+            void *data;
+        };
+
+        inline void *sinkInstance;
+
+    }
+    inline void (*connect)(u32 channelNumber, void *data, Source source);
+
+    inline u8 mix(u8 a, u8 b){
+        s32 v = s32(a) + s32(b) - 127;
+        if(v < 0) return 0;
+        if(v > 0xFF) return 0xFF;
+        return v;
+    }
+}
+
+#ifndef POK_SIM
+#include "./PokittoHWSink.hpp"
+#else
+#include "./PokittoSimSink.hpp"
+#endif
+
+#include "./SilenceSource.hpp"
+#include "./RAWFileSource.hpp"
+#include "./ByteBeatSource.hpp"
+#include "./SFX8Source.hpp"

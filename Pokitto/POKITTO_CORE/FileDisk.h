@@ -18,9 +18,11 @@ inline File streamFile;
 #define isThisFileOpen ffs_isThisFileOpen
 #define getFileLength ffs_getFileLength
 
+#ifdef POK_SIM
 inline struct {
     uint32_t fsize;
 } fs;
+#endif
 
 inline bool ffs_pokInitSD(){
     return true;

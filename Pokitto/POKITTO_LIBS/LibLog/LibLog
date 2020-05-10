@@ -16,7 +16,7 @@ inline void LOGD( char c ){
 }
 
 inline void LOG( const char *str ){
-    puts(str);
+    printf("%s", str);
 }
 
 inline void LOGD( const char *str ){
@@ -148,30 +148,30 @@ void LOGD(const Arg& arg, const Args& ... args){
 
 inline volatile char * const usart = (char*) 0x40008000;
 
-inline void LOG( char c ){
+inline OPT_SMALL void LOG( char c ){
     usart[0xC] = 3;
     usart[0] = c;
 }
 
-inline void LOGD( char c ){
+inline OPT_SMALL void LOGD( char c ){
 #ifndef RELEASE
     LOG(c);
 #endif
 }
 
-inline void LOG( const char *str ){
+inline OPT_SMALL void LOG( const char *str ){
     usart[0xC] = 3;
     while( *str )
         usart[0] = *str++;
 }
 
-inline void LOGD( const char *str ){
+inline OPT_SMALL void LOGD( const char *str ){
 #ifndef RELEASE
     LOG(str);
 #endif
 }
 
-inline void LOGNUM(unsigned int number){
+inline OPT_SMALL void LOGNUM(unsigned int number){
     if(number == 0){
         LOG('0');
         return;
@@ -186,7 +186,7 @@ inline void LOGNUM(unsigned int number){
     LOG(cursor);
 }
 
-inline void LOGNUMD(unsigned int n){
+inline OPT_SMALL void LOGNUMD(unsigned int n){
 #ifndef RELEASE
     LOGNUM(n);
 #endif
@@ -195,7 +195,7 @@ inline void LOGNUMD(unsigned int n){
 template <typename Integer,
           std::enable_if_t<std::is_integral_v<Integer>, int> = 0
           >
-inline void LOG(Integer number){
+inline OPT_SMALL void LOG(Integer number){
     if (std::is_signed_v<Integer> && number < 0){
         LOG('-');
         number = -number;
@@ -206,7 +206,7 @@ inline void LOG(Integer number){
 template <typename Integer,
           std::enable_if_t<std::is_integral_v<Integer>, int> = 0
           >
-inline void LOGD(Integer number){
+inline OPT_SMALL void LOGD(Integer number){
 #ifndef RELEASE
     LOG(number);
 #endif
@@ -215,7 +215,7 @@ inline void LOGD(Integer number){
 template <typename Pointer,
           std::enable_if_t<std::is_pointer_v<Pointer>, int> = 0
           >
-inline void LOG(Pointer ptr){
+inline OPT_SMALL void LOG(Pointer ptr){
     auto v = reinterpret_cast<std::uintptr_t>(ptr);
     usart[0xC] = 3;
     const char digits[] = "0123456789ABCDEF";
@@ -225,11 +225,11 @@ inline void LOG(Pointer ptr){
     }
 }
 
-inline void LOG( bool b ){
+inline OPT_SMALL void LOG( bool b ){
     LOG(b ? "true" : "false");
 }
 
-inline void LOGD( bool b ){
+inline OPT_SMALL void LOGD( bool b ){
 #ifndef RELEASE
     LOG(b);
 #endif
@@ -238,14 +238,14 @@ inline void LOGD( bool b ){
 template <typename Enum,
           std::enable_if_t<std::is_enum_v<Enum>, int> = 0
           >
-inline void LOG(Enum e){
+inline OPT_SMALL void LOG(Enum e){
     LOG(static_cast<unsigned int>(e));
 }
 
 template <typename Enum,
           std::enable_if_t<std::is_enum_v<Enum>, int> = 0
           >
-inline void LOGD(Enum e){
+inline OPT_SMALL void LOGD(Enum e){
 #ifndef RELEASE
     LOG(e);
 #endif
@@ -256,7 +256,7 @@ template <
     typename ... Args,
     std::enable_if_t<sizeof...(Args), int> = 0
     >
-void LOG(const Arg& arg, const Args& ... args){
+void OPT_SMALL LOG(const Arg& arg, const Args& ... args){
     LOG(arg);
     LOG(args...);
 }
@@ -266,7 +266,7 @@ template <
     typename ... Args,
     std::enable_if_t<sizeof...(Args), int> = 0
     >
-void LOGD(const Arg& arg, const Args& ... args){
+void OPT_SMALL LOGD(const Arg& arg, const Args& ... args){
 #ifndef RELEASE
     LOG(arg);
     LOG(args...);

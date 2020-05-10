@@ -161,6 +161,13 @@ int SDL_main(){
     return main();
 }
 
+
+#if POK_ENABLE_SOUND > 0
+void (*Core::updateHook)(bool) = +[](bool){ Sound::updateStream(); };
+#else
+void (*Core::updateHook)(bool) = +[](bool){};
+#endif
+    
 bool Core::run_state; // this definition needed
 
 /** Components */
@@ -948,12 +955,11 @@ void Core::titleScreen(const char*  name, const uint8_t *logo){
  */
 bool Core::update(bool useDirectMode, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH) {
 
-    #if POK_STREAMING_MUSIC
-        sound.updateStream();
-    #endif
+    
 
     uint32_t now = getTime();
 	if ((((nextFrameMillis - now)) > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
+		updateHook(true);
 		nextFrameMillis = now + timePerFrame;
 		frameCount++;
 
@@ -982,6 +988,7 @@ bool Core::update(bool useDirectMode, uint8_t updRectX, uint8_t updRectY, uint8_
 		return true;
 
 	} else {
+		updateHook(false);
 		if (!frameEndMicros) { //runs once at the end of the frame
         #if (PROJ_GAMEBUINO > 0)
 			#if POK_ENABLE_SOUND > 0
