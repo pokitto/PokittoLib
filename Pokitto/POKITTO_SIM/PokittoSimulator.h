@@ -49,6 +49,9 @@
 
 #define SIMW POK_LCD_W
 #define SIMH POK_LCD_H
+#ifndef SIMZOOM
+#  define SIMZOOM 2
+#endif // SIMZOOM
 #define AB_JUMP 1024 // jump one 1-bit Arduboy screen forward to get next color bit
 #define GB_JUMP 504 // jump one 1-bit Gamebuino screen forward to get next color bit
 
