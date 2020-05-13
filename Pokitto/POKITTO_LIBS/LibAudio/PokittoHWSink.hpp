@@ -183,6 +183,10 @@ namespace Audio {
 
     public:
 
+        static void reinstallIRQ(){
+            NVIC_SetVector((IRQn_Type)TIMER_32_0_IRQn, (uint32_t)IRQ);
+        }
+
         Sink(){
             nextHook = Pokitto::Core::updateHook;
             Pokitto::Core::updateHook =
