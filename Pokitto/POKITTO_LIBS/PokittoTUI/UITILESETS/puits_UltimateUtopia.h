@@ -1,6 +1,8 @@
 #ifndef POKITTOTUI_UITILESETS_PUITS_ULTIMATEUTOPIA_HPP
 #	define POKITTOTUI_UITILESETS_PUITS_ULTIMATEUTOPIA_HPP
 
+#   include <cstdint>
+
 
 namespace puits
 {
@@ -11,9 +13,9 @@ namespace puits
 		struct Colors
 		{
 			static constexpr auto max = 8;
-			
+
 			static constexpr auto outside = 0;
-			
+
 			// Background of the box and all widgets.
 			// - Background has a checkerboard pattern.
 			// - You can make a unique color by setting the same one to bg1 and bg2, using mapColor.
@@ -21,12 +23,12 @@ namespace puits
 			// - Setting only one to transparent (0) will make it less "opaque" visually.
 			static constexpr auto bg1 = 1;
 			static constexpr auto bg2 = 2;
-			
+
 			// Borders for Gauge, Box and Checkbox.
 			static constexpr auto border = 3;
 			static constexpr auto borderInside = 4;
 			static constexpr auto borderShine = 5;
-			
+
 			// Text, Checkbox' Check, Arrows, Gauge's Filling' shine.
 			static constexpr auto main = 7;
 			// Checkbox' Check, Gauge's Filling, Arrows.
@@ -34,7 +36,7 @@ namespace puits
 			// Gauge's Filling.
 			static constexpr auto tiercary = 5;
 		};
-		
+
 		// The tileset itself.
 		inline const uint8_t tileSet[] = {
 		0x00,0x00,0x00,0x00,0x00,0x00,
