@@ -229,8 +229,8 @@ namespace ptui
         // - Negative and reversed boxes are considered as empty ones.
         void fillRectTiles(int firstColumn, int firstRow, int lastColumn, int lastRow, Tile tile) noexcept
         {
-            fillRectTilesUnsafe(clampColumn(firstColumn), clampRow(firstRow), clampColumn(lastColumn), clampRow(lastRow),
-                                tile);
+            if (cropBox(firstColumn, firstRow, lastColumn, lastRow))
+                fillRectTilesUnsafe(firstColumn, firstRow, lastColumn, lastRow, tile);
         }
 
         // Same than above, but for the tile deltas.
@@ -238,21 +238,20 @@ namespace ptui
         {
             if (!enableTilesWithDeltasP)
                 return ;
-            fillRectDeltasUnsafe(clampColumn(firstColumn), clampRow(firstRow), clampColumn(lastColumn), clampRow(lastRow),
-                                 delta);
+            if (cropBox(firstColumn, firstRow, lastColumn, lastRow))
+                fillRectDeltasUnsafe(firstColumn, firstRow, lastColumn, lastRow, delta);
         }
 
         // Both fillRectTiles and fillRectDeltas.
         void fillRectTilesAndDeltas(int firstColumn, int firstRow, int lastColumn, int lastRow, Tile tile, Delta delta) noexcept
         {
-            firstColumn = clampColumn(firstColumn);
-            firstRow = clampRow(firstRow);
-            lastColumn = clampColumn(lastColumn);
-            lastRow = clampRow(lastRow);
-            fillRectTilesUnsafe(firstColumn, firstRow, lastColumn, lastRow,
-                                tile);
-            fillRectDeltasUnsafe(firstColumn, firstRow, lastColumn, lastRow,
-                                 delta);
+            if (cropBox(firstColumn, firstRow, lastColumn, lastRow))
+            {
+                fillRectTilesUnsafe(firstColumn, firstRow, lastColumn, lastRow,
+                                    tile);
+                fillRectDeltasUnsafe(firstColumn, firstRow, lastColumn, lastRow,
+                                     delta);
+            }
         }
 
         // Shift the whole map by `shiftedColumns` columns and `shiftedRows` rows.
@@ -260,8 +259,7 @@ namespace ptui
         // - If Deltas are supported, they're shifted as well.
         void shift(int shiftedColumns, int shiftedRows) noexcept
         {
-            shiftUnsafe(0, 0, columns - 1, rows - 1,
-                        shiftedColumns, shiftedRows);
+            shiftUnsafe(0, 0, columns - 1, rows - 1, shiftedColumns, shiftedRows);
         }
 
         // Same than above, on a given area.
@@ -271,8 +269,8 @@ namespace ptui
         void shift(int firstColumn, int firstRow, int lastColumn, int lastRow,
                    int shiftedColumns, int shiftedRows) noexcept
         {
-            shiftUnsafe(clampColumn(firstColumn), clampRow(firstRow), clampColumn(lastColumn), clampRow(lastRow),
-                        shiftedColumns, shiftedRows);
+            if (cropBox(firstColumn, firstRow, lastColumn, lastRow))
+                shiftUnsafe(firstColumn, firstRow, lastColumn, lastRow, shiftedColumns, shiftedRows);
         }
 
 
@@ -304,6 +302,18 @@ namespace ptui
         bool areCoordsValid(CoordsType column, CoordsType row) const noexcept
         {
             return (column >= 0) && (column < columns) && (row >= 0) && (row < rows);
+        }
+
+        template<typename CoordsType = int>
+        bool cropBox(CoordsType& firstColumn, CoordsType& firstRow, CoordsType& lastColumn, CoordsType& lastRow) const noexcept
+        {
+            if ((firstColumn >= columns) || (lastColumn < 0) || (firstColumn >= columns) || (lastColumn < 0))
+                return false;
+            firstColumn = std::max<CoordsType>(0, firstColumn);
+            firstRow = std::max<CoordsType>(0, firstRow);
+            lastColumn = std::min<CoordsType>(lastColumn, columns - 1);
+            lastRow = std::min<CoordsType>(lastRow, rows - 1);
+            return true;
         }
 
 
