@@ -307,7 +307,7 @@ namespace ptui
         template<typename CoordsType = int>
         bool cropBox(CoordsType& firstColumn, CoordsType& firstRow, CoordsType& lastColumn, CoordsType& lastRow) const noexcept
         {
-            if ((firstColumn >= columns) || (lastColumn < 0) || (firstColumn >= columns) || (lastColumn < 0))
+            if ((firstColumn >= columns) || (lastColumn < 0) || (firstRow >= rows) || (lastRow < 0))
                 return false;
             firstColumn = std::max<CoordsType>(0, firstColumn);
             firstRow = std::max<CoordsType>(0, firstRow);
