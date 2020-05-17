@@ -180,9 +180,9 @@ void Simulator::initSDLGfx() {
     DestR.w = SIMW; DestR.h = SIMH;
     #else
     #if SIM_PORTRAIT != 1
-    DestR.x = 0; DestR.y = 0; DestR.w = SIMW*2; DestR.h = SIMH*2;SrcR.w = SIMW*2; SrcR.h = SIMH*2;
+    DestR.x = 0; DestR.y = 0; DestR.w = SIMW*SIMZOOM; DestR.h = SIMH*SIMZOOM;SrcR.w = SIMW*SIMZOOM; SrcR.h = SIMH*SIMZOOM;
     #else
-    DestR.x = 0; DestR.y = 0; DestR.w = SIMH*2; DestR.h = SIMW*2;SrcR.w = SIMH*2; SrcR.h = SIMW*2;
+    DestR.x = 0; DestR.y = 0; DestR.w = SIMH*SIMZOOM; DestR.h = SIMW*SIMZOOM;SrcR.w = SIMH*SIMZOOM; SrcR.h = SIMW*SIMZOOM;
     #endif // SIM_PORTRAIT
     #endif // SIM_SHOWDEVICE
     #endif // SIM_FULLSCREEN
@@ -216,11 +216,11 @@ void Simulator::initSDLGfx() {
     wh = 3.6f*SIMH;
     #else
     #if SIM_PORTRAIT != 1
-    ww = SIMW*2;
-    wh = SIMH*2;
+    ww = SIMW*SIMZOOM;
+    wh = SIMH*SIMZOOM;
     #else
-    wh = SIMW*2;
-    ww = SIMH*2;
+    wh = SIMW*SIMZOOM;
+    ww = SIMH*SIMZOOM;
     #endif // SIM_PORTRAIT
     #endif // SIM_SHOWDEVICE
     sdlSimWin = SDL_CreateWindow("Pokitto simulator", 100, 100, ww, wh, SDL_WINDOW_SHOWN);
@@ -238,7 +238,7 @@ void Simulator::initSDLGfx() {
     }
 
     sdlRen = SDL_CreateRenderer(sdlSimWin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    
+
     if (sdlRen == nullptr){
         std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
         std::cout << "Trying without hardware acceleration." << std::endl;
@@ -390,9 +390,9 @@ void Simulator::refreshDisplay() {
             SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, ww, wh, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
         #else
             #if SIM_PORTRAIT != 1
-            SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMW*2, SIMH*2, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+            SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMW*SIMZOOM, SIMH*SIMZOOM, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
             #else
-            SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMH*2, SIMW*2, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+            SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, SIMH*SIMZOOM, SIMW*SIMZOOM, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
             #endif // SIM_PORTRAIT
         #endif // SIM_SHOWDEVICE
     #endif // SCREENCAPTURE
