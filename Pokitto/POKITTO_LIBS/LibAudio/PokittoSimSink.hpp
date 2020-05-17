@@ -80,8 +80,6 @@ namespace Audio {
 
     public:
 
-        static void reinstallIRQ(){}
-
         Sink(){
             nextHook = Pokitto::Core::updateHook;
             Pokitto::Core::updateHook =
