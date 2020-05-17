@@ -11,10 +11,12 @@ namespace Audio {
     using s8 = signed char;
     using Source = void (*)(u8*, void*);
 
+    inline constexpr u32 bufferCount = 2;
+
     extern "C" {
         inline volatile u32 audio_playHead;
-        inline volatile u8 audio_state[2];
-        inline u8 audio_buffer[1024];
+        inline volatile u8 audio_state[bufferCount];
+        inline u8 audio_buffer[512 * bufferCount];
     }
 
     namespace internal {
