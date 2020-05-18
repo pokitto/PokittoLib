@@ -9,6 +9,8 @@
 #include "./minilpc.h"
 #include "file_diskio.h"
 
+extern int pokInitSD();
+
 namespace YAPFS
 {
 
@@ -56,6 +58,7 @@ static volatile uint8_t * const pSPI = (uint8_t *) 0x40040000;
 static volatile uint16_t * const pSPI16 = (uint16_t *) 0x40040000;
 
 static void initSPI(){
+    pokInitSD();
     LPC_SYSCON->SYSAHBCLKCTRL |= 1 << 11;
     LPC_SYSCON->SSP0CLKDIV = 0x01;
     LPC_SYSCON->PRESETCTRL |= 1 << 0;
