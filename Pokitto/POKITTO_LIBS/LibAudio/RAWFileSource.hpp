@@ -80,7 +80,8 @@ namespace Audio {
             Audio::connect(channel, &sd, channel == 0 ? copy : mix);
             return sd;
         }
-
+        
+        template<u32 channel = 0>
         static RAWFileSource* play(const char *name){
             static ALIGNED u8 ram[sizeof(File)];
             static bool init = false;
@@ -91,9 +92,9 @@ namespace Audio {
 
             File& file = *reinterpret_cast<File*>(ram);
             if(file.openRO(name)){
-                return &play<0>(file, file.size());
+                return &play<channel>(file, file.size());
             } else {
-                Audio::stop<0>();
+                Audio::stop<channel>();
             }
             return nullptr;
         }
@@ -120,6 +121,6 @@ namespace Audio {
 
     template<u32 channel = 0>
     RAWFileSource *play(const char *name){
-        return RAWFileSource::play(name);
+        return RAWFileSource::play<channel>(name);
     }
 }
