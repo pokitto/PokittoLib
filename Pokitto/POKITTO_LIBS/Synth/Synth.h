@@ -21,6 +21,8 @@
 #ifndef SYNTH_H
 #define SYNTH_H
 
+#include <array>
+
 #include "Synth_osc.h"
 #include "Synth_song.h"
 
@@ -139,7 +141,19 @@ extern const int8_t arptable[][5];
 
 extern uint16_t freqs[];
 //extern uint16_t cincs[];
-extern const uint32_t cincs[];
+//extern const uint32_t cincs[];
+
+inline constexpr std::array<uint32_t, 89> genCincsTable(uint32_t sampleRate){
+    std::array<uint32_t, 89> table = {};
+    double freq = 30.868; // B0
+    double ratio = 1.0594630943592953; // one semitone
+    for(int i=0; i<89; ++i, freq *= ratio){
+        table[i] = (~uint32_t{}) * freq / sampleRate;
+    }
+    return table;
+}
+
+inline constexpr auto cincs = genCincsTable(POK_AUD_FREQ);
 
 extern uint8_t xorshift8();
 extern uint16_t xorshift16();
