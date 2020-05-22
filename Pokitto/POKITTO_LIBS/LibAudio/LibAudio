@@ -49,3 +49,4 @@ namespace Audio {
 #include "./RAWFileSource.hpp"
 #include "./ByteBeatSource.hpp"
 #include "./SFX8Source.hpp"
+#include "./SynthSource.hpp"
