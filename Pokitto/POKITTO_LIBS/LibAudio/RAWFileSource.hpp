@@ -65,7 +65,7 @@ namespace Audio {
                     rem = 0;
                 }
             }
-            Audio::mix(buffer, tmp, 512);
+            Audio::mix(buffer, tmpbuf, 512);
         }
 
     public:
