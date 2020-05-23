@@ -1,0 +1,89 @@
+#pragma once
+
+#include <array>
+
+/*
+
+The Trig class provides a lookup-table-based implementation
+of Sine/Cosine that is microcontroller-friendly, using C++17.
+
+The LUT is generated in compile-time using a Taylor Series.
+
+The class requires two template parameters:
+- quadSize: How many entries should the LUT have for
+            one quadrant of the unit circle.
+- multiplier: Factor by which entries will be multiplied.
+
+For the best performance quadSize should be a power-of-two.
+
+Example:
+If you want to store 90 entries, ranging from 0 to 255:
+    using trig90 = Trig<90, 255>;
+    trig90::sin(0); // 0
+    trig90::sin(90); // 255
+    trig90::sin(180); // 0
+    trig90::sin(-90); // -255
+
+Or, if you require more resolution:
+    using trig256 = Trig<256, 0xFFFF>;
+    trig256::sin(0); // 0
+    trig256::sin(256); // 65535
+    trig256::sin(512); // 0
+    trig256::sin(768); // -65535
+
+The following is provided for convenience:
+using trig = Trig<256, 255>;
+
+ */
+
+namespace trig_internal {
+    template<std::uint32_t m> struct TypeDetail { using type = std::uint32_t; };
+    template<> struct TypeDetail<2> { using type = std::uint16_t; };
+    template<> struct TypeDetail<1> { using type = std::uint8_t; };
+}
+
+template<std::uint32_t quadSize, std::uint32_t multiplier>
+class Trig {
+    static constexpr std::uint32_t multiplierSize = multiplier <= 0xFF ? 1 : (multiplier <= 0xFFFF ? 2 : 4);
+    using Type = typename trig_internal::TypeDetail< multiplierSize >::type;
+
+    static constexpr std::array<Type, quadSize> genCosTable(uint32_t mul){
+        std::uint32_t precision = 4;
+        std::array<Type, quadSize> table = {};
+        for(std::uint32_t i=0; i<quadSize; ++i){
+            double x = i * 3.1415926535897932384626433 / ((quadSize - 1) * 2.0);
+            double s = -1, v = 1, nF = 2, xN = x * x;
+            for(std::uint32_t it=0; it<precision; ++it){
+                v += s * (xN / nF);
+                nF *= ((it+1)*2+1);
+                nF *= ((it+1)*2+2);
+                xN *= x * x;
+                s *= -1;
+            }
+            table[i] = mul * v;
+        }
+        return table;
+    }
+
+    static constexpr std::array<Type, quadSize> data = genCosTable(multiplier);
+
+public:
+    static constexpr int cos(std::int32_t a){
+        a %= static_cast<std::int32_t>(quadSize) * 4;
+        if(a < 0) a = -a;
+        auto quadrant = a / quadSize;
+        switch(quadrant){
+        case 0: return data[a];
+        case 1: return -data[quadSize * 2 - 1 - a];
+        case 2: return -data[a - quadSize * 2];
+        case 3: return data[quadSize * 4 - 1 - a];
+        default: return 0;
+        }
+    }
+
+    static constexpr int sin(std::int32_t a){
+        return cos(a - quadSize);
+    }
+};
+
+using trig = Trig<256, 255>;

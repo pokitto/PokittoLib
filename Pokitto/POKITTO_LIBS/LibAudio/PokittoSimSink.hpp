@@ -68,7 +68,6 @@ namespace Audio {
             wanted.channels = 1;
             wanted.samples = 512;
             wanted.callback = +[](void*, u8* stream, int len){
-                static bool wasCalled = false;
                 for(int i=0; i<len; ++i)
                     stream[i] = IRQ();
             };
