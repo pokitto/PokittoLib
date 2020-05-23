@@ -4,6 +4,10 @@
 extern SDL_AudioDeviceID audioDevice;
 
 namespace Audio {
+    inline void setVolume(u32 v){
+        v = v * v * 256 / 36864;
+        audio_volume = v;
+    }
 
     inline void mix(void *dst, const void* src, std::size_t count) {
         char *buffer = static_cast<char*>(dst);
@@ -39,7 +43,7 @@ namespace Audio {
                 }
             }
 
-            return lastByte;
+            return lastByte * audio_volume >> 8;
         }
 
         void (*nextHook)(bool);
@@ -48,6 +52,8 @@ namespace Audio {
             if(wasInit)
                 return;
             wasInit = true;
+            // set volume
+            Audio::setVolume(Pokitto::Sound::globalVolume);
 
             for(int i=0; i<channelCount; ++i){
                 channels[i].source = nullptr;

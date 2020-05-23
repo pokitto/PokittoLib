@@ -1,11 +1,21 @@
 #pragma once
 
+#include "SoftwareI2C.h"
+
 #include <MemOps>
 
 #pragma GCC diagnostic ignored "-Wattributes"
 #define NAKED __attribute__((naked))
 
 namespace Audio {
+
+    inline void setVolume(u32 v){
+        v = 255 - (192 - v) * (192 - v) * 255 / 36864;
+        u32 hwVolume = v ? (v>>1) | 0xF : 0;
+        u32 swVolume = v ? (v | 0xF) + 1 : 0;
+        SoftwareI2C(P0_4, P0_5).write(0x5e, hwVolume);
+        audio_volume = swVolume;
+    }
 
     inline void NAKED mix(void* dst, const void* src, std::size_t count) {
         __asm__ volatile (
@@ -89,7 +99,8 @@ namespace Audio {
                 "ldr r0, =0x40014000" "\n"
                 "ldr r1, [r0]" "\n"
                 "lsls r1, 30" "\n"
-                "bpl 2f" "\n"
+                "bpl 3f" "\n"
+                
                 "ldr r1, =2" "\n"
                 "str r1, [r0]" "\n"
                 "ldr r2, =audio_playHead" "\n"
@@ -97,7 +108,19 @@ namespace Audio {
                 "ldr r3, [r2]" "\n"
 
                 "ldrb r0, [r1, r3]" "\n"
-                "ldr r1, =0xA0000020 + 28\n"
+
+                "ldr r1, =audio_volume" "\n"
+                "ldr r1, [r1]" "\n"
+                "subs r0, 128" "\n"
+                "muls r0, r1" "\n"
+                "asrs r0, 8" "\n"
+                "adds r0, 128" "\n"
+                "asrs r1, r0, 8" "\n"
+                "beq 2f" "\n"
+                "asrs r1, 30" "\n"
+                "mvns r0, r1" "\n"
+
+                "2:ldr r1, =0xA0000020 + 28\n"
                 "strb r0, [r1]      \n"
                 "lsrs r0, 1         \n"
                 "strb r0, [r1, 1]   \n"
@@ -122,11 +145,12 @@ namespace Audio {
                 "str r3, [r2]"      "\n"
                 "lsrs r3, 9"        "\n"
                 "cmp r3, r0"        "\n"
-                "beq 2f"            "\n"
+                "beq 3f"            "\n"
                 "movs r3, 0"        "\n"
                 "ldr r1, =audio_state"      "\n"
                 "strb r3, [r1, r0]"         "\n"
-                "2: bx lr" "\n"
+
+                "3: bx lr" "\n"
                 );
         }
 /* */
@@ -136,7 +160,12 @@ namespace Audio {
         void init(){
             if(wasInit)
                 return;
+            // set volume
+            Audio::setVolume(Pokitto::Sound::globalVolume);
 
+            // enable amp
+            LPC_GPIO_PORT->SET[1] = (1 << 17);
+            
             for(int i=0; i<channelCount; ++i){
                 channels[i].source = nullptr;
             }
@@ -210,6 +239,7 @@ namespace Audio {
         void update(){
             init();
             NVIC_SetVector((IRQn_Type)TIMER_32_0_IRQn, (uint32_t)IRQ);
+
             for(u32 i = 0; i < bufferCount; ++i){
                 if(audio_state[i])
                     continue;
