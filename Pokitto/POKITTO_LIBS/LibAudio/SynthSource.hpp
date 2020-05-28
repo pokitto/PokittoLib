@@ -65,24 +65,28 @@ namespace Audio {
     }
 
     struct Note {
-        constexpr Note(u32 notenumber) : _notenumber(notenumber){}
+        constexpr Note(u32 notenumber=25) : _notenumber(notenumber){}
 
         template<u32 channel = 0>
-        void play(u32 oscId = 0) const {
+        void play(u32 oscId = ~0U) const {
+            if(oscId == ~0U) oscId = _oscId;
             Audio::play<channel>(oscId, *this);
         }
+
+        uint8_t _oscId = 0;
+        constexpr Note& osc(uint8_t oscId){ _oscId = oscId; return *this; }
 
         uint8_t _wave = 1;
         constexpr Note& wave(uint8_t v){ _wave = v; return *this; }
 
-        uint8_t _loop = 0;
-        constexpr Note& loop(uint8_t v){ _loop = v; return *this; }
+        bool _loop = 0;
+        constexpr Note& loop(bool v){ _loop = v; return *this; }
 
-        uint8_t _echo = 0;
-        constexpr Note& echo(uint8_t v){ _echo = v; return *this; }
+        bool _echo = 0;
+        constexpr Note& echo(bool v){ _echo = v; return *this; }
 
-        uint8_t _adsr = 0;
-        constexpr Note& adsr(uint8_t v){ _adsr = v; return *this; }
+        bool _adsr = 0;
+        constexpr Note& adsr(bool v){ _adsr = v; return *this; }
 
         uint8_t _notenumber = 25;
         constexpr Note& noteNumber(uint8_t v){ _notenumber = v; return *this; }
@@ -91,16 +95,32 @@ namespace Audio {
         constexpr Note& volume(uint16_t v){ _volume = v; return *this; }
 
         uint16_t _attack = 0;
-        constexpr Note& attack(uint16_t v){ _attack = v; return *this; }
+        constexpr Note& attack(uint16_t v){
+            _adsr = 1;
+            _attack = v;
+            return *this;
+        }
 
         uint16_t _decay = 0;
-        constexpr Note& decay(uint16_t v){ _decay = v; return *this; }
+        constexpr Note& decay(uint16_t v){
+            _adsr = 1;
+            _decay = v;
+            return *this;
+        }
 
         uint16_t _sustain = 0;
-        constexpr Note& sustain(uint16_t v){ _sustain = v; return *this; }
+        constexpr Note& sustain(uint16_t v){
+            _adsr = 1;
+            _sustain = v;
+            return *this;
+        }
 
         uint16_t _release = 0;
-        constexpr Note& release(uint16_t v){ _release = v; return *this; }
+        constexpr Note& release(uint16_t v){
+            _adsr = 1;
+            _release = v;
+            return *this;
+        }
 
         int16_t _maxbend = 0;
         constexpr Note& maxbend(int16_t v){ _maxbend = v; return *this; }
