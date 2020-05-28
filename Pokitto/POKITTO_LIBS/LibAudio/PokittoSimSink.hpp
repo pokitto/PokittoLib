@@ -21,10 +21,7 @@ namespace Audio {
     }
 
     template <u32 channelCount, u32 sampleRate>
-    class Sink {
-        internal::Channel channels[channelCount];
-        u8 wasInit = false;
-
+    class Sink : public BaseSink<Sink<channelCount, sampleRate>, channelCount> {
         static u8 IRQ(void){
             static u8 lastByte = 128;
             auto currentBuffer = audio_playHead >> 9;
@@ -46,17 +43,21 @@ namespace Audio {
             return lastByte * audio_volume >> 8;
         }
 
-        void (*nextHook)(bool);
-
+    public:
         void init(){
-            if(wasInit)
+            if(this->wasInit)
                 return;
-            wasInit = true;
-            // set volume
+            this->wasInit = true;
+
             Audio::setVolume(Pokitto::Sound::globalVolume);
 
-            for(int i=0; i<channelCount; ++i){
-                channels[i].source = nullptr;
+            this->channels[0].source =
+                +[](u8 *buffer, void *ptr){
+                     MemOps::set(buffer, 128, 512);
+                 };
+
+            for(int i=1; i<channelCount; ++i){
+                this->channels[i].source = nullptr;
             }
 
             for(int i=0; i<bufferCount; ++i){
@@ -83,52 +84,6 @@ namespace Audio {
             SDL_PauseAudioDevice(audioDevice, 0);
         }
 
-    public:
-
-        Sink(){
-            nextHook = Pokitto::Core::updateHook;
-            Pokitto::Core::updateHook =
-                +[](bool isFrame){
-                     auto self = reinterpret_cast<Sink*>(Audio::internal::sinkInstance);
-                     self->update();
-                     self->nextHook(isFrame);
-                 };
-            Audio::internal::sinkInstance = this;
-            Audio::connect =
-                +[](u32 channelNumber, void *data, Source source){
-                     auto self = reinterpret_cast<Sink*>(Audio::internal::sinkInstance);
-                     self->connect(channelNumber, data, source);
-                 };
-        }
-
-        void connect(u32 channelNumber, void *data, Source source){
-            init();
-            if(channelNumber >= channelCount)
-                channelNumber = channelCount-1;
-            channels[channelNumber].source = source;
-            channels[channelNumber].data = data;
-        }
-
-        void update(){
-            init();
-            for(u32 i = 0; i < bufferCount; ++i){
-                if(audio_state[i])
-                    continue;
-                u8 *buffer = audio_buffer + i * 512;
-                for(u32 c = 0; c < channelCount; ++c){
-                    auto source = channels[c].source;
-                    if(source){
-                        source(buffer, channels[c].data);
-                    }
-                }
-                audio_state[i] = 1;
-            }
-        }
-
-        template <u32 channel>
-        void stop(){
-            channels[channel].source = nullptr;
-        }
-
+        Sink() = default;
     };
 }
