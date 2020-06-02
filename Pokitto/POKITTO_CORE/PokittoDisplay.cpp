@@ -99,8 +99,10 @@ int16_t Display::cursorX, Display::cursorY;
 uint8_t Display::m_w, Display::m_h;
 uint8_t Display::fontWidth, Display::fontHeight;
 bool Display::textWrap=true;
-uint8_t Display::scanType[88];
-uint8_t Display::subMode;
+#if (PROJ_SCREENMODE == MIXMODE)
+    uint8_t Display::subMode; // for mixed mode switching
+    uint8_t Display::scanType[88]; // for mixed screen mode
+#endif
 
 uint8_t Display::persistence = 0;
 uint16_t Display::color = 1;
