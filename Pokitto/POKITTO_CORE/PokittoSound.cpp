@@ -43,7 +43,7 @@
  *
  * License for Gamebuino-identical code:
  *
- * (C) Copyright 2014 Aurélien Rodot. All rights reserved.
+ * (C) Copyright 2014 Aurï¿½lien Rodot. All rights reserved.
  *
  * This file is part of the Gamebuino Library (http://gamebuino.com)
  *
@@ -64,24 +64,62 @@
 #include "PokittoSound.h"
 #include "Pokitto_settings.h"
 #include "PokittoCore.h"
+#if (POK_ENABLE_SYNTH == 1)
 #include "Synth.h"
+#endif
 
 #ifndef POK_SIM
 #include "HWSound.h"
+
+#ifdef PROJ_SDFS_STREAMING
+#include "SDFSDisk.h"
+#endif
+
+#ifdef PROJ_FILE_STREAMING
+#include "FileDisk.h"
+#endif
+
 #else
+
 #include "SimSound.h"
 #include "PokittoSimulator.h"
+
+#if defined(PROJ_FILE_STREAMING)
+#include "FileDisk.h"
+#else
+#include "FileIO.h"
+#endif
 #endif
 
 typedef uint8_t byte;
 
 using namespace Pokitto;
 
+#ifdef PROJ_SND_DEBUG
+int __sx=0;
+#endif
+
+/** discrete hardware volume control **/
+
+uint8_t Pokitto::discrete_vol = 0;
+uint8_t const Pokitto::discrete_vol_levels[8]      {0,32,64,96,128,160,192,224};
+uint8_t const Pokitto::discrete_vol_hw_levels[8]   {0,27,64,96,36,117,127,127};
+uint8_t const Pokitto::discrete_vol_multipliers[8] {0,127,127,127,192,192,255,255};
+
 Pokitto::Core _soundc;
 
-uint8_t Sound::prescaler;
+const uint8_t *Sound::sfxDataPtr = 0;
+const uint8_t *Sound::sfxEndPtr = 0;
+bool Sound::sfxIs4bitSamples = false;
+uint8_t Sound::sfxBytePos = 0;
+
 uint16_t Sound::globalVolume;
 uint16_t Sound::volumeMax = VOLUME_HEADPHONE_MAX;
+uint8_t Sound::headPhoneLevel=1;
+
+#if (POK_GBSOUND > 0)
+
+uint8_t Sound::prescaler;
 
 bool Sound::trackIsPlaying[NUM_CHANNELS];
 bool Sound::patternIsPlaying[NUM_CHANNELS];
@@ -126,15 +164,20 @@ int8_t Sound::stepVolume[NUM_CHANNELS];
 uint8_t Sound::stepPitch[NUM_CHANNELS];
 uint8_t Sound::chanVolumes[NUM_CHANNELS];
 
+#endif
+
 #if (POK_ENABLE_SOUND < 1)
+ #ifdef NUM_CHANNELS
+ #undef NUM_CHANNELS
  #define NUM_CHANNELS 0
+ #endif // NUM_CHANNELS
 #endif
 
 #if(NUM_CHANNELS > 0)
     #ifndef POK_SIM
-        uint8_t sbyte;
+        uint32_t sbyte;
     #else
-    uint8_t sbyte;
+    uint32_t sbyte;
     float pwm1;
     #endif // POK_SIM
 
@@ -156,6 +199,7 @@ const uint16_t playOKPattern[]  = {0x0005,0x138,0x168,0x0000};
 const uint16_t playCancelPattern[]  = {0x0005,0x168,0x138,0x0000};
 const uint16_t playTickP[]  = {0x0045,0x168,0x0000};
 #endif
+
 #if(EXTENDED_NOTE_RANGE > 0)
 //extended note range
 #define NUM_PITCH 59
@@ -177,7 +221,7 @@ void Pokitto::audio_IRQ() {
         #endif
 
         streamstep &= streamon; //check if stream is on
-		
+
         if(streamvol && streamstep) {
             uint8_t output = (*currentPtr++);
             sbyte = output;
@@ -194,19 +238,26 @@ void Pokitto::audio_IRQ() {
         }
 
     #endif // POK_STREAMING_MUSIC
-    #if (NUM_CHANNELS > 0)
+    #if (NUM_CHANNELS > 0) && (PROJ_GAMEBUINO > 0)
 	Sound::generateOutput();
     #endif
 }
 
 void Sound::volumeUp() {
-    if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()+VOLUME_STEP*2);
-    else setVolume(getVolume()+VOLUME_STEP);
+    Pokitto::discrete_vol++;
+    if (discrete_vol>7) discrete_vol=7;
+    globalVolume = discrete_vol_levels[discrete_vol];
+    setVolume(globalVolume);
+    //if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()+VOLUME_STEP*2);
+    //else setVolume(getVolume()+VOLUME_STEP);
 }
 
 void Sound::volumeDown() {
-    if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()-VOLUME_STEP*4);
-    else setVolume(getVolume()-VOLUME_STEP);
+    if (discrete_vol) Pokitto::discrete_vol--;
+    globalVolume = discrete_vol_levels[discrete_vol];
+    setVolume(globalVolume);
+    //if (globalVolume>VOLUME_HEADPHONE_MAX) setVolume(getVolume()-VOLUME_STEP*4);
+    //else setVolume(getVolume()-VOLUME_STEP);
 }
 
 
@@ -224,7 +275,7 @@ uint16_t Sound::getMaxVol() {
 }
 
 void Sound::updateStream() {
-    #if POK_STREAMING_MUSIC
+     #if POK_STREAMING_MUSIC
     if (oldBuffer != currentBuffer) {
         if (currentBuffer==0) fileReadBytes(&buffers[3][0],BUFFER_SIZE);
         else if (currentBuffer==1) fileReadBytes(&buffers[0][0],BUFFER_SIZE);
@@ -242,10 +293,11 @@ void Sound::updateStream() {
         streamcounter=0;
         #if POK_STREAM_LOOP > 0
         fileRewind();
-        #endif
-        #ifndef POK_SIM
-        streamon=0;
-        #endif // POK_SIM
+        #else
+            #ifndef POK_SIM
+                streamon=0;
+            #endif // POK_SIM
+        #endif // POK_STREAM_LOOP
     }
     #endif
 }
@@ -259,7 +311,7 @@ ampEnable(true);
 #if POK_ENABLE_SOUND > 0
 #if POK_GBSOUND > 0
 	prescaler = 1;
-	for(byte i=0; i<NUM_CHANNELS; i++){
+	for(int i=0; i<NUM_CHANNELS; i++){
 		chanVolumes[i] = VOLUME_CHANNEL_MAX;
 		changeInstrumentSet(defaultInstruments, i); //load default instruments. #0:square wave, #1: noise
 		command(CMD_INSTRUMENT, 0, 0, i); //set the default instrument to square wave
@@ -268,6 +320,8 @@ ampEnable(true);
 #endif //POK_ENABLE_SOUND
 #endif
 }
+
+#if (POK_GBSOUND > 0)
 
 void Sound::playTrack(const uint16_t* track, uint8_t channel){
 #if(NUM_CHANNELS > 0)
@@ -592,6 +646,7 @@ void Sound::updateNote(uint8_t i) {
 		// jonnehw noInterrupts();
 		_chanHalfPeriod[i] = pgm_read_byte(_halfPeriods + outputPitch[i]);
 		_chanOutput[i] = _chanOutputVolume[i] = outputVolume[i] * (globalVolume>>GLOBVOL_SHIFT) * chanVolumes[i] * stepVolume[i];
+		//_chanOutput[i] = _chanOutputVolume[i] = outputVolume[i] * (globalVolume) * chanVolumes[i] * stepVolume[i];
 		//Serial.println(outputVolume[i]);
 		// jonnehw interrupts();
 	}
@@ -691,7 +746,7 @@ void Sound::generateOutput() {
 
 void Sound::updateOutput() {
 #if(NUM_CHANNELS > 0)
-	uint8_t output = 0;
+	uint32_t output = 0;
 
 	//CHANNEL 0
 	if (_chanState[0]) {
@@ -723,24 +778,31 @@ void Sound::updateOutput() {
     #if POK_ENABLE_SOUND
     /** HARDWARE **/
 
-        #if POK_STREAMING_MUSIC
+        #if POK_STREAMING_MUSIC && POK_USE_PWM
             if (streamstep) {
-                pwmout_write(&audiopwm,(float)sbyte/(float)255);
+                //pwmout_write(&audiopwm,(float)(sbyte>>headPhoneLevel)/(float)255);
+                sbyte *= discrete_vol_multipliers[discrete_vol];
+                sbyte >>= 8;
+                pwmout_write(&audiopwm,(float)(sbyte)/(float)255);
             }
         #endif
+            output *= discrete_vol_multipliers[discrete_vol];
+            output >>= 8;
             dac_write((uint8_t)output); //direct hardware mixing baby !
     soundbyte = output;
+
     #endif //POK_ENABLE_SOUND
     #else
     /** SIMULATOR **/
         #if POK_STREAMING_MUSIC
             if (streamstep) {
                 uint16_t o = output + sbyte;
-                output = o/2;
+                output = (o/2);//>>headPhoneLevel;
             }
         #endif
-        soundbyte = output;
+        soundbyte = output;//<<headPhoneLevel;
     #endif // POK_SIM
+
 #endif
 }
 
@@ -776,18 +838,21 @@ void Sound::playTick(){
 #endif // POK_GBSOUND
 }
 
+#endif //(POK_GBSOUND > 0)
+
 void Sound::setVolume(int16_t volume) {
 //#if NUM_CHANNELS > 0
 	if (volume<0) volume = 0;
-	if (volume>volumeMax) volume = volumeMax;
-	globalVolume = volume; // % (volumeMax+1);
+	//if (volume>volumeMax) volume = volumeMax;
+	globalVolume = volume;
+	//#if POK_ENABLE_SOUND > 0
+	discrete_vol = (volume>>5);
 	#ifndef POK_SIM
-	volume = (volume / 2)-10;
-	if (volume<0) volume = 0;
 	#if POK_ENABLE_SOUND > 0
-	setHWvolume(volume);
+	setHWvolume(discrete_vol_hw_levels[discrete_vol]); //boost volume if headphonelevel
 	#endif
 	#endif
+	//#endif
 	#if POK_SHOW_VOLUME > 0
 	_soundc.volbar_visible = VOLUMEBAR_TIMEOUT;
 	#endif
@@ -802,6 +867,7 @@ uint16_t Sound::getVolume() {
 //#endif
 }
 
+#if (POK_GBSOUND > 0)
 void Sound::setVolume(int8_t volume, uint8_t channel) {
 #if(NUM_CHANNELS > 0)
 	if(channel>=NUM_CHANNELS)
@@ -821,10 +887,12 @@ uint8_t Sound::getVolume(uint8_t channel) {
 	return 0;
 #endif
 }
+#endif //(POK_GBSOUND > 0)
 
+#if (POK_ENABLE_SYNTH == 1)
 void Sound::playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav,uint8_t arpmode)
 {
-    if (wav>5) wav=0;
+    if (wav>MAX_WAVETYPES) wav=0;
     if (arpmode>MAX_ARPMODE) arpmode=MAX_ARPMODE;
     if (os==1) setOSC(&osc1,1,wav,1,0,0,frq,amp,0,0,0,0,0,0,arpmode,0,0);
     else if (os==2) setOSC(&osc2,1,wav,1,0,0,frq,amp,0,0,0,0,0,0,arpmode,0,0);
@@ -833,10 +901,12 @@ void Sound::playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav,uint8_t arpmo
 
 void Sound::playTone(uint8_t os, uint16_t frq, uint8_t volume, uint32_t duration)
 {
-    if (os==1) setOSC(&osc1,1,WSAW,frq,volume,duration);
+    if (os==1) setOSC(&osc1,1,WSQUARE,frq,volume,duration);
     else if (os==2) setOSC(&osc2,1,WTRI,frq,volume,duration);
     else if (os==3) setOSC(&osc3,1,WTRI,frq,volume,duration);
 }
+
+#endif
 
 uint8_t Sound::ampIsOn()
 {
@@ -863,7 +933,7 @@ void Sound::ampEnable(uint8_t v) {
 
 int Sound::playMusicStream(char* filename)
 {
-    return playMusicStream(filename,0);
+    return playMusicStream(filename,FILE_MODE_READONLY | FILE_MODE_BINARY);
 }
 
 int Sound::playMusicStream()
@@ -872,8 +942,9 @@ int Sound::playMusicStream()
     if (currentPtr) {
             pokPlayStream();
             return 1;
-    } else return 0; //no stream
+    }
     #endif // POK_STREAMING_MUSIC
+    return 0; //no stream
 }
 
 void Sound::pauseMusicStream() {
@@ -885,12 +956,11 @@ void Sound::pauseMusicStream() {
 int Sound::playMusicStream(char* filename, uint8_t options)
 {
     #if POK_STREAMING_MUSIC
+
         uint8_t result;
         result = pokInitSD();
-        if (!isThisFileOpen(filename)) {
-            fileClose(); // close any open files
-            result = fileOpen(filename,FILE_MODE_OVERWRITE | FILE_MODE_BINARY);
-        }
+        fileClose(); // close any open files
+        result = fileOpen(filename,FILE_MODE_READONLY | FILE_MODE_BINARY);
 
         if (result) {
                 currentPtr = 0; // mark that no stream is available
@@ -912,3 +982,28 @@ int Sound::playMusicStream(char* filename, uint8_t options)
     return 1; // opening music file succeeded
 }
 
+uint32_t Sound::getMusicStreamElapsedSec() {
+    #if POK_STREAMING_MUSIC
+    return streamcounter/POK_AUD_FREQ;
+    #endif
+    return 0;
+}
+
+uint32_t Sound::getMusicStreamElapsedMilliSec() {
+    #if POK_STREAMING_MUSIC
+    return streamcounter/(POK_AUD_FREQ/1000);
+    #endif
+    return 0;
+}
+
+#if (POK_ENABLE_SYNTH == 1)
+void Sound::loadSampleToOsc(uint8_t os, uint8_t* data, uint32_t datasize) {
+    OSC* o;
+    if (os==3) o = &osc3;
+    else if (os==2) o = &osc2;
+    else o = &osc1;
+    o->sample = data;
+    o->samplelength = datasize;
+    o->samplepos = 0;
+}
+#endif

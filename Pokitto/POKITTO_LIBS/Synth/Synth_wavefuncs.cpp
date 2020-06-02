@@ -42,7 +42,7 @@ void waveoff(OSC* o); void sqwave(OSC* o); void sawwave(OSC* o); void triwave(OS
 void noADSR(OSC* o); void attackFunc(OSC* o); void decayFunc(OSC* o); void releaseFunc(OSC* o);
 void mix1(); void mix2(); void mix3(); void updateEnvelopes();
 
-waveFunction Farr []  = {waveoff, sqwave, sawwave, triwave, noise, tonenoise};
+waveFunction Farr []  = {waveoff, sqwave, sawwave, triwave, noise, tonenoise, sample};
 envFunction Earr [] = {noADSR, attackFunc, decayFunc, releaseFunc};
 mixFunction Marr [] = {updateEnvelopes,mix3,mix2,mix1}; // counts down
 mixFunction HWMarr [] = {updateEnvelopes,mix3,mix2,mix1}; // counts down
@@ -50,24 +50,25 @@ mixFunction HWMarr [] = {updateEnvelopes,mix3,mix2,mix1}; // counts down
 /** SOUND FUNCTIONS **/
 
 void waveoff(OSC* o){
-  o->output = 0;
+  o->output = 0x8000;
 }
 
 void sqwave(OSC* o){
 // square. If bit 16 set, its 2nd half of cycle and then output. if not, silence.
- if (o->count & 0x8000) o->output = 0;
- else  o->output = 0xFFFF;
+ if (o->count & 0x80000000) o->output = 0;
+ else
+     o->output = 0xFFFF;
 }
 
 void sawwave(OSC* o){
  // saw is just twice the count, so it happens 2 times in a cycle.
- o->output = o->count << 1; // simple, eh ?
+ o->output = (o->count >>15);  //its now 32 bits (o->count << 1)>>4; // simple, eh ?
 }
 
 void triwave(OSC* o){
     // exploit the fact that above 0x7FFF bit 16 will be set (ie. when on second side of cycle)
-    if (o->count & 0x8000) o->output = (~o->count) << 1; // counts down because complement goes other way
-    else o->output = o->count << 1; // count up on first side of cycle
+    if (o->count & 0x80000000) o->output = (~o->count) >>15;// << 1; // counts down because complement goes other way
+    else o->output = o->count >>15; // now 32 bits ! << 1; // count up on first side of cycle
 }
 
 void noise(OSC* o){
@@ -75,7 +76,7 @@ void noise(OSC* o){
   // Xorshift16 gives 32-39 fps
   // Xorshift8 gives
 
-  if (o->count > 0x8000) {
+  if (o->count > 0x80000000) {
     o->output = noiseval2;
     //noiseval = random(0,0xFFFF);
     noiseval = xorshift16();
@@ -91,18 +92,19 @@ void noise(OSC* o){
 
 void tonenoise(OSC* o){
   // square. If bit 16 set, its 2nd half of cycle and then output. if not, silence.
- if (o->count & 0x8000) o->output = (xorshift16()>>6); //was 0
+ if (o->count & 0x80000000) o->output = (xorshift16()>>6); //was 0
  else  o->output = (xorshift16()>>1) + 0x4000;//random(0,0xFFFF);
 }
 
 void sample(OSC* o) {
-
-    /*if (o->samplepos > o->samplelength ) o->samplepos = 0;
-
-    if (o->count > o->wcycle) {
-        o->count=0;
-        if (o->output) o->output = 0;
-        //else o->output = o->output=pgm_read_byte((uint32_t)(sfxBike) + o->inccount);
-    }*/
+    if (o->sample==NULL) o->output = 0x8000;
+    else {
+          o->samplepos+=o->samplestep;
+          if ((o->samplepos>>8) > o->samplelength ) {
+                o->samplepos = 0;
+                if (o->loop == 0) o->duration=0;
+          }
+          o->output = *(o->sample + (o->samplepos>>8))<<8;
+    }
 }
 

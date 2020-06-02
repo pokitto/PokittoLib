@@ -44,11 +44,33 @@
 #define write_command write_command_16
 #define write_data write_data_16
 
+extern volatile uint32_t *LCD;
+
+extern "C" {
+    void flushLine(const uint16_t *palette, const uint8_t *line);
+    void flushLine2X(const uint16_t *palette, const uint8_t *line);
+    void pixelExpand(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor, int32_t stride);
+    void pixelCopy(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+    void pixelCopyMirror(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+    void pixelCopySolid(uint8_t* dest, const uint8_t *src, uint32_t count, uint32_t recolor=0);
+    void updateMode1(const volatile uint32_t *palette, const uint8_t *buffer );
+    void updateMode1Clear(const volatile uint32_t *palette, const uint8_t *buffer, int clearColor );
+    void updateMode2(const uint16_t *palette, const uint8_t *buffer );
+    void updateMode2Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
+    void updateMode13(const uint16_t *palette, const uint8_t *buffer, int offset );
+    void updateMode13Clear(const uint16_t *palette, const uint8_t *buffer, int offset, int clearColor );
+    void updateMode15(const uint32_t *palette, const uint8_t *buffer );
+    void updateMode15Clear(const uint32_t *palette, const uint8_t *buffer, int clear );
+    void updateMode64(const uint16_t *palette, const uint8_t *buffer );
+    void updateMode64Clear(const uint16_t *palette, const uint8_t *buffer, int clearColor );
+}
+
 namespace Pokitto {
-
-
+extern void lcdPrepareRefresh();
+extern void setDRAMpoint(uint8_t, uint8_t);
+extern void pumpDRAMdata(uint16_t*, uint16_t);
 extern void initBacklight();
-extern void setBacklight(float);
+extern void setBacklight(uint8_t);
 extern void lcdFillSurface(uint16_t);
 extern void lcdPixel(int16_t x, int16_t y, uint16_t c);
 extern void setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
@@ -58,16 +80,14 @@ extern void lcdInit();
 extern void lcdSleep();
 extern void lcdWakeUp();
 extern void lcdRefresh(uint8_t *, uint16_t*);
-extern void lcdRefreshAB(uint8_t *, uint16_t*);
-extern void lcdRefreshGB(uint8_t *, uint16_t*);
-extern void lcdRefreshMode1(uint8_t *, uint16_t*);
-extern void lcdRefreshMode2(uint8_t *, uint16_t*);
-extern void lcdRefreshMode3(uint8_t *, uint16_t*);
-extern void lcdRefreshModeGBC(uint8_t *, uint16_t*);
-extern void lcdRefreshMode13(uint8_t *, uint16_t*, uint8_t);
+extern void lcdRefreshMode1(const uint8_t* scrbuf, const uint16_t* paletteptr);
+extern void lcdRefreshMode2(const uint8_t *, const uint16_t*);
+extern void lcdRefreshMode13(const uint8_t *, const uint16_t*, uint8_t);
+extern void lcdRefreshMixMode(const uint8_t *, const uint16_t*, const uint8_t*);
+extern void lcdRefreshMode64(const uint8_t*, const uint16_t*);
+extern void lcdRefreshMode15(const uint8_t*, const uint16_t*);
+extern void lcdRefreshTASMode(const uint16_t*);
 
-/** Update LCD from 1-bit tile mode */
-extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
 extern void lcdClear();
 extern void lcdFill(uint16_t);
 /** Blit one word of data*/
@@ -109,7 +129,8 @@ extern void blitWord(uint16_t);
 #define CLR_CD { LPC_GPIO_PORT->CLR[LCD_CD_PORT] = 1 << LCD_CD_PIN; } // RS = (0); // Clear pin
 #define SET_CD { LPC_GPIO_PORT->SET[LCD_CD_PORT] = 1 << LCD_CD_PIN; }// RS = (1); // Set pin
 
-#define CLR_WR { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN; __asm("nop");__asm("nop");}//WR = (0); // Clear pin
+#define CLR_WR { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;__asm("nop");}//__asm("nop");}//WR = (0); // Clear pin
+#define CLR_WR_SLOW { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;__asm("nop");__asm("nop");}//WR = (0); // Clear pin
 #define SET_WR LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN; //WR = (1); // Set pin
 
 #define CLR_RD LPC_GPIO_PORT->CLR[LCD_RD_PORT] = 1 << LCD_RD_PIN; //RD = (0); // Clear pin
@@ -126,7 +147,15 @@ extern void blitWord(uint16_t);
 #define SET_MASK_P2 LPC_GPIO_PORT->MASK[2] = ~(0x7FFF8); //mask P2_3 ...P2_18
 #define CLR_MASK_P2 LPC_GPIO_PORT->MASK[2] = 0; // all on
 
+#define TGL_WR_OP(OP)							\
+  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
+  OP;									\
+  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			
 
+#define TGL_WR								\
+  LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN;			\
+  __asm("nop");								\
+  LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN;			
 
 /**************************************************************************/
 /**                          SETUP GPIO & DATA                           **/

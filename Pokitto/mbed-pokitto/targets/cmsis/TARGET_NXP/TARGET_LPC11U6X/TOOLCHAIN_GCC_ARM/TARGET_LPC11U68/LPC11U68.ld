@@ -66,6 +66,7 @@ SECTIONS
         
         *(.text*)
         *(.rodata .rodata.*)
+        *(__global_locale)
         . = ALIGN(4);
         
         /* C++ constructors etc */
@@ -232,4 +233,12 @@ SECTIONS
     
     PROVIDE(_pvHeapStart = .);
     PROVIDE(_vStackTop = __top_Ram0_32 - 0);
+
+    PROVIDE(__valid_user_code_checksum = 0 - (
+    				       _vStackTop +
+				       (ResetISR + 1) +
+				       (NMI_Handler + 1) +
+				       (HardFault_Handler + 1)
+				       
+    ) );
 }

@@ -50,12 +50,14 @@ extern uint8_t pokStreamPaused();
 
 //volume levels
 #define GLOBVOL_SHIFT 5 //shift global volume to allow for finer increments
+
+
 #ifndef MAX_VOL_TEST
     #define VOLUME_SPEAKER_MAX 255 //((8<<GLOBVOL_SHIFT)-1)
-    #define VOLUME_HEADPHONE_MAX (1<<GLOBVOL_SHIFT)
-    #define VOLUME_STARTUP ((1<<GLOBVOL_SHIFT)/2)
+    #define VOLUME_HEADPHONE_MAX 127
+    #define VOLUME_STARTUP VOLUME_HEADPHONE_MAX
 #else
-    #define VOLUME_SPEAKER_MAX ((8<<GLOBVOL_SHIFT)-1)
+    #define VOLUME_SPEAKER_MAX 255
     #define VOLUME_HEADPHONE_MAX VOLUME_SPEAKER_MAX
     #define VOLUME_STARTUP VOLUME_SPEAKER_MAX
 #endif // MAXVOLTEST
@@ -89,19 +91,53 @@ namespace Pokitto {
  *
  */
 
+/** discrete_vol* are needed for more accurate volume control levels on hardware **/
+extern uint8_t discrete_vol;
+extern const uint8_t discrete_vol_levels[];
+extern const uint8_t discrete_vol_hw_levels[];
+extern const uint8_t discrete_vol_multipliers[];
+
 extern void audio_IRQ();  // audio interrupt
 
 class Sound {
 private:
     static uint16_t volumeMax;
+
 public:
+    static const uint8_t *sfxDataPtr;
+    static const uint8_t *sfxEndPtr;
+    static uint8_t sfxBytePos;
+    static bool sfxIs4bitSamples;
+    static void playSFX( const uint8_t *sfx, uint32_t length ){
+        #if POK_STREAMING_MUSIC > 0
+        //streamon=1; // force enable stream
+        sfxIs4bitSamples = false;
+        sfxDataPtr = sfx;
+        sfxEndPtr = sfx + length;
+        sfxBytePos = 0;
+        #endif
+    };
+    static void playSFX4bit( const uint8_t *sfx, uint32_t length ){
+        #if POK_STREAMING_MUSIC > 0
+        //streamon=1; // force enable stream
+        sfxIs4bitSamples = true;
+        sfxDataPtr = sfx;
+        sfxEndPtr = sfx + length;
+        sfxBytePos = 0;
+        #endif
+    };
+
 	static void begin();
 
 	// Headphonemode
+	static uint8_t headPhoneLevel; // a workaround to disappearing sound at low volume
 	static void setMaxVol(int16_t);
     static uint16_t getMaxVol();
     static void volumeUp();
     static void volumeDown();
+
+    // Synth using samples support
+    static void loadSampleToOsc(uint8_t os, uint8_t* sampdata, uint32_t sampsize);
 
 	// Original functions
 	static void updateStream();
@@ -113,7 +149,14 @@ public:
     static int playMusicStream(char* filename);
     static int playMusicStream();
     static void pauseMusicStream();
+    static uint32_t getMusicStreamElapsedSec();
+    static uint32_t getMusicStreamElapsedMilliSec();
 
+	static uint16_t globalVolume;
+	static void setVolume(int16_t volume);
+	static uint16_t getVolume();
+
+#if (POK_GBSOUND > 0)
 	// GB compatibility functions
 	static void playTrack(const uint16_t* track, uint8_t channel);
 	static void updateTrack(uint8_t channel);
@@ -144,8 +187,7 @@ public:
 
 	static void setMasterVolume(uint8_t);
 	static uint8_t GetMasterVolume();
-	static void setVolume(int16_t volume);
-	static uint16_t getVolume();
+
 	static void setVolume(int8_t volume, uint8_t channel);
 	static uint8_t getVolume(uint8_t channel);
 
@@ -157,8 +199,9 @@ public:
 
 	static void setChannelHalfPeriod(uint8_t channel, uint8_t halfPeriod);
 
+
 	static void generateOutput(); //!\\ DO NOT USE
-	static uint16_t globalVolume;
+
 
 
 #if (NUM_CHANNELS > 0)
@@ -203,6 +246,9 @@ public:
 
 	static uint8_t chanVolumes[NUM_CHANNELS];
 #endif
+
+#endif // Gamebuino sound
+
 	static void updateOutput();
 };
 

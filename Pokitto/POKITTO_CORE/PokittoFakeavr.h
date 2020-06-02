@@ -50,6 +50,8 @@
 
 #define _BV(bit) (1 << (bit)) //jonne
 
+
+
 /** data types */
 #ifndef _RPCNDR_H
 typedef bool boolean;
@@ -80,10 +82,6 @@ typedef uint8_t byte;
 /** min max & others **/
 
 
-#ifndef DISABLEAVRMIN
-#define max(a,b) ((a)>(b)?(a):(b))
-#define min(a,b) ((a)<(b)?(a):(b))
-#endif // DISABLEAVRMIN
 #define __avrmax(a,b) ((a)>(b)?(a):(b))
 #define __avrmin(a,b) ((a)<(b)?(a):(b))
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))

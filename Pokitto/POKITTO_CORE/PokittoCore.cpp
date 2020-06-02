@@ -34,13 +34,18 @@
 */
 /**************************************************************************/
 
-#include "PokittoCore.h"
 #include "Pokitto_settings.h"
-#include "PokittoConsole.h"
+#include "PokittoCore.h"
+
+#if POK_USE_CONSOLE > 0
+    #include "PokittoConsole.h"
+#endif
+
 #include "PokittoFonts.h"
 #include "PokittoTimer.h"
 #include "PokittoLogos.h"
 #include <stdlib.h>
+
 #ifndef DISABLEAVRMIN
 #define max(a,b) ((a)>(b)?(a):(b))
 #endif // DISABLEAVRMIN
@@ -132,17 +137,46 @@ int random(int maxVal)
 int random(int minVal, int maxVal)
 {
   // int rand(void); included by default from newlib
+  #ifdef OLDINCLUSIVERANDOM
   return rand() % (maxVal-minVal+1) + minVal;
+  #else
+  return rand() % (maxVal-minVal) + minVal;
+  #endif
 }
 
 using namespace Pokitto;
 
+__attribute__ ((weak)) void init(){}
+__attribute__ ((weak)) void update(){}
+__attribute__ ((weak)) int main(){
+    Core::begin();
+    init();
+    while(true){
+        if(Core::update())
+            update();
+    }
+}
+
+int SDL_main(){
+    return main();
+}
+
+
+#if POK_ENABLE_SOUND > 0
+void (*Core::updateHook)(bool) = +[](bool){ Sound::updateStream(); };
+#else
+void (*Core::updateHook)(bool) = +[](bool){};
+#endif
+    
 bool Core::run_state; // this definition needed
 
 /** Components */
-Backlight Core::backlight;
+#if (PROJ_GAMEBUINO > 0)
+    Backlight Core::backlight;
+    Battery Core::battery;
+#endif
+
 Buttons Core::buttons;
-Battery Core::battery;
 #if POK_ENABLE_SOUND > 0
 Sound Core::sound;
 #endif
@@ -159,14 +193,13 @@ uint16_t Core::frameDurationMicros;
 uint32_t Core::frameStartMicros, Core::frameEndMicros;
 uint8_t Core::volbar_visible=0;
 
+uint32_t Core::fps_counter;
+bool Core::fps_counter_updated;
+uint32_t Core::fps_refreshtime;
+uint32_t Core::fps_frameCount;
 
-Core::Core() {
-
-}
-
-
-int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
-    #ifndef POK_SIM
+static int updateLoader (uint32_t version, uint32_t jumpaddress) {
+#ifndef POK_SIM
     uint32_t counter=0;
     uint8_t data[256];
     /** prepare the flash writing **/
@@ -177,30 +210,27 @@ int Core::updateLoader (uint32_t version, uint32_t jumpaddress) {
     fsize = fileGetPosition();
     if (fsize>0x40000-jumpaddress) fsize = 0x40000-jumpaddress; // shouldn't happen!!
     fileRewind();
-    display.println("PLEASE WAIT");
+    Display::println("PLEASE WAIT");
     while (1) {
-        //if (counter >= fsize-0x200) {
-        //    display.println("gotcha");
-        //}
         if (counter >= fsize) {
-                break;
+            break;
         }
         opg=progress;
         if (fileReadBytes(&data[0],0x100)<0x100) {
-                if (fsize-counter>0x100) {
-                        display.println("ERROR READING LOA.DER FILE");
-                        return 1; // 1 means error
-                }
+            if (fsize-counter>0x100) {
+                Display::println("ERROR READING LOA.DER FILE");
+                return 1; // 1 means error
+            }
         }
         if (CopyPageToFlash(jumpaddress+counter,data)) {
-                    display.println("FLASH WRITE ERROR");
-                    return 1;
+            Display::println("FLASH WRITE ERROR");
+            return 1;
         } else {
             counter += 0x100;
-            display.print(".");
+            Display::print(".");
         }
-        }
-        #endif // POK_SIM
+    }
+#endif // POK_SIM
     return 0; //success
 }
 
@@ -248,24 +278,32 @@ void Core::showWarning() {
     display.enableDirectPrinting(false);
 }
 
-void Core::jumpToLoader() {
-    //display.setFont(font5x7);
-    //display.adjustCharStep=1;
-    //display.adjustLineStep=2;
-    display.fontSize=1;
-    display.directbgcolor=COLOR_BLACK;
-    display.directcolor=COLOR_GREEN;
-    display.clearLCD();
-    display.setCursor(0,0);
-    display.enableDirectPrinting(true);
-    #ifdef POK_SIM
-    display.println("LOADER IS NOT AVAILABLE ON THE SIMULATOR. PRESS A TO RETURN.");
-    #else
+void pokitto_jumpToLoader(bool wasInit) {
+    if(!wasInit){
+#ifndef POK_SIM
+        SPI device(CONNECT_MOSI, CONNECT_MISO, CONNECT_SCK);
+#endif
+        Core::init();
+        Display::begin();
+    }
+
+#ifndef POK_SIM
+    NVIC_DisableIRQ(IRQn_Type::CT32B0_IRQn); // Stop sound interrupt
+#endif
+    Display::fontSize=1;
+    Display::directbgcolor=COLOR_BLACK;
+    Display::directcolor=COLOR_GREEN;
+    Display::clearLCD();
+    Display::setCursor(0,0);
+    Display::enableDirectPrinting(true);
+#ifdef POK_SIM
+    Display::println("LOADER IS NOT AVAILABLE ON THE SIMULATOR. PRESS A TO RETURN.");
+#else
     uint32_t* bootinfo;
     uint32_t bootversion=0, sdversion=0, sdjump=0;
     bool flashloader=false, checkforboot=true;
     //check for loa.der on SD card
-    #if POK_ENABLE_LOADER_UPDATES > 0
+#if POK_ENABLE_LOADER_UPDATES > 0
     pokInitSD();
     if (fileOpen("LOA.DER", FILE_MODE_BINARY)==0) {
         //LOA.DER found on SD
@@ -277,72 +315,77 @@ void Core::jumpToLoader() {
         fileReadBytes((uint8_t*)tptr,4); //read jump address of loader on sd card
         fileRewind();
     }
-    #endif
+#endif
     //now start searching for bootkey
     while (checkforboot)
     {
-    checkforboot=false; flashloader=false;
-    bootinfo = (uint32_t*)0x3FFF4;
-    if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3FF04; //allow couple of alternative locations
-    if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3FE04; //allow couple of alternative locations
-    if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3F004; //for futureproofing
-    if (*bootinfo != 0xB007AB1E) {
-        // no bootkey found at all
-        display.directcolor=COLOR_YELLOW;
-        display.println("NO LOADER INSTALLED");
-        if (sdversion==0 || sdjump < 0x38000) {
+        checkforboot=false;
+        flashloader=false;
+        bootinfo = (uint32_t*)0x3FFF4;
+        if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3FF04; //allow couple of alternative locations
+        if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3FE04; //allow couple of alternative locations
+        if (*bootinfo != 0xB007AB1E) bootinfo = (uint32_t*)0x3F004; //for futureproofing
+        if (*bootinfo != 0xB007AB1E) {
+            // no bootkey found at all
+            Display::directcolor=COLOR_YELLOW;
+            Display::println("NO LOADER INSTALLED");
+            if (sdversion==0 || sdjump < 0x38000) {
                 //file open of loader failed
-                display.println("NO VALID LOA.DER ON SD");
-                display.println("");
-                display.directcolor=COLOR_GREEN;
-                display.println("PUT LOA.DER ON SD & REBOOT");
-        } else flashloader=true;
-    } else {
-        //loader was found
-        //check if we should update the loader
-        display.directcolor=COLOR_CYAN;
-        display.print("LOADER V.");
-        display.directcolor=COLOR_WHITE;
-        display.println(*(bootinfo+1));
-        #if POK_ENABLE_LOADER_UPDATES
-        if (sdversion>(*(bootinfo+1))) flashloader=true;
-        else start_application(*(bootinfo+2)); //never returns
-        #else
-        start_application(*(bootinfo+2)); //never returns
-        #endif
-    }
-    // update loader if it was requested
-    if(flashloader) {
-            display.directcolor=COLOR_MAGENTA;
-            display.print("NEW LOADER ON SD V.");
-            display.directcolor=COLOR_WHITE;
-            display.println(sdversion);
-            display.directcolor=COLOR_GREEN;
-            display.println("UPDATE LOADER?\n(UP=YES, DOWN=CANCEL)");
+                Display::println("NO VALID LOA.DER ON SD");
+                Display::println("");
+                Display::directcolor=COLOR_GREEN;
+                Display::println("PUT LOA.DER ON SD & REBOOT");
+            } else flashloader=true;
+        } else {
+            //loader was found
+            //check if we should update the loader
+            Display::directcolor=COLOR_CYAN;
+            Display::print("LOADER V.");
+            Display::directcolor=COLOR_WHITE;
+            Display::println(*(bootinfo+1));
+#if POK_ENABLE_LOADER_UPDATES
+            if (sdversion>(*(bootinfo+1))) flashloader=true;
+            else start_application(*(bootinfo+2)); //never returns
+#else
+            start_application(*(bootinfo+2)); //never returns
+#endif
+        }
+        // update loader if it was requested
+        if(flashloader) {
+            Display::directcolor=COLOR_MAGENTA;
+            Display::print("NEW LOADER ON SD V.");
+            Display::directcolor=COLOR_WHITE;
+            Display::println(sdversion);
+            Display::directcolor=COLOR_GREEN;
+            Display::println("UPDATE LOADER?\n(UP=YES, DOWN=CANCEL)");
             while(1) {
-                    if (buttons.upBtn()) {
-                        if (updateLoader(sdversion,sdjump)) {
-                            display.println("PUT LOA.DER ON SD AND RETRY");
-                        } else {
-                        display.println("SUCCESS!!");
+                if (Buttons::upBtn()) {
+                    if (updateLoader(sdversion,sdjump)) {
+                        Display::println("PUT LOA.DER ON SD AND RETRY");
+                    } else {
+                        Display::println("SUCCESS!!");
                         checkforboot=true; //recheck
-                        }
-                    break;
                     }
-                    if (buttons.downBtn()) return;
+                    break;
+                }
+                if (Buttons::downBtn()) return;
             }
-    } // if flashloader
+        } // if flashloader
     } // while checkforboot
-    #endif // POK_SIM
-    while (!buttons.aBtn()) {
-        buttons.pollButtons();
-        if (buttons.aBtn()) {
-            while (buttons.aBtn()) {
-                buttons.pollButtons();
+#endif // POK_SIM
+    while (!Buttons::aBtn()) {
+        Buttons::pollButtons();
+        if (Buttons::aBtn()) {
+            while (Buttons::aBtn()) {
+                Buttons::pollButtons();
             }
             return;
         }
     }
+}
+
+void Core::jumpToLoader(){
+    pokitto_jumpToLoader(true);
 }
 
 void Core::askLoader() {
@@ -371,17 +414,28 @@ void Core::askLoader() {
     display.print("FOR LOADER");
     display.directcolor=COLOR_WHITE;
     display.fontSize=2;
-    int countd=POK_LOADER_COUNTDOWN; uint16_t c2 = getTime();
+    int countd = 0;
+    //#ifndef POK_SIM
+    //read countdown time from settings
+    countd = eeprom_read_byte((uint16_t*)EESETTINGS_LOADERWAIT);
+    //#endif
+    if (countd<=0 || countd > 5) countd=3;
+    uint16_t c2 = getTime();
     while (countd) {
         buttons.pollButtons();
         display.set_cursor(13*8,15*8);
         display.print(countd);
-        if (getTime()>c2+1000) {
+        if (getTime()>uint32_t(c2+1000)) {
             c2=getTime();
             countd--;
         }
         if (cBtn()) {while (cBtn()) buttons.pollButtons();jumpToLoader();countd=0;}
-        if (aBtn()) {while (aBtn()) buttons.pollButtons();countd=0;}
+        if (aBtn()) {
+                while (aBtn()) {
+                        buttons.pollButtons();
+                }
+                        countd=0;
+                }
         if (bBtn()) {while (bBtn()) buttons.pollButtons();countd=0;}
     }
     display.fontSize=1;
@@ -392,8 +446,12 @@ void Core::askLoader() {
 
 void Core::drawvolbar(int x, int y, int level, bool text) {
     uint16_t oldcol = display.directcolor;
+    level = level >> 5;
     if (text) display.directRectangle(0,0,50,50,COLOR_BLACK);
-    display.directcolor = COLOR_GREEN;
+    if (level<4)  display.directcolor = COLOR_GREEN;
+    if (level==4) display.directcolor = COLOR_YELLOW;
+    if (level>4) display.directcolor = COLOR_RED;
+
     if (text) {
             bool temp = display.isDirectPrintingEnabled();
             display.enableDirectPrinting(true);
@@ -401,25 +459,24 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
             display.print("  ");
             display.enableDirectPrinting(temp);
     }
-    if (level<12) display.directcolor = COLOR_GRAY_80;
+    if (level<1) display.directcolor = COLOR_GRAY_80;
     display.directBitmap(x,y,Pokitto_volumebar,1,1);
-    if (level<24) display.directcolor = COLOR_GRAY_80;
+    if (level<2) display.directcolor = COLOR_GRAY_80;
     display.directBitmap(x+8,y,Pokitto_volumebar,1,1);
     display.directBitmap(x+8,y-4,Pokitto_volumebar,1,1);
-    display.directcolor = COLOR_RED;
-    if (level<48) display.directcolor = COLOR_GRAY_80;
+    if (level<3) display.directcolor = COLOR_GRAY_80;
     display.directBitmap(x+16,y,Pokitto_volumebar,1,1);
     display.directBitmap(x+16,y-4,Pokitto_volumebar,1,1);
     display.directBitmap(x+16,y-8,Pokitto_volumebar,1,1);
-
-    if (level<96) {
+    if (level<4) {
             display.directcolor = COLOR_GRAY_80;
     }
     display.directBitmap(x+24,y,Pokitto_volumebar,1,1);
     display.directBitmap(x+24,y-4,Pokitto_volumebar,1,1);
     display.directBitmap(x+24,y-8,Pokitto_volumebar,1,1);
     display.directBitmap(x+24,y-12,Pokitto_volumebar,1,1);
-    if (level<160) {
+
+    if (level<5) {
             display.directcolor = COLOR_GRAY_80;
     }
     display.directBitmap(x+32,y,Pokitto_volumebar,1,1);
@@ -427,24 +484,65 @@ void Core::drawvolbar(int x, int y, int level, bool text) {
     display.directBitmap(x+32,y-8,Pokitto_volumebar,1,1);
     display.directBitmap(x+32,y-12,Pokitto_volumebar,1,1);
     display.directBitmap(x+32,y-16,Pokitto_volumebar,1,1);
+
+    if (level<6) {
+            display.directcolor = COLOR_GRAY_80;
+    }
+    display.directBitmap(x+40,y,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-4,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-8,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-12,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-16,Pokitto_volumebar,1,1);
+    display.directBitmap(x+40,y-20,Pokitto_volumebar,1,1);
     display.directcolor = oldcol;
 }
 
 
 #ifdef POK_SIM
-#define VINCMULT 1
+#define VINCMULT 0.9f
 #else
 #define VINCMULT 50
 #endif //POK_SIM
 void Core::setVolLimit() {
     display.enableDirectPrinting(true);
     display.adjustCharStep = 0;
-    sound.setMaxVol(VOLUME_HEADPHONE_MAX);
+    //sound.setMaxVol(VOLUME_HEADPHONE_MAX);
     int dstate=1;
     bool wipe = true;
-    float vol = sound.getVolume(); float tvol;
+    uint16_t vol = sound.getVolume();
+    //#ifndef POK_SIM
+    vol=eeprom_read_byte((uint16_t*)EESETTINGS_VOL);
+    Pokitto::Sound::globalVolume=vol;
+    //#endif
+    if (vol>VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_SPEAKER_MAX);
+    else sound.setMaxVol(VOLUME_HEADPHONE_MAX);
+    #ifdef PRODUCTIONTESTING
+    vol=170;
+    sound.setMaxVol(VOLUME_SPEAKER_MAX);
+    #endif
+    //for (uint8_t t=0;t<=vol;t++) {
+    //        sound.setVolume(t);
+    //}
+	sound.setVolume(vol/4);
+	sound.setVolume(vol/2);
+	sound.setVolume(vol); //prevent "crack" by gradually increasing volume
+	discrete_vol = ((int)vol>>5); // fix "shows zero" in volume slider bug
     volbar_visible=0;
-    while (core.isRunning() && dstate){
+    int countd=0;
+    //#ifndef POK_SIM
+    //read countdown time from settings
+    countd = eeprom_read_byte((uint16_t*)EESETTINGS_VOLWAIT);
+    //#endif
+    if (countd<=0 || countd > 10) countd=0xFFFF;
+    #ifdef PRODUCTIONTESTING
+    countd=2;
+    #endif
+    uint16_t c2 = getTime();
+    while (core.isRunning() && dstate && countd){
+        if (getTime()>uint32_t(c2+1000)) {
+            c2=getTime();
+            if (countd<0xFFFF) countd--;
+        }
         switch (dstate) {
         case 1:
             //redraw
@@ -470,79 +568,113 @@ void Core::setVolLimit() {
             display.println(" dbbbbbbbbbbbbbbbbbbbbbbbe");
             } // wipe = true
             display.setCursor(6*8,17*9);
-            if (sound.getVolume()-5<=VOLUME_HEADPHONE_MAX) display.directcolor = COLOR_WHITE;
+            if (discrete_vol<4) display.directcolor = COLOR_WHITE;
             else display.directcolor = COLOR_RED;
             display.directBitmap(21*8-4,6*8,Pokitto_headphones,1,2);
             display.setCursor(3*8,6*8+6);
             display.print("HEADPHONES");
             display.setCursor(3*8,8*8+2);
-            if (sound.getVolume()-8>VOLUME_HEADPHONE_MAX) display.print("TOO LOUD!");
+            if (discrete_vol>3) display.print("TOO LOUD!");
             else display.print("OK        ");
             display.directcolor = COLOR_GREEN;
             display.directBitmap(21*8-4,12*8,Pokitto_speaker,1,2);
             display.setCursor(3*8,12*8+6);
             display.print("VOLUME MAX");
             display.setCursor(3*8,14*8+2);
-            tvol = (vol/float(VOLUME_HEADPHONE_MAX))*100;
-            if (tvol > 100 && tvol < 120) tvol=100;
-            if (sound.getVolume()-5>VOLUME_HEADPHONE_MAX) { display.directcolor=COLOR_RED;}
+            //tvol = (vol/float(VOLUME_HEADPHONE_MAX))*100;
+            //if (tvol > 100 && tvol < 120) tvol=100;
+            //if (sound.getVolume()-5>VOLUME_HEADPHONE_MAX) { display.directcolor=COLOR_RED;}
+            if ((sound.getVolume()>>5)>3) { display.directcolor=COLOR_RED;}
             else display.directcolor=COLOR_GREEN;
-            display.print(int(sound.getVolume()));
+            if (discrete_vol==4) display.directcolor=COLOR_YELLOW;
+            if (discrete_vol==7) discrete_vol=6;
+            display.print((int)discrete_vol);
             //display.print(int(tvol));
             display.print("  ");
             display.directcolor=COLOR_GREEN;
-            drawvolbar(14*8,14*8+4+2,sound.getVolume(),false);
+            drawvolbar(14*8,14*8+4+3,sound.getVolume(),false);
             //display.setCursor(1,10);
             //display.print(vol);
             dstate=2; break;
         case 2:
+            #ifndef POK_SIM
             buttons.pollButtons();
-            if (aBtn()) {dstate=0;while(aBtn()){buttons.pollButtons();};break;}
-            if (rightBtn()) {
-                    if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
-                    else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.025f*VINCMULT;
+            #endif // POK_SIM
+            buttons.update();
+            if (aBtn()) {dstate=0;break;}
+            if (buttons.pressed(BTN_RIGHT)) {
+                    countd=0xFFFF; //disable countdown
+                    /*if (vol >= VOLUME_HEADPHONE_MAX && vol < VOLUME_HEADPHONE_MAX+1 ) vol += 0.00025f*VINCMULT;
+                    else if (vol >= VOLUME_HEADPHONE_MAX) vol += 0.25f*VINCMULT;
                     else vol += 0.05f*VINCMULT;
                     if (vol > VOLUME_HEADPHONE_MAX + 20) {
                             sound.setMaxVol(VOLUME_SPEAKER_MAX);
                     }
                     if (vol > VOLUME_SPEAKER_MAX) vol=VOLUME_SPEAKER_MAX;
-                    sound.setVolume(vol);
+                    sound.setVolume(vol);*/
+                    sound.volumeUp();
                     dstate=1; wipe=false;
                     break;
                     }
-            if (leftBtn()) {
-                    vol -= 0.025f*VINCMULT;
+            if (buttons.pressed(BTN_LEFT)) {
+                    countd=0xFFFF; //disable countdown
+                    /*if (vol >= VOLUME_HEADPHONE_MAX) vol -= 0.25f*VINCMULT;
+                    else vol -= 0.05f*VINCMULT;
                     if (vol <= VOLUME_HEADPHONE_MAX) sound.setMaxVol(VOLUME_HEADPHONE_MAX);
                     if (vol < 0) vol=0;
-                    sound.setVolume(vol);
+                    sound.setVolume(vol);*/
+                    sound.volumeDown();
                     dstate=1; wipe=false;
                     break;
                     }
             break;
         }
     }
+    vol = sound.getVolume();
+    //#ifndef POK_SIM
+    if (vol != eeprom_read_byte((uint16_t*)EESETTINGS_VOL)) eeprom_write_byte((uint16_t*)EESETTINGS_VOL,(uint8_t)vol);
+    //#endif
+    sound.setVolume(vol);
+    //sound.volumeUp();
+    display.setCursor(0,0);
 }
 
 void Core::begin() {
 
     init(); // original functions
+    display.begin();
     timePerFrame = POK_FRAMEDURATION;
 	//nextFrameMillis = 0;
 	//frameCount = 0;
 	frameEndMicros = 1;
 	startMenuTimer = 255;
+
 	//read default settings from flash memory (set using settings.hex)
 	readSettings();
+#if (PROJ_GAMEBUINO > 0)
 	//init everything
 	backlight.begin();
 	backlight.set(BACKLIGHT_MAX);
-	buttons.begin();
+#endif
 	buttons.update();
+#if (PROJ_GAMEBUINO > 0)
 	battery.begin();
-	display.begin();
+#endif
+
+	char logoFlag = eeprom_read_byte((uint16_t*)EESETTINGS_SKIPINTRO);
+	if( logoFlag&2 ){ // toggle flag set, change value for next boot
+	    eeprom_write_byte((uint16_t*)EESETTINGS_SKIPINTRO, !(logoFlag&1));
+	}
+	logoFlag &= 1;
+
 	#if POK_DISPLAYLOGO
-        showLogo();
+        #if PROJ_DEVELOPER_MODE != 1
+	if( logoFlag == 0 ){
+	    showLogo();
+	}
+        #endif // PROJ_DEVELOPER_MODE
 	#endif // POK_DISPLAYLOGO
+
 
 	display.enableDirectPrinting(true);
     display.directbgcolor = COLOR_BLACK;
@@ -552,7 +684,6 @@ void Core::begin() {
     display.enableDirectPrinting(true);
     display.directbgcolor = COLOR_BLACK;
     display.directcolor = COLOR_GREEN;
-    display.clearLCD();
     display.setFont(fntC64UIGfx);
     display.adjustCharStep=0;
     display.adjustLineStep=1;
@@ -561,15 +692,33 @@ void Core::begin() {
 	#endif
 
     #ifndef DISABLE_LOADER
-    askLoader();
+    #if PROJ_DEVELOPER_MODE != 1
+	if( logoFlag == 0 ){
+	    askLoader();
+	}
+    #endif // PROJ_DEVELOPER_MODE
     #endif
 
-	#ifndef DISABLE_SOUND_WARNING
-	//showWarning();
-	setVolLimit();
-	//sound.setVolume(sound.getVolume());//make sure we're at set volume before continue
-	sound.volumeUp();
+	#if PROJ_DEVELOPER_MODE==1
+	sound.setMaxVol(VOLUME_SPEAKER_MAX);
+	sound.setVolume(VOLUME_SPEAKER_MAX);
+	#else
+	if( logoFlag == 0 ){
+	    //showWarning();
+	    setVolLimit();
+	    display.clear();
+	    display.update();
+
+	    while(buttons.states[BTN_A])
+	    {
+		buttons.update();
+	    }
+	}else{
+	    sound.setVolume(sound.getVolume());//make sure we're at set volume before continue
+	}
+
 	#endif
+
 	display.enableDirectPrinting(false);
 	display.adjustCharStep=1;
 	display.adjustLineStep=1;
@@ -579,15 +728,17 @@ void Core::begin() {
 	display.setFont(font5x7);
 	#else
 	display.setFont(fontC64);
-    #endif
+    	#endif
 	#if POK_ENABLE_SOUND > 0
         sound.begin();
-
+#if (PROJ_GAMEBUINO > 0)
 	//mute when B is held during start up or if battery is low
 	battery.update();
-	if(buttons.pressed(BTN_B) || (battery.level == 0)){
+#endif
+	if(buttons.pressed(BTN_B)){
 		sound.setVolume(0);
 	}
+
 	else{ //play the startup sound on each channel for it to be louder
 		#if POK_GBSOUND > 0
 		#if(NUM_CHANNELS > 0)
@@ -656,7 +807,7 @@ void Core::initDisplay() {
 void Core::showLogo() {
     uint32_t now;
     uint8_t state=0; //jump directly to logo, bypass teeth
-    uint16_t counter=0, i=0;
+    uint16_t i=0;
     uint16_t sc;
     while (state < 255/6) {
     now=getTime();
@@ -690,6 +841,7 @@ void Core::showLogo() {
     }
 }
 
+
 void Core::readSettings() {
     // ToDo
         /*display.contrast = SCR_CONTRAST;
@@ -709,6 +861,7 @@ void Core::readSettings() {
 		battery.thresolds[3] = BAT_LVL_FULL;*/
 }
 
+#if (PROJ_GAMEBUINO > 0)
 void Core::titleScreen(const char* name){
 	titleScreen(name, 0);
 }
@@ -721,12 +874,15 @@ void Core::titleScreen(){
 	titleScreen((""));
 }
 
+
 void Core::titleScreen(const char*  name, const uint8_t *logo){
 	display.setFont(font5x7);
+	while(buttons.aBtn()) wait(10); //don't accidentally skip menu
 	if(startMenuTimer){
 		display.fontSize = 1;
 		display.textWrap = false;
 		display.persistence = false;
+
 		battery.show = false;
 		display.setColor(BLACK);
 		while(isRunning()){
@@ -781,27 +937,60 @@ void Core::titleScreen(const char*  name, const uint8_t *logo){
 			}
 		}
 		battery.show = true;
+
 	}
 }
+#endif
 
-bool Core::update(bool useDirectMode) {
-#if POK_STREAMING_MUSIC
-        sound.updateStream();
-    #endif
+/**
+ * Update all the subsystems, like graphics, audio, events, etc.
+ * Note: the update rect is used for drawing only part of the screen buffer to LCD. Because of speed optimizations,
+ * the x, y, and width of the update rect must be dividable by 4 pixels, and the height must be dividable by 8 pixels.
+ * The update rect is currently used for 220x176, 4 colors, screen mode only.
+ * @param useDirectMode True, if only direct screen drawing is used. False, if the screen buffer is drawn. Note: If sprites are enabled, they are drawn in both modes.
+ * @param updRectX The update rect.
+ * @param updRectY The update rect.
+ * @param updRectW The update rect.
+ * @param updRectH The update rect.
+ */
+bool Core::update(bool useDirectMode, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH) {
 
-	if ((((nextFrameMillis - getTime())) > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
-		nextFrameMillis = getTime() + timePerFrame;
+    
+
+    uint32_t now = getTime();
+	if ((((nextFrameMillis - now)) > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
+		updateHook(true);
+		nextFrameMillis = now + timePerFrame;
 		frameCount++;
 
 		frameEndMicros = 0;
+#if (PROJ_GAMEBUINO > 0)
 		backlight.update();
+#endif
 		buttons.update();
+#if (PROJ_GAMEBUINO > 0)
 		battery.update();
+#endif
+
+        // FPS counter
+		#if defined(PROJ_USE_FPS_COUNTER) ||  defined(PROJ_SHOW_FPS_COUNTER)
+        const uint32_t fpsInterval_ms = 1000*3;
+
+        fps_frameCount++;
+        if (now > fps_refreshtime) {
+            fps_counter = (1000*fps_frameCount) / (now - fps_refreshtime + fpsInterval_ms);
+            fps_refreshtime = now + fpsInterval_ms;
+            fps_frameCount = 0;
+            fps_counter_updated = true;
+        }
+        #endif
 
 		return true;
 
 	} else {
+		updateHook(false);
 		if (!frameEndMicros) { //runs once at the end of the frame
+        #if (PROJ_GAMEBUINO > 0)
 			#if POK_ENABLE_SOUND > 0
 			sound.updateTrack();
 			sound.updatePattern();
@@ -809,9 +998,8 @@ bool Core::update(bool useDirectMode) {
 			#endif
 			updatePopup();
 			displayBattery();
-
-			if(!useDirectMode)
-				display.update(); //send the buffer to the screen
+        #endif
+            display.update(useDirectMode); //send the buffer to the screen
 
             frameEndMicros = 1; //jonne
 
@@ -820,6 +1008,7 @@ bool Core::update(bool useDirectMode) {
 	}
 }
 
+#if (PROJ_GAMEBUINO > 0)
 void Core::displayBattery(){
 #if (ENABLE_BATTERY > 0)
 	//display.setColor(BLACK, WHITE);
@@ -860,8 +1049,12 @@ display.cursorX = ox;
 display.cursorY = oy;
 #endif
 }
+#endif //(PROJ_GAMEBUINO > 0)
+
+#ifdef ENABLE_GUI
 
 char* Core::filemenu(char *ext) {
+    uint8_t oldPersistence = display.persistence;
     display.persistence = false;
     uint16_t oldpal0=display.palette[0];
     uint16_t oldpal1=display.palette[1];
@@ -874,99 +1067,133 @@ char* Core::filemenu(char *ext) {
     display.color=1;
     display.bgcolor=0;
 
+	int16_t rowh = display.fontHeight + 2;
     int8_t activeItem = 0;
-	int16_t currentY = 100;
-	int16_t targetY = 0, rowh = display.fontHeight + 2;
+	int16_t currentTopItem = 0;
+	int16_t itemsPerScreen = (display.height+1) / rowh;
+	int16_t numOfItemsFound = 0;
 	boolean exit = false;
 
 	char* txt;
 
+    pokInitSD();
 
+    bool updated = true;
 	while (isRunning()) {
-		if (update()) {
-            getFirstFile(ext);
+		if (update(true)) {
 			if (buttons.pressed(BTN_A) || buttons.pressed(BTN_B) || buttons.pressed(BTN_C)) {
 				exit = true; //time to exit menu !
-				targetY = - display.fontHeight * 10 - 2; //send the menu out of the screen
 				if (buttons.pressed(BTN_A)) {
-					//answer = activeItem;
+                    #if (POK_GBSOUND > 0)
 					sound.playOK();
+                    #endif
 				} else {
+				    *selectedfile = 0;
+                    #if (POK_GBSOUND > 0)
 					sound.playCancel();
+                    #endif
 				}
+				updated = true; // update screen
 			}
 			if (exit == false) {
 				if (buttons.repeat(BTN_DOWN,4)) {
-					activeItem++;
+                    if( ++activeItem >= numOfItemsFound ) activeItem = numOfItemsFound - 1;
+					if( activeItem >= currentTopItem + itemsPerScreen) currentTopItem += itemsPerScreen; // next page
+                    #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
+                    updated = true; // update screen
 				}
 				if (buttons.repeat(BTN_UP,4)) {
-					activeItem--;
+				    if( --activeItem < 0 ) activeItem = 0;
+ 					if( activeItem < currentTopItem) currentTopItem -= itemsPerScreen;  // previous page
+                     #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
+                    updated = true; // update screen
 				}
-				//don't go out of the menu
-				//if (activeItem == length) activeItem = 0;
-				//if (activeItem < 0) activeItem = length - 1;
-                if (currentY>targetY) currentY-=16;
-                if (currentY<targetY) currentY=targetY;
-				//targetY = -rowh * activeItem + (rowh+4); //center the menu on the active item
+
 			} else { //exit :
-			    if (currentY>targetY) currentY-=16;
-                if (currentY<targetY) currentY=targetY;
-				if ((currentY - targetY) <= 1)
-				{
 				    display.bgcolor=oldbg;
 				    display.color=oldfg;
 				    display.palette[0] = oldpal0;
 				    display.palette[1] = oldpal1;
 				    display.palette[2] = oldpal2;
+				    display.persistence = oldPersistence;
 				    return selectedfile;
-				}
-
 			}
-			//draw a fancy menu
-			//currentY = 0;//(currentY + targetY) / 2 + 5;
-			display.cursorX = 0;
-			display.cursorY = currentY;
-			display.textWrap = false;
-			uint16_t fc,bc;
-			fc = display.color;
-            bc = display.bgcolor;
-            //getFirstFile(ext);
-			for (int i = 0; i<20; i++) {
-				display.invisiblecolor=255;
-				display.cursorY = currentY + rowh * i;
-				if (i==3) display.color=1;
-				if (i == activeItem){
-					display.cursorX = 3;
 
-                    //display.fillRoundRect(0, currentY + display.fontHeight * activeItem - 2, LCDWIDTH, (display.fontHeight+3), 3);
-                    display.color=2;
-                    display.fillRect(0, currentY + rowh * activeItem - 2, LCDWIDTH, (rowh));
-                    display.setColor(0,2);
-				} else display.setColor(1,0);
-				//display.println((char*)*(const unsigned int*)(items+i));
-				//display.println((int)i);
-                txt = getNextFile(ext);
-                if (txt) {
-                        display.println(txt);
-                        if (i == activeItem) {
-                            strcpy(selectedfile,txt);
+			//draw a fancy menu
+			display.textWrap = false;
+            if( updated ) { // update screen?
+                #if POK_SIM
+                getFirstFile(ext);
+                #else
+                bool isFirstFile = true;
+                #endif
+                for (int i = 0; ; i++) {
+                    display.cursorX = 0;
+                    display.invisiblecolor=255;
+                    display.cursorY = (i - currentTopItem ) * rowh;
+
+                    // read the file name from SD
+                    #ifndef POK_SIM
+                    if(isFirstFile) {
+                        txt = getFirstFile(ext);
+                        isFirstFile = false;
+                    }
+                    else
+                    #endif
+
+                    txt = getNextFile(ext);
+
+                    if (txt) {
+
+                        numOfItemsFound = i+1;
+
+                        // Draw active line with diffrent backgtound and char color
+                        if (i == activeItem){
+                            display.cursorX = 3;
+                            display.color=2;
+                            display.fillRect(0, display.cursorY - 2, LCDWIDTH, rowh);
+                            display.setColor(0,2);
+                        } else display.setColor(1,0);
+
+                        // break loop if going out of screen
+                        if(i >= currentTopItem + itemsPerScreen ) {
+                            break;
                         }
-                } else i--;
-                display.setColor(1,0);
-			} // draw menu loop
+
+                        // Display only if the file is on the current page
+                        if( i >= currentTopItem) {
+                            display.print(display.cursorX, display.cursorY, txt);
+                            if (i == activeItem)
+                                strcpy(selectedfile,txt);
+                        }
+                    } else
+                        break; // break loop as no more files found
+
+                    display.setColor(1,0);
+                } // end for
+
+                display.update();
+            }
+            updated = false;
 		} // update
+
+        display.setColor(1,0);
 	}
+
 	return 0;
 }
 
 char* Core::filemenu() {
-    return filemenu("");
+    return filemenu((char*)"");
 }
 
 int8_t Core::menu(const char* const* items, uint8_t length) {
-#if (ENABLE_GUI > 0)
+if (display.color>3) display.color=1;
+#ifdef ENABLE_GUI
 	display.persistence = false;
 	int8_t activeItem = 0;
 	int16_t currentY = display.height;
@@ -980,19 +1207,27 @@ int8_t Core::menu(const char* const* items, uint8_t length) {
 				targetY = - display.fontHeight * length - 2; //send the menu out of the screen
 				if (buttons.pressed(BTN_A)) {
 					answer = activeItem;
+                    #if (POK_GBSOUND > 0)
 					sound.playOK();
+                    #endif
 				} else {
+                    #if (POK_GBSOUND > 0)
 					sound.playCancel();
+                    #endif
 				}
 			}
 			if (exit == false) {
 				if (buttons.repeat(BTN_DOWN,4)) {
 					activeItem++;
+                    #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
 				}
 				if (buttons.repeat(BTN_UP,4)) {
 					activeItem--;
+                    #if (POK_GBSOUND > 0)
 					sound.playTick();
+                    #endif
 				}
 				//don't go out of the menu
 				if (activeItem == length) activeItem = 0;
@@ -1010,8 +1245,8 @@ int8_t Core::menu(const char* const* items, uint8_t length) {
 			display.textWrap = false;
 			uint16_t fc,bc;
 			fc = display.color;
-            bc = display.bgcolor;
-			for (byte i = 0; i < length; i++) {
+                        bc = display.bgcolor;
+			for (uint8_t i = 0; i < length; i++) {
 				display.cursorY = currentY + rowh * i;
 				if (i == activeItem){
 					display.cursorX = 3;
@@ -1034,7 +1269,7 @@ int8_t Core::menu(const char* const* items, uint8_t length) {
 }
 
 void Core::keyboard(char* text, uint8_t length) {
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 	display.persistence = false;
 	//memset(text, 0, length); //clear the text
 	text[length-1] = '\0';
@@ -1054,19 +1289,27 @@ void Core::keyboard(char* text, uint8_t length) {
 			//move the character selector
 			if (buttons.repeat(BTN_DOWN, 4)) {
 				activeY++;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			if (buttons.repeat(BTN_UP, 4)) {
 				activeY--;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			if (buttons.repeat(BTN_RIGHT, 4)) {
 				activeX++;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			if (buttons.repeat(BTN_LEFT, 4)) {
 				activeX--;
+                #if (POK_GBSOUND > 0)
 				sound.playTick();
+                #endif
 			}
 			//don't go out of the keyboard
 			if (activeX == KEYBOARD_W) activeX = 0;
@@ -1082,21 +1325,25 @@ void Core::keyboard(char* text, uint8_t length) {
 			//type character
 			if (buttons.pressed(BTN_A)) {
 				if (activeChar < (length-1)) {
-					byte thisChar = activeX + KEYBOARD_W * activeY;
+					int thisChar = activeX + KEYBOARD_W * activeY;
 					if((thisChar == 0)||(thisChar == 10)||(thisChar == 13)) //avoid line feed and carriage return
 					continue;
 					text[activeChar] = thisChar;
 					text[activeChar+1] = '\0';
 				}
 				activeChar++;
+                #if (POK_GBSOUND > 0)
 				sound.playOK();
+                #endif
 				if (activeChar > length)
 				activeChar = length;
 			}
 			//erase character
 			if (buttons.pressed(BTN_B)) {
 				activeChar--;
+                #if (POK_GBSOUND > 0)
 				sound.playCancel();
+                #endif
 				if (activeChar >= 0)
 				text[activeChar] = 0;
 				else
@@ -1104,7 +1351,9 @@ void Core::keyboard(char* text, uint8_t length) {
 			}
 			//leave menu
 			if (buttons.pressed(BTN_C)) {
+                #if (POK_GBSOUND > 0)
 				sound.playOK();
+                #endif
 				while (1) {
 					if (update()) {
 						//display.setCursor(0,0);
@@ -1112,11 +1361,15 @@ void Core::keyboard(char* text, uint8_t length) {
 						display.print(text);
 						display.println(("\n\n\n\x15:okay \x16:edit"));
 						if(buttons.pressed(BTN_A)){
+                            #if (POK_GBSOUND > 0)
 							sound.playOK();
+                            #endif
 							return;
 						}
 						if(buttons.pressed(BTN_B)){
+                            #if (POK_GBSOUND > 0)
 							sound.playCancel();
+                            #endif
 							break;
 						}
 					}
@@ -1167,14 +1420,14 @@ void Core::keyboard(char* text, uint8_t length) {
 }
 
 void Core::popup(const char* text, uint8_t duration){
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 	popupText = text;
 	popupTimeLeft = duration+12;
 #endif
 }
 
 void Core::updatePopup(){
-#if (ENABLE_GUI > 0)
+#ifdef ENABLE_GUI
 	if (popupTimeLeft){
 		uint8_t yOffset = 0;
 		if(popupTimeLeft<12){
@@ -1192,11 +1445,18 @@ void Core::updatePopup(){
 	}
 #endif
 }
+#endif //(ENABLE_GUI > 0)
 
 void Core::setFrameRate(uint8_t fps) {
 	timePerFrame = 1000 / fps;
+#if (PROJ_GAMEBUINO > 0)
 	sound.prescaler = fps / 20;
 	sound.prescaler = __avrmax(1, sound.prescaler);
+#endif
+}
+
+uint8_t Core::getFrameRate() {
+	return 1000 / timePerFrame;
 }
 
 void Core::pickRandomSeed(){

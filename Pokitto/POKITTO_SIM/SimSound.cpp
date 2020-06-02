@@ -51,14 +51,22 @@ uint8_t activesfbuf=0, writesfbuf=0; uint16_t sfbufindex=0;
 using namespace Pokitto;
 
 void Pokitto::soundInit() {
+    soundInit(false);
+}
+
+
+void Pokitto::soundInit(uint8_t reinit) {
+    if (!reinit) {
     simulator.initSDLAudio();
     simulator.simSoundEnabled(true);
     pokPauseStream();
+    }
 }
 
 void Pokitto::pauseAudio(uint8_t v) {
     SDL_PauseAudio(v);
 }
+
 
 #if (POK_STREAMING_MUSIC > 0)
     unsigned char buffers[4][BUFFER_SIZE];
@@ -75,7 +83,8 @@ uint8_t streambyte,output,streamon=0;
 uint8_t test=false;
 float test2=0;
 
-uint8_t soundbuf[256], soundbufindex=0;
+uint8_t soundbuf[SBUFSIZE];
+uint16_t soundbufindex=0;
 
 uint8_t pokStreamPaused() {
     return !streamon;
@@ -92,106 +101,8 @@ void pokPlayStream() {
     streamon=1;
 }
 
-void pokSoundIRQ() {
-    #ifndef POK_SIM
-    pwmout_t* obj = &audiopwm;
-    #endif
-    #if POK_STREAMING_MUSIC > 0
-        #if POK_STREAMFREQ_HALVE
-        streamstep = 1-streamstep;
-        #else
-        streamstep = 1;
-        #endif // POK_STREAMFREQ_HALVE
-        streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
-        if (streamstep) {
-            uint8_t output = (*currentPtr++);
-            if(streamvol) {
-                output >>= 3-streamvol;
-                streambyte = output;
-            } else {
-                streambyte = 0; // duty cycle
-                output = 0;
-            }
-            if (currentPtr >= endPtr)
-            {
-            currentBuffer++;
-            if (currentBuffer==4) currentBuffer=0;
-            currentPtr = buffers[currentBuffer];
-            endPtr = currentPtr + BUFFER_SIZE;
-            }
-        }
-    #endif // POK_STREAMING_MUSIC
-
-    /** DO ADDITIONAL SOUND PROCESSING (NOT STREAM) OF SOUND HERE **/
-
-    #if POK_ENABLE_SYNTH
-        /** if song is being played from sd **/
-        if (playing) {
-                notetick++;
-                updatePlaybackSD(playerpos&7);
-        }
-        /** oscillators update **/
-        osc1.count += osc1.cinc + (osc1.pitchbend >> 4); // counts to 65535 and overflows to zero WAS 8 !
-        osc2.count += osc2.cinc + (osc2.pitchbend >> 4); // counts to 65535 and overflows to zero
-        osc3.count += osc3.cinc + (osc3.pitchbend >> 4); // counts to 65535 and overflows to zero
-        Marr[tick](); // call mixing function
-        --tick;
-
-        /** mixing oscillator output **/
-        #ifdef POK_SIM
-        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        #else
-        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        #endif //POK_SIM
-        output = (uint8_t) op;
-
-    #endif // POK_ENABLE_SYNTH
-
-    #ifndef POK_SIM
-    /** HARDWARE **/
-        #if POK_ENABLE_SOUND
-            #if POK_STREAMING_MUSIC > 0
-                #if POK_STREAM_TO_DAC > 0
-                    #if POK_USE_DAC > 0
-                        if (streamstep) dac_write((uint8_t)streambyte); // duty cycle
-                    #endif // POK_USE_DAC
-                #else
-                    if (streamstep) {
-                            uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*streambyte)>>8); //cut out float
-                            obj->pwm->MATCHREL1 = t_on;
-                    }
-                #endif // POK_STREAM_TO_DAC
-            #endif // POK_STREAMING_MUSIC
-
-            #if POK_STREAM_TO_DAC == 0
-                #if POK_USE_DAC > 0
-                    dac_write((uint8_t)output); // write synth output to DAC
-                #endif
-            #else
-                uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
-                obj->pwm->MATCHREL1 = t_on;
-            #endif // POK_SYNTH_TO_DAC
-            soundbuf[soundbufindex++]=output;
-        #endif //POK_ENABLE_SOUND
-    #endif // HARDWARE
-
-    #ifdef POK_SIM
-    /** SIMULATOR **/
-        #if POK_STREAMING_MUSIC
-            //if (streamstep) {
-                uint16_t o = output + streambyte;
-                output = o/2;
-            //}
-        #endif // STREAMING
-        soundbyte = output;
-        soundbuf[soundbufindex++]=output;
-    #endif // POK_SIM
-}
-
+// *** INCLUDE THE COMMON IMPLEMENTATION FOR HWSound.cpp and SimSound.cpp.
+#include "../POKITTO_CORE/SoundCommonImp.h"
 
 /** THE FAKE ISR **/
 

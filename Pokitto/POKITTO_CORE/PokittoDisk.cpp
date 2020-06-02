@@ -30,10 +30,10 @@
 #define SD_CS_PIN     7
 
 #if POK_ENABLE_SD > 0
-BYTE res;
-FATFS fs;            /* File system object */
-FATDIR dir;            /* Directory object */
-FILINFO fno;        /* File information */
+PFFS::BYTE res;
+PFFS::FATFS fs;            /* File system object */
+PFFS::FATDIR dir;            /* Directory object */
+PFFS::FILINFO fno;        /* File information */
 
 //static FATFS *FatFs;    /* Pointer to the file system object (logical drive) */
 
@@ -45,7 +45,9 @@ bool diropened=false;
 #define FILESIZE 0x1BFBCD
 
 uint8_t filemode = FILE_MODE_UNINITIALIZED;
-char currentfile[15]; // holds current file's name
+
+#define CURRENT_FILE_SIZE 15
+char currentfile[CURRENT_FILE_SIZE]; // holds current file's name
 
 SPI device(CONNECT_MOSI,CONNECT_MISO,CONNECT_SCK);
 //DigitalOut mmccs(CONNECT_CS);
@@ -56,16 +58,19 @@ const char *get_filename_ext(const char *filename) {
     return dot + 1;
 }
 
-__attribute__((section(".SD_Code"))) void initSDGPIO() {
+//__attribute__((section(".SD_Code")))
+void initSDGPIO() {
     LPC_GPIO_PORT->DIR[SD_MOSI_PORT] |= (1  << SD_MOSI_PIN );
     LPC_GPIO_PORT->DIR[SD_MISO_PORT] |= (1  << SD_MISO_PIN );
     LPC_GPIO_PORT->DIR[SD_SCK_PORT]  |= (1  << SD_SCK_PIN );
     LPC_GPIO_PORT->DIR[SD_CS_PORT]   |= (1  << SD_CS_PIN );
 }
 
-__attribute__((section(".SD_Code"))) int pokInitSD() {
+//__attribute__((section(".SD_Code")))
+int pokInitSD() {
     initSDGPIO();
-    res = disk_initialize();
+    res = PFFS::disk_initialize();
+    //res = disk_initialize(0);
     res = (pf_mount(&fs));
     res = pf_opendir(&dir,"");
     if (res) diropened=false;
@@ -80,12 +85,12 @@ void emptyFname() {
 
 /** PUBLIC FUNCTIONS **/
 
-char* getFirstDirEntry() {
+char* getFirstDirEntry(char* path) {
     res=0;
     if (!diropened) {
             pokInitSD();
     }
-    res = pf_opendir(&dir,"");
+    res = pf_opendir(&dir,path);
     emptyFname();
     res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
     if (res) return 0;
@@ -105,6 +110,10 @@ char* getFirstDirEntry() {
         if (res==0 && dir.index==0) break;
     }
     return 0;
+}
+
+char* getFirstDirEntry() {
+    return getFirstDirEntry("");
 }
 
 char* getNextDirEntry() {
@@ -161,12 +170,12 @@ char* getNextFile() {
     return getNextFile("");
 }
 
-char* getFirstFile(char* ext) {
+char* getFirstFile(char* ext, char* path) {
     res=0;
     if (!diropened) {
             pokInitSD();
     }
-    res = pf_opendir(&dir,"");
+    res = pf_opendir(&dir,path);
     emptyFname();
     res = pf_readdir(&dir,&fno); //returns 0 if everything is OK
     if (res) return 0;
@@ -181,6 +190,10 @@ char* getFirstFile(char* ext) {
         if (res==0 && dir.index==0) break;
     }
     return 0;
+}
+
+char* getFirstFile(char* ext) {
+    return getFirstFile(ext, "");
 }
 
 char* getFirstFile() {
@@ -207,10 +220,16 @@ uint8_t fileOpen(char* buffer, char fmode) {
     }
 
     filemode = fmode;
-    err = pf_open(buffer);
+    err = PFFS::pf_open(buffer);
     if (err==0) {
-            strcpy(currentfile,(const char*)buffer);
-            return 0; // 0 means all clear
+        uint8_t i=0;
+        while(buffer[i] && i < CURRENT_FILE_SIZE-1 )
+        {
+            currentfile[i]=buffer[i];
+            i++;
+        }
+        currentfile[i]=0;
+        return 0; // 0 means all clear
     }
     // file open failed
     filemode = FILE_MODE_FAILED;
@@ -219,50 +238,50 @@ uint8_t fileOpen(char* buffer, char fmode) {
 
 void fileClose() {
     filemode = FILE_MODE_UNINITIALIZED;
-    for (uint8_t i=0; i<15; i++) currentfile[i]=0;
+    for (uint8_t i=0; i<CURRENT_FILE_SIZE; i++) currentfile[i]=0;
 }
 
-int fileGetChar() {
-    BYTE buff[1];
-    WORD br;
-    int err = pf_read(buff, 1, &br);    /* Read data to the buff[] */
+char fileGetChar() {
+    PFFS::BYTE buff[1];
+    PFFS::WORD br;
+    int err = PFFS::pf_read(buff, 1, &br);    /* Read data to the buff[] */
     return buff[0];
 }
 
 void filePutChar(char c) {
-    WORD bw;
-    pf_write((const void*)&c, 1, &bw);
-    pf_write(0, 0, &bw);
+    PFFS::WORD bw;
+    PFFS::pf_write((const void*)&c, 1, &bw);
+    PFFS::pf_write(0, 0, &bw);
 }
 
 void fileWriteBytes(uint8_t * b, uint16_t n) {
-    WORD bw;
-    pf_write((const void*)&b, n, &bw);
-    pf_write(0, 0, &bw);
+    PFFS::WORD bw;
+    PFFS::pf_write((const void*)&b, n, &bw);
+    PFFS::pf_write(0, 0, &bw);
 }
 
 uint16_t fileReadBytes(uint8_t * b, uint16_t n) {
-    WORD br;
-    pf_read(b, n, &br);    /* Read data to the buff[] */
+    PFFS::WORD br;
+    PFFS::pf_read(b, n, &br);    /* Read data to the buff[] */
     return br;             /* Return number of bytes read */
 }
 
 void fileSeekAbsolute(long n) {
-    res = pf_lseek(n);
+    res = PFFS::pf_lseek(n);
 }
 
 void fileSeekRelative(long n) {
     if (n<0) if (fs.fptr < -n) n=-fs.fptr;
     else if (n>0) if (fs.fptr+n > fs.fsize) n=fs.fsize-fs.fptr;
-    res = pf_lseek(fs.fptr + n);
+    res = PFFS::pf_lseek(fs.fptr + n);
 }
 
 void fileRewind() {
-  res = pf_lseek(0);
+  res = PFFS::pf_lseek(0);
 }
 
 void fileEnd() {
-  res = pf_lseek(fs.fsize);
+  res = PFFS::pf_lseek(fs.fsize);
 }
 
 long int fileGetPosition() {
@@ -270,24 +289,42 @@ long int fileGetPosition() {
 }
 
 uint8_t filePeek(long n) {
-    pf_lseek(n);
+    PFFS::pf_lseek(n);
     return fileGetChar();
 }
 
 void filePoke(long n, uint8_t c) {
-    pf_lseek(n);
+    PFFS::pf_lseek(n);
     filePutChar(c);
 }
 
+int fileReadLine(char* destination, int maxchars) {
+    int n=0;
+    char c=1;
+    char linebuf[80];
+    fileReadBytes((uint8_t*)linebuf,80);
+    int index=0;
+    while (c!=NULL) {
+        c = linebuf[index++];
+        if (n == 0) {
+            while (c == '\n' || c == '\r') c = linebuf[index++]; // skip empty lines
+        }
+        n++;
+        if (c=='\n' || c=='\r' || n==maxchars-1) c=NULL; //prevent buffer overflow
+        *destination++ = c;
+    }
+    fileSeekRelative(-80+index); //rewind
+    return n; //number of characters read
+}
+
 int dirOpen() {
-    return pf_opendir(&dir,"");
+    return PFFS::pf_opendir(&dir,"");
 }
 
 int dirUp() {
 
 return 0;
 }
-
 #endif // POK_ENABLE_SD
 
 

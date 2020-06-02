@@ -41,15 +41,60 @@
 #include "Pokitto_settings.h"
 #include "PokittoDisk.h"
 #include "PokittoGlobs.h"
+
+#if (POK_ENABLE_SYNTH == 1)
 #include "Synth.h"
+#endif
+
+#include "PokittoSound.h"
+
+//#include "beat_11025.h"
 
 
+/* Resets the timer terminal and prescale counts to 0 */
+void Sound_TIMER_Reset()
+{
+	uint32_t reg;
+
+	/* Disable timer, set terminal count to non-0 */
+	reg = LPC_CT32B0->TCR;
+	LPC_CT32B0->TCR = 0;
+	LPC_CT32B0->TC = 1;
+
+	/* Reset timer counter */
+	LPC_CT32B0->TCR = (1 << 1);
+
+	/* Wait for terminal count to clear */
+	while (LPC_CT32B0->TC != 0) {}
+
+	/* Restore timer state */
+	LPC_CT32B0->TCR = reg;
+}
+
+Pokitto::Sound __shw;
 
 using namespace Pokitto;
 
+#ifndef POK_SIM
+#if POK_USE_PWM
+pwmout_t* obj = &audiopwm;
+#endif
+#endif
+
 /** Sound Variables **/
 #if (POK_STREAMING_MUSIC > 0)
+
+#if POK_HIGH_RAM == HIGH_RAM_MUSIC
+unsigned char *buffers[4] = {
+    (unsigned char *) 0x20000000,
+    (unsigned char *) 0x20000400,
+    (unsigned char *) 0x20004000,
+    (unsigned char *) 0x20004400
+};
+#else
     unsigned char buffers[4][BUFFER_SIZE];
+#endif
+
     volatile int currentBuffer = 0, oldBuffer = 0;
     volatile int bufindex = 0, vol=1;
     volatile unsigned char * currentPtr;
@@ -60,18 +105,28 @@ using namespace Pokitto;
 #endif
 
 #if POK_ENABLE_SOUND > 0
+
+#if POK_USE_PWM
 	pwmout_t Pokitto::audiopwm; // this way (instead of PwmOut class) pwm doesn't start screaming until it is initialized !
-    Ticker Pokitto::audio;
+    //Ticker Pokitto::audio;
+#endif
 
 using namespace Pokitto;
+
 
 /** stream output and status */
 uint8_t Pokitto::streambyte,Pokitto::streamon;
 
-uint8_t soundbuf[256], soundbufindex=0, Pokitto::HWvolume=0;
+uint8_t soundbuf[SBUFSIZE];
+uint8_t Pokitto::HWvolume=0;
+uint16_t soundbufindex;
+uint8_t* soundbufptr;
+
 bool volpotError=false; //test for broken MCP4018
 
 uint16_t soundbyte;
+
+sampletype Pokitto::snd[4]; // up to 4 sounds at once?
 
 
 #if POK_USE_DAC > 0
@@ -86,18 +141,21 @@ uint16_t soundbyte;
  DigitalOut dac6(P1_15);
  DigitalOut dac7(P1_8);
 #else
- /** 4-layer board rev 2.1 **/
+
+/*
+ // 4-layer board rev 2.1 
  DigitalOut dac0(P1_28);
  DigitalOut dac1(P1_29);
  DigitalOut dac2(P1_30);
  DigitalOut dac3(P1_31);
- /* has daniel made a mistake ?*/
+ // has daniel made a mistake
  DigitalOut dac4(P2_20);
  DigitalOut dac5(P2_21);
  DigitalOut dac6(P2_22);
  DigitalOut dac7(P2_23);
 
  DigitalOut amp(P1_17);
+ */
 
 #endif // POK_BOARDREV
 #endif // POK_USE_DAC
@@ -105,15 +163,45 @@ uint16_t soundbyte;
 #if POK_BOARDREV == 2
 //MCP4018 volpot(P0_5,P0_4);
 
+/**
+ * @brief	Handle interrupt from 32-bit timer 0
+ * @return	Nothing
+ */
+
+uint32_t p=0;
+uint8_t pixx=0, pixy=0;
+
+extern "C" void TIMER32_0_IRQHandler(void)
+{
+	if ((LPC_CT32B0->IR & (1 << 1)) != 0) {
+        LPC_CT32B0->IR = (1 << 1);
+		//pokSoundBufferedIRQ();
+		#if POK_GBSOUND > 0
+    	/** GAMEBUINO SOUND **/
+    	Pokitto::audio_IRQ();
+    	#else
+    	/** NOT GAMEBUINO SOUND **/
+            #if POK_SOUND_BUFFERED
+                pokSoundBufferedIRQ();
+            #else
+                pokSoundIRQ();
+            #endif
+		#endif
+	}
+}
+
+
 void initHWvolumecontrol() {
     HWvolume=0;
    	volpotError=true;
     //if (volpot.put(HWvolume)) volpotError=true; //try if MCP4018 answers
-    setHWvolume(VOLUME_STARTUP);
+    setHWvolume(discrete_vol_hw_levels[VOLUME_STARTUP>>5]);
 }
 
 int Pokitto::setHWvolume(uint8_t v) {
-    HWvolume = 0x7F&v;
+    HWvolume=v;
+    if (HWvolume>127) HWvolume=127;
+    //HWvolume = 0x7F&v;
     //if (!volpotError) return volpot.put(HWvolume); //use normal I2C
     /* fallback method for broken MCP4018 */
     SoftwareI2C swvolpot(P0_4, P0_5); //swapped SDA,SCL
@@ -133,12 +221,14 @@ void Pokitto::changeHWvolume(int8_t v) {
 }
 
  uint8_t Pokitto::ampIsOn() {
-    return amp;
+    return (LPC_GPIO_PORT->PIN[1]& (1 << 17));
  }
 
  void Pokitto::ampEnable(uint8_t v) {
-    if (v>1) v=1; // limit against funny values
-    amp=v;
+    if(v)
+        LPC_GPIO_PORT->SET[1] = (1 << 17);
+    else
+        LPC_GPIO_PORT->CLR[1] = (1 << 17);
  }
 #endif // POK_BOARDREV == 2
 
@@ -161,7 +251,7 @@ void Pokitto::dac_write(uint8_t value) {
     value >>= 1;
     if (value & 1) SET_DAC7 else CLR_DAC7;
     #else
-    //uint32_t val;
+
     //val = value<<28; //lower 4 bits go higher - because port mask is used, no AND is needed to clear bits
     //val += value<<(15-4); //higher 4 bits go lower. No need to shift by 15 because bits are in the higher nibble
     /* daniel has made a mistake with ports */
@@ -171,13 +261,19 @@ void Pokitto::dac_write(uint8_t value) {
     //LPC_GPIO_PORT->MPIN[1] = val; // write bits to port
     //CLR_MASK_DAC;
     /* fixed here */
-    /*val=value;
+    #define MASKED_DAC 0
+    #if MASKED_DAC
+    uint32_t val;
+    val=value;
     SET_MASK_DAC_LO;
     LPC_GPIO_PORT->MPIN[1] = val<<28; // write lower 4 bits to port
     CLR_MASK_DAC_LO;
     SET_MASK_DAC_HI;
     LPC_GPIO_PORT->MPIN[2] = val<<(20-4); // write bits to port
-    CLR_MASK_DAC_HI; */
+    CLR_MASK_DAC_HI;
+    #else
+/*
+    CLR_MASK_P2;
     if (value & 1) SET_DAC0 else CLR_DAC0;
     value >>= 1;
     if (value & 1) SET_DAC1 else CLR_DAC1;
@@ -193,25 +289,85 @@ void Pokitto::dac_write(uint8_t value) {
     if (value & 1) SET_DAC6 else CLR_DAC6;
     value >>= 1;
     if (value & 1) SET_DAC7 else CLR_DAC7;
+    SET_MASK_P2;
+*/
+    //from minilib by FManga
+    volatile unsigned char *P1 = (volatile unsigned char *) 0xA0000020;
+    volatile unsigned char *P2 = (volatile unsigned char *) 0xA0000040;
+    P1[28] = value&1; value >>= 1;
+    P1[29] = value&1; value >>= 1;
+    P1[30] = value&1; value >>= 1;
+    P1[31] = value&1; value >>= 1;
+    P2[20] = value&1; value >>= 1;
+    P2[21] = value&1; value >>= 1;
+    P2[22] = value&1; value >>= 1;
+    P2[23] = value;
+    #endif //MASKED_DAC
     //CLR_MASK_DAC;
     #endif // BOARDREV
     #endif
 }
 
-/** SOUND INIT **/
 void Pokitto::soundInit() {
+    soundInit(false);
+}
 
-    pwmout_init(&audiopwm,POK_AUD_PIN);
-    pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
-    pwmout_write(&audiopwm,0.1f);
+/** SOUND INIT **/
+void Pokitto::soundInit(uint8_t reinit) {
+    #ifdef XPERIMENTAL
+    mbed::DigitalOut expr4(EXT4);
+    expr4=0;
+    #endif
+    #if POK_ENABLE_SOUND > 0
+    uint32_t timerFreq;
+    #if POK_USE_PWM
+    if (!reinit) {
+        pwmout_init(&audiopwm,POK_AUD_PIN);
+        pwmout_period_us(&audiopwm,POK_AUD_PWM_US); //was 31us
+        pwmout_write(&audiopwm,0.1f);
+        setBacklight(POK_BACKLIGHT_INITIALVALUE);
+    }
+    #endif
 
-    #if POK_GBSOUND > 0
+    //#if POK_GBSOUND > 0
     /** GAMEBUINO SOUND **/
-    audio.attach_us(&audio_IRQ, 1000000/(POK_AUD_FREQ>>0));
-    #else
+    //audio.attach_us(&audio_IRQ, 1000000/(POK_AUD_FREQ>>0));
+    //#else
     /** NOT GAMEBUINO SOUND **/
-    audio.attach_us(&pokSoundIRQ, 1000000/(POK_AUD_FREQ>>0));
-    #endif // POK_GAMEBUINO_SUPPORT
+    //audio.attach_us(&pokSoundBufferedIRQ, 1000000/(POK_AUD_FREQ>>0));
+
+     /* Initialize 32-bit timer 0 clock */
+    LPC_SYSCON->SYSAHBCLKCTRL |= (1 << 9);
+
+    /* Timer rate is system clock rate */
+	timerFreq = SystemCoreClock;
+
+	/* Timer setup for match and interrupt at TICKRATE_HZ */
+    Sound_TIMER_Reset();
+
+	/* Enable both timers to generate interrupts when time matches */
+    LPC_CT32B0->MCR |= (1 << ((1) * 3));
+
+    /* Setup 32-bit timer's duration (32-bit match time) */
+    LPC_CT32B0->MR1 = (timerFreq / POK_AUD_FREQ);
+
+	/* Setup both timers to restart when match occurs */
+
+    LPC_CT32B0->MCR |= (1 << ((1 * 3) + 1));
+
+	/* Start both timers */
+	LPC_CT32B0->TCR |= (1 << 0);
+
+	/* Clear both timers of any pending interrupts */
+    #define TIMER_32_0_IRQn 18
+	NVIC_ClearPendingIRQ((IRQn_Type)TIMER_32_0_IRQn);
+
+    /* Redirect IRQ vector - Jonne*/
+    NVIC_SetVector((IRQn_Type)TIMER_32_0_IRQn, (uint32_t)&TIMER32_0_IRQHandler);
+
+	/* Enable both timer interrupts */
+	NVIC_EnableIRQ((IRQn_Type)TIMER_32_0_IRQn);
+    //#endif // POK_GAMEBUINO_SUPPORT
 
     //emptySong();
     //emptyOscillators();
@@ -221,8 +377,31 @@ void Pokitto::soundInit() {
         testOsc();
     #endif // TEST_SOUND
     #if POK_BOARDREV == 2
-        initHWvolumecontrol();
+        //initHWvolumecontrol();
     #endif
+
+    #if POK_ENABLE_SYNTH
+        emptyOscillators();
+    #endif
+
+    #if POK_USE_DAC && POK_BOARDREV == 2
+    // configure dac as output
+    volatile unsigned int *PIO1 = (volatile unsigned int *) 0x40044060;
+    volatile unsigned int *PIO2 = (volatile unsigned int *) 0x400440F0;
+    volatile unsigned int *DIR1 = (volatile unsigned int *) 0xA0002004;
+    volatile unsigned int *DIR2 = (volatile unsigned int *) 0xA0002008;
+    PIO1[28] = PIO1[29] = PIO1[30] = PIO1[31] = 1<<7;
+    PIO2[20] = PIO2[21] = PIO2[22] = PIO2[23] = 1<<7;
+    *DIR1 |= (1<<28) | (1<<29) | (1<<30) | (1<<31);
+    *DIR2 |= (1<<20) | (1<<21) | (1<<22) | (1<<23);
+
+    // init amp
+    LPC_GPIO_PORT->DIR[1] |= (1 << 17);
+    LPC_GPIO_PORT->SET[1] = (1 << 17);
+    #endif
+
+
+    #endif // POK_ENABLE_SOUND
 
 }
 
@@ -248,95 +427,56 @@ void pokPlayStream() {
     streamon=1;
 }
 
-void pokSoundIRQ() {
-    uint8_t output=0;
-    #ifndef POK_SIM
-    //pwmout_t* obj = &audiopwm;
-    #endif
-    #if POK_STREAMING_MUSIC > 0
-        #if POK_STREAMFREQ_HALVE
-        streamstep = 1-streamstep;
-        #else
-        streamstep = 1;
-        #endif // POK_STREAMFREQ_HALVE
-        streamstep &= streamon; // streamon is used to toggle SD music streaming on and off
-        if (streamstep) {
-            output = (*currentPtr++);
-            if(streamvol && streamon) {
-                output >>= 3-streamvol;
-                streambyte = output;
-            } else {
-                streambyte = 0; // duty cycle
-                output = 0;
-            }
-            if (currentPtr >= endPtr)
-            {
-            currentBuffer++;
-            if (currentBuffer==4) currentBuffer=0;
-            currentPtr = buffers[currentBuffer];
-            endPtr = currentPtr + BUFFER_SIZE;
+uint8_t mixSound()
+{
+    int temp = 0;
+    signed int ss[4];
+    for(int s=0; s<4; s++){
+        snd[s].soundPoint++;
+
+        int currentPos = (snd[s].soundPoint*snd[s].speed)>>8;
+
+        if( currentPos >= snd[s].currentSoundSize){
+            if(snd[s].repeat){
+                snd[s].soundPoint = snd[s].repeat;
+            }else{
+                snd[s].playSample=0;
+                snd[s].soundPoint=0;
             }
         }
-    #endif // POK_STREAMING_MUSIC
 
-    /** DO ADDITIONAL SOUND PROCESSING (NOT STREAM) OF SOUND HERE **/
+        ss[s] = snd[s].currentSound[currentPos] -128;
+        ss[s] *= snd[s].volume;
+        ss[s] = ss[s]>>8;
+        ss[s] *= snd[s].playSample; // will be 1 or 0, if not playing, will silence
 
-    #if POK_ENABLE_SYNTH
-        /** if song is being played from sd **/
-        if (playing) {
-                notetick++;
-                updatePlaybackSD(playerpos&7);
-        }
-        /** oscillators update **/
-        osc1.count += osc1.cinc + (osc1.pitchbend >> 4); // counts to 65535 and overflows to zero WAS 8 !
-        osc2.count += osc2.cinc + (osc2.pitchbend >> 4); // counts to 65535 and overflows to zero
-        osc3.count += osc3.cinc + (osc3.pitchbend >> 4); // counts to 65535 and overflows to zero
-        Marr[tick](); // call mixing function
-        --tick;
-
-        /** mixing oscillator output **/
-
-        uint16_t op = (uint16_t) ((osc1.output)*(osc1.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc2.output)*(osc2.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        op += (uint16_t) ((osc3.output)*(osc3.vol>>8))>>9;// >> 2 osc1.vol Marr;
-        output = (uint8_t) op;
-
-    #endif // POK_ENABLE_SYNTH
-
-    #ifndef POK_SIM
-    /** HARDWARE **/
-        #if POK_ENABLE_SOUND > 0
-            #if POK_STREAMING_MUSIC > 0
-                /** sound is enabled, streaming is enabled */
-                #if POK_STREAM_TO_DAC > 0
-                    /** stream goes to DAC */
-                    #if POK_USE_DAC > 0
-                    if (streamstep) dac_write((uint8_t)streambyte); // duty cycle
-                    #endif // POK_USE_DAC
-                #else
-                    /** stream goes to PWM */
-                    if (streamstep) {
-                            pwmout_write(&audiopwm,(float)streambyte/(float)255);
-                            //uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*streambyte)>>8); //cut out float
-                            //obj->pwm->MATCHREL1 = t_on;
-                            //dac_write((uint8_t)streambyte); // duty cycle
-                    }
-                #endif // POK_STREAM_TO_DAC
-            #endif // POK_STREAMING_MUSIC
-            #if POK_STREAM_TO_DAC > 0
-            /** synth goes to PWM */
-            pwmout_write(&audiopwm,(float)output/(float)255);
-            //uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
-            //obj->pwm->MATCHREL1 = t_on;
-            #else
-            dac_write((uint8_t)output);
-            #endif // decide where synth is output
-            soundbyte = (output+streambyte)>>1;
-            soundbuf[soundbufindex++]=soundbyte;
-        #endif //POK_ENABLE_SOUND
-    #endif // HARDWARE
+     }
+    temp = (ss[0] + ss[1] + ss[2] + ss[3])/4;
+    return temp +128;
 }
 
+
+inline void pokSoundBufferedIRQ() {
+
+#if POK_AUD_TRACKER
+           uint32_t output = mixSound();
+#else
+           uint32_t output = soundbuf[soundbufindex+=Pokitto::streamon];
+#endif
+           if (soundbufindex==SBUFSIZE) soundbufindex=0;
+           //if (p==sizeof(beat_11025_raw)) p=0;
+           //soundbuf[soundbufindex++] = output;
+           //uint32_t t_on = (uint32_t)(((obj->pwm->MATCHREL0)*output)>>8); //cut out float
+           //obj->pwm->MATCHREL1 = t_on;
+           output *= discrete_vol_multipliers[discrete_vol];
+           output >>= 8;
+           dac_write(output);
+
+           //setDRAMpoint(pixx, pixy);
+}
+
+// *** INCLUDE THE COMMON IMPLEMENTATION FOR HWSound.cpp and SimSound.cpp.
+#include "../POKITTO_CORE/SoundCommonImp.h"
 
 void Pokitto::updateSDAudioStream() {
     if (streamPaused()) return;

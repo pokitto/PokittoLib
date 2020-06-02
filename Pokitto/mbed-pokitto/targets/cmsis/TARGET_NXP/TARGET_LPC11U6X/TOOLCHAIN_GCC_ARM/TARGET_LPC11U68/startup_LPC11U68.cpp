@@ -1,3 +1,5 @@
+void pokitto_jumpToLoader(bool wasInit);
+
 extern "C" {
 
 #include "LPC11U6x.h"
@@ -15,6 +17,7 @@ extern unsigned int __bss_section_table_end;
 extern void __libc_init_array(void);
 extern int main(void);
 extern void _vStackTop(void);
+extern void __valid_user_code_checksum(void);
 extern void (* const g_pfnVectors[])(void);
 
      void ResetISR(void);
@@ -67,7 +70,11 @@ void (* const g_pfnVectors[])(void) = {
     0,                               // Reserved
     0,                               // Reserved
     0,                               // Reserved
-    0,                               // Reserved
+    #ifndef MINILOADHIGH
+    __valid_user_code_checksum,                               // Reserved
+    #else
+    0,
+    #endif
     0,                               // Reserved
     0,                               // Reserved
     0,                               // Reserved
@@ -110,7 +117,7 @@ void (* const g_pfnVectors[])(void) = {
     ADCB_IRQHandler,                 // 24 - ADC B (A/D Converter)
     USBWakeup_IRQHandler,            // 30 - USB wake-up interrupt
     0,                               // 31 - Reserved
-}; 
+};
 /* End Vector */
 
 AFTER_VECTORS void data_init(unsigned int romstart, unsigned int start, unsigned int len) {
@@ -133,9 +140,9 @@ extern "C" void software_init_hook(void) __attribute__((weak));
 AFTER_VECTORS void ResetISR(void) {
     unsigned int LoadAddr, ExeAddr, SectionLen;
     unsigned int *SectionTableAddr;
-    
+
     SectionTableAddr = &__data_section_table;
-    
+
     while (SectionTableAddr < &__data_section_table_end) {
         LoadAddr = *SectionTableAddr++;
         ExeAddr = *SectionTableAddr++;
@@ -147,11 +154,19 @@ AFTER_VECTORS void ResetISR(void) {
         SectionLen = *SectionTableAddr++;
         bss_init(ExeAddr, SectionLen);
     }
-    
+
     SystemInit();
-    if (software_init_hook) 
-        software_init_hook(); 
-    else {
+
+    // disabled temporarily, seems to be unreliable
+    // *((volatile unsigned int*) 0x40048080) |= (1<<16) | (1<<6) | (1<<30) | (1<<19) | (3<<26) | (1<<12);
+    // *((volatile unsigned int*)(0x40044088)) = 0x88;
+    // *((volatile unsigned int*)(0x40044094)) = 0x88;
+
+    if (software_init_hook){
+        software_init_hook();
+    // } else if(*((volatile char*)(0xA0000000 + 1*0x20 + 10))){
+    //     pokitto_jumpToLoader(false);
+    } else {
         __libc_init_array();
         main();
     }
@@ -169,9 +184,13 @@ AFTER_VECTORS void PendSV_Handler    (void) {}
 AFTER_VECTORS void SysTick_Handler   (void) {}
 AFTER_VECTORS void IntDefaultHandler (void) {}
 
+#ifndef POKITTO_PIO_BUILD
 int __aeabi_atexit(void *object, void (*destructor)(void *), void *dso_handle) {return 0;}
+#endif
 }
 
+
+#ifndef POKITTO_PIO_BUILD
 #include <stdlib.h>
 
 void *operator new(size_t size)  {return malloc(size);}
@@ -179,3 +198,4 @@ void *operator new[](size_t size){return malloc(size);}
 
 void operator delete(void *p)   {free(p);}
 void operator delete[](void *p) {free(p);}
+#endif

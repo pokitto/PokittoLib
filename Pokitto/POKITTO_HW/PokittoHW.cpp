@@ -47,10 +47,22 @@ void Core::quit() {
 }
 
 void Core::initRandom() {
-    //TODO: hook random seed to battery level
+#if (PROJ_NOSTDRAND == 0)
+    time_t seconds = time(NULL);
+#if (PROJ_GAMEBUINO > 0)
+    Pokitto::Battery::update();
+    srand((unsigned int) (Pokitto::Battery::level + (seconds)));
+#else
+    srand((unsigned int)seconds);
+#endif
+#endif
 }
 
 void Core::initGPIO() {
+    #if PROJ_HIGH_RAM > 0
+    LPC_SYSCON->SYSAHBCLKCTRL |= 1<<26;
+    #endif
+
     /** control lines **/
     LPC_GPIO_PORT->DIR[LCD_CD_PORT] |= (1  << LCD_CD_PIN );
     LPC_GPIO_PORT->DIR[LCD_WR_PORT] |= (1  << LCD_WR_PIN );
@@ -59,25 +71,25 @@ void Core::initGPIO() {
     /** data lines **/
     LPC_GPIO_PORT->DIR[2] |= (0xFFFF  << 3);  // P2_3...P2_18 as output
 
-    pin_mode(P2_3,PullNone); // turn off pull-up
-    pin_mode(P2_4,PullNone); // turn off pull-up
-    pin_mode(P2_5,PullNone); // turn off pull-up
-    pin_mode(P2_6,PullNone); // turn off pull-up
+    pin_mode(P2_3, PullNone); // turn off pull-up
+    pin_mode(P2_4, PullNone); // turn off pull-up
+    pin_mode(P2_5, PullNone); // turn off pull-up
+    pin_mode(P2_6, PullNone); // turn off pull-up
 
-    pin_mode(P2_7,PullNone); // turn off pull-up
-    pin_mode(P2_8,PullNone); // turn off pull-up
-    pin_mode(P2_9,PullNone); // turn off pull-up
-    pin_mode(P2_10,PullNone); // turn off pull-up
+    pin_mode(P2_7, PullNone); // turn off pull-up
+    pin_mode(P2_8, PullNone); // turn off pull-up
+    pin_mode(P2_9, PullNone); // turn off pull-up
+    pin_mode(P2_10, PullNone); // turn off pull-up
 
-    pin_mode(P2_11,PullNone); // turn off pull-up
-    pin_mode(P2_12,PullNone); // turn off pull-up
-    pin_mode(P2_13,PullNone); // turn off pull-up
-    pin_mode(P2_14,PullNone); // turn off pull-up
+    pin_mode(P2_11, PullNone); // turn off pull-up
+    pin_mode(P2_12, PullNone); // turn off pull-up
+    pin_mode(P2_13, PullNone); // turn off pull-up
+    pin_mode(P2_14, PullNone); // turn off pull-up
 
-    pin_mode(P2_15,PullNone); // turn off pull-up
-    pin_mode(P2_16,PullNone); // turn off pull-up
-    pin_mode(P2_17,PullNone); // turn off pull-up
-    pin_mode(P2_18,PullNone); // turn off pull-up
+    pin_mode(P2_15, PullNone); // turn off pull-up
+    pin_mode(P2_16, PullNone); // turn off pull-up
+    pin_mode(P2_17, PullNone); // turn off pull-up
+    pin_mode(P2_18, PullNone); // turn off pull-up
 }
 
 

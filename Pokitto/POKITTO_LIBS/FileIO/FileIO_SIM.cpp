@@ -66,38 +66,36 @@ long getFileLength() {
 uint8_t fileOpen(char* buffer, char fmode) {
 
     filemode = fmode;
-    if (fmode & FILE_MODE_ASCII) {
-            // ASCII file
-            if (fmode & FILE_MODE_READONLY) {
-                // RO ASCII
-                fp=fopen(buffer, "r");
+    if (fmode & FILE_MODE_BINARY) {
+        // Binary file
+        if (fmode & FILE_MODE_READONLY) {
+            // RO Binary
+            fp=fopen(buffer, "rb");
+        } else {
+            // RW Binary
+            if (fmode & FILE_MODE_APPEND) {
+                // APPEND TO EXISTING Binary
+                fp=fopen(buffer, "a+b");
             } else {
-                // RW ASCII
-                if (fmode & FILE_MODE_APPEND) {
-                    // APPEND TO EXISTING RW ASCII
-                    fp=fopen(buffer, "a+");
-                } else {
-                    // OVERWRITE RW ASCII
-                    fp=fopen(buffer, "w+");
-                }
-
+                // OVERWRITE Binary
+                fp=fopen(buffer, "w+b"); //w+b will wipe the file !!!
             }
-    } else {
-            // Binary file
-            if (fmode & FILE_MODE_READONLY) {
-                // RO Binary
-                fp=fopen(buffer, "rb");
+        }
+    } else { // FILE_MODE_ASCII
+        // ASCII file
+        if (fmode & FILE_MODE_READONLY) {
+            // RO ASCII
+            fp=fopen(buffer, "r");
+        } else {
+            // RW ASCII
+            if (fmode & FILE_MODE_APPEND) {
+                // APPEND TO EXISTING RW ASCII
+                fp=fopen(buffer, "a+");
             } else {
-                // RW Binary
-                if (fmode & FILE_MODE_APPEND) {
-                    // APPEND TO EXISTING Binary
-                    fp=fopen(buffer, "a+b");
-                } else {
-                    // OVERWRITE Binary
-                    fp=fopen(buffer, "r+b"); //w+b will wipe the file !!!
-                }
-
+                // OVERWRITE RW ASCII
+                fp=fopen(buffer, "w+");
             }
+        }
     }
 
     if (fp) {
@@ -118,6 +116,72 @@ char* getCurrentFileName (){
     return currentfile;
 }
 
+char* getFirstDirEntry(char* path) {
+    if (diropened) {
+        tinydir_close(&tinydir);
+        diropened=false;
+    }
+    tinydir_open(&tinydir, path);
+    diropened = true;
+    int err = tinydir_readfile(&tinydir, &tinyfile);
+    if (err==-1) return 0;
+    while (tinyfile.name || tinyfile.is_dir) {
+        if (tinyfile.is_dir) {
+            tinyfile.name[8]='.';
+            tinyfile.name[9]='D';
+            tinyfile.name[10]='I';
+            tinyfile.name[11]='R';
+            tinyfile.name[12]='\0';
+            return tinyfile.name;
+        }
+
+        tinydir_next(&tinydir);
+        err = tinydir_readfile(&tinydir, &tinyfile);
+        if (err==-1) break;
+    }
+    return 0;
+}
+
+char* getFirstDirEntry() {
+    return getFirstDirEntry((char*)"./");
+}
+
+char* getNextDirEntry (){
+
+    if (!diropened) pokInitSD();
+    tinydir_next(&tinydir);
+    int err = tinydir_readfile(&tinydir, &tinyfile);
+	if(err != -1) {
+
+        while(!tinyfile.is_dir && err != -1) {
+            tinydir_next(&tinydir);
+            err = tinydir_readfile(&tinydir, &tinyfile);
+        }
+        if (tinyfile.is_dir) {
+
+            // Change the dir name: "mydir" ==> "/mydir/"
+            int i=12;
+            while (i) {
+                    tinyfile.name[i] = tinyfile.name[i-1];
+                    i--;
+            }
+            if (tinyfile.name[0]) {
+                    tinyfile.name[0]='/';
+                    i=0;
+                    while (tinyfile.name[i]) i++;
+                    tinyfile.name[i++]='/';
+                    tinyfile.name[i++]='\0';
+            }
+            /*tinyfile.name[a++]='.';
+            tinyfile.name[a++]='D';
+            tinyfile.name[a++]='I';
+            tinyfile.name[a++]='R';
+            tinyfile.name[a]='\0';*/
+        }
+        return tinyfile.name;
+	}
+	return 0;
+}
 
 char* getNextFile (char* ext){
 
@@ -131,19 +195,20 @@ char* getNextFile (char* ext){
         if (a == 0 && tinyfile.is_dir==0) return tinyfile.name;
 
 	}
+	return 0;
 }
 
 
 char* getNextFile() {
-    return getNextFile("");
+    return getNextFile((char*)"");
 }
 
-char* getFirstFile(char* ext) {
+char* getFirstFile(char* ext, char* path) {
     if (diropened) {
         tinydir_close(&tinydir);
         diropened=false;
     }
-    tinydir_open(&tinydir, "./");
+    tinydir_open(&tinydir, path);
     diropened = true;
     int b = tinydir_readfile(&tinydir, &tinyfile);
     if (b==-1) return 0;
@@ -159,8 +224,12 @@ char* getFirstFile(char* ext) {
     return 0;
 }
 
+char* getFirstFile(char* ext) {
+    return getFirstFile(ext,(char*)"./");
+}
+
 char* getFirstFile() {
-    return getFirstFile("");
+    return getFirstFile((char*)"");
 }
 
 int isThisFileOpen(char* buffer){
@@ -182,8 +251,8 @@ void fileClose() {
     }
 }
 
-int fileGetChar() {
-    return fgetc(fp);
+char fileGetChar() {
+    return (char)fgetc(fp);
 }
 
 void filePutChar(char c) {
@@ -196,7 +265,8 @@ void fileWriteBytes(uint8_t * b, uint16_t n) {
 }
 
 uint16_t fileReadBytes(uint8_t * b, uint16_t n) {
-    return fread(b, 1, n, fp);
+    if(fp)
+        return fread(b, 1, n, fp);
 }
 
 void fileSeekAbsolute(long n) {
@@ -208,7 +278,8 @@ void fileSeekRelative(long n) {
 }
 
 void fileRewind() {
-    fseek(fp, 0, SEEK_SET);
+    if(fp)
+        fseek(fp, 0, SEEK_SET);
 }
 
 void fileEnd() {
@@ -227,4 +298,19 @@ uint8_t filePeek(long n) {
 void filePoke(long n, uint8_t c) {
     fileSeekAbsolute(n);
     fputc( c, fp );
+}
+
+int fileReadLine(char* source, int maxchars) {
+    int n=0;
+    char c=1;
+    while (c!=0) {
+        c = fileGetChar();
+        if (n == 0) {
+            while (c == '\n' || c == '\r') c = fileGetChar(); // skip empty lines
+        }
+        if (c=='\n' || c=='\r' || n==maxchars-1) c=0; //prevent buffer overflow
+        n++;
+        *source++ = c;
+    }
+    return n; //number of characters read
 }

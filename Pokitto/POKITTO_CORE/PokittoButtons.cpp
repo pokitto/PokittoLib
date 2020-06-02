@@ -45,22 +45,19 @@ uint8_t Buttons::buttons_held;
 uint8_t Buttons::buttons_released; // from LSB up,down,left,right,a,b,c
 uint16_t Buttons::cHWLongPress = CHWLONGPRESSTIMEOUT;
 
-
-void Buttons::begin() {
-    #ifndef POK_SIM
-    Pokitto::initButtons();
-    #endif // POK_SIM
-}
-
 void Buttons::update() {
     #if POK_USE_CONSOLE
     if (console.conscounter) return;
     #endif // POK_USE_CONSOLE
+    #if PROJ_BUTTONS_POLLING == 1
+    pollButtons();
+    #endif
     #ifndef POK_SIM
         /** HARDWARE CODE **/
     for (uint8_t thisButton = 0; thisButton < NUM_BTN; thisButton++) {
         if (Pokitto::heldStates[thisButton]) { //if button pressed
             states[thisButton]++; //increase button hold time
+            if (states[thisButton]==0xFF) states[thisButton]=2; // PREVENT WRAPAROUND!!!!
         } else {
             if (states[thisButton] == 0)//button idle
                 continue;
@@ -96,6 +93,7 @@ void Buttons::update() {
 
         if (temp == HIGH) { //if button pressed
             states[thisButton]++; //increase button hold time
+            if (states[thisButton]==0xFF) states[thisButton] = 2; //prevent wraparound and retrigger
         } else {
             if (states[thisButton] == 0)//button idle
                 continue;
@@ -124,8 +122,10 @@ bool Buttons::pressed(uint8_t button) {
  * return true if 'button' is released
  */
 bool Buttons::released(uint8_t button) {
-    if (states[button] == 0xFF)
+    if (states[button] == 0xFF) {
+        states[button] = 0; // prevent continuous released state!
         return true;
+    }
     else
         return false;
 }
@@ -195,7 +195,11 @@ uint8_t Buttons::aBtn() {
     #ifdef POK_SIM
     return simulator.aBtn();
     #else
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_A];
+    #else
+    return Pokitto::Core::aBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -204,7 +208,11 @@ uint8_t Buttons::bBtn() {
     #ifdef POK_SIM
     return simulator.bBtn();
     #else
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_B];
+    #else
+    return Pokitto::Core::bBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -213,7 +221,11 @@ uint8_t Buttons::cBtn() {
     #ifdef POK_SIM
     c = simulator.cBtn();
     #else
+    #if PROJ_BUTTONS_POLLING == 0
     c = Pokitto::heldStates[BTN_C];
+    #else
+    return Pokitto::Core::cBtn();
+    #endif
     #endif // POK_SIM
     return c;
 }
@@ -222,7 +234,11 @@ uint8_t Buttons::leftBtn() {
     #ifdef POK_SIM
     return simulator.leftBtn();
     #else
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_LEFT];
+    #else
+    return Pokitto::Core::leftBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -230,7 +246,11 @@ uint8_t Buttons::rightBtn() {
     #ifdef POK_SIM
     return simulator.rightBtn();
     #else
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_RIGHT];
+    #else
+    return Pokitto::Core::rightBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -238,7 +258,11 @@ uint8_t Buttons::upBtn() {
     #ifdef POK_SIM
     return simulator.upBtn();
     #else
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_UP];
+    #else
+    return Pokitto::Core::upBtn();
+    #endif
     #endif // POK_SIM
 }
 
@@ -246,7 +270,11 @@ uint8_t Buttons::downBtn() {
     #ifdef POK_SIM
     return simulator.downBtn();
     #else
+    #if PROJ_BUTTONS_POLLING == 0
     return Pokitto::heldStates[BTN_DOWN];
+    #else
+    return Pokitto::Core::downBtn();
+    #endif
     #endif // POK_SIM
 }
 

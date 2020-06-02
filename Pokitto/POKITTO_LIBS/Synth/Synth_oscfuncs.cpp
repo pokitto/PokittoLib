@@ -38,12 +38,13 @@
 
 /** OSCILLATOR FUNCTIONS **/
 
-void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0,
-            uint8_t notenumber=25, uint8_t volume=127,
+void setOSC(OSC* o,uint8_t on=1, uint8_t wave=1, uint8_t loop=0, uint8_t echo=0, uint8_t adsr=0,
+            uint8_t notenumber=25, uint16_t volume=127,
             uint16_t attack=0, uint16_t decay=0, uint16_t sustain=0, uint16_t release=0,
             int16_t maxbend=0, int16_t bendrate=0, uint8_t arpmode = 0, uint8_t overdrive=0, uint8_t kick=0){
   //Serial.println("SetOsc "); osc1
   o->on = on;
+  o->duration = -1; //max this out for the time being
   o->overdrive = overdrive;
   o->kick = kick;
   o->wave = wave;
@@ -62,16 +63,17 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
   o->count = 0;
   noiseval = xorshift16(); //random(0,0xFFFF);
 
-  o->cinc = cincs[notenumber]<<POK_CINC_MULTIPLIER; // direct cinc from table, no calculation
+  o->cinc = cincs[notenumber]; // direct cinc from table, no calculation
   o->tonic = notenumber; // save tonic for arpeggio use
   if (wave == 2) o->cinc >>= 1; // correct pitch for saw wave
   if (wave == 4) o->cinc <<= 1; // enable higher pitch for pure noise
+  if (wave == 6) o->samplestep = (o->cinc/(cincs[37]>>8));
   o->vol = volume << 8;//volume;
 
   if (adsr) {
     o->attack = attack;
     o->decay = decay;
-    o->sustain = sustain;
+    o->sustain = sustain<<8; //sustain needs to be multiplied by 256 also
     o->release = release;
     o->adsrphase = 1;
     if (!o->attack) o->adsrvol = o->vol; // start directly, no attack ramp
@@ -85,38 +87,43 @@ void setOSC(OSC* o,byte on=1, byte wave=1, byte loop=0, byte echo=0, byte adsr=0
     o->adsrvol = o->vol; // will stay same all the time
   }
 
+  o->pitchbend = 0; //this has to be zeroed always!
   if (bendrate != 0) {
-        o->bendrate = bendrate; // test value
-        o->pitchbend = 0;
-        o->maxbend = maxbend;
+        o->bendrate = (int32_t)bendrate*(o->cinc/10000); // test value
+        o->maxbend = (int32_t)maxbend*(o->cinc/100);
+        //o->samplebendcount = o->maxbend>>24;
+        //o->samplebendtick = 0;
+  } else {
+        o->bendrate = 0;
+        o->maxbend = 0;
   }
 }
 
-void setOSC(OSC* o,byte on, byte wave, uint16_t frq, uint8_t volume, uint32_t duration){
+void setOSC(OSC* o,uint8_t on, uint8_t wave, uint16_t frq, uint8_t volume, uint32_t duration){
   o->on = on;
   o->overdrive = 0;
   o->kick = 0;
   o->wave = wave;
-  o->loop = 1;
-  o->echo = 1; //echo shifts left 8 steps to zero
+  o->loop = 0;//1;
+  o->echo = 0;//1; //echo shifts left 8 steps to zero
   o->echodiv = 0;
-  o->adsr = 1;
-  o->attack = 200;
-  o->decay = 200;
-  o->sustain = 20;
-  o->release = 10;
-  o->adsrphase = 1;
+  o->adsr = 0;//1;
+  o->attack = 0;//200;
+  o->decay = 0;//200;
+  o->sustain = 0;//20;
+  o->release = 0;//10;
+  o->adsrphase = 0;//1;
   o->arpmode = 0;
   o->count = 0;
   noiseval = xorshift16(); //random(0,0xFFFF);
-  o->cinc = (frq/100)*(cincs[18]<<POK_CINC_MULTIPLIER); // its a kludge, i know. cant be bothered.
+  o->cinc = ((float)0xFFFFFFFF/(float)POK_AUD_FREQ)*frq;
   if (wave == 2) o->cinc >>= 1; // correct pitch for saw wave
   if (wave == 4) o->cinc <<= 1; // enable higher pitch for pure noise
   o->vol = volume << 8;//volume;
   o->adsrvol = o->vol;
-  o->duration = duration*100;
-  o->maxbend = -4000;
-  o->bendrate = 1000;
+  o->duration = 0;//duration*100;
+  o->maxbend = 0;//-4000;
+  o->bendrate = 0;//1000;
 }
 
 

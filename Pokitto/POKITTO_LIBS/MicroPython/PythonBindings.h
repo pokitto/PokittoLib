@@ -38,7 +38,6 @@
 #define PYTHON_BINDINGS_H
 
 #if MICROPY_ENABLE_GC==1  // This means micropython is used
-
 #ifdef __cplusplus
 #define EXTERNC extern "C"
 #else
@@ -49,9 +48,17 @@
 #define BTN_RIGHT   2
 #define BTN_DOWN    3
 #define BTN_LEFT    0
+#define BTN_A       4
+#define BTN_B       5
+#define BTN_C       6
 
 // Main function in uPy library
+#if defined(POKITTO_USE_WIN_SIMULATOR) ||defined(POK_SIM)
 EXTERNC int PythonMain(int argc, char **argv);
+#else
+EXTERNC int PyInSkyMain(unsigned int heapSize, char *heapMem);
+#endif
+
 
 // Pokitto simulator API for uPython.
 
@@ -67,31 +74,83 @@ EXTERNC bool Pok_addToRingBuffer(uint8_t type, uint8_t key);
 EXTERNC bool Pok_readAndRemoveFromRingBuffer(EventRingBufferItem* itemOut);
 
 // Display
+EXTERNC void Pok_Display_init( bool mustClearScreen );
 EXTERNC uint8_t Pok_Display_getNumberOfColors();
 EXTERNC uint16_t Pok_Display_getWidth();
 EXTERNC uint16_t Pok_Display_getHeight();
-EXTERNC void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, const uint8_t *buffer);
+EXTERNC void Pok_Display_setForegroundColor(int16_t color_);
+EXTERNC void Pok_Display_setBackgroundColor(int16_t color);
+EXTERNC void Pok_Display_setInvisibleColor(int16_t color);
+EXTERNC void Pok_Display_drawPixel(int16_t x,int16_t y);
+EXTERNC void Pok_Display_drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
+EXTERNC void Pok_Display_drawRectangle(int16_t x0, int16_t y0, int16_t w, int16_t h);
+EXTERNC void Pok_Display_fillRectangle(int16_t x, int16_t y, int16_t w, int16_t h);
+EXTERNC void Pok_Display_drawCircle(int16_t x0, int16_t y0, int16_t r);
+EXTERNC void Pok_Display_fillCircle(int16_t x0, int16_t y0, int16_t r);
+EXTERNC void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, bool flipH, bool flipV, int16_t invisiblecol_, const uint8_t *buffer);
 EXTERNC void Pok_Display_write(const uint8_t *buffer, uint8_t size);
 EXTERNC void Pok_Display_print(uint8_t x, uint8_t y, const char str[], uint8_t color);
 EXTERNC uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b);
 EXTERNC void POK_game_display_setPalette(uint16_t* paletteArray, int16_t len);
+EXTERNC void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h);
+EXTERNC void Pok_Display_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h);
 
 // Core
-EXTERNC bool Pok_Core_update(bool useDirectMode);
+EXTERNC bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h);
 EXTERNC bool Pok_Core_isRunning();
 EXTERNC bool Pok_Core_buttons_repeat(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_held(uint8_t button, uint8_t period);
 EXTERNC bool Pok_Core_buttons_released(uint8_t button);
 
+// Sound functions
+EXTERNC void Pok_Sound_Reset();
+EXTERNC void Pok_Sound_PlayMusicFromSD(char* filePath);
+EXTERNC uint8_t Pok_Sound_GetCurrentBufferIndex();
+EXTERNC uint32_t Pok_Sound_GetCurrentBufferPos();
+EXTERNC uint32_t Pok_Sound_GetBufferSize();
+EXTERNC void Pok_Sound_FillBuffer(void* buf, uint16_t len, uint8_t soundBufferIndex, uint16_t soundBufferPos);
+EXTERNC void Pok_Sound_Play();
+EXTERNC void Pok_Sound_Pause();
+EXTERNC void Pok_Sound_playSFX(void* sfxdata, uint32_t length, bool is4bitSample);
+
+// Time related functions.
+EXTERNC void Pok_Wait(uint32_t dur_ms);
+EXTERNC uint32_t Pok_Time_ms();
+
+// Tilemap functions.
+EXTERNC void* Pok_ConstructMap();
+EXTERNC void Pok_DestroyMap( void* _this );
+EXTERNC void Pok_SetMap( void* _this, size_t width, size_t height, const uint8_t *map );
+EXTERNC void Pok_DrawMap( void* _this, int32_t x, int32_t y );
+EXTERNC void Pok_SetTile( void* _this, uint8_t index, uint8_t width, uint8_t height, const uint8_t *data);
+EXTERNC uint8_t Pok_GetTileId( void* _this, int32_t x, int32_t y, uint8_t tileSize );
+EXTERNC void Pok_GetTileIds( void* _this, int32_t tlx, int32_t tly, int32_t brx, int32_t bry, uint8_t tileSize,
+                        /*OUT*/ uint8_t* tileIdTl, uint8_t* tileIdTr, uint8_t* tileIdBl, uint8_t* tileIdBr );
+
+//*** EEPROM reading and writing ***
+EXTERNC void* Pok_CreateCookie(char* name, uint8_t* cookieBufPtr, uint32_t cookieBufLen);
+EXTERNC void Pok_DeleteCookie(void* mycookiePtr );
+EXTERNC void Pok_LoadCookie(void* mycookiePtr);
+EXTERNC void Pok_SaveCookie(void* mycookiePtr);
+
+// *** TAS UI ***
+EXTERNC void Pok_TasUI_setCursor(int32_t col, int32_t row);
+EXTERNC void Pok_TasUI_printString(char* text);
+EXTERNC void Pok_TasUI_printInteger(int32_t number);
+EXTERNC void Pok_TasUI_setTile(int32_t col, int32_t row, int32_t id);
+EXTERNC void Pok_TasUI_clear();
+EXTERNC void Pok_TasUI_fillRectTiles(int32_t col1, int32_t row1, int32_t col2, int32_t row2, int32_t id);
+EXTERNC void Pok_TasUI_drawBox(int32_t col1, int32_t row1, int32_t col2, int32_t row2);
+EXTERNC void Pok_TasUI_drawGauge(int32_t col1, int32_t col2, int32_t row, int32_t current, int32_t maxValue );
+
+// For compatibility in linking
 EXTERNC struct tm * localtime_cpp(const time_t * timer);
 EXTERNC time_t time_cpp(time_t* timer);
 
-#if !POKITTO_USE_WIN_SIMULATOR && !defined(POK_SIM)
 // Debug
 EXTERNC int pc_printf(const char* format, ...);
 EXTERNC void pc_puts(const char* strWithNull);
 EXTERNC void pc_putsn(const char* str, int len);
-#endif
 
 #endif // MICROPY_ENABLE_GC
 

@@ -19,6 +19,10 @@
 #ifndef USBSERIAL_H
 #define USBSERIAL_H
 
+#if POK_HIGH_RAM != HIGH_RAM_OFF
+#error "Cannot use the USB serial if the high ram is already in use!"
+#endif
+
 #include "USBCDC.h"
 #include "Stream.h"
 #include "CircBuffer.h"
@@ -56,9 +60,15 @@ public:
     * @param connect_blocking define if the connection must be blocked if USB not plugged in
     *
     */
+    #ifdef POK_VENDOR_ID
+    USBSerial(uint16_t vendor_id = POK_VENDOR_ID, uint16_t product_id = POK_PRODUCT_ID, uint16_t product_release = 0x0001, bool connect_blocking = true): USBCDC(vendor_id, product_id, product_release, connect_blocking){
+        settingsChangedCallback = 0;
+    };
+    #else
     USBSerial(uint16_t vendor_id = 0x1f00, uint16_t product_id = 0x2012, uint16_t product_release = 0x0001, bool connect_blocking = true): USBCDC(vendor_id, product_id, product_release, connect_blocking){
         settingsChangedCallback = 0;
     };
+    #endif
 
 
     /**

@@ -38,12 +38,12 @@ struct EERef{
         : index( index )                 {}
 
     //Access/read members.
-    uint8_t operator*() const            { return eeprom_read_byte( (uint8_t*) index ); }
-    operator uint8_t() const       { return **this; }
+    uint8_t operator*() const            { return eeprom_read_byte( (uint16_t*) index ); }
+    operator const uint8_t() const       { return **this; }
 
     //Assignment/write members.
     EERef &operator=( const EERef &ref ) { return *this = *ref; }
-    EERef &operator=( uint8_t in )       { return eeprom_write_byte( (uint8_t*) index, in ), *this;  }
+    EERef &operator=( uint8_t in )       { return eeprom_write_byte( (uint16_t*) index, in ), *this;  }
     EERef &operator +=( uint8_t in )     { return *this = **this + in; }
     EERef &operator -=( uint8_t in )     { return *this = **this - in; }
     EERef &operator *=( uint8_t in )     { return *this = **this * in; }
@@ -88,7 +88,7 @@ struct EEPtr{
     EEPtr( const int index )
         : index( index )                {}
 
-    operator int() const          { return index; }
+    operator const int() const          { return index; }
     EEPtr &operator=( int in )          { return index = in, *this; }
 
     //Iterator functionality.
@@ -123,7 +123,7 @@ struct EEPROMClass{
     //STL and C++11 iteration capability.
     EEPtr begin()                        { return 0x00; }
     EEPtr end()                          { return length(); } //Standards requires this to be the item after the last valid entry. The returned pointer is invalid.
-    uint16_t length()                    { return 0x1000; } // length for pokitto is 4kB
+    uint16_t length()                    { return EESETTINGS_VOL; } // length for pokitto is 4kB MINUS settings area!!
 
     //Functionality to 'get' and 'put' objects to and from EEPROM.
     template< typename T > T &get( int idx, T &t ){

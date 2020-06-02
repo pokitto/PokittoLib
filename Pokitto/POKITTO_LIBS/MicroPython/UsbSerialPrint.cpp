@@ -38,12 +38,24 @@
 #include <cstdarg>
 
 #ifndef POK_SIM
-#include "USBSerial.h"
+
+#ifdef USE_SEGGER_SERIAL_PRINT
+// Note that to be able to use TeraTerm with Segger J-Link, Tera Term must be configured
+// not to send the whole line only after <return>. Each char should be send immediately:
+// TERATERM.INI: EnableLineMode=off
+// That is needed e.g. Python interactive prompt via the terminal. Normally, this mode is set
+// automatically but somehow TeraTerm does not recognize J-Link connection correctly.
+// TeraTerm must be connected to the telnet port "localhost:19021".
+
+#include "SEGGER_RTT.h"
 #endif
 
+#endif
 #include "PythonBindings.h"
 
 #if USE_USB_SERIAL_PRINT
+
+#include "USBSerial.h"
 
 USBSerial pc;
 
@@ -75,7 +87,33 @@ extern "C" int pc_printf(const char* format, ...) {
     return ret;
 }
 
-#else !USE_USB_SERIAL_PRINT
+#else //!USE_USB_SERIAL_PRINT
+
+#ifdef USE_SEGGER_SERIAL_PRINT
+
+extern "C" int pc_putc(int c) {
+    char cc = c;
+    return SEGGER_RTT_Write(0, &cc, 1);
+}
+extern "C" int pc_getc() {
+    return SEGGER_RTT_WaitKey();
+}
+extern "C" void pc_puts(const char* strWithNull) {
+
+    SEGGER_RTT_WriteString(0, strWithNull);
+}
+extern "C" void pc_putsn(const char* str, int len) {
+    SEGGER_RTT_Write(0, str, len);
+}
+extern "C" int pc_printf(const char* format, ...) {
+
+    std::va_list arg;
+    va_start(arg, format);
+    int ret = SEGGER_RTT_printf( 0, format, arg);
+    va_end(arg);
+    return ret;
+}
+#else
 
 extern "C" int pc_putc(int c) { return 0;}
 extern "C" int pc_getc() {return 0;}
@@ -83,5 +121,6 @@ extern "C" void pc_puts(const char* strWithNull) {}
 extern "C" void pc_putsn(const char* str, int len) {}
 extern "C" int pc_printf(const char* format, ...) {return 0;}
 
+#endif
 #endif
 

@@ -6,6 +6,8 @@
 
 #include "integer.h"
 
+namespace PFFS {
+
 /* Status of Disk Functions */
 typedef BYTE    DSTATUS;
 
@@ -34,6 +36,9 @@ DRESULT disk_writep (const BYTE*, DWORD);
 #define CT_SDC                (CT_SD1|CT_SD2)    /* SD */
 #define CT_BLOCK            0x08    /* Block addressing */
 
+} // namespace PFFS
+
 #define _DISKIO
 #endif
+
 

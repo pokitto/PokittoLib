@@ -27,14 +27,14 @@ extern uint8_t chunk[2][CHUNKSIZE];
 extern uint8_t cc; // current chunk
 
 struct SONG {
-    byte rb_version; // rbtracker version with which the song was created
+    uint8_t rb_version; // rbtracker version with which the song was created
     uint16_t song_bpm; // song beats per minute
-    byte num_patches; // how many different instruments ie patches
-    byte num_channels; // how many channels are used by this song (1-3)
-    byte num_patterns; // how many different patterns are used
-    byte song_end;  // at what position song ends
+    uint8_t num_patches; // how many different instruments ie patches
+    uint8_t num_channels; // how many channels are used by this song (1-3)
+    uint8_t num_patterns; // how many different patterns are used
+    uint8_t song_end;  // at what position song ends
     int8_t song_loop; // where to loop at end of song. -1 means no loop
-    byte block_sequence[3][10]; //the sequence of blocks for each track
+    uint8_t block_sequence[3][10]; //the sequence of blocks for each track
     const uint8_t * instrument_stream[3]; //pointers to the instruments in the track streams
     const uint8_t * note_stream[3]; //pointers to the notes in the track streams
 };

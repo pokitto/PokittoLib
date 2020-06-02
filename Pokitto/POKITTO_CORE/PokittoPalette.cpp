@@ -50,12 +50,14 @@ using namespace Pokitto;
 
 
 void Display::loadRGBPalette(const unsigned char* p) {
-    for (int i=0;i<PALETTE_SIZE;i++) palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
+    for (int i=0;i<PALETTE_SIZE;i++)
+        palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
     paletteptr = palette;
 }
 
 void Display::load565Palette(const uint16_t* p) {
-    for (int i=0;i<PALETTE_SIZE;i++) palette[i] = p[i];
+    for (int i=0;i<PALETTE_SIZE;i++)
+        palette[i] = p[i];
     paletteptr = palette;
 }
 
@@ -64,8 +66,10 @@ void Display::rotatePalette(int8_t step) {
     if (step == 0) return;
     step = 0-step;
     if (step>0) {
-        for (int i=step;i<PALETTE_SIZE;i++) tpal[i]=palette[i-step]; // palette revolves up, new color 1 becomes old color 0
-        for (int i=0; i < step; i++) tpal[i]=palette[PALETTE_SIZE-step+i]; // overflow topmost values to bottom of new palette
+        for (int i=step;i<PALETTE_SIZE;i++)
+            tpal[i]=palette[i-step]; // palette revolves up, new color 1 becomes old color 0
+        for (int i=0; i < step; i++)
+            tpal[i]=palette[PALETTE_SIZE-step+i]; // overflow topmost values to bottom of new palette
     } else {
         for (int i=0;i<PALETTE_SIZE+step;i++)
         {
@@ -76,7 +80,9 @@ void Display::rotatePalette(int8_t step) {
         }
         // overflow bottom values to top of new palette
     }
-    for (int i=0; i<PALETTE_SIZE;i++) palette[i] = tpal[i];
+
+    for (int i=0; i<PALETTE_SIZE;i++)
+        palette[i] = tpal[i];
 }
 
 uint16_t Display::RGBto565(uint8_t R,uint8_t G,uint8_t B) {

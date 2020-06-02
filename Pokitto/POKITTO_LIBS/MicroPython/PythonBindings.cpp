@@ -36,8 +36,20 @@
 
 #include "PokittoCore.h"
 #include "PokittoDisplay.h"
+#include "Tilemap.hpp"
+#include "PokittoCookie.h"
 #include "PythonBindings.h"
 #include "time.h"
+
+#ifdef TASUI
+// Include for the TASUI API.
+#include <tasui>
+
+// Include for the Tileset.
+#include <puits_UltimateUtopia.h>
+#include <ptui_StandardUITilesetDefinition.hpp>
+using PUI=Pokitto::UI;
+#endif
 
 using namespace Pokitto;
 
@@ -115,6 +127,11 @@ bool Pok_readAndRemoveFromRingBuffer(EventRingBufferItem* itemOut){
     return true;
 }
 
+void Pok_Display_init( bool mustClearScreen )
+{
+    Display::persistence = !mustClearScreen;
+}
+
 uint8_t Pok_Display_getNumberOfColors() {
 
     return Display::getNumberOfColors();
@@ -130,6 +147,42 @@ uint16_t Pok_Display_getHeight() {
     return Display::getHeight();
 }
 
+void Pok_Display_setForegroundColor(int16_t color_) {
+    Display::color = (uint8_t)color_;
+}
+
+void Pok_Display_setBackgroundColor(int16_t color) {
+    Display::bgcolor = (uint8_t)color;
+}
+
+void Pok_Display_setInvisibleColor(int16_t color) {
+    Display::invisiblecolor = (uint8_t)color;
+}
+
+void Pok_Display_drawPixel(int16_t x,int16_t y) {
+    Display::drawPixel(x,y);
+}
+
+void Pok_Display_drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
+    Display::drawLine(x0, y0, x1, y1);
+}
+
+void Pok_Display_drawRectangle(int16_t x0, int16_t y0, int16_t w, int16_t h) {
+    Display::drawRectangle(x0, y0, w, h);
+}
+
+void Pok_Display_fillRectangle(int16_t x, int16_t y, int16_t w, int16_t h) {
+    Display::fillRectangle(x, y, w, h);
+}
+
+void Pok_Display_drawCircle(int16_t x0, int16_t y0, int16_t r) {
+    Display::drawCircle(x0, y0, r);
+}
+
+void Pok_Display_fillCircle(int16_t x0, int16_t y0, int16_t r) {
+    Display::fillCircle(x0, y0, r);
+}
+
 void Pok_Display_write(const uint8_t *buffer, uint8_t size) {
 
     Display::write(buffer, size);
@@ -137,14 +190,21 @@ void Pok_Display_write(const uint8_t *buffer, uint8_t size) {
 
 void Pok_Display_print(uint8_t x, uint8_t y, const char str[], uint8_t color) {
 
-    Display::color = color;
+    if( color != -1)
+        Display::color = color;
     Display::print( x, y, str );
 }
 
-void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, int16_t invisiblecol_, const uint8_t *buffer) {
+void Pok_Display_blitFrameBuffer(int16_t x, int16_t y, int16_t w, int16_t h, bool flipH, bool flipV, int16_t invisiblecol_, const uint8_t *buffer) {
     if( invisiblecol_ != -1)
         Display::invisiblecolor = (uint8_t)invisiblecol_;
-    Display::drawBitmapData(x, y, w, h, buffer );
+
+    if(flipH)
+        Display::drawBitmapDataXFlipped(x, y, w, h, buffer );
+    else if(flipV)
+        Display::drawBitmapDataYFlipped(x, y, w, h, buffer );
+    else
+        Display::drawBitmapData(x, y, w, h, buffer );
 }
 
 uint16_t POK_game_display_RGBto565(uint8_t r, uint8_t g, uint8_t b) {
@@ -156,11 +216,25 @@ void POK_game_display_setPalette(uint16_t* paletteArray, int16_t len) {
         Display::palette[i] = paletteArray[i];
 }
 
-bool Pok_Core_update(bool useDirectMode) {
+void Pok_Display_setClipRect(int16_t x, int16_t y, int16_t w, int16_t h) {
+}
+
+// Draw the screen surface immediately to the display. Do not care about fps limits. Do not run event loops etc.
+void Pok_Display_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h)
+{
+    Display::update(useDirectMode);
+}
+
+// Run the event loops, audio loops etc. Draws the screen when the fps limit is reached and returns true.
+bool Pok_Core_update(bool useDirectMode, uint8_t x, uint8_t y, uint8_t w, uint8_t h )
+{
 
     bool ret = Core::update(useDirectMode);
+    //printf("update, %d ms\n", Core::getTime()-s);
     return ret;
 }
+
+
 
 bool Pok_Core_isRunning() {
 
@@ -182,8 +256,278 @@ bool Pok_Core_buttons_released(uint8_t button) {
     return Core::buttons.released(button);
 }
 
+// *** Sound functions
 
-struct tm * localtime_cpp(const time_t * timer){
+void Pok_Sound_Reset() {
+
+    #if POK_STREAMING_MUSIC > 0
+
+    // Init buffers to an empty value: 128.
+    #if POK_HIGH_RAM == HIGH_RAM_MUSIC
+    memset(buffers[0], 128, BUFFER_SIZE);
+    memset(buffers[1], 128, BUFFER_SIZE);
+    memset(buffers[2], 128, BUFFER_SIZE);
+    memset(buffers[3], 128, BUFFER_SIZE);
+    #else
+    memset(&(buffers[0]), 128, BUFFER_SIZE);
+    memset(&(buffers[1]), 128, BUFFER_SIZE);
+    memset(&(buffers[2]), 128, BUFFER_SIZE);
+    memset(&(buffers[3]), 128, BUFFER_SIZE);
+    #endif
+
+    // Set global variables
+    currentBuffer = 0;
+    currentPtr = buffers[currentBuffer];
+    endPtr = currentPtr + BUFFER_SIZE;
+
+    //pokPlayStream(); // activate stream
+    //Sound::ampEnable(true);
+    //Pokitto::Sound::playMusicStream();
+
+    /*
+    //!!HV
+    for(uint32_t bufferIndex=0; bufferIndex<4; bufferIndex++) {
+        printf("\n*** buffer num : %d\n", bufferIndex);
+        for(uint32_t t=0; t<BUFFER_SIZE; t++) {
+            if(t%64 == 0) printf("\n");
+            printf("%u,", buffers[bufferIndex][t]);
+        }
+    }
+    */
+    #endif
+}
+
+void Pok_Sound_PlayMusicFromSD(char* filePath) {
+    #if POK_STREAMING_MUSIC > 0
+    Pokitto::Sound::pauseMusicStream();
+    fileClose(); // Close the file always just in case the same file is loaded again.
+    int ok = Pokitto::Sound::playMusicStream(filePath);
+    if(ok)
+        Pokitto::Sound::playMusicStream();
+    else
+    {
+        Pokitto::Sound::pauseMusicStream();
+        Pok_Sound_Reset();
+    }
+    #endif
+}
+
+uint8_t Pok_Sound_GetCurrentBufferIndex() {    //
+
+    #if POK_STREAMING_MUSIC > 0
+    return currentBuffer;
+    #else
+    return 0;
+    #endif
+}
+
+uint32_t Pok_Sound_GetCurrentBufferPos() {    //
+
+    #if POK_STREAMING_MUSIC > 0
+    return (currentPtr - &(buffers[currentBuffer][0])) / sizeof(buffers[currentBuffer][0]);
+    #else
+    return 0;
+    #endif
+}
+
+uint32_t Pok_Sound_GetBufferSize() {    //
+
+    #if POK_STREAMING_MUSIC > 0
+    return BUFFER_SIZE;
+    #else
+    return 0;
+    #endif
+}
+
+void Pok_Sound_FillBuffer(void* buf, uint16_t len, uint8_t soundBufferIndex, uint16_t soundBufferPos) {
+
+    #if POK_STREAMING_MUSIC > 0
+    //
+//    if(soundBufferPos<512)
+//        printf("%d::%u\n", soundBufferPos, *(unsigned char*)buf);
+//    else
+//        printf("%d::%u\n", soundBufferPos, *(unsigned char*)buf);
+
+    memcpy(&(buffers[soundBufferIndex][soundBufferPos]), buf, len);
+    #endif
+}
+
+void Pok_Sound_Play() {
+    #if POK_STREAMING_MUSIC > 0
+    //streamvol = 3;
+    Pokitto::Sound::playMusicStream();
+    #endif
+}
+
+void Pok_Sound_Pause() {
+    #if POK_STREAMING_MUSIC > 0
+    //streamvol = 0;
+    Pokitto::Sound::pauseMusicStream();
+   #endif
+}
+
+void Pok_Sound_playSFX(void *sfxdata, uint32_t length, bool is4bitSample) {
+    #if POK_STREAMING_MUSIC > 0
+    if(is4bitSample)
+        Pokitto::Sound::playSFX4bit( (const uint8_t*)sfxdata, length );
+    else
+        Pokitto::Sound::playSFX( (const uint8_t*)sfxdata, length );
+    #endif
+}
+
+void Pok_Sound_playSFX(const uint8_t *sfxdata, uint32_t length) {
+    #if POK_STREAMING_MUSIC > 0
+    Pokitto::Sound::playSFX( sfxdata, length );
+    #endif
+}
+
+void Pok_Wait(uint32_t dur_ms) {
+#ifdef POK_SIM
+    Simulator::wait_ms(dur_ms);
+#else
+    wait_ms(dur_ms);
+#endif // POK_SIM
+}
+
+uint32_t Pok_Time_ms()
+{
+    return Core::getTime();
+}
+
+// Tilemap functions.
+
+void* Pok_ConstructMap()
+{
+    return new Tilemap();
+}
+
+void Pok_DestroyMap( void* _this )
+{
+    delete(((Tilemap*)_this));
+}
+
+void Pok_SetMap( void* _this, size_t width, size_t height, const uint8_t *map )
+{
+    if( _this == NULL ) return;
+   ((Tilemap*)_this)->set( width, height, map );
+}
+
+void Pok_DrawMap( void* _this, int32_t x, int32_t y )
+{
+    if( _this == NULL ) return;
+    ((Tilemap*)_this)->draw( x, y );
+}
+
+void Pok_SetTile( void* _this, uint8_t index, uint8_t width, uint8_t height, const uint8_t *data)
+{
+    if( _this == NULL ) return;
+    index &= 0xf; // Limit between 0 and 15.
+    ((Tilemap*)_this)->setTile(index, width, height, data );
+}
+
+uint8_t Pok_GetTileId( void* _this, int32_t x, int32_t y, uint8_t tileSize ) {
+    if( _this == NULL ) return 0;
+    uint8_t id = ((Tilemap*)_this)->GetTileId( x, y, tileSize );
+    return id;
+}
+
+void Pok_GetTileIds( void* _this, int32_t tlx, int32_t tly, int32_t brx, int32_t bry,uint8_t tileSize,
+                        /*OUT*/ uint8_t* tileIdTl, uint8_t* tileIdTr, uint8_t* tileIdBl, uint8_t* tileIdBr ) {
+    if( _this == NULL ) return;
+    ((Tilemap*)_this)->GetTileIds( tlx, tly, brx, bry, tileSize,
+                    /*OUT*/ *tileIdTl, *tileIdTr, *tileIdBl, *tileIdBr );
+ }
+
+//*** EEPROM reading and writing ***
+
+void* Pok_CreateCookie(char* name, uint8_t* cookieBufPtr, uint32_t cookieBufLen)
+{
+    Pokitto::Cookie* mycookiePtr = new Pokitto::Cookie;
+
+    //initialize cookie
+    if(mycookiePtr )mycookiePtr->beginWithData(name, cookieBufLen, (char*)cookieBufPtr);
+
+    return (void*)mycookiePtr;
+}
+
+void Pok_DeleteCookie(void* mycookiePtr )
+{
+    delete((Pokitto::Cookie*)mycookiePtr);
+}
+
+void Pok_LoadCookie(void* mycookiePtr)
+{
+    ((Pokitto::Cookie*)mycookiePtr)->loadCookie();
+}
+
+void Pok_SaveCookie(void* mycookiePtr)
+{
+    // Save cookie if this is the best time
+    ((Pokitto::Cookie*)mycookiePtr)->saveCookie();
+}
+
+// *** TAS UI
+
+void Pok_TasUI_setCursor(int32_t col, int32_t row)
+{
+    #ifdef TASUI
+    PUI::setCursor(col, row);
+    #endif
+}
+
+void Pok_TasUI_printString(char* text)
+{
+    #ifdef TASUI
+    PUI::printString(text);
+    #endif
+}
+
+void Pok_TasUI_printInteger(int32_t number)
+{
+    #ifdef TASUI
+    PUI::printInteger(number);
+    #endif
+}
+
+void Pok_TasUI_setTile(int32_t col, int32_t row, int32_t id)
+{
+    #ifdef TASUI
+    PUI::setTile(col, row, id);
+    #endif
+}
+
+void Pok_TasUI_clear()
+{
+    #ifdef TASUI
+    PUI::clear();
+    #endif
+}
+
+void Pok_TasUI_fillRectTiles(int32_t col1, int32_t row1, int32_t col2, int32_t row2, int32_t id)
+{
+    #ifdef TASUI
+    PUI::fillRectTiles(col1, row1, col2, row2, id);
+    #endif
+}
+
+void Pok_TasUI_drawBox(int32_t col1, int32_t row1, int32_t col2, int32_t row2)
+{
+    #ifdef TASUI
+    PUI::drawBox(col1, row1, col2, row2);
+    #endif
+}
+
+ void Pok_TasUI_drawGauge(int32_t col1, int32_t col2, int32_t row, int32_t current, int32_t maxValue )
+{
+    #ifdef TASUI
+    PUI::drawGauge(col1, col2, row, current, maxValue);
+    #endif
+}
+
+// For compatibility in linking
+
+struct tm * localtime_cpp(const time_t * timer)
+{
     return(localtime(timer));
 }
 

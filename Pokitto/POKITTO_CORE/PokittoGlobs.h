@@ -43,11 +43,15 @@
     #include "SimLCD.h"
     #include "SimSound.h"
     #include "PokittoSimulator.h"
+    #define OPT_SMALL
+    #define OPT_FAST
 #else
     #include "mbed.h"
     #include "HWLCD.h"
     #include "HWSound.h"
-#endif // POK_SIM
+    #define OPT_SMALL __attribute__((optimize("-Os")))
+    #define OPT_FAST __attribute__((optimize("-O3")))
+#endif // POK_SIM 
 
 extern int random(int);
 extern int random(int,int);
@@ -76,7 +80,13 @@ extern uint16_t soundbyte;
 #if POK_STREAMING_MUSIC
     #define SPEAKER 3
    // #define BUFFER_SIZE 512 //5120 // was 256
+#ifndef POK_SIM
+#if POK_HIGH_RAM == HIGH_RAM_MUSIC
+    extern unsigned char *buffers[];
+#else
     extern unsigned char buffers[][BUFFER_SIZE];
+#endif
+#endif // POK_SIM
     extern volatile int currentBuffer, oldBuffer;
     extern volatile int bufindex, vol;
     extern volatile unsigned char * currentPtr;

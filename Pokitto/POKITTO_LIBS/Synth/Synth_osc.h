@@ -23,21 +23,21 @@
 
 #include "Pokitto.h"
 
-typedef uint8_t byte;
-
 struct OSC {
-  byte on;
-  byte wave;
-  byte loop;
-  byte echo;
-  byte echodiv;
-  byte adsr;
-  byte tonic;
+  uint8_t on;
+  uint8_t wave;
+  uint8_t loop;
+  uint8_t echo;
+  uint8_t echodiv;
+  uint8_t adsr;
+  uint8_t tonic;
 
-  uint16_t count;
+  //uint16_t count;
+  uint32_t count;
 
   uint16_t vol;
-  uint16_t cinc; // how much to add per cycle
+  //uint16_t cinc; // how much to add per cycle
+  uint32_t cinc; // how much to add per cycle
   uint16_t output; // output is stored as  16 bit value and shifted before its put in OCR2B
 
   uint8_t adsrphase;
@@ -47,9 +47,9 @@ struct OSC {
   uint16_t sustain; // Attack change
   uint16_t release; // Attack change
 
-  int16_t pitchbend;   // bends cycle counter (more is higher pitch)
-  int16_t maxbend; // maximum bend before stopping
-  int16_t bendrate; // how much to bend by every cycle
+  int32_t pitchbend;   // bends cycle counter (more is higher pitch)
+  int32_t maxbend; // maximum bend before stopping
+  int32_t bendrate; // how much to bend by every cycle
 
   uint8_t vibrate;
   uint8_t arpmode;
@@ -59,6 +59,14 @@ struct OSC {
   uint8_t kick;
 
   uint32_t duration;
+
+  uint32_t samplepos;
+  uint32_t samplestep;
+  uint32_t samplelength;
+  uint8_t* sample;
+  //uint32_t samplebendcount;
+  //uint32_t samplebendtick;
+
 };
 
 

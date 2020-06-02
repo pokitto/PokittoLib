@@ -39,15 +39,21 @@
 #define POKITTO_DISK_H
 
 #ifndef POK_SIM
+
 // real hardware disk driver
 #include "diskio.h"
 #include "pff.h"
 #include "connect.h"
+
+//using namespace PFFS;
+
+extern PFFS::BYTE res;
+extern PFFS::FATFS fs;            /* File system object */
+extern PFFS::FATDIR dir;            /* Directory object */
+extern PFFS::FILINFO fno;        /* File information */
+
 #include "mbed.h"
-extern BYTE res;
-extern FATFS fs;            /* File system object */
-extern FATDIR dir;            /* Directory object */
-extern FILINFO fno;        /* File information */
+
 extern SPI device;
 extern DigitalOut mmccs;
 
@@ -58,7 +64,7 @@ extern DigitalOut mmccs;
 // CS ... #define CONNECT_CS      P0_7 //p13
 #define CLR_SD_CS LPC_GPIO_PORT->CLR[0] = (1 << 7)
 #define SET_SD_CS LPC_GPIO_PORT->SET[0] = (1 << 7)
-#define GET_SD_CS LPC_GPIO_PORT->PIN[0] & (1 << 7)
+#define GET_SD_CS ((LPC_GPIO_PORT->PIN[0]) & (1 << 7))
 
 #else
 // simulated disk driver
@@ -82,7 +88,7 @@ extern int pokInitSD();
 
 extern uint8_t fileOpen(char*, char);
 extern void fileClose();
-extern int fileGetChar();
+extern char fileGetChar();
 extern void filePutChar(char);
 extern void fileWriteBytes(uint8_t *, uint16_t);
 extern uint16_t fileReadBytes(uint8_t *, uint16_t);
@@ -94,12 +100,15 @@ extern long int fileGetPosition();
 #define fileSetPosition(n)  (fileSeekAbsolute(n))
 extern uint8_t filePeek(long);
 extern void filePoke(long, uint8_t);
+extern int fileReadLine(char*,int);
 extern char* getCurrentFileName ();
 extern char* getNextFile (char*);
 extern char* getNextFile ();
-extern char* getFirstFile(char*);
+extern char* getFirstFile(char* ext);
+extern char* getFirstFile(char* ext, char* path);
 extern char* getFirstFile();
 extern char* getFirstDirEntry();
+extern char* getFirstDirEntry(char* path);
 extern char* getNextDirEntry();
 extern int isThisFileOpen(char*);
 extern int fileOK();

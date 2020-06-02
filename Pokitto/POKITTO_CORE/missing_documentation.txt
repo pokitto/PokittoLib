@@ -1,0 +1,568 @@
+
+lookup cache used 587/65536 hits=2440 misses=604
+finished...
+:Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:179: warning: Member noteDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:180: warning: Member noteVolume[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:181: warning: Member notePlaying[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:184: warning: Member commandsCounter[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:185: warning: Member volumeSlideStepDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:186: warning: Member volumeSlideStepSize[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:187: warning: Member arpeggioStepDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:188: warning: Member arpeggioStepSize[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:189: warning: Member tremoloStepDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:190: warning: Member tremoloStepSize[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:194: warning: Member instrumentData[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:195: warning: Member instrumentLength[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:196: warning: Member instrumentLooping[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:197: warning: Member instrumentCursor[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:198: warning: Member instrumentNextChange[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:201: warning: Member stepVolume[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:202: warning: Member stepPitch[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:204: warning: Member chanVolumes[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+
+Elitebook@DESKTOP-6KLEK5A MINGW64 /c/PokittoLib/Pokitto/POKITTO_CORE (master)
+$ doxygen doxy.conf > missing_documentation.txt
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoPalette.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoTimer.h:6: warning: multiple use of section label 'LICENSE' while adding section, (first occurrence: C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h, line 6)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.cpp:3: warning: the name `Pokitto_disk.cpp' supplied as the second argument in the \file statement is not an input file
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:136: warning: Compound Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:94: warning: Compound Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:117: warning: Compound Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:57: warning: Compound Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:44: warning: Compound consmsg is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:49: warning: Compound Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:43: warning: Compound Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h:43: warning: Member STR_OK (macro definition) of file Localization.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Localization.h:44: warning: Member STR_CANCEL (macro definition) of file Localization.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:57: warning: Member LCD_CD_PIN (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:58: warning: Member LCD_WR_PORT (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:59: warning: Member LCD_WR_PIN (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:60: warning: Member LCD_RD_PORT (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:61: warning: Member LCD_RD_PIN (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:62: warning: Member LCD_RES_PORT (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:63: warning: Member LCD_RES_PIN (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:71: warning: Member SET_RESET (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:73: warning: Member CLR_CD (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:74: warning: Member SET_CD (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:76: warning: Member CLR_WR (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:77: warning: Member SET_WR (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:79: warning: Member CLR_RD (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:80: warning: Member SET_RD (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:82: warning: Member SET_CS (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:83: warning: Member CLR_CS (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:85: warning: Member CLR_CS_CD_SET_RD_WR (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:86: warning: Member CLR_CS_SET_CD_RD_WR (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:87: warning: Member SET_CD_RD_WR (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:88: warning: Member SET_WR_CS (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:90: warning: Member SET_MASK_P2 (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:91: warning: Member CLR_MASK_P2 (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:98: warning: Member write_data (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:100: warning: Member AB_JUMP (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/Macros_LCD.h:101: warning: Member GB_JUMP (macro definition) of file Macros_LCD.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:48: warning: Member CHWLONGPRESSTIMEOUT (macro definition) of file PokittoButtons.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.cpp:42: warning: Member pConsole (variable) of file PokittoConsole.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:53: warning: Member V_INT8 (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:54: warning: Member V_UINT16 (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:55: warning: Member V_INT16 (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:56: warning: Member V_UINT32 (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:57: warning: Member V_INT32 (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:58: warning: Member V_FLOAT (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:59: warning: Member V_STRING (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:60: warning: Member V_NONE (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:64: warning: Member MSG_OK (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:65: warning: Member MSG_WARNING (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:66: warning: Member MSG_FATAL (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:67: warning: Member MSG_INIT_OK (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:68: warning: Member MSG_INIT_FAIL (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:69: warning: Member MSG_NOT_ENOUGH_MEM (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:70: warning: Member MSG_GFX_MODE_CHANGE (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:71: warning: Member MSG_GFX_MODE_INVALID (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:72: warning: Member MSG_UP (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:73: warning: Member MSG_DOWN (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:74: warning: Member MSG_PRINT (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:75: warning: Member MSG_BREAK (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:76: warning: Member MSG_YESNO (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:77: warning: Member MSG_YES (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:78: warning: Member MSG_NO (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:79: warning: Member MSG_OBJECT (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:80: warning: Member MSG_OBJECT2 (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:84: warning: Member MSOURCE_SD (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:85: warning: Member MSOURCE_LCD (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:86: warning: Member MSOURCE_SOUND (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:87: warning: Member MSOURCE_TIMER (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:88: warning: Member MSOURCE_BTNA (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:89: warning: Member MSOURCE_BTNB (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:90: warning: Member MSOURCE_BTNC (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:91: warning: Member MSOURCE_BTNU (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:92: warning: Member MSOURCE_BTND (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:93: warning: Member MSOURCE_BTNL (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:94: warning: Member MSOURCE_BTNR (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:95: warning: Member MSOURCE_BATT (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:96: warning: Member MSOURCE_APP (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:97: warning: Member MSOURCE_USER (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:98: warning: Member MSOURCE_COLLISION (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:102: warning: Member CONS_PAUSE (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:103: warning: Member CONS_STEP (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:104: warning: Member CONS_VISIBLE (macro definition) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:109: warning: Member conscounter (variable) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:157: warning: Member console (variable) of file PokittoConsole.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.cpp:45: warning: Member max(a, b) (macro definition) of file PokittoCore.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.cpp:437: warning: Member VINCMULT (macro definition) of file PokittoCore.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.cpp:126: warning: Member random(int maxVal) (function) of file PokittoCore.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.cpp:132: warning: Member random(int minVal, int maxVal) (function) of file PokittoCore.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.cpp:48: warning: Member selectedfile[25] (variable) of file PokittoCore.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:64: warning: Member PALETTE_SIZE (macro definition) of file PokittoCore.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:65: warning: Member PI (macro definition) of file PokittoCore.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:73: warning: Member ptimer (variable) of file PokittoCore.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:255: warning: Member core (variable) of namespace Pokitto is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:60: warning: Member SET_SD_CS (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:61: warning: Member GET_SD_CS (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:74: warning: Member FILE_MODE_APPEND (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:75: warning: Member FILE_MODE_OVERWRITE (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:76: warning: Member FILE_MODE_READONLY (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:77: warning: Member FILE_MODE_READWRITE (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:78: warning: Member FILE_MODE_BINARY (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:79: warning: Member FILE_MODE_ASCII (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:80: warning: Member FILE_MODE_FAILED (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:81: warning: Member FILE_MODE_UNINITIALIZED (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:94: warning: Member fileSetPosition(n) (macro definition) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:71: warning: Member pokInitSD() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:83: warning: Member fileOpen(char *, char) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:84: warning: Member fileClose() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:85: warning: Member fileGetChar() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:86: warning: Member filePutChar(char) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:87: warning: Member fileWriteBytes(uint8_t *, uint16_t) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:88: warning: Member fileReadBytes(uint8_t *, uint16_t) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:89: warning: Member fileSeekAbsolute(long) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:90: warning: Member fileSeekRelative(long) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:91: warning: Member fileRewind() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:92: warning: Member fileEnd() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:93: warning: Member fileGetPosition() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:95: warning: Member filePeek(long) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:96: warning: Member filePoke(long, uint8_t) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:97: warning: Member getCurrentFileName() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:98: warning: Member getNextFile(char *) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:99: warning: Member getNextFile() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:100: warning: Member getFirstFile(char *) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:101: warning: Member getFirstFile() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:102: warning: Member getFirstDirEntry() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:103: warning: Member getNextDirEntry() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:104: warning: Member isThisFileOpen(char *) (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:105: warning: Member fileOK() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:106: warning: Member dirOpen() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:107: warning: Member dirUp() (function) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:47: warning: Member res (variable) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:48: warning: Member fs (variable) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:49: warning: Member dir (variable) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:50: warning: Member fno (variable) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:51: warning: Member device (variable) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisk.h:52: warning: Member mmccs (variable) of file PokittoDisk.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.cpp:161: warning: Member RLE_ESC_EOL (macro definition) of file PokittoDisplay.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.cpp:162: warning: Member RLE_ESC_EOB (macro definition) of file PokittoDisplay.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.cpp:163: warning: Member RLE_ESC_OFFSET (macro definition) of file PokittoDisplay.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.cpp:81: warning: Member core (variable) of file PokittoDisplay.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.cpp:82: warning: Member _pdsound (variable) of file PokittoDisplay.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:78: warning: Member COLOR_BLACK (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:79: warning: Member COLOR_BLUE (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:80: warning: Member COLOR_RED (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:81: warning: Member COLOR_GREEN (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:82: warning: Member COLOR_CYAN (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:83: warning: Member COLOR_MAGENTA (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:84: warning: Member COLOR_YELLOW (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:85: warning: Member COLOR_WHITE (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:88: warning: Member COLOR_GRAY_15 (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:89: warning: Member COLOR_GRAY_30 (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:90: warning: Member COLOR_GRAY_50 (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:91: warning: Member COLOR_GRAY_80 (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:92: warning: Member COLOR_GRAY_128 (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:93: warning: Member COLOR_GRAY_200 (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:94: warning: Member COLOR_GRAY_225 (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:128: warning: Member PALETTE_SIZE (macro definition) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:120: warning: Member def565palette[16] (variable) of file PokittoDisplay.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:51: warning: Member _BV(bit) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:65: warning: Member strstr_P (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:66: warning: Member strcpy_P (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:68: warning: Member utoa (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:69: warning: Member ultoa (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:73: warning: Member pgm_read_byte(addr) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:75: warning: Member pgm_read_word(addr) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:85: warning: Member min(a, b) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:87: warning: Member __avrmax(a, b) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:88: warning: Member __avrmin(a, b) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:89: warning: Member constrain(amt, low, high) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:90: warning: Member min2(a, b) (macro definition) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:57: warning: Member byte (typedef) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:98: warning: Member cli() (function) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFakeavr.h:99: warning: Member sei() (function) of file PokittoFakeavr.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:62: warning: Member DEFAULT_FONT (macro definition) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:42: warning: Member fontMini[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:43: warning: Member fontDonut[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:44: warning: Member fontDragon[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:45: warning: Member fontKarateka[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:46: warning: Member fontKoubit[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:47: warning: Member fontRunes[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:48: warning: Member fontTight[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:49: warning: Member fontTiny[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:50: warning: Member fontAdventurer[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:51: warning: Member font5x7[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:52: warning: Member font3x5[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:53: warning: Member font3x3[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:54: warning: Member fontC64[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:55: warning: Member fntC64UIGfx[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:56: warning: Member fontZXSpec[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoFonts.h:57: warning: Member fontTIC806x6[] (variable) of file PokittoFonts.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:55: warning: Member HIGH (macro definition) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:56: warning: Member LOW (macro definition) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:58: warning: Member swapWT(type, a, b) (macro definition) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:66: warning: Member SAMPLE_RATE (macro definition) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:67: warning: Member NUMFRAMES (macro definition) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:52: warning: Member random(int) (function) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:53: warning: Member random(int, int) (function) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:71: warning: Member fakeISR() (function) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:72: warning: Member audio_IRQ() (function) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:73: warning: Member update_SDAudioStream() (function) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoGlobs.h:74: warning: Member soundbyte (variable) of file PokittoGlobs.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.cpp:133: warning: Member pokUtoa(uint16_t value, char *str, int base) (function) of file PokittoItoa.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.cpp:137: warning: Member pokLtoa(long value, char *str, int base) (function) of file PokittoItoa.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:43: warning: argument 'value' of command @param is not found in the argument list of pokItoa(uint16_t, char *, int)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:43: warning: argument 'str' of command @param is not found in the argument list of pokItoa(uint16_t, char *, int)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:43: warning: argument 'base' of command @param is not found in the argument list of pokItoa(uint16_t, char *, int)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:46: warning: Member pokUtoa(int16_t, char *, int) (function) of file PokittoItoa.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:47: warning: Member pokLtoa(long, char *, int) (function) of file PokittoItoa.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:43: warning: argument 'value' of command @param is not found in the argument list of pokItoa(uint16_t, char *, int)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:43: warning: argument 'str' of command @param is not found in the argument list of pokItoa(uint16_t, char *, int)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoItoa.h:43: warning: argument 'base' of command @param is not found in the argument list of pokItoa(uint16_t, char *, int)
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.cpp:40: warning: Member Pokitto_speaker[] (variable) of file PokittoLogos.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.cpp:45: warning: Member Pokitto_headphones[] (variable) of file PokittoLogos.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.cpp:50: warning: Member Pokitto_volumebar[] (variable) of file PokittoLogos.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.cpp:55: warning: Member Pokitto_logo[] (variable) of file PokittoLogos.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.h:42: warning: Member Pokitto_logo[] (variable) of file PokittoLogos.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.h:43: warning: Member Pokitto_headphones[] (variable) of file PokittoLogos.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.h:44: warning: Member Pokitto_speaker[] (variable) of file PokittoLogos.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoLogos.h:45: warning: Member Pokitto_volumebar[] (variable) of file PokittoLogos.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:130: warning: Member NUM_CHANNELS (macro definition) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:165: warning: Member NUM_PITCH (macro definition) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:76: warning: Member byte (typedef) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:80: warning: Member _soundc (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:135: warning: Member sbyte (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:142: warning: Member _rand (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:143: warning: Member _chanCount[NUM_CHANNELS] (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:144: warning: Member _chanState[NUM_CHANNELS] (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:145: warning: Member _chanHalfPeriod[NUM_CHANNELS] (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:146: warning: Member _chanOutputVolume[NUM_CHANNELS] (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:147: warning: Member _chanOutput[NUM_CHANNELS] (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:148: warning: Member _chanNoise[NUM_CHANNELS] (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.cpp:166: warning: Member _halfPeriods[NUM_PITCH] (variable) of file PokittoSound.cpp is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:52: warning: Member GLOBVOL_SHIFT (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:54: warning: Member VOLUME_SPEAKER_MAX (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:55: warning: Member VOLUME_HEADPHONE_MAX (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:56: warning: Member VOLUME_STARTUP (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:66: warning: Member VOLUME_STEP (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:71: warning: Member CMD_VOLUME (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:72: warning: Member CMD_INSTRUMENT (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:73: warning: Member CMD_SLIDE (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:74: warning: Member CMD_ARPEGGIO (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:75: warning: Member CMD_TREMOLO (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:77: warning: Member STR_PLAYING (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:78: warning: Member STR_VISUALIZER (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:79: warning: Member STR_LOOP (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:80: warning: Member STR_PAUSED (macro definition) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:47: warning: Member pokPauseStream() (function) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:48: warning: Member pokPlayStream() (function) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:49: warning: Member pokStreamPaused() (function) of file PokittoSound.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoTimer.h:40: warning: Member pokInitTimer(void) (function) of file PokittoTimer.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoTimer.h:41: warning: Member pokGetTime(void) (function) of file PokittoTimer.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoTimer.h:42: warning: Member pokWaitms(uint16_t) (function) of file PokittoTimer.h is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:45: warning: Member val (variable) of class consmsg is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:46: warning: Member valtype (variable) of class consmsg is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:47: warning: Member msgsource (variable) of class consmsg is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:48: warning: Member msgtype (variable) of class consmsg is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:45: warning: Member begin() (function) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:46: warning: Member set(uint8_t value) (function) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:47: warning: Member update() (function) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:48: warning: Member automatic (variable) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:49: warning: Member ambientLight (variable) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:50: warning: Member backlightValue (variable) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:51: warning: Member backlightMin (variable) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:51: warning: Member backlightMax (variable) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:52: warning: Member ambientLightMin (variable) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBacklight.h:52: warning: Member ambientLightMax (variable) of class Pokitto::Backlight is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:51: warning: Member begin() (function) of class Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:52: warning: Member update() (function) of class Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:53: warning: Member show (variable) of class Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:54: warning: Member level (variable) of class Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:55: warning: Member voltage (variable) of class Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:56: warning: Member thresholds[NUM_LVL] (variable) of class Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoBattery.h:57: warning: Member nextUpdate (variable) of class Pokitto::Battery is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:61: warning: Member initButtons() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:62: warning: Member pollButtons() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:63: warning: Member leftBtn() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:64: warning: Member rightBtn() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:65: warning: Member upBtn() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:66: warning: Member downBtn() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:67: warning: Member aBtn() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:68: warning: Member bBtn() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:69: warning: Member cBtn() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:70: warning: Member leftHeld() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:71: warning: Member rightHeld() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:72: warning: Member upHeld() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:73: warning: Member downHeld() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:74: warning: Member aHeld() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:75: warning: Member bHeld() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:76: warning: Member cHeld() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:78: warning: Member leftReleased() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:79: warning: Member rightReleased() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:80: warning: Member upReleased() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:81: warning: Member downReleased() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:82: warning: Member aReleased() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:83: warning: Member bReleased() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:84: warning: Member cReleased() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:87: warning: Member begin() (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:89: warning: Member pressed(uint8_t button) (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:90: warning: Member released(uint8_t button) (function) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:60: warning: Member buttons_state (variable) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:60: warning: Member buttons_held (variable) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:60: warning: Member buttons_released (variable) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:94: warning: Member pins[NUM_BTN] (variable) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:95: warning: Member states[NUM_BTN] (variable) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoButtons.h:96: warning: Member heldStates[NUM_BTN] (variable) of class Pokitto::Buttons is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:125: warning: Member Toggle() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:126: warning: Member AddMessage(uint8_t, uint8_t, uint8_t, uint32_t) (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:127: warning: Member AddMessage(uint8_t, uint8_t) (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:128: warning: Member AddMessage(uint8_t, char *) (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:129: warning: Member AddMessage(uint8_t, uint8_t, uint32_t) (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:130: warning: Member Last() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:131: warning: Member First() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:132: warning: Member RemoveLast() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:133: warning: Member Previous() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:134: warning: Member Next() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:135: warning: Member GetMessage() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:136: warning: Member PrintMessage() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:137: warning: Member Purge() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:138: warning: Member Draw() (function) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:122: warning: Member mode (variable) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:123: warning: Member visible (variable) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:124: warning: Member font (variable) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:147: warning: Member conscounter (variable) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:148: warning: Member color (variable) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:149: warning: Member _display (variable) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoConsole.h:150: warning: Member _buttons (variable) of class Pokitto::Console is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:175: warning: Member showWarning() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:176: warning: Member setVolLimit() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:182: warning: Member initButtons() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:183: warning: Member pollButtons() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:184: warning: Member leftBtn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:185: warning: Member rightBtn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:186: warning: Member upBtn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:187: warning: Member downBtn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:188: warning: Member aBtn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:189: warning: Member bBtn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:190: warning: Member cBtn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:191: warning: Member leftHeld() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:192: warning: Member rightHeld() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:193: warning: Member upHeld() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:194: warning: Member downHeld() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:195: warning: Member aHeld() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:196: warning: Member bHeld() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:197: warning: Member cHeld() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:199: warning: Member leftReleased() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:200: warning: Member rightReleased() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:201: warning: Member upReleased() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:202: warning: Member downReleased() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:203: warning: Member aReleased() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:204: warning: Member bReleased() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:205: warning: Member cReleased() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:208: warning: Member ampIsOn() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:209: warning: Member ampEnable(uint8_t) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:214: warning: Member readSettings() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:215: warning: Member titleScreen(const char *name, const uint8_t *logo) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:216: warning: Member titleScreen(const char *name) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:217: warning: Member titleScreen(const uint8_t *logo) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:218: warning: Member titleScreen() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:219: warning: Member update(bool useDirectMode=false) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:221: warning: Member menu(const char *const *items, uint8_t length) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:222: warning: Member filemenu(char *) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:223: warning: Member filemenu() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:224: warning: Member keyboard(char *text, uint8_t length) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:225: warning: Member popup(const char *text, uint8_t duration) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:226: warning: Member setFrameRate(uint8_t fps) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:227: warning: Member pickRandomSeed() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:229: warning: Member getCpuLoad() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:230: warning: Member getFreeRam() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:232: warning: Member collidePointRect(int16_t x1, int16_t y1, int16_t x2, int16_t y2, int16_t w, int16_t h) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:233: warning: Member collideRectRect(int16_t x1, int16_t y1, int16_t w1, int16_t h1, int16_t x2, int16_t y2, int16_t w2, int16_t h2) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:234: warning: Member collideBitmapBitmap(int16_t x1, int16_t y1, const uint8_t *b1, int16_t x2, int16_t y2, const uint8_t *b2) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:249: warning: Member drawvolbar(int, int, int, bool) (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:250: warning: Member askLoader() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:251: warning: Member jumpToLoader() (function) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:210: warning: Member soundbyte (variable) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:220: warning: Member frameCount (variable) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoCore.h:248: warning: Member volbar_visible (variable) of class Pokitto::Core is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:151: warning: Member setColorDepth(uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:152: warning: Member getColorDepth() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:153: warning: Member getBitsPerPixel() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:154: warning: Member getWidth() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:155: warning: Member getHeight() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:156: warning: Member getNumberOfColors() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:324: warning: Member enableDirectPrinting(uint8_t m) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:325: warning: Member isDirectPrintingEnabled() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:326: warning: Member print_char(uint8_t x, uint8_t y, unsigned char c) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:327: warning: Member set_cursor(uint8_t, uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:328: warning: Member write(uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:329: warning: Member write(const char *str) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:330: warning: Member write(const uint8_t *buffer, uint8_t size) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:331: warning: Member print(const char[]) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:332: warning: Member print(char, int base=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:333: warning: Member print(unsigned char, int base=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:334: warning: Member print(int, int base=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:335: warning: Member print(unsigned int, int base=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:336: warning: Member print(long, int base=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:337: warning: Member print(unsigned long, int base=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:338: warning: Member print(double, int base=2) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:339: warning: Member print(uint8_t, uint8_t, const char[]) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:340: warning: Member print(uint8_t, uint8_t, char, int=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:341: warning: Member print(uint8_t, uint8_t, unsigned char, int=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:342: warning: Member print(uint8_t, uint8_t, int, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:343: warning: Member print(uint8_t, uint8_t, unsigned int, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:344: warning: Member print(uint8_t, uint8_t, long, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:345: warning: Member print(uint8_t, uint8_t, unsigned long, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:346: warning: Member print(uint8_t, uint8_t, double, int=2) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:347: warning: Member println(uint8_t, uint8_t, const char[]) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:348: warning: Member println(uint8_t, uint8_t, char, int=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:349: warning: Member println(uint8_t, uint8_t, unsigned char, int=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:350: warning: Member println(uint8_t, uint8_t, int, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:351: warning: Member println(uint8_t, uint8_t, unsigned int, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:352: warning: Member println(uint8_t, uint8_t, long, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:353: warning: Member println(uint8_t, uint8_t, unsigned long, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:354: warning: Member println(uint8_t, uint8_t, double, int=2) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:355: warning: Member println(uint8_t, uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:356: warning: Member println(const char[]) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:357: warning: Member println(char, int=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:358: warning: Member println(unsigned char, int=0) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:359: warning: Member println(int, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:360: warning: Member println(unsigned int, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:361: warning: Member println(long, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:362: warning: Member println(unsigned long, int=10) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:363: warning: Member println(double, int=2) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:364: warning: Member println(void) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:371: warning: Member inc_txtline() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:372: warning: Member printNumber(unsigned long, uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:373: warning: Member printFloat(double, uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:379: warning: Member setTileBufferTo(uint8_t *) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:380: warning: Member clearTileBuffer() (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:381: warning: Member shiftTileBuffer(int8_t, int8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:383: warning: Member setTile(uint16_t, uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:384: warning: Member getTile(uint16_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:385: warning: Member getTile(uint8_t, uint8_t) (function) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:146: warning: Member width (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:147: warning: Member height (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:148: warning: Member screenbuffer[] (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:318: warning: Member fontHeight (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:366: warning: Member cursorX (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:366: warning: Member cursorY (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:367: warning: Member fontSize (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:368: warning: Member adjustCharStep (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:368: warning: Member adjustLineStep (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoDisplay.h:369: warning: Member fixedWidthFont (variable) of class Pokitto::Display is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:98: warning: Member begin() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:101: warning: Member setMaxVol(int16_t) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:102: warning: Member getMaxVol() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:103: warning: Member volumeUp() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:104: warning: Member volumeDown() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:107: warning: Member updateStream() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:108: warning: Member playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav, uint8_t arpmode) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:109: warning: Member playTone(uint8_t os, uint16_t freq, uint8_t volume, uint32_t duration) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:110: warning: Member ampIsOn() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:111: warning: Member ampEnable(uint8_t) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:112: warning: Member playMusicStream(char *filename, uint8_t options) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:113: warning: Member playMusicStream(char *filename) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:114: warning: Member playMusicStream() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:115: warning: Member pauseMusicStream() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:118: warning: Member playTrack(const uint16_t *track, uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:119: warning: Member updateTrack(uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:120: warning: Member updateTrack() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:121: warning: Member stopTrack(uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:122: warning: Member stopTrack() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:123: warning: Member changePatternSet(const uint16_t *const *patterns, uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:126: warning: Member playPattern(const uint16_t *pattern, uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:127: warning: Member changeInstrumentSet(const uint16_t *const *instruments, uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:128: warning: Member updatePattern(uint8_t i) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:129: warning: Member updatePattern() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:130: warning: Member setPatternLooping(bool loop, uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:131: warning: Member stopPattern(uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:132: warning: Member stopPattern() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:135: warning: Member command(uint8_t cmd, uint8_t X, int8_t Y, uint8_t i) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:136: warning: Member playNote(uint8_t pitch, uint8_t duration, uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:137: warning: Member updateNote() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:138: warning: Member updateNote(uint8_t i) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:139: warning: Member stopNote(uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:140: warning: Member stopNote() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:145: warning: Member setMasterVolume(uint8_t) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:146: warning: Member GetMasterVolume() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:147: warning: Member setVolume(int16_t volume) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:148: warning: Member getVolume() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:149: warning: Member setVolume(int8_t volume, uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:150: warning: Member getVolume(uint8_t channel) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:152: warning: Member playOK() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:153: warning: Member playCancel() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:154: warning: Member playTick() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:158: warning: Member setChannelHalfPeriod(uint8_t channel, uint8_t halfPeriod) (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:160: warning: Member generateOutput() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:206: warning: Member updateOutput() (function) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:124: warning: Member trackIsPlaying[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:133: warning: Member patternIsPlaying[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:142: warning: Member outputPitch[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:143: warning: Member outputVolume[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:156: warning: Member prescaler (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:166: warning: Member trackData[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:167: warning: Member trackCursor[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:168: warning: Member patternSet[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:169: warning: Member patternPitch[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:172: warning: Member patternData[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:173: warning: Member instrumentSet[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:174: warning: Member patternLooping[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:175: warning: Member patternCursor[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:178: warning: Member notePitch[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:179: warning: Member noteDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:180: warning: Member noteVolume[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:181: warning: Member notePlaying[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:184: warning: Member commandsCounter[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:185: warning: Member volumeSlideStepDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:186: warning: Member volumeSlideStepSize[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:187: warning: Member arpeggioStepDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:188: warning: Member arpeggioStepSize[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:189: warning: Member tremoloStepDuration[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:190: warning: Member tremoloStepSize[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:194: warning: Member instrumentData[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:195: warning: Member instrumentLength[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:196: warning: Member instrumentLooping[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:197: warning: Member instrumentCursor[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:198: warning: Member instrumentNextChange[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:201: warning: Member stepVolume[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:202: warning: Member stepPitch[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.
+C:/PokittoLib/Pokitto/POKITTO_CORE/PokittoSound.h:204: warning: Member chanVolumes[NUM_CHANNELS] (variable) of class Pokitto::Sound is not documented.

@@ -45,12 +45,14 @@
 #include <stdio.h>
 
 extern FILE* soundfile;
+#define SBUFSIZE 512*4
 extern uint8_t soundfilebuffer[2][SFBUFSIZE];
 extern uint8_t activesfbuf, writesfbuf; extern uint16_t sfbufindex;
 
 namespace Pokitto {
 
 extern void soundInit();
+extern void soundInit(uint8_t);
 extern void pauseAudio(uint8_t);
 }
 

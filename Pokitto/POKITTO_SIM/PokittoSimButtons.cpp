@@ -106,17 +106,23 @@ void Simulator::pollButtons() {
                 if (!downBtn()) pokConsoleAddMessage(MSOURCE_BTND,MSG_DOWN);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state |= (1<<DOWNBIT); break;
-            case SDLK_z:
+            case SDLK_a:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (!aBtn()) pokConsoleAddMessage(MSOURCE_BTNA,MSG_DOWN);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state |= (1<<ABIT); break;
-            case SDLK_x:
+            case SDLK_s:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (!bBtn()) pokConsoleAddMessage(MSOURCE_BTNB,MSG_DOWN);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state |= (1<<BBIT); break;
             case SDLK_c:
+                #if POK_CONSOLE_LOG_BUTTONS
+                if (!cBtn()) pokConsoleAddMessage(MSOURCE_BTNC,MSG_DOWN);
+                #endif // POK_CONSOLE_LOG_BUTTONS
+                buttons_state |= (1<<CBIT);
+                break;
+            case SDLK_d:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (!cBtn()) pokConsoleAddMessage(MSOURCE_BTNC,MSG_DOWN);
                 #endif // POK_CONSOLE_LOG_BUTTONS
@@ -149,17 +155,22 @@ void Simulator::pollButtons() {
                 if (downBtn()) pokConsoleAddMessage(MSOURCE_BTND,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state &=~ (1<<DOWNBIT); break;
-            case SDLK_z:
+            case SDLK_a:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (aBtn())  pokConsoleAddMessage(MSOURCE_BTNA,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state &=~ (1<<ABIT); break;
-            case SDLK_x:
+            case SDLK_s:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (bBtn()) pokConsoleAddMessage(MSOURCE_BTNB,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS
                 buttons_state &=~ (1<<BBIT); break;
             case SDLK_c:
+                #if POK_CONSOLE_LOG_BUTTONS
+                if (cBtn()) pokConsoleAddMessage(MSOURCE_BTNC,MSG_UP);
+                #endif // POK_CONSOLE_LOG_BUTTONS
+                buttons_state &=~ (1<<CBIT); break;
+            case SDLK_d:
                 #if POK_CONSOLE_LOG_BUTTONS
                 if (cBtn()) pokConsoleAddMessage(MSOURCE_BTNC,MSG_UP);
                 #endif // POK_CONSOLE_LOG_BUTTONS
@@ -174,6 +185,9 @@ void Simulator::pollButtons() {
     }
     buttons_held = buttons_state & buttons_state_old; // only if both 1, end result is 1
     buttons_released = ~buttons_state & buttons_state_old; // if now zero, then 1 AND previous 1 = 1
+    Pokitto::Buttons::buttons_state = buttons_state;
+    Pokitto::Buttons::buttons_held = buttons_held;
+    Pokitto::Buttons::buttons_released = buttons_released;
 }
 
 uint8_t Simulator::upHeld() { if (buttons_held & (1<<UPBIT)) return 1; return 0;}

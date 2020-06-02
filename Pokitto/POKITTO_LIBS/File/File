@@ -1,0 +1,11 @@
+#pragma once
+
+#include "Pokitto_settings.h"
+
+#ifdef POK_SIM
+#include "./SIMFile.h"
+#elif defined(PROJ_SDFS_STREAMING)
+#include "./SDFSFile.h"
+#else
+#include "./YAPFSFile.h"
+#endif

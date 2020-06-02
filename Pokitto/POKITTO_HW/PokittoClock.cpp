@@ -40,31 +40,39 @@
 #include "Pokitto_settings.h"
 #include "wait_api.h"
 
-uint32_t pt_count=0;
+volatile uint32_t pt_count=0;
 uint32_t* ptimer;
 
 extern "C" {
 void SysTick_Handler(void) {
     //interrupt happens when systick has counted down to zero
     #if PROJ_GAMEBOY > 0
-    uint32_t a;
-    a = *ptimer;
-    *ptimer = a + 1;
+        uint32_t a;
+        a = *ptimer;
+        *ptimer = a + 1;
     #endif
-    pt_count+=10;                        // increment counter
-}}
+    pt_count+=100;                 // increment counter
+}
+}
 
 using namespace Pokitto;
 
 uint32_t Core::refreshtime;
 
+#ifdef _OSCT
+    #define SYSTEM_CLOCK ((48000000*3)/_OSCT)
+#else
+    #define SYSTEM_CLOCK 48000000
+#endif
+
+
 void Core::initClock() {
-        // to get 1000 interrupts per second the reload value should be 48000
+    // Reload value of 24 bit down counter. 4800000-1 gives 100 ms interval on a 48 MHz system
     #if PROJ_GAMEBOY > 0
-    ptimer = &pt_count;
-    SysTick->LOAD = 480000-1;
+        ptimer = &pt_count;
+        SysTick->LOAD = 4800000-1;
     #else
-    SysTick->LOAD = 480000-1;
+        SysTick->LOAD = (SYSTEM_CLOCK/10)-1;
     #endif
     SysTick->VAL  = 0;
     SysTick->CTRL  = 4 | 2 | 1; //CLKSOURCE=CPU clock | TICKINT | ENABLE
@@ -72,7 +80,28 @@ void Core::initClock() {
 }
 
 uint32_t Core::getTime() {
-    return pt_count;
+  // Convert SysTick counter value to milliseconds since last interrupt:
+  // systick_ms = (4800000-1-SysTick->VAL)/48000
+#ifdef _OSCT
+    uint32_t systick_ms = ((SYSTEM_CLOCK/10)-1-SysTick->VAL)/(SYSTEM_CLOCK/1000);
+#else
+    uint32_t systick_ms = ((((SYSTEM_CLOCK/10)-1-SysTick->VAL)>>9)*699)>>16; // div by 48000 => mul by 699>>25
+#endif
+
+    return pt_count + systick_ms;
+}
+
+uint32_t Core::getTime_us() {
+  // Convert SysTick counter value to microseconds since last interrupt:
+  // systick_us = (4800000-1-SysTick->VAL)/48
+
+#ifdef _OSCT
+    uint32_t systick_us = ((SYSTEM_CLOCK/10)-1-SysTick->VAL)/(SYSTEM_CLOCK/1000000);
+#else
+    uint32_t systick_us = ((((SYSTEM_CLOCK/10)-1-SysTick->VAL)>>5)*21845)>>15; // div by 48 => mul by 21845>>20
+#endif
+
+    return pt_count*1000 + systick_us;
 }
 
 void Core::wait(uint16_t ms) {

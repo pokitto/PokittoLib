@@ -40,7 +40,17 @@
 #include "Pokitto_settings.h"
 
 #define SPEAKER 3
-#define BUFFER_SIZE 512*4 //*8 //*8 // 512 // was 512 (works really well with crabator) was 256
+#if POK_HIGH_RAM == HIGH_RAM_MUSIC
+        #ifdef PROJ_BUFFER_SIZE
+                #define BUFFER_SIZE PROJ_BUFFER_SIZE
+        #else
+                #define BUFFER_SIZE 256*4
+        #endif
+	#define SBUFSIZE 256*4
+#else
+	#define BUFFER_SIZE 512*4 //*8 //*8 // 512 // was 512 (works really well with crabator) was 256
+	#define SBUFSIZE 512*4
+#endif
 
 #if POK_BOARDREV == 1
  /** 2-layer board rev 1.3 **/
@@ -112,15 +122,15 @@
 /** the output holder **/
 extern uint16_t soundbyte;
 
-namespace Pokitto {
 
+namespace Pokitto {
 
 /** stream output and status */
 extern uint8_t streambyte, streamon, HWvolume;
 
 extern float pwm2; //virtual pwm output
-
 extern void soundInit();
+extern void soundInit(uint8_t);
 extern void dac_write(uint8_t value);
 extern uint8_t ampIsOn();
 extern void ampEnable(uint8_t v);
@@ -133,20 +143,41 @@ extern int setHWvolume(uint8_t);
 extern uint8_t getHWvolume();
 extern void changeHWvolume(int8_t);
 
+#if POK_USE_PWM
 extern pwmout_t audiopwm;
+#endif
+
 extern uint8_t pokAmpIsOn();
 extern void pokAmpEnable(uint8_t);
 
 extern Ticker audio;
 
 extern void update_SDAudioStream();
+
+typedef struct{
+    bool playSample;
+    int soundPoint;
+    const uint8_t *currentSound;
+    uint32_t currentSoundSize;
+    int volume;
+    int speed;
+    int repeat;
+}sampletype;
+
+extern sampletype snd[4]; // up to 4 sounds at once?
+
 }
 
 
 extern void pokSoundIRQ();
+extern void pokSoundBufferedIRQ();
 
 #if POK_STREAMING_MUSIC > 0
+#if POK_HIGH_RAM == HIGH_RAM_MUSIC
+    extern unsigned char *buffers[];
+#else
     extern unsigned char buffers[][BUFFER_SIZE];
+#endif
     extern volatile int currentBuffer, oldBuffer;
     extern volatile int bufindex, vol;
     extern volatile unsigned char * currentPtr;

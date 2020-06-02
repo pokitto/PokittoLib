@@ -39,12 +39,19 @@
 
 #include <stdint.h>
 #include <SDL2/SDL.h>
-
+#ifdef main
+#undef main
+#define main POKITTO_SDL_main
+#endif
 #include "Pokitto_settings.h"
 #include "SimLCD.h"
+#include "SimEEPROM.h"
 
 #define SIMW POK_LCD_W
 #define SIMH POK_LCD_H
+#ifndef SIMZOOM
+#  define SIMZOOM 2
+#endif // SIMZOOM
 #define AB_JUMP 1024 // jump one 1-bit Arduboy screen forward to get next color bit
 #define GB_JUMP 504 // jump one 1-bit Gamebuino screen forward to get next color bit
 
@@ -58,6 +65,7 @@
 #define SOUNDCAPTURE    0       // nonzero = continuous capture of sound stream to disk
 #define USE_JOYSTICK    0       // check for presence & use a game controller (analog stick is not supported yet)
 #define MAKE_GIF        0       // nonzero = make a gif using ImageMagick Convert
+#define SIM_PORTRAIT    0       // turn display to portrait mode
 
 /** INTERNAL SETTINGS, DO NOT CHANGE UNLESS YOU UNDERSTAND WHAT YOU'RE DOING **/
 //#if SCREENCAPTURE > 1
@@ -155,6 +163,7 @@ private:
   static uint16_t sc_count; // counter to decide at which intervals a screen capture is taken
   static uint16_t framenumber; // framenumber is the number of the frame
   static uint16_t audframenumber; // framenumber is the number of the frame
+  static const char * screencapPath;
 
   /** button input related */
   static uint8_t buttons_state;

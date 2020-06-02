@@ -34,10 +34,13 @@
 */
 /**************************************************************************/
 
+
 #include "PokittoGlobs.h"
 #include "PokittoConsole.h"
 #include "PokittoFonts.h"
 #include "PokittoDisplay.h"
+
+#if (POK_USE_CONSOLE > 0)
 
 Pokitto::Console pConsole;
 
@@ -284,7 +287,6 @@ void Console::Draw() {
     int16_t oldx,oldy;
     uint16_t oldcolor;
     uint8_t oldsize;
-    bool oldenable;
     oldfont = (unsigned char*) _display->font;
     oldx = _display->cursorX;
     oldy = _display->cursorY;
@@ -309,6 +311,6 @@ void Console::Draw() {
 }
 
 
-
+#endif
 
 

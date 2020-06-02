@@ -67,7 +67,6 @@ static inline void setup_data_16(uint16_t data)
     CLR_MASK_P2;
 }
 
-
 /**************************************************************************/
 /*!
   @brief  Write a command to the lcd, 16-bit bus
@@ -155,11 +154,11 @@ void Pokitto::setDRAMpoint(uint8_t xptr, uint8_t yoffset)
 */
 /**************************************************************************/
 void Pokitto::lcdPrepareRefresh() {
-#if POK_FLIP_SCREEN
+    #if POK_FLIP_SCREEN
     write_command(0x03); write_data(0x1008); // normal
-#else
+    #else
     write_command(0x03); write_data(0x1038); // normal
-#endif
+    #endif
     write_command(0x20);  // Horizontal DRAM Address
     write_data(0);  // 0
     write_command(0x21);  // Vertical DRAM Address

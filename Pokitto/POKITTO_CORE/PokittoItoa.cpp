@@ -38,6 +38,21 @@
 #include <string.h>
 #include <stdint.h>
 
+/* A utility function to reverse a string  */
+void reverse(char str[], int length)
+{
+    int start = 0;
+    int end = length -1;
+    while (start < end)
+    {
+        char t = *(str+end);
+        *(str+end) = *(str+start);
+        *(str+start) = t;
+        //std::swap(*(str+start), *(str+end));
+        start++;
+        end--;
+    }
+}
 
 void pokItoa(uint16_t value, char *str, int base)
 {
@@ -134,7 +149,43 @@ void pokUtoa(uint16_t value, char *str, int base) {
     pokItoa(value,str,base);
 }
 
-void pokLtoa(long value, char *str, int base) {
-    pokItoa(value,str,base);
+void pokLtoa(long num, char *str, int base) {
+    int i = 0;
+    bool isNegative = false;
+
+    /* Handle 0 explicitely, otherwise empty string is printed for 0 */
+    if (num == 0)
+    {
+        str[i++] = '0';
+        str[i] = '\0';
+        return;// str;
+    }
+
+    // In standard itoa(), negative numbers are handled only with
+    // base 10. Otherwise numbers are considered unsigned.
+    if (num < 0 && base == 10)
+    {
+        isNegative = true;
+        num = -num;
+    }
+
+    // Process individual digits
+    while (num != 0)
+    {
+        int rem = num % base;
+        str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
+        num = num/base;
+    }
+
+    // If number is negative, append '-'
+    if (isNegative)
+        str[i++] = '-';
+
+    str[i] = '\0'; // Append string terminator
+
+    // Reverse the string
+    reverse(str, i);
+
+    return;// str;
 }
 

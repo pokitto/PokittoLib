@@ -47,76 +47,101 @@ int8_t bendtick = 0; // ditto for bend.
 void mix1(){
     // Track 1
     if (osc1.on) {
-    Farr[osc1.wave](&osc1);
-    #if PROJ_ARDUBOY > 0
-    if (osc1.duration) {
-        /**this is special for osc1 and is only used to emulate arduino Tone(); */
-        osc1.duration--;
-    } else osc1.on = 0;
-    #endif
-
-    #ifdef POK_SIM
-    soundbyte = (((osc1.output>>8) * (osc1.adsrvol >>8 )) >> 8) >> osc1.echodiv; // To output, shift back to 8-bit
-    if (osc1.overdrive) soundbyte *= OVERDRIVE;
-    if (osc1.kick ) soundbyte >>= 2;
-    osc1.output = soundbyte;
-    #else
-    //OCR2B = osc1.output>>8;
-    #if POK_ENABLE_SOUND > 0
-    soundbyte = (((osc1.output>>8) * (osc1.adsrvol >>8 )) >> 8) >> osc1.echodiv; // To output, shift back to 8-bit
-    if (osc1.overdrive) soundbyte *= OVERDRIVE;
-    if (osc1.kick ) soundbyte >>= 2;
-    osc1.output = soundbyte;
-    #endif
-    #endif
+        Farr[osc1.wave](&osc1);
+        //#if PROJ_ARDUBOY > 0
+        if (osc1.duration) {
+            /**this is special for osc1 and is only used to emulate arduino Tone(); */
+            osc1.duration--;
+        } else osc1.on = 0;
+        //#endif
+    
+        #if defined(POK_SIM) || POK_ENABLE_SOUND > 0
+        
+        // Sample value needs to be handled as signed value so as not to mess it's zero level
+        int32_t out = (((int32_t)(osc1.output) - 0x8000) * osc1.adsrvol) >> 16;
+        if(osc1.overdrive) {
+            out *= OVERDRIVE;
+        }
+        if(osc1.kick) {
+            out >>= 2;
+        }
+        // Without this trick the echoing value remains alternating between 0 and -1
+        out = (out < 0) ? -(-out >> osc1.echodiv) : (out >> osc1.echodiv);
+        // Clip sample value to range -32768...32767
+        out = (out < -0x8000) ? -0x8000 : (out > 0x7fff) ? 0x7fff : out;
+        // Convert back to unsigned value 0...65535
+        osc1.output = 0x8000 + out;
+        
+        #endif // defined(POK_SIM) || POK_ENABLE_SOUND > 0
+    }
+    else {
+        osc1.output = 0x8000;
     }
 }
 
 void mix2(){
     // Track 2
     if (osc2.on) {
-    Farr[osc2.wave](&osc2);
-    #ifdef POK_SIM
-    soundbyte = (((osc2.output>>8) * (osc2.adsrvol >>8 )) >> 8) >> osc2.echodiv;
-    if (osc2.overdrive) soundbyte *= OVERDRIVE;
-    if (osc2.kick ) soundbyte >>= 2;
-    osc2.output = soundbyte;
-    #else
-    //OCR2B = osc2.output>>8;
-    #if POK_ENABLE_SOUND > 0
-    soundbyte = (((osc2.output>>8) * (osc2.adsrvol >>8 )) >> 8) >> osc2.echodiv;
-    if (osc2.overdrive) soundbyte *= OVERDRIVE;
-    if (osc2.kick ) soundbyte >>= 2;
-    osc2.output = soundbyte;
-    #endif
-    #endif
+        Farr[osc2.wave](&osc2);
+        if (osc2.duration) {
+            osc2.duration--;
+        } else osc2.on = 0;
+    
+        #if defined(POK_SIM) || POK_ENABLE_SOUND > 0
+        
+        int32_t out = (((int32_t)(osc2.output) - 0x8000) * osc2.adsrvol) >> 16;
+        if(osc2.overdrive) {
+            out *= OVERDRIVE;
+        }
+        if(osc2.kick) {
+            out >>= 2;
+        }
+        out = (out < 0) ? -(-out >> osc2.echodiv) : (out >> osc2.echodiv);
+        out = (out < -0x8000) ? -0x8000 : (out > 0x7fff) ? 0x7fff : out;
+        osc2.output = 0x8000 + out;
+        
+        #endif // defined(POK_SIM) || POK_ENABLE_SOUND > 0
+    }
+    else {
+        osc2.output = 0x8000;
     }
 }
 
 void mix3(){
     // Track 3
     if (osc3.on) {
-    Farr[osc3.wave](&osc3);
-    #ifdef POK_SIM
-    soundbyte = (((osc3.output>>8) * (osc3.adsrvol >>8 )) >> 8) >> osc3.echodiv;
-    if (osc3.overdrive) soundbyte *= OVERDRIVE;
-    if (osc3.kick ) soundbyte >>= 2;
-    osc3.output = soundbyte;
-    #else
-    //OCR2B = osc3.output>>8;
-    #if POK_ENABLE_SOUND > 0
-    soundbyte = (((osc3.output>>8) * (osc3.adsrvol >>8 )) >> 8) >> osc3.echodiv;
-    if (osc3.overdrive) soundbyte *= OVERDRIVE;
-    if (osc3.kick ) soundbyte >>= 2;
-    osc3.output = soundbyte;
-    #endif
-    #endif
+        Farr[osc3.wave](&osc3);
+        if (osc3.duration) {
+            osc3.duration--;
+        } else osc3.on = 0;
+        
+        #if defined(POK_SIM) || POK_ENABLE_SOUND > 0
+        
+        int32_t out = (((int32_t)(osc3.output) - 0x8000) * osc3.adsrvol) >> 16;
+        if(osc3.overdrive) {
+            out *= OVERDRIVE;
+        }
+        if(osc3.kick) {
+            out >>= 2;
+        }
+        out = (out < 0) ? -(-out >> osc3.echodiv) : (out >> osc3.echodiv);
+        out = (out < -0x8000) ? -0x8000 : (out > 0x7fff) ? 0x7fff : out;
+        osc3.output = 0x8000 + out;
+        
+        #endif // defined(POK_SIM) || POK_ENABLE_SOUND > 0
+    }
+    else {
+        osc3.output = 0x8000;
     }
 }
 
 void updateEnvelopes(){
     //calculate volume envelopes, I do this to save cpu power
+    #if POK_ALT_MIXING > 0
     if (arptick) --arptick;
+    #else
+    if (arptick) --arptick;
+    #endif
     else {
             if (osc1.arpmode && osc1.on) {
                 osc1.cinc = cincs[osc1.tonic+arptable[osc1.arpmode][osc1.arpstep]];
@@ -139,11 +164,25 @@ void updateEnvelopes(){
 
     }
 
+    #if POK_ALT_MIXING > 0
     if (voltick) --voltick;
+    #else
+    if (voltick) --voltick;
+    #endif
     else {
             bendtick = !bendtick;
             if (osc1.on) Earr[osc1.adsrphase](&osc1);
-            if (bendtick) osc1.pitchbend += osc1.bendrate; //slow bend to every second beat
+            if (bendtick) {
+                    osc1.pitchbend += osc1.bendrate; //slow bend to every second beat
+                    /*if (osc1.wave == 6 && osc1.bendrate) {
+                        if (osc1.samplebendtick > osc1.samplebendcount) {
+                            if (osc1.bendrate>0) osc1.samplestep++;
+                            else if (osc1.bendrate<0) osc1.samplestep--;
+                            osc1.samplebendtick=0;
+                        } else osc1.samplebendtick++;
+
+                    }*/
+            }
             if (osc1.bendrate > 0 && osc1.pitchbend > osc1.maxbend) {
                     osc1.pitchbend = osc1.maxbend;
                     osc1.bendrate = 0; // STOP BENDING !

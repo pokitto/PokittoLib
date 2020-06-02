@@ -37,51 +37,69 @@
 #include "Pokitto.h"
 
 #ifndef POK_SIM
+#if USE_USB_SERIAL_PRINT
 #include "USBSerial.h"
+#endif
+#ifdef USE_SEGGER_SERIAL_PRINT
+#include "SEGGER_RTT.h"
+#endif
 #endif
 
 #include "PythonBindings.h"
 
-#ifdef POK_SIM
-#define PYTHON_SOURCE_FILE_PATH "..\\..\\..\\POKITTO_LIBS\\MicroPython\\src_py\\"
-#else
-#define PYTHON_SOURCE_FILE_PATH
+#ifdef TASUI
+// Include for the TASUI API.
+#include <tasui>
+// Include for the Tileset.
+#include <puits_UltimateUtopia4.h>
+#include <ptui_StandardUITilesetDefinition.hpp>
 #endif
 
-Pokitto::Core game;
 
-extern "C" int main_upython(int argc, char **argv);
+#ifdef POK_SIM
+extern "C" int PythonMain(int argc, char **argv);
+#else
+extern "C" int PyInSkyMain( unsigned int heapSize, char *heapMem );
+#endif
 
 int main () {
 
+    int *tmp = new int;
+    uintptr_t p = (uintptr_t)(void *)(&tmp) - (uintptr_t)(void *)(tmp);
+    p -= 1024*3; // stack and stuff
+
+    Pokitto::Core game;
     game.begin();
-
     game.display.persistence = 0;
+    Pokitto::Display::setColorDepth(4);
 
-    game.display.setFont(fontC64);
+    #ifdef TASUI
+    // TAS UI
+    using PUI=Pokitto::UI;
+    // Select the tileset.
+    PUI::setTilesetImage(puits::UltimateUtopia4::tileSet);
+    // Show the Tilemap, the Sprites, then the UI.
+    PUI::showTileMapSpritesUI();
+    #endif
 
-    if (game.isRunning()) {
+    #ifdef POK_SIM
 
-        #if PROJ_PYTHON_REPL
+   // Load the python script and start running it.
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wwrite-strings" // The strings below will not be changed in the function called
+    char* argv[] = {
+        "",
+        "..\\..\\..\\POKITTO_LIBS\\MicroPython\\src_py\\main.py"
+    };
+    #pragma GCC diagnostic pop
 
-        PythonMain(0, NULL);
+    PythonMain(2, argv);
 
-        #else // Run python script
+    #else
 
-        // Load the python script and start running it.
-        #pragma GCC diagnostic push
-        #pragma GCC diagnostic ignored "-Wwrite-strings" // The strings below will not be changed in the function called
-        char* argv[] = {
-            "",
-            PYTHON_SOURCE_FILE_PATH"example_main.py"
-        };
-        #pragma GCC diagnostic pop
+    PyInSkyMain( p, new char[p] );
 
-        PythonMain(2, argv);
-
-        #endif  // PROJ_PYTHON_REPL
-
-   }
+    #endif
 
     return 1;
 }

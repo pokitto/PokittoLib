@@ -2,12 +2,16 @@
 /* PFF - Low level disk control module for ATtiny85     (C)ChaN, 2009    */
 /*-----------------------------------------------------------------------*/
 
-#define _WRITE_FUNC    1
+
 
 #include "diskio.h"
 #include "mbed.h"
 #include "connect.h"
 #include "PokittoDisk.h"
+
+namespace PFFS {
+
+#define _WRITE_FUNC    1
 
 /* Definitions for MMC/SDC command */
 #define CMD0    (0x40+0)    /* GO_IDLE_STATE */
@@ -27,12 +31,25 @@
 #define    DESELECT()    SET_SD_CS // mmccs.write(1)        /* MMC CS = H */
 #define    MMC_SEL        !GET_SD_CS // !mmccs.read()    /* MMC CS status (true:selected) */
 
+volatile uint8_t * const SPI = (uint8_t *) 0x40040000;
+
 void xmit_spi (BYTE c) {
-    device.write(c);    /* Send a byte */
+  device.write(c);    /* Send a byte */
 }
 
-BYTE rcv_spi (void) {
-    return device.write(0xff);
+inline BYTE rcv_spi (void) {
+  while( !(SPI[12] & (1<<1)) ); // wait until writeable
+  SPI[8] = 0xFF; // write
+  while( !(SPI[12] & (1<<2)) ); // wait until readable
+  return SPI[8]; // read
+  // return device.write(0xff);
+}
+
+inline uint32_t ign_spi (void) {
+  while( !(SPI[12] & (1<<1)) ); // wait until writeable
+  SPI[8] = 0xFF; // write
+  while( !(SPI[12] & (1<<2)) ); // wait until readable
+  return SPI[8]; // read
 }
 
 /*--------------------------------------------------------------------------
@@ -191,23 +208,30 @@ DRESULT disk_readp (
             /* Skip leading bytes */
             if (ofs) {
                 do {
-                    rcv_spi();
+                    ign_spi();
                 } while (--ofs);
             }
 
             /* Receive a part of the sector */
             if (buff) {    /* Store data to the memory */
                 do {
-                    *buff++ = rcv_spi();
+		  while( !(SPI[12] & (1<<1)) ); // wait until writeable
+		  SPI[8] = 0xFF; // write
+		  while( !(SPI[12] & (1<<2)) ); // wait until readable
+		  *buff++ = SPI[8]; // read
                 } while (--cnt);
             } else {    /* Forward data to the outgoing stream (depends on the project) */
+		uint8_t dud;
                 do {
-                    rcv_spi();
+		  while( !(SPI[12] & (1<<1)) ); // wait until writeable
+		  SPI[8] = 0xFF; // write
+		  while( !(SPI[12] & (1<<2)) ); // wait until readable
+		  dud = SPI[8]; // read
                 } while (--cnt);
             }
 
             /* Skip trailing bytes and CRC */
-            do rcv_spi();
+            do ign_spi();
             while (--bc);
 
             res = RES_OK;
@@ -268,4 +292,6 @@ DRESULT disk_writep (
     return res;
 }
 #endif
+
+} // namespace PFFS
 
