@@ -146,7 +146,7 @@ public:
     #endif
     #if (PROJ_SCREENMODE == MIXMODE)
         static uint8_t subMode; // for mixed mode switching
-        static uint8_t scanType[]; // for mixed screen mode
+        static uint8_t scanType[88]; // for mixed screen mode
     #endif
 
     // PROPERTIES
