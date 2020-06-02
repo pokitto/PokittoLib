@@ -63,14 +63,17 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 */
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <cstddef>
+#include <algorithm>
 
 #include "PokittoDisplay.h"
 #include "Pokitto_settings.h"
 #include "GBcompatibility.h"
 #include "PokittoCore.h"
 #include "PokittoSound.h"
-#include <stdio.h>
-#include <string.h>
 
 #ifndef POK_SIM
 #include "HWLCD.h"
@@ -78,23 +81,26 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "SimLCD.h"
 #endif
 
-Pokitto::Core core;
-Pokitto::Sound _pdsound;
+extern "C" void CheckStack();
+extern char _ebss[];  // In map file
+extern "C" {
+    extern void _vStackTop(void);
+}
 
+using core = Pokitto::Core;
+using _pdsound = Pokitto::Sound;
 using namespace Pokitto;
 
-
-
 uint8_t* Display::m_scrbuf;
-uint8_t* Display::m_tileset;
-uint8_t* Display::m_tilebuf;
-uint8_t* Display::m_tilecolorbuf;
-uint8_t Display::m_mode, Display::m_colordepth;
+uint8_t Display::m_mode;
+uint8_t Display::palOffset;
 uint8_t Display::fontSize=1;
-int16_t Display::cursorX,Display::cursorY;
-uint16_t Display::m_w,Display::m_h;
+int16_t Display::cursorX, Display::cursorY;
+uint8_t Display::m_w, Display::m_h;
 uint8_t Display::fontWidth, Display::fontHeight;
 bool Display::textWrap=true;
+uint8_t Display::scanType[88];
+uint8_t Display::subMode;
 
 uint8_t Display::persistence = 0;
 uint16_t Display::color = 1;
@@ -102,88 +108,35 @@ uint16_t Display::bgcolor = 0;
 uint16_t Display::invisiblecolor = 17;
 uint16_t Display::directcolor=0xFFFF;
 uint16_t Display::directbgcolor=0x0;
+bool Display::directtextrotated=false;
 
 uint16_t* Display::paletteptr;
 uint16_t Display::palette[PALETTE_SIZE];
 const unsigned char* Display::font;
 int8_t Display::adjustCharStep = 1;
 int8_t Display::adjustLineStep = 1;
-bool Display::fixedWidthFont = false;
+bool Display::fixedWidthFont = false, Display::flipFontVertical = false;
+uint8_t Display::m_colordepth = PROJ_COLORDEPTH;
+uint8_t Display::width = LCDWIDTH;
+uint8_t Display::height = LCDHEIGHT;
 
-/** drawing canvas **/
-//uint8_t* Display::canvas; // points to the active buffer. if null, draw direct to screen
-
-/** screenbuffer **/
-uint8_t Display::bpp = POK_COLORDEPTH;
-#ifndef POK_TILEDMODE
-#if (POK_SCREENMODE == MODE_HI_MONOCHROME)
-    uint8_t Display::width = POK_LCD_W;
-    uint8_t Display::height = POK_LCD_H;
-    uint8_t Display::screenbuffer[((POK_LCD_H+1)*POK_LCD_W)*POK_COLORDEPTH/8]; // maximum resolution
-#elif (POK_SCREENMODE == MODE_HI_4COLOR)
-    uint8_t Display::width = POK_LCD_W;
-    uint8_t Display::height = POK_LCD_H;
-    uint8_t __attribute__((section (".bss"))) Display::screenbuffer[((POK_LCD_H)*POK_LCD_W)/4]; // maximum resolution
-#elif (POK_SCREENMODE == MODE_FAST_16COLOR)
-    uint8_t Display::width = POK_LCD_W/2;
-    uint8_t Display::height = POK_LCD_H/2;
-    uint8_t Display::screenbuffer[(((POK_LCD_H/2)+1)*POK_LCD_W/2)*POK_COLORDEPTH/8]; // half resolution
-#elif (POK_SCREENMODE == MODE_HI_16COLOR)
-    uint8_t Display::width = POK_LCD_W;
-    uint8_t Display::height = POK_LCD_H;
-    uint8_t Display::screenbuffer[POK_LCD_H*POK_LCD_W/2]; // 4 bits per pixel
-#elif (POK_SCREENMODE == MODE_LAMENES)
-    uint8_t Display::width = 128;
-    uint8_t Display::height = 120;
-    uint8_t Display::screenbuffer[((121)*128)*POK_COLORDEPTH/8]; // half resolution
-#elif (POK_SCREENMODE == MODE_GAMEBOY)
-    uint8_t Display::width = 160;
-    uint8_t Display::height = 144;
-    uint8_t Display::screenbuffer[160*144/4];
+#if PROJ_SCREENMODE != TASMODE
+#ifndef POK_SIM
+uint8_t __attribute__((section (".bss"))) __attribute__ ((aligned)) Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
 #else
-    uint8_t Display::width = 84;
-    uint8_t Display::height = 48;
-    uint8_t Display::screenbuffer[128*64]; // not needed because Gamebuino and Arduboy have their own buffer
+	uint8_t Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
+#endif // POK_SIM
+#if (POK_SCREENMODE == MIXMODE)
+	uint8_t Display::scanType[88]; // scanline bit depth indicator
 #endif
-#else //Tiledmode
-#if (POK_SCREENMODE == MODE_TILED_1BIT)
-    uint8_t Display::width = POK_LCD_W;
-    uint8_t Display::height = POK_LCD_H;
-    uint8_t Display::screenbuffer[0];
-#else
-    uint8_t Display::width = POK_LCD_W;
-    uint8_t Display::height = POK_LCD_H;
-    uint8_t Display::screenbuffer[0];
-#endif
-#endif //tiledmode
-
-// RLE decoding
-#define RLE_ESC_EOL 0
-#define RLE_ESC_EOB 1
-#define RLE_ESC_OFFSET 2
-
-Display::Display() {
-    m_scrbuf = screenbuffer;
-    setDefaultPalette();
-    m_mode = 1; // direct printing on by default
-    m_w = POK_LCD_W;
-    m_h = POK_LCD_H;
-    setFont(DEFAULT_FONT);
-    invisiblecolor=17;
-    bgcolor=0;
-    if (POK_COLORDEPTH) m_colordepth = POK_COLORDEPTH;
-    else m_colordepth = 4;
-    #if POK_GAMEBUINO_SUPPORT
-    setColorDepth(1);
-    #endif // POK_GAMEBUINO_SUPPORT
-}
+#endif // TASMODE
 
 uint16_t Display::getWidth() {
     return width;
 }
 
-uint8_t Display::getNumberOfColors() {
-    return 1<<POK_COLORDEPTH;
+uint32_t Display::getNumberOfColors() {
+    return 1<<PROJ_COLORDEPTH;
 }
 
 uint16_t Display::getHeight() {
@@ -195,7 +148,7 @@ uint8_t Display::getColorDepth() {
 }
 
 void Display::setColorDepth(uint8_t v) {
-    if (v > POK_COLORDEPTH) v=POK_COLORDEPTH;
+    if (v > PROJ_COLORDEPTH) v=PROJ_COLORDEPTH;
     m_colordepth = v;
 }
 
@@ -209,6 +162,7 @@ void Display::fillLCD(uint16_t c) {
 }
 
 void Display::directPixel(int16_t x, int16_t y, uint16_t color) {
+    if ((invisiblecolor < PALETTE_SIZE) && (invisiblecolor < 16) && (color == palette[invisiblecolor])) return;
     lcdPixel(x,y,color);
 }
 
@@ -221,6 +175,21 @@ void Display::directRectangle(int16_t x, int16_t y,int16_t x2, int16_t y2, uint1
 }
 
 void Display::begin() {
+#if PROJ_SCREENMODE != TASMODE
+    m_scrbuf = screenbuffer;
+#endif
+    setDefaultPalette();
+    m_mode = 1; // direct printing on by default
+    m_w = POK_LCD_W;
+    m_h = POK_LCD_H;
+    setFont(DEFAULT_FONT);
+    invisiblecolor=17;
+    bgcolor=0;
+    if (PROJ_COLORDEPTH) m_colordepth = PROJ_COLORDEPTH;
+    else m_colordepth = 4;
+#if POK_GAMEBUINO_SUPPORT
+    setColorDepth(1);
+#endif // POK_GAMEBUINO_SUPPORT
     lcdInit();
 }
 
@@ -229,46 +198,79 @@ void Display::setCursor(int16_t x,int16_t y) {
     cursorY = y;
 }
 
-void Display::update() {
+/**
+ * Update the display.
+ * The update rect is used for drawing only part of the screen buffer to LCD. Because of speed optimizations, the
+ * x, y, and width of the update rect must be dividable by 4 pixels, and the height must be dividable by 8 pixels.
+ * Note: The update rect is currently used for 220x176, 4 colors, screen mode only.
+ * @param useDirectMode True, if only direct screen drawing is used. False, if the screen buffer is drawn. Note: If sprites are enabled, they are drawn in both modes.
+ * @param updRectX The update rect.
+ * @param updRectY The update rect.
+ * @param updRectW The update rect.
+ * @param updRectH The update rect.
+ */
+void Display::update(bool useDirectDrawMode) {
 
-#if POK_SCREENMODE == MODE_GAMEBOY
-    lcdRefreshModeGBC(m_scrbuf, paletteptr);
-#endif
+    if (!useDirectDrawMode)
+	#if POK_SCREENMODE == MIXMODE
+		lcdRefreshMixMode(m_scrbuf, paletteptr, scanType);
+	#else
+		lcdRefresh(m_scrbuf, useDirectDrawMode);
+	#endif
+	
+	
+    /** draw FPS if visible **/
+    #ifdef PROJ_SHOW_FPS_COUNTER
+    printFPS();
+    #endif
 
-#if POK_SCREENMODE == MODE_HI_4COLOR
-    lcdRefreshMode1(m_scrbuf, paletteptr);
-#endif
+    #ifndef PERSISTENCE
+    if (!persistence)
+        clear();
+    #endif
 
-#if POK_SCREENMODE == MODE_HI_16COLOR
-    lcdRefreshMode3(m_scrbuf, paletteptr);
-#endif
-
-#if POK_SCREENMODE == MODE_FAST_16COLOR
-    lcdRefreshMode2(m_scrbuf, paletteptr);
-#endif
-
-#if POK_SCREENMODE == MODE_GAMEBUINO_16COLOR
-    lcdRefreshGB(m_scrbuf, paletteptr);
-#endif
-
-#if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
-    lcdRefreshAB(m_scrbuf, paletteptr);
-#endif
-
-#if POK_SCREENMODE == MODE_TILED_1BIT
-    lcdRefreshT1(m_tilebuf, m_tilecolorbuf, m_tileset, paletteptr);
-#endif
-
-if (!persistence) clear();
-
-/** draw volume bar if visible **/
-#if POK_SHOW_VOLUME > 0
-if (core.volbar_visible) {
-        core.drawvolbar(4,20,_pdsound.getVolume(),true);
-        core.volbar_visible--;
+    /** draw volume bar if visible **/
+    #if POK_SHOW_VOLUME > 0
+    if (core.volbar_visible) {
+            core.drawvolbar(4,20,_pdsound.getVolume(),true);
+            core.volbar_visible--;
+    }
+    #endif // POK_SHOW_VOLUME
 }
-#endif // POK_SHOW_VOLUME
 
+void Display::printFPS(){
+    if(!core.fps_counter_updated)
+        return;
+    core.fps_counter_updated = false;
+
+    // Store current state
+    bool temp = isDirectPrintingEnabled();
+    uint16_t oldcol = directcolor;
+    uint16_t oldinvisiblecolor = invisiblecolor;
+    uint16_t oldbgcol = directbgcolor;
+    bool olddirecttextrotated = directtextrotated;
+    int8_t oldadjustCharStep = adjustCharStep;
+    const unsigned char * oldFont = font;
+
+    // Print FPS
+    directcolor = COLOR_WHITE;
+    invisiblecolor = COLOR_BLACK;
+    directbgcolor = 0x0001; // Cannot be black as that is transparent color
+    directtextrotated = false;
+    adjustCharStep = 0;
+    setFont(fontC64);
+    enableDirectPrinting(true);
+    print(0, 0, "FPS:");
+    print((int)core.fps_counter);
+
+    // Restore state
+    enableDirectPrinting(temp);
+    directcolor = oldcol;
+    invisiblecolor =  oldinvisiblecolor;
+    directbgcolor = oldbgcol;
+    directtextrotated = olddirecttextrotated;
+    adjustCharStep = oldadjustCharStep;
+    setFont(oldFont);
 }
 
 void Display::directBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t depth, uint8_t scale) {
@@ -315,7 +317,20 @@ void Display::directBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t 
             }
         }
     }
-
+    else if (depth == 8) {
+        for (j = 0; j < h; j+=1) {
+            for (i = 0; i < w; i++) {
+                uint16_t col = paletteptr[*bitmap];
+                if (scale==2) {
+                        directPixel(x + (i<<1), y + (j<<1),col);
+                        directPixel(x + (i<<1) + 1, y + (j<<1),col);
+                        directPixel(x + (i<<1) + 1, y + (j<<1) + 1,col);
+                        directPixel(x + (i<<1), y + (j<<1) + 1,col);
+                } else directPixel(x + i, y + j,col);
+                bitmap++;
+            }
+        }
+    }
 }
 
 int Display::directChar(int16_t x, int16_t y, uint16_t index){
@@ -343,14 +358,21 @@ int Display::directChar(int16_t x, int16_t y, uint16_t index){
                         directPixel(x + (i<<1)+1, y + (j<<1),directcolor);
                         directPixel(x + (i<<1)  , y + (j<<1)+1,directcolor);
                         directPixel(x + (i<<1)+1, y + (j<<1)+1,directcolor);
-                    } else directPixel(x + i, y + j,directcolor);
+                    } else {
+                        if(directtextrotated) directPixel(y + h - j - 1, x + i,directcolor);
+                        else directPixel(x + i, y + j,directcolor);
+                    }
+
                 } else if (directbgcolor != invisiblecolor) {
                     if (fontSize==2) {
                         directPixel(x + (i<<1)  , y + (j<<1),directbgcolor);
                         directPixel(x + (i<<1)+1, y + (j<<1),directbgcolor);
                         directPixel(x + (i<<1)  , y + (j<<1)+1,directbgcolor);
                         directPixel(x + (i<<1)+1, y + (j<<1)+1,directbgcolor);
-                    } else directPixel(x + i, y + j,directbgcolor);
+                    } else {
+                        if(directtextrotated) directPixel(y + h - j - 1, x + i,directbgcolor);
+                        else directPixel(x + i, y + j,directbgcolor);
+                    }
                 }
                 bitcolumn>>=1;
             }
@@ -358,96 +380,64 @@ int Display::directChar(int16_t x, int16_t y, uint16_t index){
     return (numBytes+adjustCharStep)*fontSize; // for character stepping
 }
 
-int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
-    const uint8_t* bitmap = font;
-    uint8_t w = *bitmap;
-	uint8_t h = *(bitmap + 1);
-	uint8_t hbytes=0, xtra=1;
-	if (h==8 || h==16) xtra=0; //don't add if exactly on byte limit
-	hbytes=(h>>3)+xtra; //GLCD fonts are arranged w+1 times h/8 bytes
-	//bitmap = bitmap + 3 + index * h * ((w>>3)+xtra); //add an offset to the pointer (fonts !)
-	bitmap = bitmap + 4 + index * (w * hbytes + 1); //add an offset to the pointer (fonts !)
-	//int8_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    int8_t i, j, numBytes;
-    numBytes = *bitmap++; //first byte of char is the width in bytes
-    // GLCD fonts are arranged LSB = topmost pixel of char, so its easy to just shift through the column
-    uint16_t bitcolumn; //16 bits for 2x8 bit high characters
-
-	for (i = 0; i < numBytes; i++) {
-            bitcolumn = *bitmap++;
-            if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
-            for (j = 0; j <= h; j++) { // was j<=h
-                #if PROJ_ARDUBOY > 0
-                if (bitcolumn&0x1) {
-                    drawPixel(x + i, y + 7 - j,color);
-                } else drawPixel(x + i, y + 7 - j,bgcolor);
-                bitcolumn>>=1;
-                #else
-                if (bitcolumn&0x1) {
-                    drawPixel(x + i, y + j,color);
-                } else drawPixel(x + i, y + j,bgcolor);
-                bitcolumn>>=1;
-                #endif // PROJ_ARDUBOY
-
-            }
-    }
-
-    return numBytes+adjustCharStep; // for character stepping
-}
 
 void Display::clear() {
-
+#if PROJ_SCREENMODE != TASMODE
     uint8_t c=0;
     c = bgcolor & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
-    if (bpp==1 && bgcolor) c=0xFF; // bgcolor !=0, set all pixels
-    else if (bpp==2) {
+    if (m_colordepth==1 && bgcolor) {
+        c = 0xFF; // bgcolor !=0, set all pixels
+    } else if (m_colordepth==2) {
         c = bgcolor & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
-    } else {
+    } else if (m_colordepth==4) {
         c = (c & 0x0F) | (c << 4);
     }
-    uint16_t j = sizeof(screenbuffer);
-    memset((void*)m_scrbuf,c,j);
 
+    memset((void*)m_scrbuf, c, POK_SCREENBUFFERSIZE);
     setCursor(0,0);
-
+#endif
 }
 
 void Display::scroll(int16_t pixelrows) {
     uint16_t index = 0, index2=0,oc;
     if (pixelrows==0) return;
     if (pixelrows >= height) pixelrows=height-1;
-    if (bpp == 4) index2 = pixelrows*width/2;
-    else if (bpp == 2) index2 = pixelrows*width/4;
+    if (m_colordepth == 4) index2 = pixelrows*width/2;
+    else if (m_colordepth == 2) index2 = pixelrows*width/4;
     else return;
     oc = color;
     color = bgcolor;
     if (pixelrows>0) {
-    for (uint16_t y=0;y<height-pixelrows;y++) {
-            for (uint16_t x=0;x<(width/8)*bpp;x++) screenbuffer[index++]=screenbuffer[index2++];
-    }
-    fillRect(0,cursorY,width,height);
+        for (uint16_t y=0;y<height-pixelrows;y++) {
+            for (uint16_t x=0;x<(width/8)*m_colordepth;x++)
+                m_scrbuf[index++]=m_scrbuf[index2++];
+        }
+        fillRect(0,cursorY,width,height);
     } else {
-    for (uint16_t y=pixelrows;y<height;y++) {
-            for (uint16_t x=0;x<(width*bpp)/8;x++) screenbuffer[index2++]=screenbuffer[index++];
-    }
-    fillRect(0,0,width,pixelrows);
+        for (uint16_t y=pixelrows;y<height;y++) {
+            for (uint16_t x=0;x<(width*m_colordepth)/8;x++)
+                m_scrbuf[index2++]=m_scrbuf[index++];
+        }
+        fillRect(0,0,width,pixelrows);
     }
     color=oc;
 }
 
 void Display::fillScreen(uint16_t c) {
+    #if PROJ_SCREENMODE != TASMODE
     c = c & (PALETTE_SIZE-1) ; //don't let palette go out of bounds
-    if (bpp==1 && c) c=0xFF; // set all pixels
-    else if (bpp==2) {
-        c = bgcolor & 0x3;
+    if (m_colordepth==1 && c) c=0xFF; // set all pixels
+    else if (m_colordepth==2) {
+        c = c & 0x3;
         c = c | (c << 2);
         c = c | (c << 4);
-    } else {
+    } else if (m_colordepth==4){
         c = (c & 0x0F) | (c << 4);
     }
-    memset((void*)m_scrbuf,c,sizeof(screenbuffer));
+    memset((void*)m_scrbuf, c, POK_SCREENBUFFERSIZE);
+    #endif
 }
 
 void Display::setDefaultPalette() {
@@ -459,12 +449,12 @@ void Display::setDefaultPalette() {
 }
 
 void Display::setColor(uint8_t c) {
-    color = c & ((1<<POK_COLORDEPTH)-1); // cut out colors that go above palette limit
+    color = c & ((1<<PROJ_COLORDEPTH)-1); // cut out colors that go above palette limit
 }
 
 void Display::setColor(uint8_t c,uint8_t bgc){
-    color = c & ((1<<POK_COLORDEPTH)-1); // cut out colors that go above palette limit
-    bgcolor = bgc & ((1<<POK_COLORDEPTH)-1); // cut out colors that go above palette limit
+    color = c & ((1<<PROJ_COLORDEPTH)-1); // cut out colors that go above palette limit
+    bgcolor = bgc & ((1<<PROJ_COLORDEPTH)-1); // cut out colors that go above palette limit
 }
 
 void Display::setInvisibleColor(uint16_t c){
@@ -483,349 +473,6 @@ uint16_t Display::getInvisibleColor() {
     return invisiblecolor;
 }
 
-void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
-    if (col==invisiblecolor) return; // do not draw transparent pixels
-    if ((uint16_t)x >= width || (uint16_t)y >= height) return;
-    col &= (PALETTE_SIZE-1);
-
-    #if POK_COLORDEPTH == 8
-        m_scrbuf[x+width*y] = col;
-    #endif
-
-    #if POK_GAMEBUINO_SUPPORT >0
-
-	uint8_t c = col;
-	uint8_t ct = col;
-
-    uint16_t bitptr=0;
-    for (uint8_t cbit=0;cbit<POK_COLORDEPTH;cbit++) {
-	c = ct & 1; // take the lowest bit of the color index number
-	if(c == 0){ //white - or actually "Clear bit"
-		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] &= ~_BV(y % 8);
-	} else { //black - or actually "Set bit"
-		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] |= _BV(y % 8);
-	}
-	ct >>=1; // shift to get next bit
-	bitptr += POK_BITFRAME; // move one screen worth of buffer forward to get to the next color bit
-    } // POK_COLOURDEPTH
-
-    #else
-    #if POK_COLORDEPTH == 1
-        if (col) {m_scrbuf[(y >> 3) * width + x] |= (0x80 >> (y & 7)); return;}
-        m_scrbuf[(y >> 3) * width + x] &= ~(0x80 >> (y & 7));
-    #elif POK_COLORDEPTH == 2
-        if (col) {
-                col &= 3;
-        }
-        uint16_t i = y*(width>>2) + (x>>2);
-        uint8_t pixel = m_scrbuf[i];
-        uint8_t column = x&0x03;
-        if (column==3) pixel = (pixel&0xFC)|(col); // bits 0-1
-        else if (column==2) pixel = (pixel&0xF3)|(col<<2); // bits 2-3
-        else if (column==1) pixel = (pixel&0xCF)|(col<<4); // bits 4-5
-        else pixel = (pixel&0x3F)|(col<<6); // bits 6-7
-        m_scrbuf[i] = pixel;
-    #elif POK_COLORDEPTH == 3
-    #elif POK_COLORDEPTH == 4
-    uint16_t i = y*(width>>1) + (x>>1);
-    uint8_t pixel = m_scrbuf[i];
-    if (x&1) pixel = (pixel&0xF0)|(col);
-    else pixel = (pixel&0x0F) | (col<<4);
-    m_scrbuf[i] = pixel;
-    #endif // POK_COLORDEPTH
-    #endif // POK_GAMEBUINO_SUPPORT
-}
-
-void Display::drawPixel(int16_t x,int16_t y) {
-    if ((uint16_t)x >= width || (uint16_t)y >= height) return;
-
-    #if POK_COLORDEPTH == 8
-        m_scrbuf[x+width*y] = color;
-    #endif	
-	
-    #if POK_GAMEBUINO_SUPPORT > 0
-
-	uint8_t c = color;
-	uint8_t ct = color;
-	if(ct == INVERT){
-	 ct = !getPixel(x, y); //jonne - was c = !getP...
-	}
-
-    uint16_t bitptr=0;
-    for (uint8_t cbit=0;cbit<POK_COLORDEPTH;cbit++) {
-	c = ct & 1; // take the lowest bit of the color index number
-	if(c == 0){ //white - or actually "Clear bit"
-    #if DISPLAY_ROT == NOROT
-		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] &= ~_BV(y % 8);
-    #elif DISPLAY_ROT == ROTCCW
-		m_scrbuf[LCDHEIGHT - y - 1 + (x / 8) * LCDWIDTH_NOROT + bitptr] &= ~_BV(x % 8);
-    #elif DISPLAY_ROT == ROT180
-		m_scrbuf[LCDWIDTH - x - 1 + ((LCDHEIGHT - y - 1) / 8) * LCDWIDTH_NOROT + bitptr] &= ~_BV((LCDHEIGHT - y - 1) % 8);
-    #elif DISPLAY_ROT == ROTCW
-		m_scrbuf[y + ((LCDWIDTH - x - 1) / 8) * LCDWIDTH_NOROT + bitbtr] &= ~_BV((LCDWIDTH - x - 1) % 8);
-    #endif
-		//return; //jonne
-	} else { //black - or actually "Set bit"
-    #if DISPLAY_ROT == NOROT
-		m_scrbuf[x + (y / 8) * LCDWIDTH + bitptr] |= _BV(y % 8);
-    #elif DISPLAY_ROT == ROTCCW
-		m_scrbuf[LCDHEIGHT - y - 1 + (x / 8) * LCDWIDTH_NOROT + bitptr] |= _BV(x % 8);
-    #elif DISPLAY_ROT == ROT180
-		m_scrbuf[LCDWIDTH - x - 1 + ((LCDHEIGHT - y - 1) / 8) * LCDWIDTH_NOROT + bitptr] |= _BV((LCDHEIGHT - y - 1) % 8);
-    #elif DISPLAY_ROT == ROTCW
-		m_scrbuf[y + ((LCDWIDTH - x - 1) / 8) * LCDWIDTH_NOROT + bitptr] |= _BV((LCDWIDTH - x -1) % 8);
-    #endif
-		//return; //jonne
-	}
-	ct >>=1; // shift to get next bit
-	bitptr += POK_BITFRAME; // move one screen worth of buffer forward to get to the next color bit
-    } // POK_COLOURDEPTH
-
-    #else
-
-    /** NOT Gamebuino */
-    #if POK_COLORDEPTH == 1
-        if (color) {m_scrbuf[(y >> 3) * width + x] |= (0x80 >> (y & 7)); return;}
-        m_scrbuf[(y >> 3) * width + x] &= ~(0x80 >> (y & 7));
-    #elif POK_COLORDEPTH == 2
-        uint16_t i = y*(width>>2) + (x>>2);
-        uint8_t pixel = m_scrbuf[i];
-        uint8_t column = x&0x03;
-        if (column==3) pixel = (pixel&0xFC)|(color); // bits 0-1
-        else if (column==2) pixel = (pixel&0xF3)|(color<<2); // bits 2-3
-        else if (column==1) pixel = (pixel&0xCF)|(color<<4); // bits 4-5
-        else pixel = (pixel&0x3F)|(color<<6); // bits 6-7
-        m_scrbuf[i] = pixel;
-    #elif POK_COLORDEPTH == 3
-    #elif POK_COLORDEPTH == 4
-            uint16_t i = y*(width>>1) + (x>>1);
-            uint8_t pixel = m_scrbuf[i];
-            if (x&1) pixel = (pixel&0xF0)|(color);
-            else pixel = (pixel&0x0F) | (color<<4);
-            m_scrbuf[i] = pixel;
-    #endif // POK_COLORDEPTH
-    #endif // POK_GAMEBUINO_SUPPORT
-}
-
-uint8_t Display::getPixel(int16_t x,int16_t y) {
-    if ((uint16_t)x >= width || (uint16_t)y >= height) return 0;
-    #if POK_GAMEBUINO_SUPPORT
-    uint8_t color=0; //jonne
-	for (uint8_t cbit=0; cbit<POK_COLORDEPTH;cbit++) {
-    	color |= (m_scrbuf[x + (y / 8) * LCDWIDTH+POK_BITFRAME*cbit] >> (y % 8)) & 0x1 ; //jonne - added +504*cbit
-	}
-	return color;
-    #else
-    /** not gamebuino */
-    #if POK_COLORDEPTH == 1
-        return (m_scrbuf[(y >> 3) * width + x] & (0x80 >> (y & 7))) ? 1:0;
-    #elif POK_COLORDEPTH == 2
-        uint16_t i = y*(width>>2) + (x>>2);
-        uint8_t pixel = m_scrbuf[i];
-        uint8_t column = x&0x03;
-        if (column==0) return pixel & 0x03; // bits 0-1
-        else if (column==1) return (pixel & 0x0C)>>2; // bits 2-3
-        else if (column==2) return (pixel & 0x30)>>4; // bits 4-5
-        else return pixel>>6;; // bits 6-7
-    #elif POK_COLORDEPTH == 3
-    #elif POK_COLORDEPTH == 4
-    uint16_t i = y*(width>>1) + (x>>1);
-    uint8_t pixel = m_scrbuf[i];
-    if (x&1) return pixel & 0x0F;
-    else return pixel>>4;
-    #endif // POK_COLORDEPTH
-    #endif // POK_GAMEBUINO_SUPPORT
-}
-
-void Display::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
-    if ((uint16_t)x0 >= width || (uint16_t)y0 >= height || (uint16_t)x1 >= width || (uint16_t)y1 >= height ) {
-        if (clipLine (&x0,&y0,&x1,&y1)==0) return; // line out of bounds
-    }
-	if (x0 == x1)
-		drawColumn(x0,y0,y1);
-	else if (y0 == y1)
-		drawRow(x0,x1,y0);
-	else {
-		int e;
-		signed int dx,dy,j, temp;
-		signed char s1,s2, xchange;
-		signed int x,y;
-
-		x = x0;
-		y = y0;
-
-		//take absolute value
-		if (x1 < x0) {
-			dx = x0 - x1;
-			s1 = -1;
-		}
-		else if (x1 == x0) {
-			dx = 0;
-			s1 = 0;
-		}
-		else {
-			dx = x1 - x0;
-			s1 = 1;
-		}
-
-		if (y1 < y0) {
-			dy = y0 - y1;
-			s2 = -1;
-		}
-		else if (y1 == y0) {
-			dy = 0;
-			s2 = 0;
-		}
-		else {
-			dy = y1 - y0;
-			s2 = 1;
-		}
-
-		xchange = 0;
-
-		if (dy>dx) {
-			temp = dx;
-			dx = dy;
-			dy = temp;
-			xchange = 1;
-		}
-
-		e = ((int)dy<<1) - dx;
-
-		for (j=0; j<=dx; j++) {
-			drawPixel(x,y);
-
-			if (e>=0) {
-				if (xchange==1) x = x + s1;
-				else y = y + s2;
-				e = e - ((int)dx<<1);
-			}
-			if (xchange==1)
-				y = y + s2;
-			else
-				x = x + s1;
-			e = e + ((int)dy<<1);
-		}
-	}
-}
-
-uint8_t Display::clipLine(int16_t *x0, int16_t *y0, int16_t *x1, int16_t *y1){
-    // Check X bounds
-	if (*x1<*x0) {
-        //std::swap (*x1,*x0); // swap so that we dont have to check x1 also
-        swapWT(int16_t*,x1,x0);
-        //std::swap (*y1,*y0); // y needs to be swaaped also
-        swapWT(int16_t*,y1,y0);
-	}
-
-	if (*x0>=width) return 0; // whole line is out of bounds
-
-	// Clip against X0 = 0
-	if (*x0 < 0) {
-        if ( *x1 < 0) return 0; // nothing visible
-        int16_t dx = (*x1 - *x0);
-        int16_t dy = ((*y1 - *y0) << 8); // 8.8 fixed point calculation trick
-        int16_t m = dy/dx;
-        *y0 = *y0 + ((m*-*x0)>>8); // get y0 at boundary
-        *x0 = 0;
-	}
-
-	// Clip against x1 = 83
-	if (*x1 >= width) {
-        int16_t dx = (*x1 - *x0);
-        int16_t dy = ((*y1 - *y0) << 8); // 8.8 fixed point calculation trick
-        int16_t m = dy/dx;
-        //*y1 = *y1 + ((m*(*x1-XMAX))>>8); // get y0 at boundary
-        *y1 = *y1 + ((m*(width-1-*x1))>>8); // get y0 at boundary
-        *x1 = width-1;
-	}
-
-    // Check Y bounds
-	if (*y1<*y0) {
-        //std::swap (*x1,*x0); // swap so that we dont have to check x1 also
-        swapWT(int16_t*,x1,x0);
-        //std::swap (*y1,*y0); // y needs to be swaaped also
-        swapWT(int16_t*,y1,y0);
-	}
-
-	if (*y0>=height) return 0; // whole line is out of bounds
-
-    if (*y0 < 0) {
-        if ( *y1 < 0) return 0; // nothing visible
-        int16_t dx = (*x1 - *x0) << 8;
-        int16_t dy = (*y1 - *y0); // 8.8 fixed point calculation trick
-        int16_t m = dx/dy;
-        *x0 = *x0 + ((m*-*y0)>>8); // get x0 at boundary
-        *y0 = 0;
-	}
-
-    // Clip against y1 = 47
-	if (*y1 >= height) {
-        int16_t dx = (*x1 - *x0) << 8;
-        int16_t dy = (*y1 - *y0); // 8.8 fixed point calculation trick
-        int16_t m = dx/dy;
-        *x1 = *x1 + ((m*(height-1-*y1))>>8); // get y0 at boundary
-        //*x1 = *x1 + ((m*(*y1-YMAX))>>8); // get y0 at boundary
-        *y1 = height-1;
-	}
-	return 1; // clipped succesfully
-}
-
-void Display::map1BitColumn(int16_t x, int16_t sy, int16_t ey, const uint8_t* bitmap, uint16_t column){
-    if ((uint16_t)sy>=height && (uint16_t)ey>=height) return; //completely out of bounds
-    if ((uint16_t)x>=width) return; //completely out of bounds
-    if (sy>ey) {
-            int y=sy;
-            sy=ey;
-            ey=y; // swap around so that x0 is less than x1
-    }
-    uint16_t bmw,bmh;
-    float texelstep, texelindex;
-    bmw = *(bitmap);
-    bmh = *(bitmap+1);
-    if (column>bmw-1) column=bmw-1;
-    bitmap += 2;
-    bitmap += column;
-    texelstep = (float)bmh/((float)ey-(float)sy);
-    texelindex = 0;
-    for (int y=sy; y <= ey; y++, texelindex += texelstep) {
-        uint8_t texel;
-        uint8_t currbyte, bit;
-        currbyte = texelindex / 8;
-        bit = 7-((uint16_t) texelindex & 0x7);
-        texel=*(bitmap+currbyte*bmw);
-        if (texel & (1<<bit)) drawPixel(x,y);
-        else if (bgcolor != invisiblecolor) drawPixel(x,y,bgcolor);
-    }
-};
-
-void Display::drawColumn(int16_t x, int16_t sy, int16_t ey){
-    if ((uint16_t)sy>=height && (uint16_t)ey>=height) return; //completely out of bounds
-    if ((uint16_t)x>=width) return; //completely out of bounds
-    if (sy>ey) {
-            int y=sy;
-            sy=ey;
-            ey=y; // swap around so that x0 is less than x1
-    }
-    for (int y=sy; y <= ey; y++) {
-        drawPixel(x,y);
-    }
-}
-
-void Display::drawRow(int16_t x0, int16_t x1, int16_t y){
-    if ((uint16_t)x0>=width && (uint16_t)x1>=width) return; //completely out of bounds
-    if ((uint16_t)y>=height) return; //completely out of bounds
-
-    if (x0>x1) {
-            int x=x0;
-            x0=x1;
-            x1=x; // swap around so that x0 is less than x1
-    }
-    for (int x=x0; x <= x1; x++) {
-        drawPixel(x,y);
-    }
-}
-
 void Display::drawFastVLine(int16_t x, int16_t y, int16_t h){
     if (h<0) {y += h; h = -h;}
     drawColumn(x,y,y+h);
@@ -836,168 +483,12 @@ void Display::drawFastHLine(int16_t x, int16_t y, int16_t w){
     drawRow(x,x+w-1,y);
 }
 
-void Display::drawRectangle(int16_t x0, int16_t y0, int16_t w, int16_t h) {
-    drawColumn(x0,y0,y0+h);
-    drawColumn(x0+w,y0,y0+h);
-    drawRow(x0,x0+w,y0);
-    drawRow(x0,x0+w,y0+h);
-}
-
-void Display::fillRectangle(int16_t x0,int16_t y0, int16_t w, int16_t h){
-    int16_t x,y,x1,y1;
-    x1=x0+w;y1=y0+h;
-    if ((x0<0 && x1<0) || (x0>=width && x1 >=width)) return; //completely out of bounds
-    if ((y0<0 && y1<0) || (y0>=height && y1 >=height)) return; //completely out of bounds
-    if (x0>x1) {x=x1;x1=x0;}
-    else x=x0;
-    if (y0>y1) {y=y1;y1=y0;}
-    else y=y0;
-    if (x<0) x=0;
-    if (y<0) y=0;
-    for (;x<x1;x++) drawColumn(x,y,y1);
-}
-
 void Display::fillRect(int16_t x, int16_t y, int16_t w, int16_t h) {
     fillRectangle(x,y,w,h);
 }
 
 void Display::drawRect(int16_t x, int16_t y, int16_t w, int16_t h) {
     drawRectangle(x,y,w,h);
-}
-
-void Display::drawCircle(int16_t x0, int16_t y0, int16_t r) {
-    int16_t f = 1 - r;
-    int16_t ddF_x = 1;
-    int16_t ddF_y = -2 * r;
-    int16_t x = 0;
-    int16_t y = r;
-
-    drawPixel(x0, y0 + r);
-    drawPixel(x0, y0 - r);
-    drawPixel(x0 + r, y0);
-    drawPixel(x0 - r, y0);
-
-    while (x < y) {
-        if (f >= 0) {
-
-            y--;
-            ddF_y += 2;
-            f += ddF_y;
-        }
-        x++;
-        ddF_x += 2;
-        f += ddF_x;
-
-        drawPixel(x0 + x, y0 + y);
-        drawPixel(x0 - x, y0 + y);
-        drawPixel(x0 + x, y0 - y);
-        drawPixel(x0 - x, y0 - y);
-        drawPixel(x0 + y, y0 + x);
-        drawPixel(x0 - y, y0 + x);
-        drawPixel(x0 + y, y0 - x);
-        drawPixel(x0 - y, y0 - x);
-
-    }
-}
-
-void Display::drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername) {
-    int16_t f = 1 - r;
-    int16_t ddF_x = 1;
-    int16_t ddF_y = -2 * r;
-    int16_t x = 0;
-    int16_t y = r;
-
-    while (x < y) {
-        if (f >= 0) {
-            y--;
-            ddF_y += 2;
-            f += ddF_y;
-        }
-        x++;
-        ddF_x += 2;
-        f += ddF_x;
-        if (cornername & 0x4) {
-            drawPixel(x0 + x, y0 + y);
-            drawPixel(x0 + y, y0 + x);
-        }
-        if (cornername & 0x2) {
-            drawPixel(x0 + x, y0 - y);
-            drawPixel(x0 + y, y0 - x);
-        }
-        if (cornername & 0x8) {
-            drawPixel(x0 - y, y0 + x);
-            drawPixel(x0 - x, y0 + y);
-        }
-        if (cornername & 0x1) {
-
-            drawPixel(x0 - y, y0 - x);
-            drawPixel(x0 - x, y0 - y);
-        }
-    }
-}
-
-void Display::fillCircle(int16_t x0, int16_t y0, int16_t r) {
-    drawFastVLine(x0, y0 - r, 2 * r );
-    fillCircleHelper(x0, y0, r, 3, 0);
-}
-
-void Display::fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername, int16_t delta) {
-    int16_t f = 1 - r;
-    int16_t ddF_x = 1;
-    int16_t ddF_y = -2 * r;
-    int16_t x = 0;
-    int16_t y = r;
-
-    while (x < y) {
-        if (f >= 0) {
-            y--;
-            ddF_y += 2;
-            f += ddF_y;
-        }
-        x++;
-        ddF_x += 2;
-        f += ddF_x;
-
-        if (cornername & 0x1) {
-            drawFastVLine(x0 + x, y0 - y, 2 * y + 1 + delta-1); //added -1 here, jonne
-            drawFastVLine(x0 + y, y0 - x, 2 * x + 1 + delta-1); //added -1 here, jonne
-        }
-        if (cornername & 0x2) {
-
-            drawFastVLine(x0 - x, y0 - y, 2 * y + 1 + delta-1); //added -1 here, jonne
-            drawFastVLine(x0 - y, y0 - x, 2 * x + 1 + delta-1); //added -1 here, jonne
-        }
-    }
-}
-
-void Display::drawRoundRect(int16_t x, int16_t y, int16_t w,int16_t h, int16_t r) {
-    if (r<2) {drawRectangle(x,y,w,h);return;}
-    // smarter version
-    drawFastHLine(x + r, y, w - 2 * r); // Top
-    drawFastHLine(x + r, y + h - 1, w - 2 * r); // Bottom
-    drawFastVLine(x, y + r, h - 2 * r); // Left
-    drawFastVLine(x + w - 1, y + r, h - 2 * r); // Right
-    // draw four corners
-    drawCircleHelper(x + r, y + r, r, 1);
-    drawCircleHelper(x + w - r - 1, y + r, r, 2);
-    drawCircleHelper(x + w - r - 1, y + h - r - 1, r, 4);
-    drawCircleHelper(x + r, y + h - r - 1, r, 8);
-}
-
-void Display::fillRoundRect(int16_t x, int16_t y, int16_t w,int16_t h, int16_t r) {
-    if (r<2) {fillRectangle(x,y,w,h);return;}
-    fillRectangle(x + r, y, w - 2 * r, h-1);
-    // draw four corners
-    fillCircleHelper(x + w - r - 1, y + r, r, 1, h - 2 * r - 1);
-    fillCircleHelper(x + r, y + r, r, 2, h - 2 * r - 1);
-}
-
-void Display::drawTriangle(int16_t x0, int16_t y0,
-        int16_t x1, int16_t y1,
-        int16_t x2, int16_t y2) {
-    drawLine(x0, y0, x1, y1);
-    drawLine(x1, y1, x2, y2);
-    drawLine(x2, y2, x0, y0);
 }
 
 void Display::fillTriangle(int16_t x0, int16_t y0,
@@ -1082,583 +573,69 @@ void Display::setFont(const unsigned char * f) {
 	fontHeight = *(font + 1)+1;
 }
 
-void Display::drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t index) {
-    uint8_t w = *bitmap;
-	uint8_t h = *(bitmap + 1);
-	uint8_t xtra=0;
-	if (w&0x7) xtra=1;
-	bitmap = bitmap + 3 + index * h * ((w>>3)+xtra); //add an offset to the pointer (fonts !)
-    #if POK_GAMEBUINO_SUPPORT > 0
-    int8_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 8;
-        bitNum = i % 8;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            if (source & (0x80 >> bitNum)) {
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
-    #else
-    /** not gamebuino */
-    int8_t scrx,scry;
-    uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
-    int8_t bitptr;
-    for (scry = y; scry < y+h; scry+=1) {
-            if ((x&1)==0) { /** EVEN pixel starting line**/
-                for (scrx = x, bitptr=7; scrx < w+x; scrx+=2) {
-                    uint8_t targetpixel = *scrptr;
-                    if (*bitmap & (1<<bitptr)) targetpixel = (targetpixel & 0xF) | color<<4; // upper nibble
-                    else if (bgcolor != invisiblecolor) targetpixel = (targetpixel & 0xF) | bgcolor<<4; // upper nibble
-                    bitptr--;
-                    if (*bitmap & (1<<bitptr)) targetpixel = (targetpixel & 0xF0) | color; // lower nibble
-                    else if (bgcolor != invisiblecolor) targetpixel = (targetpixel & 0xF0) | bgcolor; // lower nibble
-                    bitptr--;
-                    if (bitptr<0) { bitptr = 7; bitmap++; }
-                    *scrptr = targetpixel;
-                    scrptr++;
-                }
-            } else { /** ODD pixel starting line **/
-                for (scrx = x, bitptr=7; scrx < w+x; scrx+=2) {
-                    uint8_t targetpixel = *scrptr;
-                    // store higher nibble of source pixel in lower nibble of target
-                    if (*bitmap & (1<<bitptr)) targetpixel = (targetpixel & 0xF0) | color; // lower nibble
-                    else if (bgcolor != invisiblecolor) targetpixel = (targetpixel & 0xF0) | bgcolor; // lower nibble
-                    *scrptr = targetpixel; // store
-                    bitptr--;scrptr++;targetpixel = *scrptr;
-                    // store lower nibble of source pixel in higher nibble of target
-                    if (*bitmap & (1<<bitptr)) targetpixel = (targetpixel & 0xF) | color<<4; // higher nibble
-                    else if (bgcolor != invisiblecolor) targetpixel = (targetpixel & 0xF) | bgcolor<<4; // higher nibble
-                    *scrptr = targetpixel; // store
-                    bitptr--; // do not increment scrptr here !
-                }
-            }
-            if (bitptr!=7) bitmap++; // force skip to next line
-            // increment the y jump in the scrptr
-            scrptr = scrptr + ((width - w)>>1);
-    }
-    #endif // POK_GAMEBUINO_SUPPORT
-}
-
-
-void Display::drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t frame)
+void Display::drawBitmap(int16_t x, int16_t y, const uint8_t * bitmap, uint8_t frameIndex)
 {
-    int16_t w = *bitmap;
-	int16_t h = *(bitmap + 1);
-	uint8_t framew = *(bitmap+2);
-    bitmap = bitmap + 3; //add an offset to the pointer to start after the width and height
-    /** visibility check */
-    if (y<-h || y>height) return; //invisible
-    if (x<-framew || x>width) return;  //invisible
-    /** 1 bpp mode */
-    if (m_colordepth<2) {
-    int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 8;
-        bitNum = i % 8;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            if (source & (0x80 >> bitNum)) {
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
+	using std::size_t;
+	constexpr size_t widthIndex = 0;
+	constexpr size_t heightIndex = 1;
+	constexpr size_t dataIndex = 2;
+	constexpr size_t bitsPerByte = 8;
+	const size_t width = bitmap[widthIndex];
+	const size_t height = bitmap[heightIndex];
+	const size_t frameSize = ((width * height) / (bitsPerByte / Display::m_colordepth));
 
-    return;
-    }
-    /** 2 bpp mode */
-    if (m_colordepth<4) {
-    int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 4;
-        bitNum = (i % 4)<<1;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            uint8_t output = (source & (0xC0 >> bitNum));
-            output >>= (6-bitNum);
-            if (output != invisiblecolor) {
-                setColor(output);
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
-
-    return;
-    }
-    /** 4bpp fast version */
-	int16_t scrx,scry,xclip,xjump,scrxjump;
-    xclip=xjump=scrxjump=0;
-    bitmap += (framew*frame)>>1;
-    /** y clipping */
-    if (y<0) { h+=y; bitmap -= y*(w>>1); y=0;}
-    else if (y+h>height) { h -=(y-height);}
-    /** x clipping */
-    xjump = (w-framew)>>1;
-    if (x<0) { xclip=(x&1)<<1; framew+=x; xjump = ((-x)>>1); bitmap += xjump; x=0;}
-    else if (x+framew>width) {
-            xclip = (x&1)<<1;
-            scrxjump = x&1;
-            xjump=((x+framew-width)>>1)+scrxjump;
-            framew = width-x;}
-
-    uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
-    /** ONLY 4-bit mode for time being **/
-    for (scry = y; scry < y+h; scry+=1) {
-            if (scry>=height) return;
-            if ((x&1)==0) { /** EVEN pixel starting line, very simple, just copypaste **/
-                for (scrx = x; scrx < framew+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    if (xclip) {
-                            sourcepixel <<=4;
-                            sourcepixel |= ((*(bitmap+1))>>4);
-                    }
-                    uint8_t targetpixel = *scrptr;
-                    if ((sourcepixel>>4) != invisiblecolor ) targetpixel = (targetpixel&0x0F) | (sourcepixel & 0xF0);
-                    if ((sourcepixel&0x0F) != invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel & 0x0F);
-                    *scrptr = targetpixel;
-                    bitmap++;
-                    scrptr++;
-                }
-                if (xclip){
-                    if (framew&1) {
-                        /**last pixel is odd pixel due to clipping & odd width*/
-                        uint8_t sourcepixel = *bitmap;
-                        if ((sourcepixel&0x0F) != invisiblecolor) {
-                            sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
-                            targetpixel |= sourcepixel;
-                            *scrptr = targetpixel;
-                        }
-                        //scrptr++;
-                    }
-                    bitmap++;
-                    scrptr++;
-                }
-                bitmap += xjump; // needed if x<0 clipping occurs
-            } else { /** ODD pixel starting line **/
-                for (scrx = x; scrx < framew+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
-                    // store higher nibble of source pixel in lower nibble of target
-                    if((sourcepixel>>4)!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel >> 4 );
-                    *scrptr = targetpixel;
-                    scrptr++;
-                    targetpixel = *scrptr;
-                    // store lower nibble of source pixel in higher nibble of target
-                    if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
-                    *scrptr = targetpixel;
-                    bitmap++;
-                }
-                bitmap+=xjump;
-            }
-            // increment the y jump in the scrptr
-            scrptr = scrptr + ((width - framew)>>1)+scrxjump;
-    }
+	Display::drawBitmapData(x, y, width, height, &bitmap[dataIndex + (frameIndex * frameSize)]);
 }
-
 
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap)
 {
     int16_t w = *bitmap;
-	int16_t h = *(bitmap + 1);
-    bitmap = bitmap + 2; //add an offset to the pointer to start after the width and height
+    int16_t h = *(bitmap + 1);
+    //add an offset to the pointer to start after the width and height
+    bitmap = bitmap + 2;
     drawBitmapData(x, y, w, h, bitmap);
 }
 
 void Display::drawBitmapData(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap) {
     /** visibility check */
-    if (y<-h || y>height) return; //invisible
-    if (x<-w || x>width) return;  //invisible
-    /** 1 bpp mode */
-    if (m_colordepth<2) {
-    int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 8;
-        bitNum = i % 8;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            if (source & (0x80 >> bitNum)) {
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
-
-    return;
-    }
-    /** 2 bpp mode */
-    if (m_colordepth<4) {
-    int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 4;
-        bitNum = (i % 4)<<1;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            uint8_t output = (source & (0xC0 >> bitNum));
-            output >>= (6-bitNum);
-            if (output != invisiblecolor) {
-                setColor(output);
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
-
-    return;
-    }
-    /** 4bpp fast version */
-	int16_t scrx,scry,xclip,xjump,scrxjump;
-    xclip=xjump=scrxjump=0;
-    /** y clipping */
-    if (y<0) { h+=y; bitmap -= y*(w>>1); y=0;}
-    else if (y+h>height) { h -=(y-height);}
-    /** x clipping */
-    if (x<0) { xclip=(x&1)<<1; w+=x; xjump = ((-x)>>1); bitmap += xjump; x=0;}
-    else if (x+w>width) {
-            xclip = (x&1)<<1;
-            scrxjump = x&1;
-            xjump=((x+w-width)>>1)+scrxjump;
-            w = width-x;}
-
-    uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
-    /** ONLY 4-bit mode for time being **/
-    for (scry = y; scry < y+h; scry+=1) {
-            if (scry>=height) return;
-            if ((x&1)==0) { /** EVEN pixel starting line, very simple, just copypaste **/
-                for (scrx = x; scrx < w+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    if (xclip) {
-                            sourcepixel <<=4;
-                            sourcepixel |= ((*(bitmap+1))>>4);
-                    }
-                    uint8_t targetpixel = *scrptr;
-                    if ((sourcepixel>>4) != invisiblecolor ) targetpixel = (targetpixel&0x0F) | (sourcepixel & 0xF0);
-                    if ((sourcepixel&0x0F) != invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel & 0x0F);
-                    *scrptr = targetpixel;
-                    bitmap++;
-                    scrptr++;
-                }
-                if (xclip){
-                    if (w&1) {
-                        /**last pixel is odd pixel due to clipping & odd width*/
-                        uint8_t sourcepixel = *bitmap;
-                        if ((sourcepixel&0x0F) != invisiblecolor) {
-                            sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
-                            targetpixel |= sourcepixel;
-                            *scrptr = targetpixel;
-                        }
-                        //scrptr++;
-                    }
-                    bitmap++;
-                    scrptr++;
-                }
-                bitmap += xjump; // needed if x<0 clipping occurs
-            } else { /** ODD pixel starting line **/
-                for (scrx = x; scrx < w+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
-                    // store higher nibble of source pixel in lower nibble of target
-                    if((sourcepixel>>4)!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel >> 4 );
-                    *scrptr = targetpixel;
-                    scrptr++;
-                    targetpixel = *scrptr;
-                    // store lower nibble of source pixel in higher nibble of target
-                    if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel << 4);
-                    *scrptr = targetpixel;
-                    bitmap++;
-                }
-                bitmap+=xjump;
-            }
-            // increment the y jump in the scrptr
-            scrptr = scrptr + ((width - w)>>1)+scrxjump;
-    }
+    if (y<-h || y>=height) return; //invisible
+    if (x<-w || x>=width) return;  //invisible
+    if (m_colordepth==2) drawBitmapData2BPP(x, y, w, h, bitmap);
+    if (m_colordepth==4) drawBitmapData4BPP(x, y, w, h, bitmap);
+    if (m_colordepth==8) drawBitmapData8BPP(x, y, w, h, bitmap);
 }
 
-void Display::drawRleBitmap(int16_t x, int16_t y, const uint8_t* rlebitmap)
+void Display::drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap)
 {
-    // ONLY can copy 4-bit bitmap to 4-bit screen mode for time being
-    #if (POK_SCREENMODE != MODE_FAST_16COLOR)
-    return;
-    #endif
-
-    int16_t w = *rlebitmap;
-	int16_t h = *(rlebitmap + 1);
-    rlebitmap = rlebitmap + 2; //add an offset to the pointer to start after the width and height
-
-    // visibility check
+    /** visibility check */
     if (y<-h || y>height) return; //invisible
     if (x<-w || x>width) return;  //invisible
+    /** 2 bpp mode */
+    if (m_colordepth==2) drawBitmapDataXFlipped2BPP(x, y, w, h, bitmap);
+    else if (m_colordepth==4) drawBitmapDataXFlipped4BPP(x, y, w, h, bitmap);
+    /** 8 bpp mode */
+    else if (m_colordepth==8) drawBitmapDataXFlipped8BPP(x, y, w, h, bitmap);
 
-    // Clipping is not supported
-    if ((x < 0) || (x+w > width) || (y < 0) || (y+h > height)) return;
-
-    // Currently only support RLE bitmaps in 16 color mode.
-    if (m_colordepth != 4)  //
-        return;
-
-    // Go through each line.
-    uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
-    bool is_endofbitmap = false;
-    for (int16_t scry = y; scry < y+h && !is_endofbitmap;) {
-
-        // Process one line. Go through each pixel run and escape command in RLE data.
-        for (int16_t scrx = x;;) {
-            uint8_t rle_count = *rlebitmap++;
-
-            if (rle_count == 0) {
-
-               /** Escape or absolute mode */
-
-                uint8_t rle_escape_or_runsize = *rlebitmap++;
-                if ( rle_escape_or_runsize == RLE_ESC_EOL) {
-                    // End of line.
-                    break;
-                }
-                else if ( rle_escape_or_runsize == RLE_ESC_EOB) {
-                    // End of bitmap.
-                    is_endofbitmap = true;
-                    break;
-                }
-                else if ( rle_escape_or_runsize == RLE_ESC_OFFSET) {
-                    // Move position in target.
-                    // TODO: not tested yet.
-                    uint8_t xoffset = *rlebitmap++;
-                    uint8_t yoffset = *rlebitmap++;
-                    scrptr += (xoffset>1);
-                    scrx += xoffset;
-                    scrptr += yoffset*width;
-                    scry += yoffset;
-                 }
-                else {
-
-                    /** Absolute mode. Copy pixels from the source bitmap to the target screen. */
-
-                    int16_t runsize = rle_escape_or_runsize;
-                    uint8_t targetpixel = *scrptr;  // initial value
-                    uint8_t sourcepixel = *rlebitmap;  // initial value
-                    for( int16_t runx = 0; runx < runsize; ) {
-                        if (scrx&0x1)  { // screen pixel is in the low nibble
-                            if (runx&0x1) { // bitmap pixel is in the low nibble
-                                if ((sourcepixel&0x0F) != invisiblecolor)
-                                    targetpixel = (targetpixel&0xF0) | (sourcepixel&0x0F); // Copy low to low nibble.
-                                rlebitmap++;
-                            }
-                            else // bitmap pixel is in the high nibble
-                                if ((sourcepixel>>4) != invisiblecolor)
-                                    targetpixel = (targetpixel&0xF0) | (sourcepixel>>4); // Copy high to low nibble.
-
-                            // Copy the byte to the target.
-                            *scrptr = targetpixel;
-                            scrptr++;
-                        }
-                        else  { // screen pixel is in the high nibble
-                            targetpixel = *scrptr;
-                            sourcepixel = *rlebitmap;
-                            if (runx&0x1) { // bitmap pixel is sourcepixel = *rlebitmapin the low nibble
-                                if ((sourcepixel&0x0F) != invisiblecolor )
-                                    targetpixel = (targetpixel&0x0F) | ((sourcepixel<<4)&0xF0); // Copy low to high nibble.
-                                rlebitmap++;  // read the new source byte
-                            }
-                            else // bitmap pixel is in the high nibble
-                                if ((sourcepixel>>4) != invisiblecolor )
-                                    targetpixel = (targetpixel&0x0F) | (sourcepixel&0xF0); // Copy high to high nibble.
-                        }
-                        runx++;
-                        scrx++;
-                    }  // end for
-
-                     // If this is odd target index, copy the byte to the target.
-                    if (scrx&0x1) {
-                        *scrptr = targetpixel;
-                        scrptr++;
-                    }
-
-                    // In absolute mode the source size is always padded to the word boundary.
-                    if (runsize%4) {
-                        int16_t padpixcount = 4 - (runsize%4);
-                        rlebitmap += padpixcount>>1;  // skip n padding bytes
-                    }
-                }
-            }
-            else {
-
-                /** Encoded mode. Duplicate one pixel pair to the all required pixels on the target screen */
-
-                int16_t runsize = rle_count;
-                uint8_t clonepixelpair = *rlebitmap++;
-                uint8_t targetpixel = *scrptr;  // initial value
-                for( int16_t runx = 0;  runx < runsize; ) {
-                    if (scrx&0x1)  { // screen pixel is in the low nibble
-                        if (runx&0x1) { // bitmap pixel is in the low nibble
-                            if ((clonepixelpair&0x0F) != invisiblecolor)
-                                targetpixel = (targetpixel&0xF0) | (clonepixelpair&0x0F); // Copy low to low nibble.
-                        }
-                        else // bitmap pixel is in the high nibble
-                            if ((clonepixelpair>>4) != invisiblecolor)
-                                targetpixel = (targetpixel&0xF0) | (clonepixelpair>>4); // Copy high to low nibble.
-
-                        // Copy the byte to the target.
-                        *scrptr = targetpixel;
-                        scrptr++;
-                    }
-                    else  { // screen pixel is in the high nibble
-                        targetpixel = *scrptr;
-                        if (runx&0x1) {// bitmap pixel is in the low nibble
-                            if ((clonepixelpair&0x0F) != invisiblecolor )
-                                targetpixel = (targetpixel&0x0F) | ((clonepixelpair<<4)&0xF0); // Copy low to high nibble.
-                        }
-                        else // bitmap pixel is in the high nibble
-                            if ((clonepixelpair>>4) != invisiblecolor )
-                                targetpixel = (targetpixel&0x0F) | (clonepixelpair&0xF0); // Copy high to high nibble.
-                    }
-                    runx++;
-                    scrx++;
-
-                }  // end for
-
-                // If this is odd target index, copy the byte to the target.
-                if (scrx&0x1) {
-                    *scrptr = targetpixel;
-                    scrptr++;
-                 }
-            } // end if
-        }  // end while
-
-        // Increment the target screen pointer and index.
-        scrptr = scrptr + ((width - w)>>1);
-        scry++;
-    } // end for scry
 }
 
 void Display::drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
 {
-    int16_t w = *bitmap;
-	int16_t h = *(bitmap + 1);
-    bitmap = bitmap + 2; //add an offset to the pointer to start after the width and height
-    /** visibility check */
-    if (y<-h || y>height) return; //invisible
-    if (x<-w || x>width) return;  //invisible
-    /** 1 bpp mode */
-    if (m_colordepth<2) {
-    int16_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 8;
-        bitNum = i % 8;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            if (source & (0x80 >> bitNum)) {
-                drawPixel(x + w - i, y + j);
-            }
-        }
-    }
+    drawBitmapDataXFlipped(x, y, bitmap[0], bitmap[1], bitmap + 2);
+}
 
-    return;
-    }
-    /** 2 bpp mode */
-    if (m_colordepth<4) {
-    int16_t i, j, byteNum, bitNum, byteWidth = w >> 2;
-    for (i = 0; i < w; i++) {
-        byteNum = i / 4;
-        bitNum = (i % 4)<<1;
-        for (j = 0; j < h; j++) {
-            uint8_t source = *(bitmap + j * byteWidth + byteNum);
-            uint8_t output = (source & (0xC0 >> bitNum));
-            output >>= (6-bitNum);
-            if (output != invisiblecolor) {
-                setColor(output);
-                drawPixel(x + i, y + j);
-            }
-        }
-    }
-
-    return;
-    }
-    /** 4bpp fast version */
-	int16_t scrx,scry,xclip,xjump,scrxjump;
-    xclip=xjump=scrxjump=0;
-    /** y clipping */
-    if (y<0) { h+=y; bitmap -= y*(w>>1); y=0;}
-    else if (y+h>height) { h -=(y-height);}
-    /** x clipping */
-    bitmap += ((w>>1)-1); //inverted!
-    if (x<0) {
-            xclip=(x&1)<<1;
-            w+=x;
-            xjump = ((-x)>>1);
-            //bitmap += xjump; // do not clip left edge of source, as bitmap is inverted !
-            x=0;
-            }
-    else if (x+w>width) {
-            xclip = (x&1)<<1;
-            scrxjump = x&1;
-            xjump=((x+w-width)>>1)+scrxjump;
-            w = width-x;}
-
-    //uint8_t* scrptr = m_scrbuf + (y*(width>>1) + ((x+width)>>1));
-    uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
-    /** ONLY 4-bit mode for time being **/
-    for (scry = y; scry < y+h; scry+=1) {
-    //    for (scry = y; scry < y+2; scry+=1) {
-            if (scry>=height) return;
-            if ((x&1)==0) { /** EVEN pixel starting line, very simple, just copypaste **/
-                //for (scrx = w+x-xclip-1; scrx >= x; scrx-=2) {
-                for (scrx = x; scrx < w+x-xclip; scrx+=2) {
-                    uint8_t sourcepixel = *(bitmap);
-                    if (xclip) {
-                            sourcepixel <<=4;
-                            sourcepixel |= ((*(bitmap-1))>>4);//inverted!
-                    }
-                    uint8_t targetpixel = *scrptr;
-                    // NIBBLES ARE INVERTED BECAUSE PICTURE IS FLIPPED !!!
-                    if ((sourcepixel>>4) != invisiblecolor ) targetpixel = (targetpixel&0xF0) | (sourcepixel>>4);
-                    if ((sourcepixel&0x0F) != invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel<<4);
-                    *scrptr = targetpixel;
-                    bitmap--;
-                    scrptr++;
-                }
-                bitmap += w; // w*2 >> 1 because inverted and because 2 pixels per byte!!
-                if (xclip){
-                    if (w&1) {
-                        /**last pixel is odd pixel due to clipping & odd width*/
-                        uint8_t sourcepixel = *bitmap;
-                        if ((sourcepixel&0x0F) != invisiblecolor) {
-                            sourcepixel <<=4;
-                            uint8_t targetpixel = *scrptr;// & 0x0F;
-                            targetpixel |= sourcepixel;
-                            *scrptr = targetpixel;
-                        }
-                        //scrptr++;
-                    }
-                    bitmap++;
-                    scrptr++;
-                }
-                bitmap += xjump; // needed if x<0 clipping occurs
-            } else { /** ODD pixel starting line **/
-                for (scrx = x; scrx < w+x-xclip; scrx+=2 ) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
-                    // inverted !!! store lower nibble of source pixel in lower nibble of target
-                    if((sourcepixel&0x0F)!=invisiblecolor) targetpixel = (targetpixel & 0xF0) | (sourcepixel & 0x0F );
-                    *scrptr = targetpixel;
-                    scrptr++;
-                    targetpixel = *scrptr;
-                    // inverted ! store higher nibble of source pixel in higher nibble of target
-                    if((sourcepixel>>4)!=invisiblecolor) targetpixel = (targetpixel & 0x0F) | (sourcepixel & 0xF0);
-                    *scrptr = targetpixel;
-                    bitmap--;
-                }
-                bitmap += w; // w*2 >> 1 because inverted and because 2 pixels per byte!!
-                bitmap+=xjump;
-            }
-            // increment the y jump in the scrptr
-            scrptr = scrptr + ((width - w)>>1)+scrxjump;
-    }
+void Display::drawBitmapYFlipped(int16_t x, int16_t y, const uint8_t* bitmap)
+{
+    drawBitmapDataYFlipped(x, y, bitmap[0], bitmap[1], bitmap + 2);
 }
 
 void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t rotation, uint8_t flip) {
 #if PROJ_GAMEBUINO == 0
-    if (!flip) drawBitmap(x,y,bitmap);
-    else drawBitmapXFlipped(x,y,bitmap);
+    if (!flip)
+        drawBitmap(x,y,bitmap);
+    else if(flip == FLIPH)
+        drawBitmapXFlipped(x,y,bitmap);
+    else if(flip == FLIPV)
+        drawBitmapYFlipped(x,y,bitmap);
 #else
 	if((rotation == NOROT) && (flip == NOFLIP)){
 		drawBitmap(x,y,bitmap); //use the faster algorithm
@@ -1683,15 +660,15 @@ void Display::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t ro
                         k = i;
                         l = j;
                         break;
-                    case ROTCCW: //90° counter-clockwise
+                    case ROTCCW: //90Â° counter-clockwise
                         k = j;
                         l = w - i - 1;
                         break;
-                    case ROT180: //180°
+                    case ROT180: //180Â°
                         k = w - i - 1;
                         l = h - j - 1;
                         break;
-                    case ROTCW: //90° clockwise
+                    case ROTCW: //90Â° clockwise
                         k = h - j - 1;
                         l = i;
                         break;
@@ -1735,7 +712,6 @@ void Display::drawChar(int8_t x, int8_t y, unsigned char c, uint8_t size) {
 	print_char(x,y,c);
 	return;
 }
-
 
 bool Display::isDirectPrintingEnabled() {
     return m_mode;
@@ -1785,7 +761,9 @@ void Display::write(uint8_t c) {
 			}
 			else
 				charstep=print_char(cursorX,cursorY,c);
+			#ifndef FULLWIDTHSPACES
 			if (c==' ' && adjustCharStep) charstep=(charstep>>1)+1;
+			#endif
 			cursorX += charstep;
 	}
 }
@@ -2087,55 +1065,41 @@ void Display::printFloat(double number, uint8_t digits)
   }
 }
 
-void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
-{
-    int8_t scry;
-    uint8_t* scrptr = m_scrbuf + (y*(width>>1) + (x>>1));
-
-    /** ONLY 4-bit mode for time being **/
-
-            if ((x&1)==0) { /** EVEN pixel starting line, very simple, just copypaste **/
-                for (scry = y; scry < h+y; scry++) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
-                    targetpixel = (targetpixel&0x0F) | (sourcepixel << 4);
-                    *scrptr = targetpixel;
-                    bitmap++;
-                    scrptr+=55;
-                }
-            } else { /** ODD pixel starting line **/
-                for (scry = y; scry < h+y; scry++) {
-                    uint8_t sourcepixel = *bitmap;
-                    uint8_t targetpixel = *scrptr;
-                    // store source pixel in lower nibble of target
-                    targetpixel = (targetpixel & 0xF0) | (sourcepixel);
-                    *scrptr = targetpixel;
-                    scrptr+=55;
-                    bitmap++;
-                }
-            }
-}
-
-void Display::lcdRefresh(unsigned char* scr) {
-
-#if POK_SCREENMODE == MODE_GAMEBOY
-    lcdRefreshModeGBC(scr, paletteptr);
+void Display::lcdRefresh(const unsigned char* scr, bool useDirectDrawMode) {
+    if (useDirectDrawMode)
+        return;
+#if (PROJ_SCREENMODE != MODE_NOBUFFER) && !defined(POK_SIM)
+    lcdPrepareRefresh();
+#endif
+#if PROJ_SCREENMODE == TASMODE
+    lcdRefreshTASMode(paletteptr);
+    #ifdef POK_SIM
+    simulator.refreshDisplay();
+    #endif
 #endif
 
-#if POK_SCREENMODE == MODE_HI_4COLOR
-    lcdRefreshMode1(scr, paletteptr);
+#if PROJ_SCREENMODE == MODE_HI_4COLOR
+    lcdRefreshMode1(scr, 0, 0, 220, 176, paletteptr);
 #endif
 
-#if POK_SCREENMODE == MODE_FAST_16COLOR
-    lcdRefreshMode2(scr, paletteptr);
+#if PROJ_SCREENMODE == MODE13
+    lcdRefreshMode13(scr, paletteptr, palOffset);
 #endif
 
-#if POK_SCREENMODE == MODE_GAMEBUINO_16COLOR
-    lcdRefreshGB(scr, paletteptr);
+#if PROJ_SCREENMODE == MODE15
+    lcdRefreshMode15(scr, paletteptr);
 #endif
 
-#if POK_SCREENMODE == MODE_ARDUBOY_16COLOR
-    lcdRefreshAB(scr, paletteptr);
+#if PROJ_SCREENMODE == MIXMODE
+    lcdRefreshMixMode(scr, paletteptr, scanType);
+#endif
+
+#if PROJ_SCREENMODE == MODE64
+    lcdRefreshMode64(scr, paletteptr);
+#endif
+
+#if PROJ_SCREENMODE == MODE_FAST_16COLOR
+    lcdRefreshMode2((uint8_t*)scr, paletteptr);
 #endif
 
 }
@@ -2144,21 +1108,103 @@ void Display::setFrameBufferTo(uint8_t* sb) {
     m_scrbuf = sb;
 };
 
-void Display::setTileBufferTo(uint8_t* tb) {
-    m_tilebuf = tb;
-};
+// Convert an integer to a hexadecimal string
+char* itoa_hex(int num, char* dest, int destLen) {
+    int i = destLen-1;
+    do {
+        char c = (num % 16) + '0';
+        if (c > '9') c += 7;
+        dest[i--] = c;
+        num /= 16;
+    } while (num && i >= 0);
+    return &(dest[i+1]);
+}
 
-void Display::loadTileset(const uint8_t* ts) {
-    m_tileset = (uint8_t*) ts;
-};
+// Draw the crash screen and wait forever
+#define STR_TO_UPPER(str_from, str_to) for( int32_t i=0; i <= strlen(str_from); i++ ) str_to[i] = toupper(str_from[i]);
+void ShowCrashScreenAndWait( const char* texLine1, const char* texLine2, const char* texLine3, const char* texLine4, const char* texLine5 ) {
 
-void Display::setTile(uint16_t i, uint8_t t) {
-    if (!m_tilebuf) return;
-    m_tilebuf[i]=t;
-};
+    // draw screen red
+    lcdFillSurface(COLOR_RED);
 
+    // Draw text
+    Display::directcolor = COLOR_WHITE;
+    Display::invisiblecolor = COLOR_RED;
+    Display::directbgcolor = COLOR_RED; // Cannot be black as that is a transparent color
+    Display::directtextrotated = false;
+    Display::adjustCharStep = 0;
+    Display::adjustLineStep = 0;
+    Display::setFont(fntC64UIGfx);  // A special font set that contains UI gfx in lower case letters.
+    Display::fixedWidthFont = true; // Needed for the non-proportional C64 font (default value=false)
+    Display::enableDirectPrinting(true);
+
+    char convertedStr[128] = {0};
+
+    // Draw texts
+    int  yOffsetInPixels = 5;
+    Display::set_cursor(0, 9 + yOffsetInPixels);
+    Display::print("  ");    STR_TO_UPPER(texLine1, convertedStr); Display::println(convertedStr);
+    Display::print("  ");    STR_TO_UPPER(texLine2, convertedStr); Display::println(convertedStr);
+    Display::print("  ");    STR_TO_UPPER(texLine3, convertedStr); Display::println(convertedStr);
+    Display::println();
+    Display::print("  *");   STR_TO_UPPER(texLine4, convertedStr); Display::println(convertedStr);
+    Display::print("  *");   STR_TO_UPPER(texLine5, convertedStr); Display::println(convertedStr);
+
+    Display::set_cursor(0, 0 + yOffsetInPixels);
+
+    // Frame
+    Display::println(" abbbbbbbbbbbbbbbbbbbbbbbbc");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::print  (" |"); Display::println(26*8, Display::cursorY,"|");
+    Display::println(" dbbbzybbbbbbbbbbbbbbbbbbbe");
+    Display::println("     {e");
+
+     // Pokitto image
+    Display::println  ("");
+    Display::println  ("  ijkl");
+    Display::println  ("  mnop");
+    Display::println  ("  qrst");
+    Display::println  ("  uvwx");
+
+   // loop forever
+    while(1){;}
+ }
+
+// Check the stack size and show a crash screen if the stack is too big.
+void CheckStack() {
+    #ifndef POK_SIM
+    #ifndef __ARMCC_VERSION
+    int currStackTop;
+    const int freeStackThreshold = 200;
+    if ((int)&currStackTop - (int)_ebss < freeStackThreshold) {
+
+        // Create info string: "<stack size>:<current stack pointer>", e.g. "12345ABC:12345ABC"
+        const int infoStringLen = 8+1+8;
+        static char infoString[infoStringLen+1];
+        memset(infoString,0,infoStringLen+1);
+        const int stackSize = reinterpret_cast<uintptr_t>(&_vStackTop) - reinterpret_cast<uintptr_t>(&currStackTop);
+        const int tmpStrLen = 8;
+        static char tmpStr[tmpStrLen+1];
+        memset(tmpStr,0,tmpStrLen+1);
+        char* subStr = itoa_hex(stackSize, tmpStr, tmpStrLen); // keep ending null
+        strcat(infoString, subStr); // Add stack size as hex string
+        strcat(infoString, ":");
+        subStr = itoa_hex((int)&currStackTop, tmpStr, tmpStrLen); // keep ending null
+        strcat(infoString, subStr); // Add stack pointer address as hex string
+
+        // Draw the crash screen and wait forever. Use static const strings to avoid more stack usage.
+        static const char* texLine1 = "OOPS! PLEASE, RESTART";
+        static const char* texLine2 = "POKITTO OR RELOAD";
+        static const char* texLine3 = "SOFTWARE.";
+        static const char* texLine4 = "STACK TOO BIG!";
+        ShowCrashScreenAndWait(texLine1, texLine2, texLine3, texLine4, infoString);
+    }
+    #endif
+    #endif
+}
 
 /** Eof */
-
-
-

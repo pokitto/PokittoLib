@@ -119,34 +119,35 @@ enum defcolors {
 
 const uint16_t def565palette[16] = {
     //kind of like pico8 palette
-    0,0x194a,0x792a,0x42a,
-    0xaa86,0x5aa9,0xc618,0xff9d,
-    0xf809,0xfd00,0xff84,0x72a,
-    0x2d7f,0x83b3,0xfbb5,0xfe75
+    0x0000, 0x194a, 0x792a, 0x042a,
+    0xaa86, 0x5aa9, 0xc618, 0xff9d,
+    0xf809, 0xfd00, 0xff84, 0x072a,
+    0x2d7f, 0x83b3, 0xfbb5, 0xfe75
 };
 
-#define PALETTE_SIZE 256
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
+#if PROJ_SCREENMODE == TASMODE
+#include "TASMODE.h"
+#endif
 
 namespace Pokitto {
 
 class Display {
 public:
-    Display();
-
-    // PROPERTIES
-private:
-    static uint8_t* canvas;
-    static uint8_t bpp;
     static uint8_t m_colordepth;
-public:
     static uint8_t palOffset;
     static uint8_t width;
     static uint8_t height;
+    #if PROJ_SCREENMODE != TASMODE
     static uint8_t screenbuffer[];
+    #endif
+    #if (PROJ_SCREENMODE == MIXMODE)
+        static uint8_t subMode; // for mixed mode switching
+        static uint8_t scanType[]; // for mixed screen mode
+    #endif
 
     // PROPERTIES
     static void setColorDepth(uint8_t);
@@ -154,7 +155,7 @@ public:
     static uint8_t getBitsPerPixel();
     static uint16_t getWidth();
     static uint16_t getHeight();
-    static uint8_t getNumberOfColors();
+    static uint32_t getNumberOfColors();
 
     // IMPORTANT PUBLIC STATE MEMBERS
     /** Selected font */
@@ -171,6 +172,8 @@ public:
     static uint16_t directcolor;
     /** Direct unbuffered background color */
     static uint16_t directbgcolor;
+    /** Direct text rotated */
+    static bool directtextrotated;
     /** set color with a command */
     static void setColor(uint8_t);
     /** set color and bgcolor with a command */
@@ -183,8 +186,6 @@ public:
     static uint8_t getBgColor();
     /** get invisible color */
     static uint16_t getInvisibleColor();
-
-
     /** Initialize display */
     static void begin();
     /** Clear display buffer */
@@ -194,9 +195,9 @@ public:
     /** Fill display buffer */
     static void fillScreen(uint16_t);
     /** Send display buffer to display hardware */
-    static void update();
+    static void update(bool useDirectMode=false);
     /** Forced update of LCD display memory with a given pixel buffer */
-    static void lcdRefresh(unsigned char*);
+    static void lcdRefresh(const unsigned char*, bool useDirectMode=false);
     /** Clear LCD hardware memory */
     static void clearLCD();
     /** Fill LCD hardware memory */
@@ -207,7 +208,6 @@ public:
     static void setFrameBufferTo(uint8_t*);
 
     // COLORS AND PALETTE
-public:
     /** set default palette */
     static void setDefaultPalette();
     /** master palette */
@@ -231,7 +231,7 @@ public:
     /** Direct pixel (not through display buffer) */
     static void directPixel(int16_t,int16_t,uint16_t);
     /** Direct tile 16bit (not through display buffer) */
-	static void directTile(int16_t x, int16_t y, int16_t x2, int16_t y2, uint16_t* gfx);
+    static void directTile(int16_t x, int16_t y, int16_t x2, int16_t y2, uint16_t* gfx);
     /** Direct rectangle (not through display buffer) */
     static void directRectangle(int16_t, int16_t,int16_t, int16_t, uint16_t);
     /** Set the cursor for printing to a certain screen position */
@@ -245,6 +245,11 @@ public:
     static void drawPixel(int16_t,int16_t);
     /** Draw pixel with specific color index at various bit depths */
     static void drawPixel(int16_t x,int16_t y, uint8_t col);
+    /** Draw pixel with specific color index at various bit depths with no bounds/transparency checks*/
+    static void drawPixelRaw(int16_t x,int16_t y, uint8_t col);
+    /** Placeholder that does nothing */
+    static void drawPixelNOP(int16_t x,int16_t y, uint8_t col);
+
     /** Get pixel at various bit depths */
     static uint8_t getPixel(int16_t,int16_t);
     /** Draw line **/
@@ -252,19 +257,19 @@ public:
     /** Clip line with screen boundaries, returns 0 if whole line is out of bounds */
     static uint8_t clipLine(int16_t*, int16_t*, int16_t*, int16_t*);
     /** Draw a column real fast */
-    static void drawColumn(int16_t, int16_t, int16_t);
+    static void drawColumn(int, int, int);
     /** Map a 1-bit column real fast */
     static void map1BitColumn(int16_t, int16_t, int16_t, const uint8_t*, uint16_t);
     /** Draw a row real fast */
-    static void drawRow(int16_t, int16_t, int16_t);
+    static void drawRow(int, int, int);
     /** Legacy drawColumn name, for compatibility - macros are not OK because of scope problems */
     static void drawFastVLine(int16_t, int16_t, int16_t);
     /** Legacy drawRow name, for compatibility - macros are not OK because of scope problems */
     static void drawFastHLine(int16_t, int16_t, int16_t);
     /** Draw rectangle (edges only) */
-    static void drawRectangle(int16_t,int16_t,int16_t,int16_t);
+    static void drawRectangle(int,int,int,int);
     /** Fill rectangle */
-    static void fillRectangle(int16_t,int16_t,int16_t,int16_t);
+    static void fillRectangle(int,int,int,int);
     /** GB compatibility fillRect */
     static void fillRect(int16_t x, int16_t y, int16_t w, int16_t h);
     /** GB compatibility drawRect */
@@ -274,21 +279,39 @@ public:
     /** Draw circle */
     static void drawCircle(int16_t x0, int16_t y0, int16_t r);
     /** Draw circle helper */
-	static void drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername);
-	/** Fill circle */
-	static void fillCircle(int16_t x0, int16_t y0, int16_t r);
-	/** Fill circle helper*/
-	static void fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername, int16_t delta);
-	/** draw triangle */
-	static void drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2);
-	/** Fill triangle*/
-	static void fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2);
-	/** Draw rounded rectangle */
-	static void drawRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius);
-	/** Fill rounded rectangle */
-	static void fillRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius);
+    static void drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername);
+    /** Fill circle */
+    static void fillCircle(int16_t x0, int16_t y0, int16_t r);
+    /** Fill circle helper*/
+    static void fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t cornername, int16_t delta);
+    /** draw triangle */
+    static void drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2);
+    /** Fill triangle*/
+    static void fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2);
+    /** Draw rounded rectangle */
+    static void drawRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius);
+    /** Fill rounded rectangle */
+    static void fillRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h, int16_t radius);
 
     // BITMAPS !
+    #if PROJ_SCREENMODE == TASMODE
+    static inline TAS::LineFiller lineFillers[] = {
+        PROJ_LINE_FILLERS
+    };
+
+    static void setTASRowMask(uint32_t mask){
+        TASMask = ~mask;
+    }
+    /** Draw tile in Tiles-and-Sprites mode. X&Y are in tile-space, not pixels. */
+    static void drawTile(uint32_t x, uint32_t y, const uint8_t *data);
+    /** Draw a solid-color tile in Tiles-and-Sprites mode. X&Y are in tile-space, not pixels. */
+    static void drawColorTile(uint32_t x, uint32_t y, uint8_t color);
+    /** Draw sprite in Tiles-And-Sprites mode */
+    static void drawSprite(int x, int y, const uint8_t *data, bool flipped=0, bool mirrored=0, uint8_t recolor=0);
+    static void drawSpriteBitmap(int x, int y, int width, int height, const uint8_t *data, bool flipped=0, bool mirrored=0, uint8_t recolor=0);
+    static void shiftTilemap(int x, int y);
+    #endif
+
     /** Draw monochromatic bitmap. Used in font rendering */
     static void drawMonoBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t index);
     /** Draw bitmap data*/
@@ -297,18 +320,69 @@ public:
     static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw RLE bitmap */
     static void drawRleBitmap(int16_t x, int16_t y, const uint8_t* bitmap);
-    /** Draw animated bitmap frame */
-    static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, uint8_t frame);
+
+    /// \brief
+    /// Draws a single frame of a multi-frame bitmap
+    /// \param x The x coordinate to draw the bitmap frame at
+    /// \param y The y coordinate to draw the bitmap frame at
+    /// \param bitmap The multi-frame bitmap whose frame is to be drawn
+    /// \param frameIndex The index of the frame to be drawn
+    /// \details
+    /// A multi-frame bitmap is expected to be in a particular format.
+    /// The 0th byte of the bitmap should be the width of the bitmap's frames.
+    /// The 1st byte of the bitmap should be the height of the bitmap's frames.
+    /// The remaining bytes should consist of the frames of the multi-frame bitmap,
+    /// stored one after another without any kind of separator or terminator.
+    ///
+    /// Example bitmap:
+    /// \code{.cpp}
+    /// #pragma once
+    /// 
+    /// #include <cstdint>
+    /// 
+    /// // An example bitmap, in 4bpp mode
+    /// const std::uint8_t exampleBitmap[] =
+    /// {
+    /// 	// Width, Height
+    /// 	8, 8,
+    /// 	// Frame 0
+    /// 	0x11, 0x11, 0x11, 0x11,
+    /// 	0x10, 0x00, 0x00, 0x01,
+    /// 	0x10, 0x00, 0x00, 0x01,
+    /// 	0x10, 0x00, 0x00, 0x01,
+    /// 	0x10, 0x00, 0x00, 0x01,
+    /// 	0x10, 0x00, 0x00, 0x01,
+    /// 	0x10, 0x00, 0x00, 0x01,
+    /// 	0x11, 0x11, 0x11, 0x11,
+    /// 	// Frame 1
+    /// 	0x22, 0x22, 0x22, 0x22,
+    /// 	0x20, 0x00, 0x00, 0x02,
+    /// 	0x20, 0x00, 0x00, 0x02,
+    /// 	0x20, 0x00, 0x00, 0x02,
+    /// 	0x20, 0x00, 0x00, 0x02,
+    /// 	0x20, 0x00, 0x00, 0x02,
+    /// 	0x20, 0x00, 0x00, 0x02,
+    /// 	0x22, 0x22, 0x22, 0x22,
+    /// };
+    /// \endcode
+    static void drawBitmap(int16_t x, int16_t y, const uint8_t * bitmap, uint8_t frameIndex);
+
+    /** Draw bitmap data flipped on x-axis*/
+    static void drawBitmapDataXFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
+    /** Draw bitmap data flipped on y-axis*/
+    static void drawBitmapDataYFlipped(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* bitmap);
     /** Draw bitmap flipped on x-axis*/
     static void drawBitmapXFlipped(int16_t x, int16_t y, const uint8_t* bitmap);
+    /** Draw bitmap flipped on y-axis*/
+    static void drawBitmapYFlipped(int16_t x, int16_t y, const uint8_t* bitmap);
     /** Draw bitmap with options */
     static void drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t rotation, uint8_t flip);
     /** Get pointer to the screen buffer - GB compatibility */
     static uint8_t* getBuffer();
-    /** Get pixel in a monochromatic bitmap - GB compatibility */
-    static uint8_t getBitmapPixel(const uint8_t*, uint16_t, uint16_t);
     /** Optimized functions for drawing bit columns - used in raytracing */
     static void draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap);
+    /** Get pixel in a monochromatic bitmap - GB compatibility */
+    static uint8_t getBitmapPixel(const uint8_t*, uint16_t, uint16_t);
 
     // PRINTING
     /** direct character to screen (no buffering) */
@@ -369,38 +443,32 @@ public:
     static int16_t cursorX,cursorY;
     static uint8_t fontSize;
     static int8_t adjustCharStep, adjustLineStep;
-	static bool fixedWidthFont;
+    static bool fixedWidthFont, flipFontVertical;
 
     static void inc_txtline();
     static void printNumber(unsigned long, uint8_t);
     static void printFloat(double, uint8_t);
 
-    /** Tiled mode functions **/
+    /** external small printf, source in PokittoPrintf.cpp **/
+    static int printf(const char *format, ...);
 
-    static void loadTileset(const uint8_t*);
-
-    static void setTileBufferTo(uint8_t*);
-    static void clearTileBuffer();
-    static void shiftTileBuffer(int8_t,int8_t);
-
-    static void setTile(uint16_t,uint8_t);
-    static uint8_t getTile(uint16_t);
-    static uint8_t getTile(uint8_t,uint8_t);
-
-
+#if PROJ_SCREENMODE == TASMODE
+    static inline uint32_t TASMask = 0; // enable all rows
+#endif
 
 private:
+    static void printFPS();
     static uint8_t m_mode;
-    static uint16_t m_w,m_h; // store these for faster access when switching printing modes
+    static uint8_t m_w,m_h; // store these for faster access when switching printing modes
     /** Pointer to screen buffer */
     static uint8_t* m_scrbuf;
-    /** Pointer to tileset */
-    static uint8_t* m_tileset;
-    /** Pointer to tilebuffer */
-    static uint8_t* m_tilebuf;
-    /** Pointer to tilecolorbuffer */
-    static uint8_t* m_tilecolorbuf;
 
+    static void drawBitmapData2BPP(int x, int y, int w, int h, const uint8_t* bitmap);
+    static void drawBitmapData4BPP(int x, int y, int w, int h, const uint8_t* bitmap);
+    static void drawBitmapData8BPP(int x, int y, int w, int h, const uint8_t* bitmap);
+    static void drawBitmapDataXFlipped2BPP(int x, int y, int w, int h, const uint8_t* bitmap);
+    static void drawBitmapDataXFlipped4BPP(int x, int y, int w, int h, const uint8_t* bitmap);
+    static void drawBitmapDataXFlipped8BPP(int x, int y, int w, int h, const uint8_t* bitmap);
 };
 
 }
