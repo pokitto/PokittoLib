@@ -320,10 +320,11 @@ inline constexpr uint32_t XCENTER = LCDWIDTH / 2;
 inline constexpr uint32_t YCENTER = LCDHEIGHT / 2;
 
 #ifndef PROJ_PALETTE_SIZE
-    #define PROJ_PALETTE_SIZE 1<<PROJ_COLORDEPTH
-#endif
-#if (PROJ_SCREENMODE == MIXMODE)
-	#define PROJ_PALETTE_SIZE 276;
+	#if (PROJ_SCREENMODE == MIXMODE)
+		#define PROJ_PALETTE_SIZE 276;
+	#else
+		#define PROJ_PALETTE_SIZE 1<<PROJ_COLORDEPTH
+	#endif
 #endif
 
 inline constexpr uint32_t PALETTE_SIZE = PROJ_PALETTE_SIZE;
