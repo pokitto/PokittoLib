@@ -34,9 +34,8 @@
 */
 /**************************************************************************/
 
-
-#ifndef POKITTO_SETTINGS_H
-#define POKITTO_SETTINGS_H
+#pragma once
+#include <stdint.h>
 
 #include "My_settings.h"
 
@@ -58,10 +57,27 @@
 #define POK_ENABLE_SD 1 // Define true to include SD library
 #define POK_LOADER_COUNTDOWN 3 //how many seconds waiting for C press for loader
 
+#if !defined(PROJ_BUTTONS_POLLING)
+    #define PROJ_BUTTONS_POLLING 1
+#endif
+
+#ifndef PROJ_FLIP_SCREEN
+    #define POK_FLIP_SCREEN 0
+#else
+    #define POK_FLIP_SCREEN PROJ_FLIP_SCREEN
+#endif
+
+
 #ifndef PROJ_ENABLE_SOUND
     #define POK_ENABLE_SOUND 1
 #else
     #define POK_ENABLE_SOUND PROJ_ENABLE_SOUND
+#endif
+
+#ifndef PROJ_SOUND_BUFFERED
+    #define POK_SOUND_BUFFERED 0
+#else
+    #define POK_SOUND_BUFFERED PROJ_SOUND_BUFFERED
 #endif
 
 #ifndef PROJ_GBSOUND
@@ -70,13 +86,35 @@
     #endif
 #else
     #define POK_GBSOUND PROJ_GBSOUND
+    //#define NUM_CHANNELS 2
 #endif
 
+#ifdef PROJ_ENABLE_SFX
+	#ifndef PROJ_ENABLE_SOUND
+		#define PROJ_ENABLE_SOUND 1
+	#endif
+
+	#ifndef PROJ_STREAMING_MUSIC
+		#define PROJ_STREAMING_MUSIC 1
+	#endif
+
+	#ifndef PROJ_ENABLE_SD_MUSIC
+		#define PROJ_DISABLE_SD_STREAMING 1
+	#endif
+#endif
+
+#ifdef PROJ_ENABLE_SD_MUSIC
+	#ifndef PROJ_ENABLE_SOUND
+		#define PROJ_ENABLE_SOUND 1
+	#endif
+
+	#ifndef PROJ_STREAMING_MUSIC
+		#define PROJ_STREAMING_MUSIC 1
+	#endif
+#endif
 
 #ifndef PROJ_STREAMING_MUSIC
-    #if POK_ENABLE_SOUND > 0
-        #define POK_STREAMING_MUSIC 1 // Define true to stream music from SD
-    #endif
+        #define POK_STREAMING_MUSIC 0 // Define true to stream music from SD
 #else
     #define POK_STREAMING_MUSIC PROJ_STREAMING_MUSIC
 #endif // PROJ_STREAMING_MUSIC
@@ -87,6 +125,15 @@
     #define POK_ENABLE_SYNTH PROJ_ENABLE_SYNTH
 #endif // PROJ_ENABLE_SYNTH
 
+#define HIGH_RAM_OFF     0 // SRAM1/SRAM2 are at the default setting
+#define HIGH_RAM_ON      1 // SRAM1/SRAM2 are enabled and free for use
+#define HIGH_RAM_MUSIC   2 // SRAM1/SRAM2 are enabled and used by music
+
+#ifndef PROJ_HIGH_RAM
+    #define POK_HIGH_RAM HIGH_RAM_OFF
+#else
+    #define POK_HIGH_RAM PROJ_HIGH_RAM
+#endif
 
 /** CONSOLE **/
 #define POK_USE_CONSOLE 0 //if debugging console is available or not
@@ -100,281 +147,238 @@
 #define POK_SHOW_VOLUME 0 // volumebar drawn after console if enabled
 #define VOLUMEBAR_TIMEOUT 10 // frames before disappearing
 
-/** PROJECT LIBRARY TYPE **/
-// Tiled mode can NOT be buffered mode (fast mode, arduboy mode, gamebuino mode etc)
-#if PROJ_TILEDMODE > 0
-    #define POK_TILEDMODE 1
-    #ifdef PROJ_TILEWIDTH
-        #define POK_TILE_W PROJ_TILEWIDTH
-    #else
-        #define POK_TILE_W 11
-    #endif // PROJ_TILEWIDTH
-    #if POK_TILE_W == 11
-        #define POK_TILES_X 20
-        #define LCDWIDTH 220
-    #elif POK_TILE_W == 12
-        #define POK_TILES_X 18
-        #define LCDWIDTH 216
-    #elif POK_TILE_W == 8
-        #define POK_TILES_X 27
-        #define LCDWIDTH 216
-    #elif POK_TILE_W == 32
-        #define POK_TILES_X 6
-        #define LCDWIDTH 220
-    #elif POK_TILE_W == 10
-        #define POK_TILES_X 22
-        #define LCDWIDTH 220
-    #elif POK_TILE_W == 14
-        #define POK_TILES_X 15
-        #define LCDWIDTH 210
-    #endif
-    #ifdef PROJ_TILEHEIGHT
-        #define POK_TILE_H PROJ_TILEHEIGHT
-    #else
-        #define POK_TILE_H 11
-    #endif // PROJ_TILEHEIGHT
-    #if POK_TILE_H == 11
-        #define POK_TILES_Y 16
-        #define LCDHEIGHT 176
-    #elif POK_TILE_H == 12
-        #define POK_TILES_Y 14
-        #define LCDHEIGHT 168
-    #elif POK_TILE_H == 8
-        #define POK_TILES_Y 22
-        #define LCDHEIGHT 176
-    #elif POK_TILE_H == 32
-        #define POK_TILES_Y 5
-        #define LCDHEIGHT 176
-    #elif POK_TILE_H == 10
-        #define POK_TILES_Y 17
-        #define LCDHEIGHT 170
-    #elif POK_TILE_H == 14
-        #define POK_TILES_Y 12
-        #define LCDHEIGHT 168
-    #endif
-#else
-#if PROJ_GAMEBUINO > 0
-    #define POK_GAMEBUINO_SUPPORT PROJ_GAMEBUINO // Define true to support Gamebuino library calls
-    #define PROJ_SCREENMODE MODE_GAMEBUINO_16COLOR
-    #define POK_STRETCH 1
-    #define PICOPALETTE 0
-    #define POK_COLORDEPTH 4
-#else
-    #if PROJ_ARDUBOY > 0
-        #define POK_ARDUBOY_SUPPORT PROJ_ARDUBOY // Define true to support Arduboy library calls
-        #define PROJ_SCREENMODE MODE_ARDUBOY_16COLOR
-        #define POK_COLORDEPTH 1
-        #define POK_STRETCH 1
-        #define POK_FPS 20
-        #define PICOPALETTE 0
-    #else
-        #if PROJ_RBOY > 0
-            #define PROJ_SCREENMODE MODE_GAMEBUINO_16COLOR
-            #define POK_COLORDEPTH 1
-            #define POK_STRETCH 0
-            #define POK_FPS 40
-            #define PICOPALETTE 0
-        #else
-            #if PROJ_GAMEBOY > 0
-            #define PROJ_SCREENMODE MODE_GAMEBOY
-            #define POK_COLORDEPTH 2
-            #define POK_STRETCH 0
-            #define POK_FPS 6
-            #define PICOPALETTE 0
-            #else
-                #define POK_GAMEBUINO_SUPPORT 0
-                #define POK_GAMEBOY_SUPPORT 0
-                #define POK_ARDUBOY_SUPPORT 0
-                #define PICOPALETTE 0
-                #define POK_COLORDEPTH 4
-            #endif // PROJ_GAMEBOY
-        #endif // PROJ_RBOY
-    #endif // PROJ_ARDUBOY
-#endif // PROJ_GAMEBUINO
-#endif // PROJ_TILEDMODE
-
-#if PROJ_MODE13 > 0
-    #define PROJ_SCREENMODE MODE13
-    #define POK_COLORDEPTH 8
-    #define POK_STRETCH 0
-    #define POK_FPS 30
-    #define POK_COLORDEPTH 8
+/** SCREEN CONFIGURATION **/
+#ifndef PROJ_PERSISTENCE
+    #define PROJ_PERSISTENCE true
 #endif
+inline constexpr bool POK_PERSISTENCE = PROJ_PERSISTENCE;
 
+#ifndef PROJ_CLEAR_SCREEN
+    #define PROJ_CLEAR_SCREEN 0
+#endif
+inline constexpr uint32_t POK_CLEAR_SCREEN = PROJ_CLEAR_SCREEN;
 
-/** SCREEN MODES TABLE -- DO NOT CHANGE THESE **/
+#ifndef PROJ_FPS
+    #define PROJ_FPS 60
+#endif
+inline constexpr uint32_t POK_FPS = PROJ_FPS;
+inline constexpr uint32_t POK_FRAMEDURATION = 1000 / PROJ_FPS;
 
-#define POK_LCD_W 220 //<- do not change !!
-#define POK_LCD_H 176 //<- do not change !!
+inline constexpr uint32_t R_MASK = 0xF800;
+inline constexpr uint32_t G_MASK = 0x07E0;
+inline constexpr uint32_t B_MASK = 0x001F;
 
-#define MODE_NOBUFFER               0   //Size: 0
-#define BUFSIZE_NOBUFFER            0
-#define MODE_HI_4COLOR              1   //Size: 9680
-#define BUFSIZE_HI_4                9680
-#define MODE_FAST_16COLOR           2   //Size: 4840
-#define BUFSIZE_FAST_16             4840
-#define MODE_HI_16COLOR             3
-#define BUFSIZE_HI_16               19360
-#define MODE_GAMEBUINO_16COLOR      4   //Size: 2016
-#define BUFSIZE_GAMEBUINO_16        2016
-#define MODE_ARDUBOY_16COLOR        5   //Size: 4096
-#define BUFSIZE_ARDUBOY_16          4096
-#define MODE_HI_MONOCHROME          6   //Size: 4840
-#define BUFSIZE_HI_MONO             4840
-#define MODE_HI_GRAYSCALE           7   //Size: 9680
-#define BUFSIZE_HI_GS               9680
-#define MODE_GAMEBOY                8
-#define BUFSIZE_GAMEBOY             5760
-#define MODE_UZEBOX                 9
-#define MODE_TVOUT                  10
-#define MODE_LAMENES                11
-#define BUFSIZE_LAMENES             7680
-#define MODE_256_COLOR              12
-#define BUFSIZE_MODE_12              4176 // 72 x 58
-#define MODE13                      13
-#define BUFSIZE_MODE13              9680 // 110*88
-// Tiled modes
-#define MODE_TILED_1BIT             1001
-#define MODE_TILED_8BIT             1002
+inline constexpr uint32_t POK_LCD_W = 220;
+inline constexpr uint32_t POK_LCD_H = 176;
 
-
+#define MODE_NOBUFFER            0
+#define MODE_HI_4COLOR           1
+#define MODE_FAST_16COLOR        2
+#define MODE13                   13
+#define MODE15                   15
+#define MIXMODE                  32
+#define TASMODE                  42
+#define TASMODELOW               43
+#define MODE64                   64
 
 /** SCREENMODE - USE THIS SELECTION FOR YOUR PROJECT **/
-
-#if POK_TILEDMODE > 0
-    #ifndef PROJ_TILEBITDEPTH
-        #define PROJ_TILEBITDEPTH 8 //default tiling mode is 256 color mode!
-    #endif // PROJ_TILEBITDEPTH
-    #if PROJ_TILEBITDEPTH == 1
-        #define POK_SCREENMODE MODE_TILED_1BIT
-        #define POK_COLORDEPTH 1
-    #else
-        #define POK_SCREENMODE MODE_TILED_8BIT
-        #define POK_COLORDEPTH 8
-    #endif // PROJ_TILEBITDEPTH
-#else
 #ifndef PROJ_SCREENMODE
-    #undef POK_COLORDEPTH
-    #ifdef PROJ_HIRES
-        #if PROJ_HIRES > 0
-            #define POK_SCREENMODE MODE_HI_4COLOR
-            #undef POK_COLORDEPTH
-            #define POK_COLORDEPTH 2
-        #elif PROJ_HICOLOR > 0
-            #define POK_SCREENMODE MODE_256_COLOR
-            #undef POK_COLORDEPTH
-            #define POK_COLORDEPTH 8
-        #else
-            #define POK_SCREENMODE MODE_FAST_16COLOR
-            #undef POK_COLORDEPTH
-            #define POK_COLORDEPTH 4
-        #endif // PROJ_HIRES
+    #if defined(PROJ_HIRES) &&  PROJ_HIRES > 0
+        #define PROJ_SCREENMODE MODE_HI_4COLOR
+    #elif defined(PROJ_HICOLOR) && PROJ_HICOLOR > 0
+        #define PROJ_SCREENMODE MODE13
+    #elif defined(PROJ_TASMODE) && PROJ_TASMODE > 0
+        #define PROJ_SCREENMODE TASMODE
+    #elif defined(PROJ_TASMODELOW) && PROJ_TASMODELOW > 0
+        #define PROJ_SCREENMODE TASMODELOW
+    #elif defined(PROJ_MODE13) && PROJ_MODE13 > 0
+        #define PROJ_SCREENMODE MODE13
+    #elif defined(PROJ_MODE15) && PROJ_MODE15 > 0
+        #define PROJ_SCREENMODE MODE15
+    #elif defined(PROJ_MIXMODE) && PROJ_MIXMODE > 0
+        #define PROJ_SCREENMODE MIXMODE
+    #elif defined(PROJ_MODE64) && PROJ_MODE64 > 0
+        #define PROJ_SCREENMODE MODE64
     #else
-        #define POK_SCREENMODE MODE_FAST_16COLOR
-        #define POK_COLORDEPTH 4
-    #endif // PROJ_HIRES
-#else
-    #define POK_SCREENMODE PROJ_SCREENMODE
-#endif
+        #define PROJ_SCREENMODE MODE_FAST_16COLOR
+    #endif
 #endif // POK_TILEDMODE
 
-/* DEFINE SCREENMODE AS THE MAXIMUM SCREEN SIZE NEEDED BY YOUR APP ... SEE SIZES LISTED ABOVE */
+#if PROJ_SCREENMODE == MODE_NOBUFFER
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_NOBUFFER
+    #define PROJ_COLORDEPTH 8
+#endif
+
+#if PROJ_SCREENMODE == TASMODELOW
+    #undef PROJ_SCREENMODE
+    #define PROJ_SCREENMODE TASMODE
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_TASMODELOW
+    #define PROJ_LCDWIDTH 110
+    #define PROJ_LCDHEIGHT 88
+#endif
+
+#if PROJ_SCREENMODE == TASMODE
+    #ifndef PROJ_SCREENBUFFERSIZE
+        #define PROJ_SCREENBUFFERSIZE BUFSIZE_TASMODE
+    #endif
+    #define PROJ_COLORDEPTH 8
+    #ifndef PROJ_MAX_SPRITES
+        #define PROJ_MAX_SPRITES 100
+    #endif
+    #ifndef PROJ_TILE_W
+        #define PROJ_TILE_W 16
+    #endif // PROJ_TILEWIDTH
+    #ifndef PROJ_TILE_H
+        #define PROJ_TILE_H 16
+    #endif // PROJ_TILEHEIGHT
+    #if !defined(PROJ_LCDHEIGHT)
+        #define PROJ_LCDWIDTH 220
+        #define PROJ_LCDHEIGHT 176
+    #endif
+    #if !defined(PROJ_LINE_FILLERS)
+        #define PROJ_LINE_FILLERS       \
+                    TAS::BGTileFiller,  \
+                    TAS::SpriteFiller,  \
+                    TAS::NOPFiller,     \
+                    TAS::NOPFiller
+    #endif
+    inline constexpr uint32_t POK_TILE_W = PROJ_TILE_W;
+    inline constexpr uint32_t POK_TILE_H = PROJ_TILE_H;
+#endif
+
+#if PROJ_SCREENMODE == MODE_FAST_16COLOR
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_FAST_16COLOR
+    #define PROJ_COLORDEPTH 4
+    #define PROJ_LCDWIDTH 110
+    #define PROJ_LCDHEIGHT 88
+#endif
+
+#if PROJ_SCREENMODE == MODE13
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_MODE13
+    #define PROJ_COLORDEPTH 8
+    #define PROJ_LCDWIDTH 110
+    #define PROJ_LCDHEIGHT 88
+#endif
+
+#if PROJ_SCREENMODE == MODE15
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_MODE15
+    #define PROJ_COLORDEPTH 4
+#endif
+
+#if PROJ_SCREENMODE == MIXMODE
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_MIXMODE
+    #define PROJ_COLORDEPTH 8
+    #define PROJ_LCDWIDTH 110
+    #define PROJ_LCDHEIGHT 88
+#endif
+
+#if PROJ_SCREENMODE == MODE64
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_MODE64
+    #define PROJ_COLORDEPTH 8
+    #define PROJ_LCDWIDTH 110
+    #define PROJ_LCDHEIGHT 176
+#endif
+
+#if PROJ_SCREENMODE == MODE_HI_4COLOR || !defined(PROJ_SCREENBUFFERSIZE)
+    #define PROJ_SCREENBUFFERSIZE BUFSIZE_HI_4COLOR
+    #define PROJ_COLORDEPTH 2
+#endif
+
+#ifndef PROJ_LCDWIDTH
+    #define PROJ_LCDWIDTH POK_LCD_W
+#endif
+inline constexpr uint32_t LCDWIDTH = PROJ_LCDWIDTH;
+
+#ifndef PROJ_LCDHEIGHT
+    #define PROJ_LCDHEIGHT POK_LCD_H
+#endif
+inline constexpr uint32_t LCDHEIGHT = PROJ_LCDHEIGHT;
 
 /** AUTOMATIC COLOR DEPTH SETTING - DO NOT CHANGE **/
-#ifndef POK_COLORDEPTH
-    #define POK_COLORDEPTH 4 // 1...5 is valid
-#endif // POK_COLORDEPTH
+#ifndef PROJ_COLORDEPTH
+    #define PROJ_COLORDEPTH 4
+#endif // PROJ_COLORDEPTH
+inline constexpr uint32_t POK_COLORDEPTH = PROJ_COLORDEPTH;
 
-/** AUTOMATIC SCREEN BUFFER SIZE CALCULATION - DO NOT CHANGE **/
-#if POK_SCREENMODE == 0
-    #define POK_SCREENBUFFERSIZE 0
-    #define LCDWIDTH POK_LCD_W
-    #define LCDHEIGHT POK_LCD_H
-    #define POK_BITFRAME 0
-#elif POK_SCREENMODE == MODE_HI_MONOCHROME
-    #define POK_SCREENBUFFERSIZE POK_LCD_W*POK_LCD_H*POK_COLORDEPTH/8
-    #define LCDWIDTH POK_LCD_W
-    #define LCDHEIGHT POK_LCD_H
-    #define POK_BITFRAME 4840
-#elif POK_SCREENMODE == MODE_HI_16COLOR
-    #define POK_SCREENBUFFERSIZE POK_LCD_W*POK_LCD_H/2
-    #define LCDWIDTH 220
-    #define LCDHEIGHT 176
-    #define POK_BITFRAME 4840
-#elif POK_SCREENMODE == MODE_HI_4COLOR || POK_SCREENMODE == MODE_HI_GRAYSCALE
-    #define POK_SCREENBUFFERSIZE POK_LCD_W*POK_LCD_H*POK_COLORDEPTH/4
-    #define LCDWIDTH POK_LCD_W
-    #define LCDHEIGHT POK_LCD_H
-    #define POK_BITFRAME 4840
-#elif POK_SCREENMODE == MODE_FAST_16COLOR
-    #define POK_SCREENBUFFERSIZE (POK_LCD_W/2)*(POK_LCD_H/2)*POK_COLORDEPTH/8
-    #define XCENTER POK_LCD_W/4
-    #define YCENTER POK_LCD_H/4
-    #define LCDWIDTH 110
-    #define LCDHEIGHT 88
-    #define POK_BITFRAME 1210
-#elif POK_SCREENMODE == MODE_256_COLOR
-    #define POK_SCREENBUFFERSIZE 72*58
-    #define XCENTER 36
-    #define YCENTER 29
-    #define LCDWIDTH 72
-    #define LCDHEIGHT 58
-    #define POK_BITFRAME 72*58
-#elif POK_SCREENMODE == MODE_GAMEBUINO_16COLOR
-    #define POK_SCREENBUFFERSIZE (84/2)*(48/2)*POK_COLORDEPTH/8
-    #define LCDWIDTH 84
-    #define LCDHEIGHT 48
-    #define POK_BITFRAME 504
-#elif POK_SCREENMODE == MODE_ARDUBOY_16COLOR
-    #define POK_SCREENBUFFERSIZE (128/2)*(64/2)*POK_COLORDEPTH/8
-    #define LCDWIDTH 128
-    #define LCDHEIGHT 64
-    #define POK_BITFRAME 1024
-#elif POK_SCREENMODE == MODE_LAMENES
-    #define POK_SCREENBUFFERSIZE (128)*(120)*POK_COLORDEPTH/8
-    #define LCDWIDTH 128
-    #define LCDHEIGHT 120
-    #define POK_BITFRAME 1210
-#elif POK_SCREENMODE == MODE_GAMEBOY
-    #define POK_SCREENBUFFERSIZE (160)*(144)/4
-    #define LCDWIDTH 160
-    #define LCDHEIGHT 144
-    #define POK_BITFRAME 2880
-#elif POK_SCREENMODE == MODE13
-    #define POK_SCREENBUFFERSIZE 110*88
-    #define LCDWIDTH 110
-    #define LCDHEIGHT 88
-    #define POK_BITFRAME 110*88
-#else
-    #define POK_SCREENBUFFERSIZE 0
-#endif // POK_SCREENMODE
+inline constexpr uint32_t BUFSIZE_NOBUFFER = 0;
+inline constexpr uint32_t BUFSIZE_TASMODE = 220;
+inline constexpr uint32_t BUFSIZE_TASMODELOW = 110;
+inline constexpr uint32_t BUFSIZE_HI_4COLOR = ((POK_LCD_H+1)*POK_LCD_W)*POK_COLORDEPTH/8;
+inline constexpr uint32_t BUFSIZE_FAST_16COLOR = (((POK_LCD_H/2)+1)*POK_LCD_W/2)*POK_COLORDEPTH/8;
+inline constexpr uint32_t BUFSIZE_MODE13 = 110*88;
+inline constexpr uint32_t BUFSIZE_MODE15 = 0x4BA0;
+inline constexpr uint32_t BUFSIZE_MODE64 = 220*88;
+inline constexpr uint32_t BUFSIZE_MIXMODE = 110*88;
 
-#ifndef POK_STRETCH
-    #define POK_STRETCH 1 // Stretch Gamebuino display
+#ifndef PROJ_SCREENBUFFERSIZE
+    #define PROJ_SCREENBUFFERSIZE 0
 #endif
-#ifndef POK_FPS
-    #define POK_FPS 20
+inline constexpr uint32_t POK_SCREENBUFFERSIZE = PROJ_SCREENBUFFERSIZE;
+
+inline constexpr uint32_t XCENTER = LCDWIDTH / 2;
+inline constexpr uint32_t YCENTER = LCDHEIGHT / 2;
+
+#ifndef PROJ_PALETTE_SIZE
+    #define PROJ_PALETTE_SIZE 1<<PROJ_COLORDEPTH
 #endif
-#define POK_FRAMEDURATION 1000/POK_FPS
+#if (PROJ_SCREENMODE == MIXMODE)
+	#define PROJ_PALETTE_SIZE 276;
+#endif
+
+inline constexpr uint32_t PALETTE_SIZE = PROJ_PALETTE_SIZE;
 
 /** SCROLL TEXT VS. WRAP AROUND WHEN PRINTING **/
+#if PROJ_NO_AUTO_SCROLL
+#define SCROLL_TEXT 0
+#else
 #define SCROLL_TEXT 1
+#endif
 
 /** AUDIO **/
-#define POK_AUD_PIN P2_19
-#define POK_AUD_PWM_US 31
-#define POK_AUD_FREQ 11025 //16000 //14285 //24000 // 14285 // 57143 // 8000 //11025// audio update frequency in Hz
-#define POK_CINC_MULTIPLIER 2 // multiplies synth cycle table
-#define POK_STREAMFREQ_HALVE  0  // if true, stream update freq is half audio freq
-#define POK_STREAM_LOOP 1 //master switch
 
-#define POK_USE_DAC 1 // is DAC in use in this project
+#define POK_ALT_MIXING 1 // NEW! alternative more accurate mixing, uses more CPU
+
+#define POK_AUD_PIN P2_19
+#define POK_AUD_PWM_US 15 //31 //Default value 31
+#ifndef PROJ_AUD_FREQ
+    #define POK_AUD_FREQ 22050 //Valid values: 8000, 11025, 16000, 22050 // audio update frequency in Hz
+#else
+    #define POK_AUD_FREQ PROJ_AUD_FREQ
+#endif
+
+#if PROJ_AUD_TRACKER > 0
+    #define POK_AUD_TRACKER 1
+#endif
+
 #define POK_USE_EXT 0 // if extension port is in use or not
-#define POK_STREAM_TO_DAC 1  // 1 = stream from SD to DAC, synthesizer to PWM,  0 = opposite
+
+#define POK_STREAMFREQ_HALVE  0  // if true, stream update freq is half audio freq
+#ifdef PROJ_STREAM_LOOP
+#define POK_STREAM_LOOP PROJ_STREAM_LOOP //master switch
+#else
+#define POK_STREAM_LOOP 1 //loop by default
+#endif
+
+#ifndef PROJ_USE_DAC
+    #define POK_USE_DAC 1 // is DAC in use in this project
+#else
+    #define POK_USE_DAC PROJ_USE_DAC
+#endif
+#ifndef PROJ_USE_PWM
+    #define POK_USE_PWM 1 // is PWM for audio used in this project
+#else
+    #define POK_USE_PWM PROJ_USE_PWM
+#endif
+
+#ifndef PROJ_STREAM_TO_DAC
+    #define POK_STREAM_TO_DAC 1  // 1 = stream from SD to DAC, synthesizer to PWM,  0 = opposite
+#else
+    #define POK_STREAM_TO_DAC PROJ_STREAM_TO_DAC
+#endif
 
 
 #define POK_BACKLIGHT_PIN P2_2
-#define POK_BACKLIGHT_INITIALVALUE 0.3f
+#define POK_BACKLIGHT_INITIALVALUE 30 // 30%
 
 #define POK_BATTERY_PIN1 P0_22 // read battery level through these pins
 #define POK_BATTERY_PIN2 P0_23
@@ -395,8 +399,41 @@
 #define BBIT     5
 #define CBIT     6
 
+/** ALLOW PWMOUT TO EXT0 (SOLVE CONFLICT WITH BACKLIGHT **/
+
+#define POK_EXT0_PWM_ENABLE 1
+
 /** LOADER UPDATE MECHANISM **/
 #define POK_ENABLE_LOADER_UPDATES 1 //1=check for new loader versions on SD and update if new found
 
-#endif // POKITTO_SETTINGS_H
+#ifndef SPRITE_COUNT
+#define SPRITE_COUNT 4  // The default max sprite count
+#endif
+
+/** SYSTEM SETTINGS ADDRESSES IN EEPROM **/
+#define EESETTINGS_FILENAME         3980 // 0xF8C 20bytes last filename requested
+#define EESETTINGS_VOL              4000 // 0xFA0 Volume
+#define EESETTINGS_DEFAULTVOL       4001 // 0xFA1 Default volume
+#define EESETTINGS_LOADERWAIT       4002 //	0xFA2 Loader wait in sec
+#define EESETTINGS_VOLWAIT          4003 // 0xFA3 Volume screen wait in sec
+#define EESETTINGS_TIMEFORMAT       4004 // 0xFA4 Time format (0=24 hrs, 1 = 12 hrs)
+#define EESETTINGS_LASTHOURSSET     4005 // 0xFA5 Last time set in hours
+#define EESETTINGS_LASTMINUTESSET   4006 // 0xFA6 Last time set in minutes
+#define EESETTINGS_DATEFORMAT       4007 // 0xFA7 Date format (0=D/M/Y, 1 = M/D/Y)
+#define EESETTINGS_LASTDAYSET       4008 // 0xFA8 Last Day set
+#define EESETTINGS_LASTMONTHSET     4009 // 0xFA9 Last Month set
+#define EESETTINGS_LASTYEARSET      4010 // 0xFAA Last Year set (counting from 2000)
+#define EESETTINGS_RTCALARMMODE     4011 // 0xFAB RTC alarm mode (0=disabled, 1=enabled, 3 = enabled with sound)
+#define EESETTINGS_RESERVED         4012 // 0xFAC 4bytes reserved (additional sleep configuration)
+#define EESETTINGS_WAKEUPTIME       4016 // 0xFB0 Wake-up time as 32bit value for 1Hz RTC clock
+#define EESETTINGS_SKIPINTRO	    4020 // 0xFB4 Show Logo (0-Yes, 1-No, 2-Yes then switch to 0, 3-No, then switch to 1)
+
+/** USB SERIAL PORT **/
+
+#ifndef PROJ_VENDOR_ID
+#define POK_VENDOR_ID 0x04D8
+#define POK_PRODUCT_ID 0x000A
+#endif
+
+
 
