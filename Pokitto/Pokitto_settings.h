@@ -61,6 +61,13 @@
     #define PROJ_BUTTONS_POLLING 1
 #endif
 
+
+#ifndef PROJ_FLIP_SCREEN
+    #define POK_FLIP_SCREEN 0
+#else
+    #define POK_FLIP_SCREEN PROJ_FLIP_SCREEN
+#endif
+
 #ifndef PROJ_ENABLE_SOUND
     #define POK_ENABLE_SOUND 1
 #else
@@ -239,6 +246,7 @@ inline constexpr uint32_t POK_LCD_H = 176;
     inline constexpr uint32_t POK_TILE_H = PROJ_TILE_H;
 #endif
 
+
 #if PROJ_SCREENMODE == MODE_FAST_16COLOR
     #define PROJ_SCREENBUFFERSIZE BUFSIZE_FAST_16COLOR
     #define PROJ_COLORDEPTH 4
@@ -314,6 +322,10 @@ inline constexpr uint32_t YCENTER = LCDHEIGHT / 2;
 #ifndef PROJ_PALETTE_SIZE
     #define PROJ_PALETTE_SIZE 1<<PROJ_COLORDEPTH
 #endif
+#if (PROJ_SCREENMODE == MIXMODE)
+	#define PROJ_PALETTE_SIZE 276;
+#endif
+
 inline constexpr uint32_t PALETTE_SIZE = PROJ_PALETTE_SIZE;
 
 /** SCROLL TEXT VS. WRAP AROUND WHEN PRINTING **/
