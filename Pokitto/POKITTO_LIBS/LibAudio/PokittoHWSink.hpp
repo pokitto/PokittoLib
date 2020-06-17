@@ -1,11 +1,21 @@
 #pragma once
 
+#include "SoftwareI2C.h"
+
 #include <MemOps>
 
 #pragma GCC diagnostic ignored "-Wattributes"
 #define NAKED __attribute__((naked))
 
 namespace Audio {
+
+    inline void setVolume(u32 v){
+        v = 255 - (192 - v) * (192 - v) * 255 / 36864;
+        u32 hwVolume = v ? (v>>1) | 0xF : 0;
+        u32 swVolume = v ? (v | 0xF) + 1 : 0;
+        SoftwareI2C(P0_4, P0_5).write(0x5e, hwVolume);
+        audio_volume = swVolume;
+    }
 
     inline void NAKED mix(void* dst, const void* src, std::size_t count) {
         __asm__ volatile (
@@ -39,13 +49,8 @@ namespace Audio {
     }
 
     template <u32 channelCount, u32 sampleRate>
-    class Sink {
-        static constexpr u32 bufferCount = 2;
+    class Sink : public BaseSink<Sink<channelCount, sampleRate>, channelCount> {
         static constexpr u32 TIMER_32_0_IRQn = 18;
-
-        internal::Channel channels[channelCount];
-        u8 wasInit = false;
-
         void enableDAC() {
             volatile auto *PIO1 = (volatile unsigned int *) 0x40044060;
             volatile auto *PIO2 = (volatile unsigned int *) 0x400440F0;
@@ -60,36 +65,14 @@ namespace Audio {
             *SET1 = 1 << 17;
         }
 
-/* * /
-        static void IRQ(void){
-            if(!(LPC_CT32B0->IR & (1 << 1)))
-                return;
-            LPC_CT32B0->IR = (1 << 1);
-
-            auto currentBuffer = audio_playHead >> 9;
-            if(!audio_state[currentBuffer])
-                return;
-
-            writeDAC(audio_buffer[audio_playHead]);
-            audio_playHead++;
-
-            auto nextBuffer = audio_playHead >> 9;
-
-            if(currentBuffer != nextBuffer){
-                audio_state[currentBuffer] = 0;
-                if(nextBuffer == bufferCount){
-                    audio_playHead = 0;
-                }
-            }
-        }
-/*/
         static NAKED void IRQ(){
             __asm__ volatile(
                 ".syntax unified" "\n"
                 "ldr r0, =0x40014000" "\n"
                 "ldr r1, [r0]" "\n"
                 "lsls r1, 30" "\n"
-                "bpl 2f" "\n"
+                "bpl 3f" "\n"
+                
                 "ldr r1, =2" "\n"
                 "str r1, [r0]" "\n"
                 "ldr r2, =audio_playHead" "\n"
@@ -97,7 +80,19 @@ namespace Audio {
                 "ldr r3, [r2]" "\n"
 
                 "ldrb r0, [r1, r3]" "\n"
-                "ldr r1, =0xA0000020 + 28\n"
+
+                "ldr r1, =audio_volume" "\n"
+                "ldr r1, [r1]" "\n"
+                "subs r0, 128" "\n"
+                "muls r0, r1" "\n"
+                "asrs r0, 8" "\n"
+                "adds r0, 128" "\n"
+                "asrs r1, r0, 8" "\n"
+                "beq 2f" "\n"
+                "asrs r1, 30" "\n"
+                "mvns r0, r1" "\n"
+
+                "2:ldr r1, =0xA0000020 + 28\n"
                 "strb r0, [r1]      \n"
                 "lsrs r0, 1         \n"
                 "strb r0, [r1, 1]   \n"
@@ -122,33 +117,43 @@ namespace Audio {
                 "str r3, [r2]"      "\n"
                 "lsrs r3, 9"        "\n"
                 "cmp r3, r0"        "\n"
-                "beq 2f"            "\n"
+                "beq 3f"            "\n"
                 "movs r3, 0"        "\n"
                 "ldr r1, =audio_state"      "\n"
                 "strb r3, [r1, r0]"         "\n"
-                "2: bx lr" "\n"
+
+                "3: bx lr" "\n"
                 );
         }
-/* */
 
-        void (*nextHook)(bool);
-
+    public:
         void init(){
-            if(wasInit)
+            NVIC_SetVector((IRQn_Type)TIMER_32_0_IRQn, (uint32_t)IRQ);
+            if(this->wasInit)
                 return;
+            this->wasInit = true;
 
-            for(int i=0; i<channelCount; ++i){
-                channels[i].source = nullptr;
+            Audio::setVolume(Pokitto::Sound::globalVolume);
+
+            // enable amp
+            LPC_GPIO_PORT->SET[1] = (1 << 17);
+
+            this->channels[0].source =
+                +[](u8 *buffer, void *ptr){
+                     MemOps::set(buffer, 128, 512);
+                 };
+
+            for(int i=1; i<channelCount; ++i){
+                this->channels[i].source = nullptr;
             }
 
-            audio_state[0] = 0;
-            audio_state[1] = 0;
+            for(int i=0; i<bufferCount; ++i){
+                audio_state[i] = 0;
+            }
             audio_playHead = 0;
 
-
-            MemOps::set(audio_buffer, 127, 1024);
+            MemOps::set(audio_buffer, 128, 1024);
             enableDAC();
-            wasInit = true;
 
             /* Initialize 32-bit timer 0 clock */
             LPC_SYSCON->SYSAHBCLKCTRL |= (1 << 9);
@@ -181,52 +186,6 @@ namespace Audio {
             NVIC_EnableIRQ((IRQn_Type)TIMER_32_0_IRQn);
         }
 
-    public:
-
-        Sink(){
-            nextHook = Pokitto::Core::updateHook;
-            Pokitto::Core::updateHook =
-                +[](bool isFrame){
-                     auto self = reinterpret_cast<Sink*>(Audio::internal::sinkInstance);
-                     self->update();
-                     self->nextHook(isFrame);
-                 };
-            Audio::internal::sinkInstance = this;
-            Audio::connect =
-                +[](u32 channelNumber, void *data, Source source){
-                     auto self = reinterpret_cast<Sink*>(Audio::internal::sinkInstance);
-                     self->connect(channelNumber, data, source);
-                 };
-        }
-
-        void connect(u32 channelNumber, void *data, Source source){
-            init();
-            if(channelNumber >= channelCount)
-                channelNumber = channelCount-1;
-            channels[channelNumber].source = source;
-            channels[channelNumber].data = data;
-        }
-
-        void update(){
-            init();
-            for(u32 i = 0; i < bufferCount; ++i){
-                if(audio_state[i])
-                    continue;
-                u8 *buffer = audio_buffer + i * 512;
-                for(u32 c = 0; c < channelCount; ++c){
-                    auto source = channels[c].source;
-                    if(source){
-                        source(buffer, channels[c].data);
-                    }
-                }
-                audio_state[i] = 1;
-            }
-        }
-
-        template <u32 channel>
-        void stop(){
-            channels[channel].source = nullptr;
-        }
-
+        Sink() = default;
     };
 }

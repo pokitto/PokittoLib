@@ -144,6 +144,10 @@ public:
     #if PROJ_SCREENMODE != TASMODE
     static uint8_t screenbuffer[];
     #endif
+    #if (PROJ_SCREENMODE == MIXMODE)
+        static uint8_t subMode; // for mixed mode switching
+        static uint8_t scanType[88]; // for mixed screen mode
+    #endif
 
     // PROPERTIES
     static void setColorDepth(uint8_t);
@@ -448,10 +452,7 @@ public:
     /** external small printf, source in PokittoPrintf.cpp **/
     static int printf(const char *format, ...);
 
-#if (PROJ_SCREENMODE == MIXMODE)
-    static uint8_t subMode; // for mixed mode switching
-    static uint8_t scanType[]; // for mixed screen mode
-#endif
+
 #if PROJ_SCREENMODE == TASMODE
     static inline uint32_t TASMask = 0; // enable all rows
 #endif

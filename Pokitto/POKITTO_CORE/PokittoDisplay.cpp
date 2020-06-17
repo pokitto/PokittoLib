@@ -99,6 +99,10 @@ int16_t Display::cursorX, Display::cursorY;
 uint8_t Display::m_w, Display::m_h;
 uint8_t Display::fontWidth, Display::fontHeight;
 bool Display::textWrap=true;
+#if (PROJ_SCREENMODE == MIXMODE)
+    uint8_t Display::subMode; // for mixed mode switching
+    uint8_t Display::scanType[88]; // for mixed screen mode
+#endif
 
 uint8_t Display::persistence = 0;
 uint16_t Display::color = 1;
@@ -122,6 +126,9 @@ uint8_t Display::height = LCDHEIGHT;
 #ifndef POK_SIM
 uint8_t __attribute__((section (".bss"))) __attribute__ ((aligned)) Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
 #else
+#if (POK_SCREENMODE == MIXMODE)
+	uint8_t Display::scanType[88]; // scanline bit depth indicator
+#endif
 uint8_t Display::screenbuffer[POK_SCREENBUFFERSIZE]; // maximum resolution
 #endif // POK_SIM
 #endif // TASMODE
@@ -207,8 +214,12 @@ void Display::setCursor(int16_t x,int16_t y) {
 void Display::update(bool useDirectDrawMode) {
 
     if (!useDirectDrawMode)
-        lcdRefresh(m_scrbuf, useDirectDrawMode);
-
+	    #if POK_SCREENMODE == MIXMODE
+		  lcdRefreshMixMode(m_scrbuf, paletteptr, scanType);
+	    #else
+		  lcdRefresh(m_scrbuf, useDirectDrawMode);
+	    #endif
+  
     /** draw FPS if visible **/
     #ifdef PROJ_SHOW_FPS_COUNTER
     printFPS();

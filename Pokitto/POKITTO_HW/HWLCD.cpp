@@ -67,7 +67,6 @@ static inline void setup_data_16(uint16_t data)
     CLR_MASK_P2;
 }
 
-
 /**************************************************************************/
 /*!
   @brief  Write a command to the lcd, 16-bit bus
@@ -155,7 +154,11 @@ void Pokitto::setDRAMpoint(uint8_t xptr, uint8_t yoffset)
 */
 /**************************************************************************/
 void Pokitto::lcdPrepareRefresh() {
-    write_command(0x03); write_data(0x1038);
+    #if POK_FLIP_SCREEN
+    write_command(0x03); write_data(0x1008); // normal
+    #else
+    write_command(0x03); write_data(0x1038); // normal
+    #endif
     write_command(0x20);  // Horizontal DRAM Address
     write_data(0);  // 0
     write_command(0x21);  // Vertical DRAM Address
@@ -544,7 +547,7 @@ void Pokitto::lcdRefreshMixMode(const uint8_t * screenBuffer, const uint16_t * p
         {
             // point to beginning of line in data
             d = &screenBuffer[110 * scanTypeIndex];
-            for(uint8_t x = 0; x < (220 / 2); ++x)
+            for(uint8_t x = 0; x < 110; ++x) // 110 = 220/2
             {
                 uint32_t color = static_cast<uint32_t>(palettePointer[*d]) << 3;
                 ++d;
@@ -557,17 +560,15 @@ void Pokitto::lcdRefreshMixMode(const uint8_t * screenBuffer, const uint16_t * p
         }
         case 1:
         {
-            for(uint8_t x = 0; x < (220 / 4); ++x)
+            for(uint8_t x = 0; x < 55; ++x) // 55 = 220/4
             {
                 uint8_t t = *d;
                 ++d;
-
                 uint32_t color1 = static_cast<uint32_t>(palettePointer[256 + (t >> 4)]) << 3;
                 scanline[lineIndex] = color1;
                 ++lineIndex;
                 scanline[lineIndex] = color1;
                 ++lineIndex;
-
                 uint32_t color2 = static_cast<uint32_t>(palettePointer[256 + (t & 0xF)]) << 3;
                 scanline[lineIndex] = color2;
                 ++lineIndex;
@@ -578,20 +579,16 @@ void Pokitto::lcdRefreshMixMode(const uint8_t * screenBuffer, const uint16_t * p
         }
         case 2:
         {
-            for(uint8_t x = 0; x < (220 / 4); ++x)
+            for(uint8_t x = 0; x < 55; ++x) // 55 = 220/4
             {
                 uint8_t t = *d;
                 ++d;
-
                 scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 6) & 0x03)]) << 3;
                 ++lineIndex;
-
                 scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 4) & 0x03)]) << 3;
                 ++lineIndex;
-
                 scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 2) & 0x03)]) << 3;
                 ++lineIndex;
-
                 scanline[lineIndex] = static_cast<uint32_t>(palettePointer[272 + ((t >> 0) & 0x03)]) << 3;
                 ++lineIndex;
             }
@@ -605,17 +602,17 @@ void Pokitto::lcdRefreshMixMode(const uint8_t * screenBuffer, const uint16_t * p
         for (uint8_t i = 0; i < 220;)
         {
             WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
-                WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE	WRITE_SCANLINE
+            WRITE_SCANLINE  WRITE_SCANLINE	WRITE_SCANLINE
 		}
 
 #undef WRITE_SCANLINE
