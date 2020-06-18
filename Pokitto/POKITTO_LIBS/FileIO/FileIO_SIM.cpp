@@ -125,7 +125,7 @@ char* getFirstDirEntry(char* path) {
     diropened = true;
     int err = tinydir_readfile(&tinydir, &tinyfile);
     if (err==-1) return 0;
-    while (tinyfile.name || tinyfile.is_dir) {
+    while (tinyfile.is_dir) {
         if (tinyfile.is_dir) {
             tinyfile.name[8]='.';
             tinyfile.name[9]='D';
@@ -212,7 +212,7 @@ char* getFirstFile(char* ext, char* path) {
     diropened = true;
     int b = tinydir_readfile(&tinydir, &tinyfile);
     if (b==-1) return 0;
-    while (tinyfile.name || tinyfile.is_dir) {
+    while (tinyfile.is_dir) {
         int a=0;
         a = strcmp((const char*)tinyfile.extension,(const char*)ext); // returns 0 if strings are identical
         if (!strcmp(ext,"")) a=0;
@@ -267,6 +267,7 @@ void fileWriteBytes(uint8_t * b, uint16_t n) {
 uint16_t fileReadBytes(uint8_t * b, uint16_t n) {
     if(fp)
         return fread(b, 1, n, fp);
+    return -1;
 }
 
 void fileSeekAbsolute(long n) {
