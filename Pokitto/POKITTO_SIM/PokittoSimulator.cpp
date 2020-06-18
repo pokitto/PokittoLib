@@ -307,7 +307,8 @@ void Simulator::refreshDisplay() {
     #endif // POK_USE_CONSOLE
 
     #if POK_ARDUBOY_SUPPORT==0
-    pollButtons();
+    // This crashes on MacOS because SDL_AddTimer's will be executed on another thread.
+    //pollButtons();
     #endif // POK_ARDUBOY_SUPPORT
 
     uint16_t p=0;
@@ -334,6 +335,7 @@ void Simulator::refreshDisplay() {
             }
     }
     /* update the SDL hardware texture with the pixels */
+    // Xcode reports a potential multithreading issue here.
     SDL_UpdateTexture(sdlTex, NULL, lcdpixels, SIMW * sizeof (Uint32));
     #else
     for (uint16_t x=0; x < SIMW; x++) {

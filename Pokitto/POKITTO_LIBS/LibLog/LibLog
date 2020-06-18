@@ -107,8 +107,7 @@ inline void LOGD(Enum e){
 
 template <
     typename Arg,
-    typename ... Args,
-    std::enable_if_t<sizeof...(Args), int> = 0
+    typename ... Args
     >
 void LOG(const Arg& arg, const Args& ... args){
     LOG(arg);
@@ -117,8 +116,7 @@ void LOG(const Arg& arg, const Args& ... args){
 
 template <
     typename Arg,
-    typename ... Args,
-    std::enable_if_t<sizeof...(Args), int> = 0
+    typename ... Args
     >
 void LOGD(const Arg& arg, const Args& ... args){
 #ifndef RELEASE

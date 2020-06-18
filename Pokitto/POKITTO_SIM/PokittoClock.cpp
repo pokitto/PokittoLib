@@ -60,7 +60,7 @@ void Core::initClock() {
 unsigned int Core::getTime() {
     //pt_count += SDL_GetTicks()-pt_count;
     pt_count = SDL_GetTicks();
-    return pt_count;
+    return static_cast<unsigned int>(pt_count);
 }
 
 void Core::wait(uint16_t ms) {

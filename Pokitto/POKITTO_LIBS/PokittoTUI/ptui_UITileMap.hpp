@@ -129,7 +129,7 @@ namespace ptui
         // - Doesn't change the delta.
         OPT_SMALL void drawBox(int firstColumn, int firstRow, int lastColumn, int lastRow) noexcept
         {
-            if ((firstColumn > lastColumn) || (firstRow > firstRow))
+            if ((firstColumn > lastColumn) || (firstRow > lastRow))
                 return ;
             if ((firstColumn == lastColumn) || (firstRow == lastRow))
             {

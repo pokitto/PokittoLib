@@ -152,7 +152,9 @@ void initSound() {
     int res=initSDLAudio();
     #if POK_USE_CONSOLE
     if(res) console.AddMessage(MSOURCE_SOUND,MSG_INIT_OK);
-    else console.AddMessage(MSOURCE_SOUND,MSG_INIT_OK);
+    else console.AddMessage(MSOURCE_SOUND,MSG_INIT_KO);
+    #else
+    (void)res;
     #endif // POK_USE_CONSOLE
 }
 

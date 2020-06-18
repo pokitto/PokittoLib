@@ -127,8 +127,6 @@ namespace ptui
                                 const Color8* tileImageP,
                                 Color8*& pixelP) noexcept
         {
-            auto tileColorOffset = tileP[deltaIndexOffset];
-
             for (auto i = tileWidth; i > 0; i--, pixelP++, tileImageP++)
             {
                 auto tilePixel = originalColorLUT[*tileImageP];

@@ -42,12 +42,16 @@ struct EERef{
         : index( index )                 {}
 
     //Access/read members.
-    uint8_t operator*() const            { return eeprom_read_byte((uint16_t*)index ); }
+    uint8_t operator*() const            { return eeprom_read_byte(reinterpret_cast<uint16_t*>(index)); }
     operator const uint8_t() const       { return **this; }
 
     //Assignment/write members.
     EERef &operator=( const EERef &ref ) { return *this = *ref; }
-    EERef &operator=( uint8_t in )       { return eeprom_write_byte((uint16_t*)index, in ), *this;  }
+    EERef &operator=( uint8_t in )
+    {
+        eeprom_write_byte(reinterpret_cast<uint16_t*>(index), in );
+        return *this;
+    }
     EERef &operator +=( uint8_t in )     { return *this = **this + in; }
     EERef &operator -=( uint8_t in )     { return *this = **this - in; }
     EERef &operator *=( uint8_t in )     { return *this = **this * in; }
@@ -68,12 +72,14 @@ struct EERef{
     /** Postfix increment/decrement **/
     uint8_t operator++ (int){
         uint8_t ret = **this;
-        return ++(*this), ret;
+        ++(*this);
+        return ret;
     }
 
     uint8_t operator-- (int){
         uint8_t ret = **this;
-        return --(*this), ret;
+        --(*this);
+        return ret;
     }
 
     int index; //Index of current EEPROM cell.
@@ -93,15 +99,15 @@ struct EEPtr{
         : index( index )                {}
 
     operator const int() const          { return index; }
-    EEPtr &operator=( int in )          { return index = in, *this; }
+    EEPtr &operator=( int in )          { index = in; return *this; }
 
     //Iterator functionality.
     bool operator!=( const EEPtr &ptr ) { return index != ptr.index; }
     EERef operator*()                   { return index; }
 
     /** Prefix & Postfix increment/decrement **/
-    EEPtr& operator++()                 { return ++index, *this; }
-    EEPtr& operator--()                 { return --index, *this; }
+    EEPtr& operator++()                 { ++index; return *this; }
+    EEPtr& operator--()                 { --index; return *this; }
     EEPtr operator++ (int)              { return index++; }
     EEPtr operator-- (int)              { return index--; }
 
