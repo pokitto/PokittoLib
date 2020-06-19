@@ -106,7 +106,8 @@ extern void lcdRefreshMode13(const unsigned char*, uint16_t*, uint8_t);
 extern void lcdRefreshT1(uint8_t*, uint8_t*, uint8_t*, uint16_t*);
 /** Update LCD from TAS tile mode */
 extern void lcdRefreshTASMode(const uint16_t*);
-
+/* mixmode */
+extern void lcdRefreshMixMode(const uint8_t *, const uint16_t*, const uint8_t*);
 
 
 }
