@@ -305,7 +305,7 @@ void pixelCopySolid4BPP(uint8_t *line, const uint8_t *src, uint32_t w, uint32_t 
         auto b = (sx&1)?
             src[sx>>1]&0xF:
             src[sx>>1]>>4;
-        if(b) *line = b;
+        *line = b;
         line++;
         sx++;
     }
