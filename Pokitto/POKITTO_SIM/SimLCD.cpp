@@ -1353,3 +1353,66 @@ void flushLine2X(const uint16_t *palette, const uint8_t *line){
     Pokitto::blitWord(palette[line[i]]);
   }
 }
+
+void Pokitto::lcdRefreshMixMode(const uint8_t * screenBuffer, const uint16_t * palettePointer, const uint8_t * scanType)
+{
+uint16_t scanline[220];
+
+setDRAMptr(0,0);
+
+
+
+    // point to beginning of line in data
+    const uint8_t * d = screenBuffer;
+    for(uint32_t y = 0; y < 176; ++y)
+    {
+        // find colours in one scanline
+        uint8_t scanTypeIndex = y >> 1;
+        uint8_t lineIndex = 0;
+        switch(scanType[scanTypeIndex])
+        {
+            case 0:
+            {
+				// Point to the beginning of the line in data
+				d = &screenBuffer[110 * scanTypeIndex];
+	            for(int x=0; x<110; x++){
+					int color = static_cast<uint32_t>(palettePointer[*d++]);
+					setup_data_16(color);CLR_WR;SET_WR;
+					setup_data_16(color);CLR_WR;SET_WR;
+	            }
+	            break;
+            }
+
+            case 1:
+            {
+	            for(int x=0; x<55; x++){
+    				const uint8_t value = *d++;
+                    uint32_t color1 = palettePointer[((value >> 4) & 0x0F)+256];
+                    uint32_t color2 = palettePointer[((value >> 0) & 0x0F)+256];
+					setup_data_16(color1);CLR_WR;SET_WR;
+					setup_data_16(color1);CLR_WR;SET_WR;
+					setup_data_16(color2);CLR_WR;SET_WR;
+					setup_data_16(color2);CLR_WR;SET_WR;
+                }
+    			break;
+            }
+
+            case 2:
+            {
+	            for(int x=0; x<55; x++){
+    				const uint8_t value = *d++;
+    				uint32_t color1 = palettePointer[((value >> 6) & 0x03)+272];
+	    			uint32_t color2 = palettePointer[((value >> 4) & 0x03)+272];
+		    		uint32_t color3 = palettePointer[((value >> 2) & 0x03)+272];
+			    	uint32_t color4 = palettePointer[((value >> 0) & 0x03)+272];
+					setup_data_16(color1);CLR_WR;SET_WR;
+					setup_data_16(color2);CLR_WR;SET_WR;
+					setup_data_16(color3);CLR_WR;SET_WR;
+					setup_data_16(color4);CLR_WR;SET_WR;
+                }
+    			break;
+            }
+
+        }
+    }
+}
