@@ -53,7 +53,7 @@
 
 
 /** data types */
-#ifndef _RPCNDR_H
+#if !defined(_RPCNDR_H) && !defined(__RPCNDR_H__)
 typedef bool boolean;
 #endif
 typedef uint8_t byte;
