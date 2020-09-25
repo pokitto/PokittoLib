@@ -122,8 +122,6 @@ const char * Simulator::screencapPath;
 
 uint64_t recordingstarttime=0;
 
-SDL_Event sdlEvent2;
-
 Uint32 rfrsh_callback(Uint32 interval, void *param)
 {
     if (simulator.isRunning()) {
@@ -180,9 +178,9 @@ void Simulator::initSDLGfx() {
     DestR.w = SIMW; DestR.h = SIMH;
     #else
     #if SIM_PORTRAIT != 1
-    DestR.x = 0; DestR.y = 0; DestR.w = SIMW*SIMZOOM; DestR.h = SIMH*SIMZOOM;SrcR.w = SIMW*SIMZOOM; SrcR.h = SIMH*SIMZOOM;
+    DestR.x = 0; DestR.y = 0; DestR.w = SIMW*SIMZOOM; DestR.h = SIMH*SIMZOOM;SrcR.w = SIMW; SrcR.h = SIMH;
     #else
-    DestR.x = 0; DestR.y = 0; DestR.w = SIMH*SIMZOOM; DestR.h = SIMW*SIMZOOM;SrcR.w = SIMH*SIMZOOM; SrcR.h = SIMW*SIMZOOM;
+    DestR.x = 0; DestR.y = 0; DestR.w = SIMH*SIMZOOM; DestR.h = SIMW*SIMZOOM;SrcR.w = SIMH; SrcR.h = SIMW;
     #endif // SIM_PORTRAIT
     #endif // SIM_SHOWDEVICE
     #endif // SIM_FULLSCREEN
@@ -223,11 +221,11 @@ void Simulator::initSDLGfx() {
     ww = SIMH*SIMZOOM;
     #endif // SIM_PORTRAIT
     #endif // SIM_SHOWDEVICE
-    sdlSimWin = SDL_CreateWindow("Pokitto simulator", 100, 100, ww, wh, SDL_WINDOW_SHOWN);
+    sdlSimWin = SDL_CreateWindow("Pokitto simulator", 100, 100, ww, wh, SDL_WINDOW_SHOWN|SDL_WINDOW_ALLOW_HIGHDPI);
     #else
     ww = 1280;
     wh = 800;
-    sdlSimWin = SDL_CreateWindow("Pokitto simulator", 0, 0, ww, wh, SDL_WINDOW_SHOWN|SDL_WINDOW_FULLSCREEN);
+    sdlSimWin = SDL_CreateWindow("Pokitto simulator", 0, 0, ww, wh, SDL_WINDOW_SHOWN|SDL_WINDOW_FULLSCREEN|SDL_WINDOW_ALLOW_HIGHDPI);
     #endif
 
 
@@ -383,7 +381,12 @@ void Simulator::refreshDisplay() {
     SDL_RenderCopy(sdlRen, Background_Tx, NULL, NULL);
     #endif
     /** LCD **/
+#if SIM_SHOWDEVICE > 0
     SDL_RenderCopy(sdlRen, sdlTex, &SrcR, &DestR);
+#else
+    // This fixes a temporary issue on SDL/MacOS 10.15.x/Retina display where the SDL_RenderCopy will forget to 2x the Dest Rect.
+    SDL_RenderCopy(sdlRen, sdlTex, &SrcR, nullptr);
+#endif
     SDL_RenderPresent(sdlRen);
 
     // Create an empty RGB surface that will be used to create the screenshot bmp file
