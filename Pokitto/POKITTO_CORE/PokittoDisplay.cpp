@@ -495,20 +495,40 @@ void Display::drawRect(int16_t x, int16_t y, int16_t w, int16_t h) {
 void Display::fillTriangle(int16_t x0, int16_t y0,
         int16_t x1, int16_t y1,
         int16_t x2, int16_t y2) {
-    int16_t a, b, y, last;
+
+    int a, b, y, last, tmp;
+
+    a = getWidth();
+    b = getHeight();
+    if (x0 < 0 && x1 < 0 && x2 < 0) return;
+    if (x0 >= a && x1 > a && x2 > a) return;
+    if (y0 < 0 && y1 < 0 && y2 < 0) return;
+    if (y0 >= b && y1 > b && y2 > b) return;
 
     // Sort coordinates by Y order (y2 >= y1 >= y0)
     if (y0 > y1) {
-        swapWT(int16_t,y0, y1);
-        swapWT(int16_t,x0, x1);
+        tmp = y0;
+        y0 = y1;
+        y1 = tmp;
+        tmp = x0;
+        x0 = x1;
+        x1 = tmp;
     }
     if (y1 > y2) {
-        swapWT(int16_t,y2, y1);
-        swapWT(int16_t,x2, x1);
+        tmp = y2;
+        y2 = y1;
+        y1 = tmp;
+        tmp = x2;
+        x2 = x1;
+        x1 = tmp;
     }
     if (y0 > y1) {
-        swapWT(int16_t,y0, y1);
-        swapWT(int16_t,x0, x1);
+        tmp = y0;
+        y0 = y1;
+        y1 = tmp;
+        tmp = x0;
+        x0 = x1;
+        x1 = tmp;
     }
 
     if (y0 == y2) { // Handle awkward all-on-same-line case as its own thing
@@ -521,15 +541,12 @@ void Display::fillTriangle(int16_t x0, int16_t y0,
         return;
     }
 
-    int16_t
-    dx01 = x1 - x0,
-            dy01 = y1 - y0,
-            dx02 = x2 - x0,
-            dy02 = y2 - y0,
-            dx12 = x2 - x1,
-            dy12 = y2 - y1,
-            sa = 0,
-            sb = 0;
+    int dx01 = x1 - x0,
+        dx02 = x2 - x0,
+        dy02 = (1 << 16) / (y2 - y0),
+        dx12 = x2 - x1,
+        sa = 0,
+        sb = 0;
 
     // For upper part of triangle, find scanline crossings for segments
     // 0-1 and 0-2.  If y1=y2 (flat-bottomed triangle), the scanline y1
@@ -540,31 +557,49 @@ void Display::fillTriangle(int16_t x0, int16_t y0,
     if (y1 == y2) last = y1; // Include y1 scanline
     else last = y1 - 1; // Skip it
 
-    for (y = y0; y <= last; y++) {
-        a = x0 + sa / dy01;
-        b = x0 + sb / dy02;
-        sa += dx01;
-        sb += dx02;
-        /* longhand:
-        a = x0 + (x1 - x0) * (y - y0) / (y1 - y0);
-        b = x0 + (x2 - x0) * (y - y0) / (y2 - y0);
-         */
-        if (a > b) swapWT(int16_t,a, b);
-        drawFastHLine(a, y, b - a + 1);
+    y = y0;
+
+    if (y0 != y1) {
+        int dy01 = (1 << 16) / (y1 - y0);
+
+        for (y = y0; y <= last; y++) {
+            a = x0 + ((sa * dy01) >> 16);
+            b = x0 + ((sb * dy02) >> 16);
+            sa += dx01;
+            sb += dx02;
+            /* longhand:
+               a = x0 + (x1 - x0) * (y - y0) / (y1 - y0);
+               b = x0 + (x2 - x0) * (y - y0) / (y2 - y0);
+            */
+            if (a > b) {
+                tmp = a;
+                a = b;
+                b = tmp;
+            }
+            drawFastHLine(a, y, b - a);
+        }
     }
 
     // For lower part of triangle, find scanline crossings for segments
     // 0-2 and 1-2.  This loop is skipped if y1=y2.
-    sa = dx12 * (y - y1);
-    sb = dx02 * (y - y0);
-    for (; y <= y2; y++) {
-        a = x1 + sa / dy12;
-        b = x0 + sb / dy02;
-        sa += dx12;
-        sb += dx02;
+    if (y1 != y2) {
+        int dy12 = (1 << 16) / (y2 - y1);
 
-        if (a > b) swapWT(int16_t,a, b);
-        drawFastHLine(a, y, b - a + 1);
+        sa = dx12 * (y - y1);
+        sb = dx02 * (y - y0);
+        for (; y <= y2; y++) {
+            a = x1 + ((sa * dy12) >> 16);
+            b = x0 + ((sb * dy02) >> 16);
+            sa += dx12;
+            sb += dx02;
+
+            if (a > b) {
+                tmp = a;
+                a = b;
+                b = tmp;
+            }
+            drawFastHLine(a, y, b - a);
+        }
     }
 }
 
