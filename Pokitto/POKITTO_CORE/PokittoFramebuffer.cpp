@@ -452,7 +452,7 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     }
 
     void (*drawPixel[])(int16_t,int16_t, uint8_t) = {drawPixelBG, drawPixelFG};
-    uint8_t colors[] = {bgcolor, color};
+    uint8_t colors[] = {static_cast<uint8_t>(bgcolor), static_cast<uint8_t>(color)};
 
 #if PROJ_ARDUBOY > 0
 #else
