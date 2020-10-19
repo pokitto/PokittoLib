@@ -219,7 +219,7 @@ void Display::drawColumn(int x, int sy, int ey){
     }    
 
     if (ey >= height)
-        ey = height;
+        ey = height -1;
 
     if (sy < 0)
         sy = 0;
@@ -241,7 +241,7 @@ void Display::drawRow(int x0, int x1, int y){
     }    
 
     if (x1 >= width) //clamp to the border
-        x1 = width;
+        x1 = width -1;
 
     if (x0 < 0) //clamp to the border
         x0 = 0;
