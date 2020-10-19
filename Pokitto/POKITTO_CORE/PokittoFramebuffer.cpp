@@ -210,15 +210,24 @@ uint8_t Display::clipLine(int16_t *x0, int16_t *y0, int16_t *x1, int16_t *y1){
 }
 
 void Display::drawColumn(int x, int sy, int ey){
-    if (static_cast<uint32_t>(sy)>=height && static_cast<uint32_t>(ey)>=height) return; //completely out of bounds
-    if (static_cast<uint32_t>(x)>=width) return; //completely out of bounds
-    if (sy>ey) {
-        int y=sy;
-        sy=ey;
-        ey=y; // swap around so that x0 is less than x1
-    }
+    if(x < 0 || x >= width) return;
+
+    if (sy > ey) {
+        int y = sy;
+        sy = ey;
+        ey = y; // swap around so that sy is less than ey
+    }    
+
+    if (ey >= height)
+        ey = height;
+
+    if (sy < 0)
+        sy = 0;
+
+    if (sy == ey) return; //nothing to do here
+    
     for (int y=sy; y <= ey; y++) {
-        drawPixel(x,y);
+        drawPixelRaw(x,y,color);
     }
 }
 
