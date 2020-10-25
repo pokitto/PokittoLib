@@ -65,8 +65,8 @@ namespace Audio {
             }
             audio_playHead = 0;
 
-            SDL_PauseAudioDevice(audioDevice, 1);
-            SDL_CloseAudioDevice(audioDevice);
+            // SDL_PauseAudioDevice(audioDevice, 1);
+            // SDL_CloseAudioDevice(audioDevice);
 
             SDL_AudioSpec wanted;
             SDL_memset(&wanted, 0, sizeof(wanted)); /* or SDL_zero(want) */

@@ -133,8 +133,6 @@ namespace Audio {
                 return;
             this->wasInit = true;
 
-            Audio::setVolume(Pokitto::Sound::globalVolume);
-
             // enable amp
             LPC_GPIO_PORT->SET[1] = (1 << 17);
 

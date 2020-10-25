@@ -161,13 +161,8 @@ int SDL_main(){
     return main();
 }
 
-
-#if POK_ENABLE_SOUND > 0
-void (*Core::updateHook)(bool) = +[](bool){ Sound::updateStream(); };
-#else
 void (*Core::updateHook)(bool) = +[](bool){};
-#endif
-    
+
 bool Core::run_state; // this definition needed
 
 /** Components */
