@@ -34,23 +34,12 @@
 */
 /**************************************************************************/
 
-
-#ifndef POKITTOSOUND_H
-#define POKITTOSOUND_H
-
+#pragma once
 #include <stdint.h>
 #include "Pokitto_settings.h"
 #include "GBcompatibility.h"
 #include "PokittoFakeavr.h"
 #include "PokittoGlobs.h"
-
-extern void pokPauseStream();
-extern void pokPlayStream();
-extern uint8_t pokStreamPaused();
-
-//volume levels
-#define GLOBVOL_SHIFT 5 //shift global volume to allow for finer increments
-
 
 #ifndef MAX_VOL_TEST
     #define VOLUME_SPEAKER_MAX 255 //((8<<GLOBVOL_SHIFT)-1)
@@ -68,19 +57,6 @@ extern uint8_t pokStreamPaused();
 #define VOLUME_STEP 8
 #endif
 
-
-//commands
-#define CMD_VOLUME 0
-#define CMD_INSTRUMENT 1
-#define CMD_SLIDE 2
-#define CMD_ARPEGGIO 3
-#define CMD_TREMOLO 4
-
-#define STR_PLAYING 0x1
-#define STR_VISUALIZER  0x2
-#define STR_LOOP    0x4
-#define STR_PAUSED  0x8
-
 namespace Pokitto {
 
 /** Sound class.
@@ -92,171 +68,67 @@ namespace Pokitto {
  */
 
 /** discrete_vol* are needed for more accurate volume control levels on hardware **/
-extern uint8_t discrete_vol;
-extern const uint8_t discrete_vol_levels[];
-extern const uint8_t discrete_vol_hw_levels[];
-extern const uint8_t discrete_vol_multipliers[];
-
-extern void audio_IRQ();  // audio interrupt
+inline uint8_t discrete_vol = 0;
 
 class Sound {
 private:
-    static uint16_t volumeMax;
+    static inline uint16_t volumeMax = VOLUME_HEADPHONE_MAX;
 
 public:
-    static const uint8_t *sfxDataPtr;
-    static const uint8_t *sfxEndPtr;
-    static uint8_t sfxBytePos;
-    static bool sfxIs4bitSamples;
-    static void playSFX( const uint8_t *sfx, uint32_t length ){
-        #if POK_STREAMING_MUSIC > 0
-        //streamon=1; // force enable stream
-        sfxIs4bitSamples = false;
-        sfxDataPtr = sfx;
-        sfxEndPtr = sfx + length;
-        sfxBytePos = 0;
-        #endif
-    };
-    static void playSFX4bit( const uint8_t *sfx, uint32_t length ){
-        #if POK_STREAMING_MUSIC > 0
-        //streamon=1; // force enable stream
-        sfxIs4bitSamples = true;
-        sfxDataPtr = sfx;
-        sfxEndPtr = sfx + length;
-        sfxBytePos = 0;
-        #endif
-    };
+    static void playSFX( const uint8_t *sfx, uint32_t length );
+    static void playSFX4bit( const uint8_t *sfx, uint32_t length );
+    static void begin();
 
-	static void begin();
+    // Headphonemode
+    static inline uint8_t headPhoneLevel = 1; // a workaround to disappearing sound at low volume
 
-	// Headphonemode
-	static uint8_t headPhoneLevel; // a workaround to disappearing sound at low volume
-	static void setMaxVol(int16_t);
-    static uint16_t getMaxVol();
+    static void setMaxVol(int v) {
+        if (v < 0) v = 0; //prevent nasty wraparound
+        if (v > VOLUME_SPEAKER_MAX) {
+            v = VOLUME_SPEAKER_MAX;
+        }
+        volumeMax = v;
+        setVolume(globalVolume);
+    }
+
+    static uint16_t getMaxVol() {
+        return volumeMax;
+    }
+
     static void volumeUp();
     static void volumeDown();
 
     // Synth using samples support
     static void loadSampleToOsc(uint8_t os, uint8_t* sampdata, uint32_t sampsize);
 
-	// Original functions
-	static void updateStream();
+    // Original functions
     static void playTone(uint8_t os, int frq, uint8_t amp, uint8_t wav,uint8_t arpmode);
     static void playTone(uint8_t os, uint16_t freq, uint8_t volume, uint32_t duration);
-    static uint8_t ampIsOn();
-    static void ampEnable(uint8_t);
-    static int playMusicStream(char* filename, uint8_t options);
-    static int playMusicStream(char* filename);
+
+    static uint8_t ampIsOn(){ return true; }
+    static void ampEnable(uint8_t){}
+
+    static int playMusicStream(const char* filename, uint8_t options){
+        if(!options)
+            return playMusicStream(filename);
+        return 0;
+    }
+
+    static int playMusicStream(const char* filename);
     static int playMusicStream();
     static void pauseMusicStream();
     static uint32_t getMusicStreamElapsedSec();
     static uint32_t getMusicStreamElapsedMilliSec();
 
-	static uint16_t globalVolume;
-	static void setVolume(int16_t volume);
-	static uint16_t getVolume();
+    static inline uint16_t globalVolume;
+    static void setVolume(int16_t volume){
+	if (volume<0) volume = 0;
+	globalVolume = volume;
+    }
 
-#if (POK_GBSOUND > 0)
-	// GB compatibility functions
-	static void playTrack(const uint16_t* track, uint8_t channel);
-	static void updateTrack(uint8_t channel);
-	static void updateTrack();
-	static void stopTrack(uint8_t channel);
-	static void stopTrack();
-	static void changePatternSet(const uint16_t* const* patterns, uint8_t channel);
-	static bool trackIsPlaying[NUM_CHANNELS];
-
-	static void playPattern(const uint16_t* pattern, uint8_t channel);
-	static void changeInstrumentSet(const uint16_t* const* instruments, uint8_t channel);
-	static void updatePattern(uint8_t i);
-	static void updatePattern();
-	static void setPatternLooping(bool loop, uint8_t channel);
-	static void stopPattern(uint8_t channel);
-	static void stopPattern();
-	static bool patternIsPlaying[NUM_CHANNELS];
-
-	static void command(uint8_t cmd, uint8_t X, int8_t Y, uint8_t i);
-	static void playNote(uint8_t pitch, uint8_t duration, uint8_t channel);
-	static void updateNote();
-	static void updateNote(uint8_t i);
-	static void stopNote(uint8_t channel);
-	static void stopNote();
-
-	static uint8_t outputPitch[NUM_CHANNELS];
-	static int8_t outputVolume[NUM_CHANNELS];
-
-	static void setMasterVolume(uint8_t);
-	static uint8_t GetMasterVolume();
-
-	static void setVolume(int8_t volume, uint8_t channel);
-	static uint8_t getVolume(uint8_t channel);
-
-	static void playOK();
-	static void playCancel();
-	static void playTick();
-
-	static uint8_t prescaler;
-
-	static void setChannelHalfPeriod(uint8_t channel, uint8_t halfPeriod);
-
-
-	static void generateOutput(); //!\\ DO NOT USE
-
-
-
-#if (NUM_CHANNELS > 0)
-	//tracks data
-	static uint16_t *trackData[NUM_CHANNELS];
-	static uint8_t trackCursor[NUM_CHANNELS];
-	static uint16_t **patternSet[NUM_CHANNELS];
-	static int8_t patternPitch[NUM_CHANNELS];
-
-	// pattern data
-	static uint16_t *patternData[NUM_CHANNELS];
-	static uint16_t **instrumentSet[NUM_CHANNELS];
-	static bool patternLooping[NUM_CHANNELS];
-	static uint16_t patternCursor[NUM_CHANNELS];
-
-	// note data
-	static uint8_t notePitch[NUM_CHANNELS];
-	static uint8_t noteDuration[NUM_CHANNELS];
-	static int8_t noteVolume[NUM_CHANNELS];
-	static bool notePlaying[NUM_CHANNELS];
-
-	// commands data
-	static int8_t commandsCounter[NUM_CHANNELS];
-	static int8_t volumeSlideStepDuration[NUM_CHANNELS];
-	static int8_t volumeSlideStepSize[NUM_CHANNELS];
-	static uint8_t arpeggioStepDuration[NUM_CHANNELS];
-	static int8_t arpeggioStepSize[NUM_CHANNELS];
-	static uint8_t tremoloStepDuration[NUM_CHANNELS];
-	static int8_t tremoloStepSize[NUM_CHANNELS];
-
-
-	// instrument data
-	static uint16_t *instrumentData[NUM_CHANNELS];
-	static uint8_t instrumentLength[NUM_CHANNELS]; //number of steps in the instrument
-	static uint8_t instrumentLooping[NUM_CHANNELS]; //how many steps to loop on when the last step of the instrument is reached
-	static uint16_t instrumentCursor[NUM_CHANNELS]; //which step is being played
-	static uint8_t instrumentNextChange[NUM_CHANNELS]; //how many frames before the next step
-
-	//current step data
-	static int8_t stepVolume[NUM_CHANNELS];
-	static uint8_t stepPitch[NUM_CHANNELS];
-
-	static uint8_t chanVolumes[NUM_CHANNELS];
-#endif
-
-#endif // Gamebuino sound
-
-	static void updateOutput();
+    static uint16_t getVolume(){
+	return globalVolume;
+    }
 };
 
 }
-
-#endif // POKITTOSOUND_H
-
-
-
-
-

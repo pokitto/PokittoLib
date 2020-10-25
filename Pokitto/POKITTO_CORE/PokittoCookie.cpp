@@ -131,9 +131,6 @@ bool Cookie::saveCookie() {
     _block=0;
     _block=findMyNextBlock();
     for (int i=0; i<_datasize; i++) writeQueue(*p++);
-    #if POK_ENABLE_SOUND
-    Pokitto::soundInit(true); //re-init sound
-    #endif
     return true;
 }
 

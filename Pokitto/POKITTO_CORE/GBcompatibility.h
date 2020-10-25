@@ -55,7 +55,10 @@
 
 //SETTINGS YOU CAN EDIT
 
+#ifndef NUM_CHANNELS
 #define NUM_CHANNELS 3 //number of sound channels, between 0 and 4
+#endif
+
 #define DISPLAY_ROT NOROT //set to NOROT, ROTCCW, ROT180 or ROTCW. Can be used to play in portrait mode.
 
 #if (PROJ_GAMEBUINO > 0)

@@ -70,8 +70,14 @@ namespace Audio {
 
     public:
         template<u32 channel = 0>
-        static RAWFileSource& play(File& fileRef, u32 length){
+        static RAWFileSource &getSourceInstance(){
             static RAWFileSource sd;
+            return sd;
+        }
+
+        template<u32 channel = 0>
+        static RAWFileSource &play(File& fileRef, u32 length){
+            auto& sd = getSourceInstance<channel>();
             sd.file = &fileRef;
             sd.offset = fileRef.tell();
             sd.start = sd.offset;
@@ -82,7 +88,7 @@ namespace Audio {
         }
         
         template<u32 channel = 0>
-        static RAWFileSource* play(const char *name){
+        static RAWFileSource *play(const char *name){
             static ALIGNED u8 ram[sizeof(File)];
             static bool init = false;
             if(!init){
@@ -107,6 +113,10 @@ namespace Audio {
         RAWFileSource& setLoop(bool doesLoop){
             loop = doesLoop;
             return *this;
+        }
+
+        u32 getPosition(){
+            return (offset - start);
         }
 
         bool ended(){
