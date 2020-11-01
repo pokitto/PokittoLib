@@ -35,7 +35,7 @@ namespace Audio {
             _note = Note().osc(0).volume(64);
             _bass = Note().osc(1).volume(128);
 
-            constexpr u32 percDuration = (60000/4/120) * (PROJ_AUD_FREQ / 1000) / 16;
+            constexpr u32 percDuration = (60000/4/120) * (POK_AUD_FREQ / 1000) / 16;
 
             _percussion[0] = Note()
                 .osc(2)
@@ -100,7 +100,7 @@ namespace Audio {
                 if(isPercussion){
                     _percussion[
                         data[position++]%4
-                        ].play<channel>();
+                        ].template play<channel>();
                 }else{
                     isBass = noteNumber >> 7;
                     noteNumber &= 0x7F;
@@ -115,9 +115,9 @@ namespace Audio {
 
                     if(!isBass){
                         if(noteNumber <= 88){
-                            _note.duration(duration * (PROJ_AUD_FREQ / 1000))
+                            _note.duration(duration * (POK_AUD_FREQ / 1000))
                                 .noteNumber(noteNumber)
-                                .play<channel>();
+                                .template play<channel>();
                         }
 
                         Schedule::after<timerId>(
@@ -125,9 +125,9 @@ namespace Audio {
                             &SimpleTuneSource::play,
                             *this);
                     }else if(noteNumber <= 88){
-                        _bass.duration(duration * (PROJ_AUD_FREQ / 1000))
+                        _bass.duration(duration * (POK_AUD_FREQ / 1000))
                             .noteNumber(noteNumber)
-                            .play<channel>();
+                            .template play<channel>();
                     }
                 }
             }while(isBass || isPercussion);
