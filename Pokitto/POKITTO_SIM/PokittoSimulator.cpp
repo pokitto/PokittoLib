@@ -82,7 +82,7 @@ bool PromptForChar( const char* prompt, char& readch )
 using namespace Pokitto;
 
 /** Internal to this compilation unit */
-SDL_AudioSpec wanted, got;
+// SDL_AudioSpec wanted, got;
 SDL_AudioDeviceID audioDevice;
 uint8_t sound_on;
 unsigned int aud_position; /* which sample we are up to */
@@ -659,58 +659,8 @@ void Simulator::CleanUp() {
     cleaned = true; // prevent running cleanup many times
 }
 
-
-void simAudioCallback(void* userdata, uint8_t* stream, int len) {
-  uint8_t* buf = (uint8_t*)stream;
-  unsigned long j =0;
-  Pokitto::Sound s;
-  /** create sound buffer by using the ISR **/
-  for (j=0;j<wanted.samples;j++) {
-
-        /** Move outputted sound to output buffer **/
-        if (sound_on == false) soundbyte = 0;
-        else fakeISR(); /** create sample **/
-        //*buf++ = ((soundbyte*(s.getVolume()>>GLOBVOL_SHIFT))/16);
-        *buf++ = soundbyte*s.getVolume()>>8;
-        #if SOUNDCAPTURE > 0
-        soundfilebuffer[activesfbuf][sfbufindex++] = soundbyte;
-        if (sfbufindex == SFBUFSIZE) {
-            activesfbuf = 1-activesfbuf; // toggle other buffer
-            sfbufindex =0;
-        }
-        #endif // SOUNDCAPTURE
-    }
-  return;
-}
-
 int Simulator::initSDLAudio() {
-    #if SOUNDCAPTURE > 0
-    soundfile = fopen("c:\\screencap\\soundcapture.raw", "wb");
-    #endif // SOUNDCAPTURE
-
     SDL_InitSubSystem(SDL_INIT_AUDIO);
-    SDL_memset(&wanted, 0, sizeof(wanted)); /* or SDL_zero(want) */
-    wanted.freq = SAMPLE_RATE;
-    wanted.format = AUDIO_U8;
-    wanted.channels = 1;
-    wanted.samples = NUMFRAMES;
-    wanted.callback = simAudioCallback;
-    audioDevice = SDL_OpenAudioDevice(NULL, 0, &wanted, &got, SDL_AUDIO_ALLOW_FREQUENCY_CHANGE);
-    if (audioDevice == 0) {
-        printf("Failed to open audio: %s\n", SDL_GetError());
-        return 0;
-    } else {
-        if (got.format != wanted.format) { // we let this one thing change.
-            printf("We didn't get the right audio format.\n");
-        return 0;
-        }
-    }
-    aud_len = got.freq * 5; /* 5 seconds */
-    aud_position = 0;
-    aud_frequency = 1.0 * SAMPLE_RATE / got.freq; /* 1.0 to make it a float */
-    aud_volume = 255; /* ~1/5 max volume */
-
-    SDL_PauseAudioDevice(audioDevice, 0); /* play! */
     return 1;
 }
 

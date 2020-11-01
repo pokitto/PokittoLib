@@ -80,44 +80,9 @@
     #define POK_SOUND_BUFFERED PROJ_SOUND_BUFFERED
 #endif
 
-#ifndef PROJ_GBSOUND
-    #if POK_ENABLE_SOUND > 0
-        #define POK_GBSOUND 0
-    #endif
-#else
-    #define POK_GBSOUND PROJ_GBSOUND
-    //#define NUM_CHANNELS 2
+#ifndef NUM_CHANNELS
+    #define NUM_CHANNELS 2
 #endif
-
-#ifdef PROJ_ENABLE_SFX
-	#ifndef PROJ_ENABLE_SOUND
-		#define PROJ_ENABLE_SOUND 1
-	#endif
-
-	#ifndef PROJ_STREAMING_MUSIC
-		#define PROJ_STREAMING_MUSIC 1
-	#endif
-
-	#ifndef PROJ_ENABLE_SD_MUSIC
-		#define PROJ_DISABLE_SD_STREAMING 1
-	#endif
-#endif
-
-#ifdef PROJ_ENABLE_SD_MUSIC
-	#ifndef PROJ_ENABLE_SOUND
-		#define PROJ_ENABLE_SOUND 1
-	#endif
-
-	#ifndef PROJ_STREAMING_MUSIC
-		#define PROJ_STREAMING_MUSIC 1
-	#endif
-#endif
-
-#ifndef PROJ_STREAMING_MUSIC
-        #define POK_STREAMING_MUSIC 0 // Define true to stream music from SD
-#else
-    #define POK_STREAMING_MUSIC PROJ_STREAMING_MUSIC
-#endif // PROJ_STREAMING_MUSIC
 
 #ifndef PROJ_ENABLE_SYNTH
     #define POK_ENABLE_SYNTH 0

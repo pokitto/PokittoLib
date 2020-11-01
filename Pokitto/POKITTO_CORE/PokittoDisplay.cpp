@@ -1115,7 +1115,7 @@ void Display::lcdRefresh(const unsigned char* scr, bool useDirectDrawMode) {
 #endif
 
 #if PROJ_SCREENMODE == MODE_HI_4COLOR
-    lcdRefreshMode1(scr, 0, 0, 220, 176, paletteptr);
+    lcdRefreshMode1(scr, paletteptr);
 #endif
 
 #if PROJ_SCREENMODE == MODE13

@@ -33,6 +33,8 @@
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 /**************************************************************************/
+#ifdef DISABLED
+
 #ifndef HWSOUND_H
 #define HWSOUND_H
 
@@ -129,8 +131,6 @@ namespace Pokitto {
 extern uint8_t streambyte, streamon, HWvolume;
 
 extern float pwm2; //virtual pwm output
-extern void soundInit();
-extern void soundInit(uint8_t);
 extern void dac_write(uint8_t value);
 extern uint8_t ampIsOn();
 extern void ampEnable(uint8_t v);
@@ -190,3 +190,4 @@ extern void pokSoundBufferedIRQ();
 #endif //HWSOUND_H
 
 
+#endif

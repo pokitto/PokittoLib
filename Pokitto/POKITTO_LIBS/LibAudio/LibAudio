@@ -27,7 +27,7 @@ namespace Audio {
 
     namespace internal {
 
-        inline void *sinkInstance;
+        inline void *sinkInstance = nullptr;
 
     }
 
@@ -50,6 +50,9 @@ namespace Audio {
         void (*nextHook)(bool);
 
         BaseSink(){
+            if(Audio::internal::sinkInstance)
+                return;
+
             Audio::internal::sinkInstance = this;
 
             Audio::connect =
