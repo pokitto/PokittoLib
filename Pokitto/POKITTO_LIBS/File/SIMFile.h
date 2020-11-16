@@ -66,11 +66,11 @@ public:
         auto len = ftell(handle);
         fsetpos(handle, &pos);
 
-        return len;
+        return static_cast<uint32_t>(len);
     }
 
     uint32_t tell(){
-        return ftell(handle);
+        return static_cast<uint32_t>(ftell(handle));
     }
 
     File& seek(uint32_t offset){
@@ -80,12 +80,12 @@ public:
 
     uint32_t read( void *ptr, uint32_t count ){
         if(!*this) return 0;
-        return fread(ptr, 1, count, handle);
+        return static_cast<uint32_t>(fread(ptr, 1, count, handle));
     }
 
     uint32_t write( const void *ptr, uint32_t count ){
         if(!*this) return 0;
-        return fwrite(ptr, 1, count, handle);
+        return static_cast<uint32_t>(fwrite(ptr, 1, count, handle));
     }
 
     template< typename T, size_t S > uint32_t read( T (&data)[S] ){
