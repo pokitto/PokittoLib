@@ -178,7 +178,7 @@ void emptyPatches(){
     patch[i].vol = 127;
     patch[i].on = true; patch[i].wave = 1; patch[i].echo = 0; patch[i].count = 0; patch[i].cinc =0;
     patch[i].attack = 0; patch[i].loop = 0; patch[i].adsrphase = 0; patch[i].adsr = 0; patch[i].decay = 20;
-    patch[i].pitchbend = 0; patch[i].bendrate = 0; patch[i].maxbend = 0; patch[i].sustain = 0; patch[i].release = 0, patch[i].overdrive = 0, patch[i].kick = 0;
+    patch[i].pitchbend = 0; patch[i].bendrate = 0; patch[i].maxbend = 0; patch[i].sustain = 0; patch[i].release = 0; patch[i].overdrive = 0; patch[i].kick = 0;
     }
 }
 
