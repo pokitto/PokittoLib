@@ -5,15 +5,15 @@ extern SDL_AudioDeviceID audioDevice;
 
 namespace Audio {
     inline void setVolume(u32 v){
-        v = v * v * 256 / 36864;
+        v = v * v * 256 / 65536;
         audio_volume = v;
     }
 
     inline void mix(void *dst, const void* src, std::size_t count) {
-        char *buffer = static_cast<char*>(dst);
-        const char *tmp = static_cast<const char*>(src);
+        u8 *buffer = static_cast<u8*>(dst);
+        const u8 *tmp = static_cast<const u8*>(src);
         for(u32 i=0; i<count; ++i){
-            s32 v = s32(buffer[i]) + s32(tmp[i]) - 127;
+            s32 v = s32(buffer[i]) + s32(tmp[i]) - 128;
             if(v < 0) v = 0;
             else if(v > 0xFF) v = 0xFF;
             buffer[i] = v;
