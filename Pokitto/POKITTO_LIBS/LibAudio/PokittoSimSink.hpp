@@ -5,7 +5,7 @@ extern SDL_AudioDeviceID audioDevice;
 
 namespace Audio {
     inline void setVolume(u32 v){
-        v = v * v * 256 / 36864;
+        v = v * v * 256 / 65536;
         audio_volume = v;
     }
 
