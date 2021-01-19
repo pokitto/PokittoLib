@@ -487,35 +487,35 @@ void Pokitto::lcdRefreshMode1(const uint8_t *scrbuf, const uint16_t *paletteptr)
         palette[(i<<1)  ] = static_cast<uint32_t>(paletteptr[i>>2]) << 3;
     }
     
-#if POK_PERSISTENCE > 0
-    updateMode1Clear(palette, scrbuf, POK_CLEAR_SCREEN);
-#else
-    updateMode1(palette, scrbuf);
-#endif
+    if(POK_PERSISTENCE > 0){
+        updateMode1Clear(palette, scrbuf, POK_CLEAR_SCREEN);
+    }else{
+        updateMode1(palette, scrbuf);
+    }
 }
 
 void Pokitto::lcdRefreshMode2(const uint8_t* scrbuf, const uint16_t* paletteptr ) {
-#if POK_PERSISTENCE > 0
-    updateMode2Clear(paletteptr, scrbuf, POK_CLEAR_SCREEN);
-#else
-    updateMode2(paletteptr, scrbuf);
-#endif
+    if(POK_PERSISTENCE == 0){
+        updateMode2Clear(paletteptr, scrbuf, POK_CLEAR_SCREEN);
+    }else{
+        updateMode2(paletteptr, scrbuf);
+    }
 }
 
 void Pokitto::lcdRefreshMode13(const uint8_t* scrbuf, const uint16_t* paletteptr, uint8_t offset){
-#if POK_PERSISTENCE > 0
-    updateMode13Clear(paletteptr, scrbuf, offset, POK_CLEAR_SCREEN);
-#else
-    updateMode13(paletteptr, scrbuf, offset);
-#endif
+    if(POK_PERSISTENCE == 0){
+        updateMode13Clear(paletteptr, scrbuf, offset, POK_CLEAR_SCREEN);
+    }else{
+        updateMode13(paletteptr, scrbuf, offset);
+    }
 }
 
 void Pokitto::lcdRefreshMode64( const uint8_t* scrbuf, const uint16_t* paletteptr ){
-#if POK_PERSISTENCE > 0
-    updateMode64Clear(paletteptr, scrbuf, POK_CLEAR_SCREEN);
-#else
-    updateMode64(paletteptr, scrbuf);
-#endif
+    if(POK_PERSISTENCE == 0){
+        updateMode64Clear(paletteptr, scrbuf, POK_CLEAR_SCREEN);
+    }else{
+        updateMode64(paletteptr, scrbuf);
+    }
 }
 
 void Pokitto::lcdRefreshMode15(const uint8_t* scrbuf, const uint16_t* paletteptr){
@@ -523,11 +523,11 @@ void Pokitto::lcdRefreshMode15(const uint8_t* scrbuf, const uint16_t* paletteptr
     for( uint32_t i=0; i<16; ++i )
         palette[i] = uint32_t(paletteptr[i]) << 3;
 
-#if POK_PERSISTENCE > 0
-    updateMode15Clear(palette, scrbuf, POK_CLEAR_SCREEN);
-#else
-    updateMode15(palette, scrbuf);
-#endif
+    if(POK_PERSISTENCE == 0){
+        updateMode15Clear(palette, scrbuf, POK_CLEAR_SCREEN);
+    }else{
+        updateMode15(palette, scrbuf);
+    }
 }
 
 void Pokitto::lcdRefreshMixMode(const uint8_t * screenBuffer, const uint16_t * palettePointer, const uint8_t * scanType)
