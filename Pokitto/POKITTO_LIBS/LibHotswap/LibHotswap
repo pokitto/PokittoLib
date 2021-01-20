@@ -1,0 +1,104 @@
+#pragma once
+
+#include "iap.h"
+#include <File>
+
+/// LibHotswap
+///    Loads data from the SD card into Flash.
+///    Hotswap size should be a multiple of 512. Size will be rounded up otherwise.
+///
+/// Example usage:
+/*
+
+// Simple Hotswap loading:
+uint8_t *data1 = Hotswap<5*1024>::load("file.bin"); // Loads file.bin into a 5KB flash block
+uint8_t *data2 = Hotswap<5*1024>::load("file2.bin"); // Overwrites data1 with file2.bin as it uses the same 5KB flash block
+
+// Async Hotswap loading:
+// Create a 5kb hotswap area, load Dude.bin asynchronously into it and call callback when ready
+Hotswap<5*1024>::load("Dude.bin", +[](const uint8_t *ptr){
+  printf("Done! Dude loaded into 0x%x!\n", ptr);
+});
+
+ */
+
+template<std::size_t bytes>
+class Hotswap {
+    inline static constexpr std::size_t pageCount = (bytes >> 9) + (bytes & 0x1FF ? 1 : 0);
+
+#ifdef POKITTO
+    
+    inline static const __attribute__ ((aligned(4096))) uint8_t swapData[pageCount * 512] = {};
+    
+    static bool loadPage(File &file, std::size_t page){
+        uint8_t buffer[512];
+        auto count = file.read(buffer);
+        if (count) {
+            if (CopyPageToFlash(reinterpret_cast<uintptr_t>(swapData) + page * 512, buffer)) {
+                printf("Error on page %d\n", page);
+            }
+        }
+        return count == 512;
+    }
+    
+#else
+
+    inline static const uint8_t swapData[pageCount * 512] = {};
+    
+    static bool loadPage(File &file, std::size_t page){
+        return file.read(swapData + page * 512, 512) == 512;
+    }
+    
+#endif
+    
+public:
+    static const uint8_t *load(const char *fileName){
+        File file;
+        file.openRO(fileName);
+        return load(file);
+    }
+    
+    static const uint8_t *load(File &file){
+        if (!file) return nullptr;
+        for( int page = 0; page < pageCount; ++page) loadPage(file, page);
+        return swapData;
+    }
+    
+    static const bool load(const char *fileName, void(*cb)(const uint8_t*)){
+        static void (*nextHook)(bool) = nullptr;
+        static File *file = nullptr;
+        static uint32_t page;
+        static void (*onCompleteCB)(const uint8_t*);
+        
+        page = 0;
+        onCompleteCB = cb;
+
+        file = new File();
+        file->openRO(fileName);
+        if (!*file) {
+            delete file;
+            file = nullptr;
+            return false;
+        }
+        
+        if(file->size() > pageCount * 512){
+            printf("File too big for Hotswap\n");
+            delete file;
+            file = nullptr;
+            return false;
+        }
+        
+        if (nextHook) return true;
+        nextHook = Pokitto::Core::updateHook;
+        Pokitto::Core::updateHook =
+            +[](bool isFrame){
+                if (isFrame && file && !loadPage(*file, page++)){
+                    delete file;
+                    file = nullptr;
+                    onCompleteCB(swapData);
+                }
+                nextHook(isFrame);
+            };
+        return true;
+    }
+};
