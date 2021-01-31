@@ -11,6 +11,10 @@ protected:
 
 private:
     unsigned char deletionFlag = 0;
+
+#if PROJ_DEVELOPER_MODE != 0
+    const char *debug;
+#endif
     
 #ifdef POKITTO
 
@@ -48,7 +52,7 @@ private:
 
         operator bool () { return !!_ptr; }
 
-        Entity &operator *() { return *_ptr; }
+        Entity *operator *() { return _ptr; }
         Entity *operator -> (){ return _ptr; }
 
         iterator& operator ++ () {
@@ -70,6 +74,14 @@ private:
     };
 
 public:
+    const char *getName() {
+#if PROJ_DEVELOPER_MODE != 0
+        return debug;
+#else
+        return "";
+#endif
+    }
+
     static void push() {
         stack[stackSize++] = first;
         first = short_ptr{};
@@ -88,33 +100,33 @@ public:
 private:
     static void entityUpdate(){
         for(auto it = all().begin(); it; ){
-            auto &ptr = *it++;
-            if (ptr.deletionFlag) delete &ptr;
-            else ptr.update();
+            auto ptr = *it++;
+            if (ptr->deletionFlag) delete &ptr;
+            else ptr->update();
         }
 
-        for(auto &ptr : all()) {
-            auto id = ptr.collisionId, mask = ptr.collisionMask;
+        for(auto ptr : all()) {
+            auto id = ptr->collisionId, mask = ptr->collisionMask;
             if (!id && !mask) continue;
-            for(auto &ptr2 : all()){
-                if (&ptr2 == &ptr) continue;
-                bool p2check = ptr2.collisionMask & id;
-                bool p1check = ptr2.collisionId & mask;
-                if ((!p2check && !p1check) || !collision(ptr, ptr2))
+            for(auto ptr2 : all()){
+                if (ptr2 == ptr) continue;
+                bool p2check = ptr2->collisionMask & id;
+                bool p1check = ptr2->collisionId & mask;
+                if ((!p2check && !p1check) || !collision(*ptr, *ptr2))
                     continue;
                 if (p2check)
-                    ptr2.hit(ptr);
+                    ptr2->hit(*ptr);
                 if (p1check)
-                    ptr.hit(ptr2);
+                    ptr->hit(*ptr2);
             }
         }
         
         sort();
 
         for(auto it = all().begin(); it; ) {
-            auto &ptr = *it++;
-            if (ptr.deletionFlag) delete &ptr;
-            else ptr.draw();
+            auto ptr = *it++;
+            if (ptr->deletionFlag) delete ptr;
+            else ptr->draw();
         }
     }
     
@@ -149,7 +161,8 @@ protected:
     }
 
 public:
-    Entity(){
+    Entity(const char *name = "Anon"){
+        debug = name;
         entityInit();
         next = first;
         previous = short_ptr{};
@@ -164,15 +177,18 @@ public:
 
     static void destroyAll(){
         for(auto ptr : all()) {
-            if(!ptr.deletionFlag)
-                ptr.destroy();
+            if(!ptr->deletionFlag)
+                ptr->destroy();
         }
     }
 
     static void purgeDestroyed(){
-        for(auto it = all().begin(); it; ) {
-            auto &ptr = *it++;
-            if (ptr.deletionFlag) delete &ptr;
+        auto range = all();
+        for(auto it = range.begin(); it != range.end(); ) {
+            auto ptr = *it++;
+            if (ptr->deletionFlag){
+                delete ptr;
+            }
         }
     }
 
