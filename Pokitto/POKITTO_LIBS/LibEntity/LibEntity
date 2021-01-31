@@ -162,7 +162,9 @@ protected:
 
 public:
     Entity(const char *name = "Anon"){
+#if PROJ_DEVELOPER_MODE != 0
         debug = name;
+#endif
         entityInit();
         next = first;
         previous = short_ptr{};
