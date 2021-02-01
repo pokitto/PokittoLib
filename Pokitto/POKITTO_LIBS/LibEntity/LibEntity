@@ -97,31 +97,35 @@ public:
         return {fromShort(first), nullptr};
     }
 
+    static inline bool disableUpdate = false;
+
 private:
     static void entityUpdate(){
-        for(auto it = all().begin(); it; ){
-            auto ptr = *it++;
-            if (ptr->deletionFlag) delete &ptr;
-            else ptr->update();
-        }
-
-        for(auto ptr : all()) {
-            auto id = ptr->collisionId, mask = ptr->collisionMask;
-            if (!id && !mask) continue;
-            for(auto ptr2 : all()){
-                if (ptr2 == ptr) continue;
-                bool p2check = ptr2->collisionMask & id;
-                bool p1check = ptr2->collisionId & mask;
-                if ((!p2check && !p1check) || !collision(*ptr, *ptr2))
-                    continue;
-                if (p2check)
-                    ptr2->hit(*ptr);
-                if (p1check)
-                    ptr->hit(*ptr2);
+        if (!disableUpdate) {
+            for(auto it = all().begin(); it; ){
+                auto ptr = *it++;
+                if (ptr->deletionFlag) delete &ptr;
+                else ptr->update();
             }
-        }
+
+            for(auto ptr : all()) {
+                auto id = ptr->collisionId, mask = ptr->collisionMask;
+                if (!id && !mask) continue;
+                for(auto ptr2 : all()){
+                    if (ptr2 == ptr) continue;
+                    bool p2check = ptr2->collisionMask & id;
+                    bool p1check = ptr2->collisionId & mask;
+                    if ((!p2check && !p1check) || !collision(*ptr, *ptr2))
+                        continue;
+                    if (p2check)
+                        ptr2->hit(*ptr);
+                    if (p1check)
+                        ptr->hit(*ptr2);
+                }
+            }
         
-        sort();
+            sort();
+        }
 
         for(auto it = all().begin(); it; ) {
             auto ptr = *it++;
