@@ -26,6 +26,16 @@ inline void LOGD( const char *str ){
 #endif
 }
 
+inline void LOG( char *str ){
+    printf("%s", str);
+}
+
+inline void LOGD( char *str ){
+#ifndef RELEASE
+    LOG(str);
+#endif
+}
+
 inline void LOGNUM(unsigned int number){
     if(number == 0){
         LOG('0');
@@ -165,6 +175,16 @@ inline OPT_SMALL void LOG( const char *str ){
 }
 
 inline OPT_SMALL void LOGD( const char *str ){
+#ifndef RELEASE
+    LOG(str);
+#endif
+}
+
+inline OPT_SMALL void LOG( char *str ){
+    LOG(static_cast<const char*>(str));
+}
+
+inline OPT_SMALL void LOGD( char *str ){
 #ifndef RELEASE
     LOG(str);
 #endif

@@ -11,6 +11,10 @@ protected:
 
 private:
     unsigned char deletionFlag = 0;
+
+#if PROJ_DEVELOPER_MODE != 0
+    const char *debug;
+#endif
     
 #ifdef POKITTO
 
@@ -39,39 +43,94 @@ private:
 #endif
     short_ptr previous, next;
 
+    static inline int stackSize = 0;
+    static inline short_ptr stack[8];
     static inline short_ptr first = short_ptr{};
-    
+
+    struct iterator {
+        Entity *_ptr;
+
+        operator bool () { return !!_ptr; }
+
+        Entity *operator *() { return _ptr; }
+        Entity *operator -> (){ return _ptr; }
+
+        iterator& operator ++ () {
+            _ptr = fromShort(_ptr->next);
+            return *this;
+        }
+
+        iterator operator ++ (int) {
+            iterator ret{_ptr};
+            _ptr = fromShort(_ptr->next);
+            return ret;
+        }
+    };
+
+    struct Range{
+        Entity *_begin, *_end;
+        iterator begin(){ return {_begin}; }
+        iterator end(){ return {_end}; }
+    };
+
+public:
+    const char *getName() {
+#if PROJ_DEVELOPER_MODE != 0
+        return debug;
+#else
+        return "";
+#endif
+    }
+
+    static void push() {
+        stack[stackSize++] = first;
+        first = short_ptr{};
+    }
+
+    static void pop() {
+        destroyAll();
+        purgeDestroyed();
+        first = stack[--stackSize];
+    }
+
+    static Range all() {
+        return {fromShort(first), nullptr};
+    }
+
+    static inline bool disableUpdate = false;
+
+private:
     static void entityUpdate(){
-        for(auto ptr = fromShort(first); ptr; ){
-            auto next = fromShort(ptr->next);
-            if (ptr->deletionFlag) delete ptr;
-            else ptr->update();
-            ptr = next;
-        }
-
-        for(auto ptr = fromShort(first); ptr; ptr = fromShort(ptr->next)) {
-            auto id = ptr->collisionId, mask = ptr->collisionMask;
-            if (!id && !mask) continue;
-            for(auto ptr2 = fromShort(first); ptr2; ptr2 = fromShort(ptr2->next)) {
-                if (ptr2 == ptr) continue;
-                bool p2check = ptr2->collisionMask & id;
-                bool p1check = ptr2->collisionId & mask;
-                if ((!p2check && !p1check) || !collision(*ptr, *ptr2))
-                    continue;
-                if (p2check)
-                    ptr2->hit(*ptr);
-                if (p1check)
-                    ptr->hit(*ptr2);
+        if (!disableUpdate) {
+            for(auto it = all().begin(); it; ){
+                auto ptr = *it++;
+                if (ptr->deletionFlag) delete &ptr;
+                else ptr->update();
             }
-        }
-        
-        sort();
 
-        for(auto ptr = fromShort(first); ptr; ) {
-            auto next = fromShort(ptr->next);
+            for(auto ptr : all()) {
+                auto id = ptr->collisionId, mask = ptr->collisionMask;
+                if (!id && !mask) continue;
+                for(auto ptr2 : all()){
+                    if (ptr2 == ptr) continue;
+                    bool p2check = ptr2->collisionMask & id;
+                    bool p1check = ptr2->collisionId & mask;
+                    if ((!p2check && !p1check) || !collision(*ptr, *ptr2))
+                        continue;
+                    if (p2check)
+                        ptr2->hit(*ptr);
+                    if (p1check)
+                        ptr->hit(*ptr2);
+                }
+            }
+        
+            sort();
+        }
+
+        for(auto it = all().begin(); it; ) {
+            auto ptr = *it++;
             if (ptr->deletionFlag) delete ptr;
             else ptr->draw();
-            ptr = next;
         }
     }
     
@@ -96,19 +155,47 @@ protected:
         else first = this->next;
 
         if(next) next->previous = this->previous;
+
+        // printf("\nremaining: ");
+        // for(auto ptr = fromShort(first); ptr; ){
+        //     printf("%x ", ptr);
+        //     ptr = fromShort(ptr->next);
+        // }
+        // printf("\n");
     }
 
 public:
-    Entity(){
+    Entity(const char *name = "Anon"){
+#if PROJ_DEVELOPER_MODE != 0
+        debug = name;
+#endif
         entityInit();
         next = first;
         previous = short_ptr{};
         first = toShort(this);
+        if (next) fromShort(next)->previous = first;
     }
     
     virtual void destroy(){
         deletionFlag = 1;
         collisionMask = 0;
+    }
+
+    static void destroyAll(){
+        for(auto ptr : all()) {
+            if(!ptr->deletionFlag)
+                ptr->destroy();
+        }
+    }
+
+    static void purgeDestroyed(){
+        auto range = all();
+        for(auto it = range.begin(); it != range.end(); ) {
+            auto ptr = *it++;
+            if (ptr->deletionFlag){
+                delete ptr;
+            }
+        }
     }
 
     static bool NOPCollision(const Entity &a, const Entity &b){ return false; }
