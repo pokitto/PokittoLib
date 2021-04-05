@@ -184,7 +184,7 @@ public:
      */
      void cleanKeytable();
 
-//private:
+//protected:
 public:
 
     /** exists - find out if the key exists

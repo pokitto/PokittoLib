@@ -137,7 +137,7 @@ public:
     static void Purge();
     static void Draw(); // pokConsole
 
-private:
+protected:
     /** Message buffer */
     static consmsg msgbuf[CONSOLEBUFSIZE];
     static uint8_t conslast;

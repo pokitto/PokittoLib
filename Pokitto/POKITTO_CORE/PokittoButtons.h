@@ -94,7 +94,7 @@ public:
     static uint8_t pins[NUM_BTN];
     static uint8_t states[NUM_BTN];
     static uint8_t heldStates[NUM_BTN]; // additional, not GB based
-private:
+protected:
     static uint16_t cHWLongPress; //forced hardware detection of C long press
 };
 
