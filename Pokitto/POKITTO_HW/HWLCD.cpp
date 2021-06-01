@@ -480,7 +480,7 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
  * @param updRectH The update rect.
  * @param paletteptr The screen palette.
  */
-void Pokitto::lcdRefreshMode1(const uint8_t *scrbuf, const uint16_t *paletteptr) {
+void Pokitto::lcdRefreshMode1(const uint8_t *scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, const uint16_t *paletteptr) {
     volatile uint32_t palette[32];
     for( uint32_t i=0; i<16; ++i ){
         palette[(i<<1)+1] = static_cast<uint32_t>(paletteptr[i&3 ]) << 3;
