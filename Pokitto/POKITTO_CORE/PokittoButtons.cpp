@@ -278,7 +278,28 @@ uint8_t Buttons::downBtn() {
     #endif // POK_SIM
 }
 
+#ifndef POK_SIM
+/* This functionality was missing from HW and is therefore added here. Simulator has this code in SimButtons.cpp 
+The state handling is a bit different between hardware and SDL used in the sim.
+*/
 
+uint8_t Buttons::upHeld() { return (uint8_t) Buttons::held(BTN_UP);}
+uint8_t Buttons::downHeld() { return (uint8_t) Buttons::held(BTN_DOWN);}
+uint8_t Buttons::leftHeld() { return (uint8_t) Buttons::held(BTN_LEFT);}
+uint8_t Buttons::rightHeld() { return (uint8_t) Buttons::held(BTN_RIGHT);}
+uint8_t Buttons::aHeld() { return (uint8_t) Buttons::held(BTN_A);}
+uint8_t Buttons::bHeld() { return (uint8_t) Buttons::held(BTN_B);}
+uint8_t Buttons::cHeld() { return (uint8_t) Buttons::held(BTN_C);}
+
+uint8_t Buttons::upReleased() { return (uint8_t) Buttons::released(BTN_UP);}
+uint8_t Buttons::downReleased() { return (uint8_t) Buttons::released(BTN_DOWN);}
+uint8_t Buttons::leftReleased() { return (uint8_t) Buttons::released(BTN_LEFT);}
+uint8_t Buttons::rightReleased() { return (uint8_t) Buttons::released(BTN_RIGHT);}
+uint8_t Buttons::aReleased() { return (uint8_t) Buttons::released(BTN_A);}
+uint8_t Buttons::bReleased() { return (uint8_t) Buttons::released(BTN_B);}
+uint8_t Buttons::cReleased() { return (uint8_t) Buttons::released(BTN_C);}
+
+#endif // POK_SIM
 
 
 
