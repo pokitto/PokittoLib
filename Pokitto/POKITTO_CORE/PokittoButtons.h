@@ -88,8 +88,8 @@ public:
     static void update();
     static bool pressed(uint8_t button);
     static bool released(uint8_t button);
-    static bool held(uint8_t button, uint8_t time);
-    static bool repeat(uint8_t button, uint8_t period);
+    static bool held(uint8_t button, uint8_t time = 2);
+    static bool repeat(uint8_t button, uint8_t period = 2);
     static uint8_t timeHeld(uint8_t button);
     static uint8_t pins[NUM_BTN];
     static uint8_t states[NUM_BTN];

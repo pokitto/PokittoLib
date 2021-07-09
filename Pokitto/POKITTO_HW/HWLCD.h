@@ -80,7 +80,7 @@ extern void lcdInit();
 extern void lcdSleep();
 extern void lcdWakeUp();
 extern void lcdRefresh(uint8_t *, uint16_t*);
-extern void lcdRefreshMode1(const uint8_t* scrbuf, const uint16_t* paletteptr);
+extern void lcdRefreshMode1(const uint8_t* scrbuf, uint8_t updRectX, uint8_t updRectY, uint8_t updRectW, uint8_t updRectH, const uint16_t* paletteptr);
 extern void lcdRefreshMode2(const uint8_t *, const uint16_t*);
 extern void lcdRefreshMode13(const uint8_t *, const uint16_t*, uint8_t);
 extern void lcdRefreshMixMode(const uint8_t *, const uint16_t*, const uint8_t*);
