@@ -71,7 +71,7 @@ namespace Pokitto {
 inline uint8_t discrete_vol = 0;
 
 class Sound {
-private:
+protected:
     static inline uint16_t volumeMax = VOLUME_HEADPHONE_MAX;
 
 public:
