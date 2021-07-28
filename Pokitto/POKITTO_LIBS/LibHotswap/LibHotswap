@@ -40,17 +40,8 @@ class Hotswap {
         auto count = file.read(buffer8, pageSize);
 
         if (count) {
-            bool same = true;
             auto target = reinterpret_cast<const uint32_t*>(swapData + page * pageSize);
-            for (uint32_t i=0; i < (pageSize >> 2); ++i){
-                if(buffer[i] != target[i]){
-                    same = false;
-                    break;
-                }
-            }
-
-            if (!same && CopyPageToFlash(reinterpret_cast<uintptr_t>(target), buffer8)) {
-                // printf("Error on page %d\n", page);
+            if (CopyPageToFlash(reinterpret_cast<uintptr_t>(target), buffer8)) {
                 return false;
             }
         }
