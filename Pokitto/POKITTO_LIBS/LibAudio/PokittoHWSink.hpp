@@ -14,6 +14,7 @@ namespace Audio {
         u32 hwVolume = v ? (v>>1) | 0xF : 0;
         u32 swVolume = v ? (v | 0xF) + 1 : 0;
         SoftwareI2C(P0_4, P0_5).write(0x5e, hwVolume);
+	SoftwareI2C(P0_5, P0_4).write(0x5e, hwVolume); // fix for newer boards with i2C right way around
         audio_volume = swVolume;
     }
 
