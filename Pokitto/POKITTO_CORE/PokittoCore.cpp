@@ -722,7 +722,7 @@ void Core::begin() {
 	#if POK_GAMEBUINO_SUPPORT > 0
 	display.setFont(font5x7);
 	#else
-	display.setFont(fontC64);
+	display.setFont(DEFAULT_FONT);
     	#endif
 	#if POK_ENABLE_SOUND > 0
         sound.begin();

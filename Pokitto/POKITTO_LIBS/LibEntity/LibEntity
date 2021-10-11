@@ -1,0 +1,258 @@
+#pragma once
+
+#include <cstdint>
+
+class Entity {
+protected:
+    unsigned char collisionMask = 0, collisionId = 0, priority = 0;
+    virtual void update(){}
+    virtual void hit(Entity &other){}
+    virtual void draw(){}
+
+private:
+    unsigned char deletionFlag = 0;
+
+#if PROJ_DEVELOPER_MODE != 0
+    const char *debug;
+#endif
+    
+#ifdef POKITTO
+
+    using short_ptr = unsigned short;
+
+    static short_ptr toShort(Entity *entity){
+        return entity ? reinterpret_cast<std::uintptr_t>(entity) - 0x10000000 : 0;
+    }
+    
+    static Entity *fromShort(short_ptr ptr){
+        return ptr ? reinterpret_cast<Entity*>(0x10000000 + ptr) : 0;
+    }
+
+#else
+
+    using short_ptr = Entity*;
+
+    static short_ptr toShort(Entity *entity){
+        return entity;
+    }
+    
+    static Entity *fromShort(short_ptr ptr){
+        return ptr;
+    }
+    
+#endif
+    short_ptr previous, next;
+
+    static inline int stackSize = 0;
+    static inline short_ptr stack[8];
+    static inline short_ptr first = short_ptr{};
+
+    struct iterator {
+        Entity *_ptr;
+
+        operator bool () { return !!_ptr; }
+
+        Entity *operator *() { return _ptr; }
+        Entity *operator -> (){ return _ptr; }
+
+        iterator& operator ++ () {
+            _ptr = fromShort(_ptr->next);
+            return *this;
+        }
+
+        iterator operator ++ (int) {
+            iterator ret{_ptr};
+            _ptr = fromShort(_ptr->next);
+            return ret;
+        }
+    };
+
+    struct Range{
+        Entity *_begin, *_end;
+        iterator begin(){ return {_begin}; }
+        iterator end(){ return {_end}; }
+    };
+
+public:
+    const char *getName() {
+#if PROJ_DEVELOPER_MODE != 0
+        return debug;
+#else
+        return "";
+#endif
+    }
+
+    static void push() {
+        stack[stackSize++] = first;
+        first = short_ptr{};
+    }
+
+    static void pop() {
+        destroyAll();
+        purgeDestroyed();
+        first = stack[--stackSize];
+    }
+
+    static Range all() {
+        return {fromShort(first), nullptr};
+    }
+
+    static inline bool disableUpdate = false;
+
+private:
+    static void entityUpdate(){
+        if (!disableUpdate) {
+            for(auto it = all().begin(); it; ){
+                auto ptr = *it++;
+                if (ptr->deletionFlag) delete &ptr;
+                else ptr->update();
+            }
+
+            for(auto ptr : all()) {
+                auto id = ptr->collisionId, mask = ptr->collisionMask;
+                if (!id && !mask) continue;
+                for(auto ptr2 : all()){
+                    if (ptr2 == ptr) continue;
+                    bool p2check = ptr2->collisionMask & id;
+                    bool p1check = ptr2->collisionId & mask;
+                    if ((!p2check && !p1check) || !collision(*ptr, *ptr2))
+                        continue;
+                    if (p2check)
+                        ptr2->hit(*ptr);
+                    if (p1check)
+                        ptr->hit(*ptr2);
+                }
+            }
+        
+            sort();
+        }
+
+        for(auto it = all().begin(); it; ) {
+            auto ptr = *it++;
+            if (ptr->deletionFlag) delete ptr;
+            else ptr->draw();
+        }
+    }
+    
+    static void entityInit(){
+        static void (*nextHook)(bool) = nullptr;
+        if(nextHook) return;
+
+        nextHook = Pokitto::Core::updateHook;
+        Pokitto::Core::updateHook =
+            +[](bool isFrame){
+                if (isFrame) Entity::entityUpdate();
+                nextHook(isFrame);
+            };
+    }
+
+protected:
+    virtual ~Entity(){
+        auto next = fromShort(this->next);
+        auto previous = fromShort(this->previous);
+
+        if(previous) previous->next = this->next;
+        else first = this->next;
+
+        if(next) next->previous = this->previous;
+
+        // printf("\nremaining: ");
+        // for(auto ptr = fromShort(first); ptr; ){
+        //     printf("%x ", ptr);
+        //     ptr = fromShort(ptr->next);
+        // }
+        // printf("\n");
+    }
+
+public:
+    Entity(const char *name = "Anon"){
+#if PROJ_DEVELOPER_MODE != 0
+        debug = name;
+#endif
+        entityInit();
+        next = first;
+        previous = short_ptr{};
+        first = toShort(this);
+        if (next) fromShort(next)->previous = first;
+    }
+    
+    virtual void destroy(){
+        deletionFlag = 1;
+        collisionMask = 0;
+    }
+
+    static void destroyAll(){
+        for(auto ptr : all()) {
+            if(!ptr->deletionFlag)
+                ptr->destroy();
+        }
+    }
+
+    static void purgeDestroyed(){
+        auto range = all();
+        for(auto it = range.begin(); it != range.end(); ) {
+            auto ptr = *it++;
+            if (ptr->deletionFlag){
+                delete ptr;
+            }
+        }
+    }
+
+    static bool NOPCollision(const Entity &a, const Entity &b){ return false; }
+
+    static inline bool (*collision)(const Entity &, const Entity &) = NOPCollision;
+
+    template<typename Derived, typename std::enable_if<std::is_base_of<Entity, Derived>::value>::type* = nullptr>
+    static void setCollisionCheck(bool (*check)(const Derived&, const Derived&), bool nopOnly = false){
+        if(nopOnly && collision != NOPCollision) return;
+        collision = reinterpret_cast<decltype(collision)>(check);
+    }
+    
+    static inline bool (*compare)(const Entity &, const Entity &) = +[](const Entity &a, const Entity &b){
+        return a.priority > b.priority;
+    };
+    
+    static inline void (*sort)() = +[](){
+        if (!first) return;
+        
+        for(auto ptr = fromShort(first); ptr->next;){
+            auto next = fromShort(ptr->next);
+            auto check = next;
+            auto prev = fromShort(ptr->previous);
+            while(check && compare(*ptr, *check)){
+                prev = check;
+                check = fromShort(check->next);
+            }
+            if(check != next){
+                if(ptr->previous) fromShort(ptr->previous)->next = ptr->next;
+                else first = ptr->next;
+                next->previous = ptr->previous;
+                ptr->previous = toShort(prev);
+                prev->next = toShort(ptr);
+                if (check) check->previous = prev->next;
+                ptr->next = toShort(check);
+            }
+            ptr = next;
+        }
+    };
+};
+
+// simple example entity that does BoundingBox collision testing
+class BoxEntity : public Entity {
+public:
+    int x, y, w, h;
+
+    BoxEntity(){
+        // if a custom check hasn't been added yet, add the default one
+        Entity::setCollisionCheck(checkCollision, true);
+    }
+
+    static bool checkCollision(const BoxEntity &a, const BoxEntity &b){
+        return !(
+            (a.x + a.w < b.x) ||
+            (a.x > b.x + b.w) ||
+            (a.y + a.h < b.y) ||
+            (a.y > b.y + b.h)
+            );
+    }
+};

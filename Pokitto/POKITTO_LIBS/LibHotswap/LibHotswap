@@ -1,0 +1,118 @@
+#pragma once
+#ifdef POKITTO
+#include "iap.h"
+#endif
+#include <File>
+
+/// LibHotswap
+///    Loads data from the SD card into Flash.
+///    Hotswap size should be a multiple of pageSize. Size will be rounded up otherwise.
+///
+/// Example usage:
+/*
+
+// Simple Hotswap loading:
+uint8_t *data1 = Hotswap<5*1024>::load("file.bin"); // Loads file.bin into a 5KB flash block
+uint8_t *data2 = Hotswap<5*1024>::load("file2.bin"); // Overwrites data1 with file2.bin as it uses the same 5KB flash block
+
+// Async Hotswap loading:
+// Create a 5kb hotswap area, load Dude.bin asynchronously into it and call callback when ready
+Hotswap<5*1024>::load("Dude.bin", +[](const uint8_t *ptr){
+  printf("Done! Dude loaded into 0x%x!\n", ptr);
+});
+
+ */
+
+template<std::size_t bytes, std::size_t poolId = 0>
+class Hotswap {
+    inline static constexpr std::size_t pageSizeBits = 8;
+    inline static constexpr std::size_t pageSize = 1 << pageSizeBits;
+    inline static constexpr std::size_t pageMask = ~std::size_t{} << pageSizeBits;
+    inline static constexpr std::size_t pageCount = (bytes >> pageSizeBits) + (bytes & ~pageMask ? 1 : 0);
+
+#ifdef POKITTO
+    
+    inline static const __attribute__ ((aligned(4*1024))) uint8_t swapData[pageCount * pageSize] = {};
+    
+    static bool loadPage(File &file, std::size_t page){
+        uint32_t buffer[pageSize >> 2];
+        auto buffer8 = reinterpret_cast<uint8_t*>(buffer);
+        auto count = file.read(buffer8, pageSize);
+
+        if (count) {
+            auto target = reinterpret_cast<const uint32_t*>(swapData + page * pageSize);
+            if (CopyPageToFlash(reinterpret_cast<uintptr_t>(target), buffer8)) {
+                return false;
+            }
+        }
+
+        return count == pageSize;
+    }
+    
+#else
+
+    inline static const uint8_t swapData[pageCount * pageSize] = {};
+    
+    static bool loadPage(File &file, std::size_t page){
+        return file.read(swapData + page * pageSize, pageSize) == pageSize;
+    }
+    
+#endif
+    
+public:
+    static const uint8_t *load(){
+        return swapData;
+    }
+
+    static const uint8_t *load(const char *fileName){
+        File file;
+        file.openRO(fileName);
+        return load(file);
+    }
+    
+    static const uint8_t *load(File &file){
+        if (!file) return nullptr;
+        LOG("Hotswap ", file.size() * 100 / (pageCount * pageSize), "% full\n");
+
+        for( int page = 0; page < pageCount; ++page) loadPage(file, page);
+        return swapData;
+    }
+    
+    static const bool load(const char *fileName, void(*cb)(const uint8_t*)){
+        static void (*nextHook)(bool) = nullptr;
+        static File *file = nullptr;
+        static uint32_t page;
+        static void (*onCompleteCB)(const uint8_t*);
+        
+        page = 0;
+        onCompleteCB = cb;
+
+        file = new File();
+        file->openRO(fileName);
+        if (!*file) {
+            delete file;
+            file = nullptr;
+            return false;
+        }
+        
+        if(file->size() > pageCount * pageSize){
+            printf("File too big for Hotswap\n");
+            delete file;
+            file = nullptr;
+            return false;
+        }
+        
+        if (nextHook) return true;
+        nextHook = Pokitto::Core::updateHook;
+        Pokitto::Core::updateHook =
+            +[](bool isFrame){
+                if (isFrame && file && !loadPage(*file, page++)){
+                    delete file;
+                    file = nullptr;
+                    onCompleteCB(swapData);
+                }
+                nextHook(isFrame);
+            };
+        return true;
+    }
+};

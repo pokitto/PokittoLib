@@ -111,6 +111,9 @@
 #define CONSOLEBUFSIZE 20
 #define POK_SHOW_VOLUME 0 // volumebar drawn after console if enabled
 #define VOLUMEBAR_TIMEOUT 10 // frames before disappearing
+#ifndef DEFAULT_FONT
+    #define DEFAULT_FONT fontC64
+#endif
 
 /** SCREEN CONFIGURATION **/
 #ifndef PROJ_PERSISTENCE

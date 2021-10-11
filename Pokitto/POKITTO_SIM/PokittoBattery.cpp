@@ -1,6 +1,6 @@
 /**************************************************************************/
 /*!
-    @file     PokittoSound.cpp
+    @file     PokittoBattery.cpp
     @author   Jonne Valola
 
     @section LICENSE
