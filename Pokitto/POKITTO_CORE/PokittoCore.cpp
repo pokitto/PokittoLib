@@ -1278,29 +1278,30 @@ void Core::keyboard(char* text, uint8_t length) {
 	int8_t currentY = LCDHEIGHT;
 	int8_t targetX = 0;
 	int8_t targetY = 0;
+	uint8_t fps = getFrameRate();
 
 	while (1) {
 		if (update()) {
 			//move the character selector
-			if (buttons.repeat(BTN_DOWN, 4)) {
+			if (buttons.repeat(BTN_DOWN, fps/8+1)) {
 				activeY++;
                 #if (POK_GBSOUND > 0)
 				sound.playTick();
                 #endif
 			}
-			if (buttons.repeat(BTN_UP, 4)) {
+			if (buttons.repeat(BTN_UP, fps/8+1)) {
 				activeY--;
                 #if (POK_GBSOUND > 0)
 				sound.playTick();
                 #endif
 			}
-			if (buttons.repeat(BTN_RIGHT, 4)) {
+			if (buttons.repeat(BTN_RIGHT, fps/8+1)) {
 				activeX++;
                 #if (POK_GBSOUND > 0)
 				sound.playTick();
                 #endif
 			}
-			if (buttons.repeat(BTN_LEFT, 4)) {
+			if (buttons.repeat(BTN_LEFT, fps/8+1)) {
 				activeX--;
                 #if (POK_GBSOUND > 0)
 				sound.playTick();
@@ -1309,8 +1310,8 @@ void Core::keyboard(char* text, uint8_t length) {
 			//don't go out of the keyboard
 			if (activeX == KEYBOARD_W) activeX = 0;
 			if (activeX < 0) activeX = KEYBOARD_W - 1;
-			if (activeY == KEYBOARD_H) activeY = 0;
-			if (activeY < 0) activeY = KEYBOARD_H - 1;
+			if (activeY == KEYBOARD_H) activeY = 2;
+			if (activeY < 2) activeY = KEYBOARD_H - 1;
 			//set the keyboard position on screen
 			targetX = -(display.fontWidth+1) * activeX + LCDWIDTH / 2 - 3;
 			targetY = -(display.fontHeight+1) * activeY + LCDHEIGHT / 2 - 4 - display.fontHeight;
@@ -1354,7 +1355,7 @@ void Core::keyboard(char* text, uint8_t length) {
 						//display.setCursor(0,0);
 						display.println(("You entered\n"));
 						display.print(text);
-						display.println(("\n\n\n\x15:okay \x16:edit"));
+						display.println(("\n\n\nA:okay B:edit"));
 						if(buttons.pressed(BTN_A)){
                             #if (POK_GBSOUND > 0)
 							sound.playOK();
@@ -1371,44 +1372,44 @@ void Core::keyboard(char* text, uint8_t length) {
 				}
 			}
 			//draw the keyboard
-			for (int8_t y = 0; y < KEYBOARD_H; y++) {
+			for (int8_t y = 2; y < KEYBOARD_H; y++) {
 				for (int8_t x = 0; x < KEYBOARD_W; x++) {
 					display.drawChar(currentX + x * (display.fontWidth+1), currentY + y * (display.fontHeight+1), x + y * KEYBOARD_W, 1);
 				}
 			}
 			//draw instruction
 			display.cursorX = currentX-display.fontWidth*6-2;
-			display.cursorY = currentY+1*(display.fontHeight+1);
-			display.print(("\25type"));
-
-			display.cursorX = currentX-display.fontWidth*6-2;
-			display.cursorY = currentY+2*(display.fontHeight+1);
-			display.print(("\26back"));
-
-			display.cursorX = currentX-display.fontWidth*6-2;
 			display.cursorY = currentY+3*(display.fontHeight+1);
-			display.print(("\27save"));
+			display.print(("A:type"));
 
-			//erase some pixels around the selected character
-			display.setColor(WHITE);
-			display.drawFastHLine(currentX + activeX * (display.fontWidth+1) - 1, currentY + activeY * (display.fontHeight+1) - 2, 7);
+			display.cursorX = currentX-display.fontWidth*6-2;
+			display.cursorY = currentY+4*(display.fontHeight+1);
+			display.print(("B:back"));
+
+			display.cursorX = currentX-display.fontWidth*6-2;
+			display.cursorY = currentY+5*(display.fontHeight+1);
+			display.print(("C:save"));
+
 			//draw the selection rectangle
-			display.setColor(BLACK);
+			//display.setColor(BLACK);
 			display.drawRoundRect(currentX + activeX * (display.fontWidth+1) - 2, currentY + activeY * (display.fontHeight+1) - 3, (display.fontWidth+2)+(display.fontWidth-1)%2, (display.fontHeight+5), 3);
-			//draw keyboard outline
-			//display.drawRoundRect(currentX - 6, currentY - 6, KEYBOARD_W * (display.fontWidth+1) + 12, KEYBOARD_H * (display.fontHeight+1) + 12, 8, BLACK);
 			//text field
 			display.drawFastHLine(0, LCDHEIGHT-display.fontHeight-2, LCDWIDTH);
-			display.setColor(WHITE);
+			//fill background of text field with bg color
+			uint8_t temp = display.getColor();
+			display.setColor(display.getBgColor());
 			display.fillRect(0, LCDHEIGHT-display.fontHeight-1, LCDWIDTH, display.fontHeight+1);
+			display.setColor(temp);
 			//typed text
 			display.cursorX = 0;
 			display.cursorY = LCDHEIGHT-display.fontHeight;
-			display.setColor(BLACK);
 			display.print(text);
 			//blinking cursor
-			if (((frameCount % 8) < 4) && (activeChar < (length-1)))
-			display.drawChar(display.fontWidth * activeChar, LCDHEIGHT-display.fontHeight, '_',1);
+			temp = fps/8+1;
+			if (((frameCount % (temp*2)) < temp) &&
+					(activeChar < (length-1))){
+				display.print("_");
+			}
 		}
 	}
 #endif
