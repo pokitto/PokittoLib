@@ -396,12 +396,12 @@ public:
     /** text wrapping */
     static bool textWrap;
     /** GB compatibility drawChar */
-    static void drawChar(int8_t x, int8_t y, unsigned char c, uint8_t size);
+    static void drawChar(int16_t x, int16_t y, unsigned char c, uint8_t size);
 
     static void enableDirectPrinting(uint8_t m);
     static bool isDirectPrintingEnabled();
-    static int print_char(uint8_t x, uint8_t y, unsigned char c);
-    static void set_cursor(uint8_t, uint8_t);
+    static int print_char(int16_t x, int16_t y, unsigned char c);
+    static void set_cursor(int16_t, int16_t);
     static void write(uint8_t);
     static void write(const char *str);
     static void write(const uint8_t *buffer, uint8_t size);

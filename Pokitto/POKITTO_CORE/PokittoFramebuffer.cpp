@@ -438,37 +438,24 @@ void Display::map1BitColumn(int16_t x, int16_t sy, int16_t ey, const uint8_t* bi
 }
 
 int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
-    const uint8_t* bitmap = font;
-    uint8_t w = *bitmap;
-    uint8_t h = *(bitmap + 1);
-    uint8_t hbytes=0, xtra=1;
-    if (h==8 || h==16) xtra=0; //don't add if exactly on byte limit
-    hbytes=(h>>3)+xtra; //GLCD fonts are arranged w+1 times h/8 bytes
-    //bitmap = bitmap + 3 + index * h * ((w>>3)+xtra); //add an offset to the pointer (fonts !)
-    bitmap = bitmap + 4 + index * (w * hbytes + 1); //add an offset to the pointer (fonts !)
-    //int8_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    int8_t i, j, numBytes;
-    numBytes = *bitmap++; //first byte of char is the width in bytes
-    // GLCD fonts are arranged LSB = topmost pixel of char, so its easy to just shift through the column
-    uint16_t bitcolumn; //16 bits for 2x8 bit high characters
+    uint8_t fontW = font[0];
+    uint8_t fontH = font[1];
+
+    uint8_t hbytes = (fontH + 7)>>3;
 
     if( fontSize != 2 ) fontSize = 1;
 
-    void (*drawPixelFG)(int16_t,int16_t, uint8_t) = &Display::drawPixelNOP;
-    void (*drawPixelBG)(int16_t,int16_t, uint8_t) = &Display::drawPixelNOP;
-    if( x>=0 && y >= 0 && x+w*fontSize<width && y+(h+1)*fontSize<height ){
-	if( color != invisiblecolor )
-	    drawPixelFG = &Display::drawPixelRaw;
-	if( bgcolor != invisiblecolor )
-	    drawPixelBG = &Display::drawPixelRaw;
-    }else{
-	if( color != invisiblecolor )
-	    drawPixelFG = &Display::drawPixel;
-	if( bgcolor != invisiblecolor )
-	    drawPixelBG = &Display::drawPixel;
-    }
+    const uint8_t* bitmap = font + 4 + index*(1 + fontW*hbytes); //add an offset to the pointer
+    int charW = *bitmap; //first byte of char is char width
+    ++bitmap;
 
-    void (*drawPixel[])(int16_t,int16_t, uint8_t) = {drawPixelBG, drawPixelFG};
+    void (*drawPixelFn[])(int16_t,int16_t, uint8_t) = { &Display::drawPixel, &Display::drawPixel };
+    if(x >= 0 && y >= 0 && x + fontSize*charW <= width && y + fontSize*fontH <= height) {
+        drawPixelFn[0] = &Display::drawPixelRaw;
+        drawPixelFn[1] = &Display::drawPixelRaw;
+    }
+    if(bgcolor == invisiblecolor) drawPixelFn[0] = &Display::drawPixelNOP;
+    if(color == invisiblecolor) drawPixelFn[1] = &Display::drawPixelNOP;
     uint8_t colors[] = {static_cast<uint8_t>(bgcolor), static_cast<uint8_t>(color)};
 
 #if PROJ_ARDUBOY > 0
@@ -476,27 +463,29 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
     if( fontSize != 2 ){
 #endif
 
-        for (i = 0; i < numBytes; i++) {
-            bitcolumn = *bitmap++;
-            if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
-            for (j = 0; j <= h; j++) { // was j<=h
-                uint8_t c = colors[ bitcolumn & 1 ];
+        for (int i = 0; i < charW; ++i) {
+            for(int byteNum = 0; byteNum < hbytes; ++byteNum) {
+                uint8_t bitcolumn = *bitmap;
+                ++bitmap;
+                int endRow = (8 + 8*byteNum < fontH) ? (8 + 8*byteNum) : fontH;
+                for (int j = 8*byteNum; j < endRow; ++j) {
+                    uint8_t c = colors[ bitcolumn & 1 ];
 
 #if PROJ_ARDUBOY > 0
-                drawPixel[ bitcolumn&1 ](x, y + 7 - j,c);
+                    drawPixelFn[ bitcolumn&1 ](x, y + 7 - j,c);
 #elif PROJ_SUPPORT_FONTROTATION > 0
-                // if font flipping & rotation is allowed - do not slow down old programs!
-                if (flipFontVertical) {
-                    drawPixel[ bitcolumn&1 ](x, y + h - j,c);
-                } else {
-                    drawPixel[ bitcolumn&1 ](x, y + j,c);
-                }
+                    // if font flipping & rotation is allowed - do not slow down old programs!
+                    if (flipFontVertical) {
+                        drawPixelFn[ bitcolumn&1 ](x, y + fontH - j,c);
+                    } else {
+                        drawPixelFn[ bitcolumn&1 ](x, y + j,c);
+                    }
 #else
-                // "Normal" case
-                drawPixel[ bitcolumn&1 ](x, y + j,c);
+                    // "Normal" case
+                    drawPixelFn[ bitcolumn&1 ](x, y + j,c);
 #endif // PROJ_ARDUBOY
-                bitcolumn>>=1;
-
+                    bitcolumn>>=1;
+                }
             }
 #if PROJ_SUPPORT_FONTROTATION > 0
             if (flipFontVertical) x--;
@@ -507,10 +496,10 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
         }
 
 #if PROJ_SUPPORT_FONTROTATION > 0
-        if (flipFontVertical) return -numBytes-adjustCharStep;
-        else return numBytes+adjustCharStep; // for character stepping
+        if (flipFontVertical) return -charW - adjustCharStep;
+        else return charW + adjustCharStep; // for character stepping
 #else
-        return numBytes+adjustCharStep;
+        return charW + adjustCharStep;
 #endif
 
 
@@ -518,23 +507,24 @@ int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
 #else
     }else{
 
-	for (i = 0; i < numBytes; i++) {
-	    bitcolumn = *bitmap++;
-	    if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
-	    for (j = 0; j <= h; j++) { // was j<=h
-		uint8_t c = colors[ bitcolumn & 1 ];
+	    for (int i = 0; i < charW; ++i) {
+            for(int byteNum = 0; byteNum < hbytes; ++byteNum) {
+                uint8_t bitcolumn = *bitmap;
+                ++bitmap;
+                int endRow = (8 + 8*byteNum < fontH) ? (8 + 8*byteNum) : fontH;
+                for (int j = 8*byteNum; j < endRow; ++j) { // was j<=h
+                    uint8_t c = colors[ bitcolumn & 1 ];
 
-		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1), c);
-		drawPixel[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1), c);
-		drawPixel[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1)+1, c);
-		drawPixel[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1)+1, c);
-		bitcolumn>>=1;
-
+                    drawPixelFn[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1), c);
+                    drawPixelFn[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1), c);
+                    drawPixelFn[ bitcolumn&1 ](x + (i<<1)  , y + (j<<1)+1, c);
+                    drawPixelFn[ bitcolumn&1 ](x + (i<<1)+1, y + (j<<1)+1, c);
+                    bitcolumn>>=1;
+                }
+	        }
 	    }
-	}
 
-	return (numBytes+adjustCharStep)<<1;
-
+	    return 2*(charW + adjustCharStep);
     }
 #endif // PROJ_ARDUBOY
 
