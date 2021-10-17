@@ -405,78 +405,91 @@ void Display::fillRectangle(int x, int y, int w, int h) {
 }
 
 int Display::bufferChar(int16_t x, int16_t y, uint16_t index){
-    const uint8_t* bitmap = font;
-    uint8_t w = *bitmap;
-    uint8_t h = *(bitmap + 1);
+    uint8_t fontW = font[0];
+    uint8_t fontH = font[1];
 
-    uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16)));
+    uint8_t hbytes = (fontH + 7)>>3;
 
     // add an offset to the pointer (fonts !)
-    bitmap = bitmap + 4 + index * (w * hbytes + 1);
-    uint32_t numBytes = *bitmap++; //first byte of char is the width in bytes
+    const uint8_t* bitmap = font + 4 + index * (fontW * hbytes + 1);
+    int charW = *bitmap; //first byte of char is the width in bytes
+    ++bitmap;
 
-    if(y >= screenHeight || y + h < 0 || x >= screenWidth || x + w < 0)
-        return numBytes + adjustCharStep;
+    if(fontSize != 2) fontSize = 1;
+
+    if(y >= screenHeight || y + fontSize*fontH < 0 || x >= screenWidth || x + fontSize*charW < 0)
+        return fontSize*(charW + adjustCharStep);
 
     draw_t f;
     if( fontSize != 2 ){
-        fontSize = 1;
         f = [](uint8_t *line, Sprite &s, int y){
-                int h = s.maxY - s.y;
-                auto bitmap = static_cast<const uint8_t *>(s.data);
+                auto font = static_cast<const uint8_t *>(s.data);
+                uint8_t fontW = font[0];
+                uint8_t fontH = font[1];
+
+                uint8_t hbytes = (fontH + 7)>>3;
+
+                int index = s.b1;
+                auto bitmap = font + 4 + index * (fontW * hbytes + 1);
+                int charW = *bitmap;
+                ++bitmap;
+
                 int x = s.x;
+                if( x + charW > screenWidth )
+                    charW = screenWidth - x;
+
+                bitmap += y>>3;
+                y &= 7;
+
                 uint8_t fg = s.b3;
                 uint8_t bg = s.b2;
-                int numBytes = s.b1;
-                if( s.b1 + x > screenWidth )
-                    numBytes = screenWidth - x;
 
-                uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;
-                for (int i = 0; i < numBytes; i++) {
-                    uint32_t bitcolumn = *bitmap++;
-                    if (hbytes)
-                        bitcolumn |= (*bitmap++)<<8;
+                for (int i = (x < 0) ? -x : 0; i < charW; ++i) {
+                    uint32_t bitcolumn = bitmap[i*hbytes];
                     uint8_t c = bitcolumn & (1<<y) ? bg : fg;
-                    if( c != Display::invisiblecolor )
-                        line[x+i] = c;
+                    if( c != Display::invisiblecolor ) line[x+i] = c;
                 }
             };
     } else {
         f = [](uint8_t *line, Sprite &s, int y){
-                int h = (s.maxY - s.y)>>1;
-                y >>= 1;
-                auto bitmap = static_cast<const uint8_t *>(s.data);
+                auto font = static_cast<const uint8_t *>(s.data);
+                uint8_t fontW = font[0];
+                uint8_t fontH = font[1];
+
+                uint8_t hbytes = (fontH + 7)>>3;
+
+                int index = s.b1;
+                auto bitmap = font + 4 + index * (fontW * hbytes + 1);
+                int charW = 2*(*bitmap);
+                ++bitmap;
+
                 int x = s.x;
+                if( x + charW > screenWidth )
+                    charW = screenWidth - x;
+
+                y >>= 1;
+                bitmap += y>>3;
+                y &= 7;
+
                 uint8_t fg = s.b3;
                 uint8_t bg = s.b2;
-                int numBytes = s.b1;
-                if( (s.b1<<1) + x > screenWidth )
-                    numBytes = (screenWidth - x) >> 1;
 
-                uint8_t hbytes = ((h>>3) + ((h != 8) && (h != 16))) == 2;
-
-                for (int i = 0; i < numBytes; i++) {
-                    uint32_t bitcolumn = *bitmap++;
-                    if (hbytes)
-                        bitcolumn |= (*bitmap++)<<8;
+                for (int i = (x < 0) ? -x : 0; i < charW; ++i) {
+                    uint8_t bitcolumn = bitmap[(i>>1)*hbytes];
                     uint8_t c = bitcolumn & (1<<y) ? bg : fg;
-                    if( c != Display::invisiblecolor ){
-                        line[x+(i<<1)] = c;
-                        line[x+(i<<1)+1] = c;
-                    }
+                    if( c != Display::invisiblecolor ) line[x+i] = c;
                 }
             };
-        h *= 2;
     }
 
     addSprite(Sprite{
             x, y,
-            bitmap, f,
-            h, numBytes,
+            font, f,
+            fontSize*fontH, index,
             Display::color, Display::bgcolor
         });
 
-    return numBytes*fontSize+adjustCharStep;
+    return fontSize*(charW + adjustCharStep);
 }
 
 void Display::drawBitmapData2BPP(int x, int y, int w, int h, const uint8_t* bitmap){

@@ -335,50 +335,41 @@ void Display::directBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint8_t 
 }
 
 int Display::directChar(int16_t x, int16_t y, uint16_t index){
-    const uint8_t* bitmap = font;
-    uint8_t w = *bitmap;
-	uint8_t h = *(bitmap + 1);
-	uint8_t hbytes=0, xtra=1;
-	if (h==8 || h==16) xtra=0; //don't add if exactly on byte limit
-	hbytes=(h>>3)+xtra; //GLCD fonts are arranged w+1 times h/8 bytes
-	//bitmap = bitmap + 3 + index * h * ((w>>3)+xtra); //add an offset to the pointer (fonts !)
-	bitmap = bitmap + 4 + index * (w * hbytes + 1); //add an offset to the pointer (fonts !)
-	//int8_t i, j, byteNum, bitNum, byteWidth = (w + 7) >> 3;
-    int8_t i, j, numBytes;
-    numBytes = *bitmap++; //first byte of char is the width in bytes
-    // GLCD fonts are arranged LSB = topmost pixel of char, so its easy to just shift through the column
-    uint16_t bitcolumn; //16 bits for 2x8 bit high characters
+    uint8_t fontW = font[0];
+    uint8_t fontH = font[1];
 
-	for (i = 0; i < numBytes; i++) {
-            bitcolumn = *bitmap++;
-            if (hbytes == 2) bitcolumn |= (*bitmap++)<<8; // add second byte for 16 bit high fonts
-            for (j = 0; j < h; j++) {
-                if (bitcolumn&0x1) {
+    uint8_t hbytes = (fontH + 7)>>3;
+
+    if( fontSize != 2 ) fontSize = 1;
+
+    const uint8_t* bitmap = font + 4 + index*(1 + fontW*hbytes); //add an offset to the pointer
+    int charW = *bitmap; //first byte of char is char width
+    ++bitmap;
+
+    for (int i = 0; i < charW; ++i) {
+        for(int byteNum = 0; byteNum < hbytes; ++byteNum) {
+            uint8_t bitcolumn = *bitmap;
+            ++bitmap;
+            int endRow = (8 + 8*byteNum < fontH) ? (8 + 8*byteNum) : fontH;
+            for (int j = 8*byteNum; j < endRow; ++j) {
+                uint16_t c = (bitcolumn&1) ? directcolor : directbgcolor;
+                if(c != invisiblecolor) {
                     if (fontSize==2) {
-                        directPixel(x + (i<<1)  , y + (j<<1),directcolor);
-                        directPixel(x + (i<<1)+1, y + (j<<1),directcolor);
-                        directPixel(x + (i<<1)  , y + (j<<1)+1,directcolor);
-                        directPixel(x + (i<<1)+1, y + (j<<1)+1,directcolor);
+                        directPixel(x + (i<<1)  , y + (j<<1), c);
+                        directPixel(x + (i<<1)+1, y + (j<<1), c);
+                        directPixel(x + (i<<1)  , y + (j<<1)+1, c);
+                        directPixel(x + (i<<1)+1, y + (j<<1)+1, c);
                     } else {
-                        if(directtextrotated) directPixel(y + h - j - 1, x + i,directcolor);
-                        else directPixel(x + i, y + j,directcolor);
+                        if(directtextrotated) directPixel(y + fontH - j - 1, x + i, c);
+                        else directPixel(x + i, y + j, c);
                     }
 
-                } else if (directbgcolor != invisiblecolor) {
-                    if (fontSize==2) {
-                        directPixel(x + (i<<1)  , y + (j<<1),directbgcolor);
-                        directPixel(x + (i<<1)+1, y + (j<<1),directbgcolor);
-                        directPixel(x + (i<<1)  , y + (j<<1)+1,directbgcolor);
-                        directPixel(x + (i<<1)+1, y + (j<<1)+1,directbgcolor);
-                    } else {
-                        if(directtextrotated) directPixel(y + h - j - 1, x + i,directbgcolor);
-                        else directPixel(x + i, y + j,directbgcolor);
-                    }
                 }
                 bitcolumn>>=1;
             }
+        }
     }
-    return (numBytes+adjustCharStep)*fontSize; // for character stepping
+    return fontSize*(charW + adjustCharStep); // for character stepping
 }
 
 
@@ -738,15 +729,15 @@ uint8_t Display::getBitmapPixel(const uint8_t* bitmap, uint16_t x, uint16_t y) {
     return sourcebyte & (0x80>>(x&7));
 }
 
-int Display::print_char(uint8_t x, uint8_t y, unsigned char c) {
-	c -= font[2];
-	if (m_mode) return directChar(x,y,c);
-	return bufferChar(x,y,c);
+int Display::print_char(int16_t x, int16_t y, unsigned char c) {
+    c -= font[2];
+    if (m_mode) return directChar(x,y,c);
+    return bufferChar(x,y,c);
 }
 
-void Display::drawChar(int8_t x, int8_t y, unsigned char c, uint8_t size) {
-	print_char(x,y,c);
-	return;
+void Display::drawChar(int16_t x, int16_t y, unsigned char c, uint8_t size) {
+    print_char(x,y,c);
+    return;
 }
 
 bool Display::isDirectPrintingEnabled() {
@@ -755,13 +746,13 @@ bool Display::isDirectPrintingEnabled() {
 
 void Display::enableDirectPrinting(uint8_t m) {
     if (m) {
-            m_mode=true;
-            m_w = POK_LCD_W;
-            m_h = POK_LCD_H;
+        m_mode=true;
+        m_w = POK_LCD_W;
+        m_h = POK_LCD_H;
     } else {
-            m_mode=false;
-            m_w = getWidth();
-            m_h = getHeight();
+        m_mode=false;
+        m_w = getWidth();
+        m_h = getHeight();
     }
 }
 
@@ -934,7 +925,7 @@ void Display::println(double n, int digits)
   println();
 }
 
-void Display::set_cursor(uint8_t x, uint8_t y) {
+void Display::set_cursor(int16_t x, int16_t y) {
 	cursorX = x;
 	cursorY = y;
 }
