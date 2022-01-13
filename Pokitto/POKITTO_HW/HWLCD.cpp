@@ -487,10 +487,10 @@ void Pokitto::lcdRefreshMode1(const uint8_t *scrbuf, uint8_t updRectX, uint8_t u
         palette[(i<<1)  ] = static_cast<uint32_t>(paletteptr[i>>2]) << 3;
     }
     
-    if(POK_PERSISTENCE > 0){
-        updateMode1Clear(palette, scrbuf, POK_CLEAR_SCREEN);
+    if(POK_PERSISTENCE > 0){ 
+	updateMode1(palette, scrbuf);
     }else{
-        updateMode1(palette, scrbuf);
+        updateMode1Clear(palette, scrbuf, POK_CLEAR_SCREEN);
     }
 }
 
