@@ -71,6 +71,10 @@ int SerialBase::_base_putc(int c) {
     return c;
 }
 
+void SerialBase::_base_clear() {
+    serial_clear(&_serial);
+}
+
 void SerialBase::send_break() {
   // Wait for 1.5 frames before clearing the break condition
   // This will have different effects on our platforms, but should
