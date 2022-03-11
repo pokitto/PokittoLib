@@ -326,7 +326,6 @@ void Cookie::cleanKeytable() {
     for (int block=0;block<SBMAXBLOCKS;block++) {
             int blockentry = eeprom_read_byte((uint16_t*)(SBMAXKEYS*SBKEYSIZE+block));
             if (blockentry&0x80) {
-                    blockentry &= 0x7F;
                     bool isEmpty=true;
                     for (int key=0;key<SBMAXKEYS;key++) {
                             if (eeprom_read_byte((uint16_t*)(key*SBKEYSIZE))) {isEmpty=false;break;}
