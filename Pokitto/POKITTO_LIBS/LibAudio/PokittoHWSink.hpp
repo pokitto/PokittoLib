@@ -14,6 +14,7 @@ namespace Audio {
         u32 hwVolume = v ? (v>>1) | 0xF : 0;
         u32 swVolume = v ? (v | 0xF) + 1 : 0;
         SoftwareI2C(P0_4, P0_5).write(0x5e, hwVolume);
+	SoftwareI2C(P0_5, P0_4).write(0x5e, hwVolume); // fix for newer boards with i2C right way around
         audio_volume = swVolume;
     }
 
@@ -128,10 +129,12 @@ namespace Audio {
 
     public:
         void init(){
-            NVIC_SetVector((IRQn_Type)TIMER_32_0_IRQn, (uint32_t)IRQ);
             if(this->wasInit)
                 return;
             this->wasInit = true;
+
+			// only init the timer if not setup already
+            NVIC_SetVector((IRQn_Type)TIMER_32_0_IRQn, (uint32_t)IRQ);
 
             // enable amp
             LPC_GPIO_PORT->SET[1] = (1 << 17);
