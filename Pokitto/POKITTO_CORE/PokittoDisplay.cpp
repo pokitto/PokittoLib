@@ -434,11 +434,16 @@ void Display::fillScreen(uint16_t c) {
 
 void Display::setDefaultPalette() {
     #if PICOPALETTE
-        loadRGBPalette(palettePico);
+        const unsigned char* p = palettePico;
     #else
-        loadRGBPalette(POK_DEFAULT_PALETTE);
-    #endif //PICOPALETTE
+        const unsigned char* p = POK_DEFAULT_PALETTE;  // paletteCGA
+    #endif 
+    
+    for (int i=0;i<16;i++)
+        palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
+    paletteptr = palette;
 }
+
 
 void Display::setColor(uint8_t c) {
     color = c & ((1<<PROJ_COLORDEPTH)-1); // cut out colors that go above palette limit
