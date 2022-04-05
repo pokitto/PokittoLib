@@ -50,38 +50,43 @@ using namespace Pokitto;
 
 
 void Display::loadRGBPalette(const unsigned char* p) {
-    for (int i=0;i<PALETTE_SIZE;i++)
-        palette[i] = RGBto565(p[i*3], p[i*3+1],p[i*3+2]);
-    paletteptr = palette;
+	for (std::size_t index = 0; index < std::size(palette); ++index)
+	{
+		auto red = source[index * 3 + 0];
+		auto green = source[index * 3 + 1];
+		auto blue = source[index * 3 + 2];
+		palette[index] = RGBto565(red, green, blue);
+	}
+	paletteptr = palette;
 }
 
 void Display::load565Palette(const uint16_t* p) {
-    for (int i=0;i<PALETTE_SIZE;i++)
+    for (int i=0;i<std::size(palette);i++)
         palette[i] = p[i];
     paletteptr = palette;
 }
 
 void Display::rotatePalette(int8_t step) {
-    uint16_t tpal[PALETTE_SIZE];
+    uint16_t tpal[std::size(palette)];
     if (step == 0) return;
     step = 0-step;
     if (step>0) {
-        for (int i=step;i<PALETTE_SIZE;i++)
+        for (int i=step;i<std::size(palette);i++)
             tpal[i]=palette[i-step]; // palette revolves up, new color 1 becomes old color 0
         for (int i=0; i < step; i++)
-            tpal[i]=palette[PALETTE_SIZE-step+i]; // overflow topmost values to bottom of new palette
+            tpal[i]=palette[std::size(palette)-step+i]; // overflow topmost values to bottom of new palette
     } else {
-        for (int i=0;i<PALETTE_SIZE+step;i++)
+        for (int i=0;i<std::size(palette)+step;i++)
         {
             tpal[i]=palette[i-step];
             }// palette revolves down, new color 0 becomes old color 1
         for (int i=0;i<-step; i++) {
-                tpal[PALETTE_SIZE+step+i]=palette[i];
+                tpal[std::size(palette)+step+i]=palette[i];
         }
         // overflow bottom values to top of new palette
     }
 
-    for (int i=0; i<PALETTE_SIZE;i++)
+    for (int i=0; i<std::size(palette);i++)
         palette[i] = tpal[i];
 }
 

@@ -47,6 +47,7 @@ extern DigitalOut* rumblepin;
 extern mbed::DigitalOut _rumble;
 extern mbed::DigitalIn _b1;
 extern mbed::DigitalIn _b2;
+extern mbed::DigitalIn _b3;
 extern mbed::AnalogIn _joyx;
 extern mbed::AnalogIn _joyy;
 
@@ -61,6 +62,7 @@ public:
 
     bool Button1() { return _b1.read();}
     bool Button2() { return _b2.read();}
+    bool Button3() { return _b3.read();}
 
     int JoyX() {
         if (portraitOrientation) { return _joyx.read()*joyScale;}

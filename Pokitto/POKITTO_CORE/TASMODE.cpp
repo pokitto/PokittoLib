@@ -289,6 +289,7 @@ Sprite spriteBuffer[PROJ_MAX_SPRITES];
 uint32_t spriteBufferPos = 0;
 
 void addSprite(const Sprite& s){
+	if(PROJ_MAX_SPRITES==0) return;
     if(spriteBufferPos >= PROJ_MAX_SPRITES) spriteBufferPos = 0;
     spriteBuffer[spriteBufferPos] = s;
     auto& sb = spriteBuffer[spriteBufferPos];
