@@ -32,7 +32,7 @@ class Hotswap {
 
 #ifdef POKITTO
     
-    inline static const __attribute__ ((aligned(4*1024))) uint8_t swapData[pageCount * pageSize] = {};
+    inline static const __attribute__ ((aligned(32*1024))) uint8_t swapData[pageCount * pageSize] = {};
     
     static bool loadPage(File &file, std::size_t page){
         uint32_t buffer[pageSize >> 2];
@@ -40,7 +40,8 @@ class Hotswap {
         auto count = file.read(buffer8, pageSize);
 
         if (count) {
-            auto target = reinterpret_cast<const uint32_t*>(swapData + page * pageSize);
+            auto target = reinterpret_cast<const uint32_t*>(swapData + (page * pageSize));
+
             if (CopyPageToFlash(reinterpret_cast<uintptr_t>(target), buffer8)) {
                 return false;
             }
@@ -54,7 +55,7 @@ class Hotswap {
     inline static const uint8_t swapData[pageCount * pageSize] = {};
     
     static bool loadPage(File &file, std::size_t page){
-        return file.read(swapData + page * pageSize, pageSize) == pageSize;
+        return file.read(swapData + (page * pageSize), pageSize) == pageSize;
     }
     
 #endif
@@ -72,7 +73,7 @@ public:
     
     static const uint8_t *load(File &file){
         if (!file) return nullptr;
-        LOG("Hotswap ", file.size() * 100 / (pageCount * pageSize), "% full\n");
+        //LOG("Hotswap ", file.size() * 100 / (pageCount * pageSize), "% full\n");
 
         for( int page = 0; page < pageCount; ++page) loadPage(file, page);
         return swapData;

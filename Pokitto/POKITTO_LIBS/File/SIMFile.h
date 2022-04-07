@@ -47,9 +47,10 @@ public:
         return *this;
     }
 
-    File& openRW(const char *name, bool create, bool append) {
+    File& openRW(const char *name, bool create, bool append, bool replace=false) {
         close();
-        handle = fopen(name, "rb+");
+		if(!replace)
+        	handle = fopen(name, "rb+");
         if(!handle && create)
             handle = fopen(name, "wb+");
         if(handle && append)
