@@ -30,6 +30,8 @@ struct dirent {
     char d_name[NAME_MAX+1];
 };
 
+typedef unsigned char    BYTE;
+
 namespace mbed {
 
 /** Represents a directory stream. Objects of this type are returned
@@ -65,6 +67,7 @@ public:
      *  end of directory or error.
      */
     virtual struct dirent *readdir()=0;
+    virtual struct dirent *readdir2(BYTE& fattrib) {return readdir();}
 
     /** Resets the position to the beginning of the directory.
      */
