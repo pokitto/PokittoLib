@@ -34,7 +34,8 @@ int FATDirHandle::closedir() {
     return 0;
 }
 
-struct dirent *FATDirHandle::readdir() {
+struct dirent *FATDirHandle::readdir2(BYTE& fattrib) {
+
     FILINFO finfo;
 
 #if _USE_LFN
@@ -43,6 +44,7 @@ struct dirent *FATDirHandle::readdir() {
 #endif // _USE_LFN
 
     FRESULT res = f_readdir(&dir, &finfo);
+	fattrib = finfo.fattrib;
 
 #if _USE_LFN
     if(res != 0 || finfo.fname[0]==0) {
@@ -63,6 +65,12 @@ struct dirent *FATDirHandle::readdir() {
     }
 #endif /* _USE_LFN */
 }
+
+struct dirent *FATDirHandle::readdir() {
+	BYTE fattribNotUsed;	
+	return(readdir2(fattribNotUsed));
+}
+
 
 void FATDirHandle::rewinddir() {
     dir.index = 0;
