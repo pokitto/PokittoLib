@@ -28,7 +28,7 @@
 
 // standard ascii 5x7 font
 const uint8_t font5x7[] PROGMEM = {
-	5,7,0,0, // width and height, start char and only caps ?
+	5,8,0,0, // width and height, start char and only caps ?
     5, 0x7F, 0x41, 0x41, 0x41, 0x7F, // 0
     5, 0x3E, 0x5B, 0x4F, 0x5B, 0x3E, // 1  sad
     5, 0x3E, 0x6B, 0x4F, 0x6B, 0x3E, // 2  happy
