@@ -73,6 +73,8 @@ extern void initBacklight();
 extern void setBacklight(uint8_t);
 extern void lcdFillSurface(uint16_t);
 extern void lcdPixel(int16_t x, int16_t y, uint16_t c);
+extern void lcdLine(int16_t x0, int16_t x1, int16_t y, uint16_t color);
+extern void lcdBlitLine(int16_t x0, int16_t x1, int16_t y, uint8_t* srcLine);
 extern void setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
 extern void lcdTile(int16_t x0, int16_t y0, int16_t width, int16_t height, uint16_t* gfx);
 extern void lcdRectangle(int16_t x, int16_t y,int16_t x2, int16_t y2, uint16_t color);

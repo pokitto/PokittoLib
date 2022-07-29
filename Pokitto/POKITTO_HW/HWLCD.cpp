@@ -411,6 +411,37 @@ void Pokitto::lcdPixel(int16_t x, int16_t y, uint16_t color) {
     CLR_WR;SET_WR;
 }
 
+void Pokitto::lcdLine(int16_t x0, int16_t x1, int16_t y, uint16_t color) {
+    for (int16_t x=x0; x<=x1;x++) {
+        write_command(0x20);  // Horizontal DRAM Address (=y on pokitto screen)
+        write_data(y);
+        write_command(0x21);  // Vertical DRAM Address (=x on pokitto screen)
+        write_data(x);
+        write_command(0x22); // write data to DRAM
+
+        CLR_CS_SET_CD_RD_WR; // go to vram write mode
+
+        setup_data_16(color); // setup the color data
+        CLR_WR;SET_WR; //toggle writeline, pokitto screen writes a column up to down
+    }
+}
+
+void Pokitto::lcdBlitLine(int16_t x0, int16_t x1, int16_t y, uint8_t* srcLine) {
+    for (int16_t x=x0; x<=x1;x++) {
+        write_command(0x20);  // Horizontal DRAM Address (=y on pokitto screen)
+        write_data(y);
+        write_command(0x21);  // Vertical DRAM Address (=x on pokitto screen)
+        write_data(x);
+        write_command(0x22); // write data to DRAM
+
+        CLR_CS_SET_CD_RD_WR; // go to vram write mode
+
+        uint16_t color = (((uint16_t)srcLine[2*x+1])<<8)+ (uint16_t)srcLine[2*x];
+        setup_data_16(color); // setup the color data
+        CLR_WR;SET_WR; //toggle writeline, pokitto screen writes a column up to down
+    }
+}
+
 void Pokitto::setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2) {
     write_command(0x37); write_data(x1);
     write_command(0x36); write_data(x2);
