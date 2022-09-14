@@ -1,5 +1,15 @@
 #pragma once
 
+// Notes: 
+// 
+// The buffer used to store audio is 1024 bytes long.  It can be moved into high RAM using the following instructions:
+//
+// - Add -DAUDIO_BUFFER_ADDRESS=0x20000000 to the Pokitto C++ flags in project.json.
+// - Enable the high ram banks using PROJ_HIGH_RAM HIGH_RAM_ON 
+//
+// There are 2 banks of high RAM each 2K in length at locations 0x20000400 - 0x200007FF and 0x20004000 to 0x200047FF.
+// The location for AUDIO_BUFFER_ADDRESS could be changed to use any 1Kb range within these memory ranges.
+//
 namespace Audio {
 
     using u64 = unsigned long long;
@@ -17,7 +27,11 @@ namespace Audio {
         inline volatile u32 audio_volume;
         inline volatile u32 audio_playHead;
         inline volatile u8 audio_state[bufferCount];
+        #ifndef AUDIO_BUFFER_ADDRESS
         inline u8 audio_buffer[512 * bufferCount];
+        #else
+        inline u8* const audio_buffer = reinterpret_cast<u8*>(AUDIO_BUFFER_ADDRESS);
+        #endif
     }
 
     struct Channel {
