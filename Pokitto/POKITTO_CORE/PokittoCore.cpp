@@ -1265,6 +1265,7 @@ if (display.color>3) display.color=1;
 
 void Core::keyboard(char* text, uint8_t length) {
 #ifdef ENABLE_GUI
+	uint8_t prev_persistence = display.persistence;
 	display.persistence = false;
 	//memset(text, 0, length); //clear the text
 	text[length-1] = '\0';
@@ -1279,6 +1280,14 @@ void Core::keyboard(char* text, uint8_t length) {
 	int8_t targetX = 0;
 	int8_t targetY = 0;
 	uint8_t fps = getFrameRate();
+
+	/* Move to end of string that was passed to function */
+	while ( activeChar < length-1 ) {
+		if (text[activeChar] == '\0') {
+			break;
+		}
+		activeChar++;
+	}
 
 	while (1) {
 		if (update()) {
@@ -1331,8 +1340,9 @@ void Core::keyboard(char* text, uint8_t length) {
                 #if (POK_GBSOUND > 0)
 				sound.playOK();
                 #endif
-				if (activeChar > length)
-				activeChar = length;
+				if (activeChar > length-1) {
+					activeChar = length-1;
+				}
 			}
 			//erase character
 			if (buttons.pressed(BTN_B)) {
@@ -1360,6 +1370,7 @@ void Core::keyboard(char* text, uint8_t length) {
                             #if (POK_GBSOUND > 0)
 							sound.playOK();
                             #endif
+							display.persistence = prev_persistence;
 							return;
 						}
 						if(buttons.pressed(BTN_B)){
